@@ -1,0 +1,326 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Restore Europe design tokens
+   Every colour, type step and measure used by the site is declared here.
+   Components consume the generated utilities (bg-canvas, text-muted, …)
+   rather than raw values.
+   ------------------------------------------------------------------ */
+
+@theme {
+  /*
+   * Surfaces & ink.
+   *
+   * The dominant ground is near-black and `--color-ink` is the parchment that
+   * sets on it, so the names describe roles rather than lightness: `ink` is
+   * still the strongest value against the page, `canvas` still the page itself.
+   *
+   * `surface` and `canvas-deep` lift away from the page rather than sinking
+   * into it. Inverting their old lightness order literally would have pushed
+   * both below `canvas`, and a recessed band on a near-black ground reads as a
+   * hole rather than as a separate register.
+   */
+  --color-canvas: #0a0c0f;
+  --color-canvas-deep: #10141a;
+  --color-surface: #161b22;
+  --color-ink: #f4f1e8;
+  --color-ink-soft: #e4e0d4;
+  --color-body: #c9c6bd;
+  /*
+   * Both greys clear WCAG AA (4.5:1) against every dark ground the site uses,
+   * including the lightest — `--color-surface`. Hierarchy between them is
+   * carried mostly by size and tracking, because the contrast budget on a
+   * near-black ground does not allow many steps.
+   */
+  --color-muted: #8e8b84;
+  --color-faint: #8a877e;
+
+  /*
+   * Accents — used sparingly. `burgundy` is the accent on the page itself; the
+   * old deep burgundy sat at 1.8:1 on a near-black ground and had to be lifted
+   * to clear AA. `gold-soft` is the accent inside an `on-ink` slab and keeps
+   * the pale value it always had, because that slab is still a dark ground.
+   */
+  --color-burgundy: #c25f68;
+  --color-burgundy-deep: #7a2830;
+  --color-gold: #c9ad78;
+  --color-gold-soft: #cbb489;
+
+  /* Borders on the near-black ground */
+  --color-hairline: #1e2329;
+  --color-rule: #2c323a;
+  --color-rule-strong: #3f464f;
+  /*
+   * Form controls are interface components, so their boundary must clear 3:1
+   * (WCAG 1.4.11). The decorative rules above deliberately do not, and must not
+   * be used to draw an input.
+   */
+  --color-field: #75716a;
+
+  /* Borders inside an `on-ink` slab, which is lifted but still dark */
+  --color-hairline-inverse: #2b343d;
+  --color-rule-inverse: #3c4650;
+
+  /* Typefaces — supplied by next/font in app/layout.tsx */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, "Iowan Old Style", Georgia, serif;
+
+  /* Editorial type scale */
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.5;
+
+  --text-lede: clamp(1.0625rem, 0.99rem + 0.34vw, 1.3125rem);
+  --text-lede--line-height: 1.68;
+
+  --text-reading: clamp(1.0313rem, 0.99rem + 0.2vw, 1.1875rem);
+  --text-reading--line-height: 1.78;
+
+  --text-display-4: clamp(1.375rem, 1.19rem + 0.78vw, 1.875rem);
+  --text-display-4--line-height: 1.22;
+  --text-display-4--letter-spacing: -0.011em;
+
+  --text-display-3: clamp(1.75rem, 1.35rem + 1.72vw, 2.875rem);
+  --text-display-3--line-height: 1.12;
+  --text-display-3--letter-spacing: -0.016em;
+
+  --text-display-2: clamp(2.125rem, 1.55rem + 2.45vw, 3.75rem);
+  --text-display-2--line-height: 1.05;
+  --text-display-2--letter-spacing: -0.021em;
+
+  --text-display-1: clamp(2.625rem, 1.32rem + 5.6vw, 5.75rem);
+  --text-display-1--line-height: 0.99;
+  --text-display-1--letter-spacing: -0.028em;
+
+  /* Measures */
+  --container-reading: 45rem; /* ~720px — manifesto & essay prose */
+  --container-narrow: 56rem;
+  --container-wide: 85rem;
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Never allow a stray wide element to produce a horizontal scrollbar. */
+    overflow-x: clip;
+  }
+
+  /*
+   * A very faint tooth over the whole page. Decorative only. `screen` keeps the
+   * mottling visible on a near-black ground, where the plain dark noise the
+   * filter produces would otherwise composite away to nothing.
+   */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0.055;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /*
+   * `on-ink` blocks — the footer and the major editorial statements — are a
+   * lifted slab rather than a reversed ground, so the whole site stays dark.
+   *
+   * Only these two are re-pointed, because only these two have to mean
+   * opposite things on the two grounds: `ink` is the strongest value on the
+   * page but the slab's own background, and `canvas` is the page but the text
+   * that sets on the slab. The accent and border tokens the slab uses are not
+   * shared with the page, so they carry their slab values globally.
+   *
+   * Re-pointing them here rather than in the components works because every
+   * utility Tailwind generates reads its colour through `var()`, so this flips
+   * heading, body, accent and border colours together — including the ones the
+   * components reach through a `tone` prop — and leaves the light-on-dark
+   * contract those components were written against intact. Editing them
+   * individually would mean restating the same decision in eight files.
+   */
+  .on-ink {
+    --color-ink: #141a22;
+    --color-canvas: #f4f1e8;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-burgundy);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* The lifted slabs get a legible focus ring of their own. */
+  .on-ink :focus-visible {
+    outline-color: var(--color-gold-soft);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-gold) 34%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Same wash, but the ink it carries has to flip with the ground. */
+  .on-ink ::selection {
+    color: var(--color-canvas);
+  }
+
+  /*
+   * Anchor targets clear the sticky masthead. Set here and nowhere else —
+   * combining this with `scroll-padding-top` on the scrollport would double the
+   * offset. Pages with a second sticky bar raise it locally.
+   */
+  [id] {
+    scroll-margin-top: 7rem;
+  }
+
+  hr {
+    border-color: var(--color-hairline);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Old-style figures read better beside serif editorial text. */
+@utility numerals-oldstyle {
+  font-variant-numeric: oldstyle-nums;
+}
+
+@utility numerals-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* A hairline that fades out at both ends — used between editorial blocks. */
+@utility rule-faded {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-rule) 12%,
+    var(--color-rule) 88%,
+    transparent
+  );
+}
+
+@utility rule-faded-inverse {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-rule-inverse) 12%,
+    var(--color-rule-inverse) 88%,
+    transparent
+  );
+}
+
+/* ------------------------------------------------------------------
+   Above-the-fold motion.
+   Driven by CSS rather than JavaScript so the hero paints immediately and
+   costs nothing at hydration. The reduced-motion block below collapses both
+   to their end state.
+   ------------------------------------------------------------------ */
+
+@keyframes rem-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rem-settle {
+  from {
+    /* Starts visible, so it still counts as painted for LCP. */
+    opacity: 0.58;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: rem-rise 0.85s var(--ease-editorial) both;
+}
+
+@utility animate-settle {
+  animation: rem-settle 1.8s var(--ease-editorial) both;
+}
+
+/* ------------------------------------------------------------------
+   Reduced motion — no exceptions.
+   ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /*
+   * Reveal-on-scroll is driven by inline styles from the animation library, so
+   * the rules above cannot reach it. Neutralise it here instead of branching
+   * inside the component, which would produce different server and client
+   * markup for anyone with this preference set.
+   */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

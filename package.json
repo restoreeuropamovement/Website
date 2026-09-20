@@ -1,0 +1,45 @@
+{
+  "name": "restore-europe-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website of the Restore Europe Movement.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "artwork": "node scripts/generate-artwork.mjs",
+    "db:dev": "node scripts/dev-db.mjs",
+    "db:migrate": "tsx --env-file-if-exists=.env.local scripts/db-migrate.ts",
+    "db:seed": "tsx --env-file-if-exists=.env.local scripts/db-seed.ts",
+    "test:syntax": "tsx scripts/check-journal-syntax.ts",
+    "test:pii": "tsx scripts/check-pii.ts",
+    "check": "npm run lint && npm run typecheck && npm run test:syntax && npm run test:pii && npm run build"
+  },
+  "dependencies": {
+    "@simplewebauthn/browser": "^14.0.0",
+    "@simplewebauthn/server": "^14.0.2",
+    "@vercel/analytics": "^2.0.1",
+    "lucide-react": "^0.548.0",
+    "motion": "^12.34.2",
+    "next": "16.3.5",
+    "postgres": "^3.4.9",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@electric-sql/pglite-socket": "^0.2.11",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.13",
+    "typescript": "^5"
+  }
+}

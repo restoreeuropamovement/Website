@@ -1,0 +1,119 @@
+import Link from "next/link";
+import { MetricTable, StatPair, TrendBars } from "@/components/admin/Analytics";
+import { dateRange, fetchByDimension, fetchDaily, fetchTotals } from "@/lib/admin/analytics";
+import { listArticlesForAdmin } from "@/lib/admin/journal";
+
+const RANGES = [
+  { days: 7, label: "7 days" },
+  { days: 30, label: "30 days" },
+  { days: 90, label: "90 days" },
+] as const;
+
+function parseRange(value: string | string[] | undefined): number {
+  const candidate = Number.parseInt(Array.isArray(value) ? (value[0] ?? "") : (value ?? ""), 10);
+  return RANGES.some((range) => range.days === candidate) ? candidate : 30;
+}
+
+/**
+ * Overview.
+ *
+ * The traffic figures come from the Vercel Web Analytics API, which reads the
+ * same aggregated model as the Vercel dashboard — so these numbers agree with
+ * what the team sees there rather than being a second, subtly different count.
+ *
+ * All six queries are issued concurrently; they are independent, and running
+ * them in sequence would make the page as slow as their sum.
+ */
+export default async function AdminOverview(props: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const searchParams = await props.searchParams;
+  const days = parseRange(searchParams.range);
+  const { since, until } = dateRange(days);
+
+  const [totals, daily, routes, essays, countries, referrers, articles] = await Promise.all([
+    fetchTotals(since, until),
+    fetchDaily(since, until),
+    fetchByDimension("route", since, until, 8),
+    fetchByDimension("requestPath", since, until, 8),
+    fetchByDimension("country", since, until, 8),
+    fetchByDimension("referrerHostname", since, until, 8),
+    listArticlesForAdmin(),
+  ]);
+
+  const published = articles.filter((article) => article.status === "published").length;
+  const drafts = articles.length - published;
+
+  return (
+    <div className="flex flex-col gap-10">
+      <header className="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p className="eyebrow mb-4 text-burgundy">Overview</p>
+          <h1 className="font-serif text-display-2 font-normal text-ink">Traffic and content</h1>
+          <p className="mt-3 text-[0.9375rem] text-muted">
+            {since} to {until}
+          </p>
+        </div>
+
+        {/* Range as a link group: linkable, bookmarkable, and works without JS. */}
+        <nav aria-label="Date range" className="flex gap-2">
+          {RANGES.map((range) => (
+            <Link
+              key={range.days}
+              href={`/admin?range=${range.days}`}
+              aria-current={range.days === days ? "page" : undefined}
+              className={
+                range.days === days
+                  ? "border border-gold/70 bg-gold/10 px-3 py-1.5 text-micro text-ink"
+                  : "border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy"
+              }
+            >
+              {range.label}
+            </Link>
+          ))}
+        </nav>
+      </header>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <StatPair label={`Total, last ${days} days`} result={totals} />
+
+        <section className="border border-hairline p-6">
+          <h3 className="eyebrow mb-5 text-muted">Journal</h3>
+          <dl className="flex gap-10">
+            <div>
+              <dt className="text-micro text-faint">Published</dt>
+              <dd className="numerals-tabular font-serif text-display-3 text-ink">{published}</dd>
+            </div>
+            <div>
+              <dt className="text-micro text-faint">Drafts</dt>
+              <dd className="numerals-tabular font-serif text-display-3 text-ink">{drafts}</dd>
+            </div>
+          </dl>
+          <Link
+            href="/admin/journal"
+            className="mt-6 inline-block text-[0.875rem] text-muted underline underline-offset-4 hover:text-burgundy"
+          >
+            Manage the journal
+          </Link>
+        </section>
+      </div>
+
+      <TrendBars label="Page views by day" result={daily} />
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <MetricTable
+          label="Sections"
+          caption="Framework routes, so every essay rolls into /journal/[slug]. Page views, then visitors."
+          result={routes}
+        />
+        <MetricTable
+          label="Individual pages"
+          caption="Exact paths, so single essays and positions appear separately."
+          result={essays}
+        />
+        <MetricTable label="Countries" result={countries} />
+        <MetricTable label="Referrers" result={referrers} />
+      </div>
+    </div>
+  );
+}

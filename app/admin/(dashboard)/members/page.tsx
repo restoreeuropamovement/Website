@@ -1,0 +1,342 @@
+import { Lock } from "lucide-react";
+import { recordAudit } from "@/lib/admin/audit";
+import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
+import { hasMemberEncryptionKey } from "@/lib/admin/env";
+import {
+  membershipOverview,
+  searchMembersRevealed,
+  type MemberSearch,
+} from "@/lib/admin/members";
+import { queryDigest } from "@/lib/admin/pii";
+import { clientContext } from "@/lib/admin/request";
+import { isElevated, requireSession } from "@/lib/admin/session";
+import { europeanCountries, interestAreas, involvementRoles } from "@/content/involvement";
+import { formatDate } from "@/lib/utils";
+import { MemberSearchForm } from "@/components/admin/MemberSearchForm";
+import { AddMember } from "@/components/admin/AddMember";
+import { eraseMemberAction, lockMembersAction, setMemberStatusAction } from "./actions";
+import { EraseByEmail } from "@/components/admin/EraseByEmail";
+
+/**
+ * The membership roll.
+ *
+ * Records are entered here by an administrator, from applications that reach the
+ * movement by other means; nothing on the public site writes to this table.
+ *
+ * Two states, and the difference between them is the point of this page:
+ *
+ *   * **Signed in.** Totals and a per-country breakdown. These are aggregated in
+ *     SQL over the one column held in the clear, so rendering this decrypts
+ *     nothing and identifies nobody.
+ *   * **Signed in and freshly re-authenticated.** Names and email addresses,
+ *     searchable and sortable, plus the form for adding more. Every render of
+ *     this state writes an audit row.
+ *
+ * Which means an attacker holding a stolen session cookie gets the first state
+ * and stops there.
+ */
+
+function single(value: string | string[] | undefined): string | undefined {
+  const candidate = Array.isArray(value) ? value[0] : value;
+  const trimmed = candidate?.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+export default async function AdminMembersPage(props: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const session = await requireSession();
+  const searchParams = await props.searchParams;
+
+  if (!hasMemberEncryptionKey()) {
+    return (
+      <div className="flex flex-col gap-6">
+        <header>
+          <p className="eyebrow mb-4 text-burgundy">Membership</p>
+          <h1 className="font-serif text-display-2 font-normal text-ink">Members</h1>
+        </header>
+        <p className="border-l-2 border-burgundy py-1 pl-5 text-reading text-muted">
+          <code className="text-ink">MEMBER_ENCRYPTION_KEY</code> is not set, so membership records
+          cannot be read or written on this deployment. The public application form declines
+          submissions rather than storing details it cannot encrypt.
+        </p>
+      </div>
+    );
+  }
+
+  const overview = await membershipOverview();
+  const elevated = isElevated(session);
+
+  return (
+    <div className="flex flex-col gap-10">
+      <header className="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p className="eyebrow mb-4 text-burgundy">Membership</p>
+          <h1 className="font-serif text-display-2 font-normal text-ink">Members</h1>
+          <p className="mt-3 text-[0.9375rem] text-muted">
+            {overview.confirmed} {overview.confirmed === 1 ? "member" : "members"}
+            {overview.pending > 0 ? `, ${overview.pending} awaiting review` : ""} across{" "}
+            {overview.countries.length}{" "}
+            {overview.countries.length === 1 ? "country" : "countries"}.
+          </p>
+        </div>
+
+        {elevated ? (
+          <form action={lockMembersAction}>
+            <button
+              type="submit"
+              className="flex items-center gap-2 border border-rule px-4 py-2 text-[0.875rem] text-muted transition-colors hover:border-burgundy hover:text-burgundy"
+            >
+              <Lock className="size-3.5" strokeWidth={1.75} aria-hidden="true" />
+              Lock again
+            </button>
+          </form>
+        ) : null}
+      </header>
+
+      <CountryBreakdown overview={overview} />
+
+      {elevated ? (
+        <RevealedList session={session} searchParams={searchParams} />
+      ) : (
+        <PasskeyElevation />
+      )}
+    </div>
+  );
+}
+
+function CountryBreakdown({
+  overview,
+}: {
+  readonly overview: Awaited<ReturnType<typeof membershipOverview>>;
+}) {
+  if (overview.countries.length === 0) {
+    return (
+      <p className="border-l-2 border-gold/65 py-1 pl-5 text-reading text-muted">
+        No records yet. Once applications are entered they appear here, counted by country.
+      </p>
+    );
+  }
+
+  const highest = Math.max(...overview.countries.map((row) => row.confirmed), 1);
+
+  return (
+    <section className="flex flex-col gap-4">
+      <h2 className="eyebrow text-muted">By country</h2>
+      <ul className="flex flex-col border-t border-hairline">
+        {overview.countries.map((row) => (
+          <li
+            key={row.country}
+            className="flex items-center gap-4 border-b border-hairline py-3"
+          >
+            <span className="w-44 shrink-0 text-[0.9375rem] text-ink">{row.country}</span>
+            <span aria-hidden="true" className="h-1.5 flex-1 bg-hairline">
+              <span
+                className="block h-full bg-burgundy/60"
+                style={{ width: `${Math.round((row.confirmed / highest) * 100)}%` }}
+              />
+            </span>
+            <span className="w-24 shrink-0 text-right text-[0.9375rem] tabular-nums text-ink">
+              {row.confirmed}
+            </span>
+            <span className="w-32 shrink-0 text-right text-micro tabular-nums text-faint">
+              {row.pending > 0 ? `${row.pending} pending` : ""}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+async function RevealedList({
+  session,
+  searchParams,
+}: {
+  readonly session: Awaited<ReturnType<typeof requireSession>>;
+  readonly searchParams: Record<string, string | string[] | undefined>;
+}) {
+  const query = single(searchParams.q);
+  const country = single(searchParams.country);
+  const statusFilter = single(searchParams.status);
+  const sortParam = single(searchParams.sort);
+  const pageParam = Number(single(searchParams.page) ?? "1");
+
+  const options: MemberSearch = {
+    query,
+    country: country && europeanCountries.includes(country) ? country : undefined,
+    status: statusFilter === "pending" || statusFilter === "confirmed" ? statusFilter : undefined,
+    sort: sortParam === "name" || sortParam === "recent" ? sortParam : "country",
+    page: Number.isFinite(pageParam) ? pageParam : 1,
+  };
+
+  const result = await searchMembersRevealed(options);
+  const { ipHash } = await clientContext();
+
+  /*
+   * Audited on render, because here the read *is* the sensitive event.
+   *
+   * No result is recorded — logging the roll in order to note that somebody read
+   * the roll would just copy it into a second table. Nor is the search term,
+   * which is usually a member's name: it is stored as a keyed digest, so "did
+   * anyone look this person up?" stays answerable while "list the names that
+   * have been looked up" does not. The audit log is not encrypted, and must not
+   * become the plaintext leak beside the encrypted column.
+   */
+  await recordAudit({
+    action: "member.reveal",
+    outcome: "success",
+    actorId: session.user.id,
+    actorLabel: session.user.username,
+    detail: {
+      searched: Boolean(query),
+      queryDigest: query ? await queryDigest(query) : null,
+      country: options.country ?? null,
+      status: options.status ?? null,
+      returned: result.members.length,
+      matched: result.total,
+    },
+    ipHash,
+  });
+
+  return (
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <h2 className="eyebrow text-muted">
+          {result.total} {result.total === 1 ? "record" : "records"}
+          {query ? ` matching “${query}”` : ""}
+        </h2>
+        <p className="text-micro text-faint">
+          This view is being recorded in the audit log.
+        </p>
+      </div>
+
+      <AddMember
+        countries={europeanCountries}
+        roles={involvementRoles}
+        interests={interestAreas}
+      />
+
+      <MemberSearchForm
+        countries={europeanCountries}
+        query={query}
+        country={options.country}
+        status={options.status}
+        sort={options.sort ?? "country"}
+      />
+
+      {result.truncated ? (
+        <p className="border-l-2 border-burgundy py-1 pl-5 text-[0.875rem] text-muted">
+          There are more records than one search reads at a time. Narrow by country for exact
+          counts.
+        </p>
+      ) : null}
+
+      {result.members.length === 0 ? (
+        <p className="border-l-2 border-gold/65 py-1 pl-5 text-reading text-muted">
+          No records match.
+        </p>
+      ) : (
+        <ul className="flex flex-col border-t border-hairline">
+          {result.members.map((member) => (
+            <li
+              key={member.id}
+              className="flex flex-wrap items-baseline gap-x-6 gap-y-3 border-b border-hairline py-4"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="eyebrow mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
+                  <span className={member.status === "confirmed" ? "text-burgundy" : "text-gold"}>
+                    {member.status === "confirmed" ? "Member" : "Awaiting review"}
+                  </span>
+                  <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
+                  <span>{member.country}</span>
+                  <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
+                  <span>{member.involvementRole}</span>
+                  <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
+                  <time dateTime={member.createdAt.toISOString()}>
+                    {formatDate(member.createdAt.toISOString().slice(0, 10))}
+                  </time>
+                </p>
+                <p className="font-serif text-[1.1875rem] leading-snug text-ink">{member.name}</p>
+                <p className="mt-0.5 text-[0.875rem] text-muted">{member.email}</p>
+                <p className="mt-0.5 text-micro text-faint">{member.interestArea}</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <form action={setMemberStatusAction}>
+                  <input type="hidden" name="id" value={member.id} />
+                  <input
+                    type="hidden"
+                    name="status"
+                    value={member.status === "confirmed" ? "pending" : "confirmed"}
+                  />
+                  <button
+                    type="submit"
+                    className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-gold hover:text-gold"
+                  >
+                    {member.status === "confirmed" ? "Return to review" : "Accept as member"}
+                  </button>
+                </form>
+
+                <form action={eraseMemberAction}>
+                  <input type="hidden" name="id" value={member.id} />
+                  <input type="hidden" name="country" value={member.country} />
+                  <button
+                    type="submit"
+                    className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy"
+                  >
+                    Erase
+                  </button>
+                </form>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {result.pageCount > 1 ? (
+        <Pagination page={result.page} pageCount={result.pageCount} params={searchParams} />
+      ) : null}
+
+      <EraseByEmail />
+    </section>
+  );
+}
+
+function Pagination({
+  page,
+  pageCount,
+  params,
+}: {
+  readonly page: number;
+  readonly pageCount: number;
+  readonly params: Record<string, string | string[] | undefined>;
+}) {
+  const href = (target: number) => {
+    const next = new URLSearchParams();
+    for (const [key, value] of Object.entries(params)) {
+      const flat = Array.isArray(value) ? value[0] : value;
+      if (flat && key !== "page") next.set(key, flat);
+    }
+    next.set("page", String(target));
+    return `/admin/members?${next.toString()}`;
+  };
+
+  return (
+    <nav aria-label="Pages" className="flex items-center gap-4 text-[0.875rem]">
+      {page > 1 ? (
+        <a href={href(page - 1)} className="text-muted underline underline-offset-4 hover:text-ink">
+          Previous
+        </a>
+      ) : null}
+      <span className="text-faint">
+        Page {page} of {pageCount}
+      </span>
+      {page < pageCount ? (
+        <a href={href(page + 1)} className="text-muted underline underline-offset-4 hover:text-ink">
+          Next
+        </a>
+      ) : null}
+    </nav>
+  );
+}
