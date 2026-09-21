@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContentBlocks } from "@/components/content/ContentBlocks";
 import { Container } from "@/components/ui/Container";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { privacy } from "@/content/legal";
 
 export const metadata: Metadata = {
@@ -13,13 +14,12 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <header className="border-b border-hairline bg-canvas-deep pt-16 pb-12 lg:pt-24 lg:pb-16">
-        <Container size="narrow">
-          <p className="eyebrow mb-6 text-burgundy">{privacy.eyebrow}</p>
-          <h1 className="font-serif text-display-2 font-normal text-ink">{privacy.title}</h1>
-          <p className="mt-6 text-lede text-muted">{privacy.lede}</p>
-        </Container>
-      </header>
+      <PageHeader
+        kicker={privacy.eyebrow}
+        title={privacy.title}
+        lede={privacy.lede}
+        size="narrow"
+      />
 
       <Container size="narrow" className="py-14 lg:py-20">
         <div className="flex max-w-(--container-reading) flex-col gap-12">

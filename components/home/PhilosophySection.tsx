@@ -1,47 +1,42 @@
 import { ContentBlocks } from "@/components/content/ContentBlocks";
 import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
-import { philosophy } from "@/content/home";
+import type { HomeContent } from "@/content/home";
 
-export function PhilosophySection() {
+export function PhilosophySection({
+  content,
+}: {
+  readonly content: HomeContent["philosophy"];
+}) {
   return (
-    <Section spacing="lg" labelledBy="central-philosophy">
+    <Section spacing="md" labelledBy="central-philosophy">
       <Container>
-        <Reveal className="max-w-5xl">
-          <p className="eyebrow mb-8 flex items-center gap-3 text-burgundy">
-            <span aria-hidden="true" className="h-px w-6 bg-burgundy/40" />
-            {philosophy.eyebrow}
-          </p>
-          <h2
-            id="central-philosophy"
-            className="font-serif text-display-2 font-normal text-ink"
-          >
-            {philosophy.statement.map((line, index) => (
-              <span key={line} className={index === 1 ? "block text-muted" : "block"}>
-                {line}
-              </span>
-            ))}
-          </h2>
-        </Reveal>
+        <h2
+          id="central-philosophy"
+          className="max-w-5xl font-serif text-display-2 font-normal text-ink"
+        >
+          {content.statement.map((line, index) => (
+            <span key={line} className={index === 1 ? "block text-muted" : "block"}>
+              {line}
+            </span>
+          ))}
+        </h2>
 
-        <div className="mt-16 grid gap-14 lg:mt-20 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-20">
-          <Reveal delay={0.08}>
-            <ContentBlocks blocks={philosophy.body} className="max-w-(--container-reading)" />
-          </Reveal>
+        <div className="mt-10 grid gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-20">
+          <ContentBlocks blocks={content.body} className="max-w-(--container-reading)" />
 
-          <Reveal delay={0.16} className="flex flex-col gap-10">
+          <div className="flex flex-col gap-10">
             <ColumnList
-              title={philosophy.reductions.title}
-              items={philosophy.reductions.items}
+              title={content.reductions.title}
+              items={content.reductions.items}
               tone="muted"
             />
             <ColumnList
-              title={philosophy.requirements.title}
-              items={philosophy.requirements.items}
+              title={content.requirements.title}
+              items={content.requirements.items}
               tone="ink"
             />
-          </Reveal>
+          </div>
         </div>
       </Container>
     </Section>
@@ -59,12 +54,14 @@ function ColumnList({
 }) {
   return (
     <div>
-      <h3 className="eyebrow border-b border-hairline pb-4 text-muted">{title}</h3>
+      <h3 className="border-b border-hairline pb-3 font-serif text-[0.9375rem] text-muted">
+        {title}
+      </h3>
       <ul className="flex flex-col">
         {items.map((item) => (
           <li
             key={item}
-            className={`border-b border-hairline py-3 text-[1.0625rem] ${
+            className={`border-b border-hairline py-2.5 text-[1.0625rem] ${
               tone === "ink" ? "font-serif text-ink" : "text-muted"
             }`}
           >

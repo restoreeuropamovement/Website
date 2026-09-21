@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { JoinForm } from "@/components/forms/JoinForm";
 import { Container } from "@/components/ui/Container";
-import { europeanCountries, involvementRoles, joinMeta } from "@/content/involvement";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { europeanCountries, joinMeta, resolveInvolvementRole } from "@/content/involvement";
+import { alternateLanguages } from "@/lib/i18n";
+import { routes } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Get Involved",
+  title: "Join",
   description:
-    "Take part in Restore Europe Movement as a supporter, volunteer, local organiser, writer or professional contributor.",
-  alternates: { canonical: "/join" },
+    "Join Restore Europe Movement as a member, or volunteer to help build it.",
+  alternates: {
+    canonical: routes.join,
+    languages: alternateLanguages(routes.join),
+  },
 };
 
 /** Only values the form already offers are accepted from the query string. */
@@ -24,29 +30,20 @@ export default async function JoinPage(props: {
 }) {
   const searchParams = await props.searchParams;
   const country = pick(searchParams.country, europeanCountries);
-  const role = pick(
-    searchParams.role,
-    involvementRoles.map((item) => item.id),
+  const role = resolveInvolvementRole(
+    Array.isArray(searchParams.role) ? searchParams.role[0] : searchParams.role,
   );
 
   return (
     <>
-      <header className="border-b border-hairline bg-canvas-deep pt-16 pb-14 lg:pt-24 lg:pb-20">
-        <Container>
-          <p className="eyebrow mb-6 flex items-center gap-3 text-burgundy">
-            <span aria-hidden="true" className="h-px w-6 bg-burgundy/40" />
-            {joinMeta.eyebrow}
+      <PageHeader kicker={joinMeta.eyebrow} title={joinMeta.title} lede={joinMeta.lede}>
+        {country ? (
+          <p className="mt-6 max-w-(--container-reading) border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted">
+            You arrived from the wing in {country}, so the form below is set to it. Change either
+            field if that is not right.
           </p>
-          <h1 className="font-serif text-display-1 font-normal text-ink">{joinMeta.title}</h1>
-          <p className="mt-8 max-w-(--container-reading) text-lede text-muted">{joinMeta.lede}</p>
-          {country ? (
-            <p className="mt-6 max-w-(--container-reading) border-l-2 border-gold/65 py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted">
-              You arrived from the wing in {country}, so the form below is set to it. Change either
-              field if that is not right.
-            </p>
-          ) : null}
-        </Container>
-      </header>
+        ) : null}
+      </PageHeader>
 
       <Container className="py-14 lg:py-20">
         <div className="max-w-(--container-narrow)">

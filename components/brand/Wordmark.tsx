@@ -7,12 +7,19 @@ interface WordmarkProps {
   /** `stacked` sets the formal name beneath the letters. */
   readonly variant?: "compact" | "stacked";
   readonly size?: "sm" | "md" | "lg";
+  readonly preload?: boolean;
+  /**
+   * "Movement" in the reader's language. The name itself is never translated —
+   * it is what the movement is called, not a phrase — but the word beneath it
+   * is an ordinary noun and reads as a mistake left in English.
+   */
+  readonly descriptor?: string;
 }
 
 const markSize = {
-  sm: "w-[0.9rem]",
-  md: "w-[1.05rem]",
-  lg: "w-[1.6rem]",
+  sm: "h-8",
+  md: "h-10",
+  lg: "h-[4.75rem]",
 } as const;
 
 const letterSize = {
@@ -30,11 +37,17 @@ const letterSize = {
  * Opening up the gaps in a two-word phrase reads as a logo trying too hard, and
  * costs width the masthead does not have on a small screen.
  */
-export function Wordmark({ className, variant = "compact", size = "md" }: WordmarkProps) {
+export function Wordmark({
+  className,
+  variant = "compact",
+  size = "md",
+  preload,
+  descriptor = site.descriptor,
+}: WordmarkProps) {
   if (variant === "stacked") {
     return (
       <span className={cn("inline-flex flex-col items-start gap-2.5", className)}>
-        <RestoreEuropeMark className={cn(markSize[size], "opacity-90")} />
+        <RestoreEuropeMark className={markSize[size]} preload={preload} />
         <span className="flex flex-col gap-1">
           <span
             className={cn(
@@ -44,17 +57,15 @@ export function Wordmark({ className, variant = "compact", size = "md" }: Wordma
           >
             {site.short}
           </span>
-          <span className="eyebrow text-[0.625rem] text-current opacity-70">
-            {site.descriptor}
-          </span>
+          <span className="eyebrow text-[0.625rem] text-current opacity-70">{descriptor}</span>
         </span>
       </span>
     );
   }
 
   return (
-    <span className={cn("inline-flex items-baseline gap-2.5", className)}>
-      <RestoreEuropeMark className={cn(markSize[size], "translate-y-[0.08em] opacity-90")} />
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
+      <RestoreEuropeMark className={markSize[size]} preload={preload} />
       <span
         className={cn("font-serif font-semibold tracking-[0.015em] text-current", letterSize[size])}
       >

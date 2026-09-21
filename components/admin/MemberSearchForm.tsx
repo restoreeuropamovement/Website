@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 /**
  * Search, filter and sort controls for the membership roll.
  *
@@ -79,12 +81,12 @@ export function MemberSearchForm({
         Apply
       </button>
 
-      <a
+      <Link
         href="/admin/members"
         className="px-2 py-2 text-[0.875rem] text-muted underline underline-offset-4 hover:text-ink"
       >
         Reset
-      </a>
+      </Link>
     </form>
   );
 }

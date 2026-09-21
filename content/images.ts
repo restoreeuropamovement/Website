@@ -3,108 +3,101 @@ import type { ImageSlot } from "@/lib/content-types";
 /**
  * Image slots.
  *
- * Each entry is a place where commissioned photography belongs. Until then the
- * slot holds locally generated tonal artwork (see `scripts/generate-artwork.mjs`)
- * drawn in the brand palette. To replace one: drop a photograph at the same path
- * and ratio, update `alt`, and remove `placeholder: true`.
+ * To change one: drop a replacement at the same path and ratio and rewrite
+ * `alt` to describe what is actually in it.
  *
- * Direction for the photography that will replace these: European countryside,
- * old towns, villages, churches, forests, mountains, workshops, farms,
- * universities, public squares, stone architecture and ordinary civic life.
+ * Everything is served from this origin — nothing is hotlinked, which is what
+ * lets the privacy note promise that loading a page discloses your visit to
+ * nobody. Licences and sources are recorded in
+ * `public/images/photos/CREDITS.md`.
+ *
+ * Two standing rules for anything added here. **No recognisable faces:** a
+ * photograph of an identifiable person on a political site implies an
+ * endorsement they never gave, whatever the licence permits. **Europe only:**
+ * the subject has to be somewhere this movement is actually about — a
+ * handsome terraced hillside in Asia would say something untrue on a page
+ * arguing for European continuity, and a reader who recognises it will notice.
  */
 export const images = {
   heroValley: {
-    src: "/images/hero-valley.svg",
-    alt: "A cultivated valley: terraced fields and hedgerows below a village gathered around its church, with mountains beyond.",
+    src: "/images/hero-valley.jpg",
+    alt: "A village gathered around its church on the floor of a steep alpine valley, sheer cliffs on either side and a snow-covered massif closing the head of the valley.",
     width: 2400,
-    height: 1500,
-    placeholder: true,
+    height: 1200,
   },
   valleyWide: {
-    src: "/images/hero-valley-wide.svg",
-    alt: "A wide view of a cultivated valley beneath distant mountains.",
+    src: "/images/hero-valley-wide.jpg",
+    alt: "A small white chapel alone in a mown meadow, below wooded slopes turning for autumn and a ridge of bare rock peaks under fresh snow.",
     width: 2400,
     height: 1100,
-    placeholder: true,
   },
   woodland: {
-    src: "/images/woodland-river.svg",
-    alt: "Managed woodland on rolling hills above open meadow.",
+    src: "/images/woodland-river.jpg",
+    alt: "The trunks of a managed beech wood receding into shade, sunlight breaking through the canopy onto the leaf litter.",
     width: 2400,
     height: 1200,
-    placeholder: true,
   },
   arcade: {
-    src: "/images/arcade.svg",
-    alt: "A Romanesque arcade drawn in elevation.",
+    src: "/images/arcade.jpg",
+    alt: "A Romanesque cloister: paired columns with carved capitals carrying round arches, faded wall paintings visible in the gallery behind.",
     width: 1800,
     height: 1100,
-    placeholder: true,
   },
   arcadeWide: {
-    src: "/images/arcade-wide.svg",
-    alt: "A long Romanesque arcade drawn in elevation.",
+    src: "/images/arcade-wide.jpg",
+    alt: "Carved stone columns, capitals and entablature of a church front, weathered and lit low from one side.",
     width: 2400,
     height: 900,
-    placeholder: true,
   },
   oldTown: {
-    src: "/images/old-town.svg",
-    alt: "Town houses around a square, with a church tower rising behind them.",
+    src: "/images/old-town.jpg",
+    alt: "A terrace of baroque town houses along one side of a market square, the twin Gothic towers of a church rising behind their roofs.",
     width: 1800,
     height: 1200,
-    placeholder: true,
   },
   workshop: {
-    src: "/images/workshop.svg",
-    alt: "Daylight falling through a tall arched window onto a workshop bench and its tools.",
+    src: "/images/workshop.jpg",
+    alt: "Hand tools hung in order on a workshop wall — saws, chisels and gouges ranged above the bench.",
     width: 1800,
     height: 1200,
-    placeholder: true,
   },
   terraces: {
-    src: "/images/terraces.svg",
-    alt: "Terraced farmland divided by hedgerows, stepping away toward a wooded ridge.",
+    src: "/images/terraces.jpg",
+    alt: "Terraced vineyards stepping down a long hillside in autumn colour, with mist lying along the valley floor below.",
     width: 1800,
     height: 1200,
-    placeholder: true,
   },
 } as const satisfies Record<string, ImageSlot>;
 
 export const journalImages = {
   vault: {
-    src: "/images/journal/vault.svg",
-    alt: "The ribs of a stone vault converging on a central boss.",
+    src: "/images/journal/vault.jpg",
+    alt: "The ribs of a Gothic vault converging overhead, lit from the clerestory windows between them.",
     width: 1800,
     height: 1000,
-    placeholder: true,
   },
   colonnade: {
-    src: "/images/journal/colonnade.svg",
-    alt: "A colonnade drawn in elevation.",
+    src: "/images/journal/colonnade.jpg",
+    alt: "A stone colonnade in silhouette, daylight falling through the gaps between the columns.",
     width: 1800,
     height: 1000,
-    placeholder: true,
   },
   tracery: {
-    src: "/images/journal/tracery.svg",
-    alt: "The tracery of a rose window.",
+    src: "/images/journal/tracery.jpg",
+    alt: "A rose window seen from within, its stone tracery radiating from a stained-glass centre.",
     width: 1800,
     height: 1000,
-    placeholder: true,
   },
   portal: {
-    src: "/images/journal/portal.svg",
-    alt: "The receding orders of a Romanesque portal.",
+    src: "/images/journal/portal.jpg",
+    alt: "The receding carved orders of a Romanesque portal arching over a studded wooden door.",
     width: 1800,
     height: 1000,
-    placeholder: true,
   },
   terraces: {
-    src: "/images/journal/terraces.svg",
-    alt: "Terraced farmland divided by hedgerows.",
+    src: "/images/journal/terraces.jpg",
+    alt: "Terraced fields and groves stepping down to a river, seen from the slope opposite.",
     width: 1800,
     height: 1000,
-    placeholder: true,
   },
 } as const satisfies Record<string, ImageSlot>;

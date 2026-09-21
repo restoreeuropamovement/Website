@@ -14,11 +14,9 @@ interface EditorialImageProps {
 }
 
 /**
- * The single image component.
- *
- * Every slot is a local asset — nothing is hotlinked. Slots currently filled
- * with generated artwork carry `placeholder: true`; replacing them with
- * photography means swapping the file and clearing that flag, nothing more.
+ * The single image component. Every slot is a local asset — nothing is
+ * hotlinked, which is what lets the privacy note promise that loading a page
+ * discloses your visit to nobody.
  */
 export function EditorialImage({
   slot,
@@ -33,11 +31,7 @@ export function EditorialImage({
   return (
     <figure className={cn("flex flex-col gap-3", className)}>
       <div
-        className={cn(
-          "relative overflow-hidden border border-hairline bg-canvas-deep",
-          aspect,
-        )}
-        data-placeholder={slot.placeholder ? "true" : undefined}
+        className={cn("relative overflow-hidden border border-hairline bg-canvas-deep", aspect)}
       >
         <Image
           src={slot.src}

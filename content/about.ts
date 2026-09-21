@@ -114,7 +114,7 @@ export const aboutSections: readonly AboutSection[] = [
           {
             term: "Research and publication",
             description:
-              "The [journal](/journal), policy work, and the maintenance of the manifesto as a living reference text.",
+              "The [policy catalogue](/policy) and the maintenance of the manifesto as a living reference text.",
           },
         ],
       },

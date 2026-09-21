@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { EconomicOrderSection } from "@/components/home/EconomicOrderSection";
-import { EuropeSection } from "@/components/home/EuropeSection";
-import { Hero } from "@/components/home/Hero";
-import { LifeAndWorkSection } from "@/components/home/LifeAndWorkSection";
-import { PhilosophySection } from "@/components/home/PhilosophySection";
-import { PoliticalCultureSection } from "@/components/home/PoliticalCultureSection";
-import { PrinciplesSection } from "@/components/home/PrinciplesSection";
-import { RestorationSection } from "@/components/home/RestorationSection";
-import { StewardshipSection } from "@/components/home/StewardshipSection";
-import { TechnologySection } from "@/components/home/TechnologySection";
+import { HomeSections } from "@/components/home/HomeSections";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { site } from "@/lib/site";
+import { DEFAULT_LOCALE, alternateLanguages } from "@/lib/i18n";
+import { routes, site } from "@/lib/site";
 import { websiteSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -22,23 +14,17 @@ export const metadata: Metadata = {
    */
   title: { absolute: site.name },
   description: site.description,
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: routes.home,
+    languages: alternateLanguages(routes.home),
+  },
 };
 
 export default function HomePage() {
   return (
     <>
       <JsonLd data={websiteSchema()} />
-      <Hero />
-      <PhilosophySection />
-      <PrinciplesSection />
-      <LifeAndWorkSection />
-      <EconomicOrderSection />
-      <TechnologySection />
-      <StewardshipSection />
-      <EuropeSection />
-      <PoliticalCultureSection />
-      <RestorationSection />
+      <HomeSections locale={DEFAULT_LOCALE} />
     </>
   );
 }

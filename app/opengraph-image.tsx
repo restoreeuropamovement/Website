@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { loadGoogleFont } from "@/lib/og-font";
 import { site } from "@/lib/site";
@@ -10,15 +12,18 @@ const HEADLINE = "Europe is worth inheriting.";
 
 export default async function Image() {
   const glyphs = `${site.short}${site.name}${site.tagline}${HEADLINE}`;
-  const [serif, sans] = await Promise.all([
+  const [serif, sans, crest] = await Promise.all([
     loadGoogleFont("Source Serif 4", 400, glyphs),
     loadGoogleFont("Inter", 500, glyphs),
+    readFile(join(process.cwd(), "public/brand/restore-europa-crest.png")),
   ]);
 
   const fonts = [
     serif ? { name: "Source Serif 4", data: serif, weight: 400 as const, style: "normal" as const } : undefined,
     sans ? { name: "Inter", data: sans, weight: 500 as const, style: "normal" as const } : undefined,
   ].filter((font) => font !== undefined);
+
+  const crestSrc = `data:image/png;base64,${crest.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -35,10 +40,9 @@ export default async function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="40" height="48" viewBox="0 0 40 48" fill="#F4F1E8">
-            <path d="M4 42V22a16 16 0 0 1 32 0v20h-6V22a10 10 0 0 0-20 0v20Z" />
-            <path d="M1 44.4h38V47H1Z" />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element -- Satori renders
+              this to a PNG at build time; next/image has no meaning here. */}
+          <img src={crestSrc} width={56} height={80} alt="" />
           <span
             style={{
               fontFamily: "Source Serif 4",

@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { PolicyCategoryData, PolicyCategoryId, PolicyStatus } from "@/lib/content-types";
-import { policyStatuses } from "@/lib/policy";
 import { cn } from "@/lib/utils";
 
 interface PolicyFiltersProps {
   readonly categories: readonly PolicyCategoryData[];
+  /** Only statuses the catalogue actually uses, so no pill returns nothing. */
+  readonly statuses: readonly PolicyStatus[];
   readonly q: string;
   readonly category?: PolicyCategoryId;
   readonly status?: PolicyStatus;
@@ -33,7 +34,13 @@ const pillOff = "border-hairline text-muted hover:border-ink hover:text-ink";
  * any view of the catalogue can be linked to, bookmarked and read without
  * JavaScript. The search box is an ordinary GET form for the same reason.
  */
-export function PolicyFilters({ categories, q, category, status }: PolicyFiltersProps) {
+export function PolicyFilters({
+  categories,
+  statuses,
+  q,
+  category,
+  status,
+}: PolicyFiltersProps) {
   const filtered = q !== "" || category !== undefined || status !== undefined;
 
   return (
@@ -116,7 +123,7 @@ export function PolicyFilters({ categories, q, category, status }: PolicyFilters
               Any
             </Link>
           </li>
-          {policyStatuses.map((item) => (
+          {statuses.map((item) => (
             <li key={item}>
               <Link
                 href={policyHref({ q, category, status: item })}

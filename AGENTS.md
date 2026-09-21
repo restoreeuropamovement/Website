@@ -64,9 +64,12 @@ in the wrong hands, a list of people to be reported to an employer or named publ
 treats the political opinion it implies as Article 9 special-category data. The design assumes the
 table will one day be read by someone who should not have it.
 
-- **Names and email addresses are encrypted** by `lib/admin/pii.ts` (AES-256-GCM, key from
+- **Name, email, region and message are encrypted** by `lib/admin/pii.ts` (AES-256-GCM, key from
   `MEMBER_ENCRYPTION_KEY`, never in the database). `country`, `involvement_role` and `interest_area`
   are in the clear because the admin view sorts and counts on them and none identifies a person.
+  Region is not in that group: it narrows a person far more than a country does. The same applies to
+  the `enquiry` table, where the name, address and message body are encrypted and only the
+  fixed-list `subject` is readable.
 - **Encryption is non-deterministic on purpose**, so those columns cannot be indexed or searched in
   SQL. Search decrypts candidates and filters in memory — see `searchMembersRevealed`. Do not
   "optimise" this into a deterministic index: that would let whoever steals the table test who is
@@ -81,50 +84,76 @@ table will one day be read by someone who should not have it.
   never accumulates names. The same applies to erasure: log the id, never the address.
 - **There is no export function, deliberately.** Do not add one. A downloadable file is the form in
   which such lists escape, and it is the failure this whole design exists to prevent.
-- **Nothing is a membership until the address confirms it.** Anyone can type a third party's email
-  into a public form; enrolling an opponent to damage them is a real tactic. Unconfirmed rows are
-  pruned automatically.
-- The public intake is the one server action on the public site. Its reply must not vary with what
-  is already stored, or it becomes an oracle for testing whether a named person is a member.
+- **Nothing is a membership until a person reviews it.** Anyone can type a third party's email into
+  a public form; enrolling an opponent to damage them is a real tactic. Public applications land as
+  `pending` and an administrator vets them. Nothing is deleted on a timer — an unreviewed row is
+  somebody's application, not a stale token.
+- **The public site has exactly two server actions**, both in `app/(site)`: the membership intake
+  (`join/actions.ts`) and the contact form (`contact/actions.ts`). Both validate server-side, rate
+  limit per connection, encrypt before storing and audit without personal data. The intake's reply
+  must not vary with what is already stored, or it becomes an oracle for testing whether a named
+  person is a member. Do not add a third without the same four properties.
 
 ## Commands
 
 ```bash
 npm run dev        # development server
-npm run check      # lint + typecheck + production build
-npm run artwork    # regenerate the placeholder SVG artwork in public/images
+npm run check      # lint + typecheck + content tests + production build
+npm run artwork    # regenerate the generated SVG artwork in public/images
 npm run db:migrate # apply db/schema.sql (idempotent)
 npm run db:seed    # copy the bundled essays into the database (idempotent)
 ```
 
 ## Editing content
 
-| What                       | Where                            |
-| -------------------------- | -------------------------------- |
-| Manifesto                  | `content/manifesto.ts`           |
-| Homepage copy              | `content/home.ts`                |
-| Principles                 | `content/principles.ts`          |
-| Vision                     | `content/vision.ts`              |
-| About                      | `content/about.ts`               |
-| National wings             | `content/wings.ts`               |
-| Journal essays             | `content/journal/articles.ts`    |
-| Legal pages                | `content/legal.ts`               |
-| Navigation, site metadata  | `lib/site.ts`                    |
-| Policy catalogue           | `content/policy.ts`              |
+| What                        | Where                              |
+| --------------------------- | ---------------------------------- |
+| Manifesto                   | `content/manifesto/en.ts`          |
+| Homepage copy               | `content/home/en.ts`               |
+| Principles — the words      | `content/principles/en.ts`         |
+| Principles — order, anchors | `content/principles/structure.ts`  |
+| Navigation, footer, 404     | `content/chrome/en.ts`             |
+| Policy catalogue            | `content/policy.ts`                |
+| Vision                      | `content/vision.ts`                |
+| About                       | `content/about.ts`                 |
+| National wings              | `content/wings.ts`                 |
+| Join / Contact              | `content/involvement.ts`           |
+| Legal pages                 | `content/legal.ts`                 |
+| Routes, site metadata       | `lib/site.ts`                      |
 
-Journal essays are the one exception to "content lives in `content/`". Once `DATABASE_URL` is set,
-`lib/journal.ts` reads them from Postgres and `content/journal/articles.ts` becomes the seed for
-`npm run db:seed` and the fallback for deployments with no database. Edit published essays through
-`/admin/journal`, not the module.
+## Six languages
+
+English is the source. `de`, `fr`, `pl`, `it` and `es` sit beside each `en.ts` and are typed against
+it, so a translation that omits a key is a build error rather than a blank heading. A language with
+no file falls back to English — see `lib/dictionary.ts`.
+
+- **English keeps the bare paths** (`/principles`); translations are prefixed (`/de/principles`).
+  Nothing already indexed moves. `app/[locale]` sits beside `app/(site)`, not inside it, because a
+  route group adds no path segment and nesting would apply both layouts.
+- **Translations contain words only.** Never a URL, never a `type: "paragraph"` discriminant, never
+  a `number`. Anything structural belongs in the English-owned file next to it — `routes` in
+  `lib/site.ts`, `principleStructure` in `content/principles/structure.ts`.
+- Add a language in `lib/i18n.ts` and it appears in the switcher, the sitemap and every `hreflang`
+  set at once.
+
+Journal essays are the one exception to "content lives in `content/`", and the journal is currently
+unlisted: it has no public route, and is reachable only through `/admin/journal`. `lib/journal.ts`
+reads from Postgres when `DATABASE_URL` is set, with `content/journal/articles.ts` as the seed for
+`npm run db:seed`. To put it back on the public site, restore the routes and its entries in
+`lib/site.ts` and `content/chrome/*`.
 
 ## Non-negotiables
 
-- No fabricated facts, statistics, quotations, names, addresses or email addresses.
-- `/contact` is frontend-only and must say so. `/join` is genuinely connected and says that instead;
-  `/admin` is a genuine backend, and its analytics figures come from the Vercel API or are reported
+- No fabricated facts, statistics, quotations, names, addresses or email addresses. The imprint has
+  no named publisher because the movement is not yet registered, and no correspondence addresses are
+  printed because none is monitored yet. Neither gap may be filled with something plausible.
+- **Both public forms genuinely work.** `/join` writes to `member`, `/contact` writes to `enquiry`,
+  and each says what it does. If either is ever disconnected, the page must say so before the change
+  ships — a form that silently discards what is typed into it is worse than no form.
+- `/admin` is a genuine backend, and its analytics figures come from the Vercel API or are reported
   as unavailable — never estimated, never placeheld with plausible numbers.
 - **Changing what the site collects means editing `/privacy` first**, not afterwards. The privacy
-  note makes specific promises about encryption, step-up authentication, audit logging, retention
-  and the absence of any export. Weakening any of those without rewriting it turns a design document
-  into a false statement to the people who trusted it.
+  note makes specific promises about which fields exist, what is encrypted, step-up authentication,
+  audit logging, retention and the absence of any export. Adding a field or weakening a promise
+  without rewriting it turns a design document into a false statement to the people who trusted it.
 - Criticism is directed at systems, institutions and ideas — never at groups of people.

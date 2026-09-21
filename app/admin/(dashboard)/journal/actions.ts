@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -52,7 +52,6 @@ function draftFromForm(form: FormData): ArticleDraft {
     heroWidth: integer("heroWidth", 0),
     heroHeight: integer("heroHeight", 0),
     heroCaption: text("heroCaption"),
-    heroPlaceholder: form.get("heroPlaceholder") === "on",
     featured: form.get("featured") === "on",
     status: form.get("status") === "published" ? "published" : "draft",
     // Preserved verbatim: the body is the one field where leading whitespace and

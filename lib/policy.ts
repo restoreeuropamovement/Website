@@ -72,6 +72,20 @@ export function getActivePolicyCategories(): readonly PolicyCategoryData[] {
 }
 
 /**
+ * Statuses at least one entry currently carries.
+ *
+ * Offered as filters instead of the full scheme, so the catalogue never shows
+ * a pill that returns nothing. `Open` disappeared when the v0.2 addendum
+ * settled the last undecided question; the legend still explains what it would
+ * mean, because the scheme has not changed.
+ */
+export function getActivePolicyStatuses(): readonly PolicyStatus[] {
+  return policyStatuses.filter((status) =>
+    policyEntries.some((entry) => hasStatus(entry, status)),
+  );
+}
+
+/**
  * The text a query is matched against: title, short answer, position, the
  * commitments themselves and the authored keywords. Built once per entry.
  */

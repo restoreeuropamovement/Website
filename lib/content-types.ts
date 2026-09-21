@@ -61,11 +61,6 @@ export interface ImageSlot {
   readonly height: number;
   /** Shown beneath the figure where a caption is appropriate. */
   readonly caption?: string;
-  /**
-   * Set while the slot holds commissioned-photography placeholder artwork so the
-   * UI can say so plainly instead of implying the image is a photograph.
-   */
-  readonly placeholder?: boolean;
 }
 
 export interface Principle {

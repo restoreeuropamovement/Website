@@ -132,8 +132,11 @@ export function SelectField({
 interface CheckboxFieldProps {
   readonly id: string;
   readonly name: string;
-  readonly checked: boolean;
-  readonly onChange: (checked: boolean) => void;
+  /** Omit both to leave the box uncontrolled, as a plain form submission wants. */
+  readonly checked?: boolean;
+  readonly onChange?: (checked: boolean) => void;
+  readonly value?: string;
+  readonly required?: boolean;
   readonly error?: string;
   readonly children: ReactNode;
 }
@@ -143,6 +146,8 @@ export function CheckboxField({
   name,
   checked,
   onChange,
+  value,
+  required,
   error,
   children,
 }: CheckboxFieldProps) {
@@ -153,8 +158,11 @@ export function CheckboxField({
           id={id}
           name={name}
           type="checkbox"
-          checked={checked}
-          onChange={(event) => onChange(event.target.checked)}
+          value={value}
+          required={required}
+          {...(checked === undefined
+            ? {}
+            : { checked, onChange: (event) => onChange?.(event.target.checked) })}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${id}-error` : undefined}
           className={cn(

@@ -7,7 +7,9 @@ import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { Button } from "@/components/ui/Button";
-import { ctaNav, primaryNav, site } from "@/lib/site";
+import type { ChromeContent } from "@/content/chrome";
+import { localePath, stripLocale, type Locale } from "@/lib/i18n";
+import { ctaRoute, primaryNavIds, routes } from "@/lib/site";
 import { pad } from "@/lib/utils";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -17,8 +19,15 @@ const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1
  * Each entry keeps its number, title and one line of explanation, so the menu
  * reads like the contents of a document.
  */
-export function MobileNavigation() {
+export function MobileNavigation({
+  chrome,
+  locale,
+}: {
+  readonly chrome: ChromeContent;
+  readonly locale: Locale;
+}) {
   const pathname = usePathname();
+  const current = stripLocale(pathname);
   const [open, setOpen] = useState(false);
   const reduceMotion = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
@@ -84,7 +93,7 @@ export function MobileNavigation() {
         aria-haspopup="dialog"
         className="-mr-2 inline-flex h-11 items-center gap-2.5 px-2 text-ink transition-opacity hover:opacity-70 lg:hidden"
       >
-        <span className="eyebrow">Menu</span>
+        <span className="eyebrow">{chrome.common.menu}</span>
         <Menu className="size-5" strokeWidth={1.5} aria-hidden="true" />
       </button>
 
@@ -95,7 +104,7 @@ export function MobileNavigation() {
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Site navigation"
+            aria-label={chrome.common.siteNavLabel}
             className="fixed inset-0 z-100 flex flex-col overflow-y-auto bg-canvas lg:hidden"
             initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -103,28 +112,28 @@ export function MobileNavigation() {
             transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
           >
             <div className="flex h-18 shrink-0 items-center justify-between border-b border-hairline px-6 sm:px-8">
-              <Link href="/" onClick={close} className="text-ink">
-                <Wordmark />
-                <span className="sr-only">— home</span>
+              <Link href={localePath(locale, routes.home)} onClick={close} className="text-ink">
+                <Wordmark descriptor={chrome.site.descriptor} />
+                <span className="sr-only">— {chrome.common.home}</span>
               </Link>
               <button
                 type="button"
                 onClick={close}
                 className="-mr-2 inline-flex h-11 items-center gap-2.5 px-2 text-ink transition-opacity hover:opacity-70"
               >
-                <span className="eyebrow">Close</span>
+                <span className="eyebrow">{chrome.common.close}</span>
                 <X className="size-5" strokeWidth={1.5} aria-hidden="true" />
               </button>
             </div>
 
-            <nav aria-label="Primary" className="flex-1 px-6 py-6 sm:px-8">
+            <nav aria-label={chrome.common.primaryNavLabel} className="flex-1 px-6 py-6 sm:px-8">
               <ul className="flex flex-col">
-                {primaryNav.map((item, index) => {
-                  const active =
-                    pathname === item.href || pathname.startsWith(`${item.href}/`);
+                {primaryNavIds.map((id, index) => {
+                  const href = routes[id];
+                  const active = current === href || current.startsWith(`${href}/`);
                   return (
                     <motion.li
-                      key={item.href}
+                      key={id}
                       initial={reduceMotion ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
@@ -135,7 +144,7 @@ export function MobileNavigation() {
                       className="border-b border-hairline last:border-b-0"
                     >
                       <Link
-                        href={item.href}
+                        href={localePath(locale, href)}
                         onClick={close}
                         aria-current={active ? "page" : undefined}
                         className="group grid grid-cols-[2.5rem_1fr] items-baseline gap-x-2 py-5"
@@ -145,10 +154,10 @@ export function MobileNavigation() {
                         </span>
                         <span className="flex flex-col gap-1.5">
                           <span className="font-serif text-display-3 leading-none text-ink transition-colors group-hover:text-burgundy">
-                            {item.label}
+                            {chrome.nav[id].label}
                           </span>
                           <span className="text-[0.875rem] leading-relaxed text-muted">
-                            {item.description}
+                            {chrome.nav[id].description}
                           </span>
                         </span>
                       </Link>
@@ -159,11 +168,16 @@ export function MobileNavigation() {
             </nav>
 
             <div className="shrink-0 border-t border-hairline px-6 pt-6 pb-10 sm:px-8">
-              <Button href={ctaNav.href} size="lg" className="w-full" onClick={close}>
-                {ctaNav.label}
+              <Button
+                href={localePath(locale, ctaRoute)}
+                size="lg"
+                className="w-full"
+                onClick={close}
+              >
+                {chrome.cta.label}
               </Button>
               <p className="mt-6 font-serif text-[1.0625rem] leading-snug text-muted text-balance">
-                {site.tagline}
+                {chrome.site.tagline}
               </p>
             </div>
           </motion.div>

@@ -2,68 +2,61 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import { Wordmark } from "@/components/brand/Wordmark";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { LanguageMenu } from "./LanguageMenu";
 import { MobileNavigation } from "./MobileNavigation";
-import { ctaNav, primaryNav } from "@/lib/site";
+import type { ChromeContent } from "@/content/chrome";
+import { localePath, stripLocale, type Locale } from "@/lib/i18n";
+import { ctaRoute, primaryNavIds, routes } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
- * The masthead. It blends into the page at the top and settles onto a solid warm
- * ground with a hairline once the reader has moved.
+ * A solid masthead. It does not glass over, fade in, or wait for a scroll
+ * threshold — those are landing-page habits, and they make the bar feel like a
+ * product site rather than a newspaper.
  */
-export function Navbar() {
+export function Navbar({
+  chrome,
+  locale,
+}: {
+  readonly chrome: ChromeContent;
+  readonly locale: Locale;
+}) {
   const pathname = usePathname();
-  const [settled, setSettled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setSettled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  /* Compared without the locale prefix, so /de/principles marks Principles
+     active in exactly the way /principles does. */
+  const current = stripLocale(pathname);
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ease-(--ease-editorial)",
-        settled
-          ? "border-b border-hairline bg-canvas/92 backdrop-blur-[6px]"
-          : "border-b border-transparent bg-transparent",
-      )}
-    >
-      <Container className="flex h-18 items-center justify-between gap-6 lg:h-20">
-        <Link href="/" className="shrink-0 text-ink transition-opacity hover:opacity-70">
-          <Wordmark />
+    <header className="sticky top-0 z-50 border-b border-rule bg-canvas">
+      <Container className="flex h-16 items-center justify-between gap-6 lg:h-18">
+        <Link
+          href={localePath(locale, routes.home)}
+          className="shrink-0 text-ink transition-opacity hover:opacity-70"
+        >
+          <Wordmark descriptor={chrome.site.descriptor} preload />
           {/* Part of the link text rather than an aria-label, so the accessible
               name still contains the visible wordmark. */}
-          <span className="sr-only">— home</span>
+          <span className="sr-only">— {chrome.common.home}</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label={chrome.common.primaryNavLabel} className="hidden lg:block">
           <ul className="flex items-center gap-1">
-            {primaryNav.map((item) => {
-              const active =
-                pathname === item.href || pathname.startsWith(`${item.href}/`);
+            {primaryNavIds.map((id) => {
+              const href = routes[id];
+              const active = current === href || current.startsWith(`${href}/`);
               return (
-                <li key={item.href}>
+                <li key={id}>
                   <Link
-                    href={item.href}
+                    href={localePath(locale, href)}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex h-9 items-center px-3 text-[0.875rem] font-medium transition-colors xl:px-3.5",
+                      "inline-flex h-9 items-center px-2.5 text-[0.8125rem] xl:px-3",
                       active ? "text-ink" : "text-muted hover:text-ink",
                     )}
                   >
-                    {item.label}
-                    {active ? (
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-x-3 bottom-0.5 h-px bg-burgundy xl:inset-x-3.5"
-                      />
-                    ) : null}
+                    {chrome.nav[id].label}
                   </Link>
                 </li>
               );
@@ -71,15 +64,15 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          {/* Wrapped rather than given `hidden` directly: the button's own
-              `inline-flex` would win against it. */}
-          <div className="hidden lg:block">
-            <Button href={ctaNav.href} size="sm">
-              {ctaNav.label}
-            </Button>
-          </div>
-          <MobileNavigation />
+        <div className="flex items-center gap-2 lg:gap-3">
+          <Link
+            href={localePath(locale, ctaRoute)}
+            className="hidden text-[0.8125rem] text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy lg:inline"
+          >
+            {chrome.cta.label}
+          </Link>
+          <LanguageMenu current={locale} label={chrome.common.language} />
+          <MobileNavigation chrome={chrome} locale={locale} />
         </div>
       </Container>
     </header>

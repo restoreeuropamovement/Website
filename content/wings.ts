@@ -137,6 +137,7 @@ const seeds: readonly WingSeed[] = [
   { country: "Moldova", region: "Central and Eastern Europe", endonyms: [] },
   { country: "Poland", region: "Central and Eastern Europe", endonyms: [{ name: "Polska", lang: "pl" }] },
   { country: "Romania", region: "Central and Eastern Europe", endonyms: [{ name: "România", lang: "ro" }] },
+  { country: "Russia", region: "Central and Eastern Europe", endonyms: [{ name: "Россия", lang: "ru" }] },
   {
     country: "Slovakia",
     region: "Central and Eastern Europe",

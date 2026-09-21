@@ -3,7 +3,7 @@ import type { ContentBlock } from "@/lib/content-types";
 export const privacy = {
   eyebrow: "Legal",
   title: "Privacy",
-  lede: "This site collects nothing from its readers. What the movement holds about its members, and how, is set out below.",
+  lede: "Reading this site collects nothing from you. Two pages ask for something, and only if you choose to give it. What happens to it is set out below.",
   sections: [
     {
       id: "what-we-collect",
@@ -11,7 +11,7 @@ export const privacy = {
       body: [
         {
           type: "lead",
-          text: "Nothing that identifies you. This website has no accounts, no advertising, no tracking pixels and no third-party embeds.",
+          text: "Reading collects nothing that identifies you. This website has no accounts, no advertising, no tracking pixels and no third-party embeds.",
         },
         {
           type: "paragraph",
@@ -19,21 +19,25 @@ export const privacy = {
         },
         {
           type: "paragraph",
-          text: "Neither form on this site transmits anything. There is no place on this website through which you can hand over personal data, deliberately or otherwise.",
+          text: "There are two places on this site through which you can hand over personal data, and in both you have to mean it: the membership application on [Get Involved](/join) and the message form on [Contact](/contact). Nothing else on the site transmits anything, and neither form is reachable by accident.",
         },
       ] satisfies readonly ContentBlock[],
     },
     {
       id: "membership",
-      title: "If you are a member",
+      title: "If you apply to join",
       body: [
         {
           type: "paragraph",
-          text: "Membership applications reach the movement by correspondence rather than through this website, and are entered by hand. So although nothing is collected here, records about members are **held** here, and you are entitled to know what they contain.",
+          text: "Applying sends what you typed to the movement, where it is written to a database. Submitting the form does not make you a member: the record is marked as awaiting review, and a person decides. Until then, and afterwards, you are entitled to know exactly what is held.",
         },
         {
           type: "paragraph",
-          text: "A record holds five things: your name, your email address, your country, the role you asked for and one area of interest. That is all of it. There is no postal address, no telephone number, no date of birth and no free-text field — the last of those is absent on purpose, because free text is where people mention their employer, their family or their legal situation, and we would rather not hold it.",
+          text: "A record holds seven things at most: your name, your email address, your country, the role you asked for, one area of interest, and — only if you choose to give them — your region or city and a message. There is no postal address, no telephone number and no date of birth. Nothing is inferred, enriched or bought in from anywhere else.",
+        },
+        {
+          type: "paragraph",
+          text: "The two optional fields are the ones that can say most about you, so they are treated as carefully as your name. A region narrows a person far more than a country does, and a message is free text — which is where people mention an employer, a family situation or a legal one. **Both are encrypted**, and neither is ever written to the administrative log. If you would rather not give them, leave them empty; the application works exactly the same.",
         },
         {
           type: "subheading",
@@ -58,6 +62,14 @@ export const privacy = {
           ],
         },
         {
+          type: "subheading",
+          text: "What the form itself does",
+        },
+        {
+          type: "paragraph",
+          text: "Your name, address, region and message are encrypted before they are written down, in the same request — none of them is ever stored in readable form. The reply you see is identical whether or not the address was already on the roll, so the form cannot be used to test whether a particular person is a member. Applications are rate-limited per connection, which is a defence against a script filling the roll rather than a measure aimed at you.",
+        },
+        {
           type: "paragraph",
           text: "Your details are never sold, never shared with another organisation, never used to build an advertising profile, and never passed to a third party for any purpose. No automated decision is made about you.",
         },
@@ -69,16 +81,16 @@ export const privacy = {
       body: [
         {
           type: "paragraph",
-          text: "A membership list is exactly the kind of document that should never leak, so it is built on the assumption that one day something will go wrong. What follows is a description of the safeguards rather than a promise that nothing can happen.",
+          text: "A membership list is exactly the kind of document that should never leak, so it is built on the assumption that one day something will go wrong. What follows is a description of the safeguards rather than a promise that nothing can happen. Correspondence sent through the contact form is held the same way.",
         },
         {
           type: "list",
           marker: "rule",
           items: [
-            "**Your name and email address are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
-            "**Your country is held unencrypted**, because counting and organising by region is the reason the list exists. On its own it identifies nobody.",
+            "**Your name, email address, region and message are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
+            "**Your country is held unencrypted**, because counting and organising by country is the reason the list exists. On its own it identifies nobody. Your region, which would narrow you down much further, is not treated this way — it is encrypted with the rest.",
             "**Nobody signs in with a password.** Administrative access requires a passkey held on a physical device, which cannot be guessed, phished or read out of a stolen database.",
-            "**Reading names requires a second confirmation.** Being signed in shows only counts by country; revealing any individual needs a fresh passkey touch, valid for minutes. Someone who steals an active session gets statistics, not people.",
+            "**Reading names or messages requires a second confirmation.** Being signed in shows only counts; revealing any individual, or opening any letter, needs a fresh passkey touch valid for minutes. Someone who steals an active session gets statistics, not people.",
             "**Every reading is logged** — who looked, and when. Not merely every change: for a list like this, the act of looking is the thing worth recording. What was searched for is recorded as a one-way digest, so the log can confirm whether a particular person was looked up without itself becoming a list of names.",
             "**There is no export function.** The list cannot be downloaded as a file, because a file is the form in which such lists escape.",
           ],
@@ -91,15 +103,19 @@ export const privacy = {
     },
     {
       id: "forms",
-      title: "The forms",
+      title: "The two forms",
       body: [
         {
           type: "paragraph",
-          text: "The forms on [Get Involved](/join) and [Contact](/contact) are not connected to any system. They validate what you type in your browser and go no further: no request is made, no data leaves the page, and nothing is stored. Both say so on the page itself, not only here.",
+          text: "The first is the membership application on [Get Involved](/join), described above.",
         },
         {
           type: "paragraph",
-          text: "Please do not use either for anything you need a reply to, and do not send sensitive information through them. When a submission system is established, this page will be updated first — stating what is collected, why, how long it is kept and how to have it erased.",
+          text: "The second is the message form on [Contact](/contact). It holds your name, your email address, which function you addressed and what you wrote. Name, address and message are encrypted exactly as a member's details are — writing to an organisation is not the same as belonging to it, but the gap is thinner than it looks, and a letter saying you are thinking of joining is as disclosing as the roll itself.",
+        },
+        {
+          type: "paragraph",
+          text: "Correspondence is kept until it has been dealt with and for no longer than answering it requires, is erased on request, and is never used to add you to the membership roll. Joining is a separate decision you have to make deliberately. No email addresses are printed on the contact page because each is published only when the function it belongs to exists and somebody is answerable for reading it.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -151,7 +167,7 @@ export const privacy = {
         },
         {
           type: "paragraph",
-          text: "For membership records those rights are real and the machinery to honour them exists: a record can be produced, corrected or deleted outright on request, and deletion means deletion rather than a flag on a row that is quietly kept. Ask through whatever correspondence you used to apply.",
+          text: "Those rights are real and the machinery to honour them exists: a record can be produced, corrected or deleted outright on request, and deletion means deletion rather than a flag on a row that is quietly kept.",
         },
         {
           type: "statement",
@@ -159,15 +175,15 @@ export const privacy = {
         },
         {
           type: "paragraph",
-          text: "The movement is not yet formally constituted, which means no data controller can honestly be named and no correspondence address has been published — see the [imprint](/imprint), which lists what is still to be established. Until that is settled there is no address to which you can send a request with any certainty of who will read it, and no supervisory authority with which a complaint could be lodged against a named controller.",
+          text: "Registration as a party or association has not completed, so no data controller can yet be named and no correspondence address is published — see the [imprint](/imprint). Until that is settled there is no address to which you can send a request with certainty of who will read it, and no supervisory authority with which a complaint could be lodged against a named controller.",
         },
         {
           type: "paragraph",
-          text: "This is a genuine gap rather than an oversight, and it argues for waiting: if the absence of a named controller troubles you, do not apply yet. Nothing is lost by applying later, and this page will be updated — naming the controller, the correspondence address and the supervisory authority — before that gap is closed rather than after.",
+          text: "That is a genuine gap, and it argues for waiting: if the absence of a named controller troubles you, do not apply yet. Nothing is lost by applying later. This page will name the controller, the address and the supervisory authority before the gap closes rather than after.",
         },
         {
           type: "note",
-          text: "This note describes the site as it stands, and is written to be read rather than to satisfy a checklist. It is not legal advice, and it will be replaced by a full privacy policy once the movement is registered and a controller can be named.",
+          text: "This note describes the site as it stands and is written to be read rather than to satisfy a checklist. It is not legal advice, and it will be replaced by a full privacy policy on registration.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -181,23 +197,26 @@ export const imprint = {
   intro: [
     {
       type: "lead",
-      text: "Restore Europe Movement is in formation. It is not yet registered as a political party or association in any jurisdiction, and no responsible person can therefore be named here in a legal capacity.",
+      text: "This website is published by Restore Europe Movement, a political movement of Europe's national peoples.",
     },
     {
       type: "paragraph",
-      text: "Publishing an invented name, address or registration number would be worse than publishing none. The entries below state what will appear here, and remain unfilled until each particular is genuine.",
+      text: "Registration as a party or association is under way and has not yet completed in any jurisdiction. Until it does, there is no registered name, entry number or statutory representative to state, and this page will not invent one. Each particular appears here as it becomes a matter of public record.",
+    },
+    {
+      type: "paragraph",
+      text: "Legal notices and corrections should be sent through the correspondence channels on [Contact](/contact), which lists the address published for each function.",
     },
   ] satisfies readonly ContentBlock[],
+  /** Published on registration, in this order. Named so readers know what is owed them. */
   entries: [
-    { term: "Publisher", description: "Registered name of the association or party, once constituted." },
-    { term: "Legal form", description: "To be determined by the jurisdiction of registration." },
-    { term: "Registered address", description: "Published on registration." },
-    { term: "Responsible for content", description: "Name and address of the person responsible under applicable press law." },
-    { term: "Register and number", description: "Register of associations or parties, and the entry number." },
-    { term: "Represented by", description: "The officers empowered to represent the organisation." },
-    { term: "Contact", description: "Correspondence address and electronic contact point." },
-    { term: "VAT identification", description: "Where applicable." },
-    { term: "Supervisory authority", description: "Where applicable under national party law." },
+    { term: "Publisher", description: "The registered name of the association or party." },
+    { term: "Legal form and jurisdiction", description: "Determined by the country of registration." },
+    { term: "Registered address", description: "The seat of the organisation." },
+    { term: "Responsible for content", description: "The person answerable under applicable press law." },
+    { term: "Register and number", description: "The register of associations or parties, and the entry." },
+    { term: "Represented by", description: "The officers empowered to act for the organisation." },
+    { term: "Supervisory authority", description: "Where national party law provides for one." },
   ],
   closing: [
     {
@@ -206,7 +225,7 @@ export const imprint = {
     },
     {
       type: "paragraph",
-      text: "The text of the manifesto, the principles and the journal is published by the movement in formation and may be quoted with attribution. The placeholder artwork used throughout the site was generated for this project and carries no third-party rights.",
+      text: "The manifesto, the principles and the policy catalogue are published by the movement and may be quoted with attribution. Photographic credits and licences are recorded in the repository that builds this site.",
     },
     {
       type: "paragraph",

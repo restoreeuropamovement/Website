@@ -3,9 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PolicyCard } from "@/components/policy/PolicyCard";
 import { PolicyStatusBadge } from "@/components/policy/PolicyStatusBadge";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
 import { CATALOGUE_NOTICE } from "@/content/policy";
 import { renderInline } from "@/lib/inline";
 import {
@@ -58,19 +56,16 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
 
   return (
     <>
-      <header className="border-b border-hairline bg-canvas-deep pt-10 pb-14 lg:pt-14 lg:pb-20">
-        <Container>
-          <p className="eyebrow mb-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-muted">
-            <Link href="/policy" className="transition-colors hover:text-burgundy">
-              Policy Catalogue
+      <header className="border-b border-hairline">
+        <Container className="pt-10 pb-8 lg:pt-12 lg:pb-10">
+          <p className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-muted">
+            <Link href="/policy" className="hover:text-burgundy">
+              Policy catalogue
             </Link>
             {category ? (
               <>
-                <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
-                <Link
-                  href={`/policy?category=${category.id}`}
-                  className="transition-colors hover:text-burgundy"
-                >
+                <span aria-hidden="true">·</span>
+                <Link href={`/policy?category=${category.id}`} className="hover:text-burgundy">
                   {category.title}
                 </Link>
               </>
@@ -91,9 +86,8 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
 
       <Container className="py-16 lg:py-24">
         <div className="flex max-w-(--container-reading) flex-col gap-14">
-          <Reveal>
-            <section aria-labelledby="position-heading">
-              <h2 id="position-heading" className="eyebrow mb-6 text-burgundy">
+          <section aria-labelledby="position-heading">
+              <h2 id="position-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 Position
               </h2>
               <div className="flex flex-col gap-5">
@@ -104,12 +98,10 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                 ))}
               </div>
             </section>
-          </Reveal>
 
           {entry.policies ? (
-            <Reveal>
-              <section aria-labelledby="policies-heading" className="border-t border-hairline pt-10">
-                <h2 id="policies-heading" className="eyebrow mb-6 text-burgundy">
+            <section aria-labelledby="policies-heading" className="border-t border-hairline pt-10">
+                <h2 id="policies-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   Policy
                 </h2>
                 <ul className="flex flex-col border-t border-hairline">
@@ -123,26 +115,22 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                   ))}
                 </ul>
               </section>
-            </Reveal>
           ) : null}
 
           {entry.principle ? (
-            <Reveal>
-              <section aria-labelledby="principle-heading" className="border-t border-hairline pt-10">
-                <h2 id="principle-heading" className="eyebrow mb-6 text-burgundy">
+            <section aria-labelledby="principle-heading" className="border-t border-hairline pt-10">
+                <h2 id="principle-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   Principle
                 </h2>
-                <p className="border-l-2 border-gold/65 pl-6 font-serif text-display-4 leading-snug text-ink text-balance">
+                <p className="border-l border-rule pl-5 font-serif text-display-4 leading-snug text-ink text-balance">
                   {renderInline(entry.principle)}
                 </p>
               </section>
-            </Reveal>
           ) : null}
 
           {entry.limits ? (
-            <Reveal>
-              <section aria-labelledby="limits-heading" className="border-t border-hairline pt-10">
-                <h2 id="limits-heading" className="eyebrow mb-6 text-burgundy">
+            <section aria-labelledby="limits-heading" className="border-t border-hairline pt-10">
+                <h2 id="limits-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   Limits and unresolved details
                 </h2>
                 <ul className="flex flex-col gap-3">
@@ -151,18 +139,18 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                       key={item}
                       className="flex gap-3 text-reading leading-relaxed text-body/92"
                     >
-                      <span aria-hidden="true" className="mt-3 size-1 shrink-0 rotate-45 bg-gold/70" />
+                      <span aria-hidden="true" className="mt-2 text-muted">
+                        —
+                      </span>
                       {renderInline(item)}
                     </li>
                   ))}
                 </ul>
               </section>
-            </Reveal>
           ) : null}
 
           {entry.implementationNote ? (
-            <Reveal>
-              <section aria-labelledby="implementation-heading">
+            <section aria-labelledby="implementation-heading">
                 <h2 id="implementation-heading" className="sr-only">
                   Implementation note
                 </h2>
@@ -173,13 +161,11 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                   </p>
                 </div>
               </section>
-            </Reveal>
           ) : null}
 
           {basis.length > 0 ? (
-            <Reveal>
-              <section aria-labelledby="basis-heading" className="border-t border-hairline pt-10">
-                <h2 id="basis-heading" className="eyebrow mb-6 text-burgundy">
+            <section aria-labelledby="basis-heading" className="border-t border-hairline pt-10">
+                <h2 id="basis-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   Manifesto basis
                 </h2>
                 <ul className="flex flex-col gap-3">
@@ -200,12 +186,10 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                   ))}
                 </ul>
               </section>
-            </Reveal>
           ) : null}
 
-          <Reveal>
-            <section aria-labelledby="keywords-heading" className="border-t border-hairline pt-10">
-              <h2 id="keywords-heading" className="eyebrow mb-5 text-muted">
+          <section aria-labelledby="keywords-heading" className="border-t border-hairline pt-10">
+              <h2 id="keywords-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 Search terms
               </h2>
               <ul className="flex flex-wrap gap-2">
@@ -225,16 +209,14 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                 <time dateTime={entry.lastUpdated}>{formatDate(entry.lastUpdated)}</time>.
               </p>
             </section>
-          </Reveal>
         </div>
 
         {related.length > 0 ? (
-          <Reveal>
-            <section
+          <section
               aria-labelledby="related-heading"
               className="mt-20 border-t border-hairline pt-12 lg:mt-24"
             >
-              <h2 id="related-heading" className="eyebrow mb-10 text-muted">
+              <h2 id="related-heading" className="mb-8 font-serif text-[0.9375rem] text-muted">
                 Related positions
               </h2>
               <ul className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -245,21 +227,29 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                 ))}
               </ul>
             </section>
-          </Reveal>
         ) : null}
 
         <div className="mt-16 flex flex-col gap-4 border-t border-hairline pt-10 lg:mt-20">
           <p className="max-w-(--container-reading) text-micro leading-relaxed text-faint">
             {CATALOGUE_NOTICE}
           </p>
-          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Button href="/policy" size="lg" variant="secondary">
+          <p className="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.9375rem]">
+            <Link
+              href="/policy"
+              className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+            >
               All positions
-            </Button>
-            <Button href="/manifesto" size="lg" variant="secondary">
+            </Link>
+            <span className="text-faint" aria-hidden="true">
+              ·
+            </span>
+            <Link
+              href="/manifesto"
+              className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+            >
               Read the manifesto
-            </Button>
-          </div>
+            </Link>
+          </p>
         </div>
       </Container>
     </>

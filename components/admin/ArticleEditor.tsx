@@ -160,12 +160,6 @@ export function ArticleEditor({
             <input name="heroCaption" defaultValue={draft.heroCaption} maxLength={300} className={input} />
           </Field>
 
-          <Checkbox
-            name="heroPlaceholder"
-            defaultChecked={draft.heroPlaceholder}
-            label="Placeholder artwork"
-            hint="Marks the image as stand-in, so the page says so rather than implying it is a photograph."
-          />
         </fieldset>
 
         <fieldset className="flex flex-col gap-6 border border-hairline p-6">
@@ -211,7 +205,10 @@ export function ArticleEditor({
             <textarea name="footnotesSource" defaultValue={draft.footnotesSource} rows={4} className={area} />
           </Field>
 
-          <Field label="References" hint="One per line: Label | Detail. Our own published documents only.">
+          <Field
+            label="References"
+            hint="One per line: Label | Detail. Real, checkable sources — a treaty article, a paragraph number, a document reference. Never one you have not read."
+          >
             <textarea name="citationsSource" defaultValue={draft.citationsSource} rows={4} className={area} />
           </Field>
 

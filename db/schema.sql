@@ -179,20 +179,28 @@ CREATE INDEX IF NOT EXISTS journal_article_published_idx
 --     because sorting and per-country counts are the whole point of the admin
 --     view. A country alone identifies nobody; combined with the row's mere
 --     existence it says no more than the row already does.
---   * There is no postal address, telephone number or free-text field. Free text
---     is where people disclose their employer, their family and their legal
---     exposure, and it cannot be protected by structure.
+--   * `region_encrypted` and `message_encrypted` are encrypted for the same
+--     reason the name is. A region narrows a person far more than a country,
+--     and free text is where people disclose their employer, their family and
+--     their legal exposure. Neither is ever written to `admin_audit`.
 --
--- Nothing on the public site writes to this table. Applications reach the
--- movement by other means and an administrator enters them from `/admin/members`,
--- which is why there is no confirmation token here and no scheduled deletion:
--- every row exists because somebody with a passkey put it there.
+-- Two things write here: the public intake at `app/(site)/join/actions.ts`, and
+-- an administrator entering an application from `/admin/members`. Both land as
+-- 'pending'. There is no scheduled deletion, because an unreviewed row is
+-- somebody's application rather than a stale token.
 CREATE TABLE IF NOT EXISTS member (
   id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   name_encrypted     text NOT NULL,
   email_encrypted    text NOT NULL,
   email_digest       text NOT NULL UNIQUE,
   country            text NOT NULL,
+  -- Region and message are encrypted for the same reason the name is. A region
+  -- is far narrower than a country, and the message is free text — which is
+  -- where people mention an employer, a family situation or a legal one. The
+  -- admin view aggregates by country only, so neither needs to be readable in
+  -- SQL and both are kept where a stolen table cannot read them.
+  region_encrypted   text,
+  message_encrypted  text,
   -- Both drawn from fixed lists in content/involvement.ts, so neither is free
   -- text and neither narrows a person down on its own.
   involvement_role   text NOT NULL,
@@ -206,5 +214,37 @@ CREATE TABLE IF NOT EXISTS member (
   created_at         timestamptz NOT NULL DEFAULT now()
 );
 
+-- Added separately from the table so that `npm run db:migrate` upgrades a
+-- database created before the public intake collected these two.
+ALTER TABLE member ADD COLUMN IF NOT EXISTS region_encrypted  text;
+ALTER TABLE member ADD COLUMN IF NOT EXISTS message_encrypted text;
+
 CREATE INDEX IF NOT EXISTS member_country_idx ON member (country);
 CREATE INDEX IF NOT EXISTS member_status_idx ON member (status, created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Correspondence
+-- ---------------------------------------------------------------------------
+--
+-- Enquiries sent through /contact. Less sensitive than `member` — writing to an
+-- organisation is not the same as belonging to it — but held to the same rules,
+-- because the distinction is thinner than it looks: "I am thinking of joining"
+-- in a message body is a political opinion whatever table it sits in.
+--
+-- Name, address and body are encrypted. `subject` is drawn from the fixed list
+-- in content/involvement.ts, so it is not free text and is left readable for
+-- sorting. Unlike the roll there is no uniqueness constraint: a person may
+-- legitimately write twice.
+CREATE TABLE IF NOT EXISTS enquiry (
+  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name_encrypted    text NOT NULL,
+  email_encrypted   text NOT NULL,
+  subject           text NOT NULL,
+  message_encrypted text NOT NULL,
+  -- Editorial: 'new' until somebody has dealt with it.
+  status            text NOT NULL DEFAULT 'new'
+                      CHECK (status IN ('new', 'handled')),
+  created_at        timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS enquiry_status_idx ON enquiry (status, created_at DESC);

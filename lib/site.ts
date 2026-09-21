@@ -1,3 +1,5 @@
+import { chrome as enChrome } from "@/content/chrome/en";
+
 /**
  * Site-wide configuration.
  *
@@ -16,11 +18,20 @@ export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://restoreeuropa.eu"
 ).replace(/\/$/, "");
 
+/**
+ * The English strings are read from `content/chrome/en.ts` rather than written
+ * twice. Anything here that a reader sees in their own language comes from the
+ * chrome dictionary for that locale; `site` is the fallback for the few places
+ * with no locale in hand — the root document metadata, the Open Graph image and
+ * the plain-text manifesto download.
+ */
 export const site = {
   /**
    * Dominant brand mark, and the name the prose uses as a subject — "Restore
    * Europe holds that…". Deliberately not an acronym: the policy catalogue
    * states positions in sentences, and initials read badly there.
+   *
+   * Untranslated in every language. It is the movement's name, not a phrase.
    */
   short: "Restore Europe",
   /**
@@ -28,130 +39,56 @@ export const site = {
    * mark in small capitals, so the two together read "Restore Europe Movement"
    * without either line repeating the other.
    */
-  descriptor: "Movement",
+  descriptor: enChrome.site.descriptor,
   /** Formal name, used where an institution would sign itself. */
   name: "Restore Europe Movement",
   formal: "Restore Europe Movement",
-  tagline: "For a Christian, European and Human-Scale Civilization.",
-  description:
-    "Restore Europe Movement is a political movement of Europe's national peoples, for a Christian, European and human-scale civilization: family, widespread property, national continuity, subsidiarity, stewardship and technology under human control.",
-  closing: "Receive. Renew. Transmit.",
+  tagline: enChrome.site.tagline,
+  description: enChrome.site.description,
+  closing: enChrome.site.closing,
   locale: "en_GB",
   url: SITE_URL,
 } as const;
 
-export interface NavItem {
-  readonly label: string;
-  readonly href: string;
-  /** Shown beneath the label in the fullscreen mobile navigation. */
-  readonly description: string;
-}
-
-export const primaryNav: readonly NavItem[] = [
-  {
-    label: "Principles",
-    href: "/principles",
-    description: "The sixteen commitments that define our politics.",
-  },
-  {
-    label: "Manifesto",
-    href: "/manifesto",
-    description: "The founding document, in full.",
-  },
-  {
-    label: "Policy",
-    href: "/policy",
-    description: "Searchable positions, topic by topic.",
-  },
-  {
-    label: "Vision",
-    href: "/vision",
-    description: "What the programme means in ordinary life.",
-  },
-  {
-    label: "About",
-    href: "/about",
-    description: "Who we are and how we organise.",
-  },
-  {
-    label: "Wings",
-    href: "/wings",
-    description: "The national wing in each European nation.",
-  },
-  {
-    label: "Journal",
-    href: "/journal",
-    description: "Essays, analysis and argument.",
-  },
-];
-
-export const ctaNav = {
-    label: "Join the Movement",
-  href: "/join",
+/**
+ * Every public address, by id.
+ *
+ * Labels live in `content/chrome/*`, keyed by the same ids. Keeping the two
+ * apart means a translator edits words and never a URL, and adding a page is
+ * one entry here plus one label per language rather than a hunt through the
+ * navigation, the footer and the error page.
+ */
+export const routes = {
+  home: "/",
+  principles: "/principles",
+  manifesto: "/manifesto",
+  policy: "/policy",
+  vision: "/vision",
+  about: "/about",
+  wings: "/wings",
+  join: "/join",
+  contact: "/contact",
+  press: "/contact#press",
+  research: "/contact#research",
+  chapters: "/contact#chapters",
+  privacy: "/privacy",
+  imprint: "/imprint",
 } as const;
 
-export const footerNav: readonly {
-  readonly title: string;
-  readonly items: readonly { readonly label: string; readonly href: string }[];
-}[] = [
-  {
-    title: "The Movement",
-    items: [
-      { label: "Principles", href: "/principles" },
-      { label: "Manifesto", href: "/manifesto" },
-      { label: "Policy Catalogue", href: "/policy" },
-      { label: "Vision", href: "/vision" },
-      { label: "About", href: "/about" },
-      { label: "National Wings", href: "/wings" },
-      { label: "Journal", href: "/journal" },
-      { label: "Get Involved", href: "/join" },
-    ],
-  },
-  {
-    title: "Contact",
-    items: [
-      { label: "Contact", href: "/contact" },
-      { label: "Press", href: "/contact#press" },
-      { label: "Research", href: "/contact#research" },
-      { label: "Local Chapters", href: "/contact#chapters" },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
-      { label: "Privacy", href: "/privacy" },
-      { label: "Imprint", href: "/imprint" },
-    ],
-  },
-];
+export type RouteId = keyof typeof routes;
 
-/**
- * Social accounts are not yet established. These entries render as
- * non-interactive placeholders rather than dead links.
- */
-export const socialPlaceholders: readonly { readonly label: string }[] = [
-  { label: "Newsletter" },
-  { label: "Video" },
-  { label: "Discussion" },
-  { label: "Press Releases" },
-];
+/** The masthead, in order. Each id is a key of both `routes` and `chrome.nav`. */
+export const primaryNavIds = [
+  "principles",
+  "manifesto",
+  "policy",
+  "vision",
+  "about",
+  "wings",
+] as const;
 
-export interface LanguageOption {
-  readonly code: string;
-  readonly label: string;
-  readonly endonym: string;
-  readonly available: boolean;
-}
+export type PrimaryNavId = (typeof primaryNavIds)[number];
 
-/**
- * Only English exists. Translations are not fabricated; the other entries are
- * shown as forthcoming and are not selectable.
- */
-export const languages: readonly LanguageOption[] = [
-  { code: "EN", label: "English", endonym: "English", available: true },
-  { code: "DE", label: "German", endonym: "Deutsch", available: false },
-  { code: "FR", label: "French", endonym: "Français", available: false },
-  { code: "PL", label: "Polish", endonym: "Polski", available: false },
-  { code: "IT", label: "Italian", endonym: "Italiano", available: false },
-  { code: "ES", label: "Spanish", endonym: "Español", available: false },
-];
+/** The one call to action carried in the masthead. */
+export const ctaRoute = routes.join;
+

@@ -23,26 +23,43 @@ npm run dev        # http://localhost:3000
 | `npm run start`     | Serve the production build                           |
 | `npm run lint`      | ESLint                                               |
 | `npm run typecheck` | `tsc --noEmit`                                       |
-| `npm run check`     | Lint, typecheck and build in sequence                |
-| `npm run artwork`   | Regenerate the placeholder SVG artwork               |
+| `npm run check`     | Lint, typecheck, both content tests and build        |
+| `npm run artwork`   | Regenerate the generated SVG artwork                 |
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
 | `npm run db:migrate`| Apply `db/schema.sql` — idempotent                   |
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
 | `npm run test:syntax`| Assert the journal notation round-trips losslessly  |
 | `npm run test:pii`  | Assert membership encryption behaves as designed      |
 
-### Before deploying
+### Deploying
 
-The canonical origin is `https://restoreeuropa.eu`, which is the default in
-`lib/site.ts`. Override it only where the real origin differs — a preview
-deployment, or a staging host:
+Copy `.env.example` into the Vercel project's environment variables and fill it
+in. Every variable is documented there; none has a default in code, because a
+secret with a fallback is a published credential.
 
-```bash
-NEXT_PUBLIC_SITE_URL="https://preview.restoreeuropa.eu"
-```
+In order:
 
-Serve the apex and redirect `www` to it rather than answering on both, so pages
-are not indexed at two addresses and `ADMIN_ORIGIN` has a single value to match.
+1. **Domain.** Point the apex at Vercel and redirect `www` to it rather than
+   answering on both, so pages are not indexed at two addresses. Set
+   `NEXT_PUBLIC_SITE_URL` and `ADMIN_ORIGIN` to that exact origin — `ADMIN_ORIGIN`
+   must match what the browser shows or passkeys will not verify.
+2. **Database.** Add a Postgres integration; it supplies `DATABASE_URL`. Then run
+   `npm run db:migrate` against it once. The migration is idempotent and safe to
+   repeat.
+3. **Keys.** Generate `MEMBER_ENCRYPTION_KEY` and `ADMIN_SESSION_SECRET` with the
+   commands in `.env.example`. **Keep a copy of the encryption key somewhere a
+   disk failure cannot reach** — it is deliberately not in the database, so
+   losing it means losing every stored name, address and message irrecoverably.
+4. **First passkey.** Set `ADMIN_BOOTSTRAP_TOKEN`, enrol at `/admin/enrol`, then
+   delete the variable. Leaving it set is a standing route to a new
+   administrator account.
+5. **Analytics (optional).** Without `VERCEL_ANALYTICS_TOKEN` and
+   `VERCEL_PROJECT_ID` the dashboard reports traffic as unavailable rather than
+   estimating it.
+
+The public site builds and serves with none of this configured. Without a
+database or an encryption key the two forms decline submissions and say so,
+rather than accepting details they cannot store safely.
 
 ---
 
@@ -72,19 +89,27 @@ inherit none of the public chrome.
 
 No prose lives inside a component. To change what the site says, edit `content/`:
 
-| What                      | File                            |
-| ------------------------- | ------------------------------- |
-| Manifesto                 | `content/manifesto.ts`          |
-| Homepage                  | `content/home.ts`               |
-| Principles                | `content/principles.ts`         |
-| Vision                    | `content/vision.ts`             |
-| About                     | `content/about.ts`              |
-| National wings            | `content/wings.ts`              |
-| Journal essays            | `content/journal/articles.ts`   |
-| Join / Contact            | `content/involvement.ts`        |
-| Privacy / Imprint         | `content/legal.ts`              |
-| Image slots               | `content/images.ts`             |
-| Navigation, site metadata | `lib/site.ts`                   |
+| What                      | File                                |
+| ------------------------- | ----------------------------------- |
+| Manifesto                 | `content/manifesto/en.ts`           |
+| Homepage                  | `content/home/en.ts`                |
+| Principles (text)         | `content/principles/en.ts`          |
+| Principles (order, links) | `content/principles/structure.ts`   |
+| Navigation, footer, 404   | `content/chrome/en.ts`              |
+| Policy catalogue          | `content/policy.ts`                 |
+| Vision                    | `content/vision.ts`                 |
+| About                     | `content/about.ts`                  |
+| National wings            | `content/wings.ts`                  |
+| Join / Contact            | `content/involvement.ts`            |
+| Privacy / Imprint         | `content/legal.ts`                  |
+| Image slots               | `content/images.ts`                 |
+| Routes, site metadata     | `lib/site.ts`                       |
+
+Six languages. English is the source; `de`, `fr`, `pl`, `it` and `es` sit beside
+each `en.ts` and are typed against it, so a translation that omits a key fails
+the build rather than rendering a gap. A language with no file yet falls back to
+English, which is why some pages are still English in every locale. See
+`lib/i18n.ts` for the routing and `lib/dictionary.ts` for the loader.
 
 Content is typed `ContentBlock[]` (see `lib/content-types.ts`) rendered by
 `components/content/ContentBlocks.tsx`. Inside any `text` field you may use

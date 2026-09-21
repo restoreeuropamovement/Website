@@ -1,51 +1,47 @@
+import Link from "next/link";
 import { ContentBlocks } from "@/components/content/ContentBlocks";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Divider } from "@/components/ui/Divider";
-import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
-import { restoration } from "@/content/home";
+import type { HomeContent } from "@/content/home";
+import { localePath, type Locale } from "@/lib/i18n";
 
-export function RestorationSection() {
+export function RestorationSection({
+  content,
+  locale,
+}: {
+  readonly content: HomeContent["restoration"];
+  readonly locale: Locale;
+}) {
   return (
-    <Section tone="deep" bordered spacing="lg" labelledBy="restoration">
+    <Section bordered labelledBy="restoration">
       <Container size="narrow">
-        <Reveal className="flex flex-col items-center text-center">
-          <p className="eyebrow mb-8 text-burgundy">{restoration.eyebrow}</p>
-          <h2 id="restoration" className="font-serif text-display-2 font-normal text-ink text-balance">
-            {restoration.statement}
-          </h2>
-        </Reveal>
+        <h2 id="restoration" className="font-serif text-display-2 font-normal text-ink text-balance">
+          {content.statement}
+        </h2>
 
-        <Reveal delay={0.08} className="mt-12">
-          <ContentBlocks blocks={restoration.body} className="mx-auto max-w-(--container-reading)" />
-        </Reveal>
+        <div className="mt-8">
+          <ContentBlocks blocks={content.body} className="max-w-(--container-reading)" />
+        </div>
 
-        <Reveal delay={0.12} className="mt-14">
-          <Divider variant="mark" />
-          <ul className="mt-10 flex flex-wrap justify-center gap-x-4 gap-y-3">
-            {restoration.themes.map((theme, index) => (
-              <li key={theme} className="flex items-center gap-4">
-                {index > 0 ? <span aria-hidden="true" className="size-1 rotate-45 bg-gold/60" /> : null}
-                <span className="font-serif text-[1.125rem] text-ink">{theme}</span>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+        <p className="mt-8 font-serif text-display-4 leading-snug text-muted">{content.closing}</p>
 
-        <Reveal delay={0.16} className="mt-14 flex flex-col items-center gap-10">
-          <p className="max-w-2xl text-center font-serif text-display-4 leading-snug text-muted text-balance">
-            {restoration.closing}
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Button href={restoration.primaryCta.href} size="lg">
-              {restoration.primaryCta.label}
-            </Button>
-            <Button href={restoration.secondaryCta.href} size="lg" variant="secondary">
-              {restoration.secondaryCta.label}
-            </Button>
-          </div>
-        </Reveal>
+        <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.9375rem]">
+          <Link
+            href={localePath(locale, content.primaryCta.href)}
+            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+          >
+            {content.primaryCta.label}
+          </Link>
+          <span className="text-faint" aria-hidden="true">
+            ·
+          </span>
+          <Link
+            href={localePath(locale, content.secondaryCta.href)}
+            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+          >
+            {content.secondaryCta.label}
+          </Link>
+        </p>
       </Container>
     </Section>
   );

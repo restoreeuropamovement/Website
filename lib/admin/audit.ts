@@ -22,7 +22,17 @@ export type AuditAction =
   | "member.reveal"
   | "member.create"
   | "member.update"
-  | "member.erase";
+  | "member.erase"
+  /*
+   * The two writes the public site performs. Recorded with the same care as an
+   * administrative action and with no more detail — never a name, an address
+   * or a message body, because this log is not encrypted.
+   */
+  | "member.apply"
+  | "enquiry.create"
+  | "enquiry.reveal"
+  | "enquiry.update"
+  | "enquiry.erase";
 
 export interface AuditEntry {
   readonly action: AuditAction;

@@ -10,7 +10,12 @@ import {
 import { queryDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireSession } from "@/lib/admin/session";
-import { europeanCountries, interestAreas, involvementRoles } from "@/content/involvement";
+import {
+  europeanCountries,
+  interestAreas,
+  involvementRoleTitle,
+  involvementRoles,
+} from "@/content/involvement";
 import { formatDate } from "@/lib/utils";
 import { MemberSearchForm } from "@/components/admin/MemberSearchForm";
 import { AddMember } from "@/components/admin/AddMember";
@@ -251,7 +256,7 @@ async function RevealedList({
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
                   <span>{member.country}</span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
-                  <span>{member.involvementRole}</span>
+                  <span>{involvementRoleTitle(member.involvementRole)}</span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
                   <time dateTime={member.createdAt.toISOString()}>
                     {formatDate(member.createdAt.toISOString().slice(0, 10))}
@@ -259,7 +264,15 @@ async function RevealedList({
                 </p>
                 <p className="font-serif text-[1.1875rem] leading-snug text-ink">{member.name}</p>
                 <p className="mt-0.5 text-[0.875rem] text-muted">{member.email}</p>
-                <p className="mt-0.5 text-micro text-faint">{member.interestArea}</p>
+                <p className="mt-0.5 text-micro text-faint">
+                  {member.interestArea}
+                  {member.region ? ` · ${member.region}` : ""}
+                </p>
+                {member.message ? (
+                  <p className="mt-2 max-w-prose border-l-2 border-gold/50 py-1 pl-4 text-[0.875rem] leading-relaxed whitespace-pre-line text-muted">
+                    {member.message}
+                  </p>
+                ) : null}
               </div>
 
               <div className="flex flex-wrap items-center gap-2">

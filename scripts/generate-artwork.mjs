@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars -- see the note below */
 /**
- * Generates the placeholder artwork in `public/images`.
+ * Generates tonal vector artwork for `public/images`.
  *
- * No photography has been supplied for this project and nothing is hotlinked, so
- * every image slot is filled with tonal vector artwork drawn in the brand
- * palette. The output is deterministic (seeded), committed to the repository and
- * intended to be replaced file-for-file by commissioned photography at the same
- * aspect ratios — see `content/images.ts` for the slot definitions.
+ * **Currently dormant.** Every slot in `content/images.ts` now holds a
+ * photograph, so this script writes nothing by default and the generators below
+ * are unreferenced. It is kept, rather than deleted, as the fallback it was
+ * written to be: if a photograph has to come down — a licence question, a
+ * subject that turns out to be wrong — a slot can go back to artwork without
+ * anybody having to reconstruct several hundred lines of seeded drawing code.
+ *
+ * To put a slot back: add a `write()` call at the bottom for it, point the slot
+ * in `content/images.ts` at the `.svg`, and restore its `placeholder: true` so
+ * the page says what it is rather than implying a photograph.
+ *
+ * Output is deterministic (seeded), so regenerating produces identical files.
  *
  *   node scripts/generate-artwork.mjs
  */
@@ -288,6 +296,12 @@ function write(name, contents) {
 /* ---------------------------------------------------------------- scenes */
 
 /** A cultivated valley: mountains, a village around its church, terraced fields. */
+/*
+ * Currently unused: the two valley slots hold photographs. Kept rather than
+ * deleted because a slot can go back to artwork — if a photograph turns out to
+ * be wrong for a page, regenerating is one `write()` call away, whereas
+ * recovering this from history is not obvious to whoever needs it.
+ */
 function valley({ width, height, seed, horizon = 0.5 }) {
   const rng = mulberry32(seed);
   const hz = height * horizon;
@@ -439,6 +453,7 @@ function arcade({ width, height, seed, bays = 5 }) {
 }
 
 /** A square in an old town: two ranks of facades and a church behind them. */
+/* Unused for the same reason as `valley`: the old town slot holds a photograph. */
 function oldTown({ width, height, seed }) {
   const rng = mulberry32(seed);
   const hz = height * 0.3;
@@ -628,66 +643,17 @@ function fragment({ width, height, seed, variant }) {
 /* ------------------------------------------------------------------ build */
 
 mkdirSync(OUT, { recursive: true });
-console.log("Generating placeholder artwork → public/images");
 
-write(
-  "hero-valley.svg",
-  svg(2400, 1500, valley({ width: 2400, height: 1500, seed: 20260415, horizon: 0.44 }),
-    "A cultivated European valley with a village gathered around its church")
+/*
+ * Nothing is generated. Every slot in content/images.ts holds a photograph, so
+ * emitting SVGs here would only scatter unreferenced files through
+ * public/images — which is exactly what happened the first time these calls
+ * were left in place after a slot was filled.
+ *
+ * To bring a slot back, add its call here. The generators above are intact and
+ * the seeds that produced the original artwork are recorded in git history.
+ */
+console.log(
+  "Nothing to generate: every image slot holds a photograph.\n" +
+    "See content/images.ts, and the note at the top of this file to revert a slot."
 );
-
-write(
-  "hero-valley-wide.svg",
-  svg(2400, 1100, valley({ width: 2400, height: 1100, seed: 7781, horizon: 0.46 }),
-    "A cultivated European valley beneath distant mountains")
-);
-
-write(
-  "woodland-river.svg",
-  svg(2400, 1200, woodland({ width: 2400, height: 1200, seed: 44190 }),
-    "Managed woodland above a river meadow")
-);
-
-write(
-  "arcade.svg",
-  svg(1800, 1100, arcade({ width: 1800, height: 1100, seed: 1301, bays: 5 }),
-    "A Romanesque arcade drawn in elevation")
-);
-
-write(
-  "arcade-wide.svg",
-  svg(2400, 900, arcade({ width: 2400, height: 900, seed: 90211, bays: 9 }),
-    "A long Romanesque arcade drawn in elevation")
-);
-
-write(
-  "old-town.svg",
-  svg(1800, 1200, oldTown({ width: 1800, height: 1200, seed: 5512 }),
-    "The roofscape of a European old town")
-);
-
-write(
-  "workshop.svg",
-  svg(1800, 1200, workshop({ width: 1800, height: 1200, seed: 3307 }),
-    "Daylight falling through a tall window onto a workshop bench")
-);
-
-write(
-  "terraces.svg",
-  svg(1800, 1200, fragment({ width: 1800, height: 1200, seed: 6611, variant: "terraces" }),
-    "Terraced farmland receding toward a wooded boundary")
-);
-
-const journalVariants = [
-  ["journal/vault.svg", "vault", 811, "The ribs of a stone vault"],
-  ["journal/colonnade.svg", "colonnade", 9021, "A colonnade in elevation"],
-  ["journal/tracery.svg", "tracery", 3341, "The tracery of a rose window"],
-  ["journal/portal.svg", "portal", 4507, "The receding orders of a Romanesque portal"],
-  ["journal/terraces.svg", "terraces", 7717, "Terraced farmland"],
-];
-
-for (const [name, variant, seed, title] of journalVariants) {
-  write(name, svg(1800, 1000, fragment({ width: 1800, height: 1000, seed, variant }), title));
-}
-
-console.log("Done.");

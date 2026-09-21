@@ -9,10 +9,11 @@ import { db } from "@/lib/db";
 /**
  * Membership records.
  *
- * **Nothing on the public site writes here.** Applications reach the movement by
- * other means and an administrator enters them, which is why there is no intake
- * endpoint, no confirmation ceremony and no automatic deletion: every row exists
- * because a named person with a passkey put it there, and the audit log says who.
+ * Two things write here: the public intake at `app/(site)/join/actions.ts`, and
+ * an administrator entering an application that arrived some other way. Both
+ * land as `pending`; nothing becomes a membership until a person reviews it, and
+ * nothing is deleted on a timer, because an unreviewed row is somebody's
+ * application rather than a stale token.
  *
  * Two halves, kept apart on purpose:
  *
@@ -45,6 +46,10 @@ export interface MemberInput {
   readonly name: string;
   readonly email: string;
   readonly country: string;
+  /** Optional. Encrypted: a region narrows a person far more than a country. */
+  readonly region?: string;
+  /** Optional free text. Encrypted, and never written to the audit log. */
+  readonly message?: string;
   readonly involvementRole: string;
   readonly interestArea: string;
   /** `pending` for an application not yet reviewed; `confirmed` for a member. */
@@ -59,10 +64,11 @@ export type CreateOutcome =
   | { readonly kind: "duplicate" };
 
 /**
- * Adds a record, entered by an administrator.
+ * Adds a record.
  *
- * **Privileged**, and it encrypts on the way in, so the caller must hold an
- * elevated session and audit the call.
+ * It encrypts on the way in, so the administrative caller must hold an elevated
+ * session; the public intake reaches it only after validating and rate-limiting,
+ * and both callers audit.
  *
  * A duplicate address is reported rather than merged: two people cannot share an
  * inbox, so a collision means either a typo or a record that already exists, and
@@ -70,19 +76,27 @@ export type CreateOutcome =
  * through the keyed digest, since the encrypted column cannot be compared.
  */
 export async function createMember(input: MemberInput): Promise<CreateOutcome> {
-  const [digest, nameEncrypted, emailEncrypted] = await Promise.all([
-    emailDigest(input.email),
-    encryptPii(input.name.trim()),
-    encryptPii(input.email.trim()),
-  ]);
+  const region = input.region?.trim() ?? "";
+  const message = input.message?.trim() ?? "";
+
+  const [digest, nameEncrypted, emailEncrypted, regionEncrypted, messageEncrypted] =
+    await Promise.all([
+      emailDigest(input.email),
+      encryptPii(input.name.trim()),
+      encryptPii(input.email.trim()),
+      region ? encryptPii(region) : Promise.resolve(null),
+      message ? encryptPii(message) : Promise.resolve(null),
+    ]);
 
   const [row] = await db()<{ id: string }[]>`
     INSERT INTO member (
       name_encrypted, email_encrypted, email_digest, country,
+      region_encrypted, message_encrypted,
       involvement_role, interest_area, status, confirmed_at
     )
     VALUES (
       ${nameEncrypted}, ${emailEncrypted}, ${digest}, ${input.country},
+      ${regionEncrypted}, ${messageEncrypted},
       ${input.involvementRole}, ${input.interestArea}, ${input.status},
       ${input.status === "confirmed" ? db()`now()` : null}
     )
@@ -159,6 +173,8 @@ export interface RevealedMember {
   readonly name: string;
   readonly email: string;
   readonly country: string;
+  readonly region: string;
+  readonly message: string;
   readonly involvementRole: string;
   readonly interestArea: string;
   readonly status: "pending" | "confirmed";
@@ -208,6 +224,8 @@ export async function searchMembersRevealed(
       name_encrypted: string;
       email_encrypted: string;
       country: string;
+      region_encrypted: string | null;
+      message_encrypted: string | null;
       involvement_role: string;
       interest_area: string;
       status: "pending" | "confirmed";
@@ -215,6 +233,7 @@ export async function searchMembersRevealed(
     }[]
   >`
     SELECT id, name_encrypted, email_encrypted, country,
+           region_encrypted, message_encrypted,
            involvement_role, interest_area, status, created_at
       FROM member
      WHERE (${options.country ?? null}::text IS NULL OR country = ${options.country ?? null})
@@ -234,6 +253,12 @@ export async function searchMembersRevealed(
       name: (await decryptPiiSafe(row.name_encrypted)) ?? "[unreadable]",
       email: (await decryptPiiSafe(row.email_encrypted)) ?? "[unreadable]",
       country: row.country,
+      region: row.region_encrypted
+        ? ((await decryptPiiSafe(row.region_encrypted)) ?? "[unreadable]")
+        : "",
+      message: row.message_encrypted
+        ? ((await decryptPiiSafe(row.message_encrypted)) ?? "[unreadable]")
+        : "",
       involvementRole: row.involvement_role,
       interestArea: row.interest_area,
       status: row.status,

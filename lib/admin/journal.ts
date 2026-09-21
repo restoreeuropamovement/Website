@@ -1,4 +1,4 @@
-import type { ImageSlot, JournalCategory } from "@/lib/content-types";
+﻿import type { ImageSlot, JournalCategory } from "@/lib/content-types";
 import {
   parseBody,
   parseCitations,
@@ -44,7 +44,6 @@ export interface ArticleDraft {
   heroWidth: number;
   heroHeight: number;
   heroCaption: string;
-  heroPlaceholder: boolean;
   featured: boolean;
   status: "draft" | "published";
   bodySource: string;
@@ -67,7 +66,6 @@ export const emptyDraft: ArticleDraft = {
   heroWidth: 1600,
   heroHeight: 1000,
   heroCaption: "",
-  heroPlaceholder: true,
   featured: false,
   status: "draft",
   bodySource: "",
@@ -209,7 +207,6 @@ export async function loadDraft(slug: string): Promise<ArticleDraft | null> {
     heroWidth: row.hero.width,
     heroHeight: row.hero.height,
     heroCaption: row.hero.caption ?? "",
-    heroPlaceholder: row.hero.placeholder ?? false,
     featured: row.featured,
     status: row.status,
     bodySource: serializeBody(row.body),
@@ -228,7 +225,6 @@ export async function saveDraft(draft: ArticleDraft, originalSlug?: string): Pro
     width: draft.heroWidth,
     height: draft.heroHeight,
     ...(draft.heroCaption.trim() ? { caption: draft.heroCaption.trim() } : {}),
-    ...(draft.heroPlaceholder ? { placeholder: true } : {}),
   };
 
   const values = {

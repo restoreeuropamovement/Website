@@ -1,4 +1,3 @@
-import type { JournalArticle } from "@/lib/content-types";
 import { SITE_URL, site } from "@/lib/site";
 
 /** The publishing organisation, described only by what is known about it. */
@@ -12,7 +11,7 @@ export const organization = {
   slogan: site.tagline,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/icon.svg`,
+    url: `${SITE_URL}/brand/restore-europa-crest.png`,
   },
 } as const;
 
@@ -34,20 +33,3 @@ export function websiteSchema(): Record<string, unknown> {
   };
 }
 
-export function articleSchema(article: JournalArticle): Record<string, unknown> {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    alternativeHeadline: article.subtitle,
-    description: article.standfirst,
-    articleSection: article.category,
-    datePublished: article.date,
-    inLanguage: "en",
-    url: `${SITE_URL}/journal/${article.slug}`,
-    mainEntityOfPage: `${SITE_URL}/journal/${article.slug}`,
-    author: { "@type": "Organization", name: site.formal },
-    publisher: { "@id": `${SITE_URL}/#organization` },
-    image: `${SITE_URL}${article.hero.src}`,
-  };
-}
