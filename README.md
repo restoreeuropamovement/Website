@@ -41,7 +41,8 @@ In order:
 
 1. **Domain.** Point the apex at Vercel and redirect `www` to it rather than
    answering on both, so pages are not indexed at two addresses. Set
-   `NEXT_PUBLIC_SITE_URL` and `ADMIN_ORIGIN` to that exact origin — `ADMIN_ORIGIN`
+   `NEXT_PUBLIC_SITE_URL` and `ADMIN_ORIGIN` to that exact origin, and
+   `ADMIN_RP_ID` to the bare domain with no scheme or subdomain. `ADMIN_ORIGIN`
    must match what the browser shows or passkeys will not verify.
 2. **Database.** Add a Postgres integration; it supplies `DATABASE_URL`. Then run
    `npm run db:migrate` against it once. The migration is idempotent and safe to
@@ -50,9 +51,11 @@ In order:
    commands in `.env.example`. **Keep a copy of the encryption key somewhere a
    disk failure cannot reach** — it is deliberately not in the database, so
    losing it means losing every stored name, address and message irrecoverably.
-4. **First passkey.** Set `ADMIN_BOOTSTRAP_TOKEN`, enrol at `/admin/enrol`, then
-   delete the variable. Leaving it set is a standing route to a new
-   administrator account.
+4. **First passkey.** Do this only once the real domain is live. A passkey is
+   bound to `ADMIN_RP_ID`, so one enrolled against a `*.vercel.app` preview is
+   useless on the real domain. Set `ADMIN_BOOTSTRAP_TOKEN`, enrol at
+   `/admin/enrol`, then remove the variable — it is inert once a credential
+   exists, so this is tidiness rather than necessity.
 5. **Analytics (optional).** Without `VERCEL_ANALYTICS_TOKEN` and
    `VERCEL_PROJECT_ID` the dashboard reports traffic as unavailable rather than
    estimating it.
