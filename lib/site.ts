@@ -14,9 +14,36 @@ import { chrome as enChrome } from "@/content/chrome/en";
  * party in `lib/admin/env.ts` is the bare registrable domain, which covers apex
  * and `www` alike; only the origin is exact.
  */
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://restoreeuropa.eu"
-).replace(/\/$/, "");
+const DEFAULT_SITE_URL = "https://restoreeuropa.eu";
+
+/**
+ * `??` would be wrong here. A hosting dashboard that lists the variables a
+ * project uses will happily create them with empty values, and an empty string
+ * is neither null nor undefined — so `??` passes it straight through and the
+ * first `new URL("")` fails the build with nothing to point at. Anything blank
+ * is treated as absent.
+ *
+ * A value that is present but not a URL is a configuration mistake worth
+ * failing on, but it should fail here, naming the variable, rather than deep
+ * inside Next's metadata handling.
+ */
+function resolveSiteUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!configured) return DEFAULT_SITE_URL;
+
+  try {
+    new URL(configured);
+  } catch {
+    throw new Error(
+      `NEXT_PUBLIC_SITE_URL is set to ${JSON.stringify(configured)}, which is not a valid URL. ` +
+        `Use a full origin including the scheme, for example ${DEFAULT_SITE_URL}, or leave it unset.`,
+    );
+  }
+
+  return configured.replace(/\/$/, "");
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 /**
  * The English strings are read from `content/chrome/en.ts` rather than written
