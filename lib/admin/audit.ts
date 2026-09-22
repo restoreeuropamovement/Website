@@ -29,10 +29,26 @@ export type AuditAction =
    * or a message body, because this log is not encrypted.
    */
   | "member.apply"
+  /*
+   * Non-delivery of the acknowledgement. Recorded because the alternative is
+   * finding out weeks later that nobody who applied was ever written to, and
+   * because a sudden run of these is itself worth noticing.
+   */
+  | "member.apply.mail"
   | "enquiry.create"
   | "enquiry.reveal"
   | "enquiry.update"
-  | "enquiry.erase";
+  | "enquiry.erase"
+  /*
+   * The newsletter list. `confirm` and `unsubscribe` are recorded with their
+   * outcome but without any token: a failed confirmation is usually an expired
+   * link, occasionally somebody guessing at them, and the difference is only
+   * visible in the rate.
+   */
+  | "newsletter.subscribe"
+  | "newsletter.confirm"
+  | "newsletter.unsubscribe"
+  | "newsletter.dispatch";
 
 export interface AuditEntry {
   readonly action: AuditAction;

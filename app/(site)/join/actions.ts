@@ -1,8 +1,12 @@
 "use server";
 
+import { after } from "next/server";
+
 import { recordAudit } from "@/lib/admin/audit";
-import { hasDatabase, hasMemberEncryptionKey } from "@/lib/admin/env";
-import { createMember } from "@/lib/admin/members";
+import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
+import { createMember, pendingMemberCount } from "@/lib/admin/members";
+import { applicationAlert, applicationReceived } from "@/content/emails";
+import { sendEmail } from "@/lib/email";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import {
@@ -117,6 +121,49 @@ export async function submitMembershipApplication(
     detail: { country, written: outcome.kind === "created" },
     ipHash,
   });
+
+  /*
+   * Mail goes out after the response, for two reasons beyond not making
+   * somebody watch a spinner while a third party is slow.
+   *
+   * It removes a timing oracle. Sending on `created` and not on `duplicate` is
+   * right — the address already had its acknowledgement the first time — but
+   * doing it inline would make the duplicate case measurably faster, which
+   * hands back through the clock exactly the distinction the identical reply
+   * above is careful not to state.
+   *
+   * And it decouples the two failures. The application is already committed by
+   * this point; a mail provider that is down, throttling or misconfigured must
+   * not be able to turn a recorded application into an error the reader sees.
+   */
+  if (outcome.kind === "created") {
+    after(async () => {
+      const acknowledgement = await sendEmail({
+        to: email,
+        ...applicationReceived(),
+      });
+
+      const notify = mailNotifyAddress();
+      if (notify) {
+        await sendEmail({ to: notify, ...applicationAlert(await pendingMemberCount()) });
+      }
+
+      /*
+       * Worth recording: silent non-delivery is how a movement discovers six
+       * weeks late that nobody was ever acknowledged. `unconfigured` is a
+       * normal state on a deployment without mail, so it is not a failure.
+       */
+      if (!acknowledgement.ok && acknowledgement.reason !== "unconfigured") {
+        await recordAudit({
+          action: "member.apply.mail",
+          outcome: "failure",
+          actorLabel: "public intake",
+          detail: { reason: acknowledgement.reason },
+          ipHash,
+        });
+      }
+    });
+  }
 
   /* Identical for `created` and `duplicate`. See the note above. */
   return { status: "received", errors: [] };

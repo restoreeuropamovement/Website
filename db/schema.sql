@@ -248,3 +248,81 @@ CREATE TABLE IF NOT EXISTS enquiry (
 );
 
 CREATE INDEX IF NOT EXISTS enquiry_status_idx ON enquiry (status, created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Newsletter
+-- ---------------------------------------------------------------------------
+--
+-- Addresses that asked to receive the journal by email. Held to the same rules
+-- as the roll — encrypted value, keyed digest for matching — because the
+-- inference is nearly as strong: subscribing to a political movement's letter
+-- is not membership, but it is not nothing either, and the two lists would be
+-- equally damaging in the same hands.
+--
+-- Two things here differ deliberately from `member`, and both follow from the
+-- difference between an application and a subscription.
+--
+-- First, **nothing is delivered until the address confirms.** A membership
+-- application is reviewed by a person, so a malicious third-party submission is
+-- caught by that review. Nobody reviews a subscription, so the confirmation
+-- click is the only thing standing between the form and using this movement to
+-- mail somebody who never asked. Until `confirmed_at` is set the row receives
+-- nothing but its own confirmation request.
+--
+-- Second, **an unconfirmed row does expire**, which is the opposite of the rule
+-- on `member`. There, an unreviewed row is somebody's application and deleting
+-- it on a timer would discard it. Here, an unconfirmed row is the residue of an
+-- address that never consented — possibly typed by someone else entirely — so
+-- keeping it is the harm rather than the service. `subscriber_confirm_expiry_idx`
+-- exists to make that sweep cheap.
+CREATE TABLE IF NOT EXISTS subscriber (
+  id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  email_encrypted        text NOT NULL,
+  email_digest           text NOT NULL UNIQUE,
+
+  -- SHA-256 of the token that was mailed out, never the token. Same reasoning
+  -- as `admin_session.id`: whoever reads this table cannot reconstruct a link
+  -- that would confirm somebody else's address. Cleared once confirmed, so a
+  -- captured old message cannot be replayed.
+  --
+  -- There is deliberately no matching column for unsubscribing. A confirmation
+  -- must work once and then expire, which needs stored state; an unsubscribe
+  -- link must keep working in an issue sent two years ago, which cannot. So the
+  -- unsubscribe tag is derived on demand from the row's id under the key in
+  -- `MEMBER_ENCRYPTION_KEY` (see `unsubscribeTag`), giving a link that never
+  -- goes stale while leaving nothing in the table that would let whoever steals
+  -- it unsubscribe the entire list.
+  confirm_token_hash     text,
+  confirm_expires_at     timestamptz,
+  confirmed_at           timestamptz,
+
+  unsubscribed_at        timestamptz,
+
+  -- Which language edition they subscribed from. Not personal data, and not
+  -- currently acted on — the letter is written in English — but it is the only
+  -- honest signal of which translation would be worth the effort first.
+  locale                 text NOT NULL DEFAULT 'en',
+
+  created_at             timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS subscriber_confirmed_idx
+  ON subscriber (confirmed_at) WHERE unsubscribed_at IS NULL;
+CREATE INDEX IF NOT EXISTS subscriber_confirm_expiry_idx
+  ON subscriber (confirm_expires_at) WHERE confirmed_at IS NULL;
+
+-- One row per essay actually sent out.
+--
+-- The unique constraint on the slug is the point of the table: it makes sending
+-- the same essay to the list twice impossible rather than merely unlikely. An
+-- accidental second dispatch is the kind of mistake that costs a movement its
+-- subscribers and its sending reputation at the same time.
+CREATE TABLE IF NOT EXISTS newsletter_dispatch (
+  id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  article_slug text NOT NULL UNIQUE REFERENCES journal_article(slug) ON DELETE CASCADE,
+  sent_at      timestamptz NOT NULL DEFAULT now(),
+  -- Counts, not addresses. Enough to know a dispatch happened and roughly how
+  -- it went; never a record of who received what.
+  recipients   integer NOT NULL DEFAULT 0,
+  failures     integer NOT NULL DEFAULT 0
+);

@@ -145,6 +145,20 @@ export interface MembershipOverview {
  * nothing, needs no elevated session, and discloses no individual. It is what
  * the members page shows until somebody deliberately asks for more.
  */
+/**
+ * How many applications are waiting to be read.
+ *
+ * A single number, and the only thing the notification email is allowed to say
+ * about the roll. Touches no encrypted column, so it costs nothing and reveals
+ * nothing about who is in the queue.
+ */
+export async function pendingMemberCount(): Promise<number> {
+  const [row] = await db()<{ pending: string }[]>`
+    SELECT count(*) AS pending FROM member WHERE status = 'pending'
+  `;
+  return Number(row?.pending ?? 0);
+}
+
 export async function membershipOverview(): Promise<MembershipOverview> {
   const rows = await db()<{ country: string; confirmed: string; pending: string }[]>`
     SELECT country,

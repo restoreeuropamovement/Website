@@ -206,6 +206,25 @@ export function queryDigest(query: string): Promise<string> {
 }
 
 /**
+ * Tag authorising the unsubscribe link at the foot of a newsletter issue.
+ *
+ * Derived rather than stored, which is the opposite of how the confirmation
+ * token works, and for a reason worth stating. A confirmation must be usable
+ * exactly once and then expire, so it has to leave state behind. An unsubscribe
+ * link has to keep working in an issue somebody finds in their archive two
+ * years from now, which state in a row cannot guarantee — and a stored table of
+ * valid unsubscribe tokens is, to whoever steals it, a button that empties the
+ * list.
+ *
+ * Keyed with the same HMAC key as the digests above, under its own label, so a
+ * tag cannot be produced by anyone who has the database but not the key, and
+ * cannot be confused with a digest computed for any other purpose.
+ */
+export function unsubscribeTag(subscriberId: string): Promise<string> {
+  return blindDigest("unsubscribe", subscriberId);
+}
+
+/**
  * Folds a value to the form both search and duplicate-detection compare on:
  * case-insensitive, accent-insensitive, and insensitive to runs of whitespace.
  *

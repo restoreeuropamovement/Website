@@ -127,6 +127,42 @@ export function hasMemberEncryptionKey(): boolean {
 }
 
 /**
+ * Transactional mail.
+ *
+ * Optional, and lazy like everything else here, for a reason specific to what
+ * it is attached to. The intake at `/join` writes somebody's application; the
+ * confirmation message is a courtesy on top of it. If the provider is
+ * unreachable, misconfigured or simply not set up yet, the application must
+ * still be recorded — losing it because a third party was down would be the
+ * worse failure by a wide margin. So absence here is a supported state, not an
+ * error, and every caller treats sending as best-effort.
+ *
+ * `MAIL_FROM` must be an address on a domain verified with the provider, or
+ * messages will be rejected outright. See README.md, "Mail".
+ */
+export function mailSender(): { apiKey: string; from: string } | undefined {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.MAIL_FROM;
+  if (!apiKey || !from) return undefined;
+  return { apiKey, from };
+}
+
+export function hasMail(): boolean {
+  return mailSender() !== undefined;
+}
+
+/**
+ * Where to tell a human that something arrived.
+ *
+ * Separate from the sender because it is separately optional: sending
+ * confirmations to applicants is useful even with nobody to notify, and the
+ * notification carries no personal data in either case.
+ */
+export function mailNotifyAddress(): string | undefined {
+  return process.env.MAIL_NOTIFY_TO || undefined;
+}
+
+/**
  * Credentials for reading Vercel Web Analytics. Optional: without them the
  * dashboard says the source is not configured rather than inventing numbers.
  */
