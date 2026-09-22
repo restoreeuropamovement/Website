@@ -14,7 +14,7 @@ import { databaseUrl, hasDatabase } from "@/lib/admin/env";
  * exhaust the server's connection limit within a few minutes.
  */
 const globalForDb = globalThis as unknown as {
-  restoreEuropeDb?: ReturnType<typeof postgres>;
+  restoreEuropaDb?: ReturnType<typeof postgres>;
 };
 
 function connect() {
@@ -32,10 +32,10 @@ function connect() {
 }
 
 export function db() {
-  if (!globalForDb.restoreEuropeDb) {
-    globalForDb.restoreEuropeDb = connect();
+  if (!globalForDb.restoreEuropaDb) {
+    globalForDb.restoreEuropaDb = connect();
   }
-  return globalForDb.restoreEuropeDb;
+  return globalForDb.restoreEuropaDb;
 }
 
 /**

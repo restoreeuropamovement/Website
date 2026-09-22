@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.name,
-    /* Subpages read "Manifesto · Restore Europe". The short form, not the full
+    /* Subpages read "Manifesto · Restore Europa". The short form, not the full
      * name, because a title tag is truncated in search results and the page's
      * own subject deserves the room. */
     template: `%s · ${site.short}`,
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   applicationName: site.formal,
   alternates: { canonical: "/" },
   keywords: [
-    "Restore Europe Movement",
-    "Restore Europe",
+    "Restore Europa Movement",
+    "Restore Europa",
     "European politics",
     "subsidiarity",
     "distributism",

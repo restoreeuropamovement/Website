@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
-import { RestoreEuropeMark } from "./RestoreEuropeMark";
+import { RestoreEuropaMark } from "./RestoreEuropaMark";
 
 interface WordmarkProps {
   readonly className?: string;
@@ -29,7 +29,7 @@ const letterSize = {
 } as const;
 
 /**
- * The dominant brand is the words "Restore Europe". `stacked` adds "Movement"
+ * The dominant brand is the words "Restore Europa". `stacked` adds "Movement"
  * beneath them in small capitals, so the two lines read as the full name without
  * either repeating the other; the masthead carries the first line alone.
  *
@@ -47,7 +47,7 @@ export function Wordmark({
   if (variant === "stacked") {
     return (
       <span className={cn("inline-flex flex-col items-start gap-2.5", className)}>
-        <RestoreEuropeMark className={markSize[size]} preload={preload} />
+        <RestoreEuropaMark className={markSize[size]} preload={preload} />
         <span className="flex flex-col gap-1">
           <span
             className={cn(
@@ -65,7 +65,7 @@ export function Wordmark({
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <RestoreEuropeMark className={markSize[size]} preload={preload} />
+      <RestoreEuropaMark className={markSize[size]} preload={preload} />
       <span
         className={cn("font-serif font-semibold tracking-[0.015em] text-current", letterSize[size])}
       >

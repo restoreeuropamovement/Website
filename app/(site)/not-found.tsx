@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { RestoreEuropeMark } from "@/components/brand/RestoreEuropeMark";
+import { RestoreEuropaMark } from "@/components/brand/RestoreEuropaMark";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { englishChrome } from "@/content/chrome";
@@ -20,7 +20,7 @@ export default function NotFound() {
 
   return (
     <Container size="narrow" className="flex flex-col items-center py-28 text-center lg:py-40">
-      <RestoreEuropeMark className="h-16 w-auto" />
+      <RestoreEuropaMark className="h-16 w-auto" />
       <p className="eyebrow mt-10 text-burgundy">{notFound.eyebrow}</p>
       <h1 className="mt-5 font-serif text-display-2 font-normal text-ink text-balance">
         {notFound.title}

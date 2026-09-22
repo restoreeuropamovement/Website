@@ -209,7 +209,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe no está contra la tecnología. Rechazamos la inevitabilidad tecnológica —la suposición de que todo lo que puede construirse debe adoptarse y de que todo lo que aumenta la eficiencia ha de contar como progreso.",
+        text: "Restore Europa no está contra la tecnología. Rechazamos la inevitabilidad tecnológica —la suposición de que todo lo que puede construirse debe adoptarse y de que todo lo que aumenta la eficiencia ha de contar como progreso.",
       },
       {
         type: "paragraph",

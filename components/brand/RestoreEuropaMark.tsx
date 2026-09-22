@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-interface RestoreEuropeMarkProps {
+interface RestoreEuropaMarkProps {
   readonly className?: string;
   /** Provide a title only when the mark stands alone as the accessible label. */
   readonly title?: string;
@@ -16,12 +16,12 @@ interface RestoreEuropeMarkProps {
  * *In varietate concordia*. Colour, not a currentColor glyph — size it with
  * height (`h-* w-auto`) so the shield's portrait proportions stay intact.
  */
-export function RestoreEuropeMark({
+export function RestoreEuropaMark({
   className,
   title,
   preload,
   sizes = "80px",
-}: RestoreEuropeMarkProps) {
+}: RestoreEuropaMarkProps) {
   return (
     <Image
       src="/brand/restore-europa-crest.png"

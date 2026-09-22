@@ -1,4 +1,4 @@
--- Restore Europe Movement administrative schema.
+-- Restore Europa Movement administrative schema.
 --
 -- Requires PostgreSQL 13 or later for the built-in `gen_random_uuid()`; no
 -- extensions are needed, so the script runs without superuser privileges on

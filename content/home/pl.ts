@@ -211,7 +211,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe nie występuje przeciw technice. Odrzucamy technologiczną nieuchronność — założenie, że wszystko, co da się zbudować, trzeba wdrożyć, a wszystko, co podnosi wydajność, trzeba uznać za postęp.",
+        text: "Restore Europa nie występuje przeciw technice. Odrzucamy technologiczną nieuchronność — założenie, że wszystko, co da się zbudować, trzeba wdrożyć, a wszystko, co podnosi wydajność, trzeba uznać za postęp.",
       },
       {
         type: "paragraph",

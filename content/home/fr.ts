@@ -200,7 +200,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe n'est pas hostile à la technique. Nous refusons l'inéluctabilité technologique — l'idée que tout ce qui peut être construit doit être adopté, et que tout ce qui accroît l'efficacité vaut nécessairement comme un progrès.",
+        text: "Restore Europa n'est pas hostile à la technique. Nous refusons l'inéluctabilité technologique — l'idée que tout ce qui peut être construit doit être adopté, et que tout ce qui accroît l'efficacité vaut nécessairement comme un progrès.",
       },
       {
         type: "paragraph",

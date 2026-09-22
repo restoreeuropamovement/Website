@@ -10,7 +10,7 @@ import { pad } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "National Wings",
   description:
-    "Restore Europe is organised as a movement of national wings — one for each European nation, each answerable to its own members and holding only what its chapters and regions cannot.",
+    "Restore Europa is organised as a movement of national wings — one for each European nation, each answerable to its own members and holding only what its chapters and regions cannot.",
   alternates: { canonical: "/wings" },
 };
 

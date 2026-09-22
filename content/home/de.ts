@@ -213,7 +213,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe ist nicht gegen die Technik. Wir verwerfen die Vorstellung technischer Unausweichlichkeit — die Annahme, dass alles Machbare auch übernommen werden müsse und dass alles, was die Effizienz steigert, als Fortschritt zu gelten habe.",
+        text: "Restore Europa ist nicht gegen die Technik. Wir verwerfen die Vorstellung technischer Unausweichlichkeit — die Annahme, dass alles Machbare auch übernommen werden müsse und dass alles, was die Effizienz steigert, als Fortschritt zu gelten habe.",
       },
       {
         type: "paragraph",

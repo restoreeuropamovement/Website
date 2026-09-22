@@ -155,7 +155,7 @@ export const wings: readonly Wing[] = seeds
 export const wingsMeta = {
   eyebrow: "Organisation",
   title: "A wing in every European nation.",
-  lede: "Restore Europe is organised as a movement of national wings rather than as a single continental party. Each nation carries its own — answerable to the people who live there, and to nobody abroad.",
+  lede: "Restore Europa is organised as a movement of national wings rather than as a single continental party. Each nation carries its own — answerable to the people who live there, and to nobody abroad.",
   intro: [
     {
       type: "lead",
@@ -175,7 +175,7 @@ export const wingsMeta = {
 
 /** One sentence opening each national page. */
 export const wingLead = (country: string): string =>
-  `The wing in ${country} is the national level of Restore Europe — the body that carries our programme into ${country}'s own political conditions, and the level at which members there decide how it is pursued.`;
+  `The wing in ${country} is the national level of Restore Europa — the body that carries our programme into ${country}'s own political conditions, and the level at which members there decide how it is pursued.`;
 
 export const wingBody: readonly ContentBlock[] = [
   {

@@ -9,7 +9,7 @@ import { routes } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Join",
   description:
-    "Join Restore Europe Movement as a member, or volunteer to help build it.",
+    "Join Restore Europa Movement as a member, or volunteer to help build it.",
   alternates: {
     canonical: routes.join,
     languages: alternateLanguages(routes.join),

@@ -8,7 +8,7 @@ import { aboutMeta, aboutSections, leadershipSlots } from "@/content/about";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Who Restore Europe Movement is, why we describe our politics as restoration, how we organise, and our commitment to peaceful, constitutional and democratic political participation.",
+    "Who Restore Europa Movement is, why we describe our politics as restoration, how we organise, and our commitment to peaceful, constitutional and democratic political participation.",
   alternates: { canonical: "/about" },
 };
 

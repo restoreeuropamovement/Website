@@ -17,10 +17,10 @@ export const policyMeta = {
   date: "2026-09-21",
   framework: "European Integral Restorationism",
   lede:
-    "This catalogue answers a narrow question: what does Restore Europe hold on this issue? It does not replace the manifesto. The manifesto sets out the worldview; this sets out searchable, topic-by-topic positions.",
+    "This catalogue answers a narrow question: what does Restore Europa hold on this issue? It does not replace the manifesto. The manifesto sets out the worldview; this sets out searchable, topic-by-topic positions.",
   body: [
-    "Where Catholic moral teaching is clear, Restore Europe generally adopts it as the moral baseline, and states civil-law implementation separately. One departure is recorded explicitly: on capital punishment Restore Europe takes the older traditional allowance for exceptional cases rather than the contemporary abolitionist position.",
-    "The catalogue distinguishes the constitutional order Restore Europe seeks from European law as it currently stands. Several positions — on nationality, on deprivation of citizenship, on speech, on the public standing of religion and on capital punishment — would require constitutional or treaty change before they could be enacted in particular European states. Where that is so, the entry says it.",
+    "Where Catholic moral teaching is clear, Restore Europa generally adopts it as the moral baseline, and states civil-law implementation separately. One departure is recorded explicitly: on capital punishment Restore Europa takes the older traditional allowance for exceptional cases rather than the contemporary abolitionist position.",
+    "The catalogue distinguishes the constitutional order Restore Europa seeks from European law as it currently stands. Several positions — on nationality, on deprivation of citizenship, on speech, on the public standing of religion and on capital punishment — would require constitutional or treaty change before they could be enacted in particular European states. Where that is so, the entry says it.",
     "Version 0.2 settles the questions version 0.1 had left open: the European institutional relationship, asylum, deportation, wages, taxation, pensions, housing, labour representation, digital identity and currency, biometric surveillance, genetic engineering, sentencing, the energy mix and every standing question of foreign policy. Where a v0.2 formulation revised an earlier entry, the newer text governs.",
   ],
 } as const;
@@ -126,9 +126,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe supports formal constitutional recognition of Catholicism as the principal public religion, and rejects the claim that the state can be morally or religiously neutral.",
+      "Restore Europa supports formal constitutional recognition of Catholicism as the principal public religion, and rejects the claim that the state can be morally or religiously neutral.",
     position: [
-      "Restore Europe supports a deeply embedded Catholic confessional political order. The state should formally recognize Catholicism as the principal public religion and should not claim moral or religious neutrality.",
+      "Restore Europa supports a deeply embedded Catholic confessional political order. The state should formally recognize Catholicism as the principal public religion and should not claim moral or religious neutrality.",
     ],
     policies: [
       "Catholicism should receive formal constitutional recognition.",
@@ -140,11 +140,11 @@ export const policyEntries: readonly PolicyEntry[] = [
     principle:
       "The state governs temporal affairs; the Church governs spiritual affairs; temporal authority remains subject to the higher moral order.",
     limits: [
-      "Restore Europe does not support forced conversion.",
+      "Restore Europa does not support forced conversion.",
       "This model is not direct clerical government of ordinary state administration.",
     ],
     implementationNote:
-      "Formal establishment of a confessional order would require constitutional change in most European states, and is stated here as the order Restore Europe seeks rather than as a description of current law.",
+      "Formal establishment of a confessional order would require constitutional change in most European states, and is stated here as the order Restore Europa seeks rather than as a description of current law.",
     manifestoBasis: ["moral-order", "democracy"],
     related: ["blasphemy-and-sacrilege", "state-schools-and-christianity", "catholic-medical-ethics"],
     keywords: ["Catholic state", "confessional state", "integralism", "church and state", "establishment"],
@@ -156,9 +156,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe holds that human life must be protected from conception, and that elective direct abortion should be prohibited.",
+      "Restore Europa holds that human life must be protected from conception, and that elective direct abortion should be prohibited.",
     position: [
-      "Restore Europe follows Catholic teaching that human life must be respected and protected from conception. Elective direct abortion should be prohibited.",
+      "Restore Europa follows Catholic teaching that human life must be respected and protected from conception. Elective direct abortion should be prohibited.",
     ],
     policies: [
       "Legal protection of unborn human life from conception.",
@@ -180,9 +180,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe opposes direct euthanasia and assisted suicide, supports palliative care, and allows the refusal of extraordinary or disproportionate treatment.",
+      "Restore Europa opposes direct euthanasia and assisted suicide, supports palliative care, and allows the refusal of extraordinary or disproportionate treatment.",
     position: [
-      "Restore Europe opposes direct euthanasia and assisted suicide and supports palliative care, while allowing refusal of extraordinary or disproportionate treatment.",
+      "Restore Europa opposes direct euthanasia and assisted suicide and supports palliative care, while allowing refusal of extraordinary or disproportionate treatment.",
     ],
     policies: [
       "Direct euthanasia prohibited.",
@@ -202,9 +202,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe recognizes civil marriage as the union of one man and one woman, and centres family law on the natural family.",
+      "Restore Europa recognizes civil marriage as the union of one man and one woman, and centres family law on the natural family.",
     position: [
-      "Restore Europe recognizes civil marriage exclusively as the union of one man and one woman and follows Catholic moral teaching on sexuality.",
+      "Restore Europa recognizes civil marriage exclusively as the union of one man and one woman and follows Catholic moral teaching on sexuality.",
     ],
     policies: [
       "Same-sex marriage is not legally recognized as marriage.",
@@ -223,9 +223,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe opposes artificial contraception and rejects a public culture that treats permanent avoidance of fertility as the normal foundation of sexual life, without criminalizing private adult possession.",
+      "Restore Europa opposes artificial contraception and rejects a public culture that treats permanent avoidance of fertility as the normal foundation of sexual life, without criminalizing private adult possession.",
     position: [
-      "Restore Europe follows Catholic teaching in opposing artificial contraception and rejects a public culture that treats the permanent avoidance of fertility as the normal foundation of sexual life.",
+      "Restore Europa follows Catholic teaching in opposing artificial contraception and rejects a public culture that treats the permanent avoidance of fertility as the normal foundation of sexual life.",
     ],
     policies: [
       "No state promotion of artificial contraception.",
@@ -245,8 +245,8 @@ export const policyEntries: readonly PolicyEntry[] = [
     title: "Pornography",
     category: "constitutional",
     status: "Agreed Policy",
-    shortAnswer: "Restore Europe supports the complete legal prohibition of pornography.",
-    position: ["Restore Europe supports the complete legal prohibition of pornography."],
+    shortAnswer: "Restore Europa supports the complete legal prohibition of pornography.",
+    position: ["Restore Europa supports the complete legal prohibition of pornography."],
     policies: [
       "Production, financing, commercial distribution, sale and public display prohibited.",
       "Online hosting and knowing commercial provision prohibited.",
@@ -267,8 +267,8 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe supports the complete legal prohibition of prostitution and its commercial facilitation, with exit support for those leaving it.",
-    position: ["Restore Europe supports the complete legal prohibition of prostitution and its commercial facilitation."],
+      "Restore Europa supports the complete legal prohibition of prostitution and its commercial facilitation, with exit support for those leaving it.",
+    position: ["Restore Europa supports the complete legal prohibition of prostitution and its commercial facilitation."],
     policies: [
       "Buying sexual services prohibited.",
       "Selling sexual services prohibited.",
@@ -288,9 +288,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe supports keeping recreational narcotics, including recreational cannabis, illegal, with heavier penalties for traffickers than for dependent users.",
+      "Restore Europa supports keeping recreational narcotics, including recreational cannabis, illegal, with heavier penalties for traffickers than for dependent users.",
     position: [
-      "Restore Europe generally supports keeping recreational narcotics, including recreational cannabis, illegal.",
+      "Restore Europa generally supports keeping recreational narcotics, including recreational cannabis, illegal.",
     ],
     policies: [
       "Commercial production and trafficking prohibited.",
@@ -311,9 +311,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "constitutional",
     status: "Agreed Policy",
     shortAnswer:
-      "Alcohol remains lawful for adults in moderate use. Restore Europe opposes drunkenness, abuse and conduct that harms others.",
+      "Alcohol remains lawful for adults in moderate use. Restore Europa opposes drunkenness, abuse and conduct that harms others.",
     position: [
-      "Alcohol remains legal for adults when used moderately. Restore Europe opposes drunkenness, abuse and conduct that harms others.",
+      "Alcohol remains legal for adults when used moderately. Restore Europa opposes drunkenness, abuse and conduct that harms others.",
     ],
     policies: [
       "Sales to minors prohibited.",
@@ -358,7 +358,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Unbelief, criticism and theological argument remain lawful. Deliberate desecration of the sacred may be prohibited.",
     position: [
-      "Restore Europe distinguishes unbelief and criticism from deliberate public profanation. Atheism and theological disagreement are not themselves criminal offences, while deliberate desecration of the sacred may be prohibited.",
+      "Restore Europa distinguishes unbelief and criticism from deliberate public profanation. Atheism and theological disagreement are not themselves criminal offences, while deliberate desecration of the sacred may be prohibited.",
     ],
     policies: [
       "Atheism and private unbelief remain lawful.",
@@ -445,7 +445,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "A safety net directed primarily at citizens, families and those genuinely unable to support themselves, expressing solidarity without becoming permanent avoidable dependency.",
     position: [
-      "Restore Europe supports a social safety net directed primarily toward citizens, families and people genuinely unable to support themselves. Welfare should express solidarity without becoming a permanent system of avoidable dependency.",
+      "Restore Europa supports a social safety net directed primarily toward citizens, families and people genuinely unable to support themselves. Welfare should express solidarity without becoming a permanent system of avoidable dependency.",
     ],
     policies: [
       "Priority for citizens and their families, children, carers, disabled people, elderly people and households facing genuine hardship.",
@@ -588,9 +588,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "nation",
     status: "Agreed Policy",
     shortAnswer:
-      "Citizenship is membership of a historical political community rather than a function of residence, and Restore Europe rejects automatic territorial birthright citizenship as a general rule.",
+      "Citizenship is membership of a historical political community rather than a function of residence, and Restore Europa rejects automatic territorial birthright citizenship as a general rule.",
     position: [
-      "Citizenship is membership in a historical political community, not merely residence. Restore Europe rejects automatic territorial birthright citizenship as a general rule.",
+      "Citizenship is membership in a historical political community, not merely residence. Restore Europa rejects automatic territorial birthright citizenship as a general rule.",
     ],
     policies: [
       "Citizenship normally passes through citizen parentage.",
@@ -611,7 +611,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "The normal route requires around fifteen years of lawful residence before an application may be made, with demanding assimilation requirements.",
     position: [
-      "The normal Restore Europe naturalization route requires approximately fifteen years of lawful residence before an application may be made, together with exceptionally demanding assimilation requirements.",
+      "The normal Restore Europa naturalization route requires approximately fifteen years of lawful residence before an application may be made, together with exceptionally demanding assimilation requirements.",
     ],
     policies: [
       "Fluency in the national language.",
@@ -703,7 +703,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Dual citizenship between European countries is generally accepted; non-European citizens naturalizing into a European nation would be expected to renounce their former citizenship.",
     position: [
-      "Restore Europe generally accepts dual citizenship between European countries, but expects non-European citizens who naturalize into a European nation to renounce their previous non-European citizenship.",
+      "Restore Europa generally accepts dual citizenship between European countries, but expects non-European citizens who naturalize into a European nation to renounce their previous non-European citizenship.",
     ],
     policies: [
       "European-to-European dual citizenship generally permitted.",
@@ -734,10 +734,10 @@ export const policyEntries: readonly PolicyEntry[] = [
       "A high evidentiary standard and a right of appeal are required.",
       "Fraud in the naturalization process is a direct ground for revocation.",
       "Treason and terrorism may justify revocation.",
-      "Restore Europe favours the possibility of revocation in exceptionally grave cases even where statelessness might result.",
+      "Restore Europa favours the possibility of revocation in exceptionally grave cases even where statelessness might result.",
     ],
     implementationNote:
-      "International and European law place substantial restrictions on rendering a person stateless, and removal normally requires a receiving state legally able and willing to admit the person. This belongs to the constitutional order Restore Europe seeks, and would require treaty or constitutional change.",
+      "International and European law place substantial restrictions on rendering a person stateless, and removal normally requires a receiving state legally able and willing to admit the person. This belongs to the constitutional order Restore Europa seeks, and would require treaty or constitutional change.",
     manifestoBasis: ["nation", "democracy"],
     related: ["naturalization", "citizenship-general-principle", "prisons-punishment-and-rehabilitation"],
     keywords: ["revocation", "deprivation", "statelessness", "treason", "terrorism"],
@@ -769,9 +769,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "nation",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe supports fundamental reform of the European Union into a limited framework for cooperation among sovereign European nations, with most political powers returned to the member states.",
+      "Restore Europa supports fundamental reform of the European Union into a limited framework for cooperation among sovereign European nations, with most political powers returned to the member states.",
     position: [
-      "European cooperation should continue, but continental institutions should possess only those competences that genuinely require action at European level. Restore Europe rejects movement toward a centralized post-national state and applies subsidiarity strictly.",
+      "European cooperation should continue, but continental institutions should possess only those competences that genuinely require action at European level. Restore Europa rejects movement toward a centralized post-national state and applies subsidiarity strictly.",
     ],
     policies: [
       "Return substantial legislative and regulatory competences to member states.",
@@ -796,9 +796,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "economy",
     status: "Manifesto Core",
     shortAnswer:
-      "Restore Europe rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
+      "Restore Europa rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
     position: [
-      "Restore Europe rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
+      "Restore Europa rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
     ],
     manifestoBasis: ["economic-order"],
     related: ["private-property-and-broad-ownership", "guilds-chambers-and-corporatist-representation", "finance-lending-and-usury", "work"],
@@ -878,7 +878,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Finance should serve productive activity. Legitimate lending and reasonable return are accepted; exploitative interest and debt traps are not.",
     position: [
-      "Finance should serve productive activity. Restore Europe accepts legitimate lending and a reasonable return on capital, while opposing exploitative interest, predatory lending and debt traps.",
+      "Finance should serve productive activity. Restore Europa accepts legitimate lending and a reasonable return on capital, while opposing exploitative interest, predatory lending and debt traps.",
     ],
     policies: [
       "Tight restrictions or caps on payday-style predatory lending.",
@@ -940,7 +940,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Every worker is entitled to a just wage sufficient for a dignified life and the reasonable support of a family.",
     position: [
-      "Catholic social teaching sets a substantive just-wage standard rather than one universal statutory mechanism. Restore Europe therefore favours sectoral and regional wage-setting through representative institutions, backed by statutory protection where necessary.",
+      "Catholic social teaching sets a substantive just-wage standard rather than one universal statutory mechanism. Restore Europa therefore favours sectoral and regional wage-setting through representative institutions, backed by statutory protection where necessary.",
     ],
     policies: [
       "Establish the principle of a legally protected just wage.",
@@ -1053,7 +1053,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Workers may organize independently, while labour relations should move toward a corporatist system of permanent sectoral institutions representing workers, employers and professions.",
     position: [
-      "Restore Europe rejects both worker powerlessness before concentrated capital and permanent class conflict as the organizing principle of economic life.",
+      "Restore Europa rejects both worker powerlessness before concentrated capital and permanent class conflict as the organizing principle of economic life.",
     ],
     policies: [
       "Protect the right to form and join independent trade unions.",
@@ -1155,7 +1155,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Citizens should retain meaningful access to repairable products, against unnecessary disposability and technological lock-in.",
     position: [
-      "Citizens should retain meaningful access to repairable products. Restore Europe favours policy that resists unnecessary disposability and technological lock-in.",
+      "Citizens should retain meaningful access to repairable products. Restore Europa favours policy that resists unnecessary disposability and technological lock-in.",
     ],
     manifestoBasis: ["technology", "stewardship"],
     related: ["technology-general-doctrine", "environmental-stewardship", "work"],
@@ -1343,7 +1343,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Therapeutic genetic medicine may be legitimate, while heritable enhancement and the instrumentalization of embryonic human life face a strong prohibition.",
     position: [
-      "Restore Europe distinguishes treatment of disease from projects aimed at redesigning human nature or selecting preferred human traits.",
+      "Restore Europa distinguishes treatment of disease from projects aimed at redesigning human nature or selecting preferred human traits.",
     ],
     policies: [
       "Permit legitimate somatic gene therapy directed toward treatment of disease, subject to medical safety standards.",
@@ -1436,7 +1436,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "A plural education system including Catholic, private, classical, vocational and monastic schools, with public funding able to follow families.",
     position: [
-      "Restore Europe supports a plural education system including Catholic schools, private schools, classical schools, vocational institutions, monastic schools and homeschooling.",
+      "Restore Europa supports a plural education system including Catholic schools, private schools, classical schools, vocational institutions, monastic schools and homeschooling.",
     ],
     policies: [
       "Catholic schools legally protected.",
@@ -1555,7 +1555,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Power should be exercised at the lowest competent level. Elections, representation and constitutional limits coexist with a rejection of philosophical liberalism.",
     position: [
-      "Restore Europe rejects both anarchic individualism and totalizing state power. Elections, representation, constitutional limits and public participation may coexist with a rejection of philosophical liberalism.",
+      "Restore Europa rejects both anarchic individualism and totalizing state power. Elections, representation, constitutional limits and public participation may coexist with a rejection of philosophical liberalism.",
     ],
     policies: [
       "Power should be exercised at the lowest competent level.",
@@ -1576,7 +1576,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Broad political and academic discussion is protected; speech that directly incites violence, terrorism or criminal conduct is not.",
     position: [
-      "Restore Europe supports broad political and academic discussion, but does not treat speech as unlimited where it directly incites violence, terrorism or criminal conduct, or amounts to deliberate profanation of the sacred.",
+      "Restore Europa supports broad political and academic discussion, but does not treat speech as unlimited where it directly incites violence, terrorism or criminal conduct, or amounts to deliberate profanation of the sacred.",
     ],
     policies: [
       "Criticism of government remains lawful.",
@@ -1651,9 +1651,9 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "government",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe accepts the traditional legitimacy of capital punishment in principle, reserved for exceptional cases involving the gravest crimes.",
+      "Restore Europa accepts the traditional legitimacy of capital punishment in principle, reserved for exceptional cases involving the gravest crimes.",
     position: [
-      "Restore Europe accepts the traditional Catholic legitimacy of capital punishment in principle, but reserves it for exceptional cases involving the gravest crimes.",
+      "Restore Europa accepts the traditional Catholic legitimacy of capital punishment in principle, but reserves it for exceptional cases involving the gravest crimes.",
     ],
     policies: [
       "Potentially applicable to aggravated intentional murder, mass murder, terrorism involving deliberate killing, genocide and comparably grave offences.",
@@ -1677,7 +1677,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "The death penalty may be legally available, but not mandatory, for the most aggravated forms of rape and child sexual abuse.",
     position: [
-      "Restore Europe places exceptionally aggravated sexual crimes within the category of offences that may qualify for capital punishment, subject to the same unusually strict procedural and evidentiary safeguards as other capital cases.",
+      "Restore Europa places exceptionally aggravated sexual crimes within the category of offences that may qualify for capital punishment, subject to the same unusually strict procedural and evidentiary safeguards as other capital cases.",
     ],
     policies: [
       "Potentially qualifying cases include aggravated rape involving exceptional brutality, repeated or serial rape, rape involving kidnapping or torture, aggravated sexual abuse of children, systematic abuse of multiple children and organized sexual exploitation in exceptionally grave circumstances.",
@@ -1703,7 +1703,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Regulated civilian firearm ownership for lawful purposes, under licensing, training and secure-storage requirements.",
     position: [
-      "Restore Europe supports regulated civilian firearm ownership for lawful purposes, including self-defense, hunting, sport shooting and collecting.",
+      "Restore Europa supports regulated civilian firearm ownership for lawful purposes, including self-defense, hunting, sport shooting and collecting.",
     ],
     policies: [
       "Licensing required.",
@@ -1730,7 +1730,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Universal access to essential and medically necessary care, with safeguards against overuse and waste.",
     position: [
-      "Restore Europe supports universal access to essential and medically necessary healthcare, while permitting safeguards against overuse and waste.",
+      "Restore Europa supports universal access to essential and medically necessary healthcare, while permitting safeguards against overuse and waste.",
     ],
     policies: [
       "Emergency care available to everyone.",
@@ -1756,7 +1756,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Public healthcare should respect Catholic medical ethics, and Catholic hospitals should be free to maintain their own ethical standards.",
     position: [
-      "Public healthcare should respect Catholic medical ethics. Procedures regarded by Restore Europe as morally impermissible under Catholic teaching should not receive ordinary public funding, and Catholic hospitals should be free to maintain their ethical standards.",
+      "Public healthcare should respect Catholic medical ethics. Procedures regarded by Restore Europa as morally impermissible under Catholic teaching should not receive ordinary public funding, and Catholic hospitals should be free to maintain their ethical standards.",
     ],
     manifestoBasis: ["moral-order"],
     related: ["abortion", "euthanasia-and-assisted-suicide", "contraception", "universal-healthcare-access"],
@@ -1773,7 +1773,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     shortAnswer:
       "Nature is an inheritance entrusted to humanity rather than a commodity without limit or a divinity, and should be stewarded accordingly.",
     position: [
-      "Nature is an inheritance entrusted to humanity rather than a commodity without limit or a divinity. Restore Europe supports stewardship of forests, rivers, farmland, mountains, coastlines and biodiversity.",
+      "Nature is an inheritance entrusted to humanity rather than a commodity without limit or a divinity. Restore Europa supports stewardship of forests, rivers, farmland, mountains, coastlines and biodiversity.",
     ],
     policies: [
       "Healthy soils and clean water.",
@@ -1947,7 +1947,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "foreign-policy",
     status: "Derived",
     shortAnswer:
-      "Restore Europe is sceptical of permanent dependence on NATO and favours greater national and European strategic independence.",
+      "Restore Europa is sceptical of permanent dependence on NATO and favours greater national and European strategic independence.",
     position: [
       "Defensive cooperation may be useful, but NATO membership and alignment should not be treated as unquestionable or permanent requirements.",
     ],
@@ -2000,7 +2000,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "foreign-policy",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe does not make political alignment with either Ukraine or Russia an independent objective of European foreign policy.",
+      "Restore Europa does not make political alignment with either Ukraine or Russia an independent objective of European foreign policy.",
     position: [
       "Policy toward the Russia–Ukraine war should be governed by legitimate national interest, protection of innocent life, escalation risk and a realistic pursuit of peace rather than ideological loyalty to either side.",
     ],
@@ -2184,7 +2184,7 @@ export const policyEntries: readonly PolicyEntry[] = [
     category: "foreign-policy",
     status: "Agreed Policy",
     shortAnswer:
-      "Restore Europe supports verifiable multilateral reduction and eventual abolition of nuclear weapons.",
+      "Restore Europa supports verifiable multilateral reduction and eventual abolition of nuclear weapons.",
     position: [
       "Nuclear weapons create risks and destructive capacities of a different order from ordinary conventional arms and should not be normalized as permanent instruments of policy.",
     ],

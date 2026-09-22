@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Restore Europe design tokens
+   Restore Europa design tokens
    Every colour, type step and measure used by the site is declared here.
    Components consume the generated utilities (bg-canvas, text-muted, …)
    rather than raw values.

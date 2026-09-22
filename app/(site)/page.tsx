@@ -7,8 +7,8 @@ import { websiteSchema } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   /*
-   * `absolute` opts out of the root layout's `%s · Restore Europe` template.
-   * Without it the home page reads "Restore Europe Movement · Restore Europe",
+   * `absolute` opts out of the root layout's `%s · Restore Europa` template.
+   * Without it the home page reads "Restore Europa Movement · Restore Europa",
    * which says the name twice — the template exists to identify the site on
    * subpages, and the home page is already the site.
    */

@@ -186,7 +186,7 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       />
 
       <CheckboxField id={`${uid}-consent`} name="consent" value="yes" required>
-        I am applying to join Restore Europe Movement, and I agree that what I have entered above
+        I am applying to join Restore Europa Movement, and I agree that what I have entered above
         may be held for that purpose. Membership in a political movement implies a political
         opinion, which the law protects more strictly than ordinary personal data; I may withdraw
         this consent and have the record erased at any time.

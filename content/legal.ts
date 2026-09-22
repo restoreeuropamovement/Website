@@ -197,7 +197,7 @@ export const imprint = {
   intro: [
     {
       type: "lead",
-      text: "This website is published by Restore Europe Movement, a political movement of Europe's national peoples.",
+      text: "This website is published by Restore Europa Movement, a political movement of Europe's national peoples.",
     },
     {
       type: "paragraph",

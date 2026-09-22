@@ -73,7 +73,7 @@ export function sessionSecret(): string {
 export function relyingParty(): { id: string; name: string; origin: string } {
   return {
     id: required("ADMIN_RP_ID"),
-    name: "Restore Europe Administration",
+    name: "Restore Europa Administration",
     origin: required("ADMIN_ORIGIN"),
   };
 }

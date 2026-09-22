@@ -200,7 +200,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe non è contro la tecnologia. Rifiutiamo l'inevitabilità tecnologica — l'assunto secondo cui tutto ciò che può essere costruito debba essere adottato, e tutto ciò che accresce l'efficienza debba contare come progresso.",
+        text: "Restore Europa non è contro la tecnologia. Rifiutiamo l'inevitabilità tecnologica — l'assunto secondo cui tutto ciò che può essere costruito debba essere adottato, e tutto ciò che accresce l'efficienza debba contare come progresso.",
       },
       {
         type: "paragraph",

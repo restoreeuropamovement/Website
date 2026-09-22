@@ -24,7 +24,7 @@ export const articles: readonly JournalArticle[] = [
       "The principle we invoke most often is one the Commission also professes. The argument was never about the principle. It is about who decides whether it has been honoured, and what happens when the answer is no.",
     category: "Europe",
     date: "2026-09-20",
-    author: "Restore Europe Editorial Desk",
+    author: "Restore Europa Editorial Desk",
     readingMinutes: 7,
     hero: journalImages.vault,
     featured: true,

@@ -21,7 +21,7 @@ export default async function EnrolPage() {
     return (
       <main id="main" className="flex flex-1 items-center justify-center px-6 py-20">
         <div className="w-full max-w-md">
-          <p className="eyebrow mb-6 text-burgundy">Restore Europe · Administration</p>
+          <p className="eyebrow mb-6 text-burgundy">Restore Europa · Administration</p>
           <h1 className="font-serif text-display-2 font-normal text-ink">Enrolment closed</h1>
           <p className="mt-6 text-[0.9375rem] leading-relaxed text-muted">
             No passkey is enrolled and no <code className="text-ink">ADMIN_BOOTSTRAP_TOKEN</code> is
@@ -36,7 +36,7 @@ export default async function EnrolPage() {
   return (
     <main id="main" className="flex flex-1 items-center justify-center px-6 py-20">
       <div className="w-full max-w-md">
-        <p className="eyebrow mb-6 text-burgundy">Restore Europe · Administration</p>
+        <p className="eyebrow mb-6 text-burgundy">Restore Europa · Administration</p>
         <h1 className="font-serif text-display-2 font-normal text-ink">Enrol the first passkey</h1>
 
         <p className="mt-6 mb-10 text-[0.9375rem] leading-relaxed text-muted">

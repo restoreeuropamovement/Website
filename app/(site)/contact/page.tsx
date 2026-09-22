@@ -10,7 +10,7 @@ import { routes } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "How to reach Restore Europe Movement: general enquiries, press, research, organisation and local chapters.",
+    "How to reach Restore Europa Movement: general enquiries, press, research, organisation and local chapters.",
   alternates: {
     canonical: routes.contact,
     languages: alternateLanguages(routes.contact),

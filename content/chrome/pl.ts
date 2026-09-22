@@ -1,11 +1,11 @@
-﻿import type { ChromeContent } from "./index";
+import type { ChromeContent } from "./index";
 
 export const chrome: ChromeContent = {
   site: {
     descriptor: "Ruch",
     tagline: "O cywilizację chrześcijańską, europejską i na ludzką miarę.",
     description:
-      "Restore Europe Movement to ruch polityczny narodów Europy — o cywilizację chrześcijańską, europejską i na ludzką miarę: o rodzinę, szeroko rozproszoną własność, ciągłość narodową, pomocniczość, troskę o dziedzictwo i technikę pod kontrolą człowieka.",
+      "Restore Europa Movement to ruch polityczny narodów Europy — o cywilizację chrześcijańską, europejską i na ludzką miarę: o rodzinę, szeroko rozproszoną własność, ciągłość narodową, pomocniczość, troskę o dziedzictwo i technikę pod kontrolą człowieka.",
     closing: "Przyjmować. Odnawiać. Przekazywać.",
   },
 

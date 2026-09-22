@@ -7,7 +7,7 @@ import { imprint } from "@/content/legal";
 export const metadata: Metadata = {
   title: "Imprint",
   description:
-    "Publisher information for Restore Europe Movement. The movement is in formation; registered particulars are published as they become genuine.",
+    "Publisher information for Restore Europa Movement. The movement is in formation; registered particulars are published as they become genuine.",
   alternates: { canonical: "/imprint" },
 };
 

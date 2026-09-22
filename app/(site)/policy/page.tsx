@@ -26,7 +26,7 @@ import { formatDate } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Policy Catalogue",
   description:
-    "Searchable, topic-by-topic positions of Restore Europe Movement, each marked with how settled it is: moral order, family, citizenship, economy, technology, education, justice, healthcare, environment and foreign policy.",
+    "Searchable, topic-by-topic positions of Restore Europa Movement, each marked with how settled it is: moral order, family, citizenship, economy, technology, education, justice, healthcare, environment and foreign policy.",
   alternates: { canonical: "/policy" },
 };
 

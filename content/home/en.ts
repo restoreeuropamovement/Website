@@ -216,7 +216,7 @@ export const home = {
     body: [
       {
         type: "lead",
-        text: "Restore Europe is not against technology. We reject technological inevitability — the assumption that whatever can be built must be adopted, and that whatever raises efficiency must count as progress.",
+        text: "Restore Europa is not against technology. We reject technological inevitability — the assumption that whatever can be built must be adopted, and that whatever raises efficiency must count as progress.",
       },
       {
         type: "paragraph",

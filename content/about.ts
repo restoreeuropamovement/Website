@@ -3,7 +3,7 @@ import type { ContentBlock } from "@/lib/content-types";
 export const aboutMeta = {
   eyebrow: "About",
   title: "A political movement, organised for the long term.",
-  lede: "Restore Europe Movement is being built as a durable political project rather than a campaign. This page sets out who we are, how we work, and the limits we place on ourselves.",
+  lede: "Restore Europa Movement is being built as a durable political project rather than a campaign. This page sets out who we are, how we work, and the limits we place on ourselves.",
 } as const;
 
 export interface AboutSection {
@@ -19,7 +19,7 @@ export const aboutSections: readonly AboutSection[] = [
     body: [
       {
         type: "lead",
-        text: "Restore Europe is a European political movement founded on the conviction that Europe is a civilization worth continuing, and that continuing it is a matter of ordinary politics rather than of sentiment.",
+        text: "Restore Europa is a European political movement founded on the conviction that Europe is a civilization worth continuing, and that continuing it is a matter of ordinary politics rather than of sentiment.",
       },
       {
         type: "paragraph",
@@ -130,7 +130,7 @@ export const aboutSections: readonly AboutSection[] = [
     body: [
       {
         type: "lead",
-        text: "Restore Europe pursues its aims exclusively through lawful, peaceful and constitutional political participation.",
+        text: "Restore Europa pursues its aims exclusively through lawful, peaceful and constitutional political participation.",
       },
       {
         type: "list",

@@ -54,6 +54,12 @@ const decoder = new TextDecoder();
  * two lines as immutable: a rebrand is not a reason to orphan the roll. If they
  * ever genuinely must change, that is a migration — decrypt under the old key,
  * re-encrypt under the new — and not an edit.
+ *
+ * Which is why they still read `restore-europe` after the movement became
+ * Restore Europa. That is not an oversight and should not be tidied up: the
+ * string is a key-derivation input whose only virtue is never changing, and the
+ * movement's name appears in it by accident of history rather than by design.
+ * A global find-and-replace across this repository must skip these two lines.
  */
 const AES_INFO = "restore-europe:member:aes-256-gcm:v1";
 const DIGEST_INFO = "restore-europe:member:hmac-sha256:v1";

@@ -1,6 +1,6 @@
-# Restore Europe Movement
+# Restore Europa Movement
 
-The website of Restore Europe Movement.
+The website of Restore Europa Movement.
 *For a Christian, European and Human-Scale Civilization.*
 
 Next.js 16 (App Router) · TypeScript (strict) · Tailwind CSS v4 · Motion · Lucide.

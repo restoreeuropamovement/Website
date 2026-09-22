@@ -68,7 +68,7 @@ export function GET() {
   return new Response(renderPlainText(), {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="restore-europe-manifesto.txt"',
+      "Content-Disposition": 'attachment; filename="restore-europa-manifesto.txt"',
       "Cache-Control": "public, max-age=3600",
     },
   });

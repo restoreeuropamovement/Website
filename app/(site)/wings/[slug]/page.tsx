@@ -27,11 +27,11 @@ export async function generateMetadata(props: {
 
   return {
     title: `${wing.country} — National Wing`,
-    description: `The Restore Europe wing in ${wing.country}: the national level of the movement, what it is answerable for, and how to help establish it.`,
+    description: `The Restore Europa wing in ${wing.country}: the national level of the movement, what it is answerable for, and how to help establish it.`,
     alternates: { canonical: `/wings/${wing.slug}` },
     openGraph: {
-      title: `Restore Europe ${wing.country} — National Wing`,
-      description: `The national level of Restore Europe in ${wing.country}.`,
+      title: `Restore Europa ${wing.country} — National Wing`,
+      description: `The national level of Restore Europa in ${wing.country}.`,
       url: `/wings/${wing.slug}`,
       type: "website",
     },

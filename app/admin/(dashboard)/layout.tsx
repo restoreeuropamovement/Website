@@ -31,7 +31,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <header className="border-b border-hairline bg-canvas-deep">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-8 gap-y-4 px-6 py-5">
           <Link href="/admin" className="eyebrow text-burgundy">
-            Restore Europe · Administration
+            Restore Europa · Administration
           </Link>
           <AdminNav />
           <div className="ml-auto flex items-center gap-4 text-micro text-faint">

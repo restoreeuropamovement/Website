@@ -11,7 +11,7 @@ import { pad } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Vision",
   description:
-    "What Restore Europe's programme means in ordinary life: affordable homes, families that can raise children, work that leaves time for living, beautiful towns, protected nature, technology under human control and politics that serves people.",
+    "What Restore Europa's programme means in ordinary life: affordable homes, families that can raise children, work that leaves time for living, beautiful towns, protected nature, technology under human control and politics that serves people.",
   alternates: { canonical: "/vision" },
 };
 

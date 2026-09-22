@@ -1,11 +1,11 @@
-﻿import type { ChromeContent } from "./index";
+import type { ChromeContent } from "./index";
 
 export const chrome: ChromeContent = {
   site: {
     descriptor: "Mouvement",
     tagline: "Pour une civilisation chrétienne, européenne et à l'échelle humaine.",
     description:
-      "Restore Europe Movement est un mouvement politique des peuples nationaux d'Europe, pour une civilisation chrétienne, européenne et à l'échelle humaine : la famille, une propriété largement répartie, la continuité nationale, la subsidiarité, l'intendance et une technique sous contrôle humain.",
+      "Restore Europa Movement est un mouvement politique des peuples nationaux d'Europe, pour une civilisation chrétienne, européenne et à l'échelle humaine : la famille, une propriété largement répartie, la continuité nationale, la subsidiarité, l'intendance et une technique sous contrôle humain.",
     closing: "Recevoir. Renouveler. Transmettre.",
   },
 

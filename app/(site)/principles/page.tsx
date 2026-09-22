@@ -7,7 +7,7 @@ import { routes } from "@/lib/site";
 export const metadata: Metadata = {
   title: principlesMeta.title,
   description:
-    "The sixteen principles of Restore Europe Movement: moral order, family, nation, immigration, Europe, economy, property, work, technology, environment, architecture, education, subsidiarity, democracy and foreign policy.",
+    "The sixteen principles of Restore Europa Movement: moral order, family, nation, immigration, Europe, economy, property, work, technology, environment, architecture, education, subsidiarity, democracy and foreign policy.",
   alternates: {
     canonical: routes.principles,
     languages: alternateLanguages(routes.principles),

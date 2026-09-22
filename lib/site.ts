@@ -60,16 +60,16 @@ export const site = {
    *
    * Untranslated in every language. It is the movement's name, not a phrase.
    */
-  short: "Restore Europe",
+  short: "Restore Europa",
   /**
    * The remainder of the full name. The stacked wordmark sets it beneath the
-   * mark in small capitals, so the two together read "Restore Europe Movement"
+   * mark in small capitals, so the two together read "Restore Europa Movement"
    * without either line repeating the other.
    */
   descriptor: enChrome.site.descriptor,
   /** Formal name, used where an institution would sign itself. */
-  name: "Restore Europe Movement",
-  formal: "Restore Europe Movement",
+  name: "Restore Europa Movement",
+  formal: "Restore Europa Movement",
   tagline: enChrome.site.tagline,
   description: enChrome.site.description,
   closing: enChrome.site.closing,

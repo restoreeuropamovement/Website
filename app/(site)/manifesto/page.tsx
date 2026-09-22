@@ -7,7 +7,7 @@ import { routes, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: englishEdition.title,
   description:
-    "The founding document of Restore Europe Movement: twenty-two sections on moral order, family, nation, economy, technology, stewardship, subsidiarity and restoration.",
+    "The founding document of Restore Europa Movement: twenty-two sections on moral order, family, nation, economy, technology, stewardship, subsidiarity and restoration.",
   alternates: {
     canonical: routes.manifesto,
     languages: alternateLanguages(routes.manifesto),

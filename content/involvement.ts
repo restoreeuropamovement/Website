@@ -22,7 +22,7 @@ export const involvementRoles: readonly InvolvementRole[] = [
     id: "member",
     title: "Member",
     summary:
-      "Be counted as a member of the movement. When Restore Europe can receive contributions, members are the people who will be asked to support the work.",
+      "Be counted as a member of the movement. When Restore Europa can receive contributions, members are the people who will be asked to support the work.",
     commitment: "The ordinary way in",
   },
   {

@@ -29,7 +29,7 @@ export interface Message {
 
 /** Trailing signature used by everything written to a person. */
 const signature = `--
-Restore Europe Movement
+Restore Europa Movement
 ${SITE_URL}`;
 
 /**
@@ -41,7 +41,7 @@ ${SITE_URL}`;
  */
 export function applicationReceived(): Message {
   return {
-    subject: "Your application to the Restore Europe Movement",
+    subject: "Your application to the Restore Europa Movement",
     text: `Thank you for applying.
 
 Your application has been recorded and will be read by a person before
@@ -94,7 +94,7 @@ passkey to read it: ${SITE_URL}/admin/members`,
 export function confirmSubscription(token: string): Message {
   return {
     subject: "Confirm your subscription",
-    text: `Please confirm that you would like to receive the Restore Europe
+    text: `Please confirm that you would like to receive the Restore Europa
 journal by email — roughly one essay a week on the movement and on what
 is happening in Europe.
 
@@ -120,7 +120,7 @@ ${signature}`,
 export function alreadySubscribed(unsubscribeUrl: string): Message {
   return {
     subject: "You are already subscribed",
-    text: `Somebody asked to subscribe this address to the Restore Europe
+    text: `Somebody asked to subscribe this address to the Restore Europa
 journal, and it is already on the list. Nothing has changed and you do not
 need to do anything.
 
@@ -151,7 +151,7 @@ Read it on the site, with footnotes and sources:
 ${SITE_URL}/journal/${slug}
 
 --
-Restore Europe Movement
+Restore Europa Movement
 ${SITE_URL}
 
 You are receiving this because you confirmed this address. To stop:
