@@ -88,62 +88,13 @@ export interface ManifestoSectionData {
   readonly body: readonly ContentBlock[];
 }
 
-/** The divisions of the policy catalogue, in document order. */
-export type PolicyCategoryId =
-  | "constitutional"
-  | "family"
-  | "nation"
-  | "economy"
-  | "technology"
-  | "education"
-  | "government"
-  | "healthcare"
-  | "environment"
-  | "foreign-policy";
-
-export interface PolicyCategoryData {
-  readonly id: PolicyCategoryId;
-  /** Roman numeral as it appears in the catalogue. */
-  readonly numeral: string;
-  readonly title: string;
-  /** One line shown beneath the heading and in the index. */
-  readonly summary: string;
-}
-
-/**
- * How settled a position is. The catalogue is explicit about this so a reader
- * can tell an adopted position from one the movement has not yet decided.
+/*
+ * The policy catalogue's own types live in `content/policy/`, beside the
+ * structure they describe: ids, statuses and cross-references in
+ * `structure.ts`, the words in `index.ts`. They were here while the catalogue
+ * was a single English file, and a shared `PolicyStatus` of English labels is
+ * exactly what stopped it being translatable.
  */
-export type PolicyStatus = "Manifesto Core" | "Agreed Policy" | "Derived" | "Open";
-
-export interface PolicyEntry {
-  readonly slug: string;
-  readonly title: string;
-  readonly category: PolicyCategoryId;
-  readonly status: PolicyStatus;
-  /** A few entries sit between two statuses in the source catalogue. */
-  readonly secondaryStatus?: PolicyStatus;
-  /** One or two sentences. Shown in listings and search results. */
-  readonly shortAnswer: string;
-  /** The position itself, as paragraphs. */
-  readonly position: readonly string[];
-  /** The specific commitments that follow from the position. */
-  readonly policies?: readonly string[];
-  /** The position compressed to a single line. */
-  readonly principle?: string;
-  /** What the position deliberately does not claim, or has not yet settled. */
-  readonly limits?: readonly string[];
-  /** Where the position stands in relation to existing law. */
-  readonly implementationNote?: string;
-  /** Manifesto sections this rests on, by `ManifestoSectionData.id`. */
-  readonly manifestoBasis?: readonly string[];
-  /** Other catalogue entries, by slug. */
-  readonly related?: readonly string[];
-  /** Additional search terms beyond the title and position text. */
-  readonly keywords: readonly string[];
-  /** ISO date, e.g. "2026-09-15". */
-  readonly lastUpdated: string;
-}
 
 export type JournalCategory =
   | "Civilization"

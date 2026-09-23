@@ -1,31 +1,27 @@
 import Link from "next/link";
-import type { PolicyCategoryData, PolicyCategoryId, PolicyStatus } from "@/lib/content-types";
+import type {
+  PolicyCategory,
+  PolicyCategoryId,
+  PolicyEdition,
+  PolicyStatusId,
+  PolicyStatusOption,
+} from "@/content/policy";
+import { localePath } from "@/lib/i18n";
+import { policyHref } from "@/lib/policy";
 import { cn } from "@/lib/utils";
 
 interface PolicyFiltersProps {
-  readonly categories: readonly PolicyCategoryData[];
+  readonly edition: PolicyEdition;
+  readonly categories: readonly PolicyCategory[];
   /** Only statuses the catalogue actually uses, so no pill returns nothing. */
-  readonly statuses: readonly PolicyStatus[];
+  readonly statuses: readonly PolicyStatusOption[];
   readonly q: string;
   readonly category?: PolicyCategoryId;
-  readonly status?: PolicyStatus;
+  readonly status?: PolicyStatusId;
 }
 
-/** `/policy` with only the parameters that are actually set. */
-export function policyHref(params: {
-  readonly q?: string;
-  readonly category?: string;
-  readonly status?: string;
-}): string {
-  const search = new URLSearchParams();
-  if (params.q) search.set("q", params.q);
-  if (params.category) search.set("category", params.category);
-  if (params.status) search.set("status", params.status);
-  const query = search.toString();
-  return query ? `/policy?${query}` : "/policy";
-}
-
-const pill = "inline-flex h-9 items-center border px-4 text-[0.8125rem] font-medium transition-colors";
+const pill =
+  "inline-flex h-9 items-center border px-4 text-[0.8125rem] font-medium transition-colors";
 const pillOn = "border-ink bg-ink text-canvas";
 const pillOff = "border-hairline text-muted hover:border-ink hover:text-ink";
 
@@ -35,27 +31,35 @@ const pillOff = "border-hairline text-muted hover:border-ink hover:text-ink";
  * JavaScript. The search box is an ordinary GET form for the same reason.
  */
 export function PolicyFilters({
+  edition,
   categories,
   statuses,
   q,
   category,
   status,
 }: PolicyFiltersProps) {
+  const { locale } = edition;
+  const text = edition.filters;
   const filtered = q !== "" || category !== undefined || status !== undefined;
 
   return (
     <div className="flex flex-col gap-8">
-      <form method="get" action="/policy" role="search" className="flex flex-col gap-3 sm:flex-row">
+      <form
+        method="get"
+        action={localePath(locale, "/policy")}
+        role="search"
+        className="flex flex-col gap-3 sm:flex-row"
+      >
         <div className="flex-1">
           <label htmlFor="policy-search" className="eyebrow mb-2 block text-muted">
-            Search positions
+            {text.searchLabel}
           </label>
           <input
             id="policy-search"
             type="search"
             name="q"
             defaultValue={q}
-            placeholder="abortion, subsidiarity, naturalization…"
+            placeholder={text.searchPlaceholder}
             className="w-full rounded-xs border border-field bg-surface px-4 py-3 text-[0.9375rem] text-body transition-colors placeholder:text-faint hover:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-burgundy"
           />
         </div>
@@ -69,35 +73,35 @@ export function PolicyFilters({
             type="submit"
             className="inline-flex h-12 items-center justify-center rounded-xs bg-ink px-6 text-[0.875rem] font-medium text-canvas transition-colors hover:bg-burgundy"
           >
-            Search
+            {text.searchButton}
           </button>
           {filtered ? (
             <Link
-              href="/policy"
+              href={localePath(locale, "/policy")}
               className="inline-flex h-12 items-center text-[0.8125rem] text-muted underline decoration-rule underline-offset-[0.35em] transition-colors hover:text-burgundy hover:decoration-burgundy"
             >
-              Clear
+              {text.clear}
             </Link>
           ) : null}
         </div>
       </form>
 
-      <nav aria-label="Filter positions by section">
-        <h2 className="eyebrow mb-3 text-muted">Section</h2>
+      <nav aria-label={text.sectionNavLabel}>
+        <h2 className="eyebrow mb-3 text-muted">{text.sectionHeading}</h2>
         <ul className="flex flex-wrap items-center gap-2">
           <li>
             <Link
-              href={policyHref({ q, status })}
+              href={policyHref(locale, { q, status })}
               aria-current={category ? undefined : "true"}
               className={cn(pill, category ? pillOff : pillOn)}
             >
-              All
+              {text.allSections}
             </Link>
           </li>
           {categories.map((item) => (
             <li key={item.id}>
               <Link
-                href={policyHref({ q, status, category: item.id })}
+                href={policyHref(locale, { q, status, category: item.id })}
                 aria-current={category === item.id ? "true" : undefined}
                 className={cn(pill, category === item.id ? pillOn : pillOff)}
               >
@@ -111,26 +115,26 @@ export function PolicyFilters({
         </ul>
       </nav>
 
-      <nav aria-label="Filter positions by status">
-        <h2 className="eyebrow mb-3 text-muted">Status</h2>
+      <nav aria-label={text.statusNavLabel}>
+        <h2 className="eyebrow mb-3 text-muted">{text.statusHeading}</h2>
         <ul className="flex flex-wrap items-center gap-2">
           <li>
             <Link
-              href={policyHref({ q, category })}
+              href={policyHref(locale, { q, category })}
               aria-current={status ? undefined : "true"}
               className={cn(pill, status ? pillOff : pillOn)}
             >
-              Any
+              {text.anyStatus}
             </Link>
           </li>
           {statuses.map((item) => (
-            <li key={item}>
+            <li key={item.id}>
               <Link
-                href={policyHref({ q, category, status: item })}
-                aria-current={status === item ? "true" : undefined}
-                className={cn(pill, status === item ? pillOn : pillOff)}
+                href={policyHref(locale, { q, category, status: item.id })}
+                aria-current={status === item.id ? "true" : undefined}
+                className={cn(pill, status === item.id ? pillOn : pillOff)}
               >
-                {item}
+                {item.label}
               </Link>
             </li>
           ))}

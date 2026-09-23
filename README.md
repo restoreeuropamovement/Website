@@ -23,7 +23,7 @@ npm run dev        # http://localhost:3000
 | `npm run start`     | Serve the production build                           |
 | `npm run lint`      | ESLint                                               |
 | `npm run typecheck` | `tsc --noEmit`                                       |
-| `npm run check`     | Lint, typecheck, both content tests and build        |
+| `npm run check`     | Lint, typecheck, every content test and the build    |
 | `npm run artwork`   | Regenerate the generated SVG artwork                 |
 | `npm run map`       | Regenerate the outline of Europe used by `/wings`    |
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
@@ -31,6 +31,7 @@ npm run dev        # http://localhost:3000
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
 | `npm run test:syntax`| Assert the journal notation round-trips losslessly  |
 | `npm run test:pii`  | Assert membership encryption behaves as designed      |
+| `npm run test:i18n` | Assert each translation still says what the English does |
 
 ### Deploying
 
@@ -93,27 +94,38 @@ inherit none of the public chrome.
 
 No prose lives inside a component. To change what the site says, edit `content/`:
 
-| What                      | File                                |
-| ------------------------- | ----------------------------------- |
-| Manifesto                 | `content/manifesto/en.ts`           |
-| Homepage                  | `content/home/en.ts`                |
-| Principles (text)         | `content/principles/en.ts`          |
-| Principles (order, links) | `content/principles/structure.ts`   |
-| Navigation, footer, 404   | `content/chrome/en.ts`              |
-| Policy catalogue          | `content/policy.ts`                 |
-| Vision                    | `content/vision.ts`                 |
-| About                     | `content/about.ts`                  |
-| National wings            | `content/wings.ts`                  |
-| Join / Contact            | `content/involvement.ts`            |
-| Privacy / Imprint         | `content/legal.ts`                  |
-| Image slots               | `content/images.ts`                 |
-| Routes, site metadata     | `lib/site.ts`                       |
+| What                      | File                                     |
+| ------------------------- | ---------------------------------------- |
+| Manifesto                 | `content/manifesto/en.ts`                |
+| Homepage                  | `content/home/en.ts`                     |
+| Principles (text)         | `content/principles/en.ts`               |
+| Principles (order, links) | `content/principles/structure.ts`        |
+| Navigation, footer, 404   | `content/chrome/en.ts`                   |
+| Policy catalogue (text)   | `content/policy/en.ts`                   |
+| Policy (slugs, statuses)  | `content/policy/structure.ts`            |
+| Vision                    | `content/vision/en.ts`                   |
+| About                     | `content/about/en.ts`                    |
+| National wings            | `content/wings/en.ts`                    |
+| Wings (countries, slugs)  | `content/wings/structure.ts`             |
+| Join / Contact            | `content/involvement/en.ts`              |
+| Join / Contact field ids  | `content/involvement/structure.ts`       |
+| Privacy / Imprint         | `content/legal/en.ts`                    |
+| Image slots               | `content/images.ts`                      |
+| Routes, site metadata     | `lib/site.ts`                            |
+
+Every domain is split the same way. `structure.ts` holds what is not words —
+ids, ordering, slugs, dates, cross-references — and is owned by the English
+side; `en.ts` holds the words; `index.ts` joins the two into an edition and
+registers the dictionary. The split is what makes a translation safe: there is
+nothing in a language file a translator could change that would alter a URL,
+a database value or the order of a page.
 
 Six languages. English is the source; `de`, `fr`, `pl`, `it` and `es` sit beside
 each `en.ts` and are typed against it, so a translation that omits a key fails
 the build rather than rendering a gap. A language with no file yet falls back to
-English, which is why some pages are still English in every locale. See
-`lib/i18n.ts` for the routing and `lib/dictionary.ts` for the loader.
+English. See `lib/i18n.ts` for the routing and `lib/dictionary.ts` for the
+loader, and `npm run test:i18n` for the checks the type system cannot make —
+that no list has lost an item and no `{count}` placeholder has been translated.
 
 Content is typed `ContentBlock[]` (see `lib/content-types.ts`) rendered by
 `components/content/ContentBlocks.tsx`. Inside any `text` field you may use

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
+import { policyStructure } from "@/content/policy";
 import { wingSlugs } from "@/content/wings";
 import { LOCALES, localePath } from "@/lib/i18n";
-import { getPolicyEntries } from "@/lib/policy";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -51,7 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const positions: MetadataRoute.Sitemap = getPolicyEntries().flatMap((entry) =>
+  const positions: MetadataRoute.Sitemap = policyStructure.flatMap((entry) =>
     everyLocale(`/policy/${entry.slug}`, {
       lastModified: new Date(`${entry.lastUpdated}T00:00:00Z`),
       changeFrequency: "monthly",

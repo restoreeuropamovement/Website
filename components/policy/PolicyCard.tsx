@@ -1,10 +1,12 @@
 import Link from "next/link";
-import type { PolicyEntry } from "@/lib/content-types";
+import type { PolicyEdition, PolicyEntry } from "@/content/policy";
 import { getPolicyCategory } from "@/lib/policy";
+import { localePath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { PolicyStatusBadge } from "./PolicyStatusBadge";
 
 interface PolicyCardProps {
+  readonly edition: PolicyEdition;
   readonly entry: PolicyEntry;
   /**
    * Print the section this belongs to. Off when the cards are already grouped
@@ -25,8 +27,8 @@ interface PolicyCardProps {
  * actually had. The overlay below is the usual way to keep that promise while
  * leaving the heading as the accessible name of the link.
  */
-export function PolicyCard({ entry, showCategory = true, className }: PolicyCardProps) {
-  const category = showCategory ? getPolicyCategory(entry.category) : undefined;
+export function PolicyCard({ edition, entry, showCategory = true, className }: PolicyCardProps) {
+  const category = showCategory ? getPolicyCategory(edition, entry.category) : undefined;
 
   return (
     <article
@@ -38,13 +40,13 @@ export function PolicyCard({ entry, showCategory = true, className }: PolicyCard
       )}
     >
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <PolicyStatusBadge status={entry.status} secondaryStatus={entry.secondaryStatus} />
+        <PolicyStatusBadge status={entry.status} label={entry.statusLabel} />
         {category ? <span className="eyebrow text-faint">{category.title}</span> : null}
       </div>
 
       <h3 className="font-serif text-display-4 font-normal text-ink">
         <Link
-          href={`/policy/${entry.slug}`}
+          href={localePath(edition.locale, `/policy/${entry.slug}`)}
           className="transition-colors before:absolute before:inset-0 before:content-[''] group-hover:text-burgundy"
         >
           {entry.title}

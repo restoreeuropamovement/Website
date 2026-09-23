@@ -1,9 +1,10 @@
-import type { PolicyStatus } from "@/lib/content-types";
+import type { PolicyStatusId } from "@/content/policy";
 import { cn } from "@/lib/utils";
 
 interface PolicyStatusBadgeProps {
-  readonly status: PolicyStatus;
-  readonly secondaryStatus?: PolicyStatus;
+  readonly status: PolicyStatusId;
+  /** Already formatted, including the "/" where an entry carries two. */
+  readonly label: string;
   readonly className?: string;
 }
 
@@ -11,15 +12,18 @@ interface PolicyStatusBadgeProps {
  * How settled a position is, shown wherever an entry appears. `Open` is drawn
  * with a dashed rule for the same reason the vacant leadership slots are: the
  * absence is the point, and it should read as an absence.
+ *
+ * Keyed by id. The tones used to be looked up by the English label, which
+ * would have left every badge unstyled on five of the six pages.
  */
-const tones: Record<PolicyStatus, string> = {
-  "Manifesto Core": "border-gold/60 text-gold",
-  "Agreed Policy": "border-burgundy/55 text-burgundy",
-  Derived: "border-rule text-muted",
-  Open: "border-dashed border-rule text-faint",
+const tones: Record<PolicyStatusId, string> = {
+  "manifesto-core": "border-gold/60 text-gold",
+  agreed: "border-burgundy/55 text-burgundy",
+  derived: "border-rule text-muted",
+  open: "border-dashed border-rule text-faint",
 };
 
-export function PolicyStatusBadge({ status, secondaryStatus, className }: PolicyStatusBadgeProps) {
+export function PolicyStatusBadge({ status, label, className }: PolicyStatusBadgeProps) {
   return (
     <span
       className={cn(
@@ -28,7 +32,7 @@ export function PolicyStatusBadge({ status, secondaryStatus, className }: Policy
         className,
       )}
     >
-      {secondaryStatus ? `${status} / ${secondaryStatus}` : status}
+      {label}
     </span>
   );
 }

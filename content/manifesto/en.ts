@@ -1,4 +1,5 @@
 import type { ManifestoSectionData } from "@/lib/content-types";
+import type { ManifestoText } from "./index";
 
 export const manifestoMeta = {
   title: "Manifesto of European Integral Restorationism",
@@ -931,3 +932,27 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
     ],
   },
 ];
+
+/**
+ * The same words in the shape a translation has to match.
+ *
+ * Derived rather than authored twice. `manifestoSections` keeps its own shape
+ * because the page, the plain-text download and the policy catalogue's
+ * cross-references all read it; this is the view the dictionary is typed on.
+ * Every other module under `content/` exports its words under one name, and
+ * `npm run test:i18n` compares each `en.ts` with the language files beside it —
+ * without this the manifesto would be the one document outside that check.
+ */
+export const manifestoText: ManifestoText = {
+  meta: {
+    title: manifestoMeta.title,
+    subtitle: manifestoMeta.subtitle,
+    status: manifestoMeta.status,
+  },
+  sections: Object.fromEntries(
+    manifestoSections.map((section) => [
+      section.id,
+      { title: section.title, summary: section.summary, body: section.body },
+    ]),
+  ) as ManifestoText["sections"],
+};

@@ -98,7 +98,7 @@ table will one day be read by someone who should not have it.
 
 ```bash
 npm run dev        # development server
-npm run check      # lint + typecheck + content tests + production build
+npm run check      # lint + typecheck + content tests + translation checks + production build
 npm run artwork    # regenerate the generated SVG artwork in public/images
 npm run map        # regenerate content/wings-map.ts, the outline of Europe on /wings
 npm run db:migrate # apply db/schema.sql (idempotent)
@@ -107,19 +107,28 @@ npm run db:seed    # copy the bundled essays into the database (idempotent)
 
 ## Editing content
 
+Every domain has the same three files: `structure.ts` for what is not words
+(ids, slugs, ordering, dates, cross-references), `en.ts` for the words, and
+`index.ts` to join them into an edition. Edit the one that matches what you are
+changing — moving an id into a language file is how a URL or a database value
+ends up being decided by a translator.
+
 | What                        | Where                              |
 | --------------------------- | ---------------------------------- |
 | Manifesto                   | `content/manifesto/en.ts`          |
 | Homepage copy               | `content/home/en.ts`               |
 | Principles — the words      | `content/principles/en.ts`         |
 | Principles — order, anchors | `content/principles/structure.ts`  |
+| Policy catalogue — words    | `content/policy/en.ts`             |
+| Policy — slugs, statuses    | `content/policy/structure.ts`      |
 | Navigation, footer, 404     | `content/chrome/en.ts`             |
-| Policy catalogue            | `content/policy.ts`                |
-| Vision                      | `content/vision.ts`                |
-| About                       | `content/about.ts`                 |
-| National wings              | `content/wings.ts`                 |
-| Join / Contact              | `content/involvement.ts`           |
-| Legal pages                 | `content/legal.ts`                 |
+| Vision                      | `content/vision/en.ts`             |
+| About                       | `content/about/en.ts`              |
+| National wings              | `content/wings/en.ts`              |
+| Wings — countries, slugs    | `content/wings/structure.ts`       |
+| Join / Contact              | `content/involvement/en.ts`        |
+| Join / Contact — field ids  | `content/involvement/structure.ts` |
+| Legal pages                 | `content/legal/en.ts`              |
 | Routes, site metadata       | `lib/site.ts`                      |
 
 ## Six languages
@@ -134,8 +143,18 @@ no file falls back to English — see `lib/dictionary.ts`.
 - **Translations contain words only.** Never a URL, never a `type: "paragraph"` discriminant, never
   a `number`. Anything structural belongs in the English-owned file next to it — `routes` in
   `lib/site.ts`, `principleStructure` in `content/principles/structure.ts`.
+- **A link in prose is written `[label][route-id]`**, not `[label](/path)`. The label is translated,
+  the id is copied, and `lib/inline.tsx` resolves it against `routes` and prefixes it for the
+  current locale. An unknown id fails the build; a literal path silently sends a German reader to
+  the English page.
+- **Plural forms belong to the language.** `PluralForms` in `lib/format.ts` takes whichever CLDR
+  categories the language actually uses — Polish four, English two — and `{count}` survives
+  translation untouched.
 - Add a language in `lib/i18n.ts` and it appears in the switcher, the sitemap and every `hreflang`
   set at once.
+- `npm run test:i18n` walks every edition beside the English one and catches what the types cannot:
+  a list that lost an item, an optional section that was dropped, a translated placeholder, a path
+  written into a language file.
 
 Journal essays are the one exception to "content lives in `content/`", and the journal is currently
 unlisted: it has no public route, and is reachable only through `/admin/journal`. `lib/journal.ts`

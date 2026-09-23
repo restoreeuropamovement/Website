@@ -1,7 +1,11 @@
 import { createDictionary } from "@/lib/dictionary";
 import type { ContentBlock, ManifestoSectionData } from "@/lib/content-types";
 import type { Locale } from "@/lib/i18n";
-import { manifestoMeta as enMeta, manifestoSections as enSections } from "./en";
+import {
+  manifestoMeta as enMeta,
+  manifestoSections as enSections,
+  manifestoText as englishText,
+} from "./en";
 import { manifestoStructure, type ManifestoSectionId } from "./structure";
 
 /**
@@ -44,17 +48,6 @@ export interface ManifestoEdition {
   readonly status: string;
   readonly sections: readonly ManifestoSectionData[];
 }
-
-/** English, derived from the authored arrays so the text exists in one place. */
-const englishText: ManifestoText = {
-  meta: { title: enMeta.title, subtitle: enMeta.subtitle, status: enMeta.status },
-  sections: Object.fromEntries(
-    enSections.map((section) => [
-      section.id,
-      { title: section.title, summary: section.summary, body: section.body },
-    ]),
-  ) as ManifestoText["sections"],
-};
 
 /**
  * Registered translations. Adding a language is one line here and one file
