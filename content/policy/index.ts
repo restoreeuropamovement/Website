@@ -22,7 +22,7 @@ import {
  * and an entry that departs from existing law says so in its own words rather
  * than describing itself as settled.
  *
- * Eighty-nine entries in six languages is the largest thing on the site, and
+ * Ninety-eight entries in six languages is the largest thing on the site, and
  * the one where a translation drifting from the English would do the most
  * damage: these are the movement's stated positions on abortion, euthanasia,
  * capital punishment and the standing of religion in law. A reader in Polish
@@ -68,7 +68,7 @@ export interface PolicyText {
     readonly eyebrow: string;
     readonly title: string;
     readonly metaTitle: string;
-    /** "Version 0.2". A version is a name, and names are written out. */
+    /** "Version 0.3". A version is a name, and names are written out. */
     readonly version: string;
     readonly framework: string;
     readonly lede: string;
@@ -148,7 +148,7 @@ export interface PolicyText {
 
   /**
    * Every entry, by slug. Exhaustive: an edition that forgets one does not
-   * publish eighty-eight positions, it fails the build.
+   * publish ninety-seven positions, it fails the build.
    */
   readonly entries: Record<PolicySlug, PolicyEntryText>;
 }
@@ -284,4 +284,4 @@ export const englishPolicy: PolicyEdition = edition(DEFAULT_LOCALE, englishText)
 export const policySlugs: readonly PolicySlug[] = englishPolicy.entries.map((e) => e.slug);
 
 /** ISO date of the catalogue as a whole. Structural: a date is not a word. */
-export const POLICY_DATE = "2026-09-21";
+export const POLICY_DATE = "2026-09-23";

@@ -5,7 +5,7 @@ export const policyText: PolicyText = {
     eyebrow: "Positions",
     title: "Catalogue programmatique",
     metaTitle: "Catalogue programmatique",
-    version: "Version 0.2",
+    version: "Version 0.3",
     framework: "Restaurationnisme intégral européen",
     lede: "Ce catalogue répond à une question étroite : que soutient Restore Europa sur tel sujet ? Il ne remplace pas le manifeste. Le manifeste expose la vision du monde ; le catalogue expose des positions consultables, sujet par sujet.",
     description:
@@ -14,6 +14,7 @@ export const policyText: PolicyText = {
       "Là où l'enseignement moral catholique est clair, Restore Europa l'adopte généralement comme référence morale, et énonce séparément sa mise en œuvre en droit civil. Une divergence est consignée explicitement : sur la peine capitale, Restore Europa retient l'ancienne permission traditionnelle pour les cas exceptionnels plutôt que la position abolitionniste contemporaine.",
       "Le catalogue distingue l'ordre constitutionnel que recherche Restore Europa du droit européen tel qu'il se présente aujourd'hui. Plusieurs positions — sur la nationalité, sur la déchéance de la citoyenneté, sur la parole, sur le statut public de la religion et sur la peine capitale — exigeraient une révision constitutionnelle ou une modification des traités avant de pouvoir être adoptées dans tel ou tel État européen. Là où il en va ainsi, la notice le dit.",
       "La version 0.2 tranche les questions que la version 0.1 avait laissées ouvertes : la relation institutionnelle européenne, l'asile, l'éloignement, les salaires, la fiscalité, les retraites, le logement, la représentation du travail, l'identité et la monnaie numériques, la surveillance biométrique, le génie génétique, la peine, le bouquet énergétique et toute question pendante de politique étrangère. Là où une formulation de la v0.2 a révisé une notice antérieure, c'est le texte le plus récent qui fait foi.",
+      "La version 0.3 ajoute l'ensemble consacré à la remigration et à son exécution. Il distingue la citoyenneté, le statut de séjour, l'expulsion pénale, le retour après asile et le contrôle de la nationalité, au lieu de traiter la remigration comme un pouvoir unique et indifférencié ; il est rédigé comme une politique constitutionnelle et législative proposée, le droit européen et international en vigueur étant signalé séparément dans chaque notice. Deux notices antérieures — la naturalisation et l'expulsion des délinquants non citoyens — sont refondues dans les formulations les plus récentes plutôt que maintenues en double à côté d'elles.",
     ],
     notice:
       "Chaque question de ce catalogue est assortie d'une position. Les notices marquées Dérivée suivent la direction du manifeste sans que leur mise en œuvre soit arrêtée, et plusieurs nomment la modification légale ou conventionnelle qu'elles exigeraient. Les positions sont révisées à mesure que le mouvement décide ; la version et la date ci-dessus indiquent quel texte vous lisez.",
@@ -52,6 +53,8 @@ export const policyText: PolicyText = {
         "Le mécanisme de vérification de l'âge pour les réseaux sociaux",
         "Les échéances de neutralité carbone, les prix du carbone et les quotas d'émissions",
         "Les critères, fonction par fonction, applicables aux charges publiques réservées",
+        "Les délais de carence accordés aux résidents étrangers après une perte d'emploi involontaire",
+        "Les durées d'absence propres à chaque titre et les plafonds de rétention administrative",
       ],
     },
   },
@@ -564,29 +567,40 @@ export const policyText: PolicyText = {
     },
 
     "deportation-of-criminal-offenders": {
-      title: "Expulsion des délinquants non citoyens",
+      title: "Expulsion pénale et interdictions de retour",
       shortAnswer:
-        "Un non-citoyen condamné pour une infraction pénale grave figurant dans la liste doit ordinairement perdre le droit au séjour et se voir frapper d'une interdiction définitive de retour.",
+        "Les non-citoyens auteurs d'infractions graves sont éloignés au terme de la procédure pénale et définitivement exclus ; les manquements ordinaires au droit du séjour emportent normalement une interdiction de retour de dix ans.",
       position: [
         "La citoyenneté et la résidence étrangère sont des statuts distincts. Une délinquance intentionnelle grave commise par un non-citoyen peut justifier qu'il soit mis fin à son séjour après condamnation au terme d'une procédure pénale équitable.",
+        "La résidence étrangère ne confère pas le même droit permanent au séjour que la citoyenneté. Un non-citoyen condamné pour une infraction grave figurant dans la liste doit ordinairement perdre son séjour et être éloigné au terme de la procédure pénale applicable.",
       ],
       policies: [
-        "Exiger une condamnation pénale régulière avant toute expulsion pénale.",
+        "Exiger une condamnation régulière pour l'infraction invoquée avant toute expulsion pénale.",
         "Les violences graves, les infractions sexuelles graves, le vol avec violence, la criminalité organisée, le terrorisme, la traite, le trafic de stupéfiants d'ampleur, l'escroquerie grave et les infractions intentionnelles comparables déclenchent en principe l'éloignement.",
         "La récidive peut justifier l'éloignement même lorsque les infractions prises isolément sont moins graves.",
-        "Lorsqu'une peine d'emprisonnement est prononcée, l'éloignement suit ordinairement l'exécution de la peine privative de liberté, à moins qu'un transfèrement légal anticipé ne soit possible.",
-        "Assortir d'une interdiction définitive de retour les expulsions pénales relevant de cette liste.",
+        "Traiter le meurtre intentionnel, le viol, les abus sexuels graves sur enfants, le terrorisme, la traite grave, les violences organisées graves et les infractions graves comparables comme relevant en principe de l'interdiction définitive.",
+        "Assortir d'une interdiction définitive de retour les éloignements justifiés par une criminalité grave relevant de cette liste ou par une menace grave pour la sécurité nationale.",
+        "Appliquer une interdiction de retour de dix ans par défaut aux manquements graves au droit ordinaire du séjour, tels que l'entrée irrégulière délibérée, le séjour irrégulier répété ou le contournement délibéré d'une décision de retour, sous réserve des règles de proportionnalité prévues par la loi d'application.",
+        "Permettre des sanctions plus courtes pour les manquements véritablement mineurs ou purement techniques au droit du séjour, lorsqu'une interdiction de dix ans serait disproportionnée.",
+        "Exécuter l'éloignement après l'exécution de la peine d'emprisonnement, à moins qu'un transfèrement légal ou un éloignement anticipé ne soit possible.",
         "Les infractions administratives mineures ou vénielles n'entraînent pas automatiquement une expulsion définitive.",
-        "Les citoyens naturalisés relèvent des règles distinctes de déchéance de la citoyenneté et ne sont pas traités comme des résidents étrangers tant que la citoyenneté n'a pas d'abord été régulièrement retirée.",
+        "Maintenir les citoyens naturalisés dans le cadre distinct de la déchéance de la citoyenneté tant que celle-ci n'a pas d'abord été régulièrement retirée.",
         "Les citoyens ne peuvent être expulsés de leur propre pays.",
       ],
       implementationNote:
-        "Un ressortissant étranger en séjour régulier bénéficie actuellement de garanties procédurales contre l'expulsion au titre du droit européen des droits de l'homme. L'éloignement peut aussi être exclu lorsque le retour exposerait la personne à des mauvais traitements prohibés. Le modèle visé est donc rapide après condamnation définitive, mais reste susceptible d'un contrôle juridictionnel là où des obligations contraignantes l'exigent.",
+        "Un ressortissant étranger en séjour régulier bénéficie actuellement de garanties procédurales contre l'expulsion au titre du droit européen des droits de l'homme. L'éloignement peut aussi être exclu lorsque le retour exposerait la personne à des mauvais traitements prohibés. Le modèle visé est donc rapide après condamnation définitive, mais reste susceptible d'un contrôle juridictionnel là où des obligations contraignantes l'exigent. En l'état de l'article 11 de la directive « retour » de l'Union, les interdictions d'entrée ne doivent ordinairement pas excéder cinq ans, mais peuvent dépasser cette durée lorsque la personne représente une menace grave pour l'ordre public, la sécurité publique ou la sécurité nationale. Une interdiction de dix ans par défaut pour l'entrée irrégulière ordinaire irait donc au-delà de la règle actuelle de l'Union.",
       keywords: [
         "expulsion",
+        "expulsion pénale",
         "délinquants étrangers",
         "éloignement",
         "interdiction de retour",
+        "dix ans",
+        "interdiction définitive",
+        "meurtre",
+        "viol",
+        "terrorisme",
+        "séjour irrégulier",
         "titre de séjour",
         "ordre public",
         "reconduite à la frontière",
@@ -610,28 +624,35 @@ export const policyText: PolicyText = {
     },
 
     naturalization: {
-      title: "Naturalisation",
+      title: "Assimilation et naturalisation",
       shortAnswer:
-        "La voie normale exige environ quinze ans de résidence régulière avant qu'une demande puisse être déposée, assortis d'exigences d'assimilation rigoureuses.",
+        "La citoyenneté exige un niveau sensiblement plus élevé que la résidence ordinaire ou l'intégration : une assimilation réussie à la communauté politique nationale.",
       position: [
         "La voie de naturalisation normale de Restore Europa exige environ quinze ans de résidence régulière avant qu'une demande puisse être déposée, ainsi que des exigences d'assimilation exceptionnellement rigoureuses.",
+        "La naturalisation n'est pas la conséquence automatique du temps passé dans le pays. Les demandeurs doivent satisfaire à des exigences rigoureuses de langue, de connaissances civiques, de conduite et d'attachement avant que la citoyenneté ne soit accordée.",
       ],
       policies: [
-        "La maîtrise courante de la langue nationale.",
-        "Une connaissance étendue de l'histoire, de la culture, des traditions et des institutions nationales.",
+        "Conserver la voie de résidence normale d'environ quinze ans prévue par le catalogue avant qu'une naturalisation ordinaire puisse être sollicitée.",
+        "Exiger une maîtrise pratique avancée de la langue nationale et une connaissance substantielle de l'histoire, des institutions et de l'ordre constitutionnel.",
         "Le respect de l'ordre constitutionnel et du caractère chrétien et historique du pays.",
-        "Une loyauté démontrée et une participation durable à la vie du pays.",
-        "Une conduite respectueuse de la loi et une autonomie économique là où elle est raisonnablement possible.",
+        "Exiger un comportement durablement respectueux de la loi et des déclarations sincères devant les autorités chargées du séjour et de la nationalité.",
+        "Exiger la preuve d'un attachement durable au pays et non de la seule résidence.",
+        "Admettre des examens objectifs de langue et de connaissances civiques.",
+        "Refuser la naturalisation lorsqu'une criminalité grave, le terrorisme, une escroquerie grave ou une tromperie délibérée sur l'identité demeurent rédhibitoires.",
+        "Ne pas faire d'un réexamen civique périodique un motif automatique d'expulsion d'une personne dont la citoyenneté a été acquise régulièrement et de bonne foi ; la déchéance après naturalisation relève de notices distinctes.",
       ],
       limits: ["Quinze ans de résidence ne garantissent pas automatiquement la naturalisation."],
       implementationNote:
-        "Les conditions de résidence ordinaires vont actuellement de cinq à dix ans à travers l'Europe ; il s'agirait donc d'allonger la pratique existante plutôt que de l'ajuster.",
+        "Les conditions de résidence ordinaires vont actuellement de cinq à dix ans à travers l'Europe ; il s'agirait donc d'allonger la pratique existante plutôt que de l'ajuster. Le manifeste énonce déjà que la naturalisation doit exiger une connaissance substantielle de la langue, de l'histoire et des institutions, le respect de l'ordre constitutionnel et un attachement véritable au pays. La présente notice rassemble ces exigences en une norme d'assimilation propre au mouvement.",
       keywords: [
         "naturalisation",
-        "résidence",
         "assimilation",
+        "résidence",
+        "langue",
         "exigence linguistique",
+        "connaissances civiques",
         "test de citoyenneté",
+        "attachement",
       ],
     },
 
@@ -734,6 +755,274 @@ export const policyText: PolicyText = {
       implementationNote:
         "Le droit international et européen impose des restrictions substantielles au fait de rendre une personne apatride, et l'éloignement suppose normalement un État d'accueil juridiquement en mesure d'admettre la personne et disposé à le faire. Cela relève de l'ordre constitutionnel que recherche Restore Europa, et exigerait une modification des traités ou une révision constitutionnelle.",
       keywords: ["déchéance de nationalité", "retrait", "apatridie", "trahison", "terrorisme"],
+    },
+
+    "remigration-general-principle": {
+      title: "Remigration : principe général",
+      shortAnswer:
+        "La remigration est le retour organisé des personnes qui n'ont pas ou qui perdent une base légale de séjour, associé à une politique de retour volontaire, à une exécution stricte des conditions de séjour et au réexamen des statuts obtenus par fraude ou par une irrégularité qualifiée.",
+      position: [
+        "Restore Europa tient le statut migratoire pour conditionnel : il dépend d'une admission régulière, du respect des conditions de séjour, de l'ordre public et, le cas échéant, d'une intégration réussie. La remigration n'est pas définie comme un éloignement fondé sur la seule race ; elle opère par le statut juridique, l'historique migratoire, la conduite pénale, la fraude, les motifs de sécurité et des conditions de séjour clairement définies.",
+      ],
+      policies: [
+        "Exécuter les décisions de retour définitives à l'égard des personnes sans droit légal au séjour.",
+        "Recourir au retour volontaire lorsqu'il est réaliste et au retour contraint lorsque la base légale du séjour a cessé.",
+        "Réexaminer le séjour ou la nationalité obtenus par fraude ou tromperie substantielle.",
+        "Permettre le retrait du statut de séjour des non-citoyens pour criminalité grave, menaces graves pour la sécurité et autres motifs légaux expressément définis.",
+        "Maintenir la citoyenneté, le séjour permanent, le séjour temporaire, le statut d'asile et la présence irrégulière comme des catégories juridiquement distinctes.",
+        "Ne pas traiter le seul écoulement du temps comme créant un droit automatique au séjour lorsque le statut sous-jacent demeure temporaire ou conditionnel.",
+        "Appliquer des procédures et des exigences de preuve individuelles plutôt qu'une expulsion collective fondée sur la seule catégorie ethnique ou raciale.",
+      ],
+      implementationNote:
+        "Le droit européen en vigueur impose des contraintes procédurales et de droits de l'homme substantielles au retour et à l'expulsion. La présente notice énonce l'architecture de la politique proposée ; sa mise en œuvre exigerait la conformité aux engagements juridiques incompatibles, leur modification ou le retrait de ceux-ci. Le manifeste existant du mouvement traite déjà la citoyenneté comme une appartenance et non comme une simple résidence, et soutient une immigration maîtrisée, compatible avec l'intégration, la stabilité et la continuité nationale.",
+      keywords: [
+        "remigration",
+        "retour",
+        "application du droit des étrangers",
+        "séjour",
+        "expulsion",
+        "intégration",
+        "nationalité",
+      ],
+    },
+
+    "integration-general-definition": {
+      title: "Intégration : définition générale",
+      shortAnswer:
+        "L'intégration désigne une incorporation linguistique, civique, économique et sociale démontrable à la nation d'accueil ; la seule résidence ne suffit pas.",
+      position: [
+        "L'intégration se mesure à la conduite, à la compétence et à une participation durable. Elle se distingue de la citoyenneté et du niveau d'assimilation plus élevé qu'exige la naturalisation.",
+      ],
+      policies: [
+        "Exiger une maîtrise fonctionnelle de la principale langue nationale, normalement autour de B1–B2 selon le statut recherché.",
+        "Exiger une connaissance élémentaire de l'histoire nationale, des institutions, du droit, des devoirs civiques et de la structure constitutionnelle.",
+        "Tenir une criminalité grave et persistante, la criminalité organisée, le terrorisme, l'escroquerie grave et la fraude migratoire délibérée pour de forts indices contraires à l'intégration.",
+        "Attendre des non-citoyens aptes au travail et en âge de travailler qu'ils participent par l'emploi, le travail indépendant, l'éducation, la formation professionnelle, une prise en charge familiale reconnue ou une autre contribution légitime.",
+        "Considérer une dépendance évitable et prolongée à l'aide publique comme un facteur défavorable à l'intégration, en exemptant l'incapacité réelle, le handicap, la retraite, le chômage temporaire et une prise en charge substantielle.",
+        "Admettre la preuve d'une participation locale par le travail, l'éducation, les paroisses, les associations, les clubs et d'autres institutions communautaires, sans rendre obligatoire l'appartenance à une organisation particulière.",
+        "Exiger le respect de l'ordre constitutionnel légal sans exiger une conformité idéologique à chaque politique gouvernementale.",
+        "Apprécier l'intégration sur la base d'éléments individuels documentés plutôt que de la seule race.",
+      ],
+      implementationNote:
+        "Le droit de l'Union relatif aux résidents de longue durée permet actuellement aux États membres d'imposer des conditions d'intégration et exige des ressources stables et régulières pour l'acquisition du statut de longue durée. La politique sépare les conceptions de la nation historique fondées sur l'ascendance du critère juridique administrable consistant à savoir si tel résident est intégré.",
+      keywords: [
+        "intégration",
+        "langue",
+        "connaissances civiques",
+        "autonomie",
+        "séjour",
+        "ordre public",
+        "participation",
+      ],
+    },
+
+    "regularized-irregular-immigration": {
+      title: "Immigration irrégulière régularisée",
+      shortAnswer:
+        "Une légalisation ultérieure n'efface pas automatiquement un historique avéré d'entrée ou de séjour irréguliers ; les cas antérieurement régularisés peuvent être réexaminés individuellement au regard du nouveau cadre juridique.",
+      position: [
+        "Restore Europa rejette la thèse selon laquelle toute régularisation ou amnistie passée devrait être tenue pour constitutionnellement intouchable. Lorsque des documents fiables établissent une entrée irrégulière antérieure, un séjour irrégulier, une fausse identité ou une autre irrégularité substantielle, l'historique de séjour qui en résulte peut être réexaminé individuellement.",
+      ],
+      policies: [
+        "Permettre le réexamen individuel des statuts de séjour issus d'amnisties antérieures, de régularisations massives ou de programmes exceptionnels comparables.",
+        "Exiger de l'État qu'il prouve l'historique migratoire pertinent à partir de documents et d'éléments de preuve ; l'irrégularité ne peut être simplement présumée.",
+        "Réexaminer l'intégralité du dossier initial, y compris l'identité, l'historique d'entrée, l'historique d'asile, la base du séjour, les titres ultérieurs et toute procédure de naturalisation.",
+        "Distinguer la simple irrégularité antérieure de la fraude substantielle, de la fausse identité ou de la dissimulation, qui peuvent emporter des conséquences plus lourdes.",
+        "Lorsque le statut survit au réexamen mené sous l'empire de la loi nouvelle, il demeure valable sous réserve des conditions ordinaires de séjour.",
+        "Lorsque le statut n'aurait pas été accordé au regard de la règle nouvelle applicable et que la constitution permet un réexamen rétroactif, le retrait et le retour peuvent s'ensuivre par une décision individuelle assortie d'une procédure de recours.",
+      ],
+      limits: [
+        "La présente notice ne tient pas tout citoyen naturalisé pour frauduleux au seul motif qu'une période antérieure de séjour a été irrégulière ; la fraude et la régularisation régulière demeurent des notions distinctes.",
+      ],
+      implementationNote:
+        "Il s'agit d'un pouvoir de réexamen rétroactif proposé, qui va au-delà de la stabilité normalement attachée aux décisions administratives définitives. Il exigerait une habilitation constitutionnelle claire, des règles de prescription définies et des garanties procédurales.",
+      keywords: [
+        "régularisation",
+        "amnistie",
+        "entrée irrégulière",
+        "séjour irrégulier",
+        "réexamen du statut",
+        "historique migratoire",
+      ],
+    },
+
+    "employment-and-self-sufficiency-of-foreign-residents": {
+      title: "Emploi et autonomie des résidents étrangers",
+      shortAnswer:
+        "Les résidents non citoyens aptes au travail sont tenus de rester économiquement autonomes et ne bénéficient ordinairement pas du même droit ouvert à l'aide sociale que les citoyens.",
+      position: [
+        "La résidence étrangère est accordée à des fins déterminées et demeure conditionnelle. Les résidents en capacité de travailler doivent normalement subvenir à leurs besoins par l'emploi, le travail indépendant, les études, la formation ou une prise en charge reconnue, plutôt que par une dépendance permanente et évitable à l'aide publique.",
+      ],
+      policies: [
+        "Exiger des résidents non citoyens temporaires et ordinaires qu'ils conservent des moyens d'existence légaux suffisants, sous réserve de délais de carence raisonnables après une perte d'emploi involontaire.",
+        "Admettre l'emploi, le travail indépendant, les études à temps plein, la formation professionnelle et une prise en charge familiale substantielle comme une participation légitime.",
+        "Prévoir des exceptions pour le handicap réel, l'incapacité, la retraite, les enfants et les difficultés temporaires malgré des efforts raisonnables pour travailler.",
+        "Limiter l'aide sociale ordinaire, hors urgence, pour les non-citoyens là où cela est constitutionnellement et légalement permis.",
+        "Préserver l'alimentation, l'hébergement et les soins médicalement nécessaires en cas d'urgence lorsque leur refus violerait des obligations juridiques ou humanitaires élémentaires.",
+        "Traiter une dépendance évitable et répétée à l'aide publique comme un motif possible de réexamen du séjour lorsque le titre était expressément subordonné à l'autonomie.",
+        "Maintenir la citoyenneté acquise à part : le simple chômage ne transforme pas automatiquement un citoyen en résident irrégulier.",
+      ],
+      limits: [
+        "Le délai de carence exact après une perte d'emploi devrait être fixé par la loi d'application plutôt qu'inscrit en dur dans le principe constitutionnel.",
+      ],
+      implementationNote:
+        "Les règles de l'Union relatives aux résidents de longue durée exigent des ressources stables et régulières pour acquérir ce statut, mais le droit en vigueur accorde aussi aux résidents de longue durée des protections importantes et ne permet pas l'expulsion pour des motifs purement économiques. Le cadre proposé par le mouvement irait plus loin pour certaines catégories de séjour des non-citoyens.",
+      keywords: [
+        "autonomie",
+        "emploi",
+        "aide sociale",
+        "résidents étrangers",
+        "titre de séjour",
+        "participation économique",
+      ],
+    },
+
+    "probationary-naturalization": {
+      title: "Naturalisation probatoire",
+      shortAnswer:
+        "La citoyenneté nouvellement acquise est soumise à une période probatoire de dix ans, assortie de règles de déchéance renforcées pour des motifs graves étroitement définis.",
+      position: [
+        "La naturalisation crée la citoyenneté, mais pendant les dix premières années l'État conserve un pouvoir renforcé de rouvrir la procédure et de retirer la citoyenneté acquise pour des manquements graves déterminés ou pour des vices substantiels affectant la base de la naturalisation.",
+      ],
+      policies: [
+        "Fixer la période probatoire à dix ans à compter de la date d'acquisition de la citoyenneté.",
+        "Permettre la déchéance pour fraude substantielle à la naturalisation, fausse identité ou dissimulation délibérée d'un fait disqualifiant.",
+        "Permettre la déchéance pour les crimes exceptionnellement graves commis après la naturalisation, tels que les définit la notice distincte consacrée à la citoyenneté et à la criminalité grave.",
+        "Permettre la déchéance pour terrorisme, trahison ou conduite constituant une menace exceptionnellement grave pour la sécurité nationale, lorsque la loi le prévoit expressément.",
+        "Exiger une procédure individuelle, juridictionnelle ou quasi juridictionnelle, la preuve du motif légal et un droit de recours effectif.",
+        "Ne pas faire du simple chômage, d'un désaccord politique ou d'un test civique manqué un motif automatique de déchéance à lui seul.",
+        "Au terme des dix ans, appliquer les protections ordinaires de la citoyenneté, sous réserve des motifs permanents tirés de la fraude et des autres motifs exceptionnels de déchéance retenus ailleurs dans le catalogue.",
+      ],
+      implementationNote:
+        "Il s'agit d'une dérogation constitutionnelle proposée aux systèmes qui tiennent la naturalisation pour immédiatement indiscernable de la citoyenneté par naissance à toutes fins de privation. Les instruments internationaux existants en matière de nationalité encadrent la privation, en particulier lorsqu'elle créerait l'apatridie ; ces conflits exigeraient un traitement constitutionnel et conventionnel explicite.",
+      keywords: [
+        "citoyenneté probatoire",
+        "naturalisation",
+        "déchéance",
+        "dix ans",
+        "fraude",
+        "criminalité grave",
+      ],
+    },
+
+    "residence-permit-withdrawal": {
+      title: "Retrait du titre de séjour",
+      shortAnswer:
+        "Le statut de séjour des non-citoyens se perd plus facilement que la citoyenneté et peut être retiré lorsque des conditions définies d'admission ou de séjour continu sont substantiellement violées.",
+      position: [
+        "Le séjour est une autorisation juridique conditionnelle. Une criminalité grave, une fraude substantielle, des menaces graves pour la sécurité et le manquement persistant à des conditions de séjour expressément énoncées peuvent justifier le retrait et le retour.",
+      ],
+      policies: [
+        "Retirer le titre ou en refuser le renouvellement en cas de fraude substantielle sur l'identité ou le séjour.",
+        "Retirer le séjour en cas de crime violent ou sexuel grave, de terrorisme, de criminalité organisée grave et de délinquance grave comparable, sous réserve du cadre distinct de l'expulsion pénale.",
+        "Retirer le séjour lorsque la personne constitue une menace grave et établie pour la sécurité nationale.",
+        "Permettre un réexamen en cas de dépendance évitable et répétée à l'aide sociale lorsque l'autonomie était une condition expresse du titre.",
+        "Permettre un réexamen en cas de manquement grave et persistant aux exigences d'intégration applicables lorsque le statut était expressément subordonné à l'intégration.",
+        "Admettre qu'une absence prolongée mette fin au statut de séjour ; la loi ordinaire d'application devrait fixer le seuil par type de titre, dans une fourchette d'environ deux à cinq ans.",
+        "Notifier les motifs et ménager une possibilité individuelle de contester la décision.",
+      ],
+      implementationNote:
+        "Le droit de l'Union en vigueur protège davantage les résidents de longue durée. La directive actuelle relative aux résidents de longue durée admet la perte du statut après des absences déterminées et ne permet l'expulsion qu'en cas de menace réelle et suffisamment grave pour l'ordre public ou la sécurité ; des considérations économiques ne sauraient à elles seules justifier l'expulsion. La politique proposée par le mouvement exigerait donc des modifications là où elle est plus large que les règles actuelles de l'Union.",
+      keywords: [
+        "titre de séjour",
+        "retrait",
+        "fraude",
+        "criminalité grave",
+        "intégration",
+        "absence",
+        "sécurité publique",
+      ],
+    },
+
+    "voluntary-return-and-reintegration": {
+      title: "Retour volontaire et réintégration",
+      shortAnswer:
+        "L'État peut financer une aide au retour modeste et versée une seule fois lorsqu'un non-citoyen retourne volontairement et durablement dans le pays dont il a la nationalité ou dans un autre pays habilité à l'admettre.",
+      position: [
+        "Le retour volontaire est préférable à un éloignement coercitif coûteux lorsqu'il atteint la même fin légale avec promptitude et fiabilité.",
+      ],
+      policies: [
+        "Prendre en charge des frais de voyage raisonnables au titre d'un programme agréé de retour volontaire.",
+        "Admettre une aide limitée et unique à la réinstallation ou à la réintégration lorsqu'elle accroît sensiblement la probabilité d'un retour durable.",
+        "Subordonner l'aide au départ effectif et au respect de l'arrangement de retour convenu.",
+        "Ne pas créer de droit à des aides au retour répétées.",
+        "Lorsqu'une interdiction de retour s'applique, le départ volontaire ne l'efface pas automatiquement, sauf disposition légale expresse contraire.",
+        "Se coordonner, lorsque cela est nécessaire, avec les autorités du pays de destination ou avec des organisations reconnues pour établir les documents de voyage et l'accueil.",
+        "Préférer le départ volontaire à la rétention ou à l'éloignement forcé lorsqu'il n'existe pas de risque sérieux de fuite, de criminalité ou d'atteinte à la sécurité.",
+      ],
+      implementationNote:
+        "La présente notice est un mécanisme de mise en œuvre et non un jugement moral sur la personne qui repart. Elle vise à rendre le retour plus rapide, moins coûteux et plus ordonné là où la coopération est possible.",
+      keywords: [
+        "retour volontaire",
+        "réintégration",
+        "aide à la réinstallation",
+        "frais de voyage",
+        "programme de retour",
+      ],
+    },
+
+    "naturalized-citizenship-and-exceptionally-serious-crime": {
+      title: "Citoyenneté acquise et criminalité exceptionnellement grave",
+      shortAnswer:
+        "La citoyenneté acquise peut être retirée pour une catégorie étroitement définie de crimes exceptionnellement graves, suivie de l'éloignement lorsque les exigences de nationalité et de retour qui en découlent peuvent être légalement satisfaites.",
+      position: [
+        "La naturalisation ne place pas tout acte ultérieur hors du droit de la nationalité. L'ordre constitutionnel proposé permet le retrait de la citoyenneté acquise pour certaines conduites exceptionnellement graves postérieures à la naturalisation, tout en laissant la criminalité ordinaire au système de justice pénale.",
+      ],
+      policies: [
+        "Limiter ce pouvoir à une catégorie énumérée de crimes exceptionnellement graves, tels que le meurtre intentionnel, le viol, les abus sexuels aggravés sur enfants, le terrorisme et les infractions graves comparables.",
+        "Exiger une condamnation pénale définitive avant tout retrait de citoyenneté fondé sur un crime.",
+        "Exiger une procédure de nationalité distincte déterminant si les conditions légales du retrait sont réunies.",
+        "Ménager un recours effectif avant que l'éloignement ne soit exécuté.",
+        "Lorsque la citoyenneté est retirée et que la personne possède une autre nationalité ou peut légalement la recouvrer, appliquer le cadre ordinaire du retour.",
+        "Lorsque la nationalité est contestée, procéder à sa détermination plutôt que de présumer que le seul lieu de naissance oblige un État à accueillir la personne.",
+        "Ne pas faire de l'ascendance seule le critère de déclenchement pénal ; la distinction opérante est la citoyenneté acquise jointe à une conduite qualifiée.",
+      ],
+      implementationNote:
+        "La Convention de 1961 sur la réduction des cas d'apatridie interdit en général la privation de nationalité lorsqu'elle rendrait une personne apatride, sous réserve d'exceptions définies, dont la nationalité obtenue par fraude et certains motifs conservés au titre de l'article 8. Un pouvoir plus large exigerait un traitement explicite de ces engagements conventionnels. Détruire un passeport n'efface pas la nationalité ; le passeport est la preuve de la nationalité, non sa source juridique.",
+      keywords: [
+        "citoyenneté acquise",
+        "déchéance",
+        "criminalité grave",
+        "meurtre",
+        "viol",
+        "terrorisme",
+        "nationalité",
+      ],
+    },
+
+    "return-readmission-identity-and-removal-procedure": {
+      title: "Retour, réadmission, identité et procédure d'éloignement",
+      shortAnswer:
+        "La politique de retour suit un modèle d'exécution hybride : identification et rétention en vue de l'éloignement lorsque cela est nécessaire, puis statut temporaire restreint si l'éloignement demeure provisoirement impossible, avec la poursuite des efforts pour établir la nationalité et obtenir la réadmission.",
+      position: [
+        "Une décision de retour définitive doit pouvoir être exécutée en pratique. L'État devrait donc maintenir des mécanismes de vérification d'identité, de rétention, de présentation et de réadmission, plutôt que de laisser la destruction de documents ou le défaut de coopération produire automatiquement un séjour permanent.",
+      ],
+      policies: [
+        "Engager immédiatement la vérification de l'identité et de la nationalité lorsqu'une personne éloignable ne dispose pas de documents fiables.",
+        "Recourir aux passeports, aux documents expirés, aux registres d'état civil, aux empreintes digitales ou à d'autres données biométriques là où la loi le permet, aux documents de famille, aux vérifications consulaires, aux indices linguistiques et biographiques ainsi qu'aux accords de réadmission pour établir l'identité et la nationalité.",
+        "Traiter la destruction ou la dissimulation délibérée de documents comme une circonstance aggravante dans l'exécution, tout en reconnaissant que détruire un passeport ne met pas fin à la nationalité.",
+        "Admettre la rétention administrative lorsqu'elle est nécessaire à l'identification, à la prévention de la fuite ou à un éloignement imminent, sous réserve de limites légales définies et d'efforts continus en vue de l'éloignement.",
+        "Si l'éloignement ne peut être exécuté dans la durée maximale légale de rétention, faire passer la personne à un statut temporaire restreint plutôt qu'au séjour permanent ordinaire.",
+        "Le statut restreint peut comporter des obligations de présentation, des restrictions de résidence, la coopération continue aux procédures d'identification et une aide publique limitée.",
+        "Ne pas laisser le seul écoulement du temps passé sous statut restreint aboutir automatiquement à la citoyenneté ou au séjour permanent.",
+        "Reprendre l'éloignement dès que la nationalité, les documents de voyage et une réadmission légale deviennent disponibles.",
+        "Recourir aux accords de réadmission et à la pression diplomatique pour obliger les pays à accepter les personnes dont la nationalité est établie au regard de leur propre droit.",
+        "Permettre aux membres d'une famille de partir ensemble lorsque les parents sont éloignés et que les enfants ont le droit de les accompagner ; les questions autonomes de nationalité, de garde et de protection de l'enfance appellent une décision individuelle.",
+        "Appliquer les nouvelles règles constitutionnelles en matière d'immigration aux statuts existants lorsque la loi prévoit expressément un réexamen rétroactif, sous réserve des procédures de réexamen énoncées ailleurs dans cet ensemble.",
+      ],
+      implementationNote:
+        "Le droit du retour de l'Union limite actuellement la rétention à la période appropriée la plus brève tant que les dispositions d'éloignement sont activement poursuivies, et comporte des durées maximales et des garanties spécifiques. Le modèle hybride proposé reprend la séquence générale d'une rétention suivie d'un statut restreint lorsque l'éloignement immédiat est impossible, la durée exacte dépendant de l'ordre juridique finalement retenu. Le lieu de naissance est un indice utile, mais il n'établit pas à lui seul la nationalité ni une obligation inconditionnelle pour un pays de réadmettre une personne. La réadmission dépend du droit de la nationalité, des preuves et des accords applicables. Est véritablement apatride celui qu'aucun État ne considère comme son ressortissant par application de sa législation. Le système proposé exige donc une détermination de la nationalité, plutôt que de supposer que l'apatridie peut toujours être supprimée en rattachant la personne à son pays de naissance.",
+      keywords: [
+        "procédure de retour",
+        "réadmission",
+        "rétention",
+        "identité",
+        "nationalité",
+        "statut restreint",
+        "apatridie",
+        "unité familiale",
+        "rétroactivité",
+      ],
     },
 
     "europe-as-a-civilization-of-nations": {

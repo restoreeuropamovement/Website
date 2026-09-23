@@ -5,7 +5,7 @@ export const policyText: PolicyText = {
     eyebrow: "Posizioni",
     title: "Catalogo programmatico",
     metaTitle: "Catalogo programmatico",
-    version: "Versione 0.2",
+    version: "Versione 0.3",
     framework: "Restaurazionismo integrale europeo",
     lede: "Questo catalogo risponde a una domanda circoscritta: che cosa sostiene Restore Europa su una determinata questione? Non sostituisce il Manifesto. Il Manifesto espone la visione del mondo; qui stanno posizioni consultabili, tema per tema.",
     description:
@@ -14,6 +14,7 @@ export const policyText: PolicyText = {
       "Dove la dottrina morale cattolica è chiara, Restore Europa di norma la assume come riferimento morale di base, e indica separatamente la sua attuazione nel diritto civile. Uno scostamento è registrato esplicitamente: sulla pena capitale Restore Europa assume la più antica ammissione tradizionale per i casi eccezionali anziché la posizione abolizionista contemporanea.",
       "Il catalogo distingue l'ordine costituzionale a cui Restore Europa tende dal diritto europeo quale oggi vige. Diverse posizioni — sulla nazionalità, sulla privazione della cittadinanza, sulla libertà di parola, sulla rilevanza pubblica della religione e sulla pena capitale — richiederebbero una modifica costituzionale o dei trattati prima di poter essere attuate in singoli Stati europei. Dove è così, la voce lo dice.",
       "La versione 0.2 definisce le questioni che la versione 0.1 aveva lasciato aperte: il rapporto istituzionale europeo, l'asilo, l'espulsione, i salari, la fiscalità, le pensioni, la casa, la rappresentanza del lavoro, l'identità e la moneta digitali, la sorveglianza biometrica, l'ingegneria genetica, la commisurazione delle pene, il mix energetico e ogni questione pendente di politica estera. Dove una formulazione della v0.2 ha rivisto una voce precedente, vale il testo più recente.",
+      "La versione 0.3 aggiunge il complesso di voci sulla remigrazione e sulla sua esecuzione. Esso distingue la cittadinanza, lo status di soggiorno, l'espulsione per reato, il rimpatrio dopo la procedura di asilo e il riesame della nazionalità, anziché trattare la remigrazione come un unico potere indifferenziato; è redatto come politica costituzionale e legislativa proposta, e il diritto europeo e internazionale vigente è segnalato separatamente in ciascuna voce. Due voci precedenti — la naturalizzazione e l'espulsione degli stranieri autori di reato — sono confluite nelle formulazioni più recenti anziché restare duplicate accanto ad esse.",
     ],
     notice:
       "Ogni questione di questo catalogo porta una posizione. Le voci contrassegnate come Derivate seguono la direzione del Manifesto senza che la loro attuazione sia fissata, e parecchie indicano la modifica legislativa o dei trattati che richiederebbero. Le posizioni sono riviste man mano che il movimento decide; la versione e la data qui sopra dicono quale testo state leggendo.",
@@ -52,6 +53,8 @@ export const policyText: PolicyText = {
         "Il meccanismo di verifica dell'età per i social media",
         "Le date di neutralità climatica, i prezzi del carbonio e le quote di emissione",
         "I criteri, carica per carica, per le cariche pubbliche riservate",
+        "I periodi di tolleranza per gli stranieri residenti dopo una perdita involontaria del lavoro",
+        "I periodi di assenza propri di ciascun titolo e i limiti massimi del trattenimento",
       ],
     },
   },
@@ -536,29 +539,40 @@ export const policyText: PolicyText = {
     },
 
     "deportation-of-criminal-offenders": {
-      title: "Espulsione degli stranieri autori di reato",
+      title: "Espulsione per reato e divieti di reingresso",
       shortAnswer:
-        "Lo straniero condannato per un reato grave rientrante nell'elenco deve di regola perdere il diritto di restare e ricevere un divieto permanente di reingresso.",
+        "Gli stranieri autori di reati gravi sono allontanati al termine del processo penale ed esclusi in via permanente; le violazioni ordinarie della disciplina del soggiorno comportano di norma un divieto di reingresso di dieci anni.",
       position: [
         "La cittadinanza e il soggiorno da straniero sono due status distinti. Un reato doloso grave commesso da uno straniero può giustificare la cessazione del soggiorno dopo una condanna pronunciata in un processo penale equo.",
+        "Il soggiorno da straniero non conferisce lo stesso diritto permanente di restare che spetta alla cittadinanza. Lo straniero condannato per un reato grave rientrante nell'elenco deve di regola perdere il soggiorno ed essere allontanato al termine del procedimento penale applicabile.",
       ],
       policies: [
-        "Esigere una regolare condanna penale prima dell'espulsione per motivi di reato.",
+        "Esigere una regolare condanna per il reato invocato prima dell'espulsione per motivi di reato.",
         "I reati violenti gravi, i gravi reati sessuali, la rapina, la criminalità organizzata, il terrorismo, la tratta, lo spaccio di stupefacenti in misura grave, la truffa grave e i reati dolosi comparabili fanno presumere l'allontanamento.",
         "La reiterazione dei reati può giustificare l'allontanamento anche quando i singoli fatti sono meno gravi.",
-        "Quando è inflitta la reclusione, l'allontanamento segue di regola l'espiazione della pena detentiva, salvo che sia possibile un trasferimento anticipato conforme alla legge.",
-        "Accompagnare le espulsioni per reato rientranti nell'elenco con un divieto permanente di reingresso.",
+        "Trattare l'omicidio doloso, la violenza sessuale, gli abusi sessuali gravi su minori, il terrorismo, la tratta grave, la violenza organizzata grave e i reati gravi comparabili come casi che fanno presumere il divieto permanente.",
+        "Applicare un divieto permanente di reingresso agli allontanamenti per criminalità grave rientranti nell'elenco e a quelli motivati da gravi ragioni di sicurezza nazionale.",
+        "Applicare in via ordinaria un divieto di reingresso di dieci anni alle violazioni gravi della disciplina ordinaria del soggiorno, quali l'ingresso irregolare doloso, il soggiorno irregolare reiterato o l'elusione dolosa di una decisione di rimpatrio, fatte salve le regole di proporzionalità previste dalla legge di attuazione.",
+        "Consentire sanzioni più brevi per le violazioni della disciplina del soggiorno realmente minori o puramente tecniche, quando un divieto decennale risulterebbe sproporzionato.",
+        "Eseguire l'allontanamento dopo l'espiazione della pena detentiva, salvo che sia possibile un trasferimento conforme alla legge o un allontanamento anticipato.",
         "Le violazioni amministrative minori o i fatti di lieve entità non comportano automaticamente l'espulsione permanente.",
-        "I cittadini naturalizzati sono soggetti alle distinte norme sulla revoca della cittadinanza e non sono trattati come stranieri residenti, salvo che la cittadinanza sia stata prima legittimamente revocata.",
+        "Mantenere i cittadini naturalizzati nel distinto quadro della revoca della cittadinanza, salvo che la cittadinanza sia stata prima legittimamente ritirata.",
         "I cittadini non possono essere espulsi dal proprio Paese.",
       ],
       implementationNote:
-        "Lo straniero regolarmente residente gode oggi, in forza del diritto europeo dei diritti dell'uomo, di garanzie procedurali contro l'espulsione. L'allontanamento può inoltre essere precluso quando il rimpatrio esporrebbe la persona a trattamenti vietati. Il modello qui inteso è dunque rapido dopo la condanna definitiva, ma resta sindacabile in sede giurisdizionale dove obblighi vincolanti lo impongano.",
+        "Lo straniero regolarmente residente gode oggi, in forza del diritto europeo dei diritti dell'uomo, di garanzie procedurali contro l'espulsione. L'allontanamento può inoltre essere precluso quando il rimpatrio esporrebbe la persona a trattamenti vietati. Il modello qui inteso è dunque rapido dopo la condanna definitiva, ma resta sindacabile in sede giurisdizionale dove obblighi vincolanti lo impongano. In base all'articolo 11 della vigente direttiva rimpatri dell'Unione, i divieti d'ingresso non devono di regola superare i cinque anni, ma possono eccederli quando la persona rappresenti una grave minaccia per l'ordine pubblico, la pubblica sicurezza o la sicurezza nazionale. Un divieto ordinario di dieci anni per l'ingresso irregolare comune andrebbe quindi oltre la regola vigente dell'Unione.",
       keywords: [
         "espulsione",
+        "espulsione per reato",
         "stranieri autori di reato",
         "allontanamento",
         "divieto di reingresso",
+        "dieci anni",
+        "divieto permanente",
+        "omicidio",
+        "violenza sessuale",
+        "terrorismo",
+        "soggiorno irregolare",
         "permesso di soggiorno",
         "ordine pubblico",
         "rimpatrio",
@@ -588,28 +602,35 @@ export const policyText: PolicyText = {
     },
 
     naturalization: {
-      title: "Naturalizzazione",
+      title: "Assimilazione e naturalizzazione",
       shortAnswer:
-        "La via ordinaria richiede circa quindici anni di residenza regolare prima che si possa presentare domanda, con requisiti di assimilazione esigenti.",
+        "La cittadinanza esige uno standard sensibilmente più alto della residenza ordinaria o dell'integrazione: un'assimilazione riuscita nella comunità politica nazionale.",
       position: [
         "La via ordinaria di naturalizzazione proposta da Restore Europa richiede all'incirca quindici anni di residenza regolare prima che si possa presentare domanda, insieme a requisiti di assimilazione eccezionalmente esigenti.",
+        "La naturalizzazione non è una conseguenza automatica del tempo trascorso nel Paese. I richiedenti devono soddisfare esigenti requisiti di lingua, di conoscenze civiche, di condotta e di legame prima che la cittadinanza sia concessa.",
       ],
       policies: [
-        "Padronanza della lingua nazionale.",
-        "Conoscenza approfondita della storia, della cultura, delle tradizioni e delle istituzioni nazionali.",
+        "Mantenere la via ordinaria di residenza di circa quindici anni prevista dal catalogo prima che possa essere chiesta la naturalizzazione ordinaria.",
+        "Esigere una padronanza pratica avanzata della lingua nazionale e una conoscenza sostanziale della storia, delle istituzioni e dell'ordine costituzionale.",
         "Rispetto dell'ordine costituzionale e del carattere cristiano e storico del Paese.",
-        "Lealtà dimostrata e partecipazione di lungo periodo alla vita del Paese.",
-        "Condotta conforme alla legge e autosufficienza economica dove ragionevolmente possibile.",
+        "Esigere una condotta durevolmente conforme alla legge e dichiarazioni veritiere alle autorità competenti in materia di immigrazione e cittadinanza.",
+        "Esigere la prova di un legame duraturo con il Paese e non della sola residenza.",
+        "Ammettere esami oggettivi di lingua e di conoscenze civiche.",
+        "Negare la naturalizzazione dove permangano ostativi una criminalità grave, il terrorismo, una truffa grave o un inganno doloso sull'identità.",
+        "Non fare di una riverifica civica periodica un motivo automatico di espulsione di chi abbia acquisito la cittadinanza in modo regolare e onesto; la revoca successiva alla naturalizzazione è disciplinata da voci distinte.",
       ],
       limits: ["Quindici anni di residenza non garantiscono automaticamente la naturalizzazione."],
       implementationNote:
-        "I requisiti ordinari di residenza in Europa vanno oggi dai cinque ai dieci anni: si tratterebbe dunque di allungare la prassi esistente, non di ritoccarla.",
+        "I requisiti ordinari di residenza in Europa vanno oggi dai cinque ai dieci anni: si tratterebbe dunque di allungare la prassi esistente, non di ritoccarla. Il Manifesto afferma già che la naturalizzazione deve richiedere una conoscenza sostanziale della lingua, della storia e delle istituzioni, il rispetto dell'ordine costituzionale e un legame genuino con il Paese. La presente voce raccoglie tali requisiti come standard di assimilazione del movimento.",
       keywords: [
         "naturalizzazione",
-        "residenza",
         "assimilazione",
+        "residenza",
+        "lingua",
         "requisito linguistico",
+        "conoscenze civiche",
         "test di cittadinanza",
+        "legame con il Paese",
       ],
     },
 
@@ -712,6 +733,274 @@ export const policyText: PolicyText = {
       implementationNote:
         "Il diritto internazionale ed europeo pone limiti consistenti alla possibilità di rendere apolide una persona, e l'allontanamento richiede di norma uno Stato di destinazione giuridicamente in grado di ammetterla e disposto a farlo. Questa posizione appartiene all'ordine costituzionale a cui Restore Europa tende, e richiederebbe una modifica dei trattati o della Costituzione.",
       keywords: ["revoca", "privazione della cittadinanza", "apolidia", "tradimento", "terrorismo"],
+    },
+
+    "remigration-general-principle": {
+      title: "Remigrazione: principio generale",
+      shortAnswer:
+        "La remigrazione è il rimpatrio organizzato di chi non ha o perde una base legale per restare, unito a una politica di rimpatrio volontario, alla rigorosa applicazione delle condizioni di soggiorno e al riesame degli status ottenuti con frode o attraverso un'irregolarità qualificata.",
+      position: [
+        "Restore Europa considera lo status migratorio come condizionato: dipende dall'ingresso regolare, dal rispetto delle condizioni di soggiorno, dall'ordine pubblico e, ove pertinente, da un'integrazione riuscita. La remigrazione non è definita come allontanamento fondato sulla sola razza; opera attraverso lo status giuridico, la storia migratoria, la condotta penale, la frode, i motivi di sicurezza e condizioni di soggiorno chiaramente definite.",
+      ],
+      policies: [
+        "Eseguire le decisioni definitive di rimpatrio nei confronti di chi non ha alcun diritto legale di restare.",
+        "Ricorrere al rimpatrio volontario dove sia realistico e al rimpatrio coattivo dove la base legale del soggiorno sia venuta meno.",
+        "Riesaminare il soggiorno o la cittadinanza ottenuti mediante frode o inganno rilevanti.",
+        "Consentire il ritiro dello status di soggiorno dello straniero per reati gravi, gravi minacce alla sicurezza e altri motivi espressamente definiti dalla legge.",
+        "Mantenere cittadinanza, soggiorno permanente, soggiorno temporaneo, status di asilo e presenza irregolare come categorie giuridicamente distinte.",
+        "Non considerare il solo lungo decorso del tempo come fonte di un diritto automatico a restare quando lo status sottostante rimane temporaneo o condizionato.",
+        "Applicare procedure e requisiti di prova individuali anziché l'espulsione collettiva fondata sulla sola categoria etnica o razziale.",
+      ],
+      implementationNote:
+        "Il diritto europeo vigente impone al rimpatrio e all'espulsione vincoli procedurali e di tutela dei diritti dell'uomo di rilievo. La presente voce enuncia l'architettura della politica proposta; la sua attuazione richiederebbe la conformità agli impegni giuridici incompatibili, la loro modifica o il recesso da essi. Il Manifesto già esistente del movimento tratta la cittadinanza come appartenenza e non come mera residenza, e sostiene un'immigrazione controllata, compatibile con l'integrazione, la stabilità e la continuità nazionale.",
+      keywords: [
+        "remigrazione",
+        "rimpatrio",
+        "applicazione del diritto dell'immigrazione",
+        "soggiorno",
+        "espulsione",
+        "integrazione",
+        "cittadinanza",
+      ],
+    },
+
+    "integration-general-definition": {
+      title: "Integrazione: definizione generale",
+      shortAnswer:
+        "L'integrazione è l'incorporazione linguistica, civica, economica e sociale dimostrabile nella nazione che accoglie; la sola residenza non basta.",
+      position: [
+        "L'integrazione si misura sulla condotta, sulla competenza e su una partecipazione duratura. È distinta dalla cittadinanza e dal più alto standard di assimilazione richiesto per la naturalizzazione.",
+      ],
+      policies: [
+        "Esigere una padronanza funzionale della principale lingua nazionale, normalmente intorno a B1–B2 a seconda dello status richiesto.",
+        "Esigere una conoscenza di base della storia nazionale, delle istituzioni, del diritto, dei doveri civici e dell'assetto costituzionale.",
+        "Considerare una criminalità grave e persistente, la criminalità organizzata, il terrorismo, la truffa grave e la frode migratoria dolosa come forti indizi contrari all'integrazione.",
+        "Attendersi che gli stranieri abili al lavoro e in età lavorativa partecipino mediante impiego, lavoro autonomo, istruzione, formazione professionale, assistenza familiare riconosciuta o un altro contributo legittimo.",
+        "Considerare la dipendenza prolungata ed evitabile dall'assistenza pubblica come un fattore negativo per l'integrazione, esentando l'incapacità effettiva, la disabilità, la pensione, la disoccupazione temporanea e l'assistenza familiare rilevante.",
+        "Ammettere la prova della partecipazione locale attraverso il lavoro, l'istruzione, le parrocchie, le associazioni, i circoli e altre istituzioni della comunità, senza rendere obbligatoria l'appartenenza ad alcuna organizzazione determinata.",
+        "Esigere il rispetto dell'ordine costituzionale legittimo senza pretendere una conformità ideologica a ogni politica di governo.",
+        "Valutare l'integrazione su elementi individuali documentati anziché sulla sola razza.",
+      ],
+      implementationNote:
+        "Il diritto dell'Unione sui soggiornanti di lungo periodo consente oggi agli Stati membri di imporre condizioni di integrazione e richiede risorse stabili e regolari per l'acquisizione dello status di lungo periodo. La politica separa le concezioni della nazionalità storica fondate sull'ascendenza dal criterio giuridico praticabile che accerta se un determinato residente sia integrato.",
+      keywords: [
+        "integrazione",
+        "lingua",
+        "conoscenze civiche",
+        "autosufficienza",
+        "soggiorno",
+        "ordine pubblico",
+        "partecipazione",
+      ],
+    },
+
+    "regularized-irregular-immigration": {
+      title: "Immigrazione irregolare regolarizzata",
+      shortAnswer:
+        "Una legalizzazione successiva non cancella automaticamente una comprovata storia di ingresso o di soggiorno irregolari; i casi già regolarizzati possono essere riesaminati individualmente alla luce del nuovo quadro giuridico.",
+      position: [
+        "Restore Europa respinge la tesi secondo cui ogni regolarizzazione o sanatoria del passato debba essere considerata costituzionalmente intangibile. Dove documenti attendibili accertino un precedente ingresso irregolare, un soggiorno irregolare, una falsa identità o un'altra irregolarità rilevante, la storia di soggiorno che ne è derivata può essere riesaminata individualmente.",
+      ],
+      policies: [
+        "Consentire il riesame individuale degli status di soggiorno sorti da precedenti sanatorie, regolarizzazioni di massa o programmi eccezionali comparabili.",
+        "Esigere che sia lo Stato a provare la pertinente storia migratoria sulla base di atti e prove; l'irregolarità non può essere semplicemente presunta.",
+        "Riesaminare l'intero fascicolo originario, comprensivo di identità, storia dell'ingresso, storia della domanda di asilo, base del soggiorno, titoli successivi ed eventuale procedimento di naturalizzazione.",
+        "Distinguere la mera irregolarità pregressa dalla frode rilevante, dalla falsa identità o dall'occultamento, che possono comportare conseguenze più severe.",
+        "Se lo status supera il riesame condotto secondo la nuova legge, esso resta valido nel rispetto delle ordinarie condizioni di soggiorno.",
+        "Se lo status non sarebbe stato concesso secondo la nuova regola applicabile e la Costituzione permette un riesame retroattivo, possono seguire il ritiro e il rimpatrio, mediante una decisione individuale e un procedimento di impugnazione.",
+      ],
+      limits: [
+        "La presente voce non considera fraudolento ogni cittadino naturalizzato per il solo fatto che un precedente periodo di soggiorno sia stato irregolare; la frode e la regolarizzazione legittima restano concetti distinti.",
+      ],
+      implementationNote:
+        "Si tratta di un potere di riesame retroattivo proposto, che eccede la stabilità normalmente riconosciuta ai provvedimenti amministrativi definitivi. Richiederebbe un'esplicita autorizzazione costituzionale, regole di prescrizione definite e garanzie procedurali.",
+      keywords: [
+        "regolarizzazione",
+        "sanatoria",
+        "ingresso irregolare",
+        "soggiorno irregolare",
+        "riesame dello status",
+        "storia migratoria",
+      ],
+    },
+
+    "employment-and-self-sufficiency-of-foreign-residents": {
+      title: "Lavoro e autosufficienza degli stranieri residenti",
+      shortAnswer:
+        "Dagli stranieri residenti abili al lavoro ci si attende che restino economicamente autosufficienti e di regola non spetta loro lo stesso diritto assistenziale a tempo indeterminato riconosciuto ai cittadini.",
+      position: [
+        "Il soggiorno da straniero è concesso per scopi determinati e rimane condizionato. I residenti in grado di lavorare dovrebbero normalmente mantenersi con l'impiego, il lavoro autonomo, lo studio, la formazione o un'attività di cura riconosciuta, anziché con una dipendenza permanente ed evitabile dall'assistenza pubblica.",
+      ],
+      policies: [
+        "Esigere che gli stranieri con soggiorno temporaneo e ordinario mantengano mezzi di sostentamento leciti e sufficienti, fatti salvi ragionevoli periodi di tolleranza dopo una perdita involontaria del lavoro.",
+        "Ammettere come partecipazione legittima l'impiego, il lavoro autonomo, l'istruzione a tempo pieno, la formazione professionale e un'attività di cura familiare rilevante.",
+        "Prevedere eccezioni per disabilità effettiva, incapacità, pensione, minori e difficoltà temporanee nonostante ragionevoli sforzi di trovare lavoro.",
+        "Limitare l'assistenza ordinaria non urgente per gli stranieri dove sia costituzionalmente e legalmente ammesso.",
+        "Preservare cibo, alloggio e cure mediche necessarie in caso di emergenza dove il loro diniego violerebbe obblighi giuridici o umanitari elementari.",
+        "Trattare la dipendenza reiterata ed evitabile dall'assistenza pubblica come possibile motivo di riesame del soggiorno dove il titolo era espressamente condizionato all'autosufficienza.",
+        "Tenere distinta la cittadinanza acquisita: la semplice disoccupazione non trasforma automaticamente un cittadino in un soggiornante irregolare.",
+      ],
+      limits: [
+        "L'esatto periodo di tolleranza dopo la perdita del lavoro dovrebbe essere fissato dalla legge di attuazione anziché irrigidito nel principio costituzionale.",
+      ],
+      implementationNote:
+        "Le norme dell'Unione sui soggiornanti di lungo periodo richiedono risorse stabili e regolari per acquisire tale status, ma il diritto vigente riconosce anche ai soggiornanti di lungo periodo tutele significative e non consente l'espulsione per soli motivi economici. Il quadro proposto dal movimento andrebbe oltre per talune categorie di soggiorno degli stranieri.",
+      keywords: [
+        "autosufficienza",
+        "lavoro",
+        "assistenza pubblica",
+        "stranieri residenti",
+        "permesso di soggiorno",
+        "partecipazione economica",
+      ],
+    },
+
+    "probationary-naturalization": {
+      title: "Naturalizzazione in prova",
+      shortAnswer:
+        "La cittadinanza appena acquisita è soggetta a un periodo di prova di dieci anni, con regole di revoca rafforzate per motivi gravi definiti in modo ristretto.",
+      position: [
+        "La naturalizzazione costituisce la cittadinanza, ma nei primi dieci anni lo Stato conserva un potere rafforzato di riaprire il procedimento e revocare la cittadinanza acquisita per determinati comportamenti gravi o per vizi rilevanti del fondamento della naturalizzazione.",
+      ],
+      policies: [
+        "Fissare il periodo di prova in dieci anni dalla data di acquisto della cittadinanza.",
+        "Consentire la revoca per frode rilevante nella naturalizzazione, falsa identità od occultamento doloso di un fatto ostativo.",
+        "Consentire la revoca per i reati di eccezionale gravità commessi dopo la naturalizzazione, quali definiti nella distinta voce sulla cittadinanza e sulla criminalità grave.",
+        "Consentire la revoca per terrorismo, tradimento o condotta che costituisca una minaccia di eccezionale gravità per la sicurezza nazionale, dove la legge lo preveda espressamente.",
+        "Esigere un procedimento individuale giurisdizionale o paragiurisdizionale, la prova del motivo di legge e un effettivo diritto di impugnazione.",
+        "Non fare della semplice disoccupazione, di un dissenso politico o di un test civico non superato un motivo automatico di revoca di per sé.",
+        "Trascorsi i dieci anni, si applicano le ordinarie tutele della cittadinanza, fatti salvi i motivi permanenti fondati sulla frode e gli altri motivi eccezionali di revoca adottati altrove nel catalogo.",
+      ],
+      implementationNote:
+        "Si tratta di una deroga costituzionale proposta rispetto agli ordinamenti che, a ogni fine di privazione, trattano la naturalizzazione come da subito indistinguibile dalla cittadinanza per nascita. Gli strumenti internazionali vigenti in materia di cittadinanza limitano la privazione, soprattutto dove essa produrrebbe apolidia; tali contrasti richiederebbero un trattamento costituzionale e pattizio esplicito.",
+      keywords: [
+        "cittadinanza in prova",
+        "naturalizzazione",
+        "revoca",
+        "dieci anni",
+        "frode",
+        "reato grave",
+      ],
+    },
+
+    "residence-permit-withdrawal": {
+      title: "Ritiro del permesso di soggiorno",
+      shortAnswer:
+        "Lo status di soggiorno dello straniero si perde più facilmente della cittadinanza e può essere ritirato quando condizioni definite di ammissione o di soggiorno continuato siano violate in modo rilevante.",
+      position: [
+        "Il soggiorno è un'autorizzazione giuridica condizionata. Una criminalità grave, una frode rilevante, gravi minacce alla sicurezza e il persistente inadempimento di condizioni di soggiorno espressamente enunciate possono giustificare il ritiro e il rimpatrio.",
+      ],
+      policies: [
+        "Ritirare il titolo o negarne il rinnovo in caso di frode rilevante sull'identità o sul soggiorno.",
+        "Ritirare il soggiorno in caso di reato violento o sessuale grave, terrorismo, criminalità organizzata grave e condotte gravi comparabili, fatto salvo il distinto quadro dell'espulsione per reato.",
+        "Ritirare il soggiorno quando la persona costituisca una minaccia grave e comprovata per la sicurezza nazionale.",
+        "Consentire il riesame in caso di dipendenza assistenziale reiterata ed evitabile, dove l'autosufficienza fosse condizione espressa del titolo.",
+        "Consentire il riesame in caso di inadempimento grave e persistente dei requisiti di integrazione applicabili, dove lo status fosse espressamente condizionato all'integrazione.",
+        "Ammettere che un'assenza prolungata faccia cessare lo status di soggiorno; la legge ordinaria di attuazione dovrebbe fissare la soglia per tipo di titolo entro un intervallo di circa due-cinque anni.",
+        "Comunicare i motivi e assicurare una possibilità individuale di contestare la decisione.",
+      ],
+      implementationNote:
+        "Il diritto vigente dell'Unione tutela più intensamente i soggiornanti di lungo periodo. L'attuale direttiva sui soggiornanti di lungo periodo ammette la perdita dello status dopo assenze determinate e consente l'espulsione solo in presenza di una minaccia effettiva e sufficientemente grave per l'ordine pubblico o la sicurezza; considerazioni economiche da sole non possono giustificare l'espulsione. La politica proposta dal movimento richiederebbe dunque modifiche là dove è più ampia delle regole vigenti dell'Unione.",
+      keywords: [
+        "permesso di soggiorno",
+        "ritiro",
+        "frode",
+        "reato grave",
+        "integrazione",
+        "assenza",
+        "sicurezza pubblica",
+      ],
+    },
+
+    "voluntary-return-and-reintegration": {
+      title: "Rimpatrio volontario e reinserimento",
+      shortAnswer:
+        "Lo Stato può finanziare un contributo modesto e una tantum al rimpatrio quando uno straniero rientri volontariamente e stabilmente nel Paese di cui ha la cittadinanza o in un altro Paese legittimato ad ammetterlo.",
+      position: [
+        "Il rimpatrio volontario è preferibile a un allontanamento coattivo costoso dove consegua il medesimo fine legittimo in modo rapido e affidabile.",
+      ],
+      policies: [
+        "Sostenere spese di viaggio ragionevoli nell'ambito di un programma approvato di rimpatrio volontario.",
+        "Ammettere un contributo limitato e una tantum al trasferimento o al reinserimento dove accresca in misura rilevante la probabilità di un rimpatrio duraturo.",
+        "Subordinare il contributo alla partenza effettiva e al rispetto dell'accordo di rimpatrio convenuto.",
+        "Non creare un diritto a contributi di rimpatrio ripetuti.",
+        "Dove operi un divieto di reingresso, la partenza volontaria non lo cancella automaticamente, salvo che la legge disponga espressamente altrimenti.",
+        "Coordinarsi, ove necessario, con le autorità del Paese di destinazione o con organizzazioni riconosciute per ottenere i documenti di viaggio e l'accoglienza.",
+        "Preferire la partenza volontaria al trattenimento o all'allontanamento forzato dove non sussistano rischi seri di fuga, di reato o per la sicurezza.",
+      ],
+      implementationNote:
+        "La presente voce è un meccanismo di attuazione e non un giudizio morale sulla persona che rientra. Il suo scopo è rendere il rimpatrio più rapido, meno costoso e più ordinato dove la cooperazione sia possibile.",
+      keywords: [
+        "rimpatrio volontario",
+        "reinserimento",
+        "contributo al trasferimento",
+        "spese di viaggio",
+        "programma di rimpatrio",
+      ],
+    },
+
+    "naturalized-citizenship-and-exceptionally-serious-crime": {
+      title: "Cittadinanza acquisita e reati di eccezionale gravità",
+      shortAnswer:
+        "La cittadinanza acquisita può essere revocata per una classe ristretta di reati di eccezionale gravità, cui segue l'allontanamento dove i conseguenti requisiti di cittadinanza e di rimpatrio possano essere soddisfatti legittimamente.",
+      position: [
+        "La naturalizzazione non colloca ogni atto successivo fuori dal diritto della cittadinanza. L'ordine costituzionale proposto permette la revoca della cittadinanza acquisita per determinate condotte di eccezionale gravità successive alla naturalizzazione, lasciando la criminalità ordinaria al sistema della giustizia penale.",
+      ],
+      policies: [
+        "Limitare questo potere a una classe tassativa di reati di eccezionale gravità, quali l'omicidio doloso, la violenza sessuale, gli abusi sessuali aggravati su minori, il terrorismo e i reati gravi comparabili.",
+        "Esigere una condanna penale definitiva prima della revoca della cittadinanza fondata su un reato.",
+        "Esigere un distinto procedimento in materia di cittadinanza che accerti se ricorrano le condizioni di legge per la revoca.",
+        "Assicurare un'impugnazione effettiva prima che l'allontanamento sia eseguito.",
+        "Dove la cittadinanza sia revocata e la persona possieda o possa legittimamente riacquistare un'altra cittadinanza, applicare il quadro ordinario del rimpatrio.",
+        "Dove la cittadinanza sia controversa, procedere al suo accertamento anziché presumere che il solo luogo di nascita provi l'obbligo di uno Stato di accogliere la persona.",
+        "Non usare la sola ascendenza come criterio di attivazione penale; la distinzione che opera è la cittadinanza acquisita unita a una condotta qualificata.",
+      ],
+      implementationNote:
+        "La Convenzione del 1961 sulla riduzione dei casi di apolidia vieta in linea generale la privazione della cittadinanza dove questa renderebbe la persona apolide, fatte salve eccezioni definite, tra cui la cittadinanza ottenuta con frode e taluni motivi conservati ai sensi dell'articolo 8. Un potere più ampio richiederebbe un trattamento esplicito di tali impegni pattizi. Distruggere un passaporto non cancella di per sé la cittadinanza; il passaporto è prova della cittadinanza, non la sua fonte giuridica.",
+      keywords: [
+        "cittadinanza acquisita",
+        "revoca",
+        "reato grave",
+        "omicidio",
+        "violenza sessuale",
+        "terrorismo",
+        "cittadinanza",
+      ],
+    },
+
+    "return-readmission-identity-and-removal-procedure": {
+      title: "Rimpatrio, riammissione, identità e procedura di allontanamento",
+      shortAnswer:
+        "La politica di rimpatrio segue un modello di esecuzione misto: identificazione e trattenimento ai fini dell'allontanamento dove necessario, poi status temporaneo limitato se l'allontanamento resta provvisoriamente impossibile, con il proseguimento degli sforzi per accertare la cittadinanza e ottenere la riammissione.",
+      position: [
+        "Una decisione definitiva di rimpatrio deve poter essere eseguita in concreto. Lo Stato dovrebbe perciò mantenere meccanismi di verifica dell'identità, di trattenimento, di presentazione periodica e di riammissione, anziché lasciare che la distruzione dei documenti o la mancata cooperazione producano automaticamente un soggiorno permanente.",
+      ],
+      policies: [
+        "Avviare immediatamente la verifica dell'identità e della cittadinanza dove la persona allontanabile sia priva di documenti attendibili.",
+        "Utilizzare passaporti, documenti scaduti, registri dello stato civile, impronte digitali o altri dati biometrici dove la legge lo consenta, documenti di famiglia, verifiche consolari, elementi linguistici e biografici e accordi di riammissione per accertare identità e cittadinanza.",
+        "Trattare la distruzione o l'occultamento doloso dei documenti come circostanza aggravante in sede esecutiva, riconoscendo al contempo che distruggere un passaporto non fa cessare la cittadinanza.",
+        "Ammettere il trattenimento ai fini dell'immigrazione dove sia necessario per l'identificazione, per prevenire la fuga o per un allontanamento imminente, nel rispetto di limiti di legge definiti e di un impegno costante verso l'allontanamento.",
+        "Se l'allontanamento non può essere eseguito entro la durata massima legale del trattenimento, far passare la persona a uno status temporaneo limitato anziché al soggiorno permanente ordinario.",
+        "Lo status limitato può comprendere obblighi di presentazione, restrizioni di residenza, la cooperazione continuata alle procedure di identificazione e un'assistenza pubblica ridotta.",
+        "Non consentire che il solo decorso del tempo trascorso in status limitato maturi automaticamente in cittadinanza o in soggiorno permanente.",
+        "Riprendere l'allontanamento non appena cittadinanza, documenti di viaggio e riammissione legittima divengano disponibili.",
+        "Ricorrere agli accordi di riammissione e alla pressione diplomatica per esigere che i Paesi accolgano le persone la cui cittadinanza è accertata secondo il loro stesso diritto.",
+        "Consentire ai familiari di partire insieme dove i genitori siano allontanati e i figli abbiano il diritto di accompagnarli; le questioni autonome di cittadinanza, affidamento e protezione dell'infanzia richiedono una decisione individuale.",
+        "Applicare le nuove regole costituzionali in materia di immigrazione agli status esistenti dove la legge preveda espressamente un riesame retroattivo, nel rispetto delle procedure di riesame enunciate altrove in questo complesso di voci.",
+      ],
+      implementationNote:
+        "Il diritto dell'Unione in materia di rimpatri limita oggi il trattenimento al periodo appropriato più breve, finché le operazioni di allontanamento sono condotte con la dovuta diligenza, e prevede durate massime e garanzie specifiche. Il modello misto proposto riprende la sequenza generale del trattenimento seguito da uno status limitato quando l'allontanamento immediato è impossibile, mentre la durata esatta dipenderebbe dall'ordinamento infine adottato. Il luogo di nascita è un elemento utile, ma non prova di per sé la cittadinanza né un obbligo incondizionato di un Paese di riammettere una persona. La riammissione dipende dal diritto della cittadinanza, dalle prove e dagli accordi applicabili. È veramente apolide chi nessuno Stato considera proprio cittadino in applicazione della sua legge. Il sistema proposto richiede perciò l'accertamento della cittadinanza, anziché presumere che l'apolidia possa sempre essere eliminata attribuendo la persona al Paese di nascita.",
+      keywords: [
+        "procedura di rimpatrio",
+        "riammissione",
+        "trattenimento",
+        "identità",
+        "cittadinanza",
+        "status limitato",
+        "apolidia",
+        "unità familiare",
+        "retroattività",
+      ],
     },
 
     "europe-as-a-civilization-of-nations": {

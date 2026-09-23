@@ -5,7 +5,7 @@ export const policyText: PolicyText = {
     eyebrow: "Posiciones",
     title: "Catálogo programático",
     metaTitle: "Catálogo programático",
-    version: "Versión 0.2",
+    version: "Versión 0.3",
     framework: "Restauracionismo integral europeo",
     lede: "Este catálogo responde a una pregunta concreta: ¿qué sostiene Restore Europa sobre este asunto? No sustituye al manifiesto. El manifiesto expone la visión del mundo; esto expone posiciones consultables, tema por tema.",
     description:
@@ -14,6 +14,7 @@ export const policyText: PolicyText = {
       "Allí donde la enseñanza moral católica es clara, Restore Europa la adopta por lo general como criterio moral de partida, y expone por separado su aplicación en el derecho civil. Se deja constancia explícita de una discrepancia: en materia de pena capital, Restore Europa asume la antigua admisión tradicional para casos excepcionales y no la posición abolicionista contemporánea.",
       "El catálogo distingue el orden constitucional al que aspira Restore Europa del derecho europeo tal como hoy está. Varias posiciones —sobre la nacionalidad, sobre la privación de la ciudadanía, sobre la libertad de expresión, sobre la posición pública de la religión y sobre la pena capital— exigirían una reforma constitucional o de los tratados antes de poder promulgarse en determinados Estados europeos. Donde así sea, la entrada lo dice.",
       "La versión 0.2 resuelve las cuestiones que la versión 0.1 había dejado abiertas: la relación institucional europea, el asilo, la expulsión, los salarios, la fiscalidad, las pensiones, la vivienda, la representación laboral, la identidad y la moneda digitales, la vigilancia biométrica, la ingeniería genética, la determinación de las penas, el mix energético y todas las cuestiones pendientes de política exterior. Cuando una formulación de la v0.2 haya revisado una entrada anterior, rige el texto más reciente.",
+      "La versión 0.3 añade el conjunto de entradas sobre la remigración y su ejecución. Distingue la ciudadanía, el estatuto de residencia, la expulsión penal, el retorno tras el asilo y la revisión de la nacionalidad, en lugar de tratar la remigración como una única potestad indiferenciada, y está redactada como política constitucional y legal propuesta, señalando por separado en cada entrada el derecho europeo e internacional vigente. Dos entradas anteriores —la naturalización y la expulsión de delincuentes extranjeros— quedan integradas en las formulaciones más recientes en lugar de duplicarse junto a ellas.",
     ],
     notice:
       "Todas las cuestiones de este catálogo llevan una posición. Las entradas marcadas como Derivada siguen la orientación del manifiesto sin que su aplicación esté fijada, y varias de ellas señalan la reforma legal o de los tratados que exigirían. Las posiciones se revisan a medida que el movimiento decide; la versión y la fecha que figuran arriba indican qué texto está leyendo.",
@@ -52,6 +53,8 @@ export const policyText: PolicyText = {
         "El mecanismo de verificación de edad para las redes sociales",
         "Las fechas de emisiones netas cero, los precios del carbono y las cuotas de emisión",
         "Los criterios, cargo por cargo, de los cargos públicos restringidos",
+        "Los periodos de gracia para los residentes extranjeros tras una pérdida involuntaria del empleo",
+        "Los periodos de ausencia propios de cada permiso y los límites máximos del internamiento",
       ],
     },
   },
@@ -553,29 +556,40 @@ export const policyText: PolicyText = {
     },
 
     "deportation-of-criminal-offenders": {
-      title: "Expulsión de delincuentes extranjeros",
+      title: "Expulsión penal y prohibiciones de reentrada",
       shortAnswer:
-        "El extranjero condenado por un delito grave de los previstos debe perder por regla general el derecho a permanecer y recibir una prohibición permanente de reentrada.",
+        "Los delincuentes extranjeros graves son expulsados al término del proceso penal y quedan excluidos de forma permanente; las infracciones ordinarias del régimen de residencia conllevan por regla general una prohibición de reentrada de diez años.",
       position: [
         "La ciudadanía y la residencia extranjera son estatutos distintos. La comisión de delitos dolosos graves por parte de un no ciudadano puede justificar la extinción de la residencia tras una condena dictada en un proceso penal con todas las garantías.",
+        "La residencia extranjera no confiere el mismo derecho permanente a permanecer que la ciudadanía. El extranjero condenado por un delito grave de los previstos debe perder por regla general la residencia y ser expulsado al término del procedimiento penal que corresponda.",
       ],
       policies: [
-        "Exigir una condena penal firme y conforme a derecho antes de la expulsión por razones penales.",
+        "Exigir una condena firme y conforme a derecho por el delito invocado antes de la expulsión por razones penales.",
         "Los delitos violentos graves, los delitos sexuales graves, el robo, la delincuencia organizada, el terrorismo, la trata, la distribución grave de drogas, el fraude grave y los delitos dolosos comparables activan presuntivamente la expulsión.",
         "La reincidencia puede justificar la expulsión aun cuando los delitos aislados sean menos graves.",
-        "Cuando se imponga pena de prisión, la expulsión sigue por regla general al cumplimiento de la pena privativa de libertad, salvo que quepa legalmente un traslado anterior.",
-        "Asociar una prohibición permanente de reentrada a las expulsiones penales que cumplan los requisitos.",
+        "Tratar el homicidio doloso, la agresión sexual, los abusos sexuales graves a menores, el terrorismo, la trata grave, la violencia organizada grave y los delitos graves comparables como supuestos que activan presuntivamente la prohibición permanente.",
+        "Aplicar una prohibición permanente de reentrada a las expulsiones por delincuencia grave que cumplan los requisitos y a las motivadas por razones graves de seguridad nacional.",
+        "Aplicar con carácter ordinario una prohibición de reentrada de diez años a las infracciones graves del régimen ordinario de residencia, como la entrada irregular dolosa, la permanencia irregular reiterada o la elusión dolosa de una resolución de retorno, con sujeción a las reglas de proporcionalidad previstas en la ley de desarrollo.",
+        "Permitir sanciones más breves para las infracciones del régimen de residencia realmente menores o puramente técnicas, cuando una prohibición de diez años resultara desproporcionada.",
+        "Ejecutar la expulsión tras el cumplimiento de la pena privativa de libertad, salvo que quepa legalmente un traslado o una expulsión anticipada.",
         "Las infracciones administrativas menores o de escasa entidad no activan automáticamente la expulsión permanente.",
-        "Los ciudadanos naturalizados se rigen por las normas específicas de revocación de la ciudadanía y no se tratan como residentes extranjeros salvo que la ciudadanía haya sido previamente revocada conforme a derecho.",
+        "Mantener a los ciudadanos naturalizados en el marco específico de la revocación de la ciudadanía, salvo que la ciudadanía haya sido previamente retirada conforme a derecho.",
         "Los ciudadanos no pueden ser expulsados de su propio país.",
       ],
       implementationNote:
-        "El extranjero que reside legalmente goza actualmente de garantías procesales frente a la expulsión conforme al derecho europeo de los derechos humanos. La expulsión puede además quedar excluida cuando el retorno expusiera a la persona a tratos prohibidos. El modelo que se persigue es, por tanto, rápido tras la condena firme, pero sigue siendo revisable judicialmente allí donde lo exijan obligaciones vinculantes.",
+        "El extranjero que reside legalmente goza actualmente de garantías procesales frente a la expulsión conforme al derecho europeo de los derechos humanos. La expulsión puede además quedar excluida cuando el retorno expusiera a la persona a tratos prohibidos. El modelo que se persigue es, por tanto, rápido tras la condena firme, pero sigue siendo revisable judicialmente allí donde lo exijan obligaciones vinculantes. Conforme al artículo 11 de la directiva de retorno de la Unión hoy vigente, las prohibiciones de entrada no deben superar por regla general los cinco años, pero pueden excederlos cuando la persona represente una amenaza grave para el orden público, la seguridad pública o la seguridad nacional. Una prohibición ordinaria de diez años por entrada irregular común iría, por tanto, más allá de la regla vigente de la Unión.",
       keywords: [
         "expulsión",
+        "expulsión penal",
         "delincuentes extranjeros",
         "deportación",
         "prohibición de reentrada",
+        "diez años",
+        "prohibición permanente",
+        "homicidio",
+        "agresión sexual",
+        "terrorismo",
+        "permanencia irregular",
         "permiso de residencia",
         "orden público",
         "retorno",
@@ -605,28 +619,35 @@ export const policyText: PolicyText = {
     },
 
     naturalization: {
-      title: "Naturalización",
+      title: "Asimilación y naturalización",
       shortAnswer:
-        "La vía normal exige alrededor de quince años de residencia legal antes de poder presentar la solicitud, con exigencias de asimilación rigurosas.",
+        "La ciudadanía exige un estándar sensiblemente más alto que la residencia ordinaria o la integración: una asimilación lograda en la comunidad política nacional.",
       position: [
         "La vía normal de naturalización de Restore Europa exige aproximadamente quince años de residencia legal antes de poder presentar la solicitud, junto con unas exigencias de asimilación excepcionalmente rigurosas.",
+        "La naturalización no es una consecuencia automática del tiempo transcurrido en el país. El solicitante debe cumplir exigencias rigurosas de idioma, de conocimientos cívicos, de conducta y de vínculo antes de que se le conceda la ciudadanía.",
       ],
       policies: [
-        "Dominio de la lengua nacional.",
-        "Amplio conocimiento de la historia, la cultura, las tradiciones y las instituciones nacionales.",
+        "Mantener la vía ordinaria de residencia de alrededor de quince años prevista en el catálogo antes de poder solicitar la naturalización ordinaria.",
+        "Exigir un dominio práctico avanzado de la lengua nacional y un conocimiento sustancial de la historia, las instituciones y el orden constitucional.",
         "Respeto al orden constitucional y al carácter cristiano e histórico del país.",
-        "Lealtad demostrada y participación duradera en la vida del país.",
-        "Conducta conforme a la ley y autosuficiencia económica cuando sea razonablemente posible.",
+        "Exigir una conducta duraderamente conforme a la ley y declaraciones veraces ante las autoridades de inmigración y de ciudadanía.",
+        "Exigir la prueba de un vínculo duradero con el país, y no solo de la residencia.",
+        "Admitir exámenes objetivos de idioma y de conocimientos cívicos.",
+        "Denegar la naturalización cuando subsistan como impedimento la delincuencia grave, el terrorismo, el fraude grave o el engaño doloso sobre la identidad.",
+        "No convertir una reverificación cívica periódica en causa automática de expulsión de quien haya adquirido la ciudadanía de forma legal y honesta; la revocación posterior a la naturalización se rige por entradas específicas.",
       ],
       limits: ["Quince años de residencia no garantizan automáticamente la naturalización."],
       implementationNote:
-        "Los plazos ordinarios de residencia en Europa se sitúan hoy entre cinco y diez años, de modo que esto alargaría la práctica existente en lugar de ajustarla.",
+        "Los plazos ordinarios de residencia en Europa se sitúan hoy entre cinco y diez años, de modo que esto alargaría la práctica existente en lugar de ajustarla. El manifiesto ya afirma que la naturalización debe exigir un conocimiento sustancial de la lengua, la historia y las instituciones, el respeto al orden constitucional y un vínculo genuino con el país. Esta entrada reúne tales exigencias como estándar de asimilación del movimiento.",
       keywords: [
         "naturalización",
-        "residencia",
         "asimilación",
+        "residencia",
+        "idioma",
         "requisito de idioma",
+        "conocimientos cívicos",
         "examen de ciudadanía",
+        "vínculo con el país",
       ],
     },
 
@@ -740,6 +761,274 @@ export const policyText: PolicyText = {
         "apatridia",
         "traición",
         "terrorismo",
+      ],
+    },
+
+    "remigration-general-principle": {
+      title: "Remigración: principio general",
+      shortAnswer:
+        "La remigración es el retorno organizado de quienes carecen de base legal para permanecer o la pierden, junto con una política de retorno voluntario, la aplicación estricta de las condiciones de residencia y la revisión de los estatutos obtenidos mediante fraude o mediante una irregularidad cualificada.",
+      position: [
+        "Restore Europa entiende el estatuto migratorio como condicionado: depende de la entrada legal, del cumplimiento de las condiciones de residencia, del orden público y, cuando proceda, de una integración lograda. La remigración no se define como la expulsión por razón de la raza; opera a través del estatuto jurídico, el historial migratorio, la conducta penal, el fraude, los motivos de seguridad y unas condiciones de residencia claramente definidas.",
+      ],
+      policies: [
+        "Ejecutar las resoluciones firmes de retorno frente a quienes carecen de derecho legal a permanecer.",
+        "Recurrir al retorno voluntario cuando sea realista y al retorno forzoso cuando la base legal de la residencia se haya extinguido.",
+        "Revisar la residencia o la ciudadanía obtenidas mediante fraude o engaño relevantes.",
+        "Permitir la retirada del estatuto de residencia del extranjero por delitos graves, amenazas graves para la seguridad y otras causas expresamente definidas por ley.",
+        "Mantener la ciudadanía, la residencia permanente, la residencia temporal, el estatuto de asilo y la presencia irregular como categorías jurídicamente distintas.",
+        "No tratar el mero transcurso prolongado del tiempo como fuente de un derecho automático a permanecer cuando el estatuto subyacente sigue siendo temporal o condicionado.",
+        "Aplicar procedimientos y requisitos probatorios individuales, y no la expulsión colectiva por la mera categoría étnica o racial.",
+      ],
+      implementationNote:
+        "El derecho europeo vigente impone al retorno y a la expulsión límites procesales y de derechos humanos de entidad. Esta entrada expone la arquitectura de la política propuesta; su aplicación exigiría el cumplimiento de los compromisos jurídicos incompatibles, su modificación o la retirada de ellos. El manifiesto del movimiento ya trata la ciudadanía como pertenencia y no como mera residencia, y defiende una inmigración controlada, compatible con la integración, la estabilidad y la continuidad nacional.",
+      keywords: [
+        "remigración",
+        "retorno",
+        "aplicación del derecho de extranjería",
+        "residencia",
+        "expulsión",
+        "integración",
+        "ciudadanía",
+      ],
+    },
+
+    "integration-general-definition": {
+      title: "Integración: definición general",
+      shortAnswer:
+        "La integración es la incorporación lingüística, cívica, económica y social demostrable a la nación de acogida; la residencia por sí sola no basta.",
+      position: [
+        "La integración se mide por la conducta, la competencia y una participación duradera. Es distinta de la ciudadanía y del estándar superior de asimilación exigido para la naturalización.",
+      ],
+      policies: [
+        "Exigir un dominio funcional de la lengua nacional principal, normalmente en torno a B1–B2 según el estatuto que se solicite.",
+        "Exigir un conocimiento básico de la historia nacional, las instituciones, el derecho, los deberes cívicos y el marco constitucional.",
+        "Tratar la delincuencia grave y persistente, la delincuencia organizada, el terrorismo, el fraude grave y el fraude migratorio doloso como indicios firmes en contra de la integración.",
+        "Esperar de los extranjeros capacitados y en edad de trabajar que participen mediante el empleo, el trabajo por cuenta propia, la educación, la formación profesional, el cuidado familiar reconocido u otra contribución legítima.",
+        "Considerar la dependencia prolongada y evitable de la asistencia pública como factor negativo para la integración, exceptuando la incapacidad real, la discapacidad, la jubilación, el desempleo temporal y el cuidado familiar relevante.",
+        "Admitir la prueba de la participación local a través del trabajo, la educación, las parroquias, las asociaciones, los clubes y otras instituciones de la comunidad, sin hacer obligatoria la pertenencia a ninguna organización determinada.",
+        "Exigir el respeto al orden constitucional legítimo sin imponer una conformidad ideológica con cada política de gobierno.",
+        "Valorar la integración sobre elementos individuales documentados y no sobre la raza.",
+      ],
+      implementationNote:
+        "El derecho de la Unión sobre residentes de larga duración permite hoy a los Estados miembros imponer condiciones de integración y exige recursos estables y regulares para adquirir el estatuto de larga duración. La política separa las concepciones de la nacionalidad histórica basadas en la ascendencia del criterio jurídico practicable que determina si un residente concreto está integrado.",
+      keywords: [
+        "integración",
+        "idioma",
+        "conocimientos cívicos",
+        "autosuficiencia",
+        "residencia",
+        "orden público",
+        "participación",
+      ],
+    },
+
+    "regularized-irregular-immigration": {
+      title: "Inmigración irregular regularizada",
+      shortAnswer:
+        "Una legalización posterior no borra automáticamente un historial acreditado de entrada o permanencia irregulares; los casos ya regularizados pueden revisarse individualmente conforme al nuevo marco jurídico.",
+      position: [
+        "Restore Europa rechaza la tesis de que toda regularización o amnistía del pasado deba considerarse constitucionalmente intangible. Cuando documentos fiables acrediten una entrada irregular anterior, una permanencia irregular, una identidad falsa u otra irregularidad relevante, el historial de residencia que de ello derive puede revisarse individualmente.",
+      ],
+      policies: [
+        "Permitir la revisión individual de los estatutos de residencia nacidos de amnistías anteriores, regularizaciones masivas o programas excepcionales comparables.",
+        "Exigir que sea el Estado quien pruebe el historial migratorio pertinente mediante documentos y pruebas; la irregularidad no puede simplemente presumirse.",
+        "Revisar el expediente originario completo, incluida la identidad, el historial de entrada, el historial de asilo, la base de la residencia, los permisos posteriores y el eventual procedimiento de naturalización.",
+        "Distinguir la mera irregularidad pasada del fraude relevante, la identidad falsa o la ocultación, que pueden acarrear consecuencias más severas.",
+        "Si el estatuto supera la revisión conforme a la nueva ley, sigue siendo válido con sujeción a las condiciones ordinarias de residencia.",
+        "Si el estatuto no se habría concedido conforme a la nueva regla aplicable y la Constitución admite una revisión retroactiva, pueden seguir la retirada y el retorno, mediante resolución individual y un procedimiento de recurso.",
+      ],
+      limits: [
+        "Esta entrada no considera fraudulento a todo ciudadano naturalizado por el mero hecho de que un periodo anterior de residencia fuera irregular; el fraude y la regularización legítima siguen siendo conceptos distintos.",
+      ],
+      implementationNote:
+        "Se trata de una potestad de revisión retroactiva propuesta, que excede la estabilidad reconocida normalmente a los actos administrativos firmes. Exigiría una habilitación constitucional expresa, reglas de prescripción definidas y garantías procesales.",
+      keywords: [
+        "regularización",
+        "amnistía",
+        "entrada irregular",
+        "permanencia irregular",
+        "revisión del estatuto",
+        "historial migratorio",
+      ],
+    },
+
+    "employment-and-self-sufficiency-of-foreign-residents": {
+      title: "Empleo y autosuficiencia de los residentes extranjeros",
+      shortAnswer:
+        "De los residentes extranjeros capacitados se espera que sigan siendo económicamente autosuficientes, y por regla general no les corresponde el mismo derecho asistencial indefinido que a los ciudadanos.",
+      position: [
+        "La residencia extranjera se concede para fines determinados y sigue siendo condicionada. Los residentes en condiciones de trabajar deberían normalmente mantenerse mediante el empleo, el trabajo por cuenta propia, el estudio, la formación o una actividad de cuidado reconocida, y no mediante una dependencia permanente y evitable de la asistencia pública.",
+      ],
+      policies: [
+        "Exigir que los extranjeros con residencia temporal y ordinaria mantengan medios de subsistencia lícitos y suficientes, con periodos de gracia razonables tras una pérdida involuntaria del empleo.",
+        "Admitir como participación legítima el empleo, el trabajo por cuenta propia, la educación a tiempo completo, la formación profesional y una actividad relevante de cuidado familiar.",
+        "Prever excepciones por discapacidad real, incapacidad, jubilación, minoría de edad y dificultades temporales pese a esfuerzos razonables por encontrar trabajo.",
+        "Limitar la asistencia ordinaria no urgente para los extranjeros allí donde sea constitucional y legalmente admisible.",
+        "Preservar la alimentación, el alojamiento y la atención médica necesaria en caso de emergencia cuando su denegación vulnerara obligaciones jurídicas o humanitarias elementales.",
+        "Tratar la dependencia reiterada y evitable de la asistencia pública como posible causa de revisión de la residencia cuando el permiso estuviera expresamente condicionado a la autosuficiencia.",
+        "Mantener aparte la ciudadanía adquirida: el mero desempleo no convierte automáticamente a un ciudadano en residente irregular.",
+      ],
+      limits: [
+        "El periodo exacto de gracia tras la pérdida del empleo debería fijarse en la ley de desarrollo y no quedar rígidamente incorporado al principio constitucional.",
+      ],
+      implementationNote:
+        "Las normas de la Unión sobre residentes de larga duración exigen recursos estables y regulares para adquirir ese estatuto, pero el derecho vigente reconoce también a los residentes de larga duración protecciones significativas y no admite la expulsión por motivos puramente económicos. El marco propuesto por el movimiento iría más allá para determinadas categorías de residencia extranjera.",
+      keywords: [
+        "autosuficiencia",
+        "empleo",
+        "asistencia pública",
+        "residentes extranjeros",
+        "permiso de residencia",
+        "participación económica",
+      ],
+    },
+
+    "probationary-naturalization": {
+      title: "Naturalización en periodo de prueba",
+      shortAnswer:
+        "La ciudadanía recién adquirida queda sujeta a un periodo de prueba de diez años, con reglas de revocación reforzadas por causas graves definidas de forma estricta.",
+      position: [
+        "La naturalización constituye la ciudadanía, pero durante los diez primeros años el Estado conserva una potestad reforzada para reabrir el procedimiento y revocar la ciudadanía adquirida por determinadas conductas graves o por vicios relevantes en el fundamento de la naturalización.",
+      ],
+      policies: [
+        "Fijar el periodo de prueba en diez años desde la fecha de adquisición de la ciudadanía.",
+        "Permitir la revocación por fraude relevante en la naturalización, identidad falsa u ocultación dolosa de un hecho excluyente.",
+        "Permitir la revocación por los delitos de excepcional gravedad cometidos tras la naturalización, según se definen en la entrada específica sobre ciudadanía y delincuencia grave.",
+        "Permitir la revocación por terrorismo, traición o conducta que constituya una amenaza de excepcional gravedad para la seguridad nacional, cuando la ley lo prevea expresamente.",
+        "Exigir un procedimiento individual judicial o cuasijudicial, la prueba de la causa legal y un derecho efectivo de recurso.",
+        "No convertir el mero desempleo, la discrepancia política o un examen cívico no superado en causa automática de revocación por sí solos.",
+        "Transcurridos los diez años, rigen las protecciones ordinarias de la ciudadanía, sin perjuicio de las causas permanentes basadas en el fraude y de las demás causas excepcionales de revocación adoptadas en otras entradas del catálogo.",
+      ],
+      implementationNote:
+        "Se trata de una excepción constitucional propuesta frente a los ordenamientos que, a todos los efectos de privación, tratan la naturalización como indistinguible desde el primer momento de la ciudadanía por nacimiento. Los instrumentos internacionales vigentes en materia de nacionalidad limitan la privación, sobre todo cuando produjera apatridia; tales conflictos exigirían un tratamiento constitucional y convencional expreso.",
+      keywords: [
+        "ciudadanía en periodo de prueba",
+        "naturalización",
+        "revocación",
+        "diez años",
+        "fraude",
+        "delito grave",
+      ],
+    },
+
+    "residence-permit-withdrawal": {
+      title: "Retirada del permiso de residencia",
+      shortAnswer:
+        "El estatuto de residencia del extranjero se pierde con mayor facilidad que la ciudadanía y puede retirarse cuando se incumplan de forma relevante condiciones definidas de admisión o de permanencia.",
+      position: [
+        "La residencia es una autorización jurídica condicionada. La delincuencia grave, el fraude relevante, las amenazas graves para la seguridad y el incumplimiento persistente de condiciones de residencia expresamente enunciadas pueden justificar la retirada y el retorno.",
+      ],
+      policies: [
+        "Retirar el permiso o denegar su renovación en caso de fraude relevante sobre la identidad o la residencia.",
+        "Retirar la residencia en caso de delito violento o sexual grave, terrorismo, delincuencia organizada grave y conductas graves comparables, sin perjuicio del marco específico de la expulsión penal.",
+        "Retirar la residencia cuando la persona constituya una amenaza grave y acreditada para la seguridad nacional.",
+        "Permitir la revisión en caso de dependencia asistencial reiterada y evitable, cuando la autosuficiencia fuera condición expresa del permiso.",
+        "Permitir la revisión en caso de incumplimiento grave y persistente de los requisitos de integración aplicables, cuando el estatuto estuviera expresamente condicionado a la integración.",
+        "Admitir que una ausencia prolongada extinga el estatuto de residencia; la ley ordinaria de desarrollo debería fijar el umbral por tipo de permiso dentro de una horquilla aproximada de dos a cinco años.",
+        "Comunicar los motivos y garantizar una oportunidad individual de impugnar la resolución.",
+      ],
+      implementationNote:
+        "El derecho vigente de la Unión protege con mayor intensidad a los residentes de larga duración. La directiva actual sobre residentes de larga duración admite la pérdida del estatuto tras determinadas ausencias y solo permite la expulsión ante una amenaza real y suficientemente grave para el orden público o la seguridad; las consideraciones económicas por sí solas no pueden justificar la expulsión. La política propuesta por el movimiento exigiría, por tanto, modificaciones allí donde es más amplia que las reglas vigentes de la Unión.",
+      keywords: [
+        "permiso de residencia",
+        "retirada",
+        "fraude",
+        "delito grave",
+        "integración",
+        "ausencia",
+        "seguridad pública",
+      ],
+    },
+
+    "voluntary-return-and-reintegration": {
+      title: "Retorno voluntario y reinserción",
+      shortAnswer:
+        "El Estado puede financiar una ayuda modesta y única al retorno cuando un extranjero regrese de forma voluntaria y estable al país de su nacionalidad o a otro país facultado para admitirlo.",
+      position: [
+        "El retorno voluntario es preferible a una expulsión forzosa costosa cuando logre el mismo fin legítimo de manera rápida y fiable.",
+      ],
+      policies: [
+        "Sufragar gastos de viaje razonables dentro de un programa aprobado de retorno voluntario.",
+        "Admitir una ayuda limitada y única al traslado o a la reinserción cuando aumente de forma relevante la probabilidad de un retorno duradero.",
+        "Condicionar la ayuda a la salida efectiva y al cumplimiento del acuerdo de retorno pactado.",
+        "No crear un derecho a ayudas de retorno repetidas.",
+        "Cuando exista una prohibición de reentrada, la salida voluntaria no la cancela automáticamente, salvo que la ley disponga expresamente otra cosa.",
+        "Coordinarse, cuando sea necesario, con las autoridades del país de destino o con organizaciones reconocidas para obtener los documentos de viaje y la acogida.",
+        "Preferir la salida voluntaria al internamiento o a la expulsión forzosa cuando no existan riesgos serios de fuga, delictivos o de seguridad.",
+      ],
+      implementationNote:
+        "Esta entrada es un mecanismo de aplicación y no un juicio moral sobre la persona que regresa. Su finalidad es hacer el retorno más rápido, menos costoso y más ordenado cuando la cooperación sea posible.",
+      keywords: [
+        "retorno voluntario",
+        "reinserción",
+        "ayuda al traslado",
+        "gastos de viaje",
+        "programa de retorno",
+      ],
+    },
+
+    "naturalized-citizenship-and-exceptionally-serious-crime": {
+      title: "Ciudadanía adquirida y delitos de excepcional gravedad",
+      shortAnswer:
+        "La ciudadanía adquirida puede revocarse por una clase estricta de delitos de excepcional gravedad, seguida de la expulsión cuando los consiguientes requisitos de nacionalidad y de retorno puedan cumplirse conforme a derecho.",
+      position: [
+        "La naturalización no sitúa todo acto posterior fuera del derecho de la ciudadanía. El orden constitucional propuesto permite la revocación de la ciudadanía adquirida por determinadas conductas de excepcional gravedad posteriores a la naturalización, dejando la delincuencia ordinaria al sistema de justicia penal.",
+      ],
+      policies: [
+        "Limitar esta potestad a una clase tasada de delitos de excepcional gravedad, como el homicidio doloso, la agresión sexual, los abusos sexuales agravados a menores, el terrorismo y los delitos graves comparables.",
+        "Exigir una condena penal firme antes de la revocación de la ciudadanía fundada en un delito.",
+        "Exigir un procedimiento específico en materia de ciudadanía que determine si concurren las condiciones legales de la revocación.",
+        "Garantizar un recurso efectivo antes de que la expulsión se ejecute.",
+        "Cuando la ciudadanía se revoque y la persona posea otra nacionalidad o pueda recuperarla conforme a derecho, aplicar el marco ordinario de retorno.",
+        "Cuando la nacionalidad sea controvertida, proceder a su determinación en lugar de presumir que el solo lugar de nacimiento prueba la obligación de un Estado de acoger a la persona.",
+        "No emplear la ascendencia por sí sola como criterio de activación penal; la distinción operativa es la ciudadanía adquirida unida a una conducta cualificada.",
+      ],
+      implementationNote:
+        "La Convención de 1961 para reducir los casos de apatridia prohíbe con carácter general la privación de la nacionalidad cuando dejara apátrida a la persona, con excepciones definidas, entre ellas la nacionalidad obtenida mediante fraude y determinadas causas conservadas al amparo del artículo 8. Una potestad más amplia exigiría un tratamiento expreso de esos compromisos convencionales. Destruir un pasaporte no extingue por sí mismo la nacionalidad; el pasaporte es prueba de la nacionalidad, no su fuente jurídica.",
+      keywords: [
+        "ciudadanía adquirida",
+        "revocación",
+        "delito grave",
+        "homicidio",
+        "agresión sexual",
+        "terrorismo",
+        "nacionalidad",
+      ],
+    },
+
+    "return-readmission-identity-and-removal-procedure": {
+      title: "Retorno, readmisión, identidad y procedimiento de expulsión",
+      shortAnswer:
+        "La política de retorno sigue un modelo de ejecución mixto: identificación e internamiento a efectos de expulsión cuando sea necesario, y después un estatuto temporal limitado si la expulsión sigue siendo imposible por el momento, manteniendo los esfuerzos por determinar la nacionalidad y obtener la readmisión.",
+      position: [
+        "Una resolución firme de retorno debe poder ejecutarse en la práctica. El Estado debería, por tanto, mantener mecanismos de verificación de la identidad, internamiento, presentación periódica y readmisión, en lugar de permitir que la destrucción de documentos o la falta de cooperación produzcan automáticamente una residencia permanente.",
+      ],
+      policies: [
+        "Iniciar de inmediato la verificación de la identidad y la nacionalidad cuando la persona expulsable carezca de documentos fiables.",
+        "Emplear pasaportes, documentos caducados, registros civiles, huellas dactilares u otros datos biométricos cuando la ley lo permita, documentos familiares, comprobaciones consulares, elementos lingüísticos y biográficos y acuerdos de readmisión para determinar la identidad y la nacionalidad.",
+        "Tratar la destrucción u ocultación dolosa de documentos como circunstancia agravante en la ejecución, reconociendo al mismo tiempo que destruir un pasaporte no extingue la nacionalidad.",
+        "Admitir el internamiento de extranjeros cuando sea necesario para la identificación, para prevenir la fuga o para una expulsión inminente, con sujeción a límites legales definidos y a un empeño continuado en la expulsión.",
+        "Si la expulsión no puede ejecutarse dentro de la duración máxima legal del internamiento, hacer pasar a la persona a un estatuto temporal limitado en lugar de a la residencia permanente ordinaria.",
+        "El estatuto limitado puede comprender obligaciones de presentación, restricciones de residencia, la cooperación continuada en los trámites de identificación y una asistencia pública reducida.",
+        "No permitir que el mero transcurso del tiempo en estatuto limitado madure automáticamente en ciudadanía o residencia permanente.",
+        "Reanudar la expulsión en cuanto la nacionalidad, los documentos de viaje y una readmisión conforme a derecho estén disponibles.",
+        "Recurrir a los acuerdos de readmisión y a la presión diplomática para exigir que los países acojan a las personas cuya nacionalidad esté acreditada conforme a su propio derecho.",
+        "Permitir que los familiares partan juntos cuando los progenitores sean expulsados y los hijos tengan derecho a acompañarlos; las cuestiones autónomas de nacionalidad, custodia y protección de la infancia exigen una resolución individual.",
+        "Aplicar las nuevas reglas constitucionales de extranjería a los estatutos existentes cuando la ley prevea expresamente una revisión retroactiva, con sujeción a los procedimientos de revisión enunciados en otras entradas de este conjunto.",
+      ],
+      implementationNote:
+        "El derecho de la Unión en materia de retorno limita hoy el internamiento al periodo más breve que resulte adecuado, mientras las operaciones de expulsión se lleven a cabo con la diligencia debida, y prevé duraciones máximas y garantías específicas. El modelo mixto propuesto recoge la secuencia general de internamiento seguido de un estatuto limitado cuando la expulsión inmediata es imposible, si bien la duración exacta dependería del ordenamiento que finalmente se adopte. El lugar de nacimiento es un elemento útil, pero no prueba por sí solo la nacionalidad ni una obligación incondicional de un país de readmitir a una persona. La readmisión depende del derecho de la nacionalidad, de las pruebas y de los acuerdos aplicables. Es verdaderamente apátrida quien ningún Estado considera nacional suyo en aplicación de su legislación. El sistema propuesto exige, por tanto, la determinación de la nacionalidad, en lugar de presumir que la apatridia siempre puede eliminarse asignando a la persona a su país de nacimiento.",
+      keywords: [
+        "procedimiento de retorno",
+        "readmisión",
+        "internamiento",
+        "identidad",
+        "nacionalidad",
+        "estatuto limitado",
+        "apatridia",
+        "unidad familiar",
+        "retroactividad",
       ],
     },
 

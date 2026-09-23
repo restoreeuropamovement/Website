@@ -248,6 +248,8 @@ export const policyStructure = [
       "citizenship-general-principle",
       "naturalization",
       "demographic-renewal",
+      "remigration-general-principle",
+      "integration-general-definition",
     ],
     lastUpdated: "2026-09-15",
   },
@@ -289,12 +291,14 @@ export const policyStructure = [
     status: "agreed",
     manifestoBasis: ["nation", "immigration", "subsidiarity", "democracy"],
     related: [
-      "immigration",
-      "revocation-of-naturalized-citizenship",
+      "residence-permit-withdrawal",
+      "return-readmission-identity-and-removal-procedure",
+      "naturalized-citizenship-and-exceptionally-serious-crime",
       "criminal-sentencing",
+      "immigration",
       "asylum-and-international-protection",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-09-23",
   },
   {
     slug: "citizenship-general-principle",
@@ -316,11 +320,13 @@ export const policyStructure = [
     manifestoBasis: ["immigration", "nation"],
     related: [
       "citizenship-general-principle",
+      "integration-general-definition",
+      "probationary-naturalization",
       "voting-rights-after-naturalization",
       "dual-citizenship",
       "revocation-of-naturalized-citizenship",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-09-23",
   },
   {
     slug: "citizenship-by-descent",
@@ -378,10 +384,141 @@ export const policyStructure = [
     manifestoBasis: ["nation", "democracy"],
     related: [
       "naturalization",
+      "probationary-naturalization",
+      "naturalized-citizenship-and-exceptionally-serious-crime",
       "citizenship-general-principle",
       "prisons-punishment-and-rehabilitation",
     ],
     lastUpdated: "2026-09-15",
+  },
+  /*
+   * The remigration and enforcement cluster, in the order the v0.3 addendum
+   * numbers it. It sits after the citizenship entries and before Europe
+   * because it is the machinery those statuses imply, not a separate subject:
+   * each entry names one of admission, integration, residence, naturalization
+   * or return rather than treating remigration as a single power.
+   */
+  {
+    slug: "remigration-general-principle",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["nation", "immigration", "subsidiarity"],
+    related: [
+      "immigration",
+      "integration-general-definition",
+      "residence-permit-withdrawal",
+      "return-readmission-identity-and-removal-procedure",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "integration-general-definition",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["nation", "immigration", "education", "subsidiarity"],
+    related: [
+      "naturalization",
+      "employment-and-self-sufficiency-of-foreign-residents",
+      "residence-permit-withdrawal",
+      "immigration",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "regularized-irregular-immigration",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["immigration", "subsidiarity", "democracy"],
+    related: [
+      "remigration-general-principle",
+      "naturalization",
+      "probationary-naturalization",
+      "residence-permit-withdrawal",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "employment-and-self-sufficiency-of-foreign-residents",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["economic-order", "work", "immigration"],
+    related: [
+      "integration-general-definition",
+      "asylum-work-and-public-assistance",
+      "welfare-and-social-assistance",
+      "residence-permit-withdrawal",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "probationary-naturalization",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["nation", "immigration", "democracy"],
+    related: [
+      "naturalization",
+      "revocation-of-naturalized-citizenship",
+      "naturalized-citizenship-and-exceptionally-serious-crime",
+      "citizenship-general-principle",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "residence-permit-withdrawal",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["immigration", "subsidiarity", "democracy"],
+    related: [
+      "remigration-general-principle",
+      "deportation-of-criminal-offenders",
+      "integration-general-definition",
+      "return-readmission-identity-and-removal-procedure",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "voluntary-return-and-reintegration",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["immigration", "foreign-policy"],
+    related: [
+      "return-readmission-identity-and-removal-procedure",
+      "remigration-general-principle",
+      "deportation-of-criminal-offenders",
+      "foreign-aid",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "naturalized-citizenship-and-exceptionally-serious-crime",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: ["nation", "immigration", "democracy"],
+    related: [
+      "revocation-of-naturalized-citizenship",
+      "probationary-naturalization",
+      "deportation-of-criminal-offenders",
+      "criminal-sentencing",
+    ],
+    lastUpdated: "2026-09-23",
+  },
+  {
+    slug: "return-readmission-identity-and-removal-procedure",
+    category: "nation",
+    status: "agreed",
+    manifestoBasis: [
+      "immigration",
+      "subsidiarity",
+      "democracy",
+      "foreign-policy",
+    ],
+    related: [
+      "remigration-general-principle",
+      "voluntary-return-and-reintegration",
+      "deportation-of-criminal-offenders",
+      "asylum-and-international-protection",
+    ],
+    lastUpdated: "2026-09-23",
   },
   {
     slug: "europe-as-a-civilization-of-nations",
@@ -1192,7 +1329,7 @@ export const policyStructure = [
 /**
  * Every slug, as a union. This is what makes a language file's catalogue
  * exhaustive: forget an entry and the build fails rather than one edition
- * quietly publishing eighty-eight positions where the others publish
- * eighty-nine.
+ * quietly publishing ninety-seven positions where the others publish
+ * ninety-eight.
  */
 export type PolicySlug = (typeof policyStructure)[number]["slug"];

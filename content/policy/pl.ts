@@ -5,7 +5,7 @@ export const policyText: PolicyText = {
     eyebrow: "Stanowiska",
     title: "Katalog programowy",
     metaTitle: "Katalog programowy",
-    version: "Wersja 0.2",
+    version: "Wersja 0.3",
     framework: "Europejska odnowa integralna",
     lede: "Ten katalog odpowiada na wąskie pytanie: jakie stanowisko zajmuje Restore Europa w tej sprawie? Nie zastępuje manifestu. Manifest wykłada światopogląd; tutaj wyłożone są stanowiska temat po temacie, z wyszukiwarką.",
     description:
@@ -14,6 +14,7 @@ export const policyText: PolicyText = {
       "Tam, gdzie katolicka nauka moralna jest jasna, Restore Europa z reguły przyjmuje ją jako moralny punkt wyjścia, a jej wykonanie w prawie cywilnym określa osobno. Jedno odstępstwo zapisujemy wprost: w sprawie kary śmierci Restore Europa przyjmuje dawniejsze, tradycyjne dopuszczenie jej w wypadkach wyjątkowych, a nie współczesne stanowisko abolicjonistyczne.",
       "Katalog odróżnia ład konstytucyjny, do którego Restore Europa dąży, od prawa europejskiego w jego obecnym stanie. Kilka stanowisk — w sprawie obywatelstwa, pozbawienia obywatelstwa, wolności słowa, publicznego statusu religii oraz kary śmierci — wymagałoby zmiany konstytucji lub traktatów, zanim mogłoby zostać wprowadzone w poszczególnych państwach Europy. Tam, gdzie tak jest, wpis o tym mówi.",
       "Wersja 0.2 rozstrzyga pytania, które wersja 0.1 pozostawiła otwarte: stosunek instytucjonalny do Europy, azyl, deportacje, wynagrodzenia, podatki, emerytury, mieszkalnictwo, reprezentację pracowniczą, tożsamość i walutę cyfrową, nadzór biometryczny, inżynierię genetyczną, wymiar kar, miks energetyczny i każde stałe pytanie polityki zagranicznej. Tam, gdzie sformułowanie z wersji 0.2 zmieniło wcześniejszy wpis, obowiązuje tekst nowszy.",
+      "Wersja 0.3 dodaje zespół wpisów o remigracji i jej egzekwowaniu. Odróżnia on obywatelstwo, status pobytowy, deportację z powodu przestępstwa, powrót po zakończeniu procedury azylowej oraz weryfikację obywatelstwa, zamiast traktować remigrację jako jedno nierozróżnione uprawnienie; jest napisany jako projektowana polityka konstytucyjna i ustawowa, a obowiązujące prawo europejskie i międzynarodowe wskazano osobno w każdym wpisie. Dwa wcześniejsze wpisy — naturalizacja oraz deportacja przestępców niebędących obywatelami — zostały wchłonięte przez nowsze sformułowania, zamiast istnieć obok nich podwójnie.",
     ],
     notice:
       "Każde pytanie w tym katalogu ma swoje stanowisko. Wpisy oznaczone jako Wyprowadzone idą w kierunku wskazanym przez manifest, choć ich wykonanie nie zostało ustalone, a kilka z nich wskazuje zmianę prawa lub traktatu, której by wymagały. Stanowiska są zmieniane w miarę decyzji ruchu; wersja i data powyżej mówią, który tekst czytasz.",
@@ -61,6 +62,8 @@ export const policyText: PolicyText = {
         "Mechanizm weryfikacji wieku w mediach społecznościowych",
         "Daty zerowej emisji netto, ceny emisji dwutlenku węgla i limity emisji",
         "Kryteria — urząd po urzędzie — dla zastrzeżonych urzędów publicznych",
+        "Okresy ochronne dla cudzoziemców po niezawinionej utracie pracy",
+        "Okresy nieobecności właściwe dla poszczególnych zezwoleń i górne granice detencji imigracyjnej",
       ],
     },
   },
@@ -567,29 +570,40 @@ export const policyText: PolicyText = {
     },
 
     "deportation-of-criminal-offenders": {
-      title: "Deportacja przestępców niebędących obywatelami",
+      title: "Deportacja z powodu przestępstwa i zakazy ponownego wjazdu",
       shortAnswer:
-        "Osoba niebędąca obywatelem, skazana za kwalifikujące się poważne przestępstwo, powinna z reguły utracić prawo pobytu i otrzymać stały zakaz ponownego wjazdu.",
+        "Cudzoziemcy skazani za poważne przestępstwa są usuwani z kraju po zakończeniu postępowania karnego i trwale wykluczani; zwyczajne naruszenia przepisów o pobycie pociągają zwykle dziesięcioletni zakaz ponownego wjazdu.",
       position: [
         "Obywatelstwo i pobyt cudzoziemca to odrębne statusy. Poważna umyślna przestępczość osoby niebędącej obywatelem może uzasadniać zakończenie pobytu po skazaniu w rzetelnym postępowaniu karnym.",
+        "Pobyt cudzoziemca nie daje tego samego trwałego prawa pozostania co obywatelstwo. Osoba niebędąca obywatelem, skazana za kwalifikujące się ciężkie przestępstwo, powinna z reguły utracić pobyt i zostać usunięta z kraju po zakończeniu właściwego postępowania karnego.",
       ],
       policies: [
-        "Wymóg zgodnego z prawem skazania karnego przed deportacją z powodu przestępstwa.",
+        "Wymóg zgodnego z prawem skazania za czyn, na który się powołano, przed deportacją z powodu przestępstwa.",
         "Poważne przestępstwa z użyciem przemocy, poważne przestępstwa seksualne, rozbój, przestępczość zorganizowana, terroryzm, handel ludźmi, poważny obrót narkotykami, poważne oszustwo i porównywalne przestępstwa umyślne z domniemania prowadzą do usunięcia z kraju.",
         "Powtarzalność przestępstw może uzasadniać usunięcie z kraju także tam, gdzie poszczególne czyny są mniej poważne.",
-        "Gdy orzeczono karę pozbawienia wolności, usunięcie z kraju następuje z reguły po jej odbyciu, chyba że dostępne jest zgodne z prawem wcześniejsze przekazanie.",
-        "Powiązanie stałego zakazu ponownego wjazdu z kwalifikującymi się deportacjami z powodu przestępstwa.",
+        "Zabójstwo umyślne, zgwałcenie, poważne wykorzystywanie seksualne dzieci, terroryzm, poważny handel ludźmi, poważna zorganizowana przemoc i porównywalne ciężkie przestępstwa z domniemania należą do spraw objętych stałym zakazem.",
+        "Stały zakaz ponownego wjazdu stosuje się do kwalifikujących się usunięć z powodu poważnych przestępstw oraz z powodu ciężkich zagrożeń dla bezpieczeństwa narodowego.",
+        "Do poważnych zwyczajnych naruszeń przepisów o pobycie, takich jak umyślny nielegalny wjazd, powtarzający się nielegalny pobyt lub umyślne uchylanie się od decyzji o powrocie, stosuje się domyślnie dziesięcioletni zakaz ponownego wjazdu, z zastrzeżeniem zasad proporcjonalności określonych w ustawie wykonawczej.",
+        "Przy naprawdę drobnych lub czysto technicznych naruszeniach przepisów o pobycie dopuszcza się łagodniejsze sankcje, gdy dziesięcioletni zakaz byłby nieproporcjonalny.",
+        "Usunięcie z kraju następuje po odbyciu kary pozbawienia wolności, chyba że dostępne jest zgodne z prawem przekazanie albo wcześniejsze usunięcie.",
         "Drobne czyny administracyjne lub bagatelne nie prowadzą automatycznie do stałego wydalenia.",
-        "Obywatele naturalizowani podlegają odrębnym zasadom odebrania obywatelstwa i nie są traktowani jako zamieszkujący cudzoziemcy, dopóki obywatelstwo nie zostanie najpierw zgodnie z prawem odebrane.",
+        "Obywatele naturalizowani pozostają objęci odrębnymi ramami odebrania obywatelstwa, dopóki obywatelstwo nie zostanie najpierw zgodnie z prawem cofnięte.",
         "Obywatele nie mogą być deportowani z własnego kraju.",
       ],
       implementationNote:
-        "Cudzoziemiec zamieszkujący legalnie korzysta dziś z gwarancji proceduralnych przeciw wydaleniu na gruncie europejskiego prawa praw człowieka. Usunięcie z kraju może być też niedopuszczalne tam, gdzie powrót naraziłby tę osobę na zakazane złe traktowanie. Zamierzony model jest zatem szybki po prawomocnym skazaniu, ale wciąż podlega kontroli prawnej tam, gdzie wymagają tego wiążące zobowiązania.",
+        "Cudzoziemiec zamieszkujący legalnie korzysta dziś z gwarancji proceduralnych przeciw wydaleniu na gruncie europejskiego prawa praw człowieka. Usunięcie z kraju może być też niedopuszczalne tam, gdzie powrót naraziłby tę osobę na zakazane złe traktowanie. Zamierzony model jest zatem szybki po prawomocnym skazaniu, ale wciąż podlega kontroli prawnej tam, gdzie wymagają tego wiążące zobowiązania. Zgodnie z art. 11 obowiązującej unijnej dyrektywy powrotowej zakazy wjazdu z reguły nie powinny przekraczać pięciu lat, ale mogą być dłuższe, gdy dana osoba stanowi poważne zagrożenie dla porządku publicznego, bezpieczeństwa publicznego lub bezpieczeństwa narodowego. Domyślny dziesięcioletni zakaz za zwyczajny nielegalny wjazd wykraczałby zatem poza obowiązującą regułę unijną.",
       keywords: [
         "deportacja",
+        "deportacja z powodu przestępstwa",
         "sprawcy przestępstw",
         "wydalenie",
         "zakaz ponownego wjazdu",
+        "dziesięć lat",
+        "stały zakaz",
+        "zabójstwo",
+        "zgwałcenie",
+        "terroryzm",
+        "nielegalny pobyt",
         "zezwolenie na pobyt",
         "porządek publiczny",
         "usunięcie z kraju",
@@ -619,28 +633,35 @@ export const policyText: PolicyText = {
     },
 
     naturalization: {
-      title: "Naturalizacja",
+      title: "Asymilacja i naturalizacja",
       shortAnswer:
-        "Zwyczajna droga wymaga około piętnastu lat legalnego zamieszkania przed złożeniem wniosku oraz spełnienia wymagających warunków asymilacji.",
+        "Obywatelstwo wymaga znacznie wyższego miernika niż zwyczajne zamieszkanie czy integracja: udanej asymilacji we wspólnocie politycznej narodu.",
       position: [
         "Zwyczajna droga naturalizacji według Restore Europa wymaga około piętnastu lat legalnego zamieszkania przed złożeniem wniosku, a wraz z tym spełnienia wyjątkowo wymagających warunków asymilacji.",
+        "Naturalizacja nie jest automatycznym następstwem czasu spędzonego w kraju. Wnioskodawcy muszą spełnić wymagające warunki językowe, obywatelskie, dotyczące postępowania oraz więzi z krajem, zanim obywatelstwo zostanie nadane.",
       ],
       policies: [
-        "Biegłość w języku narodowym.",
-        "Szeroka znajomość historii, kultury, tradycji i instytucji narodowych.",
+        "Utrzymanie przewidzianej w katalogu zwyczajnej drogi około piętnastu lat zamieszkania przed możliwością ubiegania się o zwyczajną naturalizację.",
+        "Wymóg zaawansowanego praktycznego opanowania języka narodowego oraz rzetelnej znajomości historii, instytucji i porządku konstytucyjnego.",
         "Poszanowanie porządku konstytucyjnego oraz chrześcijańskiego i historycznego charakteru kraju.",
-        "Wykazana lojalność i długotrwały udział w życiu kraju.",
-        "Postępowanie zgodne z prawem i samodzielność ekonomiczna tam, gdzie jest to rozsądnie możliwe.",
+        "Wymóg trwałego postępowania zgodnego z prawem i prawdomówności wobec organów do spraw cudzoziemców i obywatelstwa.",
+        "Wymóg wykazania trwałej więzi z krajem, a nie samego zamieszkania.",
+        "Dopuszczalność obiektywnych egzaminów z języka i wiedzy obywatelskiej.",
+        "Odmowa naturalizacji tam, gdzie poważna przestępczość, terroryzm, poważne oszustwo lub umyślne wprowadzenie w błąd co do tożsamości nadal stoją temu na przeszkodzie.",
+        "Okresowe powtórne egzaminy obywatelskie nie mogą stanowić automatycznej podstawy wydalenia osoby, która nabyła obywatelstwo zgodnie z prawem i uczciwie; odebranie obywatelstwa po naturalizacji regulują odrębne wpisy.",
       ],
       limits: ["Piętnaście lat zamieszkania nie gwarantuje automatycznie naturalizacji."],
       implementationNote:
-        "Zwyczajne wymogi zamieszkania w Europie wynoszą dziś od pięciu do dziesięciu lat, więc byłoby to wydłużenie istniejącej praktyki, a nie jej dostosowanie.",
+        "Zwyczajne wymogi zamieszkania w Europie wynoszą dziś od pięciu do dziesięciu lat, więc byłoby to wydłużenie istniejącej praktyki, a nie jej dostosowanie. Manifest już stwierdza, że naturalizacja powinna wymagać rzetelnej znajomości języka, historii i instytucji, poszanowania porządku konstytucyjnego oraz prawdziwej więzi z krajem. Niniejszy wpis zbiera te wymogi w miernik asymilacji przyjęty przez ruch.",
       keywords: [
         "naturalizacja",
-        "zamieszkanie",
         "asymilacja",
+        "zamieszkanie",
+        "język",
         "wymóg językowy",
+        "wiedza obywatelska",
         "egzamin na obywatelstwo",
+        "więź z krajem",
       ],
     },
 
@@ -765,6 +786,274 @@ export const policyText: PolicyText = {
         "bezpaństwowość",
         "zdrada stanu",
         "terroryzm",
+      ],
+    },
+
+    "remigration-general-principle": {
+      title: "Remigracja: zasada ogólna",
+      shortAnswer:
+        "Remigracja to zorganizowany powrót osób, którym brakuje zgodnej z prawem podstawy pozostania albo które ją tracą, połączony z polityką powrotu dobrowolnego, ścisłym egzekwowaniem warunków pobytu oraz weryfikacją statusu uzyskanego oszustwem lub w wyniku kwalifikowanej nieprawidłowości.",
+      position: [
+        "Restore Europa traktuje status migracyjny jako warunkowy: zależy on od zgodnego z prawem wjazdu, od dochowania warunków pobytu, od porządku publicznego oraz — tam, gdzie ma to zastosowanie — od udanej integracji. Remigracja nie jest określona jako usunięcie z kraju na podstawie samej rasy; działa poprzez status prawny, historię pobytu, zachowania przestępcze, oszustwo, względy bezpieczeństwa i jasno określone warunki pobytu.",
+      ],
+      policies: [
+        "Egzekwowanie prawomocnych decyzji o powrocie wobec osób bez zgodnego z prawem prawa pozostania.",
+        "Stosowanie powrotu dobrowolnego tam, gdzie jest realny, i powrotu przymusowego tam, gdzie ustała prawna podstawa pobytu.",
+        "Weryfikacja pobytu lub obywatelstwa uzyskanych przez istotne oszustwo lub wprowadzenie w błąd.",
+        "Dopuszczenie cofnięcia statusu pobytowego cudzoziemca za poważne przestępstwa, ciężkie zagrożenia dla bezpieczeństwa oraz z innych wyraźnie określonych ustawowo podstaw.",
+        "Utrzymanie obywatelstwa, pobytu stałego, pobytu czasowego, statusu azylowego i pobytu nielegalnego jako prawnie odrębnych kategorii.",
+        "Sam upływ długiego czasu nie tworzy automatycznego prawa pozostania tam, gdzie leżący u podstaw status pozostaje czasowy lub warunkowy.",
+        "Stosowanie procedur indywidualnych i wymogów dowodowych zamiast wydalenia zbiorowego wyłącznie według kategorii etnicznej lub rasowej.",
+      ],
+      implementationNote:
+        "Obowiązujące prawo europejskie nakłada na powrót i wydalenie istotne ograniczenia proceduralne i wynikające z praw człowieka. Niniejszy wpis przedstawia proponowaną architekturę polityki; jej wdrożenie wymagałoby zgodności z niedającymi się z nią pogodzić zobowiązaniami prawnymi, ich zmiany albo wystąpienia z nich. Istniejący manifest ruchu traktuje już obywatelstwo jako przynależność, a nie sam pobyt, i opowiada się za kontrolowaną imigracją, dającą się pogodzić z integracją, stabilnością i ciągłością narodową.",
+      keywords: [
+        "remigracja",
+        "powrót",
+        "egzekwowanie prawa imigracyjnego",
+        "pobyt",
+        "deportacja",
+        "integracja",
+        "obywatelstwo",
+      ],
+    },
+
+    "integration-general-definition": {
+      title: "Integracja: określenie ogólne",
+      shortAnswer:
+        "Integracja oznacza dające się wykazać włączenie językowe, obywatelskie, gospodarcze i społeczne w naród przyjmujący; sam pobyt nie wystarcza.",
+      position: [
+        "Integrację mierzy się postępowaniem, umiejętnościami i trwałym uczestnictwem. Różni się ona od obywatelstwa oraz od wyższego miernika asymilacji wymaganego przy naturalizacji.",
+      ],
+      policies: [
+        "Wymóg funkcjonalnego opanowania głównego języka narodowego, zwykle mniej więcej na poziomie B1–B2, zależnie od statusu, o który się ubiega.",
+        "Wymóg podstawowej znajomości historii narodowej, instytucji, prawa, obowiązków obywatelskich i ustroju konstytucyjnego.",
+        "Utrzymująca się poważna przestępczość, przestępczość zorganizowana, terroryzm, poważne oszustwo i umyślne oszustwo imigracyjne stanowią silną przesłankę przeciw integracji.",
+        "Oczekiwanie, że zdolni do pracy cudzoziemcy w wieku produkcyjnym będą uczestniczyć przez zatrudnienie, samozatrudnienie, naukę, kształcenie zawodowe, uznaną opiekę nad członkami rodziny albo inny prawnie uznany wkład.",
+        "Możliwa do uniknięcia długotrwała zależność od pomocy publicznej jest okolicznością negatywną dla integracji, z wyłączeniem rzeczywistej niezdolności, niepełnosprawności, emerytury, przejściowego bezrobocia i znacznych obowiązków opiekuńczych.",
+        "Dopuszczenie dowodów miejscowego uczestnictwa przez pracę, naukę, parafie, stowarzyszenia, kluby i inne instytucje wspólnotowe, bez czynienia obowiązkową przynależności do jakiejkolwiek konkretnej organizacji.",
+        "Wymóg poszanowania zgodnego z prawem porządku konstytucyjnego, bez żądania zgodności światopoglądowej z każdą polityką rządu.",
+        "Ocena integracji na podstawie udokumentowanych dowodów indywidualnych, a nie samej rasy.",
+      ],
+      implementationNote:
+        "Obowiązujące prawo unijne o rezydentach długoterminowych pozwala państwom członkowskim nakładać warunki integracyjne i wymaga stałych oraz regularnych dochodów przy nabyciu statusu długoterminowego. Polityka ta oddziela oparte na pochodzeniu wyobrażenia o historycznej narodowości od możliwego do stosowania testu prawnego, czy dany mieszkaniec jest zintegrowany.",
+      keywords: [
+        "integracja",
+        "język",
+        "wiedza obywatelska",
+        "samodzielność",
+        "pobyt",
+        "porządek publiczny",
+        "uczestnictwo",
+      ],
+    },
+
+    "regularized-irregular-immigration": {
+      title: "Zalegalizowana imigracja nieuregulowana",
+      shortAnswer:
+        "Późniejsza legalizacja nie zaciera automatycznie udowodnionej historii nielegalnego wjazdu lub nielegalnego pobytu; sprawy wcześniej zalegalizowane mogą być indywidualnie zweryfikowane na gruncie nowych ram prawnych.",
+      position: [
+        "Restore Europa odrzuca twierdzenie, że każda dawna legalizacja czy abolicja musi być traktowana jako konstytucyjnie nienaruszalna. Tam, gdzie wiarygodne dokumenty wykazują wcześniejszy nielegalny wjazd, nielegalny pobyt, fałszywą tożsamość albo inną istotną nieprawidłowość, powstała z tego historia pobytu może zostać zweryfikowana indywidualnie.",
+      ],
+      policies: [
+        "Dopuszczenie indywidualnej weryfikacji statusów pobytowych powstałych z dawniejszych abolicji, masowych legalizacji lub porównywalnych programów nadzwyczajnych.",
+        "Wymóg, by państwo udowodniło istotną historię pobytu na podstawie dokumentów i dowodów; nieprawidłowości nie wolno po prostu domniemywać.",
+        "Weryfikacja całych akt pierwotnych, w tym tożsamości, historii wjazdu, historii azylowej, podstawy pobytu, późniejszych zezwoleń i ewentualnego postępowania naturalizacyjnego.",
+        "Odróżnienie samej wcześniejszej nieprawidłowości od istotnego oszustwa, fałszywej tożsamości lub zatajenia, które mogą pociągać surowsze następstwa.",
+        "Jeżeli status przetrwa weryfikację na gruncie nowego prawa, pozostaje ważny z zastrzeżeniem zwyczajnych warunków pobytu.",
+        "Jeżeli status nie zostałby przyznany na gruncie właściwej nowej reguły, a konstytucja dopuszcza weryfikację wsteczną, może nastąpić cofnięcie i powrót w drodze decyzji indywidualnej z postępowaniem odwoławczym.",
+      ],
+      limits: [
+        "Niniejszy wpis nie traktuje każdego obywatela naturalizowanego jako oszusta tylko dlatego, że wcześniejszy okres pobytu był nieuregulowany; oszustwo i zgodna z prawem legalizacja pozostają odrębnymi pojęciami.",
+      ],
+      implementationNote:
+        "Jest to proponowane uprawnienie do weryfikacji wstecznej i wykracza ono poza trwałość, jaką zwykle przypisuje się ostatecznym decyzjom administracyjnym. Wymagałoby ono wyraźnego upoważnienia konstytucyjnego, określonych reguł przedawnienia i gwarancji proceduralnych.",
+      keywords: [
+        "legalizacja",
+        "abolicja",
+        "nielegalny wjazd",
+        "nielegalny pobyt",
+        "weryfikacja statusu",
+        "historia pobytu",
+      ],
+    },
+
+    "employment-and-self-sufficiency-of-foreign-residents": {
+      title: "Zatrudnienie i samodzielność cudzoziemców zamieszkujących w kraju",
+      shortAnswer:
+        "Od zdolnych do pracy cudzoziemców zamieszkujących w kraju oczekuje się, że utrzymają się sami, i z reguły nie przysługuje im takie samo bezterminowe uprawnienie do świadczeń jak obywatelom.",
+      position: [
+        "Pobyt cudzoziemca jest udzielany w określonych celach i pozostaje warunkowy. Mieszkańcy zdolni do pracy powinni zwykle utrzymywać się z zatrudnienia, samozatrudnienia, nauki, szkolenia lub uznanej opieki, a nie przez trwałą i możliwą do uniknięcia zależność od pomocy publicznej.",
+      ],
+      policies: [
+        "Wymóg, by cudzoziemcy przebywający czasowo i zwyczajnie utrzymywali wystarczające zgodne z prawem środki utrzymania, z zastrzeżeniem rozsądnych okresów ochronnych po niezawinionej utracie pracy.",
+        "Zatrudnienie, samozatrudnienie, nauka w pełnym wymiarze, kształcenie zawodowe i znaczna opieka nad członkami rodziny liczą się jako prawnie uznane uczestnictwo.",
+        "Wyjątki przewiduje się dla rzeczywistej niepełnosprawności, niezdolności, emerytury, dzieci oraz przejściowych trudności mimo rozsądnych starań o pracę.",
+        "Ograniczenie zwyczajnych świadczeń socjalnych poza sytuacjami nagłymi dla osób niebędących obywatelami tam, gdzie jest to konstytucyjnie i prawnie dopuszczalne.",
+        "Zachowanie żywności, schronienia i koniecznej opieki medycznej w sytuacjach nagłych tam, gdzie ich odmowa naruszałaby podstawowe zobowiązania prawne lub humanitarne.",
+        "Powtarzająca się, możliwa do uniknięcia zależność od pomocy publicznej stanowi możliwą podstawę weryfikacji pobytu tam, gdzie zezwolenie było wyraźnie uzależnione od samodzielności.",
+        "Nabyte obywatelstwo pozostaje odrębne: samo bezrobocie nie zamienia automatycznie obywatela w osobę przebywającą nielegalnie.",
+      ],
+      limits: [
+        "Dokładny okres ochronny po utracie pracy powinien zostać określony w ustawie wykonawczej, a nie wpisany na stałe w zasadę konstytucyjną.",
+      ],
+      implementationNote:
+        "Obowiązujące przepisy unijne o rezydentach długoterminowych wymagają stałych i regularnych dochodów do nabycia tego statusu, ale obowiązujące prawo daje też rezydentom długoterminowym istotną ochronę i nie zezwala na wydalenie wyłącznie ze względów ekonomicznych. Proponowane przez ruch ramy szłyby dalej wobec pewnych kategorii pobytu cudzoziemców.",
+      keywords: [
+        "samodzielność",
+        "zatrudnienie",
+        "świadczenia socjalne",
+        "cudzoziemcy zamieszkujący w kraju",
+        "zezwolenie na pobyt",
+        "uczestnictwo gospodarcze",
+      ],
+    },
+
+    "probationary-naturalization": {
+      title: "Naturalizacja na okres próbny",
+      shortAnswer:
+        "Nowo nabyte obywatelstwo podlega dziesięcioletniemu okresowi próbnemu z zaostrzonymi zasadami odebrania z wąsko określonych ciężkich podstaw.",
+      position: [
+        "Naturalizacja tworzy obywatelstwo, lecz przez pierwszych dziesięć lat państwo zachowuje zaostrzone uprawnienie do wznowienia sprawy i odebrania nabytego obywatelstwa z powodu określonych poważnych naruszeń albo istotnych wad podstawy naturalizacji.",
+      ],
+      policies: [
+        "Ustalenie okresu próbnego na dziesięć lat od dnia nabycia obywatelstwa.",
+        "Dopuszczenie odebrania za istotne oszustwo w postępowaniu naturalizacyjnym, fałszywą tożsamość lub umyślne zatajenie faktu wykluczającego nadanie.",
+        "Dopuszczenie odebrania za wyjątkowo poważne przestępstwa popełnione po naturalizacji, określone w odrębnym wpisie o obywatelstwie i poważnej przestępczości.",
+        "Dopuszczenie odebrania za terroryzm, zdradę stanu lub postępowanie stanowiące wyjątkowo ciężkie zagrożenie dla bezpieczeństwa narodowego, gdy ustawa wyraźnie tak stanowi.",
+        "Wymóg indywidualnego postępowania sądowego lub quasi-sądowego, dowodu podstawy ustawowej i rzeczywistego prawa do odwołania.",
+        "Samo bezrobocie, różnica poglądów politycznych ani niezdany egzamin obywatelski nie stanowią automatycznej podstawy odebrania.",
+        "Po upływie dziesięciu lat stosuje się zwyczajną ochronę obywatelstwa, z zastrzeżeniem trwałych podstaw związanych z oszustwem oraz innych nadzwyczajnych podstaw odebrania przyjętych w innym miejscu katalogu.",
+      ],
+      implementationNote:
+        "Jest to proponowane odstępstwo konstytucyjne od porządków, które dla wszystkich celów pozbawienia traktują naturalizację od razu jako nieodróżnialną od obywatelstwa z urodzenia. Istniejące międzynarodowe instrumenty dotyczące obywatelstwa ograniczają pozbawienie, zwłaszcza tam, gdzie prowadziłoby ono do bezpaństwowości; te sprzeczności wymagałyby wyraźnego uregulowania konstytucyjnego i traktatowego.",
+      keywords: [
+        "obywatelstwo na okres próbny",
+        "naturalizacja",
+        "odebranie obywatelstwa",
+        "dziesięć lat",
+        "oszustwo",
+        "poważne przestępstwo",
+      ],
+    },
+
+    "residence-permit-withdrawal": {
+      title: "Cofnięcie zezwolenia na pobyt",
+      shortAnswer:
+        "Status pobytowy cudzoziemca traci się łatwiej niż obywatelstwo i może on zostać cofnięty, gdy określone warunki wjazdu lub dalszego pobytu zostaną istotnie naruszone.",
+      position: [
+        "Pobyt jest warunkowym zezwoleniem prawnym. Poważna przestępczość, istotne oszustwo, ciężkie zagrożenia dla bezpieczeństwa oraz uporczywe niedopełnianie wyraźnie określonych warunków pobytu mogą uzasadniać cofnięcie i powrót.",
+      ],
+      policies: [
+        "Cofnięcie zezwolenia lub odmowa jego przedłużenia w razie istotnego oszustwa co do tożsamości lub pobytu.",
+        "Cofnięcie pobytu w razie poważnego przestępstwa z użyciem przemocy lub przestępstwa seksualnego, terroryzmu, poważnej przestępczości zorganizowanej i porównywalnych ciężkich czynów, z zastrzeżeniem odrębnych ram deportacji z powodu przestępstwa.",
+        "Cofnięcie pobytu, gdy dana osoba stanowi ciężkie i udowodnione zagrożenie dla bezpieczeństwa narodowego.",
+        "Dopuszczenie weryfikacji w razie powtarzającej się, możliwej do uniknięcia zależności od świadczeń socjalnych, gdy samodzielność była wyraźnym warunkiem zezwolenia.",
+        "Dopuszczenie weryfikacji w razie poważnego i uporczywego niespełniania właściwych wymogów integracyjnych, gdy status był wyraźnie uzależniony od integracji.",
+        "Dopuszczenie, by długa nieobecność kończyła status pobytowy; zwyczajna ustawa wykonawcza powinna określić próg według rodzaju zezwolenia w przedziale około dwóch do pięciu lat.",
+        "Zawiadomienie o podstawach i indywidualna możliwość zaskarżenia decyzji.",
+      ],
+      implementationNote:
+        "Obowiązujące prawo unijne zapewnia rezydentom długoterminowym silniejszą ochronę. Obowiązująca dyrektywa o rezydentach długoterminowych dopuszcza utratę statusu po określonych nieobecnościach i zezwala na wydalenie tylko w razie rzeczywistego i dostatecznie poważnego zagrożenia dla porządku publicznego lub bezpieczeństwa; same względy ekonomiczne nie mogą uzasadniać wydalenia. Proponowana przez ruch polityka wymagałaby zatem zmian tam, gdzie jest szersza niż obowiązujące przepisy unijne.",
+      keywords: [
+        "zezwolenie na pobyt",
+        "cofnięcie",
+        "oszustwo",
+        "poważne przestępstwo",
+        "integracja",
+        "nieobecność",
+        "bezpieczeństwo publiczne",
+      ],
+    },
+
+    "voluntary-return-and-reintegration": {
+      title: "Powrót dobrowolny i reintegracja",
+      shortAnswer:
+        "Państwo może sfinansować skromną jednorazową pomoc w powrocie, gdy osoba niebędąca obywatelem dobrowolnie i trwale wraca do kraju swojego obywatelstwa albo do innego kraju uprawnionego do jej przyjęcia.",
+      position: [
+        "Powrót dobrowolny jest lepszy niż kosztowne usunięcie przymusowe tam, gdzie osiąga ten sam zgodny z prawem cel szybko i niezawodnie.",
+      ],
+      policies: [
+        "Pokrycie rozsądnych kosztów podróży w ramach zatwierdzonego programu powrotu dobrowolnego.",
+        "Dopuszczenie ograniczonej jednorazowej pomocy w przesiedleniu lub reintegracji tam, gdzie istotnie zwiększa ona szansę trwałego powrotu.",
+        "Uzależnienie pomocy od rzeczywistego wyjazdu i od dochowania uzgodnionych warunków powrotu.",
+        "Nietworzenie uprawnienia do powtarzanych świadczeń powrotowych.",
+        "Gdy obowiązuje zakaz ponownego wjazdu, dobrowolny wyjazd nie uchyla go automatycznie, chyba że ustawa wyraźnie stanowi inaczej.",
+        "Współpraca, gdy to konieczne, z władzami kraju docelowego lub z uznanymi organizacjami w celu uzyskania dokumentów podróży i zapewnienia przyjęcia.",
+        "Pierwszeństwo dobrowolnego wyjazdu przed detencją lub przymusowym usunięciem tam, gdzie nie ma poważnego ryzyka ucieczki ani ryzyka przestępczego lub dla bezpieczeństwa.",
+      ],
+      implementationNote:
+        "Niniejszy wpis jest mechanizmem wykonawczym, a nie oceną moralną osoby powracającej. Jego celem jest uczynienie powrotu szybszym, tańszym i bardziej uporządkowanym tam, gdzie współpraca jest możliwa.",
+      keywords: [
+        "powrót dobrowolny",
+        "reintegracja",
+        "pomoc w przesiedleniu",
+        "koszty podróży",
+        "program powrotowy",
+      ],
+    },
+
+    "naturalized-citizenship-and-exceptionally-serious-crime": {
+      title: "Obywatelstwo nabyte a przestępstwa wyjątkowo ciężkie",
+      shortAnswer:
+        "Nabyte obywatelstwo może zostać odebrane za wąsko określoną grupę przestępstw wyjątkowo ciężkich, po czym następuje usunięcie z kraju tam, gdzie wynikające z tego wymogi obywatelstwa i powrotu da się zgodnie z prawem spełnić.",
+      position: [
+        "Naturalizacja nie stawia każdego późniejszego czynu poza prawem o obywatelstwie. Proponowany ład konstytucyjny dopuszcza odebranie nabytego obywatelstwa za określone wyjątkowo ciężkie postępowanie po naturalizacji, pozostawiając zwyczajną przestępczość w rękach wymiaru sprawiedliwości w sprawach karnych.",
+      ],
+      policies: [
+        "Ograniczenie tego uprawnienia do wyliczonej grupy przestępstw wyjątkowo ciężkich, takich jak zabójstwo umyślne, zgwałcenie, kwalifikowane wykorzystywanie seksualne dzieci, terroryzm i porównywalne ciężkie czyny.",
+        "Wymóg prawomocnego skazania karnego przed odebraniem obywatelstwa z powodu przestępstwa.",
+        "Wymóg odrębnego postępowania w sprawie obywatelstwa, ustalającego, czy ustawowe przesłanki odebrania są spełnione.",
+        "Zapewnienie rzeczywistego odwołania przed wykonaniem usunięcia z kraju.",
+        "Gdy obywatelstwo zostaje odebrane, a dana osoba posiada inne obywatelstwo albo może je zgodnie z prawem odzyskać, stosuje się zwyczajne ramy powrotu.",
+        "Gdy obywatelstwo jest sporne, przeprowadza się jego ustalenie, zamiast zakładać, że samo miejsce urodzenia dowodzi obowiązku przyjęcia danej osoby przez jakieś państwo.",
+        "Samo pochodzenie nie może być przesłanką prawnokarną; rozstrzygające jest połączenie nabytego obywatelstwa z kwalifikowanym postępowaniem.",
+      ],
+      implementationNote:
+        "Konwencja z 1961 roku o ograniczaniu bezpaństwowości co do zasady zakazuje pozbawienia obywatelstwa tam, gdzie uczyniłoby ono osobę bezpaństwowcem, z zastrzeżeniem określonych wyjątków, w tym obywatelstwa uzyskanego oszustwem oraz pewnych podstaw zachowanych na mocy artykułu 8. Szersze uprawnienie wymagałoby wyraźnego odniesienia się do tych zobowiązań traktatowych. Zniszczenie paszportu samo w sobie nie zaciera obywatelstwa; paszport jest dowodem obywatelstwa, a nie jego prawnym źródłem.",
+      keywords: [
+        "obywatelstwo nabyte",
+        "odebranie obywatelstwa",
+        "poważne przestępstwo",
+        "zabójstwo",
+        "zgwałcenie",
+        "terroryzm",
+        "obywatelstwo",
+      ],
+    },
+
+    "return-readmission-identity-and-removal-procedure": {
+      title: "Powrót, readmisja, tożsamość i procedura usunięcia z kraju",
+      shortAnswer:
+        "Polityka powrotowa opiera się na mieszanym modelu egzekwowania: ustalenie tożsamości i detencja w celu usunięcia z kraju tam, gdzie to konieczne, a następnie ograniczony status tymczasowy, jeżeli usunięcie pozostaje przejściowo niemożliwe, przy dalszych staraniach o ustalenie obywatelstwa i uzyskanie readmisji.",
+      position: [
+        "Prawomocna decyzja o powrocie musi być wykonalna w praktyce. Państwo powinno zatem utrzymywać mechanizmy weryfikacji tożsamości, detencji, obowiązku stawiennictwa i readmisji, zamiast pozwalać, by zniszczenie dokumentów albo brak współpracy automatycznie prowadziły do pobytu stałego.",
+      ],
+      policies: [
+        "Niezwłoczne rozpoczęcie weryfikacji tożsamości i obywatelstwa tam, gdzie osoba podlegająca usunięciu nie ma wiarygodnych dokumentów.",
+        "Wykorzystanie paszportów, dokumentów nieważnych, rejestrów stanu cywilnego, odcisków palców lub innych danych biometrycznych tam, gdzie prawo na to pozwala, dokumentów rodzinnych, sprawdzeń konsularnych, przesłanek językowych i biograficznych oraz umów o readmisji w celu ustalenia tożsamości i obywatelstwa.",
+        "Traktowanie umyślnego zniszczenia lub ukrycia dokumentów jako okoliczności obciążającej w postępowaniu wykonawczym, przy uznaniu, że zniszczenie paszportu samo w sobie nie kończy obywatelstwa.",
+        "Dopuszczenie detencji imigracyjnej tam, gdzie jest konieczna do ustalenia tożsamości, zapobieżenia ucieczce lub wykonania nieodległego usunięcia, z zastrzeżeniem określonych granic ustawowych i ciągłych starań o usunięcie.",
+        "Jeżeli usunięcia nie da się wykonać w maksymalnym dopuszczalnym prawem okresie detencji, przeniesienie osoby do ograniczonego statusu tymczasowego, a nie do zwyczajnego pobytu stałego.",
+        "Status ograniczony może obejmować obowiązek stawiennictwa, ograniczenia miejsca pobytu, dalszą współpracę w procedurach ustalania tożsamości i ograniczoną pomoc publiczną.",
+        "Sam upływ czasu w statusie ograniczonym nie może automatycznie przekształcać się w obywatelstwo ani w pobyt stały.",
+        "Wznowienie usunięcia z kraju, gdy tylko obywatelstwo, dokumenty podróży i zgodna z prawem readmisja staną się dostępne.",
+        "Wykorzystanie umów o readmisji i nacisku dyplomatycznego, by skłonić państwa do przyjmowania osób, których obywatelstwo jest ustalone według ich własnego prawa.",
+        "Dopuszczenie wspólnego wyjazdu członków rodziny tam, gdzie usuwani są rodzice, a dzieci mają prawo im towarzyszyć; samodzielne kwestie obywatelstwa, pieczy i ochrony dziecka wymagają rozstrzygnięcia indywidualnego.",
+        "Stosowanie nowych konstytucyjnych reguł imigracyjnych do statusów istniejących tam, gdzie ustawa wyraźnie przewiduje weryfikację wsteczną, z zastrzeżeniem procedur weryfikacyjnych określonych w innych wpisach tego zespołu.",
+      ],
+      implementationNote:
+        "Obowiązujące unijne prawo powrotowe ogranicza detencję do możliwie najkrótszego odpowiedniego okresu, dopóki czynności zmierzające do usunięcia są aktywnie prowadzone, i zawiera określone okresy maksymalne oraz gwarancje. Proponowany model mieszany przejmuje ogólną kolejność detencji, a następnie statusu ograniczonego, gdy natychmiastowe usunięcie jest niemożliwe, przy czym dokładny czas trwania zależałby od ostatecznie przyjętego porządku prawnego. Miejsce urodzenia jest użyteczną przesłanką, ale samo w sobie nie ustala obywatelstwa ani bezwarunkowego obowiązku przyjęcia osoby przez dany kraj. Readmisja zależy od prawa o obywatelstwie, od dowodów i od właściwych umów. Bezpaństwowcem jest ten, kogo żadne państwo nie uważa za swojego obywatela w myśl swojego prawa. Proponowany system wymaga zatem ustalenia obywatelstwa, zamiast zakładać, że bezpaństwowość zawsze da się usunąć przez przypisanie osoby do kraju urodzenia.",
+      keywords: [
+        "procedura powrotu",
+        "readmisja",
+        "detencja",
+        "tożsamość",
+        "obywatelstwo",
+        "status ograniczony",
+        "bezpaństwowość",
+        "jedność rodziny",
+        "wsteczne stosowanie prawa",
       ],
     },
 

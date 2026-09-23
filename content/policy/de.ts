@@ -5,7 +5,7 @@ export const policyText: PolicyText = {
     eyebrow: "Positionen",
     title: "Programmkatalog",
     metaTitle: "Programmkatalog",
-    version: "Version 0.2",
+    version: "Version 0.3",
     framework: "Europäische integrale Erneuerung",
     lede: "Dieser Katalog beantwortet eine eng gefasste Frage: Was vertritt Restore Europa in dieser Sache? Er ersetzt das Manifest nicht. Das Manifest legt das Weltbild dar; hier stehen durchsuchbare Positionen, Thema für Thema.",
     description:
@@ -14,6 +14,7 @@ export const policyText: PolicyText = {
       "Wo die katholische Sittenlehre klar ist, übernimmt Restore Europa sie in der Regel als sittliche Grundlinie und nennt die Umsetzung im bürgerlichen Recht gesondert. Eine Abweichung ist ausdrücklich festgehalten: Bei der Todesstrafe hält Restore Europa an der älteren überlieferten Zulassung für Ausnahmefälle fest und nicht an der heutigen abolitionistischen Position.",
       "Der Katalog unterscheidet die Verfassungsordnung, die Restore Europa anstrebt, vom geltenden europäischen Recht. Mehrere Positionen — zur Staatsangehörigkeit, zur Aberkennung der Staatsbürgerschaft, zur Meinungsfreiheit, zur öffentlichen Stellung der Religion und zur Todesstrafe — setzten eine Verfassungs- oder Vertragsänderung voraus, ehe sie in einzelnen europäischen Staaten in Kraft gesetzt werden könnten. Wo das so ist, sagt der Eintrag es.",
       "Version 0.2 entscheidet die Fragen, die Version 0.1 offengelassen hatte: das Verhältnis zu den europäischen Institutionen, Asyl, Abschiebung, Löhne, Steuern, Renten, Wohnen, die Vertretung der Arbeitnehmer, digitale Identität und digitale Währung, biometrische Überwachung, Gentechnik, das Strafmaß, den Energiemix und jede offene Frage der Außenpolitik. Wo eine Formulierung der Version 0.2 einen früheren Eintrag geändert hat, gilt der neuere Text.",
+      "Version 0.3 fügt den Komplex zu Remigration und Vollzug hinzu. Er unterscheidet Staatsbürgerschaft, Aufenthaltsstatus, strafrechtliche Abschiebung, asylrechtliche Rückkehr und die Überprüfung der Staatsangehörigkeit, statt Remigration als eine einzige, undifferenzierte Befugnis zu behandeln, und ist als vorgeschlagene Verfassungs- und Gesetzespolitik verfasst, wobei das geltende europäische und internationale Recht in jedem Eintrag gesondert vermerkt wird. Zwei frühere Einträge — die Einbürgerung und die Abschiebung straffällig gewordener Ausländer — gehen in den neueren Formulierungen auf, statt daneben doppelt zu bestehen.",
     ],
     notice:
       "Jede Frage in diesem Katalog trägt eine Position. Einträge, die als Abgeleitet gekennzeichnet sind, folgen der Richtung des Manifests, ohne dass ihre Umsetzung feststünde, und mehrere benennen die Rechts- oder Vertragsänderung, die sie voraussetzen würden. Positionen werden geändert, sobald die Bewegung entscheidet; Version und Datum oben sagen, welchen Text Sie lesen.",
@@ -52,6 +53,8 @@ export const policyText: PolicyText = {
         "Das Verfahren der Altersprüfung für soziale Medien",
         "Netto-Null-Termine, CO₂-Preise und Emissionsquoten",
         "Die Kriterien, Amt für Amt, für die öffentlichen Ämter mit beschränktem Zugang",
+        "Karenzzeiten für ausländische Einwohner nach unverschuldetem Verlust des Arbeitsplatzes",
+        "Titelabhängige Abwesenheitsfristen und Höchstdauern der Abschiebungshaft",
       ],
     },
   },
@@ -540,29 +543,40 @@ export const policyText: PolicyText = {
     },
 
     "deportation-of-criminal-offenders": {
-      title: "Abschiebung straffällig gewordener Ausländer",
+      title: "Strafrechtliche Abschiebung und Wiedereinreiseverbote",
       shortAnswer:
-        "Ein Ausländer, der wegen einer schweren Straftat des einschlägigen Katalogs verurteilt wird, sollte in der Regel das Recht auf Verbleib verlieren und ein dauerhaftes Wiedereinreiseverbot erhalten.",
+        "Schwer straffällig gewordene Ausländer werden nach dem Strafverfahren abgeschoben und dauerhaft ausgeschlossen; gewöhnliche Verstöße gegen das Aufenthaltsrecht ziehen in der Regel ein zehnjähriges Wiedereinreiseverbot nach sich.",
       position: [
         "Staatsbürgerschaft und ausländischer Aufenthalt sind verschiedene Rechtsstellungen. Schwere vorsätzliche Straftaten eines Ausländers können es rechtfertigen, den Aufenthalt nach einer Verurteilung in einem fairen Strafverfahren zu beenden.",
+        "Der ausländische Aufenthalt verleiht nicht dasselbe dauerhafte Recht auf Verbleib wie die Staatsbürgerschaft. Ein Ausländer, der wegen einer schweren Straftat des einschlägigen Katalogs verurteilt wird, sollte in der Regel den Aufenthalt verlieren und nach Abschluss des maßgeblichen Strafverfahrens abgeschoben werden.",
       ],
       policies: [
-        "Vor einer Abschiebung wegen Straftaten ist eine rechtmäßige strafrechtliche Verurteilung erforderlich.",
+        "Vor einer Abschiebung wegen Straftaten ist eine rechtmäßige Verurteilung wegen der herangezogenen Tat erforderlich.",
         "Schwere Gewaltkriminalität, schwere Sexualstraftaten, Raub, organisierte Kriminalität, Terrorismus, Menschenhandel, schwerer Drogenhandel, schwerer Betrug und vergleichbare vorsätzliche Straftaten lösen vermutungsweise die Abschiebung aus.",
         "Wiederholte Straffälligkeit kann die Abschiebung auch dann rechtfertigen, wenn die einzelnen Taten weniger schwer wiegen.",
-        "Wird eine Freiheitsstrafe verhängt, folgt die Abschiebung in der Regel auf die Verbüßung der Haftstrafe, sofern nicht eine rechtmäßige frühere Überstellung möglich ist.",
-        "An Abschiebungen wegen solcher Straftaten wird ein dauerhaftes Wiedereinreiseverbot geknüpft.",
+        "Vorsätzlicher Mord, Vergewaltigung, schwerer sexueller Missbrauch von Kindern, Terrorismus, schwerer Menschenhandel, schwere organisierte Gewalt und vergleichbare schwerwiegende Straftaten gelten vermutungsweise als Fälle eines dauerhaften Verbots.",
+        "An qualifizierte Abschiebungen wegen schwerer Straftaten und wegen schwerwiegender Gefahren für die nationale Sicherheit wird ein dauerhaftes Wiedereinreiseverbot geknüpft.",
+        "Für schwere gewöhnliche Verstöße gegen das Aufenthaltsrecht wie die vorsätzliche unerlaubte Einreise, den wiederholten unerlaubten Aufenthalt oder die vorsätzliche Umgehung einer Rückkehrentscheidung gilt regelmäßig ein zehnjähriges Wiedereinreiseverbot, vorbehaltlich der Verhältnismäßigkeitsregeln des Ausführungsgesetzes.",
+        "Bei wirklich geringfügigen oder rein technischen Verstößen gegen das Aufenthaltsrecht sind mildere Sanktionen zulässig, wo ein zehnjähriges Verbot unverhältnismäßig wäre.",
+        "Die Abschiebung wird nach der Verbüßung der Haftstrafe vollzogen, sofern nicht eine rechtmäßige Überstellung oder eine frühere Abschiebung möglich ist.",
         "Geringfügige Verwaltungsverstöße oder Bagatelltaten lösen nicht ohne Weiteres eine dauerhafte Ausweisung aus.",
-        "Für eingebürgerte Staatsbürger gelten die gesonderten Regeln über die Aberkennung der Staatsbürgerschaft; sie werden nicht wie ausländische Einwohner behandelt, solange die Staatsbürgerschaft nicht zuvor rechtmäßig aberkannt worden ist.",
+        "Eingebürgerte Staatsbürger bleiben dem gesonderten Rahmen der Aberkennung der Staatsbürgerschaft unterstellt, solange die Staatsbürgerschaft nicht zuvor rechtmäßig entzogen worden ist.",
         "Bürger dürfen nicht aus ihrem eigenen Land abgeschoben werden.",
       ],
       implementationNote:
-        "Ein rechtmäßig ansässiger Ausländer genießt nach dem europäischen Menschenrechtsschutz derzeit Verfahrensgarantien gegen die Ausweisung. Die Abschiebung kann außerdem ausgeschlossen sein, wenn die Rückkehr die Person einer verbotenen Misshandlung aussetzte. Das angestrebte Modell wirkt deshalb zwar zügig nach der rechtskräftigen Verurteilung, bleibt aber gerichtlich überprüfbar, wo bindende Verpflichtungen es verlangen.",
+        "Ein rechtmäßig ansässiger Ausländer genießt nach dem europäischen Menschenrechtsschutz derzeit Verfahrensgarantien gegen die Ausweisung. Die Abschiebung kann außerdem ausgeschlossen sein, wenn die Rückkehr die Person einer verbotenen Misshandlung aussetzte. Das angestrebte Modell wirkt deshalb zwar zügig nach der rechtskräftigen Verurteilung, bleibt aber gerichtlich überprüfbar, wo bindende Verpflichtungen es verlangen. Nach Artikel 11 der geltenden EU-Rückführungsrichtlinie sollen Einreiseverbote in der Regel fünf Jahre nicht überschreiten, dürfen aber länger ausfallen, wenn von der Person eine schwerwiegende Gefahr für die öffentliche Ordnung, die öffentliche Sicherheit oder die nationale Sicherheit ausgeht. Ein regelmäßiges zehnjähriges Verbot für die gewöhnliche unerlaubte Einreise ginge daher über die geltende Regel der Union hinaus.",
       keywords: [
         "Abschiebung",
+        "strafrechtliche Abschiebung",
         "Straftäter",
         "Ausweisung",
         "Wiedereinreiseverbot",
+        "zehn Jahre",
+        "dauerhaftes Verbot",
+        "Mord",
+        "Vergewaltigung",
+        "Terrorismus",
+        "unerlaubter Aufenthalt",
         "Aufenthaltstitel",
         "öffentliche Ordnung",
         "Rückführung",
@@ -592,28 +606,35 @@ export const policyText: PolicyText = {
     },
 
     naturalization: {
-      title: "Einbürgerung",
+      title: "Assimilation und Einbürgerung",
       shortAnswer:
-        "Der gewöhnliche Weg verlangt etwa fünfzehn Jahre rechtmäßigen Aufenthalt, ehe ein Antrag gestellt werden darf, dazu anspruchsvolle Anforderungen an die Assimilation.",
+        "Die Staatsbürgerschaft verlangt einen deutlich höheren Maßstab als der gewöhnliche Aufenthalt oder die Integration: die gelungene Assimilation in die politische Gemeinschaft der Nation.",
       position: [
         "Der gewöhnliche Einbürgerungsweg von Restore Europa verlangt etwa fünfzehn Jahre rechtmäßigen Aufenthalt, ehe ein Antrag gestellt werden darf, dazu außerordentlich anspruchsvolle Anforderungen an die Assimilation.",
+        "Die Einbürgerung ist keine selbsttätige Folge der im Land verbrachten Zeit. Antragsteller müssen anspruchsvolle Anforderungen an Sprache, staatsbürgerliche Kenntnisse, Verhalten und Verbundenheit erfüllen, ehe die Staatsbürgerschaft verliehen wird.",
       ],
       policies: [
-        "Sichere Beherrschung der Landessprache.",
-        "Umfassende Kenntnis der nationalen Geschichte, Kultur, Überlieferungen und Institutionen.",
+        "Der im Katalog vorgesehene gewöhnliche Aufenthaltsweg von etwa fünfzehn Jahren vor einem Einbürgerungsantrag bleibt erhalten.",
+        "Verlangt werden eine fortgeschrittene praktische Beherrschung der Landessprache und belastbare Kenntnis der Geschichte, der Institutionen und der verfassungsmäßigen Ordnung.",
         "Achtung der verfassungsmäßigen Ordnung und des christlichen und geschichtlichen Gepräges des Landes.",
-        "Nachgewiesene Treue und langfristige Teilnahme am Leben des Landes.",
-        "Rechtstreues Verhalten und wirtschaftliche Selbständigkeit, soweit vernünftigerweise möglich.",
+        "Verlangt werden ein dauerhaft rechtstreues Verhalten und wahrheitsgemäße Angaben gegenüber den Ausländer- und Staatsangehörigkeitsbehörden.",
+        "Verlangt wird der Nachweis einer dauerhaften Verbundenheit mit dem Land und nicht bloß des Aufenthalts.",
+        "Sachliche Prüfungen in Sprache und staatsbürgerlicher Kunde sind zulässig.",
+        "Die Einbürgerung wird versagt, wo schwere Kriminalität, Terrorismus, schwerer Betrug oder vorsätzliche Identitätstäuschung weiterhin entgegenstehen.",
+        "Wiederkehrende staatsbürgerliche Tests dürfen nicht dazu dienen, eine Person, die die Staatsbürgerschaft rechtmäßig und redlich erworben hat, ohne Weiteres auszuweisen; die Aberkennung nach der Einbürgerung richtet sich nach gesonderten Einträgen.",
       ],
       limits: ["Fünfzehn Jahre Aufenthalt gewährleisten die Einbürgerung nicht von selbst."],
       implementationNote:
-        "Die gewöhnlichen Aufenthaltsfristen in Europa liegen derzeit bei fünf bis zehn Jahren; dies verlängerte die bestehende Praxis also, statt sie nur anzupassen.",
+        "Die gewöhnlichen Aufenthaltsfristen in Europa liegen derzeit bei fünf bis zehn Jahren; dies verlängerte die bestehende Praxis also, statt sie nur anzupassen. Das Manifest hält bereits fest, dass die Einbürgerung belastbare Kenntnis der Sprache, der Geschichte und der Institutionen, Achtung der verfassungsmäßigen Ordnung und echte Verbundenheit mit dem Land verlangen soll. Dieser Eintrag fasst diese Anforderungen als den Assimilationsmaßstab der Bewegung zusammen.",
       keywords: [
         "Einbürgerung",
-        "Aufenthalt",
         "Assimilation",
+        "Aufenthalt",
+        "Sprache",
         "Sprachnachweis",
+        "staatsbürgerliche Kenntnisse",
         "Einbürgerungstest",
+        "Verbundenheit",
       ],
     },
 
@@ -726,6 +747,274 @@ export const policyText: PolicyText = {
         "Staatenlosigkeit",
         "Landesverrat",
         "Terrorismus",
+      ],
+    },
+
+    "remigration-general-principle": {
+      title: "Remigration: allgemeiner Grundsatz",
+      shortAnswer:
+        "Remigration ist die geordnete Rückkehr von Personen, denen eine rechtmäßige Grundlage für den Verbleib fehlt oder verloren geht, verbunden mit einer Politik der freiwilligen Rückkehr, der strengen Durchsetzung der Aufenthaltsbedingungen und der Überprüfung von Rechtsstellungen, die durch Täuschung oder erhebliche Unregelmäßigkeit erlangt wurden.",
+      position: [
+        "Restore Europa behandelt den Aufenthaltsstatus als bedingt: er hängt an der rechtmäßigen Einreise, an der Einhaltung der Aufenthaltsbedingungen, an der öffentlichen Ordnung und, wo einschlägig, an der gelungenen Integration. Remigration ist nicht als Entfernung allein aufgrund der Herkunft bestimmt; sie wirkt über die Rechtsstellung, die aufenthaltsrechtliche Vorgeschichte, strafbares Verhalten, Täuschung, Sicherheitsgründe und klar umschriebene Aufenthaltsbedingungen.",
+      ],
+      policies: [
+        "Rechtskräftige Rückkehrentscheidungen werden gegenüber Personen ohne rechtmäßiges Bleiberecht durchgesetzt.",
+        "Die freiwillige Rückkehr wird genutzt, wo sie realistisch ist, und die zwangsweise Rückkehr dort, wo die rechtliche Grundlage des Aufenthalts entfallen ist.",
+        "Aufenthaltsrecht oder Staatsangehörigkeit, die durch erhebliche Täuschung oder Arglist erlangt wurden, werden überprüft.",
+        "Der Entzug des ausländischen Aufenthaltsstatus ist bei schwerer Kriminalität, bei schwerwiegenden Sicherheitsgefahren und aus anderen ausdrücklich gesetzlich bestimmten Gründen zulässig.",
+        "Staatsbürgerschaft, Daueraufenthalt, vorübergehender Aufenthalt, Asylstatus und unerlaubter Aufenthalt bleiben rechtlich getrennte Kategorien.",
+        "Der bloße Zeitablauf begründet für sich kein selbsttätiges Bleiberecht, solange die zugrunde liegende Rechtsstellung vorübergehend oder bedingt bleibt.",
+        "Es gelten individuelle Verfahren und Beweisanforderungen statt einer Kollektivausweisung allein nach ethnischer oder rassischer Kategorie.",
+      ],
+      implementationNote:
+        "Das geltende europäische Recht setzt der Rückkehr und der Ausweisung erhebliche verfahrensrechtliche und menschenrechtliche Schranken. Dieser Eintrag beschreibt die vorgeschlagene Ordnung; ihre Umsetzung verlangte die Vereinbarkeit mit unvereinbaren rechtlichen Bindungen, deren Änderung oder die Lösung von ihnen. Das bestehende Manifest der Bewegung behandelt die Staatsbürgerschaft bereits als Mitgliedschaft und nicht als bloßen Aufenthalt und tritt für eine gesteuerte Einwanderung ein, die mit Integration, Stabilität und nationaler Kontinuität vereinbar ist.",
+      keywords: [
+        "Remigration",
+        "Rückkehr",
+        "Durchsetzung des Ausländerrechts",
+        "Aufenthalt",
+        "Abschiebung",
+        "Integration",
+        "Staatsangehörigkeit",
+      ],
+    },
+
+    "integration-general-definition": {
+      title: "Integration: allgemeine Bestimmung",
+      shortAnswer:
+        "Integration bedeutet die nachweisbare sprachliche, staatsbürgerliche, wirtschaftliche und gesellschaftliche Eingliederung in die aufnehmende Nation; der Aufenthalt allein genügt nicht.",
+      position: [
+        "Integration bemisst sich nach Verhalten, Können und dauerhafter Teilhabe. Sie ist von der Staatsbürgerschaft und von dem höheren Assimilationsmaßstab zu unterscheiden, den die Einbürgerung verlangt.",
+      ],
+      policies: [
+        "Verlangt wird eine funktionsfähige Beherrschung der wichtigsten Landessprache, je nach angestrebter Rechtsstellung in der Regel etwa auf dem Niveau B1–B2.",
+        "Verlangt werden Grundkenntnisse der nationalen Geschichte, der Institutionen, des Rechts, der staatsbürgerlichen Pflichten und des Verfassungsaufbaus.",
+        "Anhaltende schwere Kriminalität, organisierte Kriminalität, Terrorismus, schwerer Betrug und vorsätzlicher Missbrauch des Ausländerrechts gelten als starkes Anzeichen gegen die Integration.",
+        "Von arbeitsfähigen Nichtstaatsbürgern im erwerbsfähigen Alter wird die Teilhabe durch Beschäftigung, selbständige Tätigkeit, Bildung, berufliche Ausbildung, anerkannte Sorgearbeit in der Familie oder einen anderen rechtmäßigen Beitrag erwartet.",
+        "Vermeidbare langfristige Abhängigkeit von öffentlicher Unterstützung gilt als negativer Umstand für die Integration, wobei echte Erwerbsunfähigkeit, Behinderung, Ruhestand, vorübergehende Arbeitslosigkeit und erhebliche Sorgearbeit ausgenommen bleiben.",
+        "Der Nachweis örtlicher Teilhabe durch Arbeit, Bildung, Kirchengemeinden, Vereine, Verbände und andere Einrichtungen des Gemeinwesens ist zulässig, ohne dass die Mitgliedschaft in einer bestimmten Organisation vorgeschrieben würde.",
+        "Verlangt wird die Achtung der rechtmäßigen verfassungsmäßigen Ordnung, ohne die weltanschauliche Übereinstimmung mit jeder Maßnahme der Regierung zu fordern.",
+        "Die Integration wird anhand belegter individueller Nachweise beurteilt und nicht nach Herkunft allein.",
+      ],
+      implementationNote:
+        "Das geltende Recht der Union über die langfristige Aufenthaltsberechtigung erlaubt es den Mitgliedstaaten, Integrationsbedingungen vorzusehen, und verlangt für den Erwerb der langfristigen Rechtsstellung feste und regelmäßige Einkünfte. Die Politik trennt abstammungsbezogene Vorstellungen geschichtlicher Nationalität von der handhabbaren rechtlichen Prüfung, ob ein bestimmter Einwohner integriert ist.",
+      keywords: [
+        "Integration",
+        "Sprache",
+        "staatsbürgerliche Kenntnisse",
+        "Selbstversorgung",
+        "Aufenthalt",
+        "öffentliche Ordnung",
+        "Teilhabe",
+      ],
+    },
+
+    "regularized-irregular-immigration": {
+      title: "Nachträglich legalisierter unerlaubter Aufenthalt",
+      shortAnswer:
+        "Eine spätere Legalisierung löscht eine erwiesene Vorgeschichte unerlaubter Einreise oder unerlaubten Aufenthalts nicht von selbst; früher legalisierte Fälle können nach dem neuen Rechtsrahmen im Einzelfall überprüft werden.",
+      position: [
+        "Restore Europa weist die Behauptung zurück, jede frühere Legalisierung oder Amnestie müsse als verfassungsrechtlich unantastbar gelten. Wo verlässliche Unterlagen eine frühere unerlaubte Einreise, einen unerlaubten Aufenthalt, eine falsche Identität oder eine andere erhebliche Unregelmäßigkeit belegen, darf die daraus hervorgegangene Aufenthaltsgeschichte im Einzelfall überprüft werden.",
+      ],
+      policies: [
+        "Aufenthaltsrechtliche Stellungen, die aus früheren Amnestien, Massenlegalisierungen oder vergleichbaren Ausnahmeprogrammen hervorgegangen sind, dürfen im Einzelfall überprüft werden.",
+        "Der Staat muss die maßgebliche aufenthaltsrechtliche Vorgeschichte aus Unterlagen und Beweisen nachweisen; eine Unregelmäßigkeit darf nicht einfach unterstellt werden.",
+        "Geprüft wird die vollständige Ursprungsakte, einschließlich Identität, Einreisegeschichte, Asylgeschichte, Aufenthaltsgrundlage, späterer Titel und eines etwaigen Einbürgerungsverfahrens.",
+        "Die bloße frühere Unregelmäßigkeit ist von erheblicher Täuschung, falscher Identität oder Verschleierung zu unterscheiden, die schwerer wiegen können.",
+        "Bleibt die Rechtsstellung nach der Prüfung bestehen, so behält sie ihre Gültigkeit vorbehaltlich der gewöhnlichen Aufenthaltsbedingungen.",
+        "Wäre die Rechtsstellung nach der anwendbaren neuen Regel nicht erteilt worden und lässt die Verfassung eine rückwirkende Überprüfung zu, so können Entzug und Rückkehr durch eine Einzelentscheidung mit Rechtsmittelverfahren folgen.",
+      ],
+      limits: [
+        "Dieser Eintrag behandelt nicht jeden eingebürgerten Staatsbürger als Täuschenden, bloß weil ein früherer Aufenthaltszeitraum unregelmäßig war; Täuschung und rechtmäßige Legalisierung bleiben verschiedene Begriffe.",
+      ],
+      implementationNote:
+        "Dies ist eine vorgeschlagene rückwirkende Überprüfungsbefugnis, die über die Bestandskraft hinausgeht, die abschließenden Verwaltungsentscheidungen gewöhnlich zukommt. Sie verlangte eine klare verfassungsrechtliche Ermächtigung, bestimmte Verjährungsregeln und Verfahrensgarantien.",
+      keywords: [
+        "Legalisierung",
+        "Amnestie",
+        "unerlaubte Einreise",
+        "unerlaubter Aufenthalt",
+        "Statusüberprüfung",
+        "aufenthaltsrechtliche Vorgeschichte",
+      ],
+    },
+
+    "employment-and-self-sufficiency-of-foreign-residents": {
+      title: "Beschäftigung und Selbständigkeit ausländischer Einwohner",
+      shortAnswer:
+        "Von arbeitsfähigen ausländischen Einwohnern wird erwartet, dass sie sich wirtschaftlich selbst tragen; sie erhalten in der Regel keinen unbefristeten Leistungsanspruch wie Staatsbürger.",
+      position: [
+        "Der ausländische Aufenthalt wird zu bestimmten Zwecken gewährt und bleibt bedingt. Arbeitsfähige Einwohner sollten sich in der Regel durch Beschäftigung, selbständige Tätigkeit, Studium, Ausbildung oder anerkannte Sorgearbeit selbst tragen und nicht dauerhaft und vermeidbar von öffentlicher Unterstützung abhängen.",
+      ],
+      policies: [
+        "Von vorübergehend und gewöhnlich aufhältigen Nichtstaatsbürgern wird verlangt, hinreichende rechtmäßige Mittel des Unterhalts zu wahren, vorbehaltlich angemessener Karenzzeiten nach unverschuldetem Verlust des Arbeitsplatzes.",
+        "Beschäftigung, selbständige Tätigkeit, Vollzeitbildung, berufliche Ausbildung und erhebliche Sorgearbeit in der Familie zählen als rechtmäßige Teilhabe.",
+        "Ausnahmen bestehen bei echter Behinderung, Erwerbsunfähigkeit, Ruhestand, für Kinder und bei vorübergehender Not trotz angemessener Bemühungen um Arbeit.",
+        "Gewöhnliche Sozialleistungen außerhalb von Notlagen werden für Nichtstaatsbürger begrenzt, soweit dies verfassungs- und gesetzesrechtlich zulässig ist.",
+        "Nahrung, Unterkunft und medizinisch notwendige Versorgung im Notfall bleiben erhalten, wo ihre Versagung grundlegende rechtliche oder humanitäre Verpflichtungen verletzte.",
+        "Wiederholte vermeidbare Abhängigkeit von öffentlicher Unterstützung gilt als möglicher Grund für die Überprüfung des Aufenthalts, wo der Titel ausdrücklich an die Selbständigkeit geknüpft war.",
+        "Die erworbene Staatsbürgerschaft bleibt davon getrennt: gewöhnliche Arbeitslosigkeit macht einen Staatsbürger nicht von selbst zu einem unerlaubt Aufhältigen.",
+      ],
+      limits: [
+        "Die genaue Karenzzeit nach dem Verlust des Arbeitsplatzes sollte im Ausführungsgesetz bestimmt und nicht im Verfassungsgrundsatz festgeschrieben werden.",
+      ],
+      implementationNote:
+        "Das geltende Unionsrecht über die langfristige Aufenthaltsberechtigung verlangt für deren Erwerb feste und regelmäßige Einkünfte, gewährt langfristig Aufenthaltsberechtigten zugleich aber erheblichen Schutz und lässt eine Ausweisung allein aus wirtschaftlichen Gründen nicht zu. Der vorgeschlagene Rahmen der Bewegung ginge für bestimmte Gruppen des ausländischen Aufenthalts darüber hinaus.",
+      keywords: [
+        "Selbstversorgung",
+        "Beschäftigung",
+        "Sozialleistungen",
+        "ausländische Einwohner",
+        "Aufenthaltstitel",
+        "wirtschaftliche Teilhabe",
+      ],
+    },
+
+    "probationary-naturalization": {
+      title: "Einbürgerung auf Probe",
+      shortAnswer:
+        "Die neu erworbene Staatsbürgerschaft steht zehn Jahre lang unter Vorbehalt, mit verschärften Regeln der Aberkennung für eng umschriebene schwerwiegende Gründe.",
+      position: [
+        "Die Einbürgerung begründet die Staatsbürgerschaft, doch behält der Staat in den ersten zehn Jahren eine verschärfte Befugnis, die erworbene Staatsbürgerschaft wegen bestimmter schwerer Verfehlungen oder erheblicher Mängel der Einbürgerungsgrundlage wieder aufzugreifen und abzuerkennen.",
+      ],
+      policies: [
+        "Die Probezeit beträgt zehn Jahre ab dem Erwerb der Staatsbürgerschaft.",
+        "Die Aberkennung ist zulässig bei erheblicher Täuschung im Einbürgerungsverfahren, bei falscher Identität oder bei vorsätzlichem Verschweigen einer entgegenstehenden Tatsache.",
+        "Die Aberkennung ist zulässig bei außerordentlich schweren Straftaten nach der Einbürgerung, wie sie der gesonderte Eintrag zur Staatsbürgerschaft und zu schweren Straftaten bestimmt.",
+        "Die Aberkennung ist zulässig bei Terrorismus, Landesverrat oder einem Verhalten, das eine außerordentlich schwere Gefahr für die nationale Sicherheit darstellt, soweit das Gesetz dies ausdrücklich bestimmt.",
+        "Erforderlich sind ein individuelles gerichtliches oder gerichtsähnliches Verfahren, der Nachweis des gesetzlichen Grundes und ein wirksames Rechtsmittel.",
+        "Gewöhnliche Arbeitslosigkeit, politische Meinungsverschiedenheit oder ein nicht bestandener staatsbürgerlicher Test sind für sich kein selbsttätiger Grund der Aberkennung.",
+        "Nach Ablauf der zehn Jahre gelten die gewöhnlichen Schutzrechte der Staatsbürgerschaft, vorbehaltlich der dauerhaften Gründe der Täuschung und der übrigen außerordentlichen Aberkennungsgründe, die an anderer Stelle des Katalogs angenommen sind.",
+      ],
+      implementationNote:
+        "Dies ist eine vorgeschlagene verfassungsrechtliche Abweichung von Ordnungen, welche die Einbürgerung für alle Zwecke des Entzugs sogleich der Staatsbürgerschaft durch Geburt gleichstellen. Bestehende völkerrechtliche Übereinkommen über die Staatsangehörigkeit begrenzen den Entzug, zumal wo er Staatenlosigkeit begründete; diese Widersprüche verlangten eine ausdrückliche verfassungs- und vertragsrechtliche Behandlung.",
+      keywords: [
+        "Staatsbürgerschaft auf Probe",
+        "Einbürgerung",
+        "Aberkennung",
+        "zehn Jahre",
+        "Täuschung",
+        "schwere Straftat",
+      ],
+    },
+
+    "residence-permit-withdrawal": {
+      title: "Entzug des Aufenthaltstitels",
+      shortAnswer:
+        "Der ausländische Aufenthaltsstatus ist leichter zu verlieren als die Staatsbürgerschaft und darf entzogen werden, wenn bestimmte Bedingungen der Zulassung oder des fortdauernden Aufenthalts erheblich verletzt werden.",
+      position: [
+        "Der Aufenthalt ist eine bedingte rechtliche Erlaubnis. Schwere Kriminalität, erhebliche Täuschung, schwerwiegende Sicherheitsgefahren und die beharrliche Nichterfüllung ausdrücklich gesetzter Aufenthaltsbedingungen können den Entzug und die Rückkehr rechtfertigen.",
+      ],
+      policies: [
+        "Bei erheblicher Täuschung über die Identität oder den Aufenthalt wird der Titel entzogen oder seine Verlängerung versagt.",
+        "Der Aufenthalt wird entzogen bei schwerer Gewalt- oder Sexualkriminalität, bei Terrorismus, bei schwerer organisierter Kriminalität und bei vergleichbar schwerem Verhalten, vorbehaltlich des gesonderten Rahmens der strafrechtlichen Abschiebung.",
+        "Der Aufenthalt wird entzogen, wo von der Person eine schwerwiegende und belegte Gefahr für die nationale Sicherheit ausgeht.",
+        "Eine Überprüfung ist zulässig bei wiederholter vermeidbarer Abhängigkeit von Sozialleistungen, wo die Selbständigkeit ausdrückliche Bedingung des Titels war.",
+        "Eine Überprüfung ist zulässig bei schwerer und beharrlicher Nichterfüllung der geltenden Integrationsanforderungen, wo die Rechtsstellung ausdrücklich an die Integration geknüpft war.",
+        "Längere Abwesenheit kann den Aufenthaltsstatus beenden; das gewöhnliche Ausführungsgesetz sollte die Frist nach Art des Titels innerhalb einer Spanne von etwa zwei bis fünf Jahren bestimmen.",
+        "Die Gründe werden mitgeteilt und es besteht eine individuelle Gelegenheit, die Entscheidung anzufechten.",
+      ],
+      implementationNote:
+        "Das geltende Unionsrecht schützt langfristig Aufenthaltsberechtigte stärker. Die geltende Richtlinie über die langfristige Aufenthaltsberechtigung lässt den Verlust der Rechtsstellung nach bestimmten Abwesenheiten zu und erlaubt die Ausweisung nur bei einer gegenwärtigen und hinreichend schweren Gefahr für die öffentliche Ordnung oder die Sicherheit; wirtschaftliche Erwägungen allein rechtfertigen die Ausweisung nicht. Die vorgeschlagene Politik der Bewegung verlangte daher Änderungen, soweit sie über die geltenden Regeln der Union hinausgeht.",
+      keywords: [
+        "Aufenthaltstitel",
+        "Entzug",
+        "Täuschung",
+        "schwere Straftat",
+        "Integration",
+        "Abwesenheit",
+        "öffentliche Sicherheit",
+      ],
+    },
+
+    "voluntary-return-and-reintegration": {
+      title: "Freiwillige Rückkehr und Wiedereingliederung",
+      shortAnswer:
+        "Der Staat darf eine maßvolle einmalige Rückkehrhilfe leisten, wo ein Nichtstaatsbürger freiwillig und dauerhaft in das Land seiner Staatsangehörigkeit oder in ein anderes zu seiner Aufnahme berechtigtes Land zurückkehrt.",
+      position: [
+        "Die freiwillige Rückkehr ist der teuren zwangsweisen Abschiebung vorzuziehen, wo sie dasselbe rechtmäßige Ziel zügig und verlässlich erreicht.",
+      ],
+      policies: [
+        "Angemessene Reisekosten eines anerkannten Programms der freiwilligen Rückkehr werden übernommen.",
+        "Eine begrenzte einmalige Hilfe zur Übersiedlung oder Wiedereingliederung ist zulässig, wo sie die Aussicht auf eine dauerhafte Rückkehr erheblich erhöht.",
+        "Die Hilfe ist an die tatsächliche Ausreise und an die Einhaltung der vereinbarten Rückkehrabrede geknüpft.",
+        "Ein Anspruch auf wiederholte Rückkehrbeihilfen wird nicht begründet.",
+        "Besteht ein Wiedereinreiseverbot, so hebt die freiwillige Ausreise es nicht von selbst auf, sofern das Gesetz nicht ausdrücklich etwas anderes bestimmt.",
+        "Wo nötig, wird mit den Behörden des Zielstaates oder mit anerkannten Organisationen zusammengearbeitet, um Reisedokumente und Aufnahme zu klären.",
+        "Der freiwilligen Ausreise ist der Vorzug vor Haft oder zwangsweiser Abschiebung zu geben, wo keine ernsthafte Gefahr des Untertauchens und keine kriminelle oder sicherheitsrelevante Gefahr besteht.",
+      ],
+      implementationNote:
+        "Dieser Eintrag ist ein Mittel der Umsetzung und kein sittliches Urteil über die zurückkehrende Person. Er soll die Rückkehr rascher, kostengünstiger und geordneter machen, wo Zusammenarbeit möglich ist.",
+      keywords: [
+        "freiwillige Rückkehr",
+        "Wiedereingliederung",
+        "Übersiedlungshilfe",
+        "Reisekosten",
+        "Rückkehrprogramm",
+      ],
+    },
+
+    "naturalized-citizenship-and-exceptionally-serious-crime": {
+      title: "Eingebürgerte Staatsbürgerschaft und außerordentlich schwere Straftaten",
+      shortAnswer:
+        "Die erworbene Staatsbürgerschaft darf für eine eng umschriebene Gruppe außerordentlich schwerer Straftaten aberkannt werden, gefolgt von der Abschiebung, wo die daraus folgenden Anforderungen an Staatsangehörigkeit und Rückkehr rechtmäßig erfüllt werden können.",
+      position: [
+        "Die Einbürgerung stellt nicht jede spätere Handlung außerhalb des Staatsangehörigkeitsrechts. Die vorgeschlagene Verfassungsordnung lässt die Aberkennung der erworbenen Staatsbürgerschaft für bestimmtes außerordentlich schweres Verhalten nach der Einbürgerung zu, während die gewöhnliche Kriminalität in der Strafrechtspflege verbleibt.",
+      ],
+      policies: [
+        "Diese Befugnis bleibt auf eine abschließend bestimmte Gruppe außerordentlich schwerer Straftaten beschränkt, etwa vorsätzlicher Mord, Vergewaltigung, schwerer sexueller Missbrauch von Kindern, Terrorismus und vergleichbare schwerwiegende Taten.",
+        "Vor einer straftatgestützten Aberkennung der Staatsbürgerschaft ist eine rechtskräftige strafrechtliche Verurteilung erforderlich.",
+        "Erforderlich ist ein gesondertes staatsangehörigkeitsrechtliches Verfahren, das feststellt, ob die gesetzlichen Voraussetzungen der Aberkennung vorliegen.",
+        "Vor dem Vollzug der Abschiebung steht ein wirksames Rechtsmittel offen.",
+        "Wird die Staatsbürgerschaft aberkannt und besitzt die Person eine andere Staatsangehörigkeit oder kann sie diese rechtmäßig wiedererlangen, so gilt der gewöhnliche Rahmen der Rückkehr.",
+        "Ist die Staatsangehörigkeit streitig, so wird sie förmlich festgestellt, statt anzunehmen, der Geburtsort allein belege die Aufnahmepflicht eines Staates.",
+        "Die Abstammung allein ist nicht der strafrechtliche Anknüpfungspunkt; maßgeblich ist die Verbindung von erworbener Staatsbürgerschaft und qualifiziertem Verhalten.",
+      ],
+      implementationNote:
+        "Das Übereinkommen von 1961 zur Verminderung der Staatenlosigkeit verbietet den Entzug der Staatsangehörigkeit grundsätzlich dort, wo er eine Person staatenlos machte, vorbehaltlich bestimmter Ausnahmen, darunter die durch Täuschung erlangte Staatsangehörigkeit und bestimmte nach Artikel 8 vorbehaltene Gründe. Eine weitergehende Befugnis verlangte eine ausdrückliche Behandlung dieser vertraglichen Bindungen. Die Vernichtung eines Passes löscht die Staatsangehörigkeit nicht; der Pass ist Beweis der Staatsangehörigkeit und nicht ihre rechtliche Quelle.",
+      keywords: [
+        "eingebürgerte Staatsbürgerschaft",
+        "Aberkennung",
+        "schwere Straftat",
+        "Mord",
+        "Vergewaltigung",
+        "Terrorismus",
+        "Staatsangehörigkeit",
+      ],
+    },
+
+    "return-readmission-identity-and-removal-procedure": {
+      title: "Rückkehr, Rückübernahme, Identität und Abschiebungsverfahren",
+      shortAnswer:
+        "Die Rückkehrpolitik folgt einem gemischten Vollzugsmodell: Identitätsfeststellung und Abschiebungshaft, wo nötig, danach ein eingeschränkter vorübergehender Status, wenn die Abschiebung einstweilen unmöglich bleibt, bei fortgesetzten Bemühungen um die Feststellung der Staatsangehörigkeit und um die Rückübernahme.",
+      position: [
+        "Eine rechtskräftige Rückkehrentscheidung muss praktisch vollziehbar sein. Der Staat sollte deshalb Verfahren zur Identitätsfeststellung, zur Haft, zur Meldepflicht und zur Rückübernahme vorhalten, statt zuzulassen, dass die Vernichtung von Dokumenten oder fehlende Mitwirkung von selbst einen dauerhaften Aufenthalt hervorbringt.",
+      ],
+      policies: [
+        "Die Feststellung von Identität und Staatsangehörigkeit beginnt sogleich, wo einer abzuschiebenden Person verlässliche Dokumente fehlen.",
+        "Zur Feststellung von Identität und Staatsangehörigkeit dienen Pässe, abgelaufene Dokumente, Personenstandsregister, Fingerabdrücke oder andere biometrische Daten, soweit rechtlich zulässig, Familienunterlagen, konsularische Anfragen, sprachliche und biografische Anhaltspunkte sowie Rückübernahmeabkommen.",
+        "Die vorsätzliche Vernichtung oder Verheimlichung von Dokumenten gilt als erschwerender Umstand im Vollzug, wobei die Vernichtung eines Passes die Staatsangehörigkeit nicht beendet.",
+        "Abschiebungshaft ist zulässig, soweit sie zur Identitätsfeststellung, zur Verhinderung des Untertauchens oder für eine bevorstehende Abschiebung erforderlich ist, vorbehaltlich bestimmter gesetzlicher Grenzen und fortgesetzter Bemühungen um die Abschiebung.",
+        "Kann die Abschiebung innerhalb der gesetzlichen Höchstdauer der Haft nicht vollzogen werden, so geht die Person in einen eingeschränkten vorübergehenden Status über und nicht in den gewöhnlichen Daueraufenthalt.",
+        "Der eingeschränkte Status kann Meldepflichten, Aufenthaltsbeschränkungen, die fortgesetzte Mitwirkung bei der Identitätsfeststellung und begrenzte öffentliche Unterstützung umfassen.",
+        "Der bloße Zeitablauf im eingeschränkten Status darf nicht von selbst in die Staatsbürgerschaft oder in den Daueraufenthalt erwachsen.",
+        "Die Abschiebung wird wieder aufgenommen, sobald Staatsangehörigkeit, Reisedokumente und die rechtmäßige Rückübernahme vorliegen.",
+        "Rückübernahmeabkommen und diplomatischer Druck dienen dazu, Staaten zur Aufnahme von Personen anzuhalten, deren Staatsangehörigkeit nach ihrem eigenen Recht feststeht.",
+        "Familienangehörige dürfen gemeinsam ausreisen, wo Eltern abgeschoben werden und die Kinder das Recht haben, sie zu begleiten; eigenständige Fragen der Staatsangehörigkeit, des Sorgerechts und des Kinderschutzes verlangen eine Entscheidung im Einzelfall.",
+        "Die neuen verfassungsrechtlichen Regeln des Ausländerrechts gelten für bestehende Rechtsstellungen, soweit das Gesetz ausdrücklich eine rückwirkende Überprüfung vorsieht, vorbehaltlich der andernorts in diesem Komplex geregelten Überprüfungsverfahren.",
+      ],
+      implementationNote:
+        "Das geltende Rückführungsrecht der Union begrenzt die Haft auf den kürzesten angemessenen Zeitraum, solange die Abschiebung mit der gebotenen Sorgfalt betrieben wird, und enthält bestimmte Höchstfristen und Schutzvorschriften. Das vorgeschlagene gemischte Modell übernimmt die allgemeine Abfolge von Haft und anschließend eingeschränktem Status, wenn die sofortige Abschiebung unmöglich ist, während die genaue Dauer von der letztlich angenommenen Rechtsordnung abhinge. Der Geburtsort ist ein nützlicher Anhaltspunkt, begründet für sich aber weder die Staatsangehörigkeit noch eine unbedingte Pflicht eines Staates zur Rückübernahme. Die Rückübernahme richtet sich nach dem Staatsangehörigkeitsrecht, nach den Beweisen und nach den anwendbaren Abkommen. Staatenlos ist, wen kein Staat nach Maßgabe seines Rechts als Angehörigen ansieht. Das vorgeschlagene System verlangt deshalb die Feststellung der Staatsangehörigkeit, statt anzunehmen, Staatenlosigkeit lasse sich stets dadurch beseitigen, dass die Person dem Land ihrer Geburt zugeordnet wird.",
+      keywords: [
+        "Rückkehrverfahren",
+        "Rückübernahme",
+        "Abschiebungshaft",
+        "Identität",
+        "Staatsangehörigkeit",
+        "eingeschränkter Status",
+        "Staatenlosigkeit",
+        "Familieneinheit",
+        "Rückwirkung",
       ],
     },
 
