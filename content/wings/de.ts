@@ -27,6 +27,7 @@ export const wingsText: WingsText = {
       "Eine Karte Europas, auf der die vierundvierzig auf dieser Seite aufgeführten Nationen vom umliegenden Land abgehoben sind.",
     mapCaption:
       "Die hier hervorgehobenen Nationen sind die vierundvierzig, die unten aufgeführt sind. Auf der Karte zu stehen bedeutet, dass die Bewegung um diese Nation herum organisiert ist — nicht, dass ihr Verband konstituiert oder aktiv wäre.",
+    mapHint: "Wählen Sie eine Nation auf der Karte, um ihren Landesverband zu öffnen.",
   },
 
   regions: {

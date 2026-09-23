@@ -55,6 +55,8 @@ export interface WingsText {
     readonly note: string;
     readonly mapLabel: string;
     readonly mapCaption: string;
+    /** Says that the nations on the map are links, which nothing else does. */
+    readonly mapHint: string;
   };
 
   /** Heading for each region. The anchor comes from the id, not from this. */

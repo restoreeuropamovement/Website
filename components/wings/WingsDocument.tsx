@@ -53,10 +53,10 @@ export function WingsDocument({ edition }: { readonly edition: WingsEdition }) {
             Held to a plate rather than run to the container width. Europe is
             close to square in an equal-area projection, so a full-width map
             would be over a thousand pixels tall and push the list of wings —
-            the part of the page you can actually click — off the screen. Size
-            buys nothing in legibility either: Luxembourg is a handful of pixels
-            wide however big the map is, which is why the small wings get
-            markers and the list does the naming.
+            the copy of this that reads in any order, at any width — off the
+            screen. Size buys nothing in legibility either: Luxembourg is a
+            handful of pixels wide however big the map is, which is why the
+            small wings get markers and the list does the naming.
           */}
           {/*
             The only reveal outside the homepage, and a fade rather than a
@@ -67,10 +67,18 @@ export function WingsDocument({ edition }: { readonly edition: WingsEdition }) {
             when you arrive.
           */}
           <Reveal distance={0}>
-            <EuropeMap label={meta.mapLabel} className="mx-auto max-w-3xl" />
+            <EuropeMap edition={edition} className="mx-auto max-w-3xl" />
           </Reveal>
+          {/*
+            The hint comes first because it answers the question the map now
+            raises — whether the nations on it can be opened — and nothing else
+            on the page says so. Hovering tells a pointer user, and the outlines
+            announce themselves as links to a screen reader, but a sighted
+            keyboard user arriving at the top of the page would have no way to
+            know before tabbing into it.
+          */}
           <figcaption className="mx-auto mt-6 max-w-(--container-reading) border-t border-hairline pt-4 text-[0.9375rem] leading-relaxed text-muted">
-            {meta.mapCaption}
+            {meta.mapHint} {meta.mapCaption}
           </figcaption>
         </figure>
 

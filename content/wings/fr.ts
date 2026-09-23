@@ -27,6 +27,7 @@ export const wingsText: WingsText = {
       "Une carte de l'Europe où les quarante-quatre nations énumérées sur cette page se détachent des terres qui les entourent.",
     mapCaption:
       "Les nations mises en évidence ici sont les quarante-quatre énumérées ci-dessous. Figurer sur la carte signifie que le mouvement s'organise autour de cette nation, non que sa branche soit constituée ou active.",
+    mapHint: "Choisissez une nation sur la carte pour ouvrir sa branche.",
   },
 
   regions: {

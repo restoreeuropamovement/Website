@@ -27,6 +27,7 @@ export const wingsText: WingsText = {
       "A map of Europe with the forty-four nations listed on this page picked out from the land around them.",
     mapCaption:
       "The nations picked out here are the forty-four listed below. Being on the map means the movement is organised around that nation, not that its wing is constituted or active.",
+    mapHint: "Choose a nation on the map to open its wing.",
   },
 
   regions: {

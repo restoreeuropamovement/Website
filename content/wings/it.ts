@@ -27,6 +27,7 @@ export const wingsText: WingsText = {
       "Una carta dell'Europa in cui le quarantaquattro nazioni elencate in questa pagina si distinguono dalle terre circostanti.",
     mapCaption:
       "Le nazioni evidenziate qui sono le quarantaquattro elencate sotto. Essere sulla carta significa che il movimento si organizza attorno a quella nazione, non che la sua sezione sia costituita o attiva.",
+    mapHint: "Scegli una nazione sulla carta per aprire la sua sezione.",
   },
 
   regions: {

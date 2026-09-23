@@ -27,6 +27,7 @@ export const wingsText: WingsText = {
       "Mapa Europy, na której czterdzieści cztery narody wymienione na tej stronie odcinają się od okolicznych ziem.",
     mapCaption:
       "Wyróżnione tutaj narody to te czterdzieści cztery wymienione poniżej. Obecność na mapie znaczy, że ruch organizuje się wokół tego narodu, a nie że jego oddział jest ukonstytuowany lub czynny.",
+    mapHint: "Wybierz naród na mapie, aby otworzyć jego oddział.",
   },
 
   regions: {
