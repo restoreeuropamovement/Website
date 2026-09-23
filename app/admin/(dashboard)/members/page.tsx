@@ -8,10 +8,12 @@ import {
   searchMembersRevealed,
   MEMBER_STATUSES,
   MEMBER_STATUS_LABEL,
+  MEMBER_STATUS_TAB,
   type MemberSearch,
   type MemberStatus,
   type RevealedMember,
 } from "@/lib/admin/members";
+import { cn } from "@/lib/utils";
 import { queryDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireSession } from "@/lib/admin/session";
@@ -109,53 +111,92 @@ export default async function AdminMembersPage(props: {
         ) : null}
       </header>
 
-      <Pipeline overview={overview} />
-
-      <CountryBreakdown overview={overview} />
+      <Tabs overview={overview} active={single(searchParams.status)} />
 
       {elevated ? (
         <RevealedList session={session} searchParams={searchParams} />
       ) : (
         <PasskeyElevation />
       )}
+
+      <CountryBreakdown overview={overview} />
     </div>
   );
 }
 
 /**
- * The four states as counts, each a link that filters the list below.
+ * The pipeline as tabs, each carrying its count.
  *
- * Rendered above the passkey wall on purpose. Knowing that eleven applications
- * are unread is operationally the most useful fact on this page, it is the one
- * thing an administrator needs on every visit, and it is a count over the
- * unencrypted status column — so it discloses nobody and need not cost a
- * passkey assertion. Who those eleven are still does.
+ * Rendered above the passkey wall on purpose. That eleven applications are
+ * unread is the most useful fact on this page and the one thing an
+ * administrator needs on every visit; it is also a count over the unencrypted
+ * status column, so it discloses nobody and need not cost a passkey assertion.
+ * Who those eleven are still does.
+ *
+ * Plain links rather than a client component. The selected tab lives in the
+ * URL, which means it can be bookmarked, opened in a second tab and shared
+ * between administrators, and it ships no JavaScript to a surface that should
+ * run as little as possible.
  */
-function Pipeline({
+function Tabs({
   overview,
+  active,
 }: {
   readonly overview: Awaited<ReturnType<typeof membershipOverview>>;
+  readonly active?: string;
 }) {
-  if (overview.total === 0) return null;
+  /*
+   * Everything defaults to the waiting-longest ordering except the roll, where
+   * "who has been a member longest" is not a queue and country is the useful
+   * grouping.
+   */
+  const tabs = [
+    ...MEMBER_STATUSES.map((status) => ({
+      key: status as string,
+      label: MEMBER_STATUS_TAB[status],
+      count: overview[status],
+      href: `/admin/members?status=${status}&sort=${status === "confirmed" ? "country" : "waiting"}`,
+      urgent: status === "new" && overview.new > 0,
+    })),
+    {
+      key: "all",
+      label: "Everything",
+      count: overview.total,
+      href: "/admin/members",
+      urgent: false,
+    },
+  ];
+
+  const selected = active && tabs.some((tab) => tab.key === active) ? active : "all";
 
   return (
-    <nav aria-label="Pipeline" className="flex flex-wrap gap-px bg-hairline">
-      {MEMBER_STATUSES.map((status) => (
-        <a
-          key={status}
-          href={`/admin/members?status=${status}&sort=waiting`}
-          className="flex min-w-36 flex-1 flex-col gap-1 bg-canvas px-5 py-4 transition-colors hover:bg-hairline/40"
-        >
-          <span
-            className={`text-[1.75rem] leading-none tabular-nums ${
-              status === "new" && overview.new > 0 ? "text-burgundy" : "text-ink"
-            }`}
+    <nav aria-label="Application pipeline" className="flex flex-wrap gap-px bg-hairline">
+      {tabs.map((tab) => {
+        const current = tab.key === selected;
+        return (
+          <a
+            key={tab.key}
+            href={tab.href}
+            aria-current={current ? "page" : undefined}
+            className={cn(
+              "flex min-w-32 flex-1 flex-col gap-1 border-b-2 px-5 py-4 transition-colors",
+              current
+                ? "border-burgundy bg-canvas"
+                : "border-transparent bg-canvas hover:bg-hairline/40",
+            )}
           >
-            {overview[status]}
-          </span>
-          <span className="eyebrow text-muted">{MEMBER_STATUS_LABEL[status]}</span>
-        </a>
-      ))}
+            <span
+              className={cn(
+                "text-[1.75rem] leading-none tabular-nums",
+                tab.urgent ? "text-burgundy" : "text-ink",
+              )}
+            >
+              {tab.count}
+            </span>
+            <span className={cn("eyebrow", current ? "text-ink" : "text-muted")}>{tab.label}</span>
+          </a>
+        );
+      })}
     </nav>
   );
 }
@@ -214,12 +255,14 @@ async function RevealedList({
   const query = single(searchParams.q);
   const country = single(searchParams.country);
   const statusFilter = single(searchParams.status);
+  const roleFilter = single(searchParams.role);
   const sortParam = single(searchParams.sort);
   const pageParam = Number(single(searchParams.page) ?? "1");
 
   const options: MemberSearch = {
     query,
     country: country && europeanCountries.includes(country) ? country : undefined,
+    role: involvementRoles.some((role) => role.id === roleFilter) ? roleFilter : undefined,
     status:
       statusFilter === "open" || (statusFilter && isMemberStatus(statusFilter))
         ? statusFilter
@@ -254,6 +297,7 @@ async function RevealedList({
       queryDigest: query ? await queryDigest(query) : null,
       country: options.country ?? null,
       status: options.status ?? null,
+      role: options.role ?? null,
       returned: result.members.length,
       matched: result.total,
     },
@@ -264,6 +308,10 @@ async function RevealedList({
     <section className="flex flex-col gap-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <h2 className="eyebrow text-muted">
+          {options.status && options.status !== "open"
+            ? MEMBER_STATUS_TAB[options.status]
+            : "Everything"}
+          {" · "}
           {result.total} {result.total === 1 ? "record" : "records"}
           {query ? ` matching “${query}”` : ""}
         </h2>
@@ -280,8 +328,10 @@ async function RevealedList({
 
       <MemberSearchForm
         countries={europeanCountries}
+        roles={involvementRoles}
         query={query}
         country={options.country}
+        role={options.role}
         status={options.status}
         sort={options.sort ?? "country"}
       />
@@ -375,6 +425,7 @@ async function RevealedList({
 const STATUS_TONE: Record<MemberStatus, string> = {
   new: "text-burgundy",
   reviewing: "text-gold",
+  awaiting: "text-gold",
   confirmed: "text-ink",
   declined: "text-faint",
 };
@@ -386,17 +437,29 @@ const STATUS_TONE: Record<MemberStatus, string> = {
  * judgement rather than a workflow and judgements get revised. What no state
  * offers is a button to its own value: a transition that changes nothing would
  * still write an audit row and reset the waiting clock.
+ *
+ * "Wrote to them" is the move that matters most here. It is what moves a
+ * record out of the pile somebody is thinking about and into the pile that is
+ * waiting on the applicant, which is the distinction the whole tab strip
+ * exists to make visible.
  */
 const NEXT_STATES: Record<MemberStatus, readonly (readonly [MemberStatus, string])[]> = {
   new: [
     ["reviewing", "Start review"],
-    ["confirmed", "Accept as member"],
+    ["awaiting", "Wrote to them"],
+    ["confirmed", "Accept"],
     ["declined", "Decline"],
   ],
   reviewing: [
-    ["confirmed", "Accept as member"],
+    ["awaiting", "Wrote to them"],
+    ["confirmed", "Accept"],
     ["declined", "Decline"],
     ["new", "Back to unread"],
+  ],
+  awaiting: [
+    ["confirmed", "Accept"],
+    ["declined", "Decline"],
+    ["reviewing", "They replied"],
   ],
   confirmed: [
     ["reviewing", "Return to review"],

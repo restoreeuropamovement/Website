@@ -205,13 +205,18 @@ CREATE TABLE IF NOT EXISTS member (
   -- text and neither narrows a person down on its own.
   involvement_role   text NOT NULL,
   interest_area      text NOT NULL,
-  -- Editorial, not cryptographic. Four states, and the order is the path an
+  -- Editorial, not cryptographic. Five states, and the order is the path an
   -- application takes through a person's judgement:
   --
   --   'new'       nobody has looked at it yet
-  --   'reviewing' somebody is vetting it — has written, is waiting for a reply
-  --   'confirmed' a member
+  --   'reviewing' somebody is considering it
+  --   'awaiting'  written to, and the movement is waiting for a reply
+  --   'confirmed' accepted — member or volunteer, per involvement_role
   --   'declined'  considered and turned down
+  --
+  -- 'awaiting' is distinct from 'reviewing' because they differ in who owes
+  -- the next move, which is the only question worth asking of this queue
+  -- daily. Merged, the applicant nobody wrote back to is invisible.
   --
   -- 'declined' earns its place by preventing a treadmill. Without it the only
   -- way to clear a rejected application is to erase the row, which also erases
@@ -223,7 +228,7 @@ CREATE TABLE IF NOT EXISTS member (
   -- Nothing expires or is deleted on a timer, in any state. An unreviewed row
   -- is somebody's application, not a stale token.
   status             text NOT NULL DEFAULT 'new'
-                       CHECK (status IN ('new', 'reviewing', 'confirmed', 'declined')),
+                       CHECK (status IN ('new', 'reviewing', 'awaiting', 'confirmed', 'declined')),
   -- In its current state since. Set on insert and on every transition, so the
   -- queue can be worked oldest-first by how long somebody has been waiting on
   -- a decision rather than by when their application happened to arrive.
@@ -256,7 +261,7 @@ ALTER TABLE member DROP CONSTRAINT IF EXISTS member_status_check;
 UPDATE member SET status = 'new' WHERE status = 'pending';
 ALTER TABLE member
   ADD CONSTRAINT member_status_check
-  CHECK (status IN ('new', 'reviewing', 'confirmed', 'declined'));
+  CHECK (status IN ('new', 'reviewing', 'awaiting', 'confirmed', 'declined'));
 ALTER TABLE member ALTER COLUMN status SET DEFAULT 'new';
 
 CREATE INDEX IF NOT EXISTS member_country_idx ON member (country);

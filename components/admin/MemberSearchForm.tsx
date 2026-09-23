@@ -19,14 +19,18 @@ import {
  */
 export function MemberSearchForm({
   countries,
+  roles,
   query,
   country,
+  role,
   status,
   sort,
 }: {
   readonly countries: readonly string[];
+  readonly roles: readonly { readonly id: string; readonly title: string }[];
   readonly query?: string;
   readonly country?: string;
+  readonly role?: string;
   readonly status?: MemberStatus | "open";
   readonly sort: MemberSort;
 }) {
@@ -58,6 +62,18 @@ export function MemberSearchForm({
           {countries.map((name) => (
             <option key={name} value={name}>
               {name}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label className="flex flex-col gap-1.5">
+        <span className="eyebrow text-muted">Applied as</span>
+        <select name="role" defaultValue={role ?? ""} className={select}>
+          <option value="">Either</option>
+          {roles.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.title}
             </option>
           ))}
         </select>

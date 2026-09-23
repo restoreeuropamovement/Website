@@ -257,9 +257,12 @@ membership lists escape, and adding one would undo most of the above.
    a real tactic rather than a hypothetical one. The decision is a human one, deliberately: an
    emailed confirmation link would only prove that somebody controls the inbox, which is not the
    question being asked.
-4. An administrator moves it through `new` → `reviewing` → `confirmed` or `declined` from
-   `/admin/members`, and may attach an encrypted vetting note along the way. Every transition
-   writes an audit row carrying the record's id and the new state, never the person.
+4. An administrator moves it through `new` → `reviewing` → `awaiting` → `confirmed` or `declined`
+   from `/admin/members`, and may attach an encrypted vetting note along the way. Every transition
+   writes an audit row carrying the record's id and the new state, never the person. `awaiting`
+   means the movement has written and is waiting to hear back; it is separate from `reviewing`
+   because the two differ in who owes the next move, and merged they hide the applicant nobody
+   replied to. Each state is a tab on `/admin/members`, so the roll and the queue are read apart.
 5. Nothing is deleted on a timer in any state. `declined` records are kept rather than erased, so
    that a resubmitted application is recognised instead of re-reviewed from scratch — a retention
    choice with a cost to the applicant, which is why `/privacy` states it outright.

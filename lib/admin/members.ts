@@ -1,4 +1,5 @@
 import {
+  MEMBER_STATUSES,
   OPEN_STATUSES,
   type MemberSort,
   type MemberStatus,
@@ -70,6 +71,7 @@ export interface MemberInput {
 export {
   MEMBER_STATUSES,
   MEMBER_STATUS_LABEL,
+  MEMBER_STATUS_TAB,
   OPEN_STATUSES,
   isMemberStatus,
   type MemberSort,
@@ -209,11 +211,19 @@ export async function unreadMemberCount(): Promise<number> {
  */
 export async function membershipOverview(): Promise<MembershipOverview> {
   const rows = await db()<
-    { country: string; new: string; reviewing: string; confirmed: string; declined: string }[]
+    {
+      country: string;
+      new: string;
+      reviewing: string;
+      awaiting: string;
+      confirmed: string;
+      declined: string;
+    }[]
   >`
     SELECT country,
            count(*) FILTER (WHERE status = 'new')       AS new,
            count(*) FILTER (WHERE status = 'reviewing') AS reviewing,
+           count(*) FILTER (WHERE status = 'awaiting')  AS awaiting,
            count(*) FILTER (WHERE status = 'confirmed') AS confirmed,
            count(*) FILTER (WHERE status = 'declined')  AS declined
       FROM member
@@ -225,24 +235,30 @@ export async function membershipOverview(): Promise<MembershipOverview> {
     country: row.country,
     new: Number(row.new),
     reviewing: Number(row.reviewing),
+    awaiting: Number(row.awaiting),
     confirmed: Number(row.confirmed),
     declined: Number(row.declined),
   }));
 
-  const sum = (status: MemberStatus) =>
-    countries.reduce((total, row) => total + row[status], 0);
+  /*
+   * Derived from MEMBER_STATUSES rather than written out, so adding a state to
+   * the union cannot leave a total quietly missing from this object while
+   * every individual count is present and correct.
+   */
+  const totals = Object.fromEntries(
+    MEMBER_STATUSES.map((status) => [
+      status,
+      countries.reduce((running, row) => running + row[status], 0),
+    ]),
+  ) as StatusCounts;
 
-  const totals = {
-    new: sum("new"),
-    reviewing: sum("reviewing"),
-    confirmed: sum("confirmed"),
-    declined: sum("declined"),
-  };
+  const sum = (of: readonly MemberStatus[]) =>
+    of.reduce((running, status) => running + totals[status], 0);
 
   return {
     ...totals,
-    open: totals.new + totals.reviewing,
-    total: totals.new + totals.reviewing + totals.confirmed + totals.declined,
+    open: sum(OPEN_STATUSES),
+    total: sum(MEMBER_STATUSES),
     countries,
   };
 }
@@ -268,6 +284,11 @@ export interface MemberSearch {
   readonly country?: string;
   /** One state, or `open` for everything still awaiting a decision. */
   readonly status?: MemberStatus | "open";
+  /**
+   * `member` or `volunteer`. Filtered in SQL: the column is in the clear
+   * because it names a kind of application rather than a person.
+   */
+  readonly role?: string;
   readonly sort?: MemberSort;
   readonly page?: number;
   readonly pageSize?: number;
@@ -335,6 +356,7 @@ export async function searchMembersRevealed(
       FROM member
      WHERE (${options.country ?? null}::text IS NULL OR country = ${options.country ?? null})
        AND (${statuses === null} OR status = ANY(${statuses ?? []}::text[]))
+       AND (${options.role ?? null}::text IS NULL OR involvement_role = ${options.role ?? null})
      ORDER BY country ASC, created_at DESC
      LIMIT ${SEARCH_SCAN_LIMIT + 1}
   `;

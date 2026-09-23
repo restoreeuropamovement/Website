@@ -33,7 +33,7 @@ export const privacy = {
         },
         {
           type: "paragraph",
-          text: "An application passes through four states, and nothing moves it between them except somebody's judgement. It arrives **unread**. When an administrator begins considering it, it is **in review** — which may mean they intend to write to you and talk before deciding. It then becomes either a **member** or **declined**. No step is automatic, and no algorithm assesses you at any point.",
+          text: "An application passes through five states, and nothing moves it between them except somebody's judgement. It arrives **unread**. When an administrator begins considering it, it is **in review**. If they write to you with questions, it is marked **awaiting reply** until you answer — a state that exists so that nobody who has been written to is forgotten. It then becomes either **accepted**, as a member or a volunteer according to what you asked for, or **declined**. No step is automatic, and no algorithm assesses you at any point.",
         },
         {
           type: "paragraph",
