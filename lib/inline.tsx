@@ -1,6 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { DEFAULT_LOCALE, localePath, type Locale } from "@/lib/i18n";
+import { routes, type RouteId } from "@/lib/site";
+
 /**
  * A deliberately tiny inline formatter for authored content.
  *
@@ -8,15 +11,30 @@ import type { ReactNode } from "react";
  *   **strong**            emphasis of the heavier kind
  *   *emphasis*            italic
  *   [^1]                  footnote reference, links to #fn-1
- *   [label](/path)        link; internal paths use the client router
+ *   [label][route-id]     link by route id, resolved against lib/site.ts
+ *   [label](/path)        link by literal path; English-authored content only
  *
  * Anything else is passed through as text, so authored copy stays readable in
  * the content files.
+ *
+ * **Reference links are the form translations use.** A translated file carries
+ * a label and a route id — `[Manifest][manifesto]` — and never a URL, for the
+ * same reason no other structural value appears in one: a path is not a word,
+ * it can rot, and five copies of it rot independently. An unknown id throws
+ * rather than rendering as plain text, so a mistyped reference fails the build
+ * instead of quietly becoming a dead phrase on one language's page.
+ *
+ * Internal links of both forms are rewritten for the current locale, so a
+ * reader who arrived in Italian is still in Italian after following one.
  */
 const PATTERN =
-  /\*\*([^*]+)\*\*|(?<!\w)\*([^*\n]+)\*(?!\w)|\[\^(\d+)\]|\[([^\]]+)\]\(([^)\s]+)\)/g;
+  /\*\*([^*]+)\*\*|(?<!\w)\*([^*\n]+)\*(?!\w)|\[\^(\d+)\]|\[([^\]]+)\]\[([a-z][a-z0-9-]*)\]|\[([^\]]+)\]\(([^)\s]+)\)/g;
 
-export function renderInline(text: string): ReactNode {
+function isRouteId(value: string): value is RouteId {
+  return Object.hasOwn(routes, value);
+}
+
+export function renderInline(text: string, locale: Locale = DEFAULT_LOCALE): ReactNode {
   const nodes: ReactNode[] = [];
   let cursor = 0;
   let key = 0;
@@ -27,7 +45,25 @@ export function renderInline(text: string): ReactNode {
       nodes.push(text.slice(cursor, index));
     }
 
-    const [raw, strong, emphasis, footnote, linkLabel, linkHref] = match;
+    const [raw, strong, emphasis, footnote, refLabel, refId, pathLabel, pathHref] = match;
+
+    /*
+     * A reference resolves to a path and then falls through to the same
+     * rendering as a literal one, so both forms behave identically.
+     */
+    let linkLabel = pathLabel;
+    let linkHref = pathHref;
+
+    if (refLabel !== undefined && refId !== undefined) {
+      if (!isRouteId(refId)) {
+        throw new Error(
+          `Unknown route id "${refId}" in inline link [${refLabel}][${refId}]. ` +
+            `Reference links resolve against \`routes\` in lib/site.ts.`,
+        );
+      }
+      linkLabel = refLabel;
+      linkHref = routes[refId];
+    }
 
     if (strong !== undefined) {
       nodes.push(
@@ -50,18 +86,21 @@ export function renderInline(text: string): ReactNode {
         </sup>,
       );
     } else if (linkLabel !== undefined && linkHref !== undefined) {
-      const isInternal = linkHref.startsWith("/") || linkHref.startsWith("#");
+      // A bare fragment stays as it is: it points within the page already open,
+      // which is the right page in every language.
+      const isInternal = linkHref.startsWith("/");
+      const href = isInternal ? localePath(locale, linkHref) : linkHref;
       const className =
         "underline decoration-rule decoration-1 underline-offset-[0.22em] transition-colors hover:decoration-burgundy hover:text-burgundy";
       nodes.push(
-        isInternal ? (
-          <Link key={key++} href={linkHref} className={className}>
+        isInternal || href.startsWith("#") ? (
+          <Link key={key++} href={href} className={className}>
             {linkLabel}
           </Link>
         ) : (
           <a
             key={key++}
-            href={linkHref}
+            href={href}
             className={className}
             rel="noreferrer noopener"
             target="_blank"
@@ -88,5 +127,6 @@ export function stripInline(text: string): string {
     .replace(/\*\*([^*]+)\*\*/g, "$1")
     .replace(/(?<!\w)\*([^*\n]+)\*(?!\w)/g, "$1")
     .replace(/\[\^\d+\]/g, "")
+    .replace(/\[([^\]]+)\]\[[a-z][a-z0-9-]*\]/g, "$1")
     .replace(/\[([^\]]+)\]\([^)\s]+\)/g, "$1");
 }

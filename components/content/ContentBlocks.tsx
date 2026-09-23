@@ -1,6 +1,7 @@
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { ContentBlock } from "@/lib/content-types";
 import { renderInline } from "@/lib/inline";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export type ContentTone = "default" | "inverse";
@@ -15,7 +16,18 @@ interface ContentBlocksProps {
    * pass 2 so the document outline stays unbroken.
    */
   readonly headingLevel?: 2 | 3;
+  /**
+   * Which language's routes the links inside this content should point at.
+   *
+   * Defaults to English so the unprefixed pages need not pass it. A localised
+   * page passes its own locale, and every internal link in the prose is
+   * rewritten to match — without it a German reader following a link inside a
+   * paragraph lands back on the English site.
+   */
+  readonly locale?: Locale;
 }
+
+type Inline = (text: string) => ReactNode;
 
 /**
  * Renders authored content. All long-form text on the site passes through here,
@@ -26,17 +38,25 @@ export function ContentBlocks({
   tone = "default",
   className,
   headingLevel = 3,
+  locale = DEFAULT_LOCALE,
 }: ContentBlocksProps) {
+  const inline: Inline = (text) => renderInline(text, locale);
+
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       {blocks.map((block, index) => (
-        <Fragment key={index}>{renderBlock(block, tone, headingLevel)}</Fragment>
+        <Fragment key={index}>{renderBlock(block, tone, headingLevel, inline)}</Fragment>
       ))}
     </div>
   );
 }
 
-function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3) {
+function renderBlock(
+  block: ContentBlock,
+  tone: ContentTone,
+  headingLevel: 2 | 3,
+  inline: Inline,
+) {
   const inverse = tone === "inverse";
   const bodyColour = inverse ? "text-canvas/78" : "text-body/92";
 
@@ -44,12 +64,12 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
     case "lead":
       return (
         <p className={cn("text-lede", inverse ? "text-canvas/85" : "text-body")}>
-          {renderInline(block.text)}
+          {inline(block.text)}
         </p>
       );
 
     case "paragraph":
-      return <p className={cn("text-reading", bodyColour)}>{renderInline(block.text)}</p>;
+      return <p className={cn("text-reading", bodyColour)}>{inline(block.text)}</p>;
 
     case "subheading": {
       const Heading = headingLevel === 2 ? "h2" : "h3";
@@ -60,7 +80,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
             inverse ? "text-canvas" : "text-ink",
           )}
         >
-          {renderInline(block.text)}
+          {inline(block.text)}
         </Heading>
       );
     }
@@ -73,7 +93,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
             inverse ? "border-gold-soft/45 text-canvas" : "border-gold/65 text-ink",
           )}
         >
-          {renderInline(block.text)}
+          {inline(block.text)}
         </p>
       );
 
@@ -86,7 +106,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
               inverse ? "text-canvas/90" : "text-ink",
             )}
           >
-            {renderInline(block.text)}
+            {inline(block.text)}
           </blockquote>
           {block.attribution ? (
             <figcaption className={cn("eyebrow mt-4", inverse ? "text-canvas/58" : "text-muted")}>
@@ -110,7 +130,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
               inverse ? "text-canvas" : "text-ink",
             )}
           >
-            {renderInline(block.text)}
+            {inline(block.text)}
           </p>
         </aside>
       );
@@ -131,7 +151,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span>{renderInline(item)}</span>
+                <span>{inline(item)}</span>
               </li>
             ))}
           </ol>
@@ -149,7 +169,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
                   inverse ? "border-hairline-inverse" : "border-hairline",
                 )}
               >
-                {renderInline(item)}
+                {inline(item)}
               </li>
             ))}
           </ul>
@@ -160,7 +180,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
         return (
           <ul className={cn("flex flex-col gap-2 text-reading", bodyColour)}>
             {block.items.map((item, index) => (
-              <li key={index}>{renderInline(item)}</li>
+              <li key={index}>{inline(item)}</li>
             ))}
           </ul>
         );
@@ -177,7 +197,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
                   inverse ? "bg-gold-soft/80" : "bg-gold",
                 )}
               />
-              <span>{renderInline(item)}</span>
+              <span>{inline(item)}</span>
             </li>
           ))}
         </ul>
@@ -201,9 +221,9 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
                   inverse ? "text-canvas" : "text-ink",
                 )}
               >
-                {renderInline(item.term)}
+                {inline(item.term)}
               </dt>
-              <dd className={cn("text-reading", bodyColour)}>{renderInline(item.description)}</dd>
+              <dd className={cn("text-reading", bodyColour)}>{inline(item.description)}</dd>
             </div>
           ))}
         </dl>
@@ -217,7 +237,7 @@ function renderBlock(block: ContentBlock, tone: ContentTone, headingLevel: 2 | 3
             inverse ? "border-rule-inverse text-canvas/60" : "border-rule text-muted",
           )}
         >
-          {renderInline(block.text)}
+          {inline(block.text)}
         </p>
       );
 

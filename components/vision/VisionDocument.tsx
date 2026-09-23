@@ -40,7 +40,11 @@ export function VisionDocument({
       />
 
       <Container className="py-12 lg:py-16">
-        <ContentBlocks blocks={edition.meta.intro} className="max-w-(--container-reading)" />
+        <ContentBlocks
+          blocks={edition.meta.intro}
+          locale={locale}
+          className="max-w-(--container-reading)"
+        />
 
         <div className="mt-12">
           <EditorialImage
@@ -89,7 +93,7 @@ export function VisionDocument({
             {edition.closing.statement}
           </h2>
           <div className="mt-6">
-            <ContentBlocks blocks={edition.closing.body} />
+            <ContentBlocks blocks={edition.closing.body} locale={locale} />
           </div>
           <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.9375rem]">
             <Link
