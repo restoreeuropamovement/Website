@@ -1,4 +1,9 @@
 import {
+  OPEN_STATUSES,
+  type MemberSort,
+  type MemberStatus,
+} from "@/lib/admin/member-status";
+import {
   decryptPiiSafe,
   emailDigest,
   encryptPii,
@@ -11,7 +16,7 @@ import { db } from "@/lib/db";
  *
  * Two things write here: the public intake at `app/(site)/join/actions.ts`, and
  * an administrator entering an application that arrived some other way. Both
- * land as `pending`; nothing becomes a membership until a person reviews it, and
+ * land as `new`; nothing becomes a membership until a person reviews it, and
  * nothing is deleted on a timer, because an unreviewed row is somebody's
  * application rather than a stale token.
  *
@@ -52,11 +57,24 @@ export interface MemberInput {
   readonly message?: string;
   readonly involvementRole: string;
   readonly interestArea: string;
-  /** `pending` for an application not yet reviewed; `confirmed` for a member. */
+  /** Where in the pipeline the record starts. Both intakes use `new`. */
   readonly status: MemberStatus;
 }
 
-export type MemberStatus = "pending" | "confirmed";
+/*
+ * Re-exported so that server-side callers can keep importing the pipeline and
+ * its vocabulary from one place, while the client components that only need
+ * the names reach for `lib/admin/member-status.ts` and leave the database
+ * driver on this side of the boundary.
+ */
+export {
+  MEMBER_STATUSES,
+  MEMBER_STATUS_LABEL,
+  OPEN_STATUSES,
+  isMemberStatus,
+  type MemberSort,
+  type MemberStatus,
+} from "@/lib/admin/member-status";
 
 export type CreateOutcome =
   | { readonly kind: "created"; readonly id: string }
@@ -108,17 +126,22 @@ export async function createMember(input: MemberInput): Promise<CreateOutcome> {
 }
 
 /**
- * Moves a record between "awaiting review" and "member".
+ * Moves a record along the pipeline.
  *
- * The distinction is editorial rather than cryptographic: an administrator has
- * either vetted the application or has not. Nothing about it is automated, and
- * in particular an unreviewed record is never deleted on a timer — it is
+ * The distinction between the states is editorial rather than cryptographic: an
+ * administrator has made a judgement or has not. Nothing about it is automated,
+ * and in particular a record is never deleted on a timer in any state — it is
  * somebody's application, not a stale token.
+ *
+ * `confirmed_at` is cleared when a record leaves `confirmed`, so it always
+ * answers "since when has this person been a member" rather than "when were
+ * they last briefly accepted".
  */
 export async function setMemberStatus(id: string, status: MemberStatus): Promise<boolean> {
   const [row] = await db()<{ id: string }[]>`
     UPDATE member
        SET status = ${status},
+           status_changed_at = now(),
            confirmed_at = ${status === "confirmed" ? db()`now()` : null}
      WHERE id = ${id}
     RETURNING id
@@ -126,16 +149,55 @@ export async function setMemberStatus(id: string, status: MemberStatus): Promise
   return Boolean(row);
 }
 
-export interface CountryCount {
-  readonly country: string;
-  readonly confirmed: number;
-  readonly pending: number;
+/**
+ * Replaces the vetting notes on one record.
+ *
+ * Encrypted on the way in like every other free-text field, and for the
+ * sharpest version of the same reason: this is the only column in the database
+ * that holds one person's opinion of another. An empty string clears the note
+ * rather than storing ciphertext of nothing, so "no note" and "a note that
+ * happens to be blank" are the same state.
+ */
+export async function setMemberNotes(id: string, notes: string): Promise<boolean> {
+  const trimmed = notes.trim();
+  const encrypted = trimmed ? await encryptPii(trimmed) : null;
+
+  const [row] = await db()<{ id: string }[]>`
+    UPDATE member SET notes_encrypted = ${encrypted} WHERE id = ${id} RETURNING id
+  `;
+  return Boolean(row);
 }
 
-export interface MembershipOverview {
-  readonly confirmed: number;
-  readonly pending: number;
+/** A count for each state, used both per country and as the grand total. */
+export type StatusCounts = { readonly [S in MemberStatus]: number };
+
+export interface CountryCount extends StatusCounts {
+  readonly country: string;
+}
+
+export interface MembershipOverview extends StatusCounts {
+  /** `new` plus `reviewing`: everything still waiting on a decision. */
+  readonly open: number;
+  readonly total: number;
   readonly countries: readonly CountryCount[];
+}
+
+/**
+ * How many applications nobody has read yet.
+ *
+ * A single number, and the only thing the notification email is allowed to say
+ * about the roll. Touches no encrypted column, so it costs nothing and reveals
+ * nothing about who is in the queue.
+ *
+ * Counts `new` alone rather than everything open. An application under review
+ * is already somebody's responsibility; the nudge is for the ones that are
+ * nobody's yet.
+ */
+export async function unreadMemberCount(): Promise<number> {
+  const [row] = await db()<{ unread: string }[]>`
+    SELECT count(*) AS unread FROM member WHERE status = 'new'
+  `;
+  return Number(row?.unread ?? 0);
 }
 
 /**
@@ -145,25 +207,15 @@ export interface MembershipOverview {
  * nothing, needs no elevated session, and discloses no individual. It is what
  * the members page shows until somebody deliberately asks for more.
  */
-/**
- * How many applications are waiting to be read.
- *
- * A single number, and the only thing the notification email is allowed to say
- * about the roll. Touches no encrypted column, so it costs nothing and reveals
- * nothing about who is in the queue.
- */
-export async function pendingMemberCount(): Promise<number> {
-  const [row] = await db()<{ pending: string }[]>`
-    SELECT count(*) AS pending FROM member WHERE status = 'pending'
-  `;
-  return Number(row?.pending ?? 0);
-}
-
 export async function membershipOverview(): Promise<MembershipOverview> {
-  const rows = await db()<{ country: string; confirmed: string; pending: string }[]>`
+  const rows = await db()<
+    { country: string; new: string; reviewing: string; confirmed: string; declined: string }[]
+  >`
     SELECT country,
+           count(*) FILTER (WHERE status = 'new')       AS new,
+           count(*) FILTER (WHERE status = 'reviewing') AS reviewing,
            count(*) FILTER (WHERE status = 'confirmed') AS confirmed,
-           count(*) FILTER (WHERE status = 'pending')   AS pending
+           count(*) FILTER (WHERE status = 'declined')  AS declined
       FROM member
      GROUP BY country
      ORDER BY count(*) FILTER (WHERE status = 'confirmed') DESC, country ASC
@@ -171,13 +223,26 @@ export async function membershipOverview(): Promise<MembershipOverview> {
 
   const countries = rows.map((row) => ({
     country: row.country,
+    new: Number(row.new),
+    reviewing: Number(row.reviewing),
     confirmed: Number(row.confirmed),
-    pending: Number(row.pending),
+    declined: Number(row.declined),
   }));
 
+  const sum = (status: MemberStatus) =>
+    countries.reduce((total, row) => total + row[status], 0);
+
+  const totals = {
+    new: sum("new"),
+    reviewing: sum("reviewing"),
+    confirmed: sum("confirmed"),
+    declined: sum("declined"),
+  };
+
   return {
-    confirmed: countries.reduce((total, row) => total + row.confirmed, 0),
-    pending: countries.reduce((total, row) => total + row.pending, 0),
+    ...totals,
+    open: totals.new + totals.reviewing,
+    total: totals.new + totals.reviewing + totals.confirmed + totals.declined,
     countries,
   };
 }
@@ -191,15 +256,19 @@ export interface RevealedMember {
   readonly message: string;
   readonly involvementRole: string;
   readonly interestArea: string;
-  readonly status: "pending" | "confirmed";
+  /** Vetting notes, decrypted. Empty when none were written. */
+  readonly notes: string;
+  readonly status: MemberStatus;
+  readonly statusChangedAt: Date;
   readonly createdAt: Date;
 }
 
 export interface MemberSearch {
   readonly query?: string;
   readonly country?: string;
-  readonly status?: "pending" | "confirmed";
-  readonly sort?: "country" | "name" | "recent";
+  /** One state, or `open` for everything still awaiting a decision. */
+  readonly status?: MemberStatus | "open";
+  readonly sort?: MemberSort;
   readonly page?: number;
   readonly pageSize?: number;
 }
@@ -232,6 +301,18 @@ export async function searchMembersRevealed(
   const pageSize = Math.min(Math.max(options.pageSize ?? 25, 1), 100);
   const sort = options.sort ?? "country";
 
+  /*
+   * `open` is a filter over two states rather than a state of its own, so it
+   * expands to a list here and the query matches against the list in every
+   * case. One code path, and the index on `status` serves all of them.
+   */
+  const statuses: readonly MemberStatus[] | null =
+    options.status === undefined
+      ? null
+      : options.status === "open"
+        ? OPEN_STATUSES
+        : [options.status];
+
   const rows = await sql<
     {
       id: string;
@@ -240,18 +321,20 @@ export async function searchMembersRevealed(
       country: string;
       region_encrypted: string | null;
       message_encrypted: string | null;
+      notes_encrypted: string | null;
       involvement_role: string;
       interest_area: string;
-      status: "pending" | "confirmed";
+      status: MemberStatus;
+      status_changed_at: Date;
       created_at: Date;
     }[]
   >`
     SELECT id, name_encrypted, email_encrypted, country,
-           region_encrypted, message_encrypted,
-           involvement_role, interest_area, status, created_at
+           region_encrypted, message_encrypted, notes_encrypted,
+           involvement_role, interest_area, status, status_changed_at, created_at
       FROM member
      WHERE (${options.country ?? null}::text IS NULL OR country = ${options.country ?? null})
-       AND (${options.status ?? null}::text IS NULL OR status = ${options.status ?? null})
+       AND (${statuses === null} OR status = ANY(${statuses ?? []}::text[]))
      ORDER BY country ASC, created_at DESC
      LIMIT ${SEARCH_SCAN_LIMIT + 1}
   `;
@@ -273,9 +356,13 @@ export async function searchMembersRevealed(
       message: row.message_encrypted
         ? ((await decryptPiiSafe(row.message_encrypted)) ?? "[unreadable]")
         : "",
+      notes: row.notes_encrypted
+        ? ((await decryptPiiSafe(row.notes_encrypted)) ?? "[unreadable]")
+        : "",
       involvementRole: row.involvement_role,
       interestArea: row.interest_area,
       status: row.status,
+      statusChangedAt: row.status_changed_at,
       createdAt: row.created_at,
     })),
   );
@@ -294,6 +381,10 @@ export async function searchMembersRevealed(
     sorted.sort((a, b) => foldForSearch(a.name).localeCompare(foldForSearch(b.name)));
   } else if (sort === "recent") {
     sorted.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  } else if (sort === "waiting") {
+    // Oldest first: the queue is worked from the person who has been waiting
+    // longest on a decision, not from whoever applied most recently.
+    sorted.sort((a, b) => a.statusChangedAt.getTime() - b.statusChangedAt.getTime());
   }
   // "country" is already the SQL ordering, so it needs no second pass.
 
@@ -334,8 +425,16 @@ export async function findMemberIdByEmail(email: string): Promise<string | undef
  * There is deliberately no scheduled deletion here.
  *
  * An earlier draft pruned unreviewed records on a timer, which made sense while
- * `pending` meant "an unverified stranger typed this address". It means the
- * opposite now: an administrator entered it and has not yet vetted it. Deleting
- * those on a clock would quietly destroy the backlog. Records leave this table
- * when somebody decides they should — see `eraseMember`.
+ * the unreviewed state meant "an unverified stranger typed this address". It
+ * means the opposite now: `new` is an application nobody has read, and deleting
+ * those on a clock would quietly destroy the backlog.
+ *
+ * `declined` is not on a timer either, and that is the state where the
+ * temptation is strongest. It is kept so that somebody already considered and
+ * turned down does not reappear as a fresh unread application every time they
+ * resubmit — erasing the row erases the email digest that recognises them. The
+ * retention is a deliberate choice with a cost, so /privacy states it outright.
+ *
+ * Records leave this table when somebody decides they should — see
+ * `eraseMember`, which remains the answer to an erasure request in any state.
  */

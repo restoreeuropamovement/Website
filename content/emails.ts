@@ -70,12 +70,12 @@ ${signature}`,
  * one message at a time. The point of the admin surface is that reading names
  * requires a passkey; mailing them out would make that ceremony decorative.
  */
-export function applicationAlert(pending: number): Message {
+export function applicationAlert(unread: number): Message {
   return {
     subject: "An application is waiting",
     text: `A new membership application arrived.
 
-${pending} ${pending === 1 ? "application is" : "applications are"} now waiting to be reviewed.
+${unread} ${unread === 1 ? "application has" : "applications have"} not been read yet.
 
 Who it is from is deliberately not in this message. Sign in and use your
 passkey to read it: ${SITE_URL}/admin/members`,

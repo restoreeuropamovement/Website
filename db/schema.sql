@@ -186,7 +186,7 @@ CREATE INDEX IF NOT EXISTS journal_article_published_idx
 --
 -- Two things write here: the public intake at `app/(site)/join/actions.ts`, and
 -- an administrator entering an application from `/admin/members`. Both land as
--- 'pending'. There is no scheduled deletion, because an unreviewed row is
+-- 'new'. There is no scheduled deletion, because an unreviewed row is
 -- somebody's application rather than a stale token.
 CREATE TABLE IF NOT EXISTS member (
   id                 uuid PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -205,12 +205,37 @@ CREATE TABLE IF NOT EXISTS member (
   -- text and neither narrows a person down on its own.
   involvement_role   text NOT NULL,
   interest_area      text NOT NULL,
-  -- Editorial, not cryptographic: 'pending' is an application an administrator
-  -- has entered but not yet vetted, 'confirmed' is a member. Nothing expires or
-  -- is deleted on a timer — an unreviewed row is somebody's application.
-  status             text NOT NULL DEFAULT 'pending'
-                       CHECK (status IN ('pending', 'confirmed')),
+  -- Editorial, not cryptographic. Four states, and the order is the path an
+  -- application takes through a person's judgement:
+  --
+  --   'new'       nobody has looked at it yet
+  --   'reviewing' somebody is vetting it — has written, is waiting for a reply
+  --   'confirmed' a member
+  --   'declined'  considered and turned down
+  --
+  -- 'declined' earns its place by preventing a treadmill. Without it the only
+  -- way to clear a rejected application is to erase the row, which also erases
+  -- the email digest that would recognise the same person reapplying, so the
+  -- same application returns as unread indefinitely. The cost is that the
+  -- movement holds a record about somebody it turned down, which /privacy
+  -- states plainly rather than leaving to be discovered.
+  --
+  -- Nothing expires or is deleted on a timer, in any state. An unreviewed row
+  -- is somebody's application, not a stale token.
+  status             text NOT NULL DEFAULT 'new'
+                       CHECK (status IN ('new', 'reviewing', 'confirmed', 'declined')),
+  -- In its current state since. Set on insert and on every transition, so the
+  -- queue can be worked oldest-first by how long somebody has been waiting on
+  -- a decision rather than by when their application happened to arrive.
+  status_changed_at  timestamptz NOT NULL DEFAULT now(),
   confirmed_at       timestamptz,
+  -- What an administrator wrote about the application while vetting it.
+  --
+  -- Encrypted, and not optional about it. This is the field most likely to
+  -- record a judgement about a named person — "spoke to her, sounded unsure",
+  -- "works for a ministry" — and it is exactly the sentence that must not be
+  -- legible in a stolen dump. Never written to admin_audit for the same reason.
+  notes_encrypted    text,
   created_at         timestamptz NOT NULL DEFAULT now()
 );
 
@@ -218,6 +243,21 @@ CREATE TABLE IF NOT EXISTS member (
 -- database created before the public intake collected these two.
 ALTER TABLE member ADD COLUMN IF NOT EXISTS region_encrypted  text;
 ALTER TABLE member ADD COLUMN IF NOT EXISTS message_encrypted text;
+ALTER TABLE member
+  ADD COLUMN IF NOT EXISTS status_changed_at timestamptz NOT NULL DEFAULT now();
+ALTER TABLE member ADD COLUMN IF NOT EXISTS notes_encrypted text;
+
+-- Widening the two-state toggle into the four-state pipeline above.
+--
+-- Dropped before the UPDATE rather than after, because the old constraint does
+-- not permit the value the UPDATE is about to write. Dropping and recreating is
+-- what makes this idempotent: ADD CONSTRAINT has no IF NOT EXISTS.
+ALTER TABLE member DROP CONSTRAINT IF EXISTS member_status_check;
+UPDATE member SET status = 'new' WHERE status = 'pending';
+ALTER TABLE member
+  ADD CONSTRAINT member_status_check
+  CHECK (status IN ('new', 'reviewing', 'confirmed', 'declined'));
+ALTER TABLE member ALTER COLUMN status SET DEFAULT 'new';
 
 CREATE INDEX IF NOT EXISTS member_country_idx ON member (country);
 CREATE INDEX IF NOT EXISTS member_status_idx ON member (status, created_at DESC);

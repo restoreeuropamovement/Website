@@ -1,5 +1,12 @@
 import Link from "next/link";
 
+import {
+  MEMBER_STATUSES,
+  MEMBER_STATUS_LABEL,
+  type MemberSort,
+  type MemberStatus,
+} from "@/lib/admin/member-status";
+
 /**
  * Search, filter and sort controls for the membership roll.
  *
@@ -20,8 +27,8 @@ export function MemberSearchForm({
   readonly countries: readonly string[];
   readonly query?: string;
   readonly country?: string;
-  readonly status?: "pending" | "confirmed";
-  readonly sort: "country" | "name" | "recent";
+  readonly status?: MemberStatus | "open";
+  readonly sort: MemberSort;
 }) {
   const select =
     "border border-rule bg-surface px-3 py-2 text-[0.875rem] text-ink focus:border-gold focus:outline-none";
@@ -60,8 +67,12 @@ export function MemberSearchForm({
         <span className="eyebrow text-muted">Status</span>
         <select name="status" defaultValue={status ?? ""} className={select}>
           <option value="">Any</option>
-          <option value="confirmed">Members</option>
-          <option value="pending">Awaiting review</option>
+          <option value="open">Awaiting a decision</option>
+          {MEMBER_STATUSES.map((value) => (
+            <option key={value} value={value}>
+              {MEMBER_STATUS_LABEL[value]}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -71,6 +82,7 @@ export function MemberSearchForm({
           <option value="country">Country</option>
           <option value="name">Name</option>
           <option value="recent">Most recent</option>
+          <option value="waiting">Waiting longest</option>
         </select>
       </label>
 

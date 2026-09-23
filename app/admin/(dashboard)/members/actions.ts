@@ -6,6 +6,8 @@ import {
   createMember,
   eraseMember,
   findMemberIdByEmail,
+  isMemberStatus,
+  setMemberNotes,
   setMemberStatus,
 } from "@/lib/admin/members";
 import { clientContext } from "@/lib/admin/request";
@@ -48,7 +50,8 @@ export async function addMemberAction(
   const country = read("country");
   const involvementRole = read("role");
   const interestArea = read("interest");
-  const status = read("status") === "confirmed" ? "confirmed" : "pending";
+  const statusField = read("status");
+  const status = isMemberStatus(statusField) ? statusField : "new";
 
   const errors: string[] = [];
   if (name.length < 2 || name.length > 120) errors.push("Enter a name, up to 120 characters.");
@@ -93,23 +96,63 @@ export async function addMemberAction(
       };
 }
 
-/** Marks an application as vetted, or puts a member back under review. */
+/**
+ * Moves one application along the pipeline.
+ *
+ * Every transition is allowed, in both directions. A vetting process that can
+ * only go forwards is one where a mis-click is permanent, and the alternative —
+ * a table of legal transitions — buys nothing here, because the states describe
+ * somebody's judgement and judgements are revised.
+ *
+ * The audit detail carries the id and the new state, never the person.
+ */
 export async function setMemberStatusAction(form: FormData): Promise<void> {
   const session = await requireElevatedSession();
   const { ipHash } = await clientContext();
 
   const id = String(form.get("id") ?? "").trim();
-  const status = String(form.get("status") ?? "") === "confirmed" ? "confirmed" : "pending";
-  if (!id) return;
+  const requested = String(form.get("status") ?? "").trim();
+  if (!id || !isMemberStatus(requested)) return;
 
-  const changed = await setMemberStatus(id, status);
+  const changed = await setMemberStatus(id, requested);
 
   await recordAudit({
     action: "member.update",
     outcome: changed ? "success" : "failure",
     actorId: session.user.id,
     actorLabel: session.user.username,
-    detail: { id, status },
+    detail: { id, status: requested },
+    ipHash,
+  });
+
+  revalidatePath("/admin/members");
+}
+
+/**
+ * Writes or clears the vetting notes on one application.
+ *
+ * The note is encrypted before it is stored and never reaches the audit log:
+ * this is the one field holding an administrator's opinion of a named person,
+ * so logging it would put in the clear exactly what the column encrypts. The
+ * audit records that a note changed and whether it now exists, which is what an
+ * investigation needs and all it needs.
+ */
+export async function setMemberNotesAction(form: FormData): Promise<void> {
+  const session = await requireElevatedSession();
+  const { ipHash } = await clientContext();
+
+  const id = String(form.get("id") ?? "").trim();
+  if (!id) return;
+
+  const notes = String(form.get("notes") ?? "").slice(0, 2000);
+  const changed = await setMemberNotes(id, notes);
+
+  await recordAudit({
+    action: "member.note",
+    outcome: changed ? "success" : "failure",
+    actorId: session.user.id,
+    actorLabel: session.user.username,
+    detail: { id, cleared: notes.trim().length === 0 },
     ipHash,
   });
 

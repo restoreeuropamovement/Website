@@ -4,11 +4,13 @@ import { useActionState } from "react";
 import { UserPlus } from "lucide-react";
 import { addMemberAction } from "@/app/admin/(dashboard)/members/actions";
 import { ADD_MEMBER_INITIAL, type AddMemberState } from "@/app/admin/(dashboard)/members/state";
+import { MEMBER_STATUSES, MEMBER_STATUS_LABEL } from "@/lib/admin/member-status";
 
 /**
  * Records an application that reached the movement by some other channel.
  *
- * Nothing on the public site writes to the roll, so this is the only way in. The
+ * The public form at /join is the usual way in; this is for the ones that
+ * arrive by conversation, at an event or forwarded by somebody else. The
  * name and address are encrypted by the action before they are stored; they exist
  * in the clear only in this form, on this screen, for as long as it takes to
  * submit — which is why the fields are uncontrolled and nothing is kept in
@@ -108,9 +110,12 @@ export function AddMember({
           </label>
           <label className="flex flex-col gap-1.5">
             <span className="eyebrow text-muted">Status</span>
-            <select name="status" defaultValue="pending" className={field}>
-              <option value="pending">Awaiting review</option>
-              <option value="confirmed">Member</option>
+            <select name="status" defaultValue="new" className={field}>
+              {MEMBER_STATUSES.map((value) => (
+                <option key={value} value={value}>
+                  {MEMBER_STATUS_LABEL[value]}
+                </option>
+              ))}
             </select>
           </label>
         </div>

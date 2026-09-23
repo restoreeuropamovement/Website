@@ -4,7 +4,7 @@ import { after } from "next/server";
 
 import { recordAudit } from "@/lib/admin/audit";
 import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
-import { createMember, pendingMemberCount } from "@/lib/admin/members";
+import { createMember, unreadMemberCount } from "@/lib/admin/members";
 import { applicationAlert, applicationReceived } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
@@ -29,7 +29,7 @@ import { JOIN_INITIAL, type JoinState } from "./state";
  * into an oracle for testing whether a named person is a member — which, for a
  * political movement, is the attack the whole encryption design exists to stop.
  *
- * **Nothing here becomes a membership.** Rows land as `pending` and an
+ * **Nothing here becomes a membership.** Rows land as `new` and an
  * administrator vets them. Anyone can type a third party's address into a
  * public form, and enrolling an opponent to damage them is a real tactic.
  *
@@ -110,7 +110,7 @@ export async function submitMembershipApplication(
     message,
     involvementRole,
     interestArea,
-    status: "pending",
+    status: "new",
   });
 
   await recordAudit({
@@ -145,7 +145,7 @@ export async function submitMembershipApplication(
 
       const notify = mailNotifyAddress();
       if (notify) {
-        await sendEmail({ to: notify, ...applicationAlert(await pendingMemberCount()) });
+        await sendEmail({ to: notify, ...applicationAlert(await unreadMemberCount()) });
       }
 
       /*

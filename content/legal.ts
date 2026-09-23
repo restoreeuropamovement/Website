@@ -29,7 +29,11 @@ export const privacy = {
       body: [
         {
           type: "paragraph",
-          text: "Applying sends what you typed to the movement, where it is written to a database. Submitting the form does not make you a member: the record is marked as awaiting review, and a person decides. Until then, and afterwards, you are entitled to know exactly what is held.",
+          text: "Applying sends what you typed to the movement, where it is written to a database. Submitting the form does not make you a member: the record arrives marked unread, and a person decides. Until then, and afterwards, you are entitled to know exactly what is held.",
+        },
+        {
+          type: "paragraph",
+          text: "An application passes through four states, and nothing moves it between them except somebody's judgement. It arrives **unread**. When an administrator begins considering it, it is **in review** — which may mean they intend to write to you and talk before deciding. It then becomes either a **member** or **declined**. No step is automatic, and no algorithm assesses you at any point.",
         },
         {
           type: "paragraph",
@@ -38,6 +42,18 @@ export const privacy = {
         {
           type: "paragraph",
           text: "The two optional fields are the ones that can say most about you, so they are treated as carefully as your name. A region narrows a person far more than a country does, and a message is free text — which is where people mention an employer, a family situation or a legal one. **Both are encrypted**, and neither is ever written to the administrative log. If you would rather not give them, leave them empty; the application works exactly the same.",
+        },
+        {
+          type: "subheading",
+          text: "One thing you did not write",
+        },
+        {
+          type: "paragraph",
+          text: "While considering an application, an administrator can attach a short note to it — the substance of a conversation, a reason for a decision, who to introduce you to. This is the only thing in your record that you did not write yourself, and it is the only field in the entire database holding one person's assessment of another, so it is **encrypted like the rest** and is never written to the administrative log.",
+        },
+        {
+          type: "paragraph",
+          text: "It is also part of your record for the purpose of a subject access request. If you ask what is held about you, the note is included in the answer. Anyone writing one is expected to write it knowing that.",
         },
         {
           type: "subheading",
@@ -57,7 +73,8 @@ export const privacy = {
           items: [
             "While the membership stands, and no longer than the movement needs it.",
             "Deleted whenever you ask, without your having to give a reason.",
-            "Nothing is deleted automatically on a timer, because an application awaiting review is somebody's application rather than something stale.",
+            "Nothing is deleted automatically on a timer, because an application nobody has read yet is somebody's application rather than something stale.",
+            "**An application that is declined is kept, marked as declined, rather than erased.** This is a deliberate choice and it has a cost to you, so it is stated plainly: erasing the record would also erase the means of recognising that the same application had been considered before, and the movement would review it again from the start each time it was resubmitted. If you would rather nothing at all were kept, ask, and it will be erased.",
             "The administrative log described below records that a record was created, changed or deleted, and by whom, but never its contents.",
           ],
         },
@@ -87,7 +104,7 @@ export const privacy = {
           type: "list",
           marker: "rule",
           items: [
-            "**Your name, email address, region and message are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
+            "**Your name, email address, region, message and any note written about you are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
             "**Your country is held unencrypted**, because counting and organising by country is the reason the list exists. On its own it identifies nobody. Your region, which would narrow you down much further, is not treated this way — it is encrypted with the rest.",
             "**Nobody signs in with a password.** Administrative access requires a passkey held on a physical device, which cannot be guessed, phished or read out of a stolen database.",
             "**Reading names or messages requires a second confirmation.** Being signed in shows only counts; revealing any individual, or opening any letter, needs a fresh passkey touch valid for minutes. Someone who steals an active session gets statistics, not people.",

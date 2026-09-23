@@ -3,9 +3,14 @@ import { recordAudit } from "@/lib/admin/audit";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { hasMemberEncryptionKey } from "@/lib/admin/env";
 import {
+  isMemberStatus,
   membershipOverview,
   searchMembersRevealed,
+  MEMBER_STATUSES,
+  MEMBER_STATUS_LABEL,
   type MemberSearch,
+  type MemberStatus,
+  type RevealedMember,
 } from "@/lib/admin/members";
 import { queryDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
@@ -19,7 +24,12 @@ import {
 import { formatDate } from "@/lib/utils";
 import { MemberSearchForm } from "@/components/admin/MemberSearchForm";
 import { AddMember } from "@/components/admin/AddMember";
-import { eraseMemberAction, lockMembersAction, setMemberStatusAction } from "./actions";
+import {
+  eraseMemberAction,
+  lockMembersAction,
+  setMemberNotesAction,
+  setMemberStatusAction,
+} from "./actions";
 import { EraseByEmail } from "@/components/admin/EraseByEmail";
 
 /**
@@ -80,7 +90,7 @@ export default async function AdminMembersPage(props: {
           <h1 className="font-serif text-display-2 font-normal text-ink">Members</h1>
           <p className="mt-3 text-[0.9375rem] text-muted">
             {overview.confirmed} {overview.confirmed === 1 ? "member" : "members"}
-            {overview.pending > 0 ? `, ${overview.pending} awaiting review` : ""} across{" "}
+            {overview.open > 0 ? `, ${overview.open} awaiting a decision` : ""} across{" "}
             {overview.countries.length}{" "}
             {overview.countries.length === 1 ? "country" : "countries"}.
           </p>
@@ -99,6 +109,8 @@ export default async function AdminMembersPage(props: {
         ) : null}
       </header>
 
+      <Pipeline overview={overview} />
+
       <CountryBreakdown overview={overview} />
 
       {elevated ? (
@@ -107,6 +119,44 @@ export default async function AdminMembersPage(props: {
         <PasskeyElevation />
       )}
     </div>
+  );
+}
+
+/**
+ * The four states as counts, each a link that filters the list below.
+ *
+ * Rendered above the passkey wall on purpose. Knowing that eleven applications
+ * are unread is operationally the most useful fact on this page, it is the one
+ * thing an administrator needs on every visit, and it is a count over the
+ * unencrypted status column — so it discloses nobody and need not cost a
+ * passkey assertion. Who those eleven are still does.
+ */
+function Pipeline({
+  overview,
+}: {
+  readonly overview: Awaited<ReturnType<typeof membershipOverview>>;
+}) {
+  if (overview.total === 0) return null;
+
+  return (
+    <nav aria-label="Pipeline" className="flex flex-wrap gap-px bg-hairline">
+      {MEMBER_STATUSES.map((status) => (
+        <a
+          key={status}
+          href={`/admin/members?status=${status}&sort=waiting`}
+          className="flex min-w-36 flex-1 flex-col gap-1 bg-canvas px-5 py-4 transition-colors hover:bg-hairline/40"
+        >
+          <span
+            className={`text-[1.75rem] leading-none tabular-nums ${
+              status === "new" && overview.new > 0 ? "text-burgundy" : "text-ink"
+            }`}
+          >
+            {overview[status]}
+          </span>
+          <span className="eyebrow text-muted">{MEMBER_STATUS_LABEL[status]}</span>
+        </a>
+      ))}
+    </nav>
   );
 }
 
@@ -145,7 +195,7 @@ function CountryBreakdown({
               {row.confirmed}
             </span>
             <span className="w-32 shrink-0 text-right text-micro tabular-nums text-faint">
-              {row.pending > 0 ? `${row.pending} pending` : ""}
+              {row.new + row.reviewing > 0 ? `${row.new + row.reviewing} open` : ""}
             </span>
           </li>
         ))}
@@ -170,8 +220,14 @@ async function RevealedList({
   const options: MemberSearch = {
     query,
     country: country && europeanCountries.includes(country) ? country : undefined,
-    status: statusFilter === "pending" || statusFilter === "confirmed" ? statusFilter : undefined,
-    sort: sortParam === "name" || sortParam === "recent" ? sortParam : "country",
+    status:
+      statusFilter === "open" || (statusFilter && isMemberStatus(statusFilter))
+        ? statusFilter
+        : undefined,
+    sort:
+      sortParam === "name" || sortParam === "recent" || sortParam === "waiting"
+        ? sortParam
+        : "country",
     page: Number.isFinite(pageParam) ? pageParam : 1,
   };
 
@@ -250,8 +306,8 @@ async function RevealedList({
             >
               <div className="min-w-0 flex-1">
                 <p className="eyebrow mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
-                  <span className={member.status === "confirmed" ? "text-burgundy" : "text-gold"}>
-                    {member.status === "confirmed" ? "Member" : "Awaiting review"}
+                  <span className={STATUS_TONE[member.status]}>
+                    {MEMBER_STATUS_LABEL[member.status]}
                   </span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
                   <span>{member.country}</span>
@@ -273,23 +329,23 @@ async function RevealedList({
                     {member.message}
                   </p>
                 ) : null}
+
+                <VettingNotes member={member} />
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <form action={setMemberStatusAction}>
-                  <input type="hidden" name="id" value={member.id} />
-                  <input
-                    type="hidden"
-                    name="status"
-                    value={member.status === "confirmed" ? "pending" : "confirmed"}
-                  />
-                  <button
-                    type="submit"
-                    className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-gold hover:text-gold"
-                  >
-                    {member.status === "confirmed" ? "Return to review" : "Accept as member"}
-                  </button>
-                </form>
+                {NEXT_STATES[member.status].map(([status, label]) => (
+                  <form key={status} action={setMemberStatusAction}>
+                    <input type="hidden" name="id" value={member.id} />
+                    <input type="hidden" name="status" value={status} />
+                    <button
+                      type="submit"
+                      className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-gold hover:text-gold"
+                    >
+                      {label}
+                    </button>
+                  </form>
+                ))}
 
                 <form action={eraseMemberAction}>
                   <input type="hidden" name="id" value={member.id} />
@@ -313,6 +369,91 @@ async function RevealedList({
 
       <EraseByEmail />
     </section>
+  );
+}
+
+const STATUS_TONE: Record<MemberStatus, string> = {
+  new: "text-burgundy",
+  reviewing: "text-gold",
+  confirmed: "text-ink",
+  declined: "text-faint",
+};
+
+/**
+ * Where an application can go from where it is, and what the move is called.
+ *
+ * Every state offers a way back, including `declined`, because these record a
+ * judgement rather than a workflow and judgements get revised. What no state
+ * offers is a button to its own value: a transition that changes nothing would
+ * still write an audit row and reset the waiting clock.
+ */
+const NEXT_STATES: Record<MemberStatus, readonly (readonly [MemberStatus, string])[]> = {
+  new: [
+    ["reviewing", "Start review"],
+    ["confirmed", "Accept as member"],
+    ["declined", "Decline"],
+  ],
+  reviewing: [
+    ["confirmed", "Accept as member"],
+    ["declined", "Decline"],
+    ["new", "Back to unread"],
+  ],
+  confirmed: [
+    ["reviewing", "Return to review"],
+    ["declined", "Decline"],
+  ],
+  declined: [["reviewing", "Reopen"]],
+};
+
+/**
+ * The vetting note, collapsed until asked for.
+ *
+ * A `<details>` rather than a toggle with state, so it works before hydration
+ * and without JavaScript like the rest of this surface. Collapsed by default
+ * because a note is a private remark about a named person and should not be
+ * sitting open on a screen somebody walks past — the summary says whether one
+ * exists, not what it says.
+ */
+function VettingNotes({ member }: { readonly member: RevealedMember }) {
+  return (
+    <details className="group mt-2">
+      <summary className="cursor-pointer list-none text-micro text-faint transition-colors hover:text-muted">
+        {member.notes ? "Note written" : "Add a note"}
+        <span aria-hidden="true" className="ml-2 group-open:hidden">
+          +
+        </span>
+        <span aria-hidden="true" className="ml-2 hidden group-open:inline">
+          −
+        </span>
+      </summary>
+
+      <form action={setMemberNotesAction} className="mt-2 flex max-w-prose flex-col gap-2">
+        <input type="hidden" name="id" value={member.id} />
+        <label htmlFor={`notes-${member.id}`} className="sr-only">
+          Vetting notes
+        </label>
+        <textarea
+          id={`notes-${member.id}`}
+          name="notes"
+          rows={3}
+          maxLength={2000}
+          defaultValue={member.notes}
+          placeholder="Spoke to them on the 14th. Wants to help with the Polish wing."
+          className="w-full border border-rule bg-transparent px-3 py-2 text-[0.875rem] leading-relaxed text-ink placeholder:text-faint focus:border-gold focus:outline-none"
+        />
+        <div className="flex items-center gap-3">
+          <button
+            type="submit"
+            className="self-start border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-gold hover:text-gold"
+          >
+            Save note
+          </button>
+          <span className="text-micro text-faint">
+            Encrypted, and never written to the audit log. Clear the box to delete it.
+          </span>
+        </div>
+      </form>
+    </details>
   );
 }
 

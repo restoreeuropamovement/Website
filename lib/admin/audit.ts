@@ -22,6 +22,12 @@ export type AuditAction =
   | "member.reveal"
   | "member.create"
   | "member.update"
+  /*
+   * A vetting note was written or cleared. The note itself never appears in
+   * the detail — it is the one column holding one person's opinion of another,
+   * and this table is not encrypted. Only that it changed, and on which row.
+   */
+  | "member.note"
   | "member.erase"
   /*
    * The two writes the public site performs. Recorded with the same care as an

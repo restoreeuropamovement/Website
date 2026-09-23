@@ -248,22 +248,36 @@ membership lists escape, and adding one would undo most of the above.
 ### How an application works
 
 1. Someone completes the form at `/join`. It asks for a name, an email address, a country, a role
-   and one area of interest — and nothing else. There is no free-text field, because free text is
-   where people mention their employer, their family or their legal exposure.
-2. The record is stored immediately, encrypted, with status `pending`.
-3. A confirmation link goes to the address given. **Nothing counts as a membership until that link
-   is opened**: anyone can type a third party's address into a public form, and enrolling an
-   opponent in a political movement to damage them is a real tactic rather than a hypothetical one.
-4. Unconfirmed applications are deleted automatically after 72 hours.
+   and one area of interest, plus an optional region and an optional message. The two optional
+   fields are free text, which is where people mention their employer, their family or their legal
+   exposure — so both are encrypted and neither is ever written to the audit log.
+2. The record is stored immediately, encrypted, with status `new`.
+3. **Nothing counts as a membership until a person reviews it.** Anyone can type a third party's
+   address into a public form, and enrolling an opponent in a political movement to damage them is
+   a real tactic rather than a hypothetical one. The decision is a human one, deliberately: an
+   emailed confirmation link would only prove that somebody controls the inbox, which is not the
+   question being asked.
+4. An administrator moves it through `new` → `reviewing` → `confirmed` or `declined` from
+   `/admin/members`, and may attach an encrypted vetting note along the way. Every transition
+   writes an audit row carrying the record's id and the new state, never the person.
+5. Nothing is deleted on a timer in any state. `declined` records are kept rather than erased, so
+   that a resubmitted application is recognised instead of re-reviewed from scratch — a retention
+   choice with a cost to the applicant, which is why `/privacy` states it outright.
 
-The form's reply is identical whether the address is new or already a confirmed member. That is not
-an oversight: a form that answered differently would let anyone test, one address at a time, whether
-a named person belongs to this movement.
+The form's reply is identical whether the address is new or already on the roll. That is not an
+oversight: a form that answered differently would let anyone test, one address at a time, whether a
+named person belongs to this movement. The acknowledgement email is sent from `after()` for the
+same reason — sending it inline would make the duplicate case measurably faster and hand the same
+distinction back through the clock.
 
-> **Before opening applications** you need two things that are not code. A named data controller and
-> a correspondence address — `/imprint` currently says neither is established, and `/privacy` says
-> plainly that this is a gap — and `RESEND_API_KEY`, without which no confirmation can be delivered
-> and therefore no membership can complete.
+> **Before opening applications** you need one thing that is not code: a named data controller and
+> a correspondence address. `/imprint` currently says neither is established, and `/privacy` says
+> plainly that this is a gap.
+>
+> `RESEND_API_KEY` is *not* on that list. Without it the acknowledgement email is skipped and
+> everything else works unchanged — the application is recorded either way. Losing somebody's
+> application because a third-party mail provider was unreachable would be the worse failure by a
+> wide margin, so absence of mail is a supported state rather than an error.
 
 ### Editing essays
 
