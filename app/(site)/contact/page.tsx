@@ -28,9 +28,14 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <PageHeader kicker={contactMeta.eyebrow} title={contactMeta.title} lede={contactMeta.lede} />
+      <PageHeader
+        kicker={contactMeta.eyebrow}
+        title={contactMeta.title}
+        lede={contactMeta.lede}
+        size="narrow"
+      />
 
-      <Container className="py-12 lg:py-16">
+      <Container size="narrow" className="py-12 lg:py-16">
         <section aria-labelledby="channels-heading">
           <h2 id="channels-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
             Channels
@@ -53,15 +58,15 @@ export default function ContactPage() {
           <h2 id="write-heading" className="font-serif text-display-3 font-normal text-ink">
             Write to us
           </h2>
-          <p className="mt-4 max-w-(--container-reading) text-reading leading-relaxed text-body/92">
+          <p className="mt-4 text-reading leading-relaxed text-body/92">
             No email addresses are printed above, because each is published when the function it
             belongs to exists and someone is answerable for reading it. This form reaches the same
             people in the meantime.
           </p>
-          <div className="mt-10 max-w-(--container-narrow)">
+          <div className="mt-10">
             <ContactForm />
           </div>
-          <p className="mt-10 max-w-(--container-reading) text-[0.9375rem] leading-relaxed text-muted">
+          <p className="mt-10 text-[0.9375rem] leading-relaxed text-muted">
             If you would rather take part than ask a question,{" "}
             <Link
               href={routes.join}

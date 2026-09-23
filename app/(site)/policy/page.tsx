@@ -46,8 +46,12 @@ export default async function PolicyPage(props: {
 
   return (
     <>
-      <PageHeader kicker={policyMeta.eyebrow} title={policyMeta.title}>
-        <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
+      <PageHeader
+        kicker={policyMeta.eyebrow}
+        title={policyMeta.title}
+        lede={policyMeta.lede}
+        aside={
+          <dl className="grid grid-cols-2 gap-x-8 gap-y-5 border-t border-hairline pt-6">
             <div>
               <dt className="text-[0.8125rem] text-faint">Version</dt>
               <dd className="mt-1 text-[0.9375rem] text-muted">{policyMeta.version}</dd>
@@ -67,21 +71,27 @@ export default async function PolicyPage(props: {
               <dd className="mt-1 numerals-tabular text-[0.9375rem] text-muted">{total}</dd>
             </div>
           </dl>
+        }
+      >
+        {/*
+          Prose stays in one column and the notice takes the other. Setting
+          the paragraphs themselves two-abreast would fill the width too, but
+          a grid flows left-to-right: a reader going down the left column
+          would jump from the first paragraph to the third.
+        */}
+        <div className="mt-10 grid gap-x-16 gap-y-8 border-t border-hairline pt-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-x-16 xl:gap-x-24">
+          <div className="flex flex-col gap-5">
+            {policyMeta.body.map((paragraph) => (
+              <p key={paragraph} className="text-reading leading-relaxed text-body/92">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
-          <p className="mt-8 max-w-(--container-reading) text-lede text-muted">{policyMeta.lede}</p>
-
-          {policyMeta.body.map((paragraph) => (
-            <p
-              key={paragraph}
-              className="mt-5 max-w-(--container-reading) text-reading leading-relaxed text-body/92"
-            >
-              {paragraph}
-            </p>
-          ))}
-
-          <p className="mt-6 max-w-(--container-reading) border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted">
+          <p className="border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted lg:mt-1">
             {CATALOGUE_NOTICE}
           </p>
+        </div>
       </PageHeader>
 
       <section aria-labelledby="legend-heading" className="border-b border-hairline">
@@ -149,10 +159,10 @@ export default async function PolicyPage(props: {
                       </p>
                     </div>
 
-                    <ul className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+                    <ul className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                       {inSection.map((entry) => (
                         <li key={entry.slug} className="flex">
-                          <PolicyCard entry={entry} className="flex-1" />
+                          <PolicyCard entry={entry} showCategory={false} className="flex-1" />
                         </li>
                       ))}
                     </ul>

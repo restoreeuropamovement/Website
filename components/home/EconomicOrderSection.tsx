@@ -10,7 +10,7 @@ export function EconomicOrderSection({
   readonly content: HomeContent["economicOrder"];
 }) {
   return (
-    <Section bordered labelledBy="economic-order">
+    <Section tone="deep" bordered labelledBy="economic-order">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
           <h2

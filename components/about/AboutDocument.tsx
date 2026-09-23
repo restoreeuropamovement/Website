@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ContentBlocks } from "@/components/content/ContentBlocks";
 import { Container } from "@/components/ui/Container";
+import { DocumentLayout } from "@/components/layout/DocumentLayout";
 import { PageHeader } from "@/components/layout/PageHeader";
 import type { AboutEdition } from "@/content/about";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -28,25 +29,7 @@ export function AboutDocument({
       />
 
       <Container className="py-12 lg:py-16">
-        <div className="grid gap-16 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16 xl:grid-cols-[17rem_minmax(0,1fr)] xl:gap-24">
-          <nav aria-label={edition.onThisPage} className="hidden lg:block">
-            <div className="sticky top-24">
-              <h2 className="mb-4 font-serif text-[0.9375rem] text-muted">{edition.onThisPage}</h2>
-              <ol className="flex flex-col border-l border-hairline">
-                {edition.sections.map((section) => (
-                  <li key={section.id}>
-                    <a
-                      href={`#${section.id}`}
-                      className="-ml-px block border-l border-transparent py-2 pl-4 text-[0.8125rem] leading-snug text-muted hover:border-rule hover:text-ink"
-                    >
-                      {section.title}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </nav>
-
+        <DocumentLayout label={edition.onThisPage} items={edition.sections}>
           <div className="flex max-w-(--container-reading) flex-col gap-12 lg:gap-16">
             {edition.sections.map((section) => (
               <section
@@ -102,7 +85,7 @@ export function AboutDocument({
               </Link>
             </p>
           </div>
-        </div>
+        </DocumentLayout>
       </Container>
     </>
   );

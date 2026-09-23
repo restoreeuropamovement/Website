@@ -365,4 +365,20 @@ export const home = {
     primaryCta: { label: "Read the Manifesto", href: "/manifesto" },
     secondaryCta: { label: "Our Vision", href: "/vision" },
   },
+
+  /**
+   * The page has argued for itself; this is where it asks.
+   *
+   * Every claim here is one the site can keep. Membership is reviewed by a
+   * person, applications are encrypted, and nothing is promised about cost or
+   * numbers — the intake genuinely works this way, and a closing block that
+   * oversold it would be the one paragraph on the homepage that was false.
+   */
+  join: {
+    eyebrow: "Membership",
+    statement: "A movement is people, or it is nothing.",
+    body: "Restore Europa is being organised as a party of members rather than of personalities. No form decides anything: every application is read by a person before it becomes a membership, and what you write is encrypted before it is stored.",
+    primaryCta: { label: "Join the Movement", href: "/join" },
+    secondaryCta: { label: "Ask a question", href: "/contact" },
+  },
 };

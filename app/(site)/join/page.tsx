@@ -36,19 +36,22 @@ export default async function JoinPage(props: {
 
   return (
     <>
-      <PageHeader kicker={joinMeta.eyebrow} title={joinMeta.title} lede={joinMeta.lede}>
+      <PageHeader
+        kicker={joinMeta.eyebrow}
+        title={joinMeta.title}
+        lede={joinMeta.lede}
+        size="narrow"
+      >
         {country ? (
-          <p className="mt-6 max-w-(--container-reading) border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted">
+          <p className="mt-6 border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted">
             You arrived from the wing in {country}, so the form below is set to it. Change either
             field if that is not right.
           </p>
         ) : null}
       </PageHeader>
 
-      <Container className="py-14 lg:py-20">
-        <div className="max-w-(--container-narrow)">
-          <JoinForm initialCountry={country} initialRole={role} />
-        </div>
+      <Container size="narrow" className="py-14 lg:py-20">
+        <JoinForm initialCountry={country} initialRole={role} />
       </Container>
     </>
   );

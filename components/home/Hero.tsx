@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { HomeContent } from "@/content/home";
 import { images } from "@/content/images";
@@ -27,23 +27,27 @@ export function Hero({
           {content.headline}
         </p>
         <p className="mt-3 max-w-xl font-serif text-lede text-muted">{content.subheadline}</p>
-        <p className="mt-8 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.9375rem]">
-          <Link
+        {/*
+          Buttons rather than the underlined text links these were. On a page
+          whose every other line is also set in the reading face, two 15px
+          links read as a footnote to the masthead instead of as the way in.
+        */}
+        <div className="mt-9 flex flex-wrap items-center gap-4 sm:mt-10">
+          <Button
             href={localePath(locale, content.primaryCta.href)}
-            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+            variant="primary"
+            size="lg"
           >
             {content.primaryCta.label}
-          </Link>
-          <span className="text-faint" aria-hidden="true">
-            ·
-          </span>
-          <Link
+          </Button>
+          <Button
             href={localePath(locale, content.secondaryCta.href)}
-            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+            variant="secondary"
+            size="lg"
           >
             {content.secondaryCta.label}
-          </Link>
-        </p>
+          </Button>
+        </div>
       </Container>
 
       <figure className="border-t border-hairline">

@@ -6,25 +6,47 @@ import { PolicyStatusBadge } from "./PolicyStatusBadge";
 
 interface PolicyCardProps {
   readonly entry: PolicyEntry;
+  /**
+   * Print the section this belongs to. Off when the cards are already grouped
+   * under that section's heading, which is most of the catalogue: repeating
+   * "Constitutional, Religious and Moral Order" on each of the nine cards
+   * beneath a heading reading exactly that is 89 lines of noise down the page.
+   */
+  readonly showCategory?: boolean;
   readonly className?: string;
 }
 
 /**
  * A listing row. Title, status and the short answer, so the catalogue can be
  * scanned and a position understood without opening the full entry.
+ *
+ * The whole card is the target, not just the title. The card already lit up on
+ * hover, which promised a hit area that only the four words of the heading
+ * actually had. The overlay below is the usual way to keep that promise while
+ * leaving the heading as the accessible name of the link.
  */
-export function PolicyCard({ entry, className }: PolicyCardProps) {
-  const category = getPolicyCategory(entry.category);
+export function PolicyCard({ entry, showCategory = true, className }: PolicyCardProps) {
+  const category = showCategory ? getPolicyCategory(entry.category) : undefined;
 
   return (
-    <article className={cn("group flex flex-col gap-3", className)}>
+    <article
+      className={cn(
+        "group relative flex flex-col gap-3 border-t border-hairline pt-5",
+        "transition-colors hover:border-rule-strong",
+        "focus-within:border-rule-strong",
+        className,
+      )}
+    >
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <PolicyStatusBadge status={entry.status} secondaryStatus={entry.secondaryStatus} />
         {category ? <span className="eyebrow text-faint">{category.title}</span> : null}
       </div>
 
       <h3 className="font-serif text-display-4 font-normal text-ink">
-        <Link href={`/policy/${entry.slug}`} className="transition-colors group-hover:text-burgundy">
+        <Link
+          href={`/policy/${entry.slug}`}
+          className="transition-colors before:absolute before:inset-0 before:content-[''] group-hover:text-burgundy"
+        >
           {entry.title}
         </Link>
       </h3>

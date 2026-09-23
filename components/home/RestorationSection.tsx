@@ -13,7 +13,7 @@ export function RestorationSection({
   readonly locale: Locale;
 }) {
   return (
-    <Section bordered labelledBy="restoration">
+    <Section spacing="lg" bordered labelledBy="restoration">
       <Container size="narrow">
         <h2 id="restoration" className="font-serif text-display-2 font-normal text-ink text-balance">
           {content.statement}

@@ -349,4 +349,12 @@ export const home: HomeContent = {
     primaryCta: { label: "Leggi il Manifesto", href: "/manifesto" },
     secondaryCta: { label: "La nostra Visione", href: "/vision" },
   },
+
+  join: {
+    eyebrow: "Adesione",
+    statement: "Un movimento è fatto di persone, oppure non è nulla.",
+    body: "Restore Europa si organizza come partito di membri anziché di personalità. Nessun modulo decide alcunché: ogni domanda è letta da una persona prima di diventare un'adesione, e ciò che scrivete è cifrato prima di essere conservato.",
+    primaryCta: { label: "Unisciti al movimento", href: "/join" },
+    secondaryCta: { label: "Fai una domanda", href: "/contact" },
+  },
 };

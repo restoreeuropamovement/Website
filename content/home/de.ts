@@ -368,4 +368,12 @@ export const home: HomeContent = {
     primaryCta: { label: "Das Manifest lesen", href: "/manifesto" },
     secondaryCta: { label: "Unsere Vision", href: "/vision" },
   },
+
+  join: {
+    eyebrow: "Mitgliedschaft",
+    statement: "Eine Bewegung besteht aus Menschen — oder sie besteht nicht.",
+    body: "Restore Europa wird als Partei der Mitglieder aufgebaut, nicht als Partei der Persönlichkeiten. Kein Formular entscheidet etwas: Jeder Antrag wird von einem Menschen gelesen, bevor daraus eine Mitgliedschaft wird, und was Sie schreiben, wird vor der Speicherung verschlüsselt.",
+    primaryCta: { label: "Der Bewegung beitreten", href: "/join" },
+    secondaryCta: { label: "Eine Frage stellen", href: "/contact" },
+  },
 };

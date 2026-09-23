@@ -9,7 +9,7 @@ export function PhilosophySection({
   readonly content: HomeContent["philosophy"];
 }) {
   return (
-    <Section spacing="md" labelledBy="central-philosophy">
+    <Section tone="deep" spacing="lg" labelledBy="central-philosophy">
       <Container>
         <h2
           id="central-philosophy"

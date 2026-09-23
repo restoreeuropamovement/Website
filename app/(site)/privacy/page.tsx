@@ -7,7 +7,7 @@ import { privacy } from "@/content/legal";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "This site collects nothing: no analytics, no cookies, no tracking, and no form submissions. A short and honest privacy note.",
+    "Reading this site collects nothing: no analytics, no cookies, no tracking. Two pages ask for something, and only if you choose to give it. What is held, what is encrypted, and how to have it erased.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
       />
 
       <Container size="narrow" className="py-14 lg:py-20">
-        <div className="flex max-w-(--container-reading) flex-col gap-12">
+        <div className="flex flex-col gap-12">
           {privacy.sections.map((section) => (
             <section
               key={section.id}

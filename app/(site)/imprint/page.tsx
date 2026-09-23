@@ -22,7 +22,7 @@ export default function ImprintPage() {
       />
 
       <Container size="narrow" className="py-14 lg:py-20">
-        <div className="flex max-w-(--container-reading) flex-col gap-12">
+        <div className="flex flex-col gap-12">
           <ContentBlocks blocks={imprint.intro} />
 
           <section aria-labelledby="particulars-heading" className="border-t border-hairline pt-8">

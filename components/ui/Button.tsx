@@ -18,8 +18,15 @@ const base =
 
 const variants: Record<ButtonVariant, string> = {
   primary: "bg-ink text-canvas hover:bg-burgundy",
+  /*
+   * `border-field`, not `border-rule`. A button's boundary is an interface
+   * component and has to clear 3:1 (WCAG 1.4.11) — which is the whole reason
+   * `--color-field` exists, as the token file says. `--color-rule` is a
+   * decorative hairline at about 1.5:1 on the page ground, invisible enough
+   * that this read as a dark rectangle rather than as a button.
+   */
   secondary:
-    "border border-rule text-ink hover:border-ink hover:bg-ink hover:text-canvas",
+    "border border-field text-ink hover:border-ink hover:bg-ink hover:text-canvas",
   quiet:
     "px-0! text-ink underline decoration-rule decoration-1 underline-offset-[0.35em] hover:decoration-burgundy hover:text-burgundy",
   inverse: "bg-canvas text-ink hover:bg-gold-soft",

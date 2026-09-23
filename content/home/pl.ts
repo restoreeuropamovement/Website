@@ -363,4 +363,12 @@ export const home: HomeContent = {
     primaryCta: { label: "Przeczytaj Manifest", href: "/manifesto" },
     secondaryCta: { label: "Nasza wizja", href: "/vision" },
   },
+
+  join: {
+    eyebrow: "Członkostwo",
+    statement: "Ruch to ludzie — albo nie ma go wcale.",
+    body: "Restore Europa organizuje się jako partia członków, a nie osobistości. Żaden formularz o niczym nie rozstrzyga: każde zgłoszenie czyta człowiek, zanim stanie się członkostwem, a to, co Państwo napiszą, jest szyfrowane przed zapisaniem.",
+    primaryCta: { label: "Dołącz do ruchu", href: "/join" },
+    secondaryCta: { label: "Zadaj pytanie", href: "/contact" },
+  },
 };

@@ -7,7 +7,7 @@ import { images } from "@/content/images";
 
 export function EuropeSection({ content }: { readonly content: HomeContent["europe"] }) {
   return (
-    <Section bordered labelledBy="europe">
+    <Section tone="deep" bordered labelledBy="europe">
       <Container>
         <h2 id="europe" className="max-w-4xl font-serif text-display-2 font-normal text-ink">
           {content.title}
