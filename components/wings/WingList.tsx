@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { Wing } from "@/content/wings";
+import { DEFAULT_LOCALE, localePath, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 interface WingListProps {
   readonly wings: readonly Wing[];
+  readonly locale?: Locale;
   readonly className?: string;
   /** Tightens the cells for the shorter list shown at the foot of a wing page. */
   readonly density?: "comfortable" | "compact";
@@ -12,7 +14,7 @@ interface WingListProps {
 /**
  * The grid is drawn as hairline gaps over a ruled ground, which means a ragged
  * final row would show that ground through the empty cells. Region counts vary
- * (8 to 16), so the shortfall is filled explicitly.
+ * (9 to 16), so the shortfall is filled explicitly.
  *
  * The column steps are 1 → 2 → 4 rather than 1 → 2 → 3 → 4 deliberately: every
  * step divides four, so padding the count to a multiple of four completes the
@@ -20,7 +22,12 @@ interface WingListProps {
  */
 const COLUMNS = 4;
 
-export function WingList({ wings, className, density = "comfortable" }: WingListProps) {
+export function WingList({
+  wings,
+  locale = DEFAULT_LOCALE,
+  className,
+  density = "comfortable",
+}: WingListProps) {
   const fillers = (COLUMNS - (wings.length % COLUMNS)) % COLUMNS;
 
   return (
@@ -33,7 +40,7 @@ export function WingList({ wings, className, density = "comfortable" }: WingList
       {wings.map((wing) => (
         <li key={wing.slug} className="bg-canvas transition-colors hover:bg-surface">
           <Link
-            href={`/wings/${wing.slug}`}
+            href={localePath(locale, `/wings/${wing.slug}`)}
             className={cn(
               "flex h-full flex-col gap-1",
               density === "compact" ? "px-5 py-4" : "px-6 py-5",

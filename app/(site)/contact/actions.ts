@@ -6,7 +6,7 @@ import { hasDatabase, hasMemberEncryptionKey } from "@/lib/admin/env";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
-import { contactSubjects } from "@/content/involvement";
+import { isContactChannel, type ContactErrorCode } from "@/content/involvement";
 import { type ContactState } from "./state";
 
 /**
@@ -60,17 +60,17 @@ export async function submitEnquiry(
   const subject = read("subject");
   const message = read("message");
 
-  const errors: string[] = [];
-  if (name.length < 2 || name.length > 120) {
-    errors.push("Enter your name, up to 120 characters.");
-  }
-  if (!EMAIL.test(email) || email.length > 180) {
-    errors.push("Enter a valid email address, so a reply can reach you.");
-  }
-  if (!contactSubjects.includes(subject)) errors.push("Choose what your message is about.");
-  if (message.length < 10 || message.length > 2000) {
-    errors.push("Your message should be between 10 and 2000 characters.");
-  }
+  /*
+   * Codes, not sentences. The subject is checked against the channel ids, not
+   * against their titles: the title is what the reader sees and differs in
+   * every language, while the id is what the unencrypted `subject` column
+   * holds and is the same in all of them.
+   */
+  const errors: ContactErrorCode[] = [];
+  if (name.length < 2 || name.length > 120) errors.push("name");
+  if (!EMAIL.test(email) || email.length > 180) errors.push("email");
+  if (!isContactChannel(subject)) errors.push("subject");
+  if (message.length < 10 || message.length > 2000) errors.push("message");
 
   if (errors.length > 0) return { status: "invalid", errors };
 

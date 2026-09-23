@@ -17,11 +17,18 @@ import { cn } from "@/lib/utils";
 import { queryDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireSession } from "@/lib/admin/session";
+/*
+ * The English edition. `/admin` is one unlisted backend read by the people who
+ * run the movement, not a public page, so it is not translated — and the ids
+ * in these columns were named in English in the first place.
+ */
 import {
-  europeanCountries,
-  interestAreas,
-  involvementRoleTitle,
-  involvementRoles,
+  countryLabel,
+  englishInvolvement,
+  interestLabel,
+  isCountryValue,
+  isInvolvementRole,
+  roleTitle,
 } from "@/content/involvement";
 import { formatDate } from "@/lib/utils";
 import { MemberSearchForm } from "@/components/admin/MemberSearchForm";
@@ -225,7 +232,9 @@ function CountryBreakdown({
             key={row.country}
             className="flex items-center gap-4 border-b border-hairline py-3"
           >
-            <span className="w-44 shrink-0 text-[0.9375rem] text-ink">{row.country}</span>
+            <span className="w-44 shrink-0 text-[0.9375rem] text-ink">
+              {countryLabel(row.country)}
+            </span>
             <span aria-hidden="true" className="h-1.5 flex-1 bg-hairline">
               <span
                 className="block h-full bg-burgundy/60"
@@ -261,8 +270,8 @@ async function RevealedList({
 
   const options: MemberSearch = {
     query,
-    country: country && europeanCountries.includes(country) ? country : undefined,
-    role: involvementRoles.some((role) => role.id === roleFilter) ? roleFilter : undefined,
+    country: country && isCountryValue(country) ? country : undefined,
+    role: roleFilter && isInvolvementRole(roleFilter) ? roleFilter : undefined,
     status:
       statusFilter === "open" || (statusFilter && isMemberStatus(statusFilter))
         ? statusFilter
@@ -321,14 +330,14 @@ async function RevealedList({
       </div>
 
       <AddMember
-        countries={europeanCountries}
-        roles={involvementRoles}
-        interests={interestAreas}
+        countries={englishInvolvement.countries}
+        roles={englishInvolvement.roles}
+        interests={englishInvolvement.interests}
       />
 
       <MemberSearchForm
-        countries={europeanCountries}
-        roles={involvementRoles}
+        countries={englishInvolvement.countries}
+        roles={englishInvolvement.roles}
         query={query}
         country={options.country}
         role={options.role}
@@ -360,9 +369,9 @@ async function RevealedList({
                     {MEMBER_STATUS_LABEL[member.status]}
                   </span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
-                  <span>{member.country}</span>
+                  <span>{countryLabel(member.country)}</span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
-                  <span>{involvementRoleTitle(member.involvementRole)}</span>
+                  <span>{roleTitle(member.involvementRole)}</span>
                   <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
                   <time dateTime={member.createdAt.toISOString()}>
                     {formatDate(member.createdAt.toISOString().slice(0, 10))}
@@ -371,7 +380,7 @@ async function RevealedList({
                 <p className="font-serif text-[1.1875rem] leading-snug text-ink">{member.name}</p>
                 <p className="mt-0.5 text-[0.875rem] text-muted">{member.email}</p>
                 <p className="mt-0.5 text-micro text-faint">
-                  {member.interestArea}
+                  {interestLabel(member.interestArea)}
                   {member.region ? ` · ${member.region}` : ""}
                 </p>
                 {member.message ? (

@@ -15,9 +15,10 @@ import {
   honeypotTripped,
 } from "@/lib/spam";
 import {
-  europeanCountries,
-  interestAreas,
-  involvementRoles,
+  isCountryValue,
+  isInterestArea,
+  isInvolvementRole,
+  type JoinErrorCode,
 } from "@/content/involvement";
 import { JOIN_INITIAL, type JoinState } from "./state";
 
@@ -104,21 +105,21 @@ export async function submitMembershipApplication(
   const interestArea = read("interest");
   const consent = read("consent") === "yes";
 
-  const errors: string[] = [];
-  if (name.length < 2 || name.length > 120) {
-    errors.push("Enter your name, up to 120 characters.");
-  }
-  if (!EMAIL.test(email) || email.length > 180) {
-    errors.push("Enter a valid email address.");
-  }
-  if (!europeanCountries.includes(country)) errors.push("Choose a country from the list.");
-  if (region.length > 120) errors.push("Region or city is limited to 120 characters.");
-  if (message.length > 1500) errors.push("Your message is limited to 1500 characters.");
-  if (!involvementRoles.some((role) => role.id === involvementRole)) {
-    errors.push("Choose whether you are applying as a member or a volunteer.");
-  }
-  if (!interestAreas.includes(interestArea)) errors.push("Choose an area of interest.");
-  if (!consent) errors.push("You must agree before continuing.");
+  /*
+   * Codes, not sentences — the form says it in the reader's language. The
+   * three list checks are the same ones that decide what may be written to the
+   * unencrypted columns, so they test against ids rather than against labels:
+   * a label is different in every edition and would reject five of them.
+   */
+  const errors: JoinErrorCode[] = [];
+  if (name.length < 2 || name.length > 120) errors.push("name");
+  if (!EMAIL.test(email) || email.length > 180) errors.push("email");
+  if (!isCountryValue(country)) errors.push("country");
+  if (region.length > 120) errors.push("region");
+  if (message.length > 1500) errors.push("message");
+  if (!isInvolvementRole(involvementRole)) errors.push("role");
+  if (!isInterestArea(interestArea)) errors.push("interest");
+  if (!consent) errors.push("consent");
 
   if (errors.length > 0) return { status: "invalid", errors };
 

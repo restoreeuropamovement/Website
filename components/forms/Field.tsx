@@ -16,6 +16,8 @@ interface FieldShellProps {
   readonly hint?: string;
   readonly error?: string;
   readonly optional?: boolean;
+  /** The word itself, so a translated form does not say "Optional" in English. */
+  readonly optionalLabel?: string;
   readonly children: ReactNode;
   readonly className?: string;
 }
@@ -26,6 +28,7 @@ export function FieldShell({
   hint,
   error,
   optional,
+  optionalLabel = "Optional",
   children,
   className,
 }: FieldShellProps) {
@@ -33,7 +36,7 @@ export function FieldShell({
     <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={id} className="eyebrow flex items-baseline gap-2 text-muted">
         {label}
-        {optional ? <span className="text-[0.5625rem] text-faint">Optional</span> : null}
+        {optional ? <span className="text-[0.5625rem] text-faint">{optionalLabel}</span> : null}
       </label>
       {hint ? (
         <p id={`${id}-hint`} className="text-micro leading-relaxed text-faint">
@@ -55,9 +58,26 @@ export function FieldShell({
 type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "className" | "id"> &
   Omit<FieldShellProps, "children">;
 
-export function TextField({ id, label, hint, error, optional, className, ...input }: TextFieldProps) {
+export function TextField({
+  id,
+  label,
+  hint,
+  error,
+  optional,
+  optionalLabel,
+  className,
+  ...input
+}: TextFieldProps) {
   return (
-    <FieldShell id={id} label={label} hint={hint} error={error} optional={optional} className={className}>
+    <FieldShell
+      id={id}
+      label={label}
+      hint={hint}
+      error={error}
+      optional={optional}
+      optionalLabel={optionalLabel}
+      className={className}
+    >
       <input
         id={id}
         aria-invalid={error ? true : undefined}
@@ -72,9 +92,26 @@ export function TextField({ id, label, hint, error, optional, className, ...inpu
 type TextAreaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className" | "id"> &
   Omit<FieldShellProps, "children">;
 
-export function TextArea({ id, label, hint, error, optional, className, ...textarea }: TextAreaProps) {
+export function TextArea({
+  id,
+  label,
+  hint,
+  error,
+  optional,
+  optionalLabel,
+  className,
+  ...textarea
+}: TextAreaProps) {
   return (
-    <FieldShell id={id} label={label} hint={hint} error={error} optional={optional} className={className}>
+    <FieldShell
+      id={id}
+      label={label}
+      hint={hint}
+      error={error}
+      optional={optional}
+      optionalLabel={optionalLabel}
+      className={className}
+    >
       <textarea
         id={id}
         rows={5}
@@ -87,9 +124,19 @@ export function TextArea({ id, label, hint, error, optional, className, ...texta
   );
 }
 
+/**
+ * An option's stored value and its visible label, which are not the same
+ * thing once the form exists in six languages: the value written to the
+ * database is a language-independent id, the label is what this reader sees.
+ */
+export interface SelectOption {
+  readonly value: string;
+  readonly label: string;
+}
+
 type SelectFieldProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "className" | "id"> &
   Omit<FieldShellProps, "children"> & {
-    readonly options: readonly string[];
+    readonly options: readonly SelectOption[];
     readonly placeholder?: string;
   };
 
@@ -99,13 +146,22 @@ export function SelectField({
   hint,
   error,
   optional,
+  optionalLabel,
   className,
   options,
   placeholder = "Select…",
   ...select
 }: SelectFieldProps) {
   return (
-    <FieldShell id={id} label={label} hint={hint} error={error} optional={optional} className={className}>
+    <FieldShell
+      id={id}
+      label={label}
+      hint={hint}
+      error={error}
+      optional={optional}
+      optionalLabel={optionalLabel}
+      className={className}
+    >
       <select
         id={id}
         aria-invalid={error ? true : undefined}
@@ -120,8 +176,8 @@ export function SelectField({
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

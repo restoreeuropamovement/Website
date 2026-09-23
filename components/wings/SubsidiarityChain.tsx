@@ -1,7 +1,9 @@
-import { wingLayers } from "@/content/wings";
+import { NATIONAL_LAYER, type WingsEdition } from "@/content/wings";
+import { fill } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 interface SubsidiarityChainProps {
+  readonly edition: WingsEdition;
   /** Names the national level, e.g. "National wing — Poland". */
   readonly country: string;
   readonly className?: string;
@@ -11,18 +13,22 @@ interface SubsidiarityChainProps {
  * Where a national wing sits: smallest level first, each one holding only what
  * the level below it cannot. The same order the manifesto argues for in
  * section XV.
+ *
+ * The highlighted level is found by id. Comparing the label against the string
+ * "National wing" worked for as long as there was one language, and would have
+ * quietly dropped the highlight from five editions the day there were six.
  */
-export function SubsidiarityChain({ country, className }: SubsidiarityChainProps) {
+export function SubsidiarityChain({ edition, country, className }: SubsidiarityChainProps) {
   return (
     <figure className={cn("flex flex-col", className)}>
-      <figcaption className="eyebrow mb-6 text-muted">Where the wing sits</figcaption>
+      <figcaption className="eyebrow mb-6 text-muted">{edition.chain.caption}</figcaption>
 
       <ol className="flex flex-col border border-hairline">
-        {wingLayers.map((layer, index) => {
-          const isNational = layer.label === "National wing";
+        {edition.layers.map((layer, index) => {
+          const isNational = layer.id === NATIONAL_LAYER;
           return (
             <li
-              key={layer.label}
+              key={layer.id}
               className={cn(
                 "flex flex-col gap-1.5 border-t border-hairline p-5 first:border-t-0",
                 isNational ? "border-l-2 border-l-burgundy bg-canvas-deep" : "bg-surface",
@@ -43,7 +49,9 @@ export function SubsidiarityChain({ country, className }: SubsidiarityChainProps
                     isNational ? "text-ink" : "text-muted",
                   )}
                 >
-                  {isNational ? `${layer.label} — ${country}` : layer.label}
+                  {isNational
+                    ? fill(edition.chain.nationalLabel, { layer: layer.label, country })
+                    : layer.label}
                 </span>
               </span>
               <span className="pl-[1.6rem] text-[0.875rem] leading-relaxed text-muted">
@@ -54,9 +62,7 @@ export function SubsidiarityChain({ country, className }: SubsidiarityChainProps
         })}
       </ol>
 
-      <p className="mt-4 text-micro leading-relaxed text-faint">
-        Read upward: a level takes on only what the one beneath it cannot competently hold.
-      </p>
+      <p className="mt-4 text-micro leading-relaxed text-faint">{edition.chain.footnote}</p>
     </figure>
   );
 }

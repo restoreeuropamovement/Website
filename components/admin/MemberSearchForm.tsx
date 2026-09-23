@@ -6,6 +6,7 @@ import {
   type MemberSort,
   type MemberStatus,
 } from "@/lib/admin/member-status";
+import type { SelectOption } from "@/components/forms/Field";
 
 /**
  * Search, filter and sort controls for the membership roll.
@@ -26,7 +27,8 @@ export function MemberSearchForm({
   status,
   sort,
 }: {
-  readonly countries: readonly string[];
+  /** Value is the slug the `country` column holds; label is the English name. */
+  readonly countries: readonly SelectOption[];
   readonly roles: readonly { readonly id: string; readonly title: string }[];
   readonly query?: string;
   readonly country?: string;
@@ -59,9 +61,9 @@ export function MemberSearchForm({
         <span className="eyebrow text-muted">Country</span>
         <select name="country" defaultValue={country ?? ""} className={select}>
           <option value="">All countries</option>
-          {countries.map((name) => (
-            <option key={name} value={name}>
-              {name}
+          {countries.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
             </option>
           ))}
         </select>

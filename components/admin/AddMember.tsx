@@ -5,6 +5,7 @@ import { UserPlus } from "lucide-react";
 import { addMemberAction } from "@/app/admin/(dashboard)/members/actions";
 import { ADD_MEMBER_INITIAL, type AddMemberState } from "@/app/admin/(dashboard)/members/state";
 import { MEMBER_STATUSES, MEMBER_STATUS_LABEL } from "@/lib/admin/member-status";
+import type { SelectOption } from "@/components/forms/Field";
 
 /**
  * Records an application that reached the movement by some other channel.
@@ -21,9 +22,14 @@ export function AddMember({
   roles,
   interests,
 }: {
-  readonly countries: readonly string[];
+  /*
+   * Ids and labels, because the values these selects submit are what the
+   * unencrypted columns store. The roll is English-only; the labels here are
+   * the English ones for ids the public form may have written in any language.
+   */
+  readonly countries: readonly SelectOption[];
   readonly roles: readonly { readonly id: string; readonly title: string }[];
-  readonly interests: readonly string[];
+  readonly interests: readonly SelectOption[];
 }) {
   const [state, formAction, pending] = useActionState<AddMemberState, FormData>(
     addMemberAction,
@@ -75,9 +81,9 @@ export function AddMember({
               <option value="" disabled>
                 Select…
               </option>
-              {countries.map((name) => (
-                <option key={name} value={name}>
-                  {name}
+              {countries.map((country) => (
+                <option key={country.value} value={country.value}>
+                  {country.label}
                 </option>
               ))}
             </select>
@@ -102,8 +108,8 @@ export function AddMember({
                 Select…
               </option>
               {interests.map((area) => (
-                <option key={area} value={area}>
-                  {area}
+                <option key={area.value} value={area.value}>
+                  {area.label}
                 </option>
               ))}
             </select>

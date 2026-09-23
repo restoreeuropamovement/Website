@@ -1,6 +1,7 @@
 import { Lock } from "lucide-react";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { recordAudit } from "@/lib/admin/audit";
+import { channelTitle } from "@/content/involvement";
 import { enquiryOverview, listEnquiriesRevealed } from "@/lib/admin/enquiries";
 import { hasMemberEncryptionKey } from "@/lib/admin/env";
 import { clientContext } from "@/lib/admin/request";
@@ -101,7 +102,8 @@ async function RevealedInbox({ session }: { readonly session: ActiveSession }) {
                 {enquiry.status === "new" ? "Awaiting reply" : "Handled"}
               </span>
               <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
-              <span>{enquiry.subject}</span>
+              {/* The column holds a channel id; the inbox reads in English. */}
+              <span>{channelTitle(enquiry.subject)}</span>
               <span aria-hidden="true" className="size-1 rotate-45 bg-gold/70" />
               <time dateTime={enquiry.createdAt.toISOString()}>
                 {formatDate(enquiry.createdAt.toISOString().slice(0, 10))}

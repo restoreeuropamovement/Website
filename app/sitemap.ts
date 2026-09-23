@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { wings } from "@/content/wings";
+import { wingSlugs } from "@/content/wings";
 import { LOCALES, localePath } from "@/lib/i18n";
 import { getPolicyEntries } from "@/lib/policy";
 import { SITE_URL } from "@/lib/site";
@@ -43,8 +43,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     everyLocale(path, { lastModified: now, changeFrequency, priority }),
   );
 
-  const nationalWings: MetadataRoute.Sitemap = wings.flatMap((wing) =>
-    everyLocale(`/wings/${wing.slug}`, {
+  const nationalWings: MetadataRoute.Sitemap = wingSlugs.flatMap((slug) =>
+    everyLocale(`/wings/${slug}`, {
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,

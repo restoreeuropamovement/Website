@@ -8,10 +8,13 @@ import { JOIN_INITIAL, type JoinState } from "@/app/(site)/join/state";
 import { CheckboxField, SelectField, TextArea, TextField } from "@/components/forms/Field";
 import { Honeypot } from "@/components/forms/Honeypot";
 import { Button } from "@/components/ui/Button";
-import { europeanCountries, interestAreas, involvementRoles } from "@/content/involvement";
+import type { InvolvementEdition } from "@/content/involvement";
+import { plural } from "@/lib/format";
+import { localePath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export interface JoinFormProps {
+  readonly edition: InvolvementEdition;
   /** Preselected from the query string, e.g. arriving from a national wing. */
   readonly initialCountry?: string;
   readonly initialRole?: string;
@@ -27,10 +30,15 @@ export interface JoinFormProps {
  * neither is ever written to the audit log.
  *
  * Validation lives in the Server Action. What is here is a courtesy to the
- * person filling the form in, and the browser's own `required` handling.
+ * person filling the form in, and the browser's own `required` handling. The
+ * action returns codes; this component turns them into sentences, because it
+ * is the side that knows which language is being read.
  */
-export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
+export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps) {
   const uid = useId();
+  const { locale } = edition;
+  const text = edition.join;
+  const privacyHref = localePath(locale, "/privacy");
   const [state, formAction, pending] = useActionState<JoinState, FormData>(
     submitMembershipApplication,
     JOIN_INITIAL,
@@ -41,18 +49,13 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       <div className="border border-rule bg-surface p-8 lg:p-10" role="status">
         <CheckCircle2 className="size-6 text-burgundy" strokeWidth={1.5} aria-hidden="true" />
         <h3 className="mt-5 font-serif text-display-4 font-normal text-ink">
-          Your application has been received.
+          {text.received.title}
         </h3>
-        <p className="mt-4 max-w-xl text-reading text-body/92">
-          It now waits to be reviewed by a person. Membership begins when that review is complete,
-          not when a form is submitted — so nothing has been decided yet, and nothing about you has
-          been published anywhere.
-        </p>
+        <p className="mt-4 max-w-xl text-reading text-body/92">{text.received.body}</p>
         <p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-muted">
-          Your name and address were encrypted before they were written down. What we hold, how
-          long we hold it and how to have it erased are set out in the{" "}
-          <Link href="/privacy" className="underline underline-offset-4 hover:text-burgundy">
-            privacy note
+          {text.received.privacy}{" "}
+          <Link href={privacyHref} className="underline underline-offset-4 hover:text-burgundy">
+            {text.received.privacyLink}
           </Link>
           .
         </p>
@@ -64,30 +67,18 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
     <form action={formAction} className="relative flex flex-col gap-10">
       <Honeypot />
 
-      {state.status === "unavailable" ? (
-        <Notice tone="warning">
-          The membership roll is not accepting applications at this moment. Nothing you type here
-          has been sent. Please try again shortly.
-        </Notice>
-      ) : null}
-
-      {state.status === "throttled" ? (
-        <Notice tone="warning">
-          Several applications have already been submitted from this connection. Please wait an
-          hour before sending another.
-        </Notice>
-      ) : null}
+      {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}
+      {state.status === "throttled" ? <Notice>{text.throttled}</Notice> : null}
 
       {state.errors.length > 0 ? (
         <div className="border border-burgundy/40 bg-burgundy/5 p-5" role="alert">
           <h3 className="text-[0.9375rem] font-medium text-burgundy">
-            There {state.errors.length === 1 ? "is 1 problem" : `are ${state.errors.length} problems`}{" "}
-            with this form
+            {plural(locale, state.errors.length, text.problemCount)}
           </h3>
           <ul className="mt-3 flex flex-col gap-1.5">
-            {state.errors.map((message) => (
-              <li key={message} className="text-[0.875rem] text-burgundy">
-                {message}
+            {state.errors.map((code) => (
+              <li key={code} className="text-[0.875rem] text-burgundy">
+                {text.errors[code]}
               </li>
             ))}
           </ul>
@@ -95,9 +86,9 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       ) : null}
 
       <fieldset className="flex flex-col gap-5">
-        <legend className="eyebrow mb-1 text-muted">How you are applying</legend>
+        <legend className="eyebrow mb-1 text-muted">{text.roleLegend}</legend>
         <ul className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
-          {involvementRoles.map((role, index) => {
+          {edition.roles.map((role, index) => {
             const id = `${uid}-role-${role.id}`;
             const defaultChecked = initialRole ? initialRole === role.id : index === 0;
             return (
@@ -130,7 +121,7 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
         <TextField
           id={`${uid}-name`}
           name="name"
-          label="Name"
+          label={text.fields.name}
           autoComplete="name"
           maxLength={120}
           required
@@ -140,7 +131,7 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
           id={`${uid}-email`}
           name="email"
           type="email"
-          label="Email"
+          label={text.fields.email}
           autoComplete="email"
           maxLength={180}
           required
@@ -149,20 +140,27 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2">
+        {/*
+          `autoComplete="country-name"` is deliberately absent. The browser
+          would fill it with a country *name*, and the option values here are
+          wing slugs — the fill would match nothing and silently clear the
+          field the reader thought was answered.
+        */}
         <SelectField
           id={`${uid}-country`}
           name="country"
-          label="Country"
-          autoComplete="country-name"
-          options={europeanCountries}
+          label={text.fields.country}
+          options={edition.countries}
+          placeholder={text.fields.placeholder}
           required
           defaultValue={initialCountry ?? ""}
         />
         <TextField
           id={`${uid}-region`}
           name="region"
-          label="Region or city"
+          label={text.fields.region}
           optional
+          optionalLabel={text.fields.optional}
           maxLength={120}
           defaultValue=""
         />
@@ -171,8 +169,9 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       <SelectField
         id={`${uid}-interest`}
         name="interest"
-        label="Area of interest"
-        options={interestAreas}
+        label={text.fields.interest}
+        options={edition.interests}
+        placeholder={text.fields.placeholder}
         required
         defaultValue=""
       />
@@ -180,29 +179,27 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
       <TextArea
         id={`${uid}-message`}
         name="message"
-        label="Message"
+        label={text.fields.message}
         optional
-        hint="What you would like to do, and anything about your circumstances that is relevant to it."
+        optionalLabel={text.fields.optional}
+        hint={text.fields.messageHint}
         maxLength={1500}
         rows={6}
         defaultValue=""
       />
 
       <CheckboxField id={`${uid}-consent`} name="consent" value="yes" required>
-        I am applying to join Restore Europa Movement, and I agree that what I have entered above
-        may be held for that purpose. Membership in a political movement implies a political
-        opinion, which the law protects more strictly than ordinary personal data; I may withdraw
-        this consent and have the record erased at any time.
+        {text.consent}
       </CheckboxField>
 
       <div className="flex flex-col gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
         <Button type="submit" size="lg" disabled={pending}>
-          {pending ? "Sending…" : "Apply to join"}
+          {pending ? text.submitting : text.submit}
         </Button>
         <p className="text-micro leading-relaxed text-faint sm:max-w-sm sm:text-right">
-          Everything you enter is encrypted before it is stored. See our{" "}
-          <Link href="/privacy" className="underline underline-offset-4 hover:text-burgundy">
-            privacy note
+          {text.privacyNote}{" "}
+          <Link href={privacyHref} className="underline underline-offset-4 hover:text-burgundy">
+            {text.privacyLink}
           </Link>
           .
         </p>
@@ -211,15 +208,9 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
   );
 }
 
-function Notice({
-  tone,
-  children,
-}: {
-  readonly tone: "warning";
-  readonly children: React.ReactNode;
-}) {
+function Notice({ children }: { readonly children: React.ReactNode }) {
   return (
-    <div className={cn("flex gap-3 border border-rule bg-canvas-deep p-5", tone)}>
+    <div className={cn("flex gap-3 border border-rule bg-canvas-deep p-5")}>
       <Info className="mt-0.5 size-4 shrink-0 text-burgundy" strokeWidth={1.75} aria-hidden="true" />
       <p className="text-[0.875rem] leading-relaxed text-muted">{children}</p>
     </div>

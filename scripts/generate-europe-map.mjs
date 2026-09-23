@@ -447,7 +447,8 @@ async function loadTopology() {
 }
 
 async function main() {
-  const { wings } = await import("../content/wings.ts");
+  const { englishWings } = await import("../content/wings/index.ts");
+  const { wings } = englishWings;
   const topology = await loadTopology();
   const arcs = decodeArcs(topology);
 

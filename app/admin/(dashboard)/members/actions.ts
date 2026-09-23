@@ -12,7 +12,11 @@ import {
 } from "@/lib/admin/members";
 import { clientContext } from "@/lib/admin/request";
 import { dropElevation, requireElevatedSession } from "@/lib/admin/session";
-import { europeanCountries, interestAreas, involvementRoles } from "@/content/involvement";
+import {
+  isCountryValue,
+  isInterestArea,
+  isInvolvementRole,
+} from "@/content/involvement";
 import type { AddMemberState, EraseState } from "@/app/admin/(dashboard)/members/state";
 
 /**
@@ -56,11 +60,13 @@ export async function addMemberAction(
   const errors: string[] = [];
   if (name.length < 2 || name.length > 120) errors.push("Enter a name, up to 120 characters.");
   if (!EMAIL.test(email) || email.length > 180) errors.push("Enter a valid email address.");
-  if (!europeanCountries.includes(country)) errors.push("Choose a country from the list.");
-  if (!involvementRoles.some((role) => role.id === involvementRole)) {
-    errors.push("Choose a role.");
-  }
-  if (!interestAreas.includes(interestArea)) errors.push("Choose an area of interest.");
+  /*
+   * Against ids, not labels: what these columns hold is the same value however
+   * the roll is being read, and the public intake writes exactly the same set.
+   */
+  if (!isCountryValue(country)) errors.push("Choose a country from the list.");
+  if (!isInvolvementRole(involvementRole)) errors.push("Choose a role.");
+  if (!isInterestArea(interestArea)) errors.push("Choose an area of interest.");
 
   if (errors.length > 0) return { status: "invalid", errors };
 
