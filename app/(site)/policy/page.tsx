@@ -88,7 +88,7 @@ export default async function PolicyPage(props: {
             ))}
           </div>
 
-          <p className="border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted lg:mt-1">
+          <p className="self-start border-l border-rule py-1 pl-5 text-[0.9375rem] leading-relaxed text-muted lg:mt-1">
             {CATALOGUE_NOTICE}
           </p>
         </div>

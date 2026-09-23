@@ -72,20 +72,29 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
             ) : null}
           </p>
 
-          <PolicyStatusBadge status={entry.status} secondaryStatus={entry.secondaryStatus} />
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16 xl:gap-24">
+            <div>
+              <PolicyStatusBadge status={entry.status} secondaryStatus={entry.secondaryStatus} />
+              <h1 className="mt-6 max-w-4xl font-serif text-display-2 font-normal text-ink text-balance">
+                {entry.title}
+              </h1>
+            </div>
 
-          <h1 className="mt-6 max-w-4xl font-serif text-display-2 font-normal text-ink">
-            {entry.title}
-          </h1>
-
-          <p className="mt-6 max-w-(--container-reading) text-lede text-muted">
-            {entry.shortAnswer}
-          </p>
+            <p className="text-lede text-muted lg:pt-2">{entry.shortAnswer}</p>
+          </div>
         </Container>
       </header>
 
       <Container className="py-16 lg:py-24">
-        <div className="flex max-w-(--container-reading) flex-col gap-14">
+        {/*
+          Two columns: the argument, and the apparatus that supports it.
+          Manifesto basis, search terms and the revision date are not part of
+          the case being made — they are how a reader checks it — so they go in
+          the rail rather than at the bottom of the page, where they also
+          happen to fill the half of the screen this page used to leave empty.
+        */}
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_18rem] xl:gap-24">
+          <div className="flex max-w-(--container-reading) min-w-0 flex-col gap-14">
           <section aria-labelledby="position-heading">
               <h2 id="position-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 Position
@@ -163,8 +172,11 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
               </section>
           ) : null}
 
-          {basis.length > 0 ? (
-            <section aria-labelledby="basis-heading" className="border-t border-hairline pt-10">
+          </div>
+
+          <aside className="flex flex-col gap-10 border-t border-hairline pt-8 lg:sticky lg:top-24 lg:self-start lg:border-t-0 lg:pt-2">
+            {basis.length > 0 ? (
+              <section aria-labelledby="basis-heading">
                 <h2 id="basis-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   Manifesto basis
                 </h2>
@@ -173,12 +185,12 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                     <li key={section.id}>
                       <Link
                         href={`/manifesto#${section.id}`}
-                        className="group flex items-baseline gap-4"
+                        className="group flex items-baseline gap-3"
                       >
-                        <span className="numerals-tabular eyebrow w-8 shrink-0 text-faint">
+                        <span className="numerals-tabular eyebrow w-7 shrink-0 text-faint">
                           {section.numeral}
                         </span>
-                        <span className="font-serif text-[1.125rem] text-ink transition-colors group-hover:text-burgundy">
+                        <span className="font-serif text-[1rem] leading-snug text-ink transition-colors group-hover:text-burgundy">
                           {section.title}
                         </span>
                       </Link>
@@ -186,9 +198,9 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                   ))}
                 </ul>
               </section>
-          ) : null}
+            ) : null}
 
-          <section aria-labelledby="keywords-heading" className="border-t border-hairline pt-10">
+            <section aria-labelledby="keywords-heading">
               <h2 id="keywords-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 Search terms
               </h2>
@@ -204,11 +216,13 @@ export default async function PolicyEntryPage(props: { params: Promise<{ slug: s
                   </li>
                 ))}
               </ul>
-              <p className="mt-8 text-micro text-faint">
-                Last updated{" "}
-                <time dateTime={entry.lastUpdated}>{formatDate(entry.lastUpdated)}</time>.
-              </p>
             </section>
+
+            <p className="text-micro text-faint">
+              Last updated{" "}
+              <time dateTime={entry.lastUpdated}>{formatDate(entry.lastUpdated)}</time>.
+            </p>
+          </aside>
         </div>
 
         {related.length > 0 ? (

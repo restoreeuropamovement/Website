@@ -171,6 +171,10 @@ export const wingsMeta = {
     },
   ] satisfies readonly ContentBlock[],
   note: "Wings are being established across the continent. If you would like to help start the one where you live, say so through Get Involved — it is the most useful thing anyone can do for the movement at this stage.",
+  mapLabel:
+    "A map of Europe with the forty-four nations listed on this page picked out from the land around them.",
+  mapCaption:
+    "The nations picked out here are the forty-four listed below. Being on the map means the movement is organised around that nation, not that its wing is constituted or active.",
 } as const;
 
 /** One sentence opening each national page. */

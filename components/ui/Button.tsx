@@ -43,6 +43,16 @@ const sizes: Record<ButtonSize, string> = {
 interface CommonProps {
   readonly variant?: ButtonVariant;
   readonly size?: ButtonSize;
+  /**
+   * Fill the line below `sm`, sit at natural width above it.
+   *
+   * For buttons that appear in a row of two or more. Stacked at their content
+   * widths on a phone they come out visibly ragged — "Read Our Principles" is
+   * half a centimetre wider than "Read the Manifesto" — which reads as
+   * carelessness rather than as a deliberate difference. Not the default,
+   * because a lone button that spans the screen looks like a banner.
+   */
+  readonly block?: boolean;
   readonly className?: string;
   readonly children: ReactNode;
 }
@@ -62,11 +72,17 @@ export type ButtonProps = LinkProps | NativeButtonProps;
  * paths); otherwise a native button. Nothing here is a link that goes nowhere.
  */
 export function Button(props: ButtonProps) {
-  const { variant = "primary", size = "md", className, children } = props;
-  const classes = cn(base, variants[variant], sizes[size], className);
+  const { variant = "primary", size = "md", block = false, className, children } = props;
+  const classes = cn(
+    base,
+    variants[variant],
+    sizes[size],
+    block && "w-full sm:w-auto",
+    className,
+  );
 
   if (props.href !== undefined) {
-    const { href, variant: _v, size: _s, className: _c, children: _ch, ...rest } = props;
+    const { href, variant: _v, size: _s, block: _b, className: _c, children: _ch, ...rest } = props;
     const isInternal = href.startsWith("/") || href.startsWith("#");
 
     if (isInternal) {
@@ -84,7 +100,7 @@ export function Button(props: ButtonProps) {
     );
   }
 
-  const { variant: _v, size: _s, className: _c, children: _ch, href: _h, ...rest } = props;
+  const { variant: _v, size: _s, block: _b, className: _c, children: _ch, href: _h, ...rest } = props;
   return (
     <button className={classes} {...rest}>
       {children}

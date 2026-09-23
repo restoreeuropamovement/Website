@@ -25,6 +25,7 @@ npm run dev        # http://localhost:3000
 | `npm run typecheck` | `tsc --noEmit`                                       |
 | `npm run check`     | Lint, typecheck, both content tests and build        |
 | `npm run artwork`   | Regenerate the generated SVG artwork                 |
+| `npm run map`       | Regenerate the outline of Europe used by `/wings`    |
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
 | `npm run db:migrate`| Apply `db/schema.sql` — idempotent                   |
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
@@ -355,6 +356,18 @@ its `alt` text, and remove the `placeholder` flag. Nothing else changes.
 Preferred direction: European countryside, old towns, villages, churches,
 forests, mountains, workshops, farms, universities, public squares, stone
 architecture and ordinary civic life.
+
+### The map on `/wings`
+
+The one image on the site that is not artwork or photography. Country outlines
+come from [Natural Earth](https://www.naturalearthdata.com/) at 1:50m, which is
+public domain and asks for no attribution; `npm run map` clips them to a window
+over Europe, projects them with EPSG:3035 and writes `content/wings-map.ts`.
+Run it again if the list of wings changes — a wing with no outline is a build
+error, not a gap in the picture.
+
+It is drawn rather than approximated on purpose. A movement organised by nation
+cannot print a map whose borders are invented.
 
 ---
 

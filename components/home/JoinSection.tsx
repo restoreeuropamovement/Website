@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import type { HomeContent } from "@/content/home";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -30,7 +31,8 @@ export function JoinSection({
   return (
     <Section tone="surface" spacing="lg" bordered labelledBy="join-statement">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
+        {/* The ask settles as one block. Animating the plea in pieces would sell it. */}
+        <Reveal className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
           <div>
             <p className="eyebrow mb-5 text-burgundy">{content.eyebrow}</p>
             <h2
@@ -43,11 +45,12 @@ export function JoinSection({
 
           <div className="flex flex-col gap-8">
             <p className="text-reading leading-relaxed text-body">{content.body}</p>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-center">
               <Button
                 href={localePath(locale, content.primaryCta.href)}
                 variant="primary"
                 size="lg"
+                block
               >
                 {content.primaryCta.label}
               </Button>
@@ -55,12 +58,13 @@ export function JoinSection({
                 href={localePath(locale, content.secondaryCta.href)}
                 variant="secondary"
                 size="lg"
+                block
               >
                 {content.secondaryCta.label}
               </Button>
             </div>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

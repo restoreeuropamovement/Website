@@ -11,6 +11,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "artwork": "node scripts/generate-artwork.mjs",
+    "map": "tsx scripts/generate-europe-map.mjs",
     "db:dev": "node scripts/dev-db.mjs",
     "db:migrate": "tsx --env-file-if-exists=.env.local scripts/db-migrate.ts",
     "db:seed": "tsx --env-file-if-exists=.env.local scripts/db-seed.ts",

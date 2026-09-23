@@ -32,11 +32,12 @@ export function Hero({
           whose every other line is also set in the reading face, two 15px
           links read as a footnote to the masthead instead of as the way in.
         */}
-        <div className="mt-9 flex flex-wrap items-center gap-4 sm:mt-10">
+        <div className="mt-9 flex flex-col items-stretch gap-4 sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
           <Button
             href={localePath(locale, content.primaryCta.href)}
             variant="primary"
             size="lg"
+            block
           >
             {content.primaryCta.label}
           </Button>
@@ -44,6 +45,7 @@ export function Hero({
             href={localePath(locale, content.secondaryCta.href)}
             variant="secondary"
             size="lg"
+            block
           >
             {content.secondaryCta.label}
           </Button>

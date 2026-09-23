@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/ui/Reveal";
 import type { ImageSlot } from "@/lib/content-types";
 
 /**
@@ -15,7 +16,12 @@ import type { ImageSlot } from "@/lib/content-types";
  */
 export function ImageBreak({ slot }: { readonly slot: ImageSlot }) {
   return (
-    <div className="relative border-t border-hairline">
+    /*
+     * `distance={0}` makes this a fade and nothing else. The band is full-bleed
+     * and sits between two grounds, so travelling it upward would open a strip
+     * of empty canvas along its bottom edge for the length of the animation.
+     */
+    <Reveal distance={0} className="relative border-t border-hairline">
       <Image
         src={slot.src}
         alt={slot.alt}
@@ -39,6 +45,6 @@ export function ImageBreak({ slot }: { readonly slot: ImageSlot }) {
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-canvas via-transparent to-canvas opacity-70"
       />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-canvas/20" />
-    </div>
+    </Reveal>
   );
 }

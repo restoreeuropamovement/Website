@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContentBlocks } from "@/components/content/ContentBlocks";
+import { EuropeMap } from "@/components/wings/EuropeMap";
 import { WingList } from "@/components/wings/WingList";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { getWingsByRegion, wingRegions, wings, wingsMeta } from "@/content/wings";
 import { pad } from "@/lib/utils";
@@ -20,11 +22,48 @@ export default function WingsPage() {
       <PageHeader kicker={wingsMeta.eyebrow} title={wingsMeta.title} lede={wingsMeta.lede} />
 
       <Container className="py-12 lg:py-16">
-        <ContentBlocks blocks={wingsMeta.intro} className="max-w-(--container-reading)" />
+        {/*
+          The standing note sits beside the intro rather than under it. Stacked,
+          it left the right half of a wide screen empty above a map that then
+          had to carry the whole width on its own.
+        */}
+        <div className="grid gap-x-16 gap-y-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] xl:gap-x-24">
+          <ContentBlocks blocks={wingsMeta.intro} className="max-w-(--container-reading)" />
 
-        <p className="mt-8 max-w-(--container-reading) border-l border-rule py-1 pl-5 text-[1.0625rem] leading-relaxed text-muted">
-          {wingsMeta.note}
-        </p>
+          {/*
+            `self-start` so the left rule measures the note rather than the
+            grid row: stretched, it draws a line down the empty space beneath.
+          */}
+          <p className="self-start border-l border-rule py-1 pl-5 text-[1.0625rem] leading-relaxed text-muted lg:mt-1">
+            {wingsMeta.note}
+          </p>
+        </div>
+
+        <figure className="mt-14 lg:mt-16">
+          {/*
+            Held to a plate rather than run to the container width. Europe is
+            close to square in an equal-area projection, so a full-width map
+            would be over a thousand pixels tall and push the list of wings —
+            the part of the page you can actually click — off the screen. Size
+            buys nothing in legibility either: Luxembourg is a handful of pixels
+            wide however big the map is, which is why the small wings get
+            markers and the list does the naming.
+          */}
+          {/*
+            The only reveal outside the homepage, and a fade rather than a
+            settle. The map is the one thing on the site that is looked at
+            rather than read, so it is worth the moment; the caption and the
+            lists are not wrapped, because a `figcaption` has to stay a direct
+            child of its `figure`, and content you came to use should be there
+            when you arrive.
+          */}
+          <Reveal distance={0}>
+            <EuropeMap label={wingsMeta.mapLabel} className="mx-auto max-w-3xl" />
+          </Reveal>
+          <figcaption className="mx-auto mt-6 max-w-(--container-reading) border-t border-hairline pt-4 text-[0.9375rem] leading-relaxed text-muted">
+            {wingsMeta.mapCaption}
+          </figcaption>
+        </figure>
 
         <div className="mt-16 flex flex-col gap-14 lg:gap-16">
           {wingRegions.map((region, index) => {
