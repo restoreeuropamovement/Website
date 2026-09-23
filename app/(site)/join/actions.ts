@@ -10,6 +10,11 @@ import { sendEmail } from "@/lib/email";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import {
+  GLOBAL_HOURLY_LIMIT,
+  GLOBAL_WINDOW_SECONDS,
+  honeypotTripped,
+} from "@/lib/spam";
+import {
   europeanCountries,
   interestAreas,
   involvementRoles,
@@ -59,6 +64,36 @@ export async function submitMembershipApplication(
     return { status: "unavailable", errors: [] };
   }
 
+  const { ipHash } = await clientContext();
+
+  /*
+   * The decoy field, checked before anything else is read.
+   *
+   * The reply is the ordinary one. Telling a submitter that it was detected
+   * teaches whoever wrote it to stop filling the field in, and the whole value
+   * of this is that they do not know it is there.
+   *
+   * Recorded only while the connection is still within its allowance, so a
+   * sustained run cannot turn the audit log into the flood it is reporting.
+   */
+  if (honeypotTripped(form)) {
+    const decoy = await consumeRateLimit(
+      `join:${ipHash ?? "unknown"}`,
+      RATE_LIMIT,
+      RATE_WINDOW_SECONDS,
+    );
+    if (decoy.allowed) {
+      await recordAudit({
+        action: "member.apply",
+        outcome: "failure",
+        actorLabel: "public intake",
+        detail: { reason: "decoy field completed" },
+        ipHash,
+      });
+    }
+    return { status: "received", errors: [] };
+  }
+
   const read = (name: string) => String(form.get(name) ?? "").trim();
   const name = read("name");
   const email = read("email");
@@ -87,13 +122,14 @@ export async function submitMembershipApplication(
 
   if (errors.length > 0) return { status: "invalid", errors };
 
-  const { ipHash } = await clientContext();
-
   /*
    * Throttled on the hashed address rather than the submitted email, so that
    * filling the roll with junk costs an attacker addresses rather than
    * keystrokes. `ipHash` is null only when no proxy header is present, in
    * which case everything anonymous shares one bucket — deliberately strict.
+   *
+   * Counted after validation on purpose: somebody who mistypes their address
+   * five times is not an attacker and should not be locked out for an hour.
    */
   const limit = await consumeRateLimit(
     `join:${ipHash ?? "unknown"}`,
@@ -101,6 +137,29 @@ export async function submitMembershipApplication(
     RATE_WINDOW_SECONDS,
   );
   if (!limit.allowed) return { status: "throttled", errors: [] };
+
+  /*
+   * And the ceiling the per-connection limit cannot see: the same script
+   * arriving from several hundred addresses, each one comfortably inside its
+   * own allowance. Recorded when it trips, because a global limit that is
+   * being reached is either an attack or the best day the movement has had,
+   * and both are worth knowing about.
+   */
+  const global = await consumeRateLimit(
+    "join:all",
+    GLOBAL_HOURLY_LIMIT,
+    GLOBAL_WINDOW_SECONDS,
+  );
+  if (!global.allowed) {
+    await recordAudit({
+      action: "member.apply",
+      outcome: "failure",
+      actorLabel: "public intake",
+      detail: { reason: "site-wide hourly ceiling reached", country },
+      ipHash,
+    });
+    return { status: "throttled", errors: [] };
+  }
 
   const outcome = await createMember({
     name,

@@ -5,6 +5,7 @@ import { createEnquiry } from "@/lib/admin/enquiries";
 import { hasDatabase, hasMemberEncryptionKey } from "@/lib/admin/env";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
+import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
 import { contactSubjects } from "@/content/involvement";
 import { type ContactState } from "./state";
 
@@ -32,6 +33,27 @@ export async function submitEnquiry(
     return { status: "unavailable", errors: [] };
   }
 
+  const { ipHash } = await clientContext();
+
+  /* The decoy field. See lib/spam.ts, and the note in the membership intake. */
+  if (honeypotTripped(form)) {
+    const decoy = await consumeRateLimit(
+      `enquiry:${ipHash ?? "unknown"}`,
+      RATE_LIMIT,
+      RATE_WINDOW_SECONDS,
+    );
+    if (decoy.allowed) {
+      await recordAudit({
+        action: "enquiry.create",
+        outcome: "failure",
+        actorLabel: "public contact form",
+        detail: { reason: "decoy field completed" },
+        ipHash,
+      });
+    }
+    return { status: "sent", errors: [] };
+  }
+
   const read = (name: string) => String(form.get(name) ?? "").trim();
   const name = read("name");
   const email = read("email");
@@ -52,13 +74,28 @@ export async function submitEnquiry(
 
   if (errors.length > 0) return { status: "invalid", errors };
 
-  const { ipHash } = await clientContext();
   const limit = await consumeRateLimit(
     `enquiry:${ipHash ?? "unknown"}`,
     RATE_LIMIT,
     RATE_WINDOW_SECONDS,
   );
   if (!limit.allowed) return { status: "throttled", errors: [] };
+
+  const global = await consumeRateLimit(
+    "enquiry:all",
+    GLOBAL_HOURLY_LIMIT,
+    GLOBAL_WINDOW_SECONDS,
+  );
+  if (!global.allowed) {
+    await recordAudit({
+      action: "enquiry.create",
+      outcome: "failure",
+      actorLabel: "public contact form",
+      detail: { reason: "site-wide hourly ceiling reached", subject },
+      ipHash,
+    });
+    return { status: "throttled", errors: [] };
+  }
 
   await createEnquiry({ name, email, subject, message });
 

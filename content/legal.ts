@@ -84,7 +84,11 @@ export const privacy = {
         },
         {
           type: "paragraph",
-          text: "Your name, address, region and message are encrypted before they are written down, in the same request — none of them is ever stored in readable form. The reply you see is identical whether or not the address was already on the roll, so the form cannot be used to test whether a particular person is a member. Applications are rate-limited per connection, which is a defence against a script filling the roll rather than a measure aimed at you.",
+          text: "Your name, address, region and message are encrypted before they are written down, in the same request — none of them is ever stored in readable form. The reply you see is identical whether or not the address was already on the roll, so the form cannot be used to test whether a particular person is a member. Applications are rate-limited per connection, and there is a ceiling on how many the site will accept in an hour from everyone together; both are defences against a script filling the roll rather than measures aimed at you.",
+        },
+        {
+          type: "paragraph",
+          text: "The form also carries one field you will never see: an empty box, positioned off the screen, skipped by the keyboard and hidden from screen readers. Automated submitters fill in every field they find and people cannot fill in this one, so anything arriving with it completed is discarded without being stored. **We use no CAPTCHA and no third-party bot detection**, deliberately — those work by having an outside company observe everyone who tries to join a political movement, which is a worse trade than the one this makes.",
         },
         {
           type: "paragraph",

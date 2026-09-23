@@ -6,6 +6,7 @@ import { useActionState, useId } from "react";
 import { submitEnquiry } from "@/app/(site)/contact/actions";
 import { CONTACT_INITIAL, type ContactState } from "@/app/(site)/contact/state";
 import { SelectField, TextArea, TextField } from "@/components/forms/Field";
+import { Honeypot } from "@/components/forms/Honeypot";
 import { Button } from "@/components/ui/Button";
 import { contactSubjects } from "@/content/involvement";
 
@@ -48,7 +49,9 @@ export function ContactForm({ initialSubject }: { readonly initialSubject?: stri
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-8">
+    <form action={formAction} className="relative flex flex-col gap-8">
+      <Honeypot />
+
       {state.status === "unavailable" ? (
         <Notice>
           Correspondence is not being accepted at this moment. Nothing you type here has been sent.

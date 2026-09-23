@@ -6,6 +6,7 @@ import { useActionState, useId } from "react";
 import { submitMembershipApplication } from "@/app/(site)/join/actions";
 import { JOIN_INITIAL, type JoinState } from "@/app/(site)/join/state";
 import { CheckboxField, SelectField, TextArea, TextField } from "@/components/forms/Field";
+import { Honeypot } from "@/components/forms/Honeypot";
 import { Button } from "@/components/ui/Button";
 import { europeanCountries, interestAreas, involvementRoles } from "@/content/involvement";
 import { cn } from "@/lib/utils";
@@ -60,7 +61,9 @@ export function JoinForm({ initialCountry, initialRole }: JoinFormProps) {
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-10">
+    <form action={formAction} className="relative flex flex-col gap-10">
+      <Honeypot />
+
       {state.status === "unavailable" ? (
         <Notice tone="warning">
           The membership roll is not accepting applications at this moment. Nothing you type here
