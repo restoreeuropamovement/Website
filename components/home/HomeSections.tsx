@@ -11,7 +11,7 @@ import { RestorationSection } from "@/components/home/RestorationSection";
 import { StewardshipSection } from "@/components/home/StewardshipSection";
 import { TechnologySection } from "@/components/home/TechnologySection";
 import { getHome } from "@/content/home";
-import { images } from "@/content/images";
+import { getImages } from "@/content/images";
 import type { Locale } from "@/lib/i18n";
 
 /**
@@ -30,11 +30,17 @@ import type { Locale } from "@/lib/i18n";
  * page into stripes.
  */
 export async function HomeSections({ locale }: { readonly locale: Locale }) {
-  const home = await getHome(locale);
+  /*
+   * The photographs are the same in every language; what they are described as
+   * is not. A slot arrives here already carrying the `alt` of this edition, so
+   * a reader using a screen reader in Polish is told what is in the picture in
+   * Polish rather than being handed the one English paragraph on the page.
+   */
+  const [home, images] = await Promise.all([getHome(locale), getImages(locale)]);
 
   return (
     <>
-      <Hero content={home.hero} locale={locale} />
+      <Hero content={home.hero} image={images.heroValley} locale={locale} />
       <PhilosophySection content={home.philosophy} />
       <PrinciplesSection content={home.principles} locale={locale} />
       <LifeAndWorkSection content={home.lifeAndWork} />
@@ -42,8 +48,8 @@ export async function HomeSections({ locale }: { readonly locale: Locale }) {
       <ImageBreak slot={images.workshop} />
       <EconomicOrderSection content={home.economicOrder} />
       <TechnologySection content={home.technology} />
-      <StewardshipSection content={home.stewardship} />
-      <EuropeSection content={home.europe} />
+      <StewardshipSection content={home.stewardship} image={images.woodland} />
+      <EuropeSection content={home.europe} image={images.arcade} />
       <PoliticalCultureSection content={home.politicalCulture} />
       {/* A market square that has stood: what "restoration" is about to mean. */}
       <ImageBreak slot={images.oldTown} />

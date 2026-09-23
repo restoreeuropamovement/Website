@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import type { HomeContent } from "@/content/home";
-import { images } from "@/content/images";
+import type { ImageSlot } from "@/lib/content-types";
 import { localePath, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
@@ -12,9 +12,11 @@ import { site } from "@/lib/site";
  */
 export function Hero({
   content,
+  image,
   locale,
 }: {
   readonly content: HomeContent["hero"];
+  readonly image: ImageSlot;
   readonly locale: Locale;
 }) {
   return (
@@ -54,10 +56,10 @@ export function Hero({
 
       <figure className="border-t border-hairline">
         <Image
-          src={images.heroValley.src}
-          alt={images.heroValley.alt}
-          width={images.heroValley.width}
-          height={images.heroValley.height}
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
           priority
           unoptimized
           sizes="100vw"

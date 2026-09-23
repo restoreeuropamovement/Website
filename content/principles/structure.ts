@@ -1,5 +1,4 @@
-import type { ImageSlot } from "@/lib/content-types";
-import { images } from "@/content/images";
+import type { ImageId } from "@/content/images/structure";
 
 /**
  * Everything about the sixteen principles that is *not* words.
@@ -17,22 +16,27 @@ export interface PrincipleStructure {
   readonly number: number;
   /** Manifesto section this principle draws on, by `ManifestoSectionData.id`. */
   readonly manifesto?: string;
-  readonly image?: ImageSlot;
+  /**
+   * Which photograph, by id rather than by slot. The picture is structure and
+   * the sentence describing it is words, so the two are joined in `index.ts`
+   * against the edition being rendered.
+   */
+  readonly image?: ImageId;
 }
 
 export const principleStructure: readonly PrincipleStructure[] = [
   { id: "moral-order", number: 1, manifesto: "moral-order" },
   { id: "person-and-community", number: 2, manifesto: "person-not-atom" },
-  { id: "family", number: 3, manifesto: "family", image: images.oldTown },
+  { id: "family", number: 3, manifesto: "family", image: "oldTown" },
   { id: "nation-and-continuity", number: 4, manifesto: "nation" },
   { id: "immigration-and-integration", number: 5, manifesto: "immigration" },
-  { id: "europe", number: 6, manifesto: "europe", image: images.arcadeWide },
+  { id: "europe", number: 6, manifesto: "europe", image: "arcadeWide" },
   { id: "economic-order", number: 7, manifesto: "economic-order" },
   { id: "property", number: 8, manifesto: "economic-order" },
-  { id: "work", number: 9, manifesto: "work", image: images.workshop },
+  { id: "work", number: 9, manifesto: "work", image: "workshop" },
   { id: "technology", number: 10, manifesto: "technology" },
-  { id: "environment", number: 11, manifesto: "stewardship", image: images.woodland },
-  { id: "architecture", number: 12, manifesto: "architecture", image: images.terraces },
+  { id: "environment", number: 11, manifesto: "stewardship", image: "woodland" },
+  { id: "architecture", number: 12, manifesto: "architecture", image: "terraces" },
   { id: "education", number: 13, manifesto: "education" },
   { id: "subsidiarity", number: 14, manifesto: "subsidiarity" },
   { id: "democracy", number: 15, manifesto: "democracy" },

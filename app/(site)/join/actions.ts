@@ -6,6 +6,7 @@ import { recordAudit } from "@/lib/admin/audit";
 import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
 import { createMember, unreadMemberCount } from "@/lib/admin/members";
 import { applicationAlert, applicationReceived } from "@/content/emails";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 import { sendEmail } from "@/lib/email";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
@@ -106,6 +107,15 @@ export async function submitMembershipApplication(
   const consent = read("consent") === "yes";
 
   /*
+   * Which edition of the form was filled in, and so which language the
+   * acknowledgement is written in. Not validated into an error: a submission
+   * that reaches the action without it — an older cached page, a script — is a
+   * real application and is acknowledged in English rather than rejected.
+   */
+  const submittedLocale = read("locale");
+  const locale = isLocale(submittedLocale) ? submittedLocale : DEFAULT_LOCALE;
+
+  /*
    * Codes, not sentences — the form says it in the reader's language. The
    * three list checks are the same ones that decide what may be written to the
    * unencrypted columns, so they test against ids rather than against labels:
@@ -200,7 +210,7 @@ export async function submitMembershipApplication(
     after(async () => {
       const acknowledgement = await sendEmail({
         to: email,
-        ...applicationReceived(),
+        ...(await applicationReceived(locale)),
       });
 
       const notify = mailNotifyAddress();

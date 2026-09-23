@@ -5,7 +5,7 @@ import { EditorialImage } from "@/components/media/EditorialImage";
 import { Container } from "@/components/ui/Container";
 import { DocumentLayout } from "@/components/layout/DocumentLayout";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { images } from "@/content/images";
+import { getImages } from "@/content/images";
 import type { VisionEdition } from "@/content/vision";
 import { localePath, type Locale } from "@/lib/i18n";
 import { routes } from "@/lib/site";
@@ -23,7 +23,7 @@ import { pad } from "@/lib/utils";
  * Every link goes through `localePath`, so a reader who arrived in Italian is
  * still in Italian after clicking "the principle behind it".
  */
-export function VisionDocument({
+export async function VisionDocument({
   edition,
   locale,
 }: {
@@ -31,6 +31,7 @@ export function VisionDocument({
   readonly locale: Locale;
 }) {
   const path = (target: string) => localePath(locale, target);
+  const images = await getImages(locale);
 
   return (
     <>

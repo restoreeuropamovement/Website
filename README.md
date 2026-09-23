@@ -110,7 +110,9 @@ No prose lives inside a component. To change what the site says, edit `content/`
 | Join / Contact            | `content/involvement/en.ts`              |
 | Join / Contact field ids  | `content/involvement/structure.ts`       |
 | Privacy / Imprint         | `content/legal/en.ts`                    |
-| Image slots               | `content/images.ts`                      |
+| Image alt text            | `content/images/en.ts`                   |
+| Image slots (paths, size) | `content/images/structure.ts`            |
+| Outbound email            | `content/emails/en.ts`                   |
 | Routes, site metadata     | `lib/site.ts`                            |
 
 Every domain is split the same way. `structure.ts` holds what is not words —
@@ -358,12 +360,16 @@ wrap the element.
 
 ## Images
 
-No photography has been supplied, so every image slot holds locally generated
-tonal artwork drawn in the brand palette (`npm run artwork`). Each slot is
-declared in `content/images.ts` with `placeholder: true`.
+Every slot holds a photograph. A slot is split like every other content module:
+the path and the intrinsic dimensions are structure (`content/images/structure.ts`)
+and the `alt` text is words, written in all six languages beside it. Alternative
+text is the only form in which a blind reader receives the picture, so leaving it
+in English would have been one untranslated paragraph on every translated page.
 
-To commission photography: drop a file at the same path and aspect ratio, update
-its `alt` text, and remove the `placeholder` flag. Nothing else changes.
+To change a photograph: drop a file at the same path and aspect ratio, and
+rewrite its `alt` text in each of the six language files. Nothing else changes.
+`npm run artwork` regenerates the tonal vector artwork that filled these slots
+before photography was supplied, and is dormant while they are all photographs.
 
 Preferred direction: European countryside, old towns, villages, churches,
 forests, mountains, workshops, farms, universities, public squares, stone

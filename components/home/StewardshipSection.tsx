@@ -3,12 +3,14 @@ import { ContentBlocks } from "@/components/content/ContentBlocks";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import type { HomeContent } from "@/content/home";
-import { images } from "@/content/images";
+import type { ImageSlot } from "@/lib/content-types";
 
 export function StewardshipSection({
   content,
+  image,
 }: {
   readonly content: HomeContent["stewardship"];
+  readonly image: ImageSlot;
 }) {
   return (
     <Section labelledBy="stewardship" className="overflow-hidden">
@@ -23,10 +25,10 @@ export function StewardshipSection({
 
       <figure className="mt-12 border-y border-hairline">
         <Image
-          src={images.woodland.src}
-          alt={images.woodland.alt}
-          width={images.woodland.width}
-          height={images.woodland.height}
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
           unoptimized
           sizes="100vw"
           className="h-[min(38vh,26rem)] w-full object-cover"

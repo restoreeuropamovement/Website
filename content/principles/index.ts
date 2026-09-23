@@ -1,3 +1,4 @@
+import { getImages } from "@/content/images";
 import { createDictionary } from "@/lib/dictionary";
 import type { Locale } from "@/lib/i18n";
 import type { Principle } from "@/lib/content-types";
@@ -28,13 +29,18 @@ export interface PrinciplesPageContent {
  * itself or lose an anchor that something else links to.
  */
 export async function getPrinciples(locale: Locale): Promise<PrinciplesPageContent> {
-  const content = await getPrinciplesContent(locale);
+  const [content, images] = await Promise.all([
+    getPrinciplesContent(locale),
+    getImages(locale),
+  ]);
 
   return {
     meta: content.meta,
     principles: principleStructure.map((structure) => ({
       ...structure,
       ...content.items[structure.id as keyof PrinciplesContent["items"]],
+      /* The photograph is chosen by the structure, described by the edition. */
+      image: structure.image ? images[structure.image] : undefined,
     })),
   };
 }

@@ -2,7 +2,7 @@
 /**
  * Generates tonal vector artwork for `public/images`.
  *
- * **Currently dormant.** Every slot in `content/images.ts` now holds a
+ * **Currently dormant.** Every slot in `content/images/structure.ts` now holds a
  * photograph, so this script writes nothing by default and the generators below
  * are unreferenced. It is kept, rather than deleted, as the fallback it was
  * written to be: if a photograph has to come down — a licence question, a
@@ -10,7 +10,7 @@
  * anybody having to reconstruct several hundred lines of seeded drawing code.
  *
  * To put a slot back: add a `write()` call at the bottom for it, point the slot
- * in `content/images.ts` at the `.svg`, and restore its `placeholder: true` so
+ * in `content/images/structure.ts` at the `.svg`, and restore its `placeholder: true` so
  * the page says what it is rather than implying a photograph.
  *
  * Output is deterministic (seeded), so regenerating produces identical files.
@@ -645,7 +645,7 @@ function fragment({ width, height, seed, variant }) {
 mkdirSync(OUT, { recursive: true });
 
 /*
- * Nothing is generated. Every slot in content/images.ts holds a photograph, so
+ * Nothing is generated. Every slot in content/images/structure.ts holds a photograph, so
  * emitting SVGs here would only scatter unreferenced files through
  * public/images — which is exactly what happened the first time these calls
  * were left in place after a slot was filled.
@@ -655,5 +655,5 @@ mkdirSync(OUT, { recursive: true });
  */
 console.log(
   "Nothing to generate: every image slot holds a photograph.\n" +
-    "See content/images.ts, and the note at the top of this file to revert a slot."
+    "See content/images/structure.ts, and the note at the top of this file to revert a slot."
 );

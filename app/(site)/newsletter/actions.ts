@@ -15,6 +15,7 @@ import {
 } from "@/lib/admin/subscribers";
 import { alreadySubscribed, confirmSubscription } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { NEWSLETTER_INITIAL, type NewsletterState } from "./state";
 
@@ -46,7 +47,13 @@ export async function subscribe(
   }
 
   const email = String(form.get("email") ?? "").trim();
-  const locale = String(form.get("locale") ?? "en").trim() || "en";
+  /*
+   * The language to write to this address in, now and for every issue after
+   * it. Anything the browser sends that is not a language the site publishes
+   * falls back to English rather than being stored and mailed in later.
+   */
+  const submitted = String(form.get("locale") ?? "").trim();
+  const locale = isLocale(submitted) ? submitted : DEFAULT_LOCALE;
 
   if (!EMAIL.test(email) || email.length > 180) {
     return { status: "invalid", errors: ["Enter a valid email address."] };
@@ -79,12 +86,12 @@ export async function subscribe(
    */
   after(async () => {
     if (outcome.kind === "pending") {
-      await sendEmail({ to: email, ...confirmSubscription(outcome.token) });
+      await sendEmail({ to: email, ...(await confirmSubscription(locale, outcome.token)) });
     } else {
       const url = `${SITE_URL}/newsletter/unsubscribe?token=${encodeURIComponent(
         await unsubscribeToken(outcome.id),
       )}`;
-      await sendEmail({ to: email, ...alreadySubscribed(url) });
+      await sendEmail({ to: email, ...(await alreadySubscribed(locale, url)) });
     }
 
     /*

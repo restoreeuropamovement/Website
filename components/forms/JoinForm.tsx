@@ -67,6 +67,14 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
     <form action={formAction} className="relative flex flex-col gap-10">
       <Honeypot />
 
+      {/*
+        The language the form was read in, so the acknowledgement is written in
+        it too. Nothing is decided by this field — every value the action
+        validates is an id, and an absent or invented locale falls back to
+        English — so it is safe to accept from the browser.
+      */}
+      <input type="hidden" name="locale" value={locale} />
+
       {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}
       {state.status === "throttled" ? <Notice>{text.throttled}</Notice> : null}
 

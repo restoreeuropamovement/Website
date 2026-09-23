@@ -3,9 +3,15 @@ import { Container } from "@/components/ui/Container";
 import { EditorialImage } from "@/components/media/EditorialImage";
 import { Section } from "@/components/ui/Section";
 import type { HomeContent } from "@/content/home";
-import { images } from "@/content/images";
+import type { ImageSlot } from "@/lib/content-types";
 
-export function EuropeSection({ content }: { readonly content: HomeContent["europe"] }) {
+export function EuropeSection({
+  content,
+  image,
+}: {
+  readonly content: HomeContent["europe"];
+  readonly image: ImageSlot;
+}) {
   return (
     <Section tone="deep" bordered labelledBy="europe">
       <Container>
@@ -33,7 +39,7 @@ export function EuropeSection({ content }: { readonly content: HomeContent["euro
           </div>
 
           <EditorialImage
-            slot={images.arcade}
+            slot={image}
             aspect="aspect-[16/11]"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
