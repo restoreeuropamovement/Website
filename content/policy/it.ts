@@ -25,6 +25,10 @@ export const policyText: PolicyText = {
     },
     noMatch: "Nel catalogo non c'è nulla che corrisponda.",
     showAll: "Mostra tutte le posizioni",
+    sectionCount: {
+      one: "{count} posizione",
+      other: "{count} posizioni",
+    },
     relevanceHeading: "Prima le corrispondenze migliori",
     suggestions: {
       heading: "Posizioni più vicine",
@@ -52,6 +56,13 @@ export const policyText: PolicyText = {
     keywordsHeading: "Termini di ricerca",
     lastUpdatedBefore: "Ultimo aggiornamento",
     lastUpdatedAfter: ".",
+    commitments: {
+      one: "{count} misura",
+      other: "{count} misure",
+    },
+    sectionPosition: "{index} di {total} in questa sezione",
+    previous: "Posizione precedente",
+    next: "Posizione successiva",
     relatedHeading: "Posizioni correlate",
     allPositions: "Tutte le posizioni",
     readManifesto: "Leggi il Manifesto",

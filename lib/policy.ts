@@ -1,4 +1,3 @@
-import { manifestoSections } from "@/content/manifesto";
 import {
   policyCategoryIds,
   POLICY_FIELD_WEIGHT,
@@ -57,13 +56,46 @@ export function getRelatedEntries(
 /**
  * Resolve `manifestoBasis` ids to real manifesto sections, in document order.
  *
- * Still English, because the manifesto module has not been given an edition
- * lookup by id; the titles here are the sidebar's cross-references rather than
- * the argument itself.
+ * The sections are passed in rather than read from the English module, because
+ * the entry page now prints each cited section's own summary beside its title.
+ * A title is a cross-reference and survives being left in English; a sentence
+ * of the manifesto's argument does not.
  */
-export function getManifestoBasis(entry: PolicyEntry): readonly ManifestoSectionData[] {
+export function getManifestoBasis(
+  entry: PolicyEntry,
+  sections: readonly ManifestoSectionData[],
+): readonly ManifestoSectionData[] {
   const ids = new Set(entry.manifestoBasis ?? []);
-  return manifestoSections.filter((section) => ids.has(section.id));
+  return sections.filter((section) => ids.has(section.id));
+}
+
+/**
+ * Where an entry sits in the catalogue: its place within its own section, and
+ * the entries either side of it in catalogue order.
+ *
+ * Ninety-eight positions read as a heap unless each one says which of them it
+ * is. All of this is counted from the order `content/policy/structure.ts`
+ * already fixes — nothing here is authored.
+ */
+export interface PolicyPlacement {
+  /** 1-based, within the entry's own category. */
+  readonly index: number;
+  /** How many entries that category holds. */
+  readonly total: number;
+  readonly previous?: PolicyEntry;
+  readonly next?: PolicyEntry;
+}
+
+export function getPolicyPlacement(edition: PolicyEdition, entry: PolicyEntry): PolicyPlacement {
+  const inCategory = edition.entries.filter((item) => item.category === entry.category);
+  const at = edition.entries.indexOf(entry);
+
+  return {
+    index: inCategory.indexOf(entry) + 1,
+    total: inCategory.length,
+    previous: at > 0 ? edition.entries[at - 1] : undefined,
+    next: at >= 0 ? edition.entries[at + 1] : undefined,
+  };
 }
 
 /** Categories that currently hold at least one entry. */

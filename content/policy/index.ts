@@ -83,6 +83,8 @@ export interface PolicyText {
     readonly showingSome: PluralForms;
     readonly noMatch: string;
     readonly showAll: string;
+    /** "{count} positions", set against a section heading and its summary. */
+    readonly sectionCount: PluralForms;
     /** Heads the flat, ranked list a text search returns. */
     readonly relevanceHeading: string;
     /** "Did you mean", for when a search found little or nothing. */
@@ -113,6 +115,13 @@ export interface PolicyText {
     /** Wraps a `<time>`, so it is two fragments rather than one template. */
     readonly lastUpdatedBefore: string;
     readonly lastUpdatedAfter: string;
+    /** "{count} commitments" — how many the entry makes, on a card and a heading. */
+    readonly commitments: PluralForms;
+    /** "{index} of {total} in this section" — where the entry sits in the catalogue. */
+    readonly sectionPosition: string;
+    /** Names the two neighbours in catalogue order. */
+    readonly previous: string;
+    readonly next: string;
     readonly relatedHeading: string;
     readonly allPositions: string;
     readonly readManifesto: string;

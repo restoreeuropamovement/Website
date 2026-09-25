@@ -24,6 +24,10 @@ export const policyText: PolicyText = {
     },
     noMatch: "Nothing in the catalogue matches that.",
     showAll: "Show all positions",
+    sectionCount: {
+      one: "{count} position",
+      other: "{count} positions",
+    },
     relevanceHeading: "Best matches first",
     suggestions: {
       heading: "Closest positions",
@@ -51,6 +55,13 @@ export const policyText: PolicyText = {
     keywordsHeading: "Search terms",
     lastUpdatedBefore: "Last updated",
     lastUpdatedAfter: ".",
+    commitments: {
+      one: "{count} commitment",
+      other: "{count} commitments",
+    },
+    sectionPosition: "{index} of {total} in this section",
+    previous: "Previous position",
+    next: "Next position",
     relatedHeading: "Related positions",
     allPositions: "All positions",
     readManifesto: "Read the manifesto",

@@ -34,6 +34,12 @@ export const policyText: PolicyText = {
     },
     noMatch: "Nic w katalogu temu nie odpowiada.",
     showAll: "Pokaż wszystkie stanowiska",
+    sectionCount: {
+      one: "{count} stanowisko",
+      few: "{count} stanowiska",
+      many: "{count} stanowisk",
+      other: "{count} stanowiska",
+    },
     relevanceHeading: "Najlepiej dopasowane najpierw",
     suggestions: {
       heading: "Najbliższe stanowiska",
@@ -61,6 +67,15 @@ export const policyText: PolicyText = {
     keywordsHeading: "Hasła wyszukiwania",
     lastUpdatedBefore: "Ostatnia aktualizacja:",
     lastUpdatedAfter: ".",
+    commitments: {
+      one: "{count} punkt programu",
+      few: "{count} punkty programu",
+      many: "{count} punktów programu",
+      other: "{count} punktów programu",
+    },
+    sectionPosition: "{index} z {total} w tym dziale",
+    previous: "Poprzednie stanowisko",
+    next: "Następne stanowisko",
     relatedHeading: "Stanowiska powiązane",
     allPositions: "Wszystkie stanowiska",
     readManifesto: "Przeczytaj manifest",

@@ -57,13 +57,10 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
         </div>
       </PageHeader>
 
-      <Container className="py-14 lg:py-20">
+      <Container className="py-12 lg:py-16">
         <PolicyFilters edition={edition} categories={categories} q={q} category={category} />
 
-        <p
-          aria-live="polite"
-          className="mt-10 border-t border-hairline pt-8 text-[0.9375rem] text-muted"
-        >
+        <p aria-live="polite" className="mt-6 text-[0.9375rem] text-muted">
           {results.length === total
             ? plural(locale, total, index.showingAll)
             : plural(locale, results.length, index.showingSome, { total })}
@@ -95,7 +92,7 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
             >
               {index.relevanceHeading}
             </h2>
-            <ul className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {results.map((entry) => (
                 <li key={entry.slug} className="flex">
                   <PolicyCard edition={edition} entry={entry} className="flex-1" />
@@ -111,20 +108,34 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
 
               return (
                 <section key={section.id} aria-labelledby={`${section.id}-heading`}>
-                  <div className="border-t border-hairline pt-8">
-                    <p className="eyebrow numerals-tabular text-faint">{section.numeral}</p>
-                    <h2
-                      id={`${section.id}-heading`}
-                      className="mt-3 font-serif text-display-3 font-normal text-ink"
-                    >
-                      {section.title}
-                    </h2>
-                    <p className="mt-3 max-w-(--container-reading) text-[0.9375rem] text-muted">
+                  {/*
+                    Numeral and count above the title, summary beside it. The
+                    summary used to sit under the heading at a reading measure,
+                    which left the right half of every one of the ten section
+                    breaks empty on a wide screen.
+                  */}
+                  <div className="grid gap-4 border-t border-hairline pt-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16 xl:gap-24">
+                    <div>
+                      <p className="eyebrow flex items-baseline gap-3 text-faint">
+                        <span className="numerals-tabular">{section.numeral}</span>
+                        <span aria-hidden="true">·</span>
+                        <span className="numerals-tabular">
+                          {plural(locale, inSection.length, index.sectionCount)}
+                        </span>
+                      </p>
+                      <h2
+                        id={`${section.id}-heading`}
+                        className="mt-3 font-serif text-display-3 font-normal text-ink"
+                      >
+                        {section.title}
+                      </h2>
+                    </div>
+                    <p className="text-[0.9375rem] leading-relaxed text-muted lg:pt-8">
                       {section.summary}
                     </p>
                   </div>
 
-                  <ul className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                  <ul className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                     {inSection.map((entry) => (
                       <li key={entry.slug} className="flex">
                         <PolicyCard
@@ -162,7 +173,7 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
             <p className="mt-4 max-w-(--container-reading) text-reading leading-relaxed text-body/92">
               {index.suggestions.body}
             </p>
-            <ul className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-8 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {suggestions.map((entry) => (
                 <li key={entry.slug} className="flex">
                   <PolicyCard edition={edition} entry={entry} className="flex-1" />
