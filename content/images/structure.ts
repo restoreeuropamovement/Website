@@ -26,6 +26,19 @@ export interface ImageGeometry {
   readonly src: string;
   readonly width: number;
   readonly height: number;
+  /**
+   * Where the subject sits, as one `object-position` utility.
+   *
+   * Every frame on the site crops: a 3:2 photograph is asked to be 21:9 on
+   * `/principles` and nearer 5:1 in a homepage band, and the default centre
+   * crop assumes the subject is halfway down the picture. For a townscape it
+   * is not — the sky is. This belongs with the geometry rather than at the
+   * call site because a principle renders whichever photograph it was given,
+   * so the picture has to carry the answer with it.
+   *
+   * Omit for anything an even crop suits.
+   */
+  readonly focus?: string;
 }
 
 export const imageGeometry = {
@@ -34,7 +47,9 @@ export const imageGeometry = {
   woodland: { src: "/images/woodland-river.jpg", width: 2400, height: 1200 },
   arcade: { src: "/images/arcade.jpg", width: 1800, height: 1100 },
   arcadeWide: { src: "/images/arcade-wide.jpg", width: 2400, height: 900 },
-  oldTown: { src: "/images/old-town.jpg", width: 1800, height: 1200 },
+  // Anchored low: the houses and the church front carry this one, and a
+  // centred crop spends the band on sky and cuts the towers off mid-spire.
+  oldTown: { src: "/images/old-town.jpg", width: 1800, height: 1200, focus: "object-[center_78%]" },
   workshop: { src: "/images/workshop.jpg", width: 1800, height: 1200 },
   terraces: { src: "/images/terraces.jpg", width: 1800, height: 1200 },
 } as const satisfies Record<string, ImageGeometry>;

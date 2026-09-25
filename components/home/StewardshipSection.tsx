@@ -29,7 +29,7 @@ export function StewardshipSection({
           alt={image.alt}
           width={image.width}
           height={image.height}
-          unoptimized
+          loading="lazy"
           sizes="100vw"
           className="h-[min(38vh,26rem)] w-full object-cover"
         />

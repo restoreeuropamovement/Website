@@ -61,7 +61,6 @@ export function Hero({
           width={image.width}
           height={image.height}
           priority
-          unoptimized
           sizes="100vw"
           className="h-[min(42vh,28rem)] w-full object-cover object-[32%_bottom] sm:object-bottom"
         />

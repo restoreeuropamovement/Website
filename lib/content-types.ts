@@ -59,6 +59,11 @@ export interface ImageSlot {
   readonly alt: string;
   readonly width: number;
   readonly height: number;
+  /**
+   * One `object-position` utility, for frames that crop harder than the
+   * photograph's own ratio. Omitted means centred, which is right for most.
+   */
+  readonly focus?: string;
   /** Shown beneath the figure where a caption is appropriate. */
   readonly caption?: string;
 }

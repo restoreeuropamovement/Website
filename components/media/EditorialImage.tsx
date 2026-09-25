@@ -41,7 +41,12 @@ export function EditorialImage({
           sizes={sizes}
           priority={priority}
           unoptimized={isVector}
-          className={cn("text-[0]", aspect ? "size-full object-cover" : "h-auto w-full")}
+          className={cn(
+            "text-[0]",
+            aspect ? "size-full object-cover" : "h-auto w-full",
+            // Only meaningful with a frame; without one nothing is cropped.
+            aspect ? slot.focus : undefined,
+          )}
         />
       </div>
 

@@ -24,7 +24,16 @@ export function EuropeSection({
           {content.nations.join(" ")} {content.together}
         </p>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
+        {/*
+          Portrait beside the prose, and centred rather than pinned to the top.
+          The text here runs some six hundred pixels down the page; a landscape
+          frame started at the top ended level with the second paragraph and
+          left a hole beside the third, which read as though the picture had
+          been dropped in rather than set. A standing 4/5 is close enough to the
+          height of the text to look deliberate at every width, and an upright
+          crop suits a colonnade — the columns run the way the frame does.
+        */}
+        <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-center lg:gap-16">
           <div>
             <ContentBlocks blocks={content.body} />
 
@@ -40,7 +49,7 @@ export function EuropeSection({
 
           <EditorialImage
             slot={image}
-            aspect="aspect-[16/11]"
+            aspect="aspect-[16/11] lg:aspect-[2/3] xl:aspect-[4/5]"
             sizes="(min-width: 1024px) 40vw, 100vw"
           />
         </div>

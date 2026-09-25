@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Reveal } from "@/components/ui/Reveal";
 import type { ImageSlot } from "@/lib/content-types";
+import { cn } from "@/lib/utils";
 
 /**
  * A photograph across the full width, between two arguments.
@@ -12,7 +13,11 @@ import type { ImageSlot } from "@/lib/content-types";
  * reads the same with them removed.
  *
  * Short on purpose. A band this height punctuates a page; a taller one becomes
- * a section of its own and interrupts the argument rather than spacing it.
+ * a section of its own and interrupts the argument rather than spacing it. It
+ * is nonetheless the most violent crop on the site — a 3:2 photograph arrives
+ * here as roughly 5:1 — so it honours the slot's own `focus`. The subject of a
+ * landscape photograph is rarely halfway down it: Prague centred put the sky
+ * across the band and sliced the tops off the towers it was chosen for.
  */
 export function ImageBreak({ slot }: { readonly slot: ImageSlot }) {
   return (
@@ -29,7 +34,7 @@ export function ImageBreak({ slot }: { readonly slot: ImageSlot }) {
         height={slot.height}
         sizes="100vw"
         loading="lazy"
-        className="h-[min(34vh,22rem)] w-full object-cover"
+        className={cn("h-[min(38vh,25rem)] w-full object-cover", slot.focus)}
       />
 
       {/*
