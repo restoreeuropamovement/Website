@@ -1,16 +1,19 @@
 import { createDictionary } from "@/lib/dictionary";
 import type { PluralForms } from "@/lib/format";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
+import type { SearchField } from "@/lib/search";
 import { policyText as englishText } from "./en";
 import {
   policyCategoryIds,
   policyCategoryNumerals,
   policyStatusIds,
   policyStructure,
+  policySynonymGroupIds,
   type PolicyCategoryId,
   type PolicyEntryStructure,
   type PolicySlug,
   type PolicyStatusId,
+  type PolicySynonymGroupId,
 } from "./structure";
 
 /**
@@ -36,12 +39,14 @@ export {
   policyCategoryNumerals,
   policyStatusIds,
   policyStructure,
+  policySynonymGroupIds,
 } from "./structure";
 export type {
   PolicyCategoryId,
   PolicyEntryStructure,
   PolicySlug,
   PolicyStatusId,
+  PolicySynonymGroupId,
 } from "./structure";
 
 /** One entry's words. No slug, no status, no cross-references. */
@@ -57,8 +62,6 @@ export interface PolicyEntryText {
   readonly principle?: string;
   /** What the position deliberately does not claim, or has not yet settled. */
   readonly limits?: readonly string[];
-  /** Where the position stands in relation to existing law. */
-  readonly implementationNote?: string;
   /** Search terms beyond the title and position text, in this language. */
   readonly keywords: readonly string[];
 }
@@ -103,6 +106,13 @@ export interface PolicyText {
     readonly showingSome: PluralForms;
     readonly noMatch: string;
     readonly showAll: string;
+    /** Heads the flat, ranked list a text search returns. */
+    readonly relevanceHeading: string;
+    /** "Did you mean", for when a search found little or nothing. */
+    readonly suggestions: {
+      readonly heading: string;
+      readonly body: string;
+    };
     readonly openQueue: {
       readonly heading: string;
       readonly body: string;
@@ -134,7 +144,6 @@ export interface PolicyText {
     readonly policiesHeading: string;
     readonly principleHeading: string;
     readonly limitsHeading: string;
-    readonly implementationHeading: string;
     readonly basisHeading: string;
     readonly keywordsHeading: string;
     /** Wraps a `<time>`, so it is two fragments rather than one template. */
@@ -144,6 +153,30 @@ export interface PolicyText {
     readonly allPositions: string;
     readonly readManifesto: string;
     readonly notFound: string;
+  };
+
+  /**
+   * Words for the same thing, grouped by subject, in this language.
+   *
+   * A reader searches for what they call a thing, not for what the catalogue
+   * calls it: `gay marriage` where the text says `same-sex`, `immigration`
+   * where it says `migrants`, `nukes` where it says `nuclear weapons`.
+   * Typing any word in a group widens the search to the rest of it, and the
+   * catalogue's own text decides which entry that reaches.
+   *
+   * These are never displayed. They are the one list in `content/` whose
+   * length is a property of the language rather than of the content — German
+   * needs one compound where English needs three words — so
+   * `scripts/check-translations.ts` compares them by kind and
+   * `scripts/check-search.ts` checks what it cannot.
+   *
+   * Two rules for what goes in: it connects vocabulary and never
+   * editorialises, and it never attaches a pejorative to a group of people.
+   * A word that is an insult rather than a name for a subject does not
+   * belong here even if somebody might type it.
+   */
+  readonly search: {
+    readonly synonyms: Record<PolicySynonymGroupId, readonly string[]>;
   };
 
   /**
@@ -189,9 +222,37 @@ export interface PolicyEdition {
   readonly entries: readonly PolicyEntry[];
   readonly categories: readonly PolicyCategory[];
   readonly statuses: readonly PolicyStatusOption[];
-  /** Lowercased searchable text per entry, built once per edition. */
-  readonly haystacks: ReadonlyMap<string, string>;
+  /** The synonym groups of this language, as the search reads them. */
+  readonly synonyms: readonly (readonly string[])[];
+  /**
+   * Searchable text per entry, split by where it came from and what a hit
+   * there is worth. Raw, not folded: `lib/search.ts` owns that, and owning it
+   * in one place is what stops the index and the query disagreeing.
+   */
+  readonly searchFields: ReadonlyMap<string, readonly SearchField[]>;
 }
+
+/**
+ * What a hit is worth, by where it is.
+ *
+ * A title is what the entry is about; the body is what it says, which on a
+ * catalogue of positions means most entries mention most of the vocabulary at
+ * least once. Without the spread, searching `family` would return the
+ * thirty-odd entries that mention families ahead of the entry called Family.
+ *
+ * The slug is in here at the bottom because it is the published URL and is
+ * the same in all six languages: a reader who has `/de/policy/abortion` in
+ * front of them can search that word on the German page and find it. It is
+ * structure, not an English index bolted onto the other five.
+ */
+export const POLICY_FIELD_WEIGHT = {
+  title: 6,
+  keywords: 5,
+  shortAnswer: 4,
+  category: 3,
+  slug: 2,
+  body: 1,
+} as const;
 
 const getPolicyText = createDictionary<PolicyText>(englishText, {
   de: () => import("./de").then((m) => m.policyText),
@@ -244,38 +305,57 @@ function edition(locale: Locale, text: PolicyText): PolicyEdition {
     entries,
     categories,
     statuses: policyStatusIds.map((id) => ({ id, ...text.statuses[id] })),
+    synonyms: policySynonymGroupIds.map((id) => text.search.synonyms[id]),
     /*
      * Searching a translated catalogue has to match translated words. A
-     * single module-level haystack built from the English would have meant a
+     * single module-level index built from the English would have meant a
      * German reader typing "Abtreibung" into a box that only knew "abortion".
      */
-    haystacks: new Map(
+    searchFields: new Map(
       entries.map((item) => [
         item.slug,
         [
-          item.title,
-          item.shortAnswer,
-          ...item.position,
-          ...(item.policies ?? []),
-          item.principle ?? "",
-          ...(item.limits ?? []),
-          item.implementationNote ?? "",
-          ...item.keywords,
-          categoryTitles.get(item.category) ?? "",
-        ]
-          .join(" ")
-          .toLowerCase(),
+          { weight: POLICY_FIELD_WEIGHT.title, text: item.title },
+          { weight: POLICY_FIELD_WEIGHT.keywords, text: item.keywords.join(" ") },
+          { weight: POLICY_FIELD_WEIGHT.shortAnswer, text: item.shortAnswer },
+          { weight: POLICY_FIELD_WEIGHT.category, text: categoryTitles.get(item.category) ?? "" },
+          { weight: POLICY_FIELD_WEIGHT.slug, text: item.slug.replace(/-/g, " ") },
+          {
+            weight: POLICY_FIELD_WEIGHT.body,
+            text: [
+              ...item.position,
+              ...(item.policies ?? []),
+              item.principle ?? "",
+              ...(item.limits ?? []),
+            ].join(" "),
+          },
+        ],
       ]),
     ),
   };
 }
 
+/**
+ * One edition per language, built once.
+ *
+ * An edition is derived entirely from two frozen modules, so rebuilding it
+ * per request bought nothing and now costs something: the search index is
+ * derived from it in turn, and is cached against this object's identity.
+ */
+const editions = new Map<Locale, PolicyEdition>();
+
 export async function getPolicy(locale: Locale): Promise<PolicyEdition> {
-  return edition(locale, await getPolicyText(locale));
+  const cached = editions.get(locale);
+  if (cached !== undefined) return cached;
+  const built = edition(locale, await getPolicyText(locale));
+  editions.set(locale, built);
+  return built;
 }
 
 /** The English edition, for the unprefixed routes that have no locale in hand. */
 export const englishPolicy: PolicyEdition = edition(DEFAULT_LOCALE, englishText);
+
+editions.set(DEFAULT_LOCALE, englishPolicy);
 
 /**
  * Slugs only, in catalogue order. `generateStaticParams` and the sitemap want

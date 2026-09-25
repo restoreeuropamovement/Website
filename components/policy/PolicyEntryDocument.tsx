@@ -132,19 +132,6 @@ export function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumentProps
               </section>
             ) : null}
 
-            {entry.implementationNote ? (
-              <section aria-labelledby="implementation-heading">
-                <h2 id="implementation-heading" className="sr-only">
-                  {text.implementationHeading}
-                </h2>
-                <div className="border border-rule bg-canvas-deep p-6 lg:p-8">
-                  <p className="eyebrow mb-4 text-faint">{text.implementationHeading}</p>
-                  <p className="text-[0.9375rem] leading-relaxed text-muted">
-                    {renderInline(entry.implementationNote, locale)}
-                  </p>
-                </div>
-              </section>
-            ) : null}
           </div>
 
           <aside className="flex flex-col gap-10 border-t border-hairline pt-8 lg:sticky lg:top-24 lg:self-start lg:border-t-0 lg:pt-2">

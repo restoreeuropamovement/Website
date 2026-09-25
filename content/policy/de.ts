@@ -12,12 +12,12 @@ export const policyText: PolicyText = {
       "Durchsuchbare Positionen des Restore Europa Movement, Thema für Thema, jede mit dem Vermerk, wie fest sie steht: sittliche Ordnung, Familie, Staatsbürgerschaft, Wirtschaft, Technik, Bildung, Justiz, Gesundheitswesen, Umwelt und Außenpolitik.",
     body: [
       "Wo die katholische Sittenlehre klar ist, übernimmt Restore Europa sie in der Regel als sittliche Grundlinie und nennt die Umsetzung im bürgerlichen Recht gesondert. Eine Abweichung ist ausdrücklich festgehalten: Bei der Todesstrafe hält Restore Europa an der älteren überlieferten Zulassung für Ausnahmefälle fest und nicht an der heutigen abolitionistischen Position.",
-      "Der Katalog unterscheidet die Verfassungsordnung, die Restore Europa anstrebt, vom geltenden europäischen Recht. Mehrere Positionen — zur Staatsangehörigkeit, zur Aberkennung der Staatsbürgerschaft, zur Meinungsfreiheit, zur öffentlichen Stellung der Religion und zur Todesstrafe — setzten eine Verfassungs- oder Vertragsänderung voraus, ehe sie in einzelnen europäischen Staaten in Kraft gesetzt werden könnten. Wo das so ist, sagt der Eintrag es.",
+      "Der Katalog unterscheidet die Verfassungsordnung, die Restore Europa anstrebt, vom geltenden europäischen Recht. Mehrere Positionen — zur Staatsangehörigkeit, zur Aberkennung der Staatsbürgerschaft, zur Meinungsfreiheit, zur öffentlichen Stellung der Religion und zur Todesstrafe — setzten eine Verfassungs- oder Vertragsänderung voraus, ehe sie in einzelnen europäischen Staaten in Kraft gesetzt werden könnten.",
       "Version 0.2 entscheidet die Fragen, die Version 0.1 offengelassen hatte: das Verhältnis zu den europäischen Institutionen, Asyl, Abschiebung, Löhne, Steuern, Renten, Wohnen, die Vertretung der Arbeitnehmer, digitale Identität und digitale Währung, biometrische Überwachung, Gentechnik, das Strafmaß, den Energiemix und jede offene Frage der Außenpolitik. Wo eine Formulierung der Version 0.2 einen früheren Eintrag geändert hat, gilt der neuere Text.",
       "Version 0.3 fügt den Komplex zu Remigration und Vollzug hinzu. Er unterscheidet Staatsbürgerschaft, Aufenthaltsstatus, strafrechtliche Abschiebung, asylrechtliche Rückkehr und die Überprüfung der Staatsangehörigkeit, statt Remigration als eine einzige, undifferenzierte Befugnis zu behandeln, und ist als vorgeschlagene Verfassungs- und Gesetzespolitik verfasst, wobei das geltende europäische und internationale Recht in jedem Eintrag gesondert vermerkt wird. Zwei frühere Einträge — die Einbürgerung und die Abschiebung straffällig gewordener Ausländer — gehen in den neueren Formulierungen auf, statt daneben doppelt zu bestehen.",
     ],
     notice:
-      "Jede Frage in diesem Katalog trägt eine Position. Einträge, die als Abgeleitet gekennzeichnet sind, folgen der Richtung des Manifests, ohne dass ihre Umsetzung feststünde, und mehrere benennen die Rechts- oder Vertragsänderung, die sie voraussetzen würden. Positionen werden geändert, sobald die Bewegung entscheidet; Version und Datum oben sagen, welchen Text Sie lesen.",
+      "Jede Frage in diesem Katalog trägt eine Position. Einträge, die als Abgeleitet gekennzeichnet sind, folgen der Richtung des Manifests, ohne dass ihre Umsetzung feststünde. Positionen werden geändert, sobald die Bewegung entscheidet; Version und Datum oben sagen, welchen Text Sie lesen.",
   },
 
   labels: {
@@ -39,6 +39,11 @@ export const policyText: PolicyText = {
     },
     noMatch: "Dazu findet sich nichts im Katalog.",
     showAll: "Alle Positionen anzeigen",
+    relevanceHeading: "Beste Treffer zuerst",
+    suggestions: {
+      heading: "Nächstliegende Positionen",
+      body: "Diese Einträge kommen dem Eingegebenen am nächsten. Sie verwenden möglicherweise andere Wörter.",
+    },
     openQueue: {
       heading: "Offene Fragen der Programmarbeit",
       body: "Diese Fragen sind als unentschieden festgehalten und nicht aus der Weltanschauung abgeleitet. Sie sind aufgeführt, damit die Lücken sichtbar bleiben, statt stillschweigend gefüllt zu werden.",
@@ -78,7 +83,6 @@ export const policyText: PolicyText = {
     policiesHeading: "Programm",
     principleHeading: "Grundsatz",
     limitsHeading: "Grenzen und offene Einzelfragen",
-    implementationHeading: "Hinweis zur Umsetzung",
     basisHeading: "Grundlage im Manifest",
     keywordsHeading: "Suchbegriffe",
     lastUpdatedBefore: "Zuletzt geändert am",
@@ -157,6 +161,576 @@ export const policyText: PolicyText = {
     },
   },
 
+  search: {
+    synonyms: {
+      "church-and-state": [
+        "Kirche und Staat",
+        "Konfessionsstaat",
+        "Staatsreligion",
+        "Staatskirche",
+        "Integralismus",
+        "Säkularismus",
+        "Laizismus",
+      ],
+      abortion: [
+        "Abtreibung",
+        "Schwangerschaftsabbruch",
+        "Ungeborenes",
+        "Lebensschutz",
+        "Recht auf Leben",
+        "Fristenlösung",
+      ],
+      euthanasia: [
+        "Sterbehilfe",
+        "assistierter Suizid",
+        "Beihilfe zum Suizid",
+        "Euthanasie",
+        "Lebensende",
+        "Palliativversorgung",
+      ],
+      contraception: [
+        "Verhütung",
+        "Empfängnisverhütung",
+        "Antibabypille",
+        "Pille",
+        "Familienplanung",
+        "Kondome",
+        "Fruchtbarkeit",
+      ],
+      "same-sex-marriage": [
+        "gleichgeschlechtliche Ehe",
+        "Ehe für alle",
+        "Homosexualität",
+        "eingetragene Lebenspartnerschaft",
+        "Zivilehe",
+      ],
+      pornography: [
+        "Pornografie",
+        "Pornographie",
+        "Porno",
+        "Erwachseneninhalte",
+        "Obszönität",
+      ],
+      prostitution: [
+        "Prostitution",
+        "Sexarbeit",
+        "Bordelle",
+        "Zuhälterei",
+        "Rotlichtviertel",
+        "Menschenhandel",
+      ],
+      drugs: [
+        "Drogen",
+        "Betäubungsmittel",
+        "Cannabis",
+        "Marihuana",
+        "Haschisch",
+        "Entkriminalisierung",
+      ],
+      alcohol: ["Alkohol", "Bier", "Wein", "Spirituosen", "Trunkenheit", "Abstinenz"],
+      gambling: [
+        "Glücksspiel",
+        "Wetten",
+        "Sportwetten",
+        "Kasino",
+        "Lotterie",
+        "Spielautomaten",
+        "Lootboxen",
+      ],
+      blasphemy: [
+        "Blasphemie",
+        "Gotteslästerung",
+        "Sakrileg",
+        "Schändung",
+        "Kirchenschändung",
+      ],
+      family: [
+        "Familie",
+        "Kinder",
+        "Eltern",
+        "Haushalt",
+        "Mutterschaft",
+        "Vaterschaft",
+        "Kinderbetreuung",
+      ],
+      demography: [
+        "Demografie",
+        "Geburtenrate",
+        "Fruchtbarkeit",
+        "Bevölkerungsrückgang",
+        "Überalterung",
+        "Kinderlosigkeit",
+      ],
+      "sunday-rest": [
+        "Sonntagsöffnung",
+        "Sonntagsruhe",
+        "Ladenöffnungszeiten",
+        "Sabbat",
+        "Ruhetag",
+        "verkaufsoffener Sonntag",
+      ],
+      welfare: [
+        "Sozialhilfe",
+        "Sozialleistungen",
+        "Bürgergeld",
+        "soziales Netz",
+        "Arbeitslosengeld",
+        "Grundsicherung",
+      ],
+      nation: [
+        "Nation",
+        "Volk",
+        "Heimat",
+        "nationale Identität",
+        "Patriotismus",
+        "geschichtliche Kontinuität",
+      ],
+      immigration: [
+        "Einwanderung",
+        "Zuwanderung",
+        "Migration",
+        "Migranten",
+        "Einwanderer",
+        "Grenzkontrollen",
+        "offene Grenzen",
+        "Masseneinwanderung",
+      ],
+      "irregular-migration": [
+        "irreguläre Migration",
+        "illegale Einwanderung",
+        "unrechtmäßiger Aufenthalt",
+        "Legalisierung",
+        "Amnestie",
+      ],
+      asylum: [
+        "Asyl",
+        "Flüchtlinge",
+        "Asylbewerber",
+        "internationaler Schutz",
+        "Non-Refoulement",
+        "sicherer Drittstaat",
+      ],
+      deportation: [
+        "Abschiebung",
+        "Ausweisung",
+        "Rückführung",
+        "Remigration",
+        "Rückkehr",
+        "Einreisesperre",
+      ],
+      citizenship: [
+        "Staatsbürgerschaft",
+        "Staatsangehörigkeit",
+        "Pass",
+        "Einbürgerung",
+        "Geburtsortsprinzip",
+        "Abstammungsprinzip",
+      ],
+      "dual-citizenship": [
+        "doppelte Staatsbürgerschaft",
+        "Mehrstaatigkeit",
+        "zweiter Pass",
+        "Verzicht",
+      ],
+      integration: [
+        "Integration",
+        "Assimilation",
+        "Sprachanforderung",
+        "Staatsbürgerkunde",
+        "Einbürgerungstest",
+      ],
+      voting: ["Wahlrecht", "Stimmrecht", "Wahlen", "Wahlberechtigung"],
+      "european-union": [
+        "Europäische Union",
+        "EU",
+        "Brüssel",
+        "Europäische Kommission",
+        "Vertragsreform",
+        "Euroskepsis",
+        "Mitgliedstaaten",
+      ],
+      subsidiarity: [
+        "Subsidiarität",
+        "Dezentralisierung",
+        "Föderalismus",
+        "kommunale Selbstverwaltung",
+        "Regionalismus",
+      ],
+      economy: [
+        "Wirtschaft",
+        "Wirtschaftsordnung",
+        "Kapitalismus",
+        "Sozialismus",
+        "Distributismus",
+        "freier Markt",
+      ],
+      property: [
+        "Eigentum",
+        "Besitz",
+        "Kleineigentümer",
+        "Genossenschaften",
+        "breit gestreutes Eigentum",
+      ],
+      monopolies: [
+        "Monopol",
+        "Monopole",
+        "Kartellrecht",
+        "Wettbewerbsrecht",
+        "Kartelle",
+        "Großkonzerne",
+        "Marktkonzentration",
+      ],
+      corporatism: [
+        "Zünfte",
+        "Kammern",
+        "Korporatismus",
+        "Handwerk",
+        "Berufsausbildung",
+        "berufsständische Vertretung",
+      ],
+      usury: ["Wucher", "Zinsen", "Kredite", "Darlehen", "Verschuldung", "Banken"],
+      housing: [
+        "Wohnen",
+        "Wohnraum",
+        "Miete",
+        "Vermieter",
+        "Hypotheken",
+        "Immobilienpreise",
+        "Wohneigentum",
+        "Mieter",
+      ],
+      work: [
+        "Arbeit",
+        "Arbeitsplätze",
+        "Beschäftigung",
+        "Arbeitnehmer",
+        "Arbeitswelt",
+        "Erwerbstätigkeit",
+      ],
+      wages: [
+        "Lohn",
+        "Löhne",
+        "Gehalt",
+        "Mindestlohn",
+        "gerechter Lohn",
+        "Familienlohn",
+        "Bezahlung",
+      ],
+      tax: [
+        "Steuer",
+        "Steuern",
+        "Besteuerung",
+        "Einkommensteuer",
+        "Mehrwertsteuer",
+        "Erbschaftsteuer",
+        "Körperschaftsteuer",
+        "Vermögensteuer",
+      ],
+      pensions: [
+        "Rente",
+        "Renten",
+        "Ruhestand",
+        "Altersvorsorge",
+        "Rentenalter",
+        "Alterssicherung",
+      ],
+      unions: [
+        "Gewerkschaften",
+        "Tarifverhandlungen",
+        "Streiks",
+        "Betriebsräte",
+        "Arbeitnehmervertretung",
+      ],
+      technology: [
+        "Technologie",
+        "Technik",
+        "Digitalisierung",
+        "Innovation",
+        "Big Tech",
+        "Maschinen",
+      ],
+      "artificial-intelligence": [
+        "künstliche Intelligenz",
+        "KI",
+        "maschinelles Lernen",
+        "Algorithmen",
+        "Chatbots",
+        "Sprachmodelle",
+      ],
+      automation: [
+        "Automatisierung",
+        "Roboter",
+        "Robotik",
+        "Entqualifizierung",
+        "Wegrationalisierung",
+      ],
+      cash: [
+        "Bargeld",
+        "Banknoten",
+        "Münzen",
+        "bargeldlose Gesellschaft",
+        "Bankfilialen",
+      ],
+      "right-to-repair": [
+        "Recht auf Reparatur",
+        "Reparierbarkeit",
+        "geplante Obsoleszenz",
+        "Ersatzteile",
+        "Wegwerfprodukte",
+      ],
+      surveillance: [
+        "Überwachung",
+        "Ausspähung",
+        "Privatsphäre",
+        "Videoüberwachung",
+        "Vorratsdatenspeicherung",
+        "Nachverfolgung",
+      ],
+      "facial-recognition": [
+        "Gesichtserkennung",
+        "Biometrie",
+        "biometrische Identifizierung",
+        "Gesichtsscan",
+      ],
+      "social-media": [
+        "soziale Medien",
+        "Smartphones",
+        "Bildschirmzeit",
+        "Altersverifikation",
+        "Kinder im Netz",
+        "Aufmerksamkeitsökonomie",
+      ],
+      "digital-identity": [
+        "digitale Identität",
+        "digitaler Ausweis",
+        "elektronische Identität",
+        "Personalausweis",
+        "Sozialkredit",
+      ],
+      "central-bank-digital-currency": [
+        "digitales Zentralbankgeld",
+        "digitaler Euro",
+        "CBDC",
+        "programmierbares Geld",
+      ],
+      cryptocurrency: [
+        "Kryptowährung",
+        "Krypto",
+        "Bitcoin",
+        "Blockchain",
+        "digitale Vermögenswerte",
+      ],
+      "genetic-engineering": [
+        "Gentechnik",
+        "Genmanipulation",
+        "Genom-Editierung",
+        "CRISPR",
+        "Designerbabys",
+        "Keimbahn",
+        "Embryonen",
+        "Eugenik",
+      ],
+      transhumanism: [
+        "Transhumanismus",
+        "Menschenoptimierung",
+        "Kybernetik",
+        "Gehirn-Computer-Schnittstelle",
+        "Implantate",
+      ],
+      education: ["Bildung", "Schule", "Schulen", "Lehrplan", "Unterricht", "Schüler"],
+      homeschooling: [
+        "Hausunterricht",
+        "Heimunterricht",
+        "Homeschooling",
+        "häusliche Bildung",
+      ],
+      "school-choice": [
+        "Schulwahl",
+        "Bildungsgutscheine",
+        "Privatschulen",
+        "freie Schulen",
+        "katholische Schulen",
+        "Schulen in freier Trägerschaft",
+      ],
+      universities: [
+        "Universitäten",
+        "Hochschulen",
+        "Hochschulbildung",
+        "Wissenschaftsfreiheit",
+        "Forschung",
+      ],
+      "religion-in-schools": [
+        "Religionsunterricht",
+        "staatliche Schulen",
+        "Christentum in der Schule",
+        "Schulgebet",
+        "weltlicher Unterricht",
+      ],
+      "sex-education": [
+        "Sexualkunde",
+        "Sexualerziehung",
+        "Aufklärungsunterricht",
+        "Elternrechte",
+        "Einwilligung",
+      ],
+      culture: [
+        "Kultur",
+        "Tradition",
+        "Brauchtum",
+        "Dialekte",
+        "Volkskunde",
+        "Feste",
+        "Vereinheitlichung",
+        "Globalisierung",
+      ],
+      architecture: [
+        "Architektur",
+        "Bauwesen",
+        "Stadtplanung",
+        "Denkmalschutz",
+        "Baukultur",
+        "Ortsbild",
+      ],
+      "free-speech": [
+        "Meinungsfreiheit",
+        "freie Rede",
+        "Zensur",
+        "Hassrede",
+        "Redeverbote",
+        "Pressefreiheit",
+        "Aufstachelung",
+      ],
+      prisons: [
+        "Gefängnisse",
+        "Haft",
+        "Strafvollzug",
+        "Strafzumessung",
+        "Strafe",
+        "Resozialisierung",
+        "Strafjustiz",
+      ],
+      "death-penalty": ["Todesstrafe", "Hinrichtung", "Kapitalstrafe", "Abschaffung"],
+      firearms: [
+        "Schusswaffen",
+        "Waffen",
+        "Waffenrecht",
+        "Notwehr",
+        "Selbstverteidigung",
+        "Jagd",
+      ],
+      healthcare: [
+        "Gesundheitsversorgung",
+        "Gesundheitswesen",
+        "Krankenhäuser",
+        "Ärzte",
+        "Medizin",
+        "Krankenversicherung",
+      ],
+      "medical-ethics": [
+        "Medizinethik",
+        "Bioethik",
+        "Gewissen",
+        "Gewissensvorbehalt",
+        "katholische Krankenhäuser",
+      ],
+      environment: [
+        "Umwelt",
+        "Natur",
+        "Ökologie",
+        "Naturschutz",
+        "Artenvielfalt",
+        "Verschmutzung",
+        "Ackerland",
+        "Bewahrung der Schöpfung",
+      ],
+      energy: [
+        "Energie",
+        "Strom",
+        "Stromnetz",
+        "Energiepreise",
+        "Versorgungssicherheit",
+        "Stromausfall",
+      ],
+      "nuclear-power": ["Kernkraft", "Atomkraft", "Kernenergie", "Reaktoren", "Atommüll"],
+      "fossil-fuels": [
+        "fossile Brennstoffe",
+        "Kohle",
+        "Erdöl",
+        "Erdgas",
+        "Benzin",
+        "Diesel",
+        "Kohlenwasserstoffe",
+      ],
+      renewables: [
+        "erneuerbare Energien",
+        "Solarenergie",
+        "Photovoltaik",
+        "Windkraft",
+        "Windräder",
+        "Wasserkraft",
+        "Geothermie",
+        "Ökostrom",
+      ],
+      climate: [
+        "Klimawandel",
+        "Erderwärmung",
+        "Kohlenstoff",
+        "Emissionen",
+        "Klimaneutralität",
+        "Treibhausgase",
+        "Dekarbonisierung",
+      ],
+      defence: ["Verteidigung", "Militär", "Armee", "Streitkräfte", "Aufrüstung"],
+      nato: [
+        "NATO",
+        "Nordatlantikpakt",
+        "Artikel 5",
+        "kollektive Verteidigung",
+        "Militärbündnisse",
+      ],
+      russia: ["Russland", "Russische Föderation", "Moskau", "Kreml"],
+      ukraine: ["Ukraine", "Kiew", "Krieg in der Ukraine", "Friedensverhandlungen"],
+      "united-states": [
+        "Vereinigte Staaten",
+        "USA",
+        "Amerika",
+        "Washington",
+        "Atlantizismus",
+      ],
+      china: ["China", "Volksrepublik China", "Peking", "Lieferketten"],
+      "israel-and-palestine": ["Israel", "Palästina", "Gaza", "Naher Osten"],
+      "foreign-aid": [
+        "Entwicklungshilfe",
+        "humanitäre Hilfe",
+        "Entwicklungszusammenarbeit",
+        "Auslandshilfe",
+      ],
+      sanctions: [
+        "Sanktionen",
+        "Embargo",
+        "Einfrieren von Vermögenswerten",
+        "wirtschaftlicher Zwang",
+        "Handelsbeschränkungen",
+      ],
+      conscription: [
+        "Wehrpflicht",
+        "Einberufung",
+        "Wehrdienst",
+        "Nationaldienst",
+        "Reserve",
+        "Kriegsdienstverweigerung",
+      ],
+      "nuclear-weapons": [
+        "Atomwaffen",
+        "Kernwaffen",
+        "nukleare Abschreckung",
+        "Abrüstung",
+        "Nichtverbreitung",
+        "Rüstungskontrolle",
+      ],
+    },
+  },
+
   entries: {
     "catholic-confessional-state": {
       title: "Katholischer Konfessionsstaat",
@@ -178,8 +752,6 @@ export const policyText: PolicyText = {
         "Restore Europa tritt nicht für Zwangsbekehrung ein.",
         "Dieses Modell ist keine unmittelbare Leitung der gewöhnlichen Staatsverwaltung durch Geistliche.",
       ],
-      implementationNote:
-        "Die förmliche Einrichtung einer konfessionellen Ordnung setzte in den meisten europäischen Staaten eine Verfassungsänderung voraus und ist hier als die Ordnung genannt, die Restore Europa anstrebt, und nicht als Beschreibung des geltenden Rechts.",
       keywords: [
         "katholischer Staat",
         "Konfessionsstaat",
@@ -384,8 +956,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "Das Heilige schützen, ohne den Zweifel, den Widerspruch oder die geistige Forschung unter Strafe zu stellen.",
-      implementationNote:
-        "Mehrere europäische Staaten haben ihre Bestimmungen zur Gotteslästerung in den letzten Jahrzehnten aufgehoben; es ginge also darum, einen enger gefassten Straftatbestand wieder einzuführen, und nicht darum, einen bestehenden beizubehalten.",
       keywords: ["Blasphemie", "Sakrileg", "Atheismus", "Schändung", "Vandalismus"],
     },
 
@@ -452,8 +1022,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "Familie, Pfarrei und die Einrichtungen vor Ort sollten vor der fernen zentralen Verwaltung tätig werden, soweit sie das sachgerecht können.",
-      implementationNote:
-        "Die Anspruchsberechtigung hängt hier von der Staatsbürgerschaft und vom Beitragsverlauf ab, nicht von der Volkszugehörigkeit. Leistungen nach der Staatsangehörigkeit zu beschränken berührte in mehreren europäischen Systemen zudem die Regeln zur Gleichbehandlung rechtmäßig ansässiger Arbeitnehmer.",
       keywords: ["Sozialleistungen", "Sozialhilfe", "Bürgergeld", "soziales Netz", "Abhängigkeit"],
     },
 
@@ -500,8 +1068,6 @@ export const policyText: PolicyText = {
         "Vorübergehender Schutz im Kriegsfall sollte vorübergehend bleiben und überprüft werden, wenn sich die Verhältnisse wesentlich ändern.",
         "Unbegleitete Minderjährige und Personen mit wirklicher Schutzbedürftigkeit erhalten gesonderte Sicherungen.",
       ],
-      implementationNote:
-        "Die Politik beruht auf einer Prüfung des Schutzbedarfs im Einzelfall und auf dem Grundsatz der Nichtzurückweisung. Bestehende europäische und internationale Verpflichtungen begrenzten jeden Versuch, eine Person an einen Ort zurückzuführen, an dem ihr Verfolgung, Folter oder vergleichbarer ernster Schaden droht.",
       keywords: [
         "Asyl",
         "Flüchtlinge",
@@ -529,8 +1095,6 @@ export const policyText: PolicyText = {
         "Nach der endgültigen Ablehnung endet die auf Integration gerichtete Unterstützung und die Person geht in das Rückführungsverfahren über.",
         "Das Nötigste im Notfall und eine angemessene Unterstützung für Kinder und für Personen, die sich wirklich nicht selbst unterhalten können, bleiben erhalten.",
       ],
-      implementationNote:
-        "Nach der Flüchtlingskonvention von 1951 genießen anerkannte Flüchtlinge, die sich rechtmäßig in einem Vertragsstaat aufhalten, vertragliche Schutzrechte hinsichtlich der Erwerbstätigkeit und der öffentlichen Fürsorge. Eine Politik, die anerkannte Flüchtlinge gänzlich von der erfassten öffentlichen Fürsorge ausschließen wollte, verlangte eine Prüfung der vertraglichen Verpflichtungen und nicht allein einfache Gesetzgebung.",
       keywords: [
         "Asyl",
         "Sozialleistungen",
@@ -563,8 +1127,6 @@ export const policyText: PolicyText = {
         "Eingebürgerte Staatsbürger bleiben dem gesonderten Rahmen der Aberkennung der Staatsbürgerschaft unterstellt, solange die Staatsbürgerschaft nicht zuvor rechtmäßig entzogen worden ist.",
         "Bürger dürfen nicht aus ihrem eigenen Land abgeschoben werden.",
       ],
-      implementationNote:
-        "Ein rechtmäßig ansässiger Ausländer genießt nach dem europäischen Menschenrechtsschutz derzeit Verfahrensgarantien gegen die Ausweisung. Die Abschiebung kann außerdem ausgeschlossen sein, wenn die Rückkehr die Person einer verbotenen Misshandlung aussetzte. Das angestrebte Modell wirkt deshalb zwar zügig nach der rechtskräftigen Verurteilung, bleibt aber gerichtlich überprüfbar, wo bindende Verpflichtungen es verlangen. Nach Artikel 11 der geltenden EU-Rückführungsrichtlinie sollen Einreiseverbote in der Regel fünf Jahre nicht überschreiten, dürfen aber länger ausfallen, wenn von der Person eine schwerwiegende Gefahr für die öffentliche Ordnung, die öffentliche Sicherheit oder die nationale Sicherheit ausgeht. Ein regelmäßiges zehnjähriges Verbot für die gewöhnliche unerlaubte Einreise ginge daher über die geltende Regel der Union hinaus.",
       keywords: [
         "Abschiebung",
         "strafrechtliche Abschiebung",
@@ -624,8 +1186,6 @@ export const policyText: PolicyText = {
         "Wiederkehrende staatsbürgerliche Tests dürfen nicht dazu dienen, eine Person, die die Staatsbürgerschaft rechtmäßig und redlich erworben hat, ohne Weiteres auszuweisen; die Aberkennung nach der Einbürgerung richtet sich nach gesonderten Einträgen.",
       ],
       limits: ["Fünfzehn Jahre Aufenthalt gewährleisten die Einbürgerung nicht von selbst."],
-      implementationNote:
-        "Die gewöhnlichen Aufenthaltsfristen in Europa liegen derzeit bei fünf bis zehn Jahren; dies verlängerte die bestehende Praxis also, statt sie nur anzupassen. Das Manifest hält bereits fest, dass die Einbürgerung belastbare Kenntnis der Sprache, der Geschichte und der Institutionen, Achtung der verfassungsmäßigen Ordnung und echte Verbundenheit mit dem Land verlangen soll. Dieser Eintrag fasst diese Anforderungen als den Assimilationsmaßstab der Bewegung zusammen.",
       keywords: [
         "Einbürgerung",
         "Assimilation",
@@ -650,8 +1210,6 @@ export const policyText: PolicyText = {
         "Wer eine belegte nationale Elternschaft oder nahe nationale Abstammung nachweist, kann einen erleichterten Weg der Rückkehr oder der Wiedererlangung erhalten.",
         "Der Arbeitsvorschlag für einen solchen erleichterten Weg lautet auf etwa fünf Jahre statt der gewöhnlichen fünfzehn.",
       ],
-      implementationNote:
-        "Abstammung bedeutet hier eine belegte Staatsbürgerschaft oder nationale Herkunftslinie. Sie begründet keine gesonderten bürgerlichen Rechte nach einer weiten rassischen oder ethnischen Einteilung.",
       keywords: ["Abstammung", "Vorfahren", "Wiedererlangung", "Rückkehr", "Abstammungsprinzip"],
     },
 
@@ -666,8 +1224,6 @@ export const policyText: PolicyText = {
         "Gewöhnlicher Weg: fünfzehn Jahre rechtmäßiger Aufenthalt, ehe ein Einbürgerungsantrag gestellt werden darf.",
         "Nach der Einbürgerung: vier weitere Jahre bis zum vollen Wahlrecht.",
       ],
-      implementationNote:
-        "Bestehenden Staatsbürgern das Wahlrecht vorzuenthalten setzte in den Staaten eine Verfassungsänderung voraus, in denen das Wahlrecht an der Staatsbürgerschaft selbst hängt.",
       keywords: ["Wahlrecht", "Stimmrecht", "aktives Wahlrecht", "Wahlen", "Wartefrist"],
     },
 
@@ -685,8 +1241,6 @@ export const policyText: PolicyText = {
         "Die gewöhnliche Einbürgerung begründet, wie lange sie auch zurückliegt, für sich genommen keine Wählbarkeit für diese Ämter.",
         "Welche Ämter unter die beschränkte Gruppe fallen, ist durch Gesetz genau zu bestimmen.",
       ],
-      implementationNote:
-        "Regeln, die an Abstammung, Geburt oder ethnische Herkunft anknüpfen, stießen nach dem geltenden europäischen und internationalen Menschenrechtsschutz auf erhebliche Einwände aus Gleichheit und Diskriminierungsverbot. Jede Umsetzung verlangte ungewöhnlich genaue rechtliche Kriterien und möglicherweise eine Verfassungs- oder Vertragsänderung.",
       keywords: [
         "hohe Staatsämter",
         "Staatspräsident",
@@ -714,8 +1268,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "Die einzelnen europäischen Nationen sind politische Gemeinschaften innerhalb einer weiteren europäischen Zivilisation.",
-      implementationNote:
-        "Europa wird hier geografisch und über das eigene Netz der Landesverbände der Bewegung verstanden und nicht als Mitgliedschaft in der Europäischen Union.",
       keywords: [
         "doppelte Staatsbürgerschaft",
         "Mehrstaatigkeit",
@@ -739,8 +1291,6 @@ export const policyText: PolicyText = {
         "Landesverrat und Terrorismus können die Aberkennung rechtfertigen.",
         "Restore Europa tritt dafür ein, dass die Aberkennung in außerordentlich schweren Fällen auch dann möglich ist, wenn daraus Staatenlosigkeit folgen könnte.",
       ],
-      implementationNote:
-        "Das internationale und das europäische Recht setzen der Herbeiführung von Staatenlosigkeit erhebliche Schranken, und die Abschiebung setzt in der Regel einen aufnehmenden Staat voraus, der die Person rechtlich aufnehmen kann und will. Dies gehört zu der Verfassungsordnung, die Restore Europa anstrebt, und verlangte eine Vertrags- oder Verfassungsänderung.",
       keywords: [
         "Aberkennung",
         "Entzug der Staatsbürgerschaft",
@@ -766,8 +1316,6 @@ export const policyText: PolicyText = {
         "Der bloße Zeitablauf begründet für sich kein selbsttätiges Bleiberecht, solange die zugrunde liegende Rechtsstellung vorübergehend oder bedingt bleibt.",
         "Es gelten individuelle Verfahren und Beweisanforderungen statt einer Kollektivausweisung allein nach ethnischer oder rassischer Kategorie.",
       ],
-      implementationNote:
-        "Das geltende europäische Recht setzt der Rückkehr und der Ausweisung erhebliche verfahrensrechtliche und menschenrechtliche Schranken. Dieser Eintrag beschreibt die vorgeschlagene Ordnung; ihre Umsetzung verlangte die Vereinbarkeit mit unvereinbaren rechtlichen Bindungen, deren Änderung oder die Lösung von ihnen. Das bestehende Manifest der Bewegung behandelt die Staatsbürgerschaft bereits als Mitgliedschaft und nicht als bloßen Aufenthalt und tritt für eine gesteuerte Einwanderung ein, die mit Integration, Stabilität und nationaler Kontinuität vereinbar ist.",
       keywords: [
         "Remigration",
         "Rückkehr",
@@ -796,8 +1344,6 @@ export const policyText: PolicyText = {
         "Verlangt wird die Achtung der rechtmäßigen verfassungsmäßigen Ordnung, ohne die weltanschauliche Übereinstimmung mit jeder Maßnahme der Regierung zu fordern.",
         "Die Integration wird anhand belegter individueller Nachweise beurteilt und nicht nach Herkunft allein.",
       ],
-      implementationNote:
-        "Das geltende Recht der Union über die langfristige Aufenthaltsberechtigung erlaubt es den Mitgliedstaaten, Integrationsbedingungen vorzusehen, und verlangt für den Erwerb der langfristigen Rechtsstellung feste und regelmäßige Einkünfte. Die Politik trennt abstammungsbezogene Vorstellungen geschichtlicher Nationalität von der handhabbaren rechtlichen Prüfung, ob ein bestimmter Einwohner integriert ist.",
       keywords: [
         "Integration",
         "Sprache",
@@ -827,8 +1373,6 @@ export const policyText: PolicyText = {
       limits: [
         "Dieser Eintrag behandelt nicht jeden eingebürgerten Staatsbürger als Täuschenden, bloß weil ein früherer Aufenthaltszeitraum unregelmäßig war; Täuschung und rechtmäßige Legalisierung bleiben verschiedene Begriffe.",
       ],
-      implementationNote:
-        "Dies ist eine vorgeschlagene rückwirkende Überprüfungsbefugnis, die über die Bestandskraft hinausgeht, die abschließenden Verwaltungsentscheidungen gewöhnlich zukommt. Sie verlangte eine klare verfassungsrechtliche Ermächtigung, bestimmte Verjährungsregeln und Verfahrensgarantien.",
       keywords: [
         "Legalisierung",
         "Amnestie",
@@ -858,8 +1402,6 @@ export const policyText: PolicyText = {
       limits: [
         "Die genaue Karenzzeit nach dem Verlust des Arbeitsplatzes sollte im Ausführungsgesetz bestimmt und nicht im Verfassungsgrundsatz festgeschrieben werden.",
       ],
-      implementationNote:
-        "Das geltende Unionsrecht über die langfristige Aufenthaltsberechtigung verlangt für deren Erwerb feste und regelmäßige Einkünfte, gewährt langfristig Aufenthaltsberechtigten zugleich aber erheblichen Schutz und lässt eine Ausweisung allein aus wirtschaftlichen Gründen nicht zu. Der vorgeschlagene Rahmen der Bewegung ginge für bestimmte Gruppen des ausländischen Aufenthalts darüber hinaus.",
       keywords: [
         "Selbstversorgung",
         "Beschäftigung",
@@ -886,8 +1428,6 @@ export const policyText: PolicyText = {
         "Gewöhnliche Arbeitslosigkeit, politische Meinungsverschiedenheit oder ein nicht bestandener staatsbürgerlicher Test sind für sich kein selbsttätiger Grund der Aberkennung.",
         "Nach Ablauf der zehn Jahre gelten die gewöhnlichen Schutzrechte der Staatsbürgerschaft, vorbehaltlich der dauerhaften Gründe der Täuschung und der übrigen außerordentlichen Aberkennungsgründe, die an anderer Stelle des Katalogs angenommen sind.",
       ],
-      implementationNote:
-        "Dies ist eine vorgeschlagene verfassungsrechtliche Abweichung von Ordnungen, welche die Einbürgerung für alle Zwecke des Entzugs sogleich der Staatsbürgerschaft durch Geburt gleichstellen. Bestehende völkerrechtliche Übereinkommen über die Staatsangehörigkeit begrenzen den Entzug, zumal wo er Staatenlosigkeit begründete; diese Widersprüche verlangten eine ausdrückliche verfassungs- und vertragsrechtliche Behandlung.",
       keywords: [
         "Staatsbürgerschaft auf Probe",
         "Einbürgerung",
@@ -914,8 +1454,6 @@ export const policyText: PolicyText = {
         "Längere Abwesenheit kann den Aufenthaltsstatus beenden; das gewöhnliche Ausführungsgesetz sollte die Frist nach Art des Titels innerhalb einer Spanne von etwa zwei bis fünf Jahren bestimmen.",
         "Die Gründe werden mitgeteilt und es besteht eine individuelle Gelegenheit, die Entscheidung anzufechten.",
       ],
-      implementationNote:
-        "Das geltende Unionsrecht schützt langfristig Aufenthaltsberechtigte stärker. Die geltende Richtlinie über die langfristige Aufenthaltsberechtigung lässt den Verlust der Rechtsstellung nach bestimmten Abwesenheiten zu und erlaubt die Ausweisung nur bei einer gegenwärtigen und hinreichend schweren Gefahr für die öffentliche Ordnung oder die Sicherheit; wirtschaftliche Erwägungen allein rechtfertigen die Ausweisung nicht. Die vorgeschlagene Politik der Bewegung verlangte daher Änderungen, soweit sie über die geltenden Regeln der Union hinausgeht.",
       keywords: [
         "Aufenthaltstitel",
         "Entzug",
@@ -943,8 +1481,6 @@ export const policyText: PolicyText = {
         "Wo nötig, wird mit den Behörden des Zielstaates oder mit anerkannten Organisationen zusammengearbeitet, um Reisedokumente und Aufnahme zu klären.",
         "Der freiwilligen Ausreise ist der Vorzug vor Haft oder zwangsweiser Abschiebung zu geben, wo keine ernsthafte Gefahr des Untertauchens und keine kriminelle oder sicherheitsrelevante Gefahr besteht.",
       ],
-      implementationNote:
-        "Dieser Eintrag ist ein Mittel der Umsetzung und kein sittliches Urteil über die zurückkehrende Person. Er soll die Rückkehr rascher, kostengünstiger und geordneter machen, wo Zusammenarbeit möglich ist.",
       keywords: [
         "freiwillige Rückkehr",
         "Wiedereingliederung",
@@ -970,8 +1506,6 @@ export const policyText: PolicyText = {
         "Ist die Staatsangehörigkeit streitig, so wird sie förmlich festgestellt, statt anzunehmen, der Geburtsort allein belege die Aufnahmepflicht eines Staates.",
         "Die Abstammung allein ist nicht der strafrechtliche Anknüpfungspunkt; maßgeblich ist die Verbindung von erworbener Staatsbürgerschaft und qualifiziertem Verhalten.",
       ],
-      implementationNote:
-        "Das Übereinkommen von 1961 zur Verminderung der Staatenlosigkeit verbietet den Entzug der Staatsangehörigkeit grundsätzlich dort, wo er eine Person staatenlos machte, vorbehaltlich bestimmter Ausnahmen, darunter die durch Täuschung erlangte Staatsangehörigkeit und bestimmte nach Artikel 8 vorbehaltene Gründe. Eine weitergehende Befugnis verlangte eine ausdrückliche Behandlung dieser vertraglichen Bindungen. Die Vernichtung eines Passes löscht die Staatsangehörigkeit nicht; der Pass ist Beweis der Staatsangehörigkeit und nicht ihre rechtliche Quelle.",
       keywords: [
         "eingebürgerte Staatsbürgerschaft",
         "Aberkennung",
@@ -1003,8 +1537,6 @@ export const policyText: PolicyText = {
         "Familienangehörige dürfen gemeinsam ausreisen, wo Eltern abgeschoben werden und die Kinder das Recht haben, sie zu begleiten; eigenständige Fragen der Staatsangehörigkeit, des Sorgerechts und des Kinderschutzes verlangen eine Entscheidung im Einzelfall.",
         "Die neuen verfassungsrechtlichen Regeln des Ausländerrechts gelten für bestehende Rechtsstellungen, soweit das Gesetz ausdrücklich eine rückwirkende Überprüfung vorsieht, vorbehaltlich der andernorts in diesem Komplex geregelten Überprüfungsverfahren.",
       ],
-      implementationNote:
-        "Das geltende Rückführungsrecht der Union begrenzt die Haft auf den kürzesten angemessenen Zeitraum, solange die Abschiebung mit der gebotenen Sorgfalt betrieben wird, und enthält bestimmte Höchstfristen und Schutzvorschriften. Das vorgeschlagene gemischte Modell übernimmt die allgemeine Abfolge von Haft und anschließend eingeschränktem Status, wenn die sofortige Abschiebung unmöglich ist, während die genaue Dauer von der letztlich angenommenen Rechtsordnung abhinge. Der Geburtsort ist ein nützlicher Anhaltspunkt, begründet für sich aber weder die Staatsangehörigkeit noch eine unbedingte Pflicht eines Staates zur Rückübernahme. Die Rückübernahme richtet sich nach dem Staatsangehörigkeitsrecht, nach den Beweisen und nach den anwendbaren Abkommen. Staatenlos ist, wen kein Staat nach Maßgabe seines Rechts als Angehörigen ansieht. Das vorgeschlagene System verlangt deshalb die Feststellung der Staatsangehörigkeit, statt anzunehmen, Staatenlosigkeit lasse sich stets dadurch beseitigen, dass die Person dem Land ihrer Geburt zugeordnet wird.",
       keywords: [
         "Rückkehrverfahren",
         "Rückübernahme",
@@ -1048,8 +1580,6 @@ export const policyText: PolicyText = {
         "Die nationale Souveränität, die verfassungsmäßige Identität und die geschichtliche Kontinuität bleiben gewahrt.",
         "Angestrebt wird ein europäischer zivilisatorischer Rahmen, der das christliche Erbe Europas anerkennt und zugleich die politische Eigenständigkeit der Nationen erhält.",
       ],
-      implementationNote:
-        "Artikel 5 des Vertrags über die Europäische Union kennt bereits die begrenzte Einzelermächtigung, die Subsidiarität und die Verhältnismäßigkeit. Diese Politik verlangte eine wesentlich strengere Anwendung dieser Grundsätze sowie eine erhebliche Vertrags- und Institutionenreform.",
       keywords: [
         "Europäische Union",
         "EU",
@@ -1192,8 +1722,6 @@ export const policyText: PolicyText = {
         "Familienzulagen oder Kindergeld werden eingesetzt, wo es angemessen ist, damit die Erziehung von Kindern keinen unzumutbaren wirtschaftlichen Nachteil bedeutet.",
         "Die Tragfähigkeit der Unternehmen, die Produktivität und die Beschäftigungsmöglichkeiten sind zu berücksichtigen.",
       ],
-      implementationNote:
-        "Der Katechismus beschreibt den gerechten Lohn als die rechtmäßige Frucht der Arbeit und verlangt, dass eine gerechte Bezahlung die Bedürfnisse, die Leistungen, die Produktivität, die Lage des Betriebs und das Gemeinwohl berücksichtigt. Laborem Exercens verbindet die gerechte Entlohnung ausdrücklich mit der Möglichkeit, eine Familie zu gründen und zu unterhalten.",
       keywords: [
         "Mindestlohn",
         "gerechter Lohn",
@@ -1229,8 +1757,6 @@ export const policyText: PolicyText = {
       limits: [
         "Genaue Sätze werden nicht vorgeschrieben und bleiben eine Frage der nationalen Umsetzung.",
       ],
-      implementationNote:
-        "Die katholische Soziallehre behandelt das Zahlen von Steuern als Teil der Solidarität und verlangt zugleich eine maßvolle und gerechte Anwendung, Redlichkeit bei den öffentlichen Ausgaben und besondere Aufmerksamkeit für die Familien.",
       keywords: [
         "Steuern",
         "Besteuerung",
@@ -1260,8 +1786,6 @@ export const policyText: PolicyText = {
         "Die Finanzierbarkeit bleibt gewahrt, damit eine Generation der nächsten keine unbezahlbaren Lasten auferlegt.",
         "Das Verhältnis von gesetzlicher, betrieblicher und privater Vorsorge darf von Land zu Land verschieden sein.",
       ],
-      implementationNote:
-        "Das Modell wendet Solidarität und Subsidiarität an: eine staatliche Untergrenze dort, wo die niedrigeren Einrichtungen keine ausreichende Sicherheit schaffen können, verbunden mit betrieblichen Einrichtungen, dem Sparen der Haushalte und privatem Eigentum.",
       keywords: [
         "Renten",
         "Ruhestand",
@@ -1293,8 +1817,6 @@ export const policyText: PolicyText = {
         "Genossenschaften und örtlich verwurzelte Eigentumsformen werden unterstützt, wo sie wirkliches Eigentum breiter streuen.",
         "Verhältnismäßigen Schutzrechten für Mieter wird der Vorzug gegeben vor Mietpreisbindungen, die neuen Wohnraum wirtschaftlich unmöglich machen.",
       ],
-      implementationNote:
-        "Das Manifest sagt bereits, dass Wohnraum dem Wohnen und dem Zusammenleben dienen und nicht in erster Linie als an Wert gewinnendes Anlagegut wirken soll. Die Beschränkungen im Einzelnen sollten national und örtlich abgestimmt werden.",
       keywords: [
         "Wohnen",
         "Wohneigentum",
@@ -1325,8 +1847,6 @@ export const policyText: PolicyText = {
         "Es wird verhindert, dass Arbeitgeber angeblich unabhängige Arbeitnehmerorganisationen beherrschen.",
         "Eine wirkliche Vielfalt der Vertretung ist zulässig statt einer einzigen staatlich gelenkten Gewerkschaft.",
       ],
-      implementationNote:
-        "Das Manifest unterstützt ausdrücklich Zünfte in zeitgemäßer Gestalt, Berufskammern und berufsständische Körperschaften und verwirft zugleich Berufsorganisationen als Werkzeuge eines allmächtigen Staates. Auch die katholische Lehre anerkennt die gewerkschaftliche Organisation und den verhältnismäßigen Streik.",
       keywords: [
         "Gewerkschaften",
         "Zünfte",
@@ -1447,8 +1967,6 @@ export const policyText: PolicyText = {
         "Die Altersprüfung ist so zu gestalten, dass möglichst wenige Identitätsdaten erhoben werden.",
         "Es gilt der allgemeine Rahmen: stark beschränkter Zugang unter 13 Jahren, starker Schutz für Eltern und Minderjährige von 13 bis 15, ein weiterer, aber weiterhin geschützter Zugang von 16 bis 17 und die gewöhnlichen Regeln für Erwachsene ab 18.",
       ],
-      implementationNote:
-        "Das Manifest sagt ausdrücklich, dass Kinder vor Wirtschaftszweigen zu schützen sind, deren Ertragsmodell darauf beruht, die seelische Abhängigkeit ins Äußerste zu treiben. Das genaue Verfahren der Altersprüfung bleibt eine Frage der Umsetzung.",
       keywords: [
         "soziale Medien",
         "Kinder",
@@ -1477,8 +1995,6 @@ export const policyText: PolicyText = {
         "Systeme sozialer Bewertung und die Bewertung politischen oder religiösen Verhaltens sind verboten.",
         "Die selbsttätige Verknüpfung von Gesundheits-, Finanz-, Bildungs-, Reise- und Kommunikationsdaten zu einem einzigen umfassenden staatlichen Profil wird vermieden.",
       ],
-      implementationNote:
-        "Das Manifest schützt nichtdigitale Ausweise ausdrücklich, wo es praktikabel ist, und verwirft eine unbegrenzte technische Abhängigkeit.",
       keywords: [
         "digitaler Ausweis",
         "elektronische Identität",
@@ -1506,8 +2022,6 @@ export const policyText: PolicyText = {
         "Der Einsatz digitalen Zentralbankgeldes für Systeme sozialer Bewertung ist verboten.",
         "Wirkliche private Zahlungen bleiben im Rahmen verhältnismäßiger Regeln zur Verbrechensbekämpfung erhalten.",
       ],
-      implementationNote:
-        "Das Manifest nennt das digitale Zentralbankgeld nicht, gewährleistet aber ausdrücklich einen wirklichen Zugang zu physischem Geld und verwirft unnötige technische Abhängigkeit und Überwachung.",
       keywords: [
         "CBDC",
         "digitaler Euro",
@@ -1534,8 +2048,6 @@ export const policyText: PolicyText = {
         "Die steuerliche Behandlung ist klar und verwaltungsmäßig zumutbar auszugestalten.",
         "Technik, die die Privatsphäre wahrt, wird nicht allein deshalb verboten, weil Privatsphäre technisch möglich ist.",
       ],
-      implementationNote:
-        "Kryptowährungen werden im Manifest nicht eigens behandelt. Diese Position ist aus dem Privateigentum abgeleitet, aus der Ablehnung geballter Finanzherrschaft und aus der Unterordnung der Technik, nicht aus einem Verbot von Technik.",
       keywords: [
         "Kryptowährung",
         "Bitcoin",
@@ -1561,8 +2073,6 @@ export const policyText: PolicyText = {
         "Politische oder religiöse Versammlungen werden nicht regelmäßig biometrisch erfasst.",
         "Privaten Unternehmen wird der Aufbau dauerhafter biometrischer Profile ohne starke gesetzliche Grundlage verwehrt.",
       ],
-      implementationNote:
-        "Das Manifest nennt die Gesichtserkennung nicht, schützt aber ausdrücklich wirkliche private Räume ohne ständige Überwachung.",
       keywords: [
         "Gesichtserkennung",
         "Biometrie",
@@ -1588,8 +2098,6 @@ export const policyText: PolicyText = {
         "Die massenhafte Überwachung wird nicht zur Grundform der Kommunikationsinfrastruktur gemacht.",
         "Der Zugriff von Strafverfolgung und Nachrichtendiensten bleibt streng beaufsichtigt.",
       ],
-      implementationNote:
-        "Die Vorratsspeicherung von Verkehrsdaten wird im Manifest nicht unmittelbar genannt. Die Position folgt aus seiner ausdrücklichen Ablehnung ständiger Überwachung und technischer Zentralisierung.",
       keywords: [
         "Verkehrsdaten",
         "Vorratsdatenspeicherung",
@@ -1616,8 +2124,6 @@ export const policyText: PolicyText = {
         "Eugenische Staatsprogramme werden verworfen.",
         "Genetische Informationen werden als besonders schutzbedürftige personenbezogene Daten geschützt.",
       ],
-      implementationNote:
-        "Das Manifest entscheidet die Gentechnik nicht im Einzelnen. Die Position ist aus der katholischen Anthropologie abgeleitet, aus dem Schutz des Lebens von der Empfängnis an und aus dem Grundsatz, dass das technische Können für sich genommen keine sittliche Rechtmäßigkeit begründet.",
       keywords: [
         "Gentechnik",
         "Genom-Editierung",
@@ -1646,8 +2152,6 @@ export const policyText: PolicyText = {
         "Für Schnittstellen zwischen Gehirn und Rechner, die die geistige Privatsphäre oder die Selbstbestimmung beeinträchtigen, gelten strenge Beschränkungen.",
         "Die vererbbare Verbesserung künftiger Generationen ist in der Regel verboten.",
       ],
-      implementationNote:
-        "Die Anthropologie des Manifests setzt transhumanistischen Vorhaben enge Grenzen, doch die Umsetzung im Einzelnen ist abgeleitet und nicht ausdrücklich festgelegt.",
       keywords: [
         "Transhumanismus",
         "Verbesserung des Menschen",
@@ -1683,8 +2187,6 @@ export const policyText: PolicyText = {
         "Regelmäßige Überprüfungen dürfen feststellen, ob die Kinder tatsächlich unterrichtet werden.",
         "Der Staat sollte die Aufsicht nicht dazu benutzen, weltanschauliche Gleichförmigkeit durchzusetzen.",
       ],
-      implementationNote:
-        "Der Hausunterricht ist in mehreren europäischen Staaten derzeit verboten oder stark eingeschränkt; dort verlangte dies also eine Gesetzesänderung.",
       keywords: ["Hausunterricht", "häusliche Bildung", "Eltern", "Lehrplan"],
     },
 
@@ -1749,8 +2251,6 @@ export const policyText: PolicyText = {
         "Der Laizismus sollte nicht als die einzige geistig berechtigte Weltanschauung dargestellt werden.",
         "Die nationale und die europäische Geschichte sollten als Erbe unterrichtet werden und nicht bloß als angehäufte Schuld.",
       ],
-      implementationNote:
-        "Mehrere europäische Staaten verlangen von Verfassungs wegen die konfessionelle Neutralität im öffentlichen Bildungswesen; diese Position verlangte von ihnen, das zu überdenken.",
       keywords: [
         "staatliche Schulen",
         "Religionsunterricht",
@@ -1870,8 +2370,6 @@ export const policyText: PolicyText = {
       limits: [
         "Genaue zahlenmäßige Strafrahmen bleiben einer späteren Ausarbeitung des Strafgesetzbuchs vorbehalten, statt ohne tatsächliche Grundlage erfunden zu werden.",
       ],
-      implementationNote:
-        "Die bestehende Lehre des Katalogs zum Strafvollzug verbindet bereits verhältnismäßige Strafe, den Schutz der Gesellschaft, die Wiedergutmachung und die Resozialisierung.",
       keywords: [
         "Strafzumessung",
         "Strafe",
@@ -1898,8 +2396,6 @@ export const policyText: PolicyText = {
         "Keine Vollstreckung an Minderjährigen.",
         "Sie wird allein von der rechtmäßigen staatlichen Gewalt verhängt und niemals bloß zur Rache gebraucht.",
       ],
-      implementationNote:
-        "Dies ist eine ausdrückliche Abweichung von der heutigen abolitionistischen Position des katholischen Katechismus; stattdessen wird die ältere überlieferte Zulassung übernommen. Die Todesstrafe ist zudem im gesamten Europarat verboten, sodass dies den Austritt aus bestehenden vertraglichen Bindungen oder deren Änderung voraussetzte.",
       keywords: ["Todesstrafe", "Kapitalstrafe", "Hinrichtung", "Mord", "Abschaffung"],
     },
 
@@ -1919,8 +2415,6 @@ export const policyText: PolicyText = {
         "Die lebenslange Freiheitsstrafe bleibt auch dort verfügbar, wo eine Tat rechtlich für die Todesstrafe in Betracht kommt.",
         "Keine Vollstreckung an Minderjährigen.",
       ],
-      implementationNote:
-        "Dies weitet die bestehende Position des Katalogs zur Todesstrafe über die Tötungsdelikte hinaus aus. Es bleibt eine ausdrückliche Abweichung von der heutigen abolitionistischen Position des katholischen Katechismus. Die Todesstrafe ist im gegenwärtigen System des Europarats verboten, für die daran gebundenen Staaten auch nach dem Protokoll Nr. 13 zur EMRK, sodass die Umsetzung eine erhebliche Rechts- und Vertragsänderung voraussetzte.",
       keywords: [
         "Todesstrafe",
         "Kapitalstrafe",
@@ -2030,8 +2524,6 @@ export const policyText: PolicyText = {
         "Landschaften und die Gemeinschaften vor Ort werden geschützt.",
         "Eine Vielfalt der Techniken ist zulässig statt einer überall vorgeschriebenen einzigen Energiequelle.",
       ],
-      implementationNote:
-        "Das Manifest legt die Bewahrung der Umwelt und die strategische Unabhängigkeit fest, bestimmt aber keinen Energiemix im Einzelnen.",
       keywords: [
         "Energiesicherheit",
         "Strom",
@@ -2058,8 +2550,6 @@ export const policyText: PolicyText = {
         "Die Kernenergie darf Teil eines breit gefächerten emissionsarmen Systems sein.",
         "Der Einsatz der Kernkraft wird nicht vorgeschrieben, wo die Verhältnisse vor Ort einen anderen Mix vernünftiger machen.",
       ],
-      implementationNote:
-        "Dies ist ein abgeleitetes politisches Urteil und keine ausdrückliche Festlegung des Manifests. Es sollte der Prüfung von technischer Sicherheit, Entsorgung und Wirtschaftlichkeit unterworfen bleiben.",
       keywords: ["Kernkraft", "Kernenergie", "Reaktoren", "Energiesicherheit", "Strom", "Atommüll"],
     },
 
@@ -2079,8 +2569,6 @@ export const policyText: PolicyText = {
         "Von besonders schädlichen Verwendungen wird abgerückt, sobald verlässliche und wirtschaftlich realistische Ersatzlösungen bestehen.",
         "Zeitpläne für den Umstieg, die wesentliche industrielle Kapazität zerstören oder die Grundversorgung mit Energie unbezahlbar machen, werden vermieden.",
       ],
-      implementationNote:
-        "Das Manifest verlangt die Bewahrung der Umwelt, bestimmt aber keine Ausstiegstermine für fossile Energieträger.",
       keywords: [
         "fossile Energieträger",
         "Kohle",
@@ -2106,8 +2594,6 @@ export const policyText: PolicyText = {
         "Örtliches und gemeinschaftliches Eigentum an Energieanlagen wird unterstützt, wo es tragfähig ist.",
         "Der Ausbau wird nicht bloß zur Erfüllung zahlenmäßiger Ziele vorgeschrieben, ohne Rücksicht auf die Verlässlichkeit und die Kosten vor Ort.",
       ],
-      implementationNote:
-        "Dies folgt den Grundsätzen des Manifests zur Bewahrung der Umwelt und zum menschlichen Maß, ist dort aber nicht ausdrücklich festgelegt.",
       keywords: [
         "erneuerbare Energien",
         "Solarenergie",
@@ -2188,8 +2674,6 @@ export const policyText: PolicyText = {
         "Ideologische Kriege, die fremde Gesellschaften umformen sollen, werden verworfen.",
         "Die langfristige Mitgliedschaft in der NATO bleibt einer erneuten Prüfung offen, falls die strategische Unabhängigkeit durch eine geeignetere Verteidigungsstruktur gesichert werden kann.",
       ],
-      implementationNote:
-        "Artikel 5 des NATO-Vertrags behandelt einen bewaffneten Angriff auf ein Mitglied als Angriff auf alle und verpflichtet jeden Verbündeten zum Beistand, überlässt es aber jedem Verbündeten, die Maßnahmen zu bestimmen, die er für erforderlich hält. Das Manifest tritt für die strategische Unabhängigkeit ein, verlangt aber selbst keinen Austritt aus der NATO.",
       keywords: [
         "NATO",
         "Artikel 5",
@@ -2218,8 +2702,6 @@ export const policyText: PolicyText = {
         "Verhältnismäßige Antworten auf schwere Friedensbrüche oder schwere Angriffe auf unschuldige Bevölkerungen sind zulässig.",
         "Verhandlungslösungen werden gesucht, wo sie realistisch sind.",
       ],
-      implementationNote:
-        "Dies ist eine Lehre der Bündnisfreiheit und kein tatsächliches Urteil über bestimmte gegenwärtige Streitfragen.",
       keywords: [
         "Russland",
         "Russische Föderation",
@@ -2247,8 +2729,6 @@ export const policyText: PolicyText = {
         "Die humanitäre Hilfe für Zivilisten wird von der unmittelbaren Teilnahme am bewaffneten Konflikt unterschieden.",
         "Eine dauerhafte Feindschaft gegenüber dem ukrainischen wie dem russischen Volk wird vermieden.",
       ],
-      implementationNote:
-        "Diese Position wendet den starken Vorbehalt des Manifests gegen jeden unnötigen Krieg und seinen Vorzug für die strategische Unabhängigkeit an.",
       keywords: [
         "Ukraine",
         "Russland",
@@ -2277,8 +2757,6 @@ export const policyText: PolicyText = {
         "Die kulturelle Unabhängigkeit von eingeführter kommerzieller Vereinheitlichung bleibt gewahrt.",
         "Die selbstverständliche Übernahme amerikanischer außenpolitischer Prioritäten wird verworfen.",
       ],
-      implementationNote:
-        "Die Politik lautet auf Zusammenarbeit ohne Abhängigkeit und nicht auf Feindschaft oder Abschottung.",
       keywords: [
         "Vereinigte Staaten",
         "Amerika",
@@ -2307,8 +2785,6 @@ export const policyText: PolicyText = {
         "In Wissenschaft und Handel wird zusammengearbeitet, wo es angemessen ist.",
         "Eine unnötige militärische Konfrontation wird vermieden, wo die europäische Sicherheit nicht unmittelbar berührt ist.",
       ],
-      implementationNote:
-        "Die Lehre lautet: Handel, wo er nützt, und Unabhängigkeit, wo sie nötig ist.",
       keywords: [
         "China",
         "Volksrepublik China",
@@ -2338,8 +2814,6 @@ export const policyText: PolicyText = {
         "Realistische diplomatische Bemühungen, die die Gewalt verringern können, werden unterstützt.",
         "Eingeführte konfessionelle Einschüchterung oder politische Gewalt wird innerhalb Europas nicht geduldet.",
       ],
-      implementationNote:
-        "Dies ist Bündnisfreiheit und keine Gleichgültigkeit gegenüber dem Schaden für Zivilisten oder gegenüber den internationalen humanitären Verpflichtungen. Die Waffenbeschränkung gilt ausnahmslos für jede Partei: Sie folgt aus dem Vorbehalt dagegen, einen Konflikt anzuheizen, an dem Europa nicht beteiligt ist, und ist keine Maßnahme gegen einen einzelnen Staat.",
       keywords: [
         "Israel",
         "Palästina",
@@ -2368,8 +2842,6 @@ export const policyText: PolicyText = {
         "Die Unterstützung von Medizin, Ernährungssicherheit, sauberem Wasser und Wiederaufbau ist zulässig, wo sie nachweislich wirkt.",
         "Die Hilfe bleibt den rechtmäßigen Haushaltspflichten im Inland nachgeordnet.",
       ],
-      implementationNote:
-        "Das Manifest bestimmt weder Mittel noch Verfahren der Auslandshilfe. Dies ist aus der Klugheit, aus der humanitären Sorge und aus dem Vorbehalt gegen die weltanschaulich begründete Einmischung abgeleitet.",
       keywords: [
         "Auslandshilfe",
         "humanitäre Hilfe",
@@ -2397,8 +2869,6 @@ export const policyText: PolicyText = {
         "Humanitäre Ausnahmen für wesentliche zivile Güter bleiben erhalten, wo immer es praktikabel ist.",
         "Sehr weitreichende Wirtschaftssanktionen bleiben außerordentlich schweren Umständen vorbehalten.",
       ],
-      implementationNote:
-        "Die Position wendet Verhältnismäßigkeit und Klugheit auf den nichtmilitärischen Zwang an. Sie begründet gegenüber keinem benannten Staat eine selbsttätige Sanktionspolitik.",
       keywords: [
         "Sanktionen",
         "Embargo",
@@ -2426,8 +2896,6 @@ export const policyText: PolicyText = {
         "Die Streitkräfte bleiben an sittliche und rechtliche Grenzen gebunden, und offensichtlich rechtswidrige Befehle werden verweigert.",
         "Der Schulsport wird gestärkt: durch ernsthaft aufbauende Ertüchtigung, Schwimmen, Erste Hilfe, Orientierung im Gelände, Fertigkeiten im Freien und altersgerechte Kenntnisse des Zivilschutzes, mit angemessener Rücksicht auf gesundheitliche Einschränkungen und Behinderungen.",
       ],
-      implementationNote:
-        "Die katholische Soziallehre anerkennt die rechtmäßige Landesverteidigung und zugleich die Verweigerung aus Gewissensgründen sowie die sittlichen Grenzen der Kriegführung.",
       keywords: [
         "Wehrpflicht",
         "Militärdienst",
@@ -2459,8 +2927,6 @@ export const policyText: PolicyText = {
         "Die Weiterverbreitung an weitere Kernwaffenstaaten wird abgelehnt.",
         "Die Politik zur Kernenergie bleibt von der Politik zu den Kernwaffen getrennt.",
       ],
-      implementationNote:
-        "Papst Franziskus hat sowohl den Einsatz als auch den Besitz von Kernwaffen wiederholt als unsittlich bezeichnet und zur Abrüstung aufgerufen. Die angenommene Position folgt dieser heutigen katholischen Richtung.",
       keywords: [
         "Kernwaffen",
         "nukleare Abrüstung",

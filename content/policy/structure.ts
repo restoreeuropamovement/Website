@@ -1333,3 +1333,106 @@ export const policyStructure = [
  * ninety-eight.
  */
 export type PolicySlug = (typeof policyStructure)[number]["slug"];
+
+/**
+ * The subjects the search's synonym map groups words under.
+ *
+ * An id is a handle for a concept, not a pointer at an entry. The language
+ * files give each id the words a reader of that language would actually type
+ * for the thing — `gay marriage` beside `same-sex marriage`, `nukes` beside
+ * `nuclear weapons` — and the search widens a query to the rest of the group.
+ * Which entry that reaches is decided by the catalogue's own text, so the map
+ * never has to take a view about what a word implies, and adding a word here
+ * cannot attach it to a position.
+ *
+ * The ids are structure, so they are the same in all six languages and the
+ * type makes an edition that forgets one a build error. The *words* are not:
+ * a group needs as many of them as its language needs, and the count
+ * legitimately differs — which is why `scripts/check-translations.ts`
+ * compares these lists by kind rather than by length.
+ */
+export const policySynonymGroupIds = [
+  "church-and-state",
+  "abortion",
+  "euthanasia",
+  "contraception",
+  "same-sex-marriage",
+  "pornography",
+  "prostitution",
+  "drugs",
+  "alcohol",
+  "gambling",
+  "blasphemy",
+  "family",
+  "demography",
+  "sunday-rest",
+  "welfare",
+  "nation",
+  "immigration",
+  "irregular-migration",
+  "asylum",
+  "deportation",
+  "citizenship",
+  "dual-citizenship",
+  "integration",
+  "voting",
+  "european-union",
+  "subsidiarity",
+  "economy",
+  "property",
+  "monopolies",
+  "corporatism",
+  "usury",
+  "housing",
+  "work",
+  "wages",
+  "tax",
+  "pensions",
+  "unions",
+  "technology",
+  "artificial-intelligence",
+  "automation",
+  "cash",
+  "right-to-repair",
+  "surveillance",
+  "facial-recognition",
+  "social-media",
+  "digital-identity",
+  "central-bank-digital-currency",
+  "cryptocurrency",
+  "genetic-engineering",
+  "transhumanism",
+  "education",
+  "homeschooling",
+  "school-choice",
+  "universities",
+  "religion-in-schools",
+  "sex-education",
+  "culture",
+  "architecture",
+  "free-speech",
+  "prisons",
+  "death-penalty",
+  "firearms",
+  "healthcare",
+  "medical-ethics",
+  "environment",
+  "energy",
+  "nuclear-power",
+  "fossil-fuels",
+  "renewables",
+  "climate",
+  "defence",
+  "nato",
+  "russia",
+  "ukraine",
+  "united-states",
+  "china",
+  "israel-and-palestine",
+  "foreign-aid",
+  "sanctions",
+  "conscription",
+  "nuclear-weapons",
+] as const;
+
+export type PolicySynonymGroupId = (typeof policySynonymGroupIds)[number];

@@ -2,6 +2,7 @@ import { manifestoSections } from "@/content/manifesto";
 import {
   policyCategoryIds,
   policyStatusIds,
+  POLICY_FIELD_WEIGHT,
   type PolicyCategory,
   type PolicyEdition,
   type PolicyEntry,
@@ -10,6 +11,14 @@ import {
 } from "@/content/policy";
 import type { ManifestoSectionData } from "@/lib/content-types";
 import { localePath, type Locale } from "@/lib/i18n";
+import {
+  buildIndex,
+  buildSynonymTable,
+  parseQuery,
+  search,
+  type SearchIndex,
+  type SynonymTable,
+} from "@/lib/search";
 
 /**
  * Queries over one edition of the catalogue.
@@ -116,26 +125,119 @@ export interface PolicyQuery {
 }
 
 /**
- * Filter the catalogue. Every term in the query must appear somewhere in the
- * entry, so adding words narrows the result rather than widening it.
+ * The index and the synonym table of one edition, built on the first search
+ * of that language and kept against the edition's identity.
+ *
+ * A `WeakMap` rather than a module-level variable because there are six
+ * editions and the pages hold them; keying on the object means the cache can
+ * never serve the German index to an Italian reader, which is the one bug
+ * worth designing the cache around.
  */
-export function queryPolicyEntries(
+interface PolicySearch {
+  readonly index: SearchIndex;
+  readonly synonyms: SynonymTable;
+}
+
+const searchContexts = new WeakMap<PolicyEdition, PolicySearch>();
+
+function searchContext(edition: PolicyEdition): PolicySearch {
+  const cached = searchContexts.get(edition);
+  if (cached !== undefined) return cached;
+
+  const built: PolicySearch = {
+    index: buildIndex(
+      edition.entries.map((entry) => ({
+        id: entry.slug,
+        fields: edition.searchFields.get(entry.slug) ?? [],
+      })),
+    ),
+    synonyms: buildSynonymTable(edition.synonyms),
+  };
+  searchContexts.set(edition, built);
+  return built;
+}
+
+/** Below this many results, the page also offers the nearest entries. */
+const SUGGEST_BELOW = 3;
+
+/** How many "did you mean" entries are worth offering. */
+const SUGGESTION_LIMIT = 4;
+
+export interface PolicyResults {
+  /** What matched, best first when there was a text query. */
+  readonly entries: readonly PolicyEntry[];
+  /**
+   * Entries that matched part of the query, offered when little or nothing
+   * matched all of it. Empty whenever the results speak for themselves.
+   */
+  readonly suggestions: readonly PolicyEntry[];
+  /**
+   * Whether the order is relevance or the catalogue's own. Browsing keeps
+   * the editorial sequence; searching does not, because a ranked list broken
+   * back up into ten sections is not a ranked list.
+   */
+  readonly ranked: boolean;
+}
+
+/**
+ * Filter and rank the catalogue.
+ *
+ * Every term in the query must be reached somehow, so adding words still
+ * narrows the result. What widened is *how* a term may be reached: the same
+ * word inflected, a near spelling of it, or another word for the same thing.
+ * See `lib/search.ts` for the tiers and what each is worth.
+ */
+export function runPolicyQuery(
   edition: PolicyEdition,
   { q, category, status }: PolicyQuery,
-): readonly PolicyEntry[] {
-  const terms = (q ?? "")
-    .toLocaleLowerCase(edition.locale)
-    .split(/\s+/)
-    .filter((term) => term.length > 0);
-
-  return edition.entries.filter((entry) => {
+): PolicyResults {
+  const inScope = edition.entries.filter((entry) => {
     if (category && entry.category !== category) return false;
     if (status && !hasStatus(entry, status)) return false;
-    if (terms.length === 0) return true;
-
-    const haystack = edition.haystacks.get(entry.slug) ?? "";
-    return terms.every((term) => haystack.includes(term));
+    return true;
   });
+
+  const text = (q ?? "").trim();
+  if (text === "") return { entries: inScope, suggestions: [], ranked: false };
+
+  const { index, synonyms } = searchContext(edition);
+  const terms = parseQuery(text, synonyms);
+  /* A query of nothing but punctuation is not a query. */
+  if (terms.length === 0) return { entries: inScope, suggestions: [], ranked: false };
+
+  const allowed = new Map(inScope.map((entry) => [entry.slug as string, entry]));
+  const { hits, near } = search(index, terms, {
+    nearLimit: edition.entries.length,
+    /*
+     * A synonym has to reach an entry through its title, its keywords or its
+     * short answer. Every entry's argument mentions the vocabulary of the
+     * neighbouring ones in passing, so letting a substituted word match the
+     * body would answer "family" with two thirds of the catalogue.
+     */
+    synonymMinWeight: POLICY_FIELD_WEIGHT.shortAnswer,
+  });
+
+  const entries = hits
+    .map((hit) => allowed.get(hit.id))
+    .filter((entry): entry is PolicyEntry => entry !== undefined);
+
+  const suggestions =
+    entries.length >= SUGGEST_BELOW
+      ? []
+      : near
+          .map((hit) => allowed.get(hit.id))
+          .filter((entry): entry is PolicyEntry => entry !== undefined)
+          .slice(0, SUGGESTION_LIMIT);
+
+  return { entries, suggestions, ranked: true };
+}
+
+/** Just the matches, for callers with nothing to say about the near misses. */
+export function queryPolicyEntries(
+  edition: PolicyEdition,
+  query: PolicyQuery,
+): readonly PolicyEntry[] {
+  return runPolicyQuery(edition, query).entries;
 }
 
 /**

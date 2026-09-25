@@ -12,12 +12,12 @@ export const policyText: PolicyText = {
       "Le posizioni del Restore Europa Movement, consultabili tema per tema e ciascuna contrassegnata dal proprio grado di definizione: ordine morale, famiglia, cittadinanza, economia, tecnologia, educazione, giustizia, sanità, ambiente e politica estera.",
     body: [
       "Dove la dottrina morale cattolica è chiara, Restore Europa di norma la assume come riferimento morale di base, e indica separatamente la sua attuazione nel diritto civile. Uno scostamento è registrato esplicitamente: sulla pena capitale Restore Europa assume la più antica ammissione tradizionale per i casi eccezionali anziché la posizione abolizionista contemporanea.",
-      "Il catalogo distingue l'ordine costituzionale a cui Restore Europa tende dal diritto europeo quale oggi vige. Diverse posizioni — sulla nazionalità, sulla privazione della cittadinanza, sulla libertà di parola, sulla rilevanza pubblica della religione e sulla pena capitale — richiederebbero una modifica costituzionale o dei trattati prima di poter essere attuate in singoli Stati europei. Dove è così, la voce lo dice.",
+      "Il catalogo distingue l'ordine costituzionale a cui Restore Europa tende dal diritto europeo quale oggi vige. Diverse posizioni — sulla nazionalità, sulla privazione della cittadinanza, sulla libertà di parola, sulla rilevanza pubblica della religione e sulla pena capitale — richiederebbero una modifica costituzionale o dei trattati prima di poter essere attuate in singoli Stati europei.",
       "La versione 0.2 definisce le questioni che la versione 0.1 aveva lasciato aperte: il rapporto istituzionale europeo, l'asilo, l'espulsione, i salari, la fiscalità, le pensioni, la casa, la rappresentanza del lavoro, l'identità e la moneta digitali, la sorveglianza biometrica, l'ingegneria genetica, la commisurazione delle pene, il mix energetico e ogni questione pendente di politica estera. Dove una formulazione della v0.2 ha rivisto una voce precedente, vale il testo più recente.",
       "La versione 0.3 aggiunge il complesso di voci sulla remigrazione e sulla sua esecuzione. Esso distingue la cittadinanza, lo status di soggiorno, l'espulsione per reato, il rimpatrio dopo la procedura di asilo e il riesame della nazionalità, anziché trattare la remigrazione come un unico potere indifferenziato; è redatto come politica costituzionale e legislativa proposta, e il diritto europeo e internazionale vigente è segnalato separatamente in ciascuna voce. Due voci precedenti — la naturalizzazione e l'espulsione degli stranieri autori di reato — sono confluite nelle formulazioni più recenti anziché restare duplicate accanto ad esse.",
     ],
     notice:
-      "Ogni questione di questo catalogo porta una posizione. Le voci contrassegnate come Derivate seguono la direzione del Manifesto senza che la loro attuazione sia fissata, e parecchie indicano la modifica legislativa o dei trattati che richiederebbero. Le posizioni sono riviste man mano che il movimento decide; la versione e la data qui sopra dicono quale testo state leggendo.",
+      "Ogni questione di questo catalogo porta una posizione. Le voci contrassegnate come Derivate seguono la direzione del Manifesto senza che la loro attuazione sia fissata. Le posizioni sono riviste man mano che il movimento decide; la versione e la data qui sopra dicono quale testo state leggendo.",
   },
 
   labels: {
@@ -39,6 +39,11 @@ export const policyText: PolicyText = {
     },
     noMatch: "Nel catalogo non c'è nulla che corrisponda.",
     showAll: "Mostra tutte le posizioni",
+    relevanceHeading: "Prima le corrispondenze migliori",
+    suggestions: {
+      heading: "Posizioni più vicine",
+      body: "Queste voci sono le più vicine a quanto è stato digitato. Potrebbero non usare le stesse parole.",
+    },
     openQueue: {
       heading: "Questioni programmatiche ancora aperte",
       body: "Queste questioni sono registrate come non decise anziché dedotte dall'ideologia. Sono elencate perché le lacune restino visibili invece di essere colmate in silenzio.",
@@ -78,7 +83,6 @@ export const policyText: PolicyText = {
     policiesHeading: "Misure",
     principleHeading: "Principio",
     limitsHeading: "Limiti e questioni irrisolte",
-    implementationHeading: "Nota di attuazione",
     basisHeading: "Fondamento nel Manifesto",
     keywordsHeading: "Termini di ricerca",
     lastUpdatedBefore: "Ultimo aggiornamento",
@@ -156,6 +160,583 @@ export const policyText: PolicyText = {
     },
   },
 
+  search: {
+    synonyms: {
+      "church-and-state": [
+        "Chiesa e Stato",
+        "Stato confessionale",
+        "religione di Stato",
+        "Chiesa di Stato",
+        "integralismo",
+        "laicità",
+        "secolarismo",
+      ],
+      abortion: [
+        "aborto",
+        "interruzione di gravidanza",
+        "nascituro",
+        "difesa della vita",
+        "diritto alla vita",
+      ],
+      euthanasia: [
+        "eutanasia",
+        "suicidio assistito",
+        "morte assistita",
+        "fine vita",
+        "cure palliative",
+      ],
+      contraception: [
+        "contraccezione",
+        "controllo delle nascite",
+        "pillola",
+        "pianificazione familiare",
+        "preservativi",
+        "fertilità",
+      ],
+      "same-sex-marriage": [
+        "matrimonio omosessuale",
+        "matrimonio tra persone dello stesso sesso",
+        "matrimonio egualitario",
+        "omosessualità",
+        "unioni civili",
+      ],
+      pornography: [
+        "pornografia",
+        "porno",
+        "contenuti per adulti",
+        "contenuti espliciti",
+        "oscenità",
+      ],
+      prostitution: [
+        "prostituzione",
+        "lavoro sessuale",
+        "case chiuse",
+        "sfruttamento della prostituzione",
+        "tratta di esseri umani",
+      ],
+      drugs: [
+        "droghe",
+        "stupefacenti",
+        "cannabis",
+        "marijuana",
+        "hashish",
+        "depenalizzazione",
+      ],
+      alcohol: ["alcol", "birra", "vino", "superalcolici", "ubriachezza", "temperanza"],
+      gambling: [
+        "gioco d'azzardo",
+        "scommesse",
+        "scommesse sportive",
+        "casinò",
+        "lotteria",
+        "slot machine",
+        "casse premio",
+      ],
+      blasphemy: [
+        "bestemmia",
+        "blasfemia",
+        "sacrilegio",
+        "profanazione",
+        "vandalismo contro le chiese",
+      ],
+      family: [
+        "famiglia",
+        "figli",
+        "genitori",
+        "nucleo familiare",
+        "maternità",
+        "paternità",
+        "servizi per l'infanzia",
+      ],
+      demography: [
+        "demografia",
+        "natalità",
+        "tasso di natalità",
+        "fertilità",
+        "calo demografico",
+        "invecchiamento della popolazione",
+      ],
+      "sunday-rest": [
+        "apertura domenicale",
+        "riposo domenicale",
+        "giorno di riposo",
+        "sabato",
+        "orari di apertura dei negozi",
+        "lavoro domenicale",
+      ],
+      welfare: [
+        "assistenza sociale",
+        "sussidi",
+        "previdenza sociale",
+        "rete di protezione",
+        "sussidio di disoccupazione",
+        "reddito minimo",
+      ],
+      nation: [
+        "nazione",
+        "popolo",
+        "patria",
+        "identità nazionale",
+        "patriottismo",
+        "continuità storica",
+      ],
+      immigration: [
+        "immigrazione",
+        "migrazione",
+        "migranti",
+        "immigrati",
+        "nuovi arrivati",
+        "controllo delle frontiere",
+        "frontiere aperte",
+        "immigrazione di massa",
+      ],
+      "irregular-migration": [
+        "migrazione irregolare",
+        "immigrazione illegale",
+        "soggiorno irregolare",
+        "senza documenti",
+        "regolarizzazione",
+        "sanatoria",
+      ],
+      asylum: [
+        "asilo",
+        "rifugiati",
+        "richiedenti asilo",
+        "protezione internazionale",
+        "non-refoulement",
+        "paese terzo sicuro",
+      ],
+      deportation: [
+        "espulsione",
+        "rimpatrio",
+        "allontanamento",
+        "remigrazione",
+        "ritorno",
+        "divieto di reingresso",
+      ],
+      citizenship: [
+        "cittadinanza",
+        "nazionalità",
+        "passaporto",
+        "naturalizzazione",
+        "ius soli",
+        "ius sanguinis",
+      ],
+      "dual-citizenship": [
+        "doppia cittadinanza",
+        "doppia nazionalità",
+        "secondo passaporto",
+        "rinuncia",
+      ],
+      integration: [
+        "integrazione",
+        "assimilazione",
+        "requisito linguistico",
+        "conoscenze civiche",
+        "test di cittadinanza",
+      ],
+      voting: ["diritto di voto", "suffragio", "elezioni", "elettorato"],
+      "european-union": [
+        "Unione europea",
+        "UE",
+        "Bruxelles",
+        "Commissione europea",
+        "riforma dei trattati",
+        "euroscetticismo",
+        "Stati membri",
+      ],
+      subsidiarity: [
+        "sussidiarietà",
+        "decentramento",
+        "federalismo",
+        "autonomie locali",
+        "localismo",
+      ],
+      economy: [
+        "economia",
+        "ordine economico",
+        "capitalismo",
+        "socialismo",
+        "distributismo",
+        "libero mercato",
+      ],
+      property: [
+        "proprietà",
+        "patrimonio",
+        "piccoli proprietari",
+        "cooperative",
+        "proprietà diffusa",
+      ],
+      monopolies: [
+        "monopolio",
+        "monopoli",
+        "antitrust",
+        "diritto della concorrenza",
+        "cartelli",
+        "grandi imprese",
+        "concentrazione economica",
+      ],
+      corporatism: [
+        "corporazioni",
+        "camere",
+        "corporativismo",
+        "apprendistato",
+        "mestieri",
+        "rappresentanza professionale",
+      ],
+      usury: [
+        "usura",
+        "interessi",
+        "tassi di interesse",
+        "prestiti",
+        "credito",
+        "debito",
+        "banche",
+      ],
+      housing: [
+        "casa",
+        "abitazioni",
+        "affitto",
+        "locatori",
+        "mutui",
+        "prezzi delle case",
+        "proprietà della casa",
+        "inquilini",
+      ],
+      work: ["lavoro", "occupazione", "posti di lavoro", "lavoratori", "mercato del lavoro"],
+      wages: [
+        "salario",
+        "salari",
+        "retribuzione",
+        "salario minimo",
+        "salario giusto",
+        "salario familiare",
+        "stipendio",
+      ],
+      tax: [
+        "tassa",
+        "tasse",
+        "imposte",
+        "fiscalità",
+        "imposta sul reddito",
+        "IVA",
+        "imposta di successione",
+        "imposta sulle società",
+        "patrimoniale",
+      ],
+      pensions: [
+        "pensione",
+        "pensioni",
+        "previdenza",
+        "età pensionabile",
+        "vecchiaia",
+        "risparmio previdenziale",
+      ],
+      unions: [
+        "sindacati",
+        "contrattazione collettiva",
+        "scioperi",
+        "rappresentanze aziendali",
+        "rappresentanza dei lavoratori",
+      ],
+      technology: [
+        "tecnologia",
+        "tecnica",
+        "digitale",
+        "innovazione",
+        "grandi piattaforme",
+        "macchine",
+      ],
+      "artificial-intelligence": [
+        "intelligenza artificiale",
+        "apprendimento automatico",
+        "algoritmi",
+        "chatbot",
+        "modelli linguistici",
+      ],
+      automation: [
+        "automazione",
+        "robot",
+        "robotica",
+        "dequalificazione",
+        "sostituzione dei lavoratori con le macchine",
+      ],
+      cash: [
+        "contante",
+        "denaro contante",
+        "banconote",
+        "monete",
+        "società senza contanti",
+        "filiali bancarie",
+      ],
+      "right-to-repair": [
+        "diritto alla riparazione",
+        "riparabilità",
+        "obsolescenza programmata",
+        "pezzi di ricambio",
+        "usa e getta",
+      ],
+      surveillance: [
+        "sorveglianza",
+        "spionaggio",
+        "riservatezza",
+        "videosorveglianza",
+        "conservazione dei dati",
+        "tracciamento",
+      ],
+      "facial-recognition": [
+        "riconoscimento facciale",
+        "biometria",
+        "identificazione biometrica",
+        "scansione del volto",
+      ],
+      "social-media": [
+        "social media",
+        "smartphone",
+        "tempo davanti allo schermo",
+        "verifica dell'età",
+        "minori online",
+        "cattura dell'attenzione",
+      ],
+      "digital-identity": [
+        "identità digitale",
+        "documento digitale",
+        "identità elettronica",
+        "carta d'identità",
+        "credito sociale",
+      ],
+      "central-bank-digital-currency": [
+        "valuta digitale di banca centrale",
+        "euro digitale",
+        "CBDC",
+        "moneta programmabile",
+      ],
+      cryptocurrency: [
+        "criptovaluta",
+        "cripto",
+        "bitcoin",
+        "blockchain",
+        "attività digitali",
+      ],
+      "genetic-engineering": [
+        "ingegneria genetica",
+        "editing genetico",
+        "CRISPR",
+        "bambini su misura",
+        "linea germinale",
+        "embrioni",
+        "eugenetica",
+      ],
+      transhumanism: [
+        "transumanesimo",
+        "potenziamento umano",
+        "cibernetica",
+        "interfaccia cervello-computer",
+        "impianti",
+      ],
+      education: [
+        "istruzione",
+        "educazione",
+        "scuola",
+        "scuole",
+        "programmi scolastici",
+        "insegnamento",
+        "alunni",
+      ],
+      homeschooling: [
+        "istruzione parentale",
+        "scuola a casa",
+        "educazione domiciliare",
+      ],
+      "school-choice": [
+        "libertà di scelta della scuola",
+        "buono scuola",
+        "scuole private",
+        "scuole paritarie",
+        "scuole cattoliche",
+        "scuole indipendenti",
+      ],
+      universities: [
+        "università",
+        "istruzione superiore",
+        "accademia",
+        "libertà accademica",
+        "ricerca",
+      ],
+      "religion-in-schools": [
+        "insegnamento della religione",
+        "scuole statali",
+        "cristianesimo nella scuola",
+        "preghiera a scuola",
+        "insegnamento laico",
+      ],
+      "sex-education": [
+        "educazione sessuale",
+        "educazione all'affettività",
+        "diritti dei genitori",
+        "consenso",
+      ],
+      culture: [
+        "cultura",
+        "tradizione",
+        "usanze",
+        "dialetti",
+        "folklore",
+        "feste",
+        "omologazione",
+        "globalizzazione",
+      ],
+      architecture: [
+        "architettura",
+        "edifici",
+        "urbanistica",
+        "patrimonio",
+        "tutela dei beni culturali",
+        "conservazione",
+      ],
+      "free-speech": [
+        "libertà di parola",
+        "libertà di espressione",
+        "censura",
+        "discorsi d'odio",
+        "leggi sulla parola",
+        "libertà di stampa",
+        "istigazione",
+      ],
+      prisons: [
+        "carceri",
+        "carcere",
+        "detenzione",
+        "pene",
+        "punizione",
+        "rieducazione",
+        "giustizia penale",
+      ],
+      "death-penalty": ["pena di morte", "pena capitale", "esecuzione", "abolizione"],
+      firearms: [
+        "armi da fuoco",
+        "armi",
+        "controllo delle armi",
+        "legittima difesa",
+        "caccia",
+      ],
+      healthcare: [
+        "sanità",
+        "assistenza sanitaria",
+        "ospedali",
+        "medici",
+        "medicina",
+        "assicurazione sanitaria",
+      ],
+      "medical-ethics": [
+        "etica medica",
+        "bioetica",
+        "coscienza",
+        "obiezione di coscienza",
+        "ospedali cattolici",
+      ],
+      environment: [
+        "ambiente",
+        "natura",
+        "ecologia",
+        "tutela della natura",
+        "biodiversità",
+        "inquinamento",
+        "terreni agricoli",
+        "custodia del creato",
+      ],
+      energy: [
+        "energia",
+        "elettricità",
+        "rete elettrica",
+        "prezzi dell'energia",
+        "sicurezza energetica",
+        "blackout",
+      ],
+      "nuclear-power": [
+        "energia nucleare",
+        "nucleare civile",
+        "centrali nucleari",
+        "reattori",
+        "scorie nucleari",
+      ],
+      "fossil-fuels": [
+        "combustibili fossili",
+        "carbone",
+        "petrolio",
+        "gas naturale",
+        "benzina",
+        "gasolio",
+        "idrocarburi",
+      ],
+      renewables: [
+        "energie rinnovabili",
+        "solare",
+        "fotovoltaico",
+        "eolico",
+        "pale eoliche",
+        "idroelettrico",
+        "geotermia",
+      ],
+      climate: [
+        "cambiamento climatico",
+        "riscaldamento globale",
+        "carbonio",
+        "emissioni",
+        "neutralità climatica",
+        "gas serra",
+        "decarbonizzazione",
+      ],
+      defence: ["difesa", "militare", "esercito", "forze armate", "riarmo"],
+      nato: [
+        "NATO",
+        "alleanza atlantica",
+        "articolo 5",
+        "difesa collettiva",
+        "alleanze militari",
+      ],
+      russia: ["Russia", "Federazione Russa", "Mosca", "Cremlino"],
+      ukraine: ["Ucraina", "Kiev", "guerra in Ucraina", "negoziati di pace"],
+      "united-states": ["Stati Uniti", "USA", "America", "Washington", "atlantismo"],
+      china: [
+        "Cina",
+        "Repubblica popolare cinese",
+        "Pechino",
+        "catene di approvvigionamento",
+      ],
+      "israel-and-palestine": ["Israele", "Palestina", "Gaza", "Medio Oriente"],
+      "foreign-aid": [
+        "aiuti allo sviluppo",
+        "aiuti umanitari",
+        "aiuti esteri",
+        "cooperazione internazionale",
+      ],
+      sanctions: [
+        "sanzioni",
+        "embargo",
+        "congelamento dei beni",
+        "coercizione economica",
+        "restrizioni commerciali",
+      ],
+      conscription: [
+        "leva obbligatoria",
+        "servizio militare",
+        "servizio nazionale",
+        "riserva",
+        "obiezione di coscienza",
+        "coscrizione",
+      ],
+      "nuclear-weapons": [
+        "armi nucleari",
+        "armi atomiche",
+        "deterrenza nucleare",
+        "disarmo",
+        "non proliferazione",
+        "controllo degli armamenti",
+      ],
+    },
+  },
+
   entries: {
     "catholic-confessional-state": {
       title: "Stato confessionale cattolico",
@@ -177,8 +758,6 @@ export const policyText: PolicyText = {
         "Restore Europa non sostiene la conversione forzata.",
         "Questo modello non è un governo clericale diretto dell'ordinaria amministrazione statale.",
       ],
-      implementationNote:
-        "L'istituzione formale di un ordine confessionale richiederebbe una modifica costituzionale nella maggior parte degli Stati europei, ed è enunciata qui come l'ordine a cui Restore Europa tende, non come descrizione del diritto vigente.",
       keywords: [
         "Stato cattolico",
         "Stato confessionale",
@@ -374,8 +953,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "Proteggere il sacro senza criminalizzare il dubbio, il dissenso o la ricerca intellettuale.",
-      implementationNote:
-        "Diversi Stati europei hanno abrogato negli ultimi decenni le norme sulla blasfemia, sicché si tratterebbe di reintrodurre una fattispecie più ristretta anziché di conservarne una esistente.",
       keywords: ["blasfemia", "bestemmia", "ateismo", "profanazione", "vandalismo"],
     },
 
@@ -448,8 +1025,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "La famiglia, la parrocchia e le istituzioni locali devono intervenire prima della lontana burocrazia centrale, là dove sono in grado di farlo con competenza.",
-      implementationNote:
-        "Il diritto alla prestazione dipende qui dalla cittadinanza e dalla storia contributiva, non dall'etnia. Limitare le prestazioni in base alla nazionalità chiamerebbe inoltre in causa, in diversi ordinamenti europei, le norme sulla parità di trattamento dei lavoratori regolarmente residenti.",
       keywords: ["welfare", "sussidi", "assistenza sociale", "rete di protezione", "dipendenza"],
     },
 
@@ -496,8 +1071,6 @@ export const policyText: PolicyText = {
         "La protezione temporanea concessa in tempo di guerra deve restare temporanea ed essere riesaminata quando le condizioni mutano in modo sostanziale.",
         "I minori non accompagnati e le persone realmente vulnerabili ricevono tutele distinte.",
       ],
-      implementationNote:
-        "Questa impostazione dipende da un esame individuale della domanda di protezione e dal principio di non respingimento. Gli obblighi europei e internazionali vigenti limiterebbero qualunque tentativo di allontanare una persona verso un luogo in cui rischia persecuzione, tortura o un danno grave comparabile.",
       keywords: [
         "asilo",
         "rifugiati",
@@ -525,8 +1098,6 @@ export const policyText: PolicyText = {
         "Far cessare il sostegno all'integrazione dopo il rigetto definitivo e trasferire la persona nel sistema dei rimpatri.",
         "Conservare i mezzi di emergenza indispensabili e un sostegno adeguato per i bambini e per le persone realmente incapaci di mantenersi.",
       ],
-      implementationNote:
-        "In forza della Convenzione sui rifugiati del 1951, i rifugiati riconosciuti che soggiornano regolarmente in uno Stato contraente godono di tutele convenzionali in materia di lavoro e di assistenza pubblica. Una misura volta a escludere del tutto i rifugiati riconosciuti dall'assistenza pubblica coperta dalla Convenzione richiederebbe un esame degli obblighi convenzionali, e non la sola legislazione ordinaria.",
       keywords: [
         "asilo",
         "welfare",
@@ -559,8 +1130,6 @@ export const policyText: PolicyText = {
         "Mantenere i cittadini naturalizzati nel distinto quadro della revoca della cittadinanza, salvo che la cittadinanza sia stata prima legittimamente ritirata.",
         "I cittadini non possono essere espulsi dal proprio Paese.",
       ],
-      implementationNote:
-        "Lo straniero regolarmente residente gode oggi, in forza del diritto europeo dei diritti dell'uomo, di garanzie procedurali contro l'espulsione. L'allontanamento può inoltre essere precluso quando il rimpatrio esporrebbe la persona a trattamenti vietati. Il modello qui inteso è dunque rapido dopo la condanna definitiva, ma resta sindacabile in sede giurisdizionale dove obblighi vincolanti lo impongano. In base all'articolo 11 della vigente direttiva rimpatri dell'Unione, i divieti d'ingresso non devono di regola superare i cinque anni, ma possono eccederli quando la persona rappresenti una grave minaccia per l'ordine pubblico, la pubblica sicurezza o la sicurezza nazionale. Un divieto ordinario di dieci anni per l'ingresso irregolare comune andrebbe quindi oltre la regola vigente dell'Unione.",
       keywords: [
         "espulsione",
         "espulsione per reato",
@@ -620,8 +1189,6 @@ export const policyText: PolicyText = {
         "Non fare di una riverifica civica periodica un motivo automatico di espulsione di chi abbia acquisito la cittadinanza in modo regolare e onesto; la revoca successiva alla naturalizzazione è disciplinata da voci distinte.",
       ],
       limits: ["Quindici anni di residenza non garantiscono automaticamente la naturalizzazione."],
-      implementationNote:
-        "I requisiti ordinari di residenza in Europa vanno oggi dai cinque ai dieci anni: si tratterebbe dunque di allungare la prassi esistente, non di ritoccarla. Il Manifesto afferma già che la naturalizzazione deve richiedere una conoscenza sostanziale della lingua, della storia e delle istituzioni, il rispetto dell'ordine costituzionale e un legame genuino con il Paese. La presente voce raccoglie tali requisiti come standard di assimilazione del movimento.",
       keywords: [
         "naturalizzazione",
         "assimilazione",
@@ -646,8 +1213,6 @@ export const policyText: PolicyText = {
         "Chi ha una filiazione nazionale documentata o una discendenza nazionale ravvicinata può accedere a una via agevolata di rientro o di reintegrazione.",
         "La proposta di lavoro per una simile via agevolata è di circa cinque anni, anziché i quindici ordinari.",
       ],
-      implementationNote:
-        "Per discendenza si intende qui una cittadinanza o una linea familiare nazionale documentata. Non si istituiscono diritti civili distinti sulla base di ampie classificazioni razziali o etniche.",
       keywords: ["discendenza", "ascendenza", "reintegrazione", "rimpatrio", "ius sanguinis"],
     },
 
@@ -662,8 +1227,6 @@ export const policyText: PolicyText = {
         "Via ordinaria: quindici anni di residenza regolare prima di poter chiedere la naturalizzazione.",
         "Dopo la naturalizzazione: altri quattro anni prima del pieno diritto di voto.",
       ],
-      implementationNote:
-        "Negare l'elettorato a persone già cittadine richiederebbe una modifica costituzionale negli Stati in cui il voto è legato alla cittadinanza in quanto tale.",
       keywords: ["diritto di voto", "elettorato", "suffragio", "elezioni", "periodo di attesa"],
     },
 
@@ -681,8 +1244,6 @@ export const policyText: PolicyText = {
         "La naturalizzazione ordinaria, quale che ne sia la durata, non conferisce di per sé l'eleggibilità a queste cariche.",
         "Definire con precisione per legge quali cariche rientrano nella categoria riservata.",
       ],
-      implementationNote:
-        "Norme fondate sulla discendenza, sulla nascita o sull'origine etnica incontrerebbero gravi obiezioni in materia di uguaglianza e di non discriminazione nel vigente diritto europeo e internazionale dei diritti dell'uomo. Qualsiasi attuazione richiederebbe criteri giuridici di insolita precisione e, possibilmente, una modifica costituzionale o dei trattati.",
       keywords: [
         "alte cariche pubbliche",
         "presidente",
@@ -710,8 +1271,6 @@ export const policyText: PolicyText = {
       ],
       principle:
         "Le distinte nazioni europee sono comunità politiche all'interno di una più ampia civiltà europea.",
-      implementationNote:
-        "L'Europa è intesa qui in senso geografico e attraverso la rete delle sezioni nazionali del movimento, e non come appartenenza all'Unione europea.",
       keywords: ["doppia cittadinanza", "doppia nazionalità", "rinuncia", "secondo passaporto"],
     },
 
@@ -730,8 +1289,6 @@ export const policyText: PolicyText = {
         "Il tradimento e il terrorismo possono giustificare la revoca.",
         "Restore Europa è favorevole alla possibilità della revoca nei casi di eccezionale gravità anche quando ne potrebbe derivare l'apolidia.",
       ],
-      implementationNote:
-        "Il diritto internazionale ed europeo pone limiti consistenti alla possibilità di rendere apolide una persona, e l'allontanamento richiede di norma uno Stato di destinazione giuridicamente in grado di ammetterla e disposto a farlo. Questa posizione appartiene all'ordine costituzionale a cui Restore Europa tende, e richiederebbe una modifica dei trattati o della Costituzione.",
       keywords: ["revoca", "privazione della cittadinanza", "apolidia", "tradimento", "terrorismo"],
     },
 
@@ -751,8 +1308,6 @@ export const policyText: PolicyText = {
         "Non considerare il solo lungo decorso del tempo come fonte di un diritto automatico a restare quando lo status sottostante rimane temporaneo o condizionato.",
         "Applicare procedure e requisiti di prova individuali anziché l'espulsione collettiva fondata sulla sola categoria etnica o razziale.",
       ],
-      implementationNote:
-        "Il diritto europeo vigente impone al rimpatrio e all'espulsione vincoli procedurali e di tutela dei diritti dell'uomo di rilievo. La presente voce enuncia l'architettura della politica proposta; la sua attuazione richiederebbe la conformità agli impegni giuridici incompatibili, la loro modifica o il recesso da essi. Il Manifesto già esistente del movimento tratta la cittadinanza come appartenenza e non come mera residenza, e sostiene un'immigrazione controllata, compatibile con l'integrazione, la stabilità e la continuità nazionale.",
       keywords: [
         "remigrazione",
         "rimpatrio",
@@ -781,8 +1336,6 @@ export const policyText: PolicyText = {
         "Esigere il rispetto dell'ordine costituzionale legittimo senza pretendere una conformità ideologica a ogni politica di governo.",
         "Valutare l'integrazione su elementi individuali documentati anziché sulla sola razza.",
       ],
-      implementationNote:
-        "Il diritto dell'Unione sui soggiornanti di lungo periodo consente oggi agli Stati membri di imporre condizioni di integrazione e richiede risorse stabili e regolari per l'acquisizione dello status di lungo periodo. La politica separa le concezioni della nazionalità storica fondate sull'ascendenza dal criterio giuridico praticabile che accerta se un determinato residente sia integrato.",
       keywords: [
         "integrazione",
         "lingua",
@@ -812,8 +1365,6 @@ export const policyText: PolicyText = {
       limits: [
         "La presente voce non considera fraudolento ogni cittadino naturalizzato per il solo fatto che un precedente periodo di soggiorno sia stato irregolare; la frode e la regolarizzazione legittima restano concetti distinti.",
       ],
-      implementationNote:
-        "Si tratta di un potere di riesame retroattivo proposto, che eccede la stabilità normalmente riconosciuta ai provvedimenti amministrativi definitivi. Richiederebbe un'esplicita autorizzazione costituzionale, regole di prescrizione definite e garanzie procedurali.",
       keywords: [
         "regolarizzazione",
         "sanatoria",
@@ -843,8 +1394,6 @@ export const policyText: PolicyText = {
       limits: [
         "L'esatto periodo di tolleranza dopo la perdita del lavoro dovrebbe essere fissato dalla legge di attuazione anziché irrigidito nel principio costituzionale.",
       ],
-      implementationNote:
-        "Le norme dell'Unione sui soggiornanti di lungo periodo richiedono risorse stabili e regolari per acquisire tale status, ma il diritto vigente riconosce anche ai soggiornanti di lungo periodo tutele significative e non consente l'espulsione per soli motivi economici. Il quadro proposto dal movimento andrebbe oltre per talune categorie di soggiorno degli stranieri.",
       keywords: [
         "autosufficienza",
         "lavoro",
@@ -871,8 +1420,6 @@ export const policyText: PolicyText = {
         "Non fare della semplice disoccupazione, di un dissenso politico o di un test civico non superato un motivo automatico di revoca di per sé.",
         "Trascorsi i dieci anni, si applicano le ordinarie tutele della cittadinanza, fatti salvi i motivi permanenti fondati sulla frode e gli altri motivi eccezionali di revoca adottati altrove nel catalogo.",
       ],
-      implementationNote:
-        "Si tratta di una deroga costituzionale proposta rispetto agli ordinamenti che, a ogni fine di privazione, trattano la naturalizzazione come da subito indistinguibile dalla cittadinanza per nascita. Gli strumenti internazionali vigenti in materia di cittadinanza limitano la privazione, soprattutto dove essa produrrebbe apolidia; tali contrasti richiederebbero un trattamento costituzionale e pattizio esplicito.",
       keywords: [
         "cittadinanza in prova",
         "naturalizzazione",
@@ -899,8 +1446,6 @@ export const policyText: PolicyText = {
         "Ammettere che un'assenza prolungata faccia cessare lo status di soggiorno; la legge ordinaria di attuazione dovrebbe fissare la soglia per tipo di titolo entro un intervallo di circa due-cinque anni.",
         "Comunicare i motivi e assicurare una possibilità individuale di contestare la decisione.",
       ],
-      implementationNote:
-        "Il diritto vigente dell'Unione tutela più intensamente i soggiornanti di lungo periodo. L'attuale direttiva sui soggiornanti di lungo periodo ammette la perdita dello status dopo assenze determinate e consente l'espulsione solo in presenza di una minaccia effettiva e sufficientemente grave per l'ordine pubblico o la sicurezza; considerazioni economiche da sole non possono giustificare l'espulsione. La politica proposta dal movimento richiederebbe dunque modifiche là dove è più ampia delle regole vigenti dell'Unione.",
       keywords: [
         "permesso di soggiorno",
         "ritiro",
@@ -928,8 +1473,6 @@ export const policyText: PolicyText = {
         "Coordinarsi, ove necessario, con le autorità del Paese di destinazione o con organizzazioni riconosciute per ottenere i documenti di viaggio e l'accoglienza.",
         "Preferire la partenza volontaria al trattenimento o all'allontanamento forzato dove non sussistano rischi seri di fuga, di reato o per la sicurezza.",
       ],
-      implementationNote:
-        "La presente voce è un meccanismo di attuazione e non un giudizio morale sulla persona che rientra. Il suo scopo è rendere il rimpatrio più rapido, meno costoso e più ordinato dove la cooperazione sia possibile.",
       keywords: [
         "rimpatrio volontario",
         "reinserimento",
@@ -955,8 +1498,6 @@ export const policyText: PolicyText = {
         "Dove la cittadinanza sia controversa, procedere al suo accertamento anziché presumere che il solo luogo di nascita provi l'obbligo di uno Stato di accogliere la persona.",
         "Non usare la sola ascendenza come criterio di attivazione penale; la distinzione che opera è la cittadinanza acquisita unita a una condotta qualificata.",
       ],
-      implementationNote:
-        "La Convenzione del 1961 sulla riduzione dei casi di apolidia vieta in linea generale la privazione della cittadinanza dove questa renderebbe la persona apolide, fatte salve eccezioni definite, tra cui la cittadinanza ottenuta con frode e taluni motivi conservati ai sensi dell'articolo 8. Un potere più ampio richiederebbe un trattamento esplicito di tali impegni pattizi. Distruggere un passaporto non cancella di per sé la cittadinanza; il passaporto è prova della cittadinanza, non la sua fonte giuridica.",
       keywords: [
         "cittadinanza acquisita",
         "revoca",
@@ -988,8 +1529,6 @@ export const policyText: PolicyText = {
         "Consentire ai familiari di partire insieme dove i genitori siano allontanati e i figli abbiano il diritto di accompagnarli; le questioni autonome di cittadinanza, affidamento e protezione dell'infanzia richiedono una decisione individuale.",
         "Applicare le nuove regole costituzionali in materia di immigrazione agli status esistenti dove la legge preveda espressamente un riesame retroattivo, nel rispetto delle procedure di riesame enunciate altrove in questo complesso di voci.",
       ],
-      implementationNote:
-        "Il diritto dell'Unione in materia di rimpatri limita oggi il trattenimento al periodo appropriato più breve, finché le operazioni di allontanamento sono condotte con la dovuta diligenza, e prevede durate massime e garanzie specifiche. Il modello misto proposto riprende la sequenza generale del trattenimento seguito da uno status limitato quando l'allontanamento immediato è impossibile, mentre la durata esatta dipenderebbe dall'ordinamento infine adottato. Il luogo di nascita è un elemento utile, ma non prova di per sé la cittadinanza né un obbligo incondizionato di un Paese di riammettere una persona. La riammissione dipende dal diritto della cittadinanza, dalle prove e dagli accordi applicabili. È veramente apolide chi nessuno Stato considera proprio cittadino in applicazione della sua legge. Il sistema proposto richiede perciò l'accertamento della cittadinanza, anziché presumere che l'apolidia possa sempre essere eliminata attribuendo la persona al Paese di nascita.",
       keywords: [
         "procedura di rimpatrio",
         "riammissione",
@@ -1033,8 +1572,6 @@ export const policyText: PolicyText = {
         "Preservare la sovranità nazionale, l'identità costituzionale e la continuità storica.",
         "Perseguire un quadro europeo di civiltà che riconosca l'eredità cristiana dell'Europa preservando al tempo stesso l'autonomia politica nazionale.",
       ],
-      implementationNote:
-        "L'articolo 5 del Trattato sull'Unione europea riconosce già i principi di attribuzione, di sussidiarietà e di proporzionalità. Questa posizione esigerebbe un'applicazione sostanzialmente più rigorosa di quei principi e una riforma consistente dei trattati e delle istituzioni.",
       keywords: [
         "Unione europea",
         "UE",
@@ -1189,8 +1726,6 @@ export const policyText: PolicyText = {
         "Ricorrere, dove opportuno, agli assegni familiari o alle prestazioni per i figli, perché crescere dei figli non comporti una penalizzazione economica irragionevole.",
         "Tenere conto della sostenibilità dell'impresa, della produttività e delle opportunità di impiego.",
       ],
-      implementationNote:
-        "Il Catechismo descrive la giusta retribuzione come il frutto legittimo del lavoro e afferma che una retribuzione equa deve tenere conto dei bisogni, dei contributi, della produttività, della situazione dell'impresa e del bene comune. La Laborem exercens collega esplicitamente la giusta remunerazione alla possibilità di fondare e mantenere una famiglia.",
       keywords: [
         "salario minimo",
         "giusta retribuzione",
@@ -1226,8 +1761,6 @@ export const policyText: PolicyText = {
       limits: [
         "Le aliquote esatte non sono prescritte e restano una questione di attuazione nazionale.",
       ],
-      implementationNote:
-        "La dottrina sociale della Chiesa considera il pagamento delle imposte parte della solidarietà, esigendo al tempo stesso un'applicazione ragionevole ed equa, l'integrità nella spesa pubblica e un'attenzione particolare alle famiglie.",
       keywords: [
         "tasse",
         "fiscalità",
@@ -1257,8 +1790,6 @@ export const policyText: PolicyText = {
         "Mantenere la sostenibilità finanziaria, perché una generazione non imponga alla successiva obblighi impossibili da onorare.",
         "Consentire variazioni nazionali nell'equilibrio fra previdenza pubblica, di categoria e privata.",
       ],
-      implementationNote:
-        "Il modello applica la solidarietà e la sussidiarietà: una soglia pubblica là dove le istituzioni inferiori non possono assicurare una protezione adeguata, unita alle istituzioni di categoria, al risparmio delle famiglie e alla proprietà privata.",
       keywords: [
         "pensioni",
         "pensionamento",
@@ -1290,8 +1821,6 @@ export const policyText: PolicyText = {
         "Sostenere le cooperative e i modelli di proprietà radicati sul territorio dove ampliano una proprietà effettiva.",
         "Preferire tutele proporzionate degli inquilini ai sistemi di calmiere degli affitti che rendono economicamente impossibile costruire nuove abitazioni.",
       ],
-      implementationNote:
-        "Il Manifesto afferma già che la casa deve servire all'abitare e alla comunità anziché funzionare in primo luogo come un'attività finanziaria in rivalutazione. I limiti di dettaglio vanno calibrati a livello nazionale e locale.",
       keywords: [
         "casa",
         "proprietà della casa",
@@ -1322,8 +1851,6 @@ export const policyText: PolicyText = {
         "Impedire che i datori di lavoro controllino organizzazioni di lavoratori solo apparentemente indipendenti.",
         "Ammettere una rappresentanza realmente plurale anziché un unico sindacato controllato dallo Stato.",
       ],
-      implementationNote:
-        "Il Manifesto sostiene espressamente le forme moderne delle arti e dei mestieri, le camere professionali e le associazioni di categoria, respingendo al tempo stesso gli organismi di mestiere come strumenti di uno Stato onnipotente. La dottrina cattolica riconosce inoltre l'organizzazione sindacale e lo sciopero proporzionato.",
       keywords: [
         "sindacati",
         "arti e mestieri",
@@ -1446,8 +1973,6 @@ export const policyText: PolicyText = {
         "Progettare la verifica dell'età in modo da ridurre al minimo la raccolta di dati identificativi.",
         "Adottare un quadro generale di accesso fortemente limitato sotto i 13 anni, forti tutele parentali e dei minori fra i 13 e i 15, un accesso più ampio ma ancora protetto fra i 16 e i 17, e le regole ordinarie degli adulti a 18.",
       ],
-      implementationNote:
-        "Il Manifesto afferma espressamente che i bambini devono essere protetti dalle industrie il cui modello di profitto dipende dal massimizzare la dipendenza psicologica. Il meccanismo preciso di verifica dell'età resta una questione di attuazione.",
       keywords: [
         "social media",
         "bambini",
@@ -1476,8 +2001,6 @@ export const policyText: PolicyText = {
         "Vietare i sistemi di credito sociale e i punteggi comportamentali di natura politica o religiosa.",
         "Evitare di collegare automaticamente i dati sanitari, finanziari, scolastici, di viaggio e di comunicazione in un unico profilo statale universale.",
       ],
-      implementationNote:
-        "Il Manifesto tutela esplicitamente l'identificazione non digitale dove praticabile e respinge una dipendenza tecnologica illimitata.",
       keywords: [
         "identità digitale",
         "identità elettronica",
@@ -1505,8 +2028,6 @@ export const policyText: PolicyText = {
         "Vietare l'uso delle valute digitali di banca centrale per sistemi di credito sociale.",
         "Preservare transazioni realmente private, entro regole proporzionate di contrasto alla criminalità.",
       ],
-      implementationNote:
-        "Il Manifesto non nomina le valute digitali di banca centrale, ma garantisce esplicitamente un accesso reale al denaro contante e respinge la dipendenza tecnologica e la sorveglianza non necessarie.",
       keywords: [
         "CBDC",
         "euro digitale",
@@ -1533,8 +2054,6 @@ export const policyText: PolicyText = {
         "Adottare un trattamento fiscale chiaro e amministrativamente ragionevole.",
         "Non vietare le tecnologie che preservano la riservatezza per il solo fatto che la riservatezza sia tecnicamente possibile.",
       ],
-      implementationNote:
-        "Le criptovalute non sono trattate specificamente nel Manifesto. Questa posizione discende dalla proprietà privata, dall'opposizione al dominio finanziario concentrato e dalla subordinazione della tecnica, non da un divieto tecnologico.",
       keywords: [
         "criptovalute",
         "Bitcoin",
@@ -1560,8 +2079,6 @@ export const policyText: PolicyText = {
         "Non catalogare abitualmente per via biometrica le riunioni politiche o religiose.",
         "Impedire alle imprese private di costruire profili biometrici permanenti senza una solida base legale.",
       ],
-      implementationNote:
-        "Il Manifesto non nomina il riconoscimento facciale, ma tutela espressamente spazi privati reali, liberi da una sorveglianza permanente.",
       keywords: [
         "riconoscimento facciale",
         "biometria",
@@ -1587,8 +2104,6 @@ export const policyText: PolicyText = {
         "Non fare della sorveglianza di massa l'architettura predefinita delle infrastrutture di comunicazione.",
         "Mantenere un controllo rigoroso sugli accessi delle forze dell'ordine e dei servizi di informazione.",
       ],
-      implementationNote:
-        "La conservazione dei metadati non è nominata direttamente nel Manifesto. Questa posizione discende dal suo esplicito rifiuto della sorveglianza permanente e della centralizzazione tecnologica.",
       keywords: [
         "metadati",
         "conservazione dei dati",
@@ -1615,8 +2130,6 @@ export const policyText: PolicyText = {
         "Respingere i programmi eugenetici di Stato.",
         "Proteggere l'informazione genetica come dato personale altamente sensibile.",
       ],
-      implementationNote:
-        "Il Manifesto non risolve nel dettaglio la questione dell'ingegneria genetica. La posizione discende dall'antropologia cattolica, dalla protezione della vita fin dal concepimento e dal principio per cui una capacità tecnica non crea di per sé una legittimità morale.",
       keywords: [
         "ingegneria genetica",
         "editing genetico",
@@ -1645,8 +2158,6 @@ export const policyText: PolicyText = {
         "Imporre restrizioni stringenti alle interfacce cervello-computer che compromettono la riservatezza mentale o l'autonomia.",
         "Vietare in linea generale il potenziamento ereditabile delle generazioni future.",
       ],
-      implementationNote:
-        "L'antropologia del Manifesto limita fortemente i progetti transumanisti, ma l'attuazione di dettaglio è derivata anziché esplicita.",
       keywords: [
         "transumanesimo",
         "potenziamento umano",
@@ -1682,8 +2193,6 @@ export const policyText: PolicyText = {
         "Verifiche periodiche possono accertare che i bambini ricevano effettivamente un'istruzione.",
         "Lo Stato non deve usare la vigilanza per imporre una conformità ideologica.",
       ],
-      implementationNote:
-        "L'istruzione parentale è oggi vietata o fortemente limitata in diversi Stati europei: in quegli ordinamenti servirebbe dunque una modifica legislativa.",
       keywords: ["istruzione parentale", "scuola a casa", "genitori", "programmi scolastici"],
     },
 
@@ -1747,8 +2256,6 @@ export const policyText: PolicyText = {
         "Il laicismo non deve essere presentato come l'unica visione del mondo intellettualmente legittima.",
         "La storia nazionale ed europea deve essere insegnata come un'eredità e non come una semplice somma di colpe.",
       ],
-      implementationNote:
-        "Diversi Stati europei impongono in Costituzione la neutralità confessionale nell'istruzione pubblica: questa posizione imporrebbe loro di rimetterla in discussione.",
       keywords: [
         "scuola pubblica",
         "insegnamento della religione",
@@ -1880,8 +2387,6 @@ export const policyText: PolicyText = {
       limits: [
         "Gli intervalli numerici esatti di pena restano materia di una successiva stesura del codice penale, anziché essere inventati senza una base documentata.",
       ],
-      implementationNote:
-        "La dottrina già enunciata nel catalogo in materia di carceri combina pena proporzionata, protezione della società, riparazione e riabilitazione.",
       keywords: [
         "commisurazione della pena",
         "pena",
@@ -1908,8 +2413,6 @@ export const policyText: PolicyText = {
         "Nessuna esecuzione di minori.",
         "Inflitta soltanto da una legittima autorità civile, e mai usata per semplice vendetta.",
       ],
-      implementationNote:
-        "Si tratta di uno scostamento esplicito dalla posizione abolizionista contemporanea del Catechismo cattolico, in favore della più antica ammissione tradizionale. La pena capitale è inoltre vietata in tutto il Consiglio d'Europa: sarebbe dunque necessario recedere dagli impegni convenzionali vigenti o modificarli.",
       keywords: ["pena di morte", "pena capitale", "esecuzione", "omicidio", "abolizione"],
     },
 
@@ -1929,8 +2432,6 @@ export const policyText: PolicyText = {
         "Mantenere disponibile l'ergastolo anche là dove un reato rientri tecnicamente fra quelli punibili con la pena capitale.",
         "Nessuna esecuzione di minori.",
       ],
-      implementationNote:
-        "Questa posizione estende quella già assunta nel catalogo sulla pena capitale oltre i delitti fondati sull'omicidio. Resta uno scostamento esplicito dalla posizione abolizionista contemporanea del Catechismo cattolico. La pena capitale è vietata nell'attuale sistema del Consiglio d'Europa, anche in forza del Protocollo n. 13 alla CEDU per gli Stati che ne sono vincolati: l'attuazione richiederebbe dunque una profonda modifica legislativa e dei trattati.",
       keywords: [
         "pena di morte",
         "pena capitale",
@@ -2034,8 +2535,6 @@ export const policyText: PolicyText = {
         "Proteggere i paesaggi e le comunità locali.",
         "Ammettere un pluralismo tecnologico anziché imporre ovunque un'unica fonte energetica.",
       ],
-      implementationNote:
-        "Il Manifesto stabilisce la custodia dell'ambiente e l'indipendenza strategica, ma non precisa un mix energetico di dettaglio.",
       keywords: [
         "sicurezza energetica",
         "elettricità",
@@ -2062,8 +2561,6 @@ export const policyText: PolicyText = {
         "Permettere che il nucleare faccia parte di un sistema diversificato a basse emissioni.",
         "Non imporre il ricorso al nucleare dove le condizioni locali rendono più razionale un altro mix.",
       ],
-      implementationNote:
-        "Si tratta di un giudizio politico derivato e non di un impegno esplicito del Manifesto. Deve restare soggetto a verifiche tecniche di sicurezza, di gestione delle scorie ed economiche.",
       keywords: [
         "centrali nucleari",
         "energia nucleare",
@@ -2090,8 +2587,6 @@ export const policyText: PolicyText = {
         "Abbandonare gli usi particolarmente dannosi quando esistono sostituti affidabili ed economicamente realistici.",
         "Evitare calendari di transizione che distruggano capacità industriali essenziali o rendano inaccessibile l'energia di base.",
       ],
-      implementationNote:
-        "Il Manifesto esige la custodia dell'ambiente ma non precisa date di uscita dai combustibili fossili.",
       keywords: [
         "combustibili fossili",
         "carbone",
@@ -2117,8 +2612,6 @@ export const policyText: PolicyText = {
         "Sostenere, dove è praticabile, la proprietà locale e comunitaria degli impianti energetici.",
         "Non imporre nuove installazioni al solo scopo di raggiungere obiettivi numerici, senza riguardo all'affidabilità e ai costi locali.",
       ],
-      implementationNote:
-        "Questa posizione discende dai principi di custodia e di misura d'uomo del Manifesto, ma là non è precisata esplicitamente.",
       keywords: [
         "energie rinnovabili",
         "solare",
@@ -2193,8 +2686,6 @@ export const policyText: PolicyText = {
         "Respingere le guerre ideologiche intese a rifare società altrui.",
         "Mantenere aperta, nel lungo periodo, la riconsiderazione dell'appartenenza alla NATO, se l'indipendenza strategica potrà essere assicurata attraverso una struttura difensiva più adeguata.",
       ],
-      implementationNote:
-        "L'articolo 5 del Trattato NATO considera un attacco armato contro un membro come un attacco contro tutti e obbliga ciascun alleato a prestare assistenza, lasciando però a ciascuno di determinare l'azione che ritiene necessaria. Il Manifesto sostiene l'indipendenza strategica ma non impone di per sé l'uscita dalla NATO.",
       keywords: [
         "NATO",
         "articolo 5",
@@ -2223,8 +2714,6 @@ export const policyText: PolicyText = {
         "Ammettere risposte proporzionate a gravi violazioni della pace o ad attacchi gravi contro popolazioni innocenti.",
         "Cercare soluzioni negoziate dove è realistico.",
       ],
-      implementationNote:
-        "Si tratta di una dottrina di non allineamento, non di un giudizio di fatto su singole controversie in corso.",
       keywords: [
         "Russia",
         "Federazione Russa",
@@ -2252,8 +2741,6 @@ export const policyText: PolicyText = {
         "Distinguere l'assistenza umanitaria ai civili dalla partecipazione diretta al conflitto militare.",
         "Evitare un'ostilità permanente verso il popolo ucraino o verso quello russo.",
       ],
-      implementationNote:
-        "Questa posizione applica la forte presunzione del Manifesto contraria alla guerra non necessaria e la sua preferenza per l'indipendenza strategica.",
       keywords: [
         "Ucraina",
         "Russia",
@@ -2282,7 +2769,6 @@ export const policyText: PolicyText = {
         "Mantenere l'indipendenza culturale da un'omologazione commerciale importata.",
         "Respingere l'allineamento automatico alle priorità di politica estera americane.",
       ],
-      implementationNote: "La linea è cooperazione senza dipendenza, non ostilità né isolamento.",
       keywords: [
         "Stati Uniti",
         "America",
@@ -2311,7 +2797,6 @@ export const policyText: PolicyText = {
         "Cooperare nella scienza e nel commercio dove è opportuno.",
         "Evitare confronti militari non necessari dove la sicurezza europea non è direttamente in gioco.",
       ],
-      implementationNote: "La dottrina è: commercio dove è utile, indipendenza dove è necessaria.",
       keywords: [
         "Cina",
         "RPC",
@@ -2341,8 +2826,6 @@ export const policyText: PolicyText = {
         "Sostenere gli sforzi diplomatici realistici capaci di ridurre la violenza.",
         "Non consentire in Europa intimidazioni settarie importate né violenza politica.",
       ],
-      implementationNote:
-        "Questo è non allineamento, non indifferenza verso i danni ai civili o verso gli obblighi umanitari internazionali. La restrizione sulle armi vale per ogni parte senza eccezioni: discende dalla presunzione contraria ad alimentare un conflitto di cui l'Europa non è parte, e non è una misura diretta contro un singolo Stato.",
       keywords: [
         "Israele",
         "Palestina",
@@ -2371,8 +2854,6 @@ export const policyText: PolicyText = {
         "Consentire il sostegno alla medicina, alla sicurezza alimentare, all'acqua potabile e alla ricostruzione dove è dimostrabilmente efficace.",
         "Mantenere gli aiuti subordinati ai legittimi obblighi di bilancio interni.",
       ],
-      implementationNote:
-        "Il Manifesto non precisa i bilanci né i meccanismi degli aiuti internazionali. Questa posizione discende dalla prudenza, dalla preoccupazione umanitaria e dalla presunzione contraria all'intervento ideologico.",
       keywords: [
         "aiuti internazionali",
         "aiuti umanitari",
@@ -2400,8 +2881,6 @@ export const policyText: PolicyText = {
         "Mantenere esenzioni umanitarie per i beni civili essenziali ovunque sia praticabile.",
         "Riservare le sanzioni economiche molto estese alle circostanze di eccezionale gravità.",
       ],
-      implementationNote:
-        "Questa posizione applica la proporzionalità e la prudenza alla coercizione non militare. Non istituisce una politica sanzionatoria automatica verso alcuno Stato determinato.",
       keywords: [
         "sanzioni",
         "embargo",
@@ -2429,8 +2908,6 @@ export const policyText: PolicyText = {
         "Mantenere le forze armate soggette a limiti morali e giuridici e respingere gli ordini manifestamente illegittimi.",
         "Rafforzare l'educazione fisica scolastica con una preparazione atletica seria e progressiva, il nuoto, il primo soccorso, l'orientamento, la competenza in ambiente naturale e nozioni di protezione civile adeguate all'età, con ragionevoli adattamenti per condizioni mediche e disabilità.",
       ],
-      implementationNote:
-        "La dottrina sociale della Chiesa riconosce la legittima difesa nazionale e insieme l'obiezione di coscienza e i limiti morali alla condotta delle forze armate.",
       keywords: [
         "coscrizione",
         "servizio militare",
@@ -2462,8 +2939,6 @@ export const policyText: PolicyText = {
         "Opporsi alla proliferazione verso ulteriori Stati dotati di armi nucleari.",
         "Tenere distinta la politica sull'energia nucleare da quella sulle armi nucleari.",
       ],
-      implementationNote:
-        "Papa Francesco ha ripetutamente definito immorali tanto l'uso quanto il possesso delle armi nucleari e ha chiesto il disarmo. La posizione adottata segue questo indirizzo cattolico contemporaneo.",
       keywords: [
         "armi nucleari",
         "disarmo nucleare",

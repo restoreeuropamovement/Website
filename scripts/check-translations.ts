@@ -57,6 +57,26 @@ function isPluralForms(value: object): boolean {
   return keys.length > 0 && keys.includes("other") && keys.every((k) => PLURAL_CATEGORIES.has(k));
 }
 
+/**
+ * Lists whose length is a property of the language, not of the content.
+ *
+ * "A list must have as many items as the English one" exists because a
+ * commitment dropped in translation is the movement saying something
+ * different in German. The policy search's synonym groups are the one list on
+ * the site that is never rendered: they are the words a reader of a given
+ * language might type for a subject, and German reaches with one compound
+ * what English needs three words for. Holding them to the English count would
+ * force a translator to pad.
+ *
+ * What is still required is that a group is a non-empty list of words.
+ * `scripts/check-search.ts` checks the part that matters — that some word in
+ * each group is one the catalogue actually uses in that language, so the
+ * group reaches an entry rather than nothing.
+ */
+function isVocabularyList(where: string): boolean {
+  return where.includes(".search.synonyms.");
+}
+
 function compare(where: string, english: unknown, translated: unknown): void {
   if (typeof english === "string") {
     if (typeof translated !== "string") {
@@ -82,6 +102,14 @@ function compare(where: string, english: unknown, translated: unknown): void {
   if (Array.isArray(english)) {
     if (!Array.isArray(translated)) {
       fail(where, "is not a list, English has one");
+      return;
+    }
+    if (isVocabularyList(where)) {
+      if (translated.length === 0) {
+        fail(where, "is empty; a synonym group needs the words of its own language");
+      } else if (translated.some((item) => typeof item !== "string" || item.trim() === "")) {
+        fail(where, "has an item that is not a word");
+      }
       return;
     }
     if (english.length !== translated.length) {

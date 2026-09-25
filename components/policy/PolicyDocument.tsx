@@ -10,7 +10,7 @@ import { localePath } from "@/lib/i18n";
 import {
   getActivePolicyCategories,
   getActivePolicyStatuses,
-  queryPolicyEntries,
+  runPolicyQuery,
   type PolicyQuery,
 } from "@/lib/policy";
 import { formatDate } from "@/lib/utils";
@@ -25,7 +25,7 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
   const { locale, meta, labels, index } = edition;
   const { q, category, status } = query;
 
-  const results = queryPolicyEntries(edition, query);
+  const { entries: results, suggestions, ranked } = runPolicyQuery(edition, query);
   const total = edition.entries.length;
   const categories = getActivePolicyCategories(edition);
   const statuses = getActivePolicyStatuses(edition);
@@ -129,6 +129,29 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
             </Link>
             .
           </p>
+        ) : ranked ? (
+          /*
+            A text search returns one list in relevance order. Putting it back
+            under the ten section headings would sort the best match to
+            wherever its section happens to fall, which is the ordering the
+            ranking exists to replace. Browsing — no query, or a section or
+            status filter alone — keeps the editorial sequence below.
+          */
+          <section aria-labelledby="relevance-heading" className="mt-12">
+            <h2
+              id="relevance-heading"
+              className="border-t border-hairline pt-8 font-serif text-[0.9375rem] text-muted"
+            >
+              {index.relevanceHeading}
+            </h2>
+            <ul className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {results.map((entry) => (
+                <li key={entry.slug} className="flex">
+                  <PolicyCard edition={edition} entry={entry} className="flex-1" />
+                </li>
+              ))}
+            </ul>
+          </section>
         ) : (
           <div className="mt-12 flex flex-col gap-16 lg:gap-20">
             {categories.map((section) => {
@@ -167,6 +190,36 @@ export function PolicyDocument({ edition, query }: PolicyDocumentProps) {
             })}
           </div>
         )}
+
+        {/*
+          The nearest entries, when the query matched little or nothing. A
+          search that finds no position on a reader's issue is how somebody
+          concludes the movement has none, so the page answers with what it
+          does hold on the words it could recognise rather than with silence.
+        */}
+        {suggestions.length > 0 ? (
+          <section
+            aria-labelledby="suggestions-heading"
+            className="mt-16 border-t border-hairline pt-10"
+          >
+            <h2
+              id="suggestions-heading"
+              className="font-serif text-display-3 font-normal text-ink"
+            >
+              {index.suggestions.heading}
+            </h2>
+            <p className="mt-4 max-w-(--container-reading) text-reading leading-relaxed text-body/92">
+              {index.suggestions.body}
+            </p>
+            <ul className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {suggestions.map((entry) => (
+                <li key={entry.slug} className="flex">
+                  <PolicyCard edition={edition} entry={entry} className="flex-1" />
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         {!filtered && index.openQueue.items.length > 0 ? (
           <Queue
