@@ -152,23 +152,6 @@ export const aboutText: AboutText = {
     },
   },
 
-  leadershipHeading: "Personen",
-  leadershipNote:
-    "Es wurden keine Amtsträger bestellt, und wir veröffentlichen keine Lebensläufe von Menschen, die diese Ämter noch nicht innehaben. Die folgenden Rollen beschreiben den Aufbau, den eine gebildete Organisation ausfüllen wird, samt dem, wofür jede einstehen wird.",
-
-  leadership: {
-    leader: {
-      role: "Vorsitzender",
-      remit:
-        "Politische Ausrichtung, Vertretung der Bewegung und Rechenschaft gegenüber den Mitgliedern.",
-    },
-    "co-leader": {
-      role: "Stellvertretender Vorsitzender",
-      remit:
-        "Teilt die politische Ausrichtung mit dem Vorsitzenden, tritt bei Bedarf an seine Stelle und verantwortet Organisation und inneres Verhalten der Bewegung.",
-    },
-  },
-
   actions: {
     getInvolved: "Mitmachen",
     contact: "Kontakt",

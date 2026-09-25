@@ -152,22 +152,6 @@ export const aboutText: AboutText = {
     },
   },
 
-  leadershipHeading: "Osoby",
-  leadershipNote:
-    "Nie powołano żadnych funkcyjnych i nie będziemy publikować życiorysów osób, które jeszcze tych stanowisk nie zajmują. Poniższe role opisują strukturę, którą wypełni ukształtowana organizacja, wraz z tym, za co każda z nich będzie odpowiadać.",
-
-  leadership: {
-    leader: {
-      role: "Przewodniczący",
-      remit: "Kierunek polityczny, reprezentowanie ruchu i odpowiedzialność przed członkami.",
-    },
-    "co-leader": {
-      role: "Wiceprzewodniczący",
-      remit:
-        "Dzieli kierunek polityczny z przewodniczącym, zastępuje go w razie potrzeby i odpowiada za organizację oraz wewnętrzne postępowanie ruchu.",
-    },
-  },
-
   actions: {
     getInvolved: "Włącz się",
     contact: "Kontakt",

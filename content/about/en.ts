@@ -152,22 +152,6 @@ export const aboutText: AboutText = {
     },
   },
 
-  leadershipHeading: "People",
-  leadershipNote:
-    "No officers have been appointed, and we will not publish biographies of people who do not yet hold these posts. The roles below describe the structure a formed organisation will fill, together with what each will be answerable for.",
-
-  leadership: {
-    leader: {
-      role: "Leader",
-      remit: "Political direction, representation of the movement, and accountability to members.",
-    },
-    "co-leader": {
-      role: "Co-Leader",
-      remit:
-        "Shares political direction with the Leader, stands in their place when required, and answers for the movement's organisation and internal conduct.",
-    },
-  },
-
   actions: {
     getInvolved: "Get involved",
     contact: "Contact",

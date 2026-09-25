@@ -48,25 +48,6 @@ export function AboutDocument({
               </section>
             ))}
 
-            <section aria-labelledby="people-heading" className="border-t border-hairline pt-8">
-              <h2
-                id="people-heading"
-                className="mb-4 font-serif text-display-3 font-normal text-ink"
-              >
-                {edition.leadershipHeading}
-              </h2>
-              <p className="mb-8 text-reading text-body/92">{edition.leadershipNote}</p>
-
-              <ul className="flex flex-col">
-                {edition.leadership.map((slot) => (
-                  <li key={slot.role} className="border-t border-hairline py-5">
-                    <h3 className="font-serif text-[1.25rem] text-ink">{slot.role}</h3>
-                    <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">{slot.remit}</p>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
             <p className="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-hairline pt-8 text-[0.9375rem]">
               <Link
                 href={localePath(locale, routes.join)}

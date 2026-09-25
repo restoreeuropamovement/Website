@@ -20,14 +20,3 @@ export const aboutStructure = [
 
 export type AboutSectionId = (typeof aboutStructure)[number];
 
-/**
- * How many leadership slots the page renders.
- *
- * The roles themselves are words and live in the language files; that there
- * are two of them, in this order, is structure. No leadership has been
- * appointed and no biographies are invented — these render as empty slots
- * until somebody actually holds them.
- */
-export const leadershipStructure = ["leader", "co-leader"] as const;
-
-export type LeadershipSlotId = (typeof leadershipStructure)[number];

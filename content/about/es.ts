@@ -152,23 +152,6 @@ export const aboutText: AboutText = {
     },
   },
 
-  leadershipHeading: "Personas",
-  leadershipNote:
-    "No se ha nombrado a ningún cargo, y no publicaremos biografías de personas que aún no ocupan estos puestos. Los papeles siguientes describen la estructura que llenará una organización ya constituida, junto con aquello de lo que cada uno responderá.",
-
-  leadership: {
-    leader: {
-      role: "Presidente",
-      remit:
-        "Dirección política, representación del movimiento y rendición de cuentas ante los miembros.",
-    },
-    "co-leader": {
-      role: "Copresidente",
-      remit:
-        "Comparte la dirección política con el presidente, ocupa su lugar cuando es necesario y responde de la organización y la conducta interna del movimiento.",
-    },
-  },
-
   actions: {
     getInvolved: "Participar",
     contact: "Contacto",

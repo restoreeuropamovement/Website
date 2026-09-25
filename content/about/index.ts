@@ -2,12 +2,7 @@ import { createDictionary } from "@/lib/dictionary";
 import type { ContentBlock } from "@/lib/content-types";
 import type { Locale } from "@/lib/i18n";
 import { aboutText as englishText } from "./en";
-import {
-  aboutStructure,
-  leadershipStructure,
-  type AboutSectionId,
-  type LeadershipSlotId,
-} from "./structure";
+import { aboutStructure, type AboutSectionId } from "./structure";
 
 /**
  * The about page, and its translations.
@@ -17,18 +12,13 @@ import {
  * — which `lib/inline.tsx` resolves against `routes` and rewrites for the
  * reader's language, so no translation contains a URL and none can rot.
  */
-export { aboutStructure, leadershipStructure } from "./structure";
-export type { AboutSectionId, LeadershipSlotId } from "./structure";
+export { aboutStructure } from "./structure";
+export type { AboutSectionId } from "./structure";
 
 /** One section's words. No id — that is structural. */
 export interface AboutSectionText {
   readonly title: string;
   readonly body: readonly ContentBlock[];
-}
-
-export interface LeadershipSlotText {
-  readonly role: string;
-  readonly remit: string;
 }
 
 export interface AboutText {
@@ -42,9 +32,6 @@ export interface AboutText {
   /** Heading above the in-page table of contents. */
   readonly onThisPage: string;
   readonly sections: Record<AboutSectionId, AboutSectionText>;
-  readonly leadershipHeading: string;
-  readonly leadershipNote: string;
-  readonly leadership: Record<LeadershipSlotId, LeadershipSlotText>;
   readonly actions: {
     readonly getInvolved: string;
     readonly contact: string;
@@ -59,9 +46,6 @@ export interface AboutEdition {
   readonly meta: AboutText["meta"];
   readonly onThisPage: string;
   readonly sections: readonly AboutSection[];
-  readonly leadershipHeading: string;
-  readonly leadershipNote: string;
-  readonly leadership: readonly LeadershipSlotText[];
   readonly actions: AboutText["actions"];
 }
 
@@ -78,9 +62,6 @@ function edition(text: AboutText): AboutEdition {
     meta: text.meta,
     onThisPage: text.onThisPage,
     sections: aboutStructure.map((id) => ({ id, ...text.sections[id] })),
-    leadershipHeading: text.leadershipHeading,
-    leadershipNote: text.leadershipNote,
-    leadership: leadershipStructure.map((id) => text.leadership[id]),
     actions: text.actions,
   };
 }

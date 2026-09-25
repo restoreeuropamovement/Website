@@ -152,23 +152,6 @@ export const aboutText: AboutText = {
     },
   },
 
-  leadershipHeading: "Personnes",
-  leadershipNote:
-    "Aucun responsable n'a été nommé, et nous ne publierons pas la biographie de personnes qui n'occupent pas encore ces postes. Les rôles ci-dessous décrivent la structure qu'une organisation constituée remplira, avec ce dont chacun répondra.",
-
-  leadership: {
-    leader: {
-      role: "Président",
-      remit:
-        "Direction politique, représentation du mouvement et responsabilité devant les membres.",
-    },
-    "co-leader": {
-      role: "Coprésident",
-      remit:
-        "Partage la direction politique avec le président, le remplace lorsque cela est nécessaire, et répond de l'organisation et de la conduite interne du mouvement.",
-    },
-  },
-
   actions: {
     getInvolved: "S'engager",
     contact: "Contact",
