@@ -5,7 +5,7 @@ export const chrome: ChromeContent = {
     descriptor: "Mouvement",
     tagline: "Pour une civilisation chrétienne, européenne et à l'échelle humaine.",
     description:
-      "Restore Europa Movement est un mouvement politique des peuples nationaux d'Europe, pour une civilisation chrétienne, européenne et à l'échelle humaine : la famille, une propriété largement répartie, la continuité nationale, la subsidiarité, l'intendance et une technique sous contrôle humain.",
+      "Un mouvement politique chrétien des nations d'Europe. Rien ne doit être décidé plus haut que là où cela peut être bien décidé, et l'héritage de l'Europe mérite d'être gardé.",
     closing: "Recevoir. Renouveler. Transmettre.",
   },
 

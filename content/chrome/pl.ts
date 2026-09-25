@@ -5,7 +5,7 @@ export const chrome: ChromeContent = {
     descriptor: "Ruch",
     tagline: "O cywilizację chrześcijańską, europejską i na ludzką miarę.",
     description:
-      "Restore Europa Movement to ruch polityczny narodów Europy — o cywilizację chrześcijańską, europejską i na ludzką miarę: o rodzinę, szeroko rozproszoną własność, ciągłość narodową, pomocniczość, troskę o dziedzictwo i technikę pod kontrolą człowieka.",
+      "Chrześcijański ruch polityczny narodów Europy. Nic nie powinno być rozstrzygane wyżej, niż można to rozstrzygnąć dobrze, a dziedzictwo Europy warto zachować.",
     closing: "Przyjmować. Odnawiać. Przekazywać.",
   },
 
