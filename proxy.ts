@@ -32,8 +32,18 @@ import { SESSION_COOKIE, hasPlausibleSessionCookie } from "@/lib/admin/session";
 const PUBLIC_ADMIN_PATHS = [
   "/admin/login",
   "/admin/enrol",
+  // Claiming an invitation. Whoever opens it has no session by definition —
+  // being unable to sign in is why they were sent a link. The page gates itself
+  // on the invitation being unspent, unexpired and not withdrawn.
+  //
+  // The token travels as a query parameter, which `pathname` excludes, so this
+  // exact-match entry covers it. A path segment would not match here, and
+  // loosening the check to a prefix for one route is how the rest of the list
+  // stops meaning anything.
+  "/admin/invite",
   // Bootstrap enrolment has no session yet; both routes gate themselves on the
-  // credential table being empty or a valid bootstrap token.
+  // credential table being empty, a valid bootstrap token, or a valid
+  // invitation.
   "/api/admin/auth/registration/options",
   "/api/admin/auth/registration/verify",
   "/api/admin/auth/authentication/options",

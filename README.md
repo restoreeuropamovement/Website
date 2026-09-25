@@ -179,6 +179,31 @@ Then visit `/admin/enrol` and register the first passkey. That page works only
 while no credential exists; afterwards it is inert and further passkeys can be
 added only from `/admin/security`, already signed in. Sign in at `/admin/login`.
 
+### Admitting a second administrator
+
+Passkeys are held on devices, not in a database, so there is nothing to send
+somebody to let them in. Invite them instead, from `/admin/security`:
+
+1. Confirm your passkey. Issuing an invitation is held to the same bar as
+   reading the membership roll, because it can hand the roll to someone new.
+2. Give them a username and a display name. You create the account; they only
+   ever claim it. That way the audit log shows a name you chose rather than one
+   typed by whoever opened the link.
+3. Send them the link that appears. It is shown **once** — the database stores
+   only its digest, so it cannot be looked up again — and it works once, expires
+   after 24 hours, and can be withdrawn before it is used.
+
+They open it, enrol a passkey on their own device, and are signed in. From then
+on they sign in like anyone else and their own name appears against everything
+they do. Until an invitation is claimed the account holds no credential and
+cannot sign in; re-inviting the same username reissues the link and withdraws
+the previous one.
+
+Removing somebody is `Disable` in the same list. It suspends the account and
+throws away their sessions immediately, rather than deleting the row, so past
+entries in the audit log keep their name. Nobody can disable themselves, and the
+last administrator who can still sign in cannot be disabled at all.
+
 Analytics is optional. Without `VERCEL_ANALYTICS_TOKEN` and `VERCEL_PROJECT_ID`
 the dashboard reports that the source is not connected — collection still works,
 only the read-back is off.

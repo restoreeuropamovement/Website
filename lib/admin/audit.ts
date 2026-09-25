@@ -7,6 +7,19 @@ export type AuditAction =
   | "session.elevate"
   | "passkey.register"
   | "passkey.delete"
+  /*
+   * Admission and removal of administrators. `invite` is recorded against the
+   * inviter and `invite.redeem` against the account that was claimed, so the
+   * two rows together answer "who let this person in, and did they arrive" —
+   * the question an audit log exists to answer about its own readers.
+   *
+   * The token never appears in the detail. It is a live credential until it is
+   * spent, and this table is not encrypted.
+   */
+  | "admin.invite"
+  | "admin.invite.revoke"
+  | "admin.invite.redeem"
+  | "admin.disable"
   | "journal.create"
   | "journal.update"
   | "journal.publish"

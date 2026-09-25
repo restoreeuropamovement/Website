@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { resolveInvite } from "@/lib/admin/administrators";
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { constantTimeEqual } from "@/lib/admin/crypto";
 import { bootstrapToken, hasBootstrapToken } from "@/lib/admin/env";
@@ -10,7 +11,7 @@ import { beginRegistration, credentialCount, findOrCreateUser } from "@/lib/admi
 /**
  * Starts passkey enrolment.
  *
- * Two, and only two, ways in:
+ * Three, and only three, ways in:
  *
  *   1. **Bootstrap.** Permitted only while the credential table is empty, and
  *      only with the one-time token from the environment. The emptiness check is
@@ -19,9 +20,19 @@ import { beginRegistration, credentialCount, findOrCreateUser } from "@/lib/admi
  *      nothing.
  *   2. **Authenticated.** An administrator who is already signed in adding
  *      another device, which is how you avoid being locked out by a lost phone.
+ *   3. **Invited.** An unspent invitation issued by an administrator who had
+ *      re-asserted their passkey to issue it. This is the only way a second
+ *      person is ever admitted; see `lib/admin/administrators.ts`.
  *
- * There is no third path. In particular, no request may name the user it wants
- * to enrol a key for.
+ * What none of the three permits is the request naming the account it wants a
+ * key for. Bootstrap creates the first one, the session branch uses the one
+ * already signed in, and an invitation refers to an account the *inviter*
+ * created. Nothing here reads a user id out of the body.
+ *
+ * An invitation is checked before the session, so that an administrator who
+ * happens to be signed in on the machine where the invitee is enrolling does
+ * not silently attach the invitee's device to their own account instead. The
+ * explicit intent in the request wins over an ambient cookie.
  */
 export async function POST(request: NextRequest) {
   const { ipHash } = await clientContext();
@@ -29,11 +40,21 @@ export async function POST(request: NextRequest) {
   const limit = await consumeRateLimit(`register:${ipHash ?? "unknown"}`, 5, 600);
   if (!limit.allowed) return opaqueFailure(429);
 
-  let body: { token?: unknown; username?: unknown; displayName?: unknown };
+  let body: { token?: unknown; username?: unknown; displayName?: unknown; invite?: unknown };
   try {
     body = await request.json();
   } catch {
     return opaqueFailure();
+  }
+
+  if (typeof body.invite === "string" && body.invite) {
+    // Resolved, not consumed: the invitation is spent at the verify step, when
+    // an authenticator has actually produced something.
+    const invite = await resolveInvite(body.invite);
+    if (!invite) return opaqueFailure(403);
+
+    const { challengeId, options } = await beginRegistration(invite.user);
+    return jsonResponse({ challengeId, options });
   }
 
   const session = await currentSession();

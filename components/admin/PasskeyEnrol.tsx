@@ -7,15 +7,24 @@ import { useState } from "react";
 /**
  * Passkey enrolment.
  *
- * Serves both cases. On a fresh installation `mode` is `"bootstrap"` and the
- * one-time token is required; for an administrator already signed in adding a
- * second device, `mode` is `"additional"` and the session authorises it.
+ * Serves the three ways a credential is ever created. On a fresh installation
+ * `mode` is `"bootstrap"` and the one-time token is required; for an
+ * administrator already signed in adding a second device, `mode` is
+ * `"additional"` and the session authorises it; for somebody claiming an
+ * invitation, `mode` is `"invite"` and the token from the link authorises it.
  *
- * The token is sent to the server and compared there in constant time. It is
- * never checked in this component — a credential validated in the browser is
- * not a credential, since whoever is holding the browser can skip the check.
+ * No token is ever checked in this component — a credential validated in the
+ * browser is not a credential, since whoever is holding the browser can skip
+ * the check. Both are sent to the server and decided there.
  */
-export function PasskeyEnrol({ mode }: { mode: "bootstrap" | "additional" }) {
+export function PasskeyEnrol({
+  mode,
+  invite,
+}: {
+  mode: "bootstrap" | "additional" | "invite";
+  /** The token from the invitation link, when claiming one. */
+  invite?: string;
+}) {
   const router = useRouter();
   const [token, setToken] = useState("");
   const [username, setUsername] = useState("");
@@ -34,14 +43,20 @@ export function PasskeyEnrol({ mode }: { mode: "bootstrap" | "additional" }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(
-          mode === "bootstrap" ? { token, username, displayName } : {},
+          mode === "bootstrap"
+            ? { token, username, displayName }
+            : mode === "invite"
+              ? { invite }
+              : {},
         ),
       });
 
       if (!optionsResponse.ok) {
         throw new Error(
           optionsResponse.status === 403
-            ? "That token was not accepted, or a passkey is already enrolled."
+            ? mode === "invite"
+              ? "This invitation has expired, been withdrawn or already been used. Ask for a new one."
+              : "That token was not accepted, or a passkey is already enrolled."
             : "Could not start enrolment.",
         );
       }
@@ -56,6 +71,7 @@ export function PasskeyEnrol({ mode }: { mode: "bootstrap" | "additional" }) {
           challengeId,
           response: attestation,
           label: label || "Passkey",
+          ...(mode === "invite" ? { invite } : {}),
         }),
       });
 

@@ -1,8 +1,17 @@
+import { InviteAdministrator } from "@/components/admin/InviteAdministrator";
+import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { PasskeyEnrol } from "@/components/admin/PasskeyEnrol";
+import { listAdministrators, listPendingInvites } from "@/lib/admin/administrators";
 import { recentAudit } from "@/lib/admin/audit";
-import { requireSession } from "@/lib/admin/session";
+import { isElevated, requireSession } from "@/lib/admin/session";
 import { listPasskeys } from "@/lib/admin/webauthn";
-import { deletePasskeyAction, revokeSessionsAction } from "./actions";
+import {
+  createInviteAction,
+  deletePasskeyAction,
+  disableAdministratorAction,
+  revokeInviteAction,
+  revokeSessionsAction,
+} from "./actions";
 
 function formatMoment(value: Date): string {
   return new Intl.DateTimeFormat("en-GB", {
@@ -14,9 +23,15 @@ function formatMoment(value: Date): string {
 
 export default async function SecurityPage() {
   const session = await requireSession();
-  const [passkeys, audit] = await Promise.all([listPasskeys(session.user.id), recentAudit(60)]);
+  const [passkeys, administrators, invites, audit] = await Promise.all([
+    listPasskeys(session.user.id),
+    listAdministrators(),
+    listPendingInvites(),
+    recentAudit(60),
+  ]);
 
   const single = passkeys.length <= 1;
+  const elevated = isElevated(session);
 
   return (
     <div className="flex flex-col gap-12">
@@ -73,6 +88,121 @@ export default async function SecurityPage() {
           Authorised by this session — no bootstrap token is involved or accepted here.
         </p>
         <PasskeyEnrol mode="additional" />
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <div>
+          <h2 className="eyebrow text-muted">Administrators</h2>
+          <p className="mt-2 text-micro leading-relaxed text-faint">
+            Everyone with an account of their own. Separate accounts are not bureaucracy: the audit
+            log below names whoever read the membership roll, and two people sharing one passkey
+            would make every one of those lines a guess.
+          </p>
+        </div>
+
+        <ul className="flex flex-col border-t border-hairline">
+          {administrators.map((administrator) => {
+            const isSelf = administrator.id === session.user.id;
+            const pending = administrator.passkeys === 0;
+
+            return (
+              <li
+                key={administrator.id}
+                className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-hairline py-4"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="text-[0.9375rem] text-ink">
+                    {administrator.displayName}
+                    <span className="ml-2 text-micro text-faint">{administrator.username}</span>
+                    {isSelf ? <span className="ml-2 text-micro text-gold">you</span> : null}
+                  </p>
+                  <p className="mt-1 text-micro text-faint">
+                    {administrator.disabledAt
+                      ? `Disabled ${formatMoment(administrator.disabledAt)}`
+                      : pending
+                        ? "Invited · no passkey enrolled yet"
+                        : `${administrator.passkeys} ${administrator.passkeys === 1 ? "passkey" : "passkeys"}`}
+                    {administrator.lastSeenAt
+                      ? ` · last signed in ${formatMoment(administrator.lastSeenAt)}`
+                      : ""}
+                  </p>
+                </div>
+
+                {isSelf || administrator.disabledAt ? null : (
+                  <form action={disableAdministratorAction}>
+                    <input type="hidden" name="administratorId" value={administrator.id} />
+                    <button
+                      type="submit"
+                      disabled={!elevated}
+                      title={
+                        elevated ? undefined : "Confirm your passkey below to disable an account."
+                      }
+                      className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Disable
+                    </button>
+                  </form>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+
+        {invites.length > 0 ? (
+          <div className="flex flex-col gap-3">
+            <h3 className="eyebrow text-muted">Unclaimed invitations</h3>
+            <ul className="flex flex-col border-t border-hairline">
+              {invites.map((invite) => (
+                <li
+                  key={invite.id}
+                  className="flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-hairline py-4"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[0.9375rem] text-ink">{invite.username}</p>
+                    <p className="mt-1 text-micro text-faint">
+                      Issued {formatMoment(invite.createdAt)}
+                      {invite.invitedBy ? ` by ${invite.invitedBy}` : ""} · expires{" "}
+                      {formatMoment(invite.expiresAt)}
+                    </p>
+                  </div>
+
+                  <form action={revokeInviteAction}>
+                    <input type="hidden" name="inviteId" value={invite.id} />
+                    <button
+                      type="submit"
+                      className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy"
+                    >
+                      Withdraw
+                    </button>
+                  </form>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="flex flex-col gap-6 border border-hairline p-6">
+        <div>
+          <h2 className="eyebrow text-muted">Invite an administrator</h2>
+          <p className="mt-2 text-[0.875rem] leading-relaxed text-muted">
+            Creates an account and a single-use link that lets them enrol a passkey of their own on
+            their own device. Nothing about the link identifies them; it is the account you name
+            here that the audit log will show.
+          </p>
+        </div>
+
+        {/*
+          Elevated, not merely signed in. Admitting an administrator is the one
+          action that can hand the membership roll to somebody new, so it is
+          held to the same bar as reading the roll: a passkey touch from the
+          last few minutes. The button above is disabled on the same test.
+        */}
+        {elevated ? (
+          <InviteAdministrator action={createInviteAction} />
+        ) : (
+          <PasskeyElevation reason="Admitting a new administrator, or removing one, gives somebody else access to everything here — including the membership roll. It needs a fresh passkey touch, so a session left unattended cannot be used to create a second way in." />
+        )}
       </section>
 
       <section className="flex flex-col gap-4 border border-burgundy/40 p-6">

@@ -42,6 +42,40 @@ CREATE TABLE IF NOT EXISTS admin_credential (
 
 CREATE INDEX IF NOT EXISTS admin_credential_user_idx ON admin_credential (user_id);
 
+-- An invitation to become an administrator.
+--
+-- The second administrator is the hard one. The first is established by
+-- `ADMIN_BOOTSTRAP_TOKEN` into an empty credential table, and that window shuts
+-- permanently the moment it is used; after it, the only enrolment path is an
+-- already signed-in administrator adding another device to their own account.
+-- That left no way to admit a second person at all, short of sharing one
+-- passkey — which would make `admin_audit` unable to say which of them read the
+-- membership roll.
+--
+-- `token_hash` is the SHA-256 of the token, never the token, for the same
+-- reason as `admin_session.id`: whoever reads this table cannot reconstruct a
+-- link that would let them enrol. The row is therefore not a credential.
+--
+-- The account is created by the inviter, not by the invitee: `user_id`
+-- references a row in `admin_user` that already exists and holds no credential
+-- yet. Whoever holds the link proves only that they were sent it, and enrols a
+-- passkey against an identity somebody already authorised — they cannot choose
+-- the username the audit log will show.
+CREATE TABLE IF NOT EXISTS admin_invite (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  token_hash  text NOT NULL UNIQUE,
+  user_id     uuid NOT NULL REFERENCES admin_user(id) ON DELETE CASCADE,
+  -- Nulled rather than cascaded: an invitation is evidence of who admitted
+  -- whom, and it should survive the inviter's own account being removed.
+  invited_by  uuid REFERENCES admin_user(id) ON DELETE SET NULL,
+  created_at  timestamptz NOT NULL DEFAULT now(),
+  expires_at  timestamptz NOT NULL,
+  consumed_at timestamptz,
+  revoked_at  timestamptz
+);
+
+CREATE INDEX IF NOT EXISTS admin_invite_user_idx ON admin_invite (user_id);
+
 -- ---------------------------------------------------------------------------
 -- Ceremony state
 -- ---------------------------------------------------------------------------
