@@ -1,5 +1,6 @@
 import { createDictionary } from "@/lib/dictionary";
 import { englishWings, getWings, type WingsEdition } from "@/content/wings";
+import { retiredWingSlugs } from "@/content/wings/structure";
 import type { PluralForms } from "@/lib/format";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { involvementText as englishText } from "./en";
@@ -238,6 +239,7 @@ export const englishInvolvement: InvolvementEdition = edition(
  */
 const englishCountryLabels = new Map<string, string>([
   ...englishWings.wings.map((wing) => [wing.slug, wing.country] as const),
+  ...Object.entries(retiredWingSlugs),
   [OTHER_COUNTRY, englishText.join.fields.otherCountry],
 ]);
 

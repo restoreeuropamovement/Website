@@ -29,7 +29,7 @@ const LABEL = { x: 68, baseline: 214, size: 88 } as const;
 const MARKER_TARGET = 90;
 
 /**
- * The continent, with the forty-four nations that carry a wing picked out, each
+ * The continent, with the forty-seven nations that carry a wing picked out, each
  * one a link to its own page.
  *
  * A Server Component, and it has to stay one: `content/wings-map.ts` is 42 kB
@@ -40,7 +40,7 @@ const MARKER_TARGET = 90;
  * without JavaScript at all.
  *
  * **On the accessibility tree.** The map is *not* `aria-hidden`. That would have
- * been the cheaper answer — the grid below is the same forty-four nations as
+ * been the cheaper answer — the grid below is the same forty-seven nations as
  * real links, so a decorative map plus that list is a defensible accessible
  * equivalent, and it is what this component used to do. It was rejected because
  * the map is now a control: `aria-hidden` may not contain focusable elements, so
@@ -75,7 +75,7 @@ export function EuropeMap({ edition, className }: EuropeMapProps) {
    * order is not negotiable: their markers and enlarged hit targets have to sit
    * *above* the neighbours that surround them, or France swallows Monaco and
    * Andorra both. It also puts the five fiddliest targets somewhere predictable
-   * rather than scattered through the other thirty-nine.
+   * rather than scattered through the other forty-two.
    */
   const drawn = edition.wings
     .map((wing) => ({ wing, shape: shapes.get(wing.slug) }))
@@ -171,7 +171,7 @@ export function EuropeMap({ edition, className }: EuropeMapProps) {
            * Nothing is lost: a touch reader has no hover state to read a name
            * in, and tapping goes straight to the page that is named after it.
            *
-           * `pointer-events-none` matters more than it looks. Forty-four of
+           * `pointer-events-none` matters more than it looks. Forty-seven of
            * these sit in the same corner at zero opacity, and an invisible
            * `<text>` still answers the pointer — without this the north
            * Atlantic would be a stack of links to whichever nation happened to

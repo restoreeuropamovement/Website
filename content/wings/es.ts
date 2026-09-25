@@ -24,9 +24,9 @@ export const wingsText: WingsText = {
     ],
     note: "Se están constituyendo secciones por todo el continente. Si quiere ayudar a poner en marcha la del país donde vive, dígalo a través de «Participar» — es lo más útil que cualquiera puede hacer por el movimiento en esta etapa.",
     mapLabel:
-      "Un mapa de Europa en el que las cuarenta y cuatro naciones enumeradas en esta página se destacan de las tierras que las rodean.",
+      "Un mapa de Europa en el que las cuarenta y siete naciones enumeradas en esta página se destacan de las tierras que las rodean.",
     mapCaption:
-      "Las naciones destacadas aquí son las cuarenta y cuatro enumeradas abajo. Estar en el mapa significa que el movimiento se organiza en torno a esa nación, no que su sección esté constituida o activa.",
+      "Las naciones destacadas aquí son las cuarenta y siete enumeradas abajo. Estar en el mapa significa que el movimiento se organiza en torno a esa nación, no que su sección esté constituida o activa.",
     mapHint: "Elija una nación en el mapa para abrir su sección.",
   },
 
@@ -48,6 +48,7 @@ export const wingsText: WingsText = {
     cyprus: "Chipre",
     czechia: "Chequia",
     denmark: "Dinamarca",
+    england: "Inglaterra",
     estonia: "Estonia",
     finland: "Finlandia",
     france: "Francia",
@@ -68,12 +69,14 @@ export const wingsText: WingsText = {
     montenegro: "Montenegro",
     netherlands: "Países Bajos",
     "north-macedonia": "Macedonia del Norte",
+    "northern-ireland": "Irlanda del Norte",
     norway: "Noruega",
     poland: "Polonia",
     portugal: "Portugal",
     romania: "Rumanía",
     russia: "Rusia",
     "san-marino": "San Marino",
+    scotland: "Escocia",
     serbia: "Serbia",
     slovakia: "Eslovaquia",
     slovenia: "Eslovenia",
@@ -81,7 +84,7 @@ export const wingsText: WingsText = {
     sweden: "Suecia",
     switzerland: "Suiza",
     ukraine: "Ucrania",
-    "united-kingdom": "Reino Unido",
+    wales: "Gales",
   },
 
   index: {

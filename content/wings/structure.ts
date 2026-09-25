@@ -87,6 +87,7 @@ export const wingStructure = [
   },
   { slug: "czechia", region: "central-eastern", endonyms: [{ name: "Česko", lang: "cs" }] },
   { slug: "denmark", region: "northern", endonyms: [{ name: "Danmark", lang: "da" }] },
+  { slug: "england", region: "northern", endonyms: [{ name: "England", lang: "en" }] },
   { slug: "estonia", region: "northern", endonyms: [{ name: "Eesti", lang: "et" }] },
   { slug: "finland", region: "northern", endonyms: [{ name: "Suomi", lang: "fi" }] },
   { slug: "france", region: "western", endonyms: [{ name: "France", lang: "fr" }] },
@@ -115,12 +116,28 @@ export const wingStructure = [
     region: "southern",
     endonyms: [{ name: "Северна Македонија", lang: "mk" }],
   },
+  {
+    slug: "northern-ireland",
+    region: "northern",
+    endonyms: [
+      { name: "Northern Ireland", lang: "en" },
+      { name: "Tuaisceart Éireann", lang: "ga" },
+    ],
+  },
   { slug: "norway", region: "northern", endonyms: [{ name: "Norge", lang: "nb" }] },
   { slug: "poland", region: "central-eastern", endonyms: [{ name: "Polska", lang: "pl" }] },
   { slug: "portugal", region: "southern", endonyms: [{ name: "Portugal", lang: "pt" }] },
   { slug: "romania", region: "central-eastern", endonyms: [{ name: "România", lang: "ro" }] },
   { slug: "russia", region: "central-eastern", endonyms: [{ name: "Россия", lang: "ru" }] },
   { slug: "san-marino", region: "southern", endonyms: [{ name: "San Marino", lang: "it" }] },
+  {
+    slug: "scotland",
+    region: "northern",
+    endonyms: [
+      { name: "Scotland", lang: "en" },
+      { name: "Alba", lang: "gd" },
+    ],
+  },
   { slug: "serbia", region: "southern", endonyms: [{ name: "Србија", lang: "sr" }] },
   { slug: "slovakia", region: "central-eastern", endonyms: [{ name: "Slovensko", lang: "sk" }] },
   { slug: "slovenia", region: "southern", endonyms: [{ name: "Slovenija", lang: "sl" }] },
@@ -138,11 +155,27 @@ export const wingStructure = [
   },
   { slug: "ukraine", region: "central-eastern", endonyms: [{ name: "Україна", lang: "uk" }] },
   {
-    slug: "united-kingdom",
+    slug: "wales",
     region: "northern",
-    endonyms: [{ name: "United Kingdom", lang: "en" }],
+    endonyms: [
+      { name: "Wales", lang: "en" },
+      { name: "Cymru", lang: "cy" },
+    ],
   },
 ] as const satisfies readonly WingStructure[];
+
+/**
+ * Slugs that were wings and are not.
+ *
+ * `united-kingdom` was one entry until the four nations of the United Kingdom
+ * were given wings of their own. Kept because the slug is a stored value: the
+ * membership intake writes whatever the reader picked into `member.country`,
+ * and a roll that prints a bare `united-kingdom` at whoever opens it is worse
+ * than one that says what it meant. Nothing here is offered by a form again.
+ */
+export const retiredWingSlugs: Readonly<Record<string, string>> = {
+  "united-kingdom": "United Kingdom (before the four nations were separated)",
+};
 
 /**
  * Every slug, as a union. This is what makes a language file's country list

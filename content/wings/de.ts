@@ -24,9 +24,9 @@ export const wingsText: WingsText = {
     ],
     note: "Überall auf dem Kontinent entstehen Landesverbände. Wenn Sie helfen möchten, den an Ihrem Wohnort zu gründen, sagen Sie es über „Mitmachen“ — es ist in diesem Stadium das Nützlichste, was jemand für die Bewegung tun kann.",
     mapLabel:
-      "Eine Karte Europas, auf der die vierundvierzig auf dieser Seite aufgeführten Nationen vom umliegenden Land abgehoben sind.",
+      "Eine Karte Europas, auf der die siebenundvierzig auf dieser Seite aufgeführten Nationen vom umliegenden Land abgehoben sind.",
     mapCaption:
-      "Die hier hervorgehobenen Nationen sind die vierundvierzig, die unten aufgeführt sind. Auf der Karte zu stehen bedeutet, dass die Bewegung um diese Nation herum organisiert ist — nicht, dass ihr Verband konstituiert oder aktiv wäre.",
+      "Die hier hervorgehobenen Nationen sind die siebenundvierzig, die unten aufgeführt sind. Auf der Karte zu stehen bedeutet, dass die Bewegung um diese Nation herum organisiert ist — nicht, dass ihr Verband konstituiert oder aktiv wäre.",
     mapHint: "Wählen Sie eine Nation auf der Karte, um ihren Landesverband zu öffnen.",
   },
 
@@ -48,6 +48,7 @@ export const wingsText: WingsText = {
     cyprus: "Zypern",
     czechia: "Tschechien",
     denmark: "Dänemark",
+    england: "England",
     estonia: "Estland",
     finland: "Finnland",
     france: "Frankreich",
@@ -68,12 +69,14 @@ export const wingsText: WingsText = {
     montenegro: "Montenegro",
     netherlands: "Niederlande",
     "north-macedonia": "Nordmazedonien",
+    "northern-ireland": "Nordirland",
     norway: "Norwegen",
     poland: "Polen",
     portugal: "Portugal",
     romania: "Rumänien",
     russia: "Russland",
     "san-marino": "San Marino",
+    scotland: "Schottland",
     serbia: "Serbien",
     slovakia: "Slowakei",
     slovenia: "Slowenien",
@@ -81,7 +84,7 @@ export const wingsText: WingsText = {
     sweden: "Schweden",
     switzerland: "Schweiz",
     ukraine: "Ukraine",
-    "united-kingdom": "Vereinigtes Königreich",
+    wales: "Wales",
   },
 
   index: {

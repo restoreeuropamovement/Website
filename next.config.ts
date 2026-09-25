@@ -1,5 +1,8 @@
 import type { NextConfig } from "next";
 
+import { retiredWingSlugs } from "./content/wings/structure";
+import { LOCALES, localePath } from "./lib/i18n";
+
 const isDev = process.env.NODE_ENV === "development";
 
 /**
@@ -93,6 +96,22 @@ const securityHeaders = [
   { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
 ];
 
+/**
+ * Wing addresses that were live and no longer resolve.
+ *
+ * The United Kingdom page became four — England, Scotland, Wales and Northern
+ * Ireland — so no single page succeeds it and the index is where all four are
+ * listed. Every locale needs its own rule because the prefix is part of the
+ * path, and the slug itself is structural, so it is the same in all six.
+ */
+const retiredWingRedirects = LOCALES.flatMap((locale) =>
+  Object.keys(retiredWingSlugs).map((slug) => ({
+    source: localePath(locale, `/wings/${slug}`),
+    destination: localePath(locale, "/wings"),
+    permanent: true,
+  })),
+);
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -105,6 +124,9 @@ const nextConfig: NextConfig = {
   },
   headers() {
     return Promise.resolve([{ source: "/:path*", headers: securityHeaders }]);
+  },
+  redirects() {
+    return Promise.resolve(retiredWingRedirects);
   },
 };
 

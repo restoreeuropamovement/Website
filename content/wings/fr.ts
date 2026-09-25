@@ -24,9 +24,9 @@ export const wingsText: WingsText = {
     ],
     note: "Des branches se constituent partout sur le continent. Si vous souhaitez aider à lancer celle de votre pays, dites-le par « S'engager » — c'est, à ce stade, la chose la plus utile que quiconque puisse faire pour le mouvement.",
     mapLabel:
-      "Une carte de l'Europe où les quarante-quatre nations énumérées sur cette page se détachent des terres qui les entourent.",
+      "Une carte de l'Europe où les quarante-sept nations énumérées sur cette page se détachent des terres qui les entourent.",
     mapCaption:
-      "Les nations mises en évidence ici sont les quarante-quatre énumérées ci-dessous. Figurer sur la carte signifie que le mouvement s'organise autour de cette nation, non que sa branche soit constituée ou active.",
+      "Les nations mises en évidence ici sont les quarante-sept énumérées ci-dessous. Figurer sur la carte signifie que le mouvement s'organise autour de cette nation, non que sa branche soit constituée ou active.",
     mapHint: "Choisissez une nation sur la carte pour ouvrir sa branche.",
   },
 
@@ -48,6 +48,7 @@ export const wingsText: WingsText = {
     cyprus: "Chypre",
     czechia: "Tchéquie",
     denmark: "Danemark",
+    england: "Angleterre",
     estonia: "Estonie",
     finland: "Finlande",
     france: "France",
@@ -68,12 +69,14 @@ export const wingsText: WingsText = {
     montenegro: "Monténégro",
     netherlands: "Pays-Bas",
     "north-macedonia": "Macédoine du Nord",
+    "northern-ireland": "Irlande du Nord",
     norway: "Norvège",
     poland: "Pologne",
     portugal: "Portugal",
     romania: "Roumanie",
     russia: "Russie",
     "san-marino": "Saint-Marin",
+    scotland: "Écosse",
     serbia: "Serbie",
     slovakia: "Slovaquie",
     slovenia: "Slovénie",
@@ -81,7 +84,7 @@ export const wingsText: WingsText = {
     sweden: "Suède",
     switzerland: "Suisse",
     ukraine: "Ukraine",
-    "united-kingdom": "Royaume-Uni",
+    wales: "Pays de Galles",
   },
 
   index: {

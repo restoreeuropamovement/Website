@@ -24,9 +24,9 @@ export const wingsText: WingsText = {
     ],
     note: "Oddziały powstają na całym kontynencie. Jeśli chcesz pomóc założyć ten w swoim kraju, napisz o tym przez „Włącz się” — to na tym etapie najpożyteczniejsza rzecz, jaką ktokolwiek może zrobić dla ruchu.",
     mapLabel:
-      "Mapa Europy, na której czterdzieści cztery narody wymienione na tej stronie odcinają się od okolicznych ziem.",
+      "Mapa Europy, na której czterdzieści siedem narodów wymienionych na tej stronie odcina się od okolicznych ziem.",
     mapCaption:
-      "Wyróżnione tutaj narody to te czterdzieści cztery wymienione poniżej. Obecność na mapie znaczy, że ruch organizuje się wokół tego narodu, a nie że jego oddział jest ukonstytuowany lub czynny.",
+      "Wyróżnione tutaj narody to czterdzieści siedem wymienionych poniżej. Obecność na mapie znaczy, że ruch organizuje się wokół tego narodu, a nie że jego oddział jest ukonstytuowany lub czynny.",
     mapHint: "Wybierz naród na mapie, aby otworzyć jego oddział.",
   },
 
@@ -48,6 +48,7 @@ export const wingsText: WingsText = {
     cyprus: "Cypr",
     czechia: "Czechy",
     denmark: "Dania",
+    england: "Anglia",
     estonia: "Estonia",
     finland: "Finlandia",
     france: "Francja",
@@ -68,12 +69,14 @@ export const wingsText: WingsText = {
     montenegro: "Czarnogóra",
     netherlands: "Niderlandy",
     "north-macedonia": "Macedonia Północna",
+    "northern-ireland": "Irlandia Północna",
     norway: "Norwegia",
     poland: "Polska",
     portugal: "Portugalia",
     romania: "Rumunia",
     russia: "Rosja",
     "san-marino": "San Marino",
+    scotland: "Szkocja",
     serbia: "Serbia",
     slovakia: "Słowacja",
     slovenia: "Słowenia",
@@ -81,7 +84,7 @@ export const wingsText: WingsText = {
     sweden: "Szwecja",
     switzerland: "Szwajcaria",
     ukraine: "Ukraina",
-    "united-kingdom": "Wielka Brytania",
+    wales: "Walia",
   },
 
   index: {

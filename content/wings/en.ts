@@ -24,9 +24,9 @@ export const wingsText: WingsText = {
     ],
     note: "Wings are being established across the continent. If you would like to help start the one where you live, say so through Get Involved — it is the most useful thing anyone can do for the movement at this stage.",
     mapLabel:
-      "A map of Europe with the forty-four nations listed on this page picked out from the land around them.",
+      "A map of Europe with the forty-seven nations listed on this page picked out from the land around them.",
     mapCaption:
-      "The nations picked out here are the forty-four listed below. Being on the map means the movement is organised around that nation, not that its wing is constituted or active.",
+      "The nations picked out here are the forty-seven listed below. Being on the map means the movement is organised around that nation, not that its wing is constituted or active.",
     mapHint: "Choose a nation on the map to open its wing.",
   },
 
@@ -48,6 +48,7 @@ export const wingsText: WingsText = {
     cyprus: "Cyprus",
     czechia: "Czechia",
     denmark: "Denmark",
+    england: "England",
     estonia: "Estonia",
     finland: "Finland",
     france: "France",
@@ -68,12 +69,14 @@ export const wingsText: WingsText = {
     montenegro: "Montenegro",
     netherlands: "Netherlands",
     "north-macedonia": "North Macedonia",
+    "northern-ireland": "Northern Ireland",
     norway: "Norway",
     poland: "Poland",
     portugal: "Portugal",
     romania: "Romania",
     russia: "Russia",
     "san-marino": "San Marino",
+    scotland: "Scotland",
     serbia: "Serbia",
     slovakia: "Slovakia",
     slovenia: "Slovenia",
@@ -81,7 +84,7 @@ export const wingsText: WingsText = {
     sweden: "Sweden",
     switzerland: "Switzerland",
     ukraine: "Ukraine",
-    "united-kingdom": "United Kingdom",
+    wales: "Wales",
   },
 
   index: {

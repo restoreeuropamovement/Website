@@ -27,6 +27,34 @@ const CACHE = join(ROOT, "node_modules", ".cache", "natural-earth");
 const CACHE_FILE = join(CACHE, "countries-50m.json");
 const SOURCE = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json";
 
+/*
+ * A second source, for the British Isles alone.
+ *
+ * The countries file draws one United Kingdom, and the movement organises four
+ * nations there. Natural Earth publishes the subdivision itself — England,
+ * Scotland, Wales and Northern Ireland as `Geo unit` subunits of GBR — at the
+ * same 1:50m scale and under the same public-domain terms, so the internal
+ * borders are surveyed rather than drawn here.
+ *
+ * Ireland is taken from this file too, though it is a country and not a
+ * subunit. It is the only wing that shares a land border with one of the four,
+ * and a border drawn from one dataset on one side and another on the other
+ * would leave a seam along it — the two releases are not point-for-point
+ * identical. Every other wing keeps the outline it already had.
+ */
+const SUBUNITS_CACHE_FILE = join(CACHE, "subunits-50m.geojson");
+const SUBUNITS_SOURCE =
+  "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_map_subunits.geojson";
+
+/** Wings drawn from the subunits file, by its `SUBUNIT` property. */
+const SUBUNIT_SOURCE = {
+  england: "England",
+  "northern-ireland": "Northern Ireland",
+  scotland: "Scotland",
+  wales: "Wales",
+  ireland: "Ireland",
+};
+
 /* ------------------------------------------------------------------ window */
 
 /*
@@ -218,6 +246,16 @@ function ringsFrom(geometry, arcs) {
   return [];
 }
 
+/**
+ * The same, for plain GeoJSON. The subunits file is not TopoJSON, so its rings
+ * are already coordinate lists and there is nothing to dereference.
+ */
+function ringsFromGeoJson(geometry) {
+  if (geometry.type === "Polygon") return geometry.coordinates;
+  if (geometry.type === "MultiPolygon") return geometry.coordinates.flat();
+  return [];
+}
+
 /* ------------------------------------------------------------------ geometry */
 
 function ringArea(ring) {
@@ -337,17 +375,16 @@ function pathFrom(rings) {
 
 /*
  * Natural Earth's names where they differ from the site's. The site says
- * "Czechia" and "United Kingdom"; the dataset says "Czechia" and "United
- * Kingdom" too at 50m, but the Balkans and the Baltics have historically moved
- * around between releases, so every wing is asserted explicitly and a missing
- * match is a hard error rather than a country quietly vanishing from the map.
+ * "Czechia" and the dataset says "Czechia" too at 50m, but the Balkans and the
+ * Baltics have historically moved around between releases, so every wing is
+ * asserted explicitly and a missing match is a hard error rather than a
+ * country quietly vanishing from the map.
  */
 const NAME_OVERRIDES = {
   "bosnia-and-herzegovina": "Bosnia and Herz.",
   czechia: "Czechia",
   "north-macedonia": "Macedonia",
   russia: "Russia",
-  "united-kingdom": "United Kingdom",
 };
 
 /*
@@ -432,16 +469,16 @@ function withinFraming(ring) {
   );
 }
 
-async function loadTopology() {
+async function loadCached(file, source) {
   try {
-    return JSON.parse(readFileSync(CACHE_FILE, "utf8"));
+    return JSON.parse(readFileSync(file, "utf8"));
   } catch {
-    process.stdout.write(`fetching ${SOURCE}\n`);
-    const response = await fetch(SOURCE);
-    if (!response.ok) throw new Error(`${SOURCE} returned ${response.status}`);
+    process.stdout.write(`fetching ${source}\n`);
+    const response = await fetch(source);
+    if (!response.ok) throw new Error(`${source} returned ${response.status}`);
     const text = await response.text();
     mkdirSync(CACHE, { recursive: true });
-    writeFileSync(CACHE_FILE, text);
+    writeFileSync(file, text);
     return JSON.parse(text);
   }
 }
@@ -449,28 +486,44 @@ async function loadTopology() {
 async function main() {
   const { englishWings } = await import("../content/wings/index.ts");
   const { wings } = englishWings;
-  const topology = await loadTopology();
+  const topology = await loadCached(CACHE_FILE, SOURCE);
   const arcs = decodeArcs(topology);
 
-  /** name -> [{ points: projected ring, framing: may set the frame }] */
-  const byName = new Map();
-  for (const geometry of topology.objects.countries.geometries) {
-    const name = geometry.properties.name;
-    const rings = ringsFrom(geometry, arcs)
+  /* Everything from here is in the same units, so one pipeline serves both. */
+  const prepare = (rings) => {
+    const prepared = rings
       .map((ring) => clipRing(ring))
       .filter((ring) => ring.length >= 3)
       .map((ring) => ({
         framing: withinFraming(ring),
         points: simplifyRing(densify(ring).map(project), TOLERANCE),
       }));
-    if (rings.length > 0) byName.set(name, significant(rings));
+    return prepared.length > 0 ? significant(prepared) : undefined;
+  };
+
+  /** name -> [{ points: projected ring, framing: may set the frame }] */
+  const byName = new Map();
+  for (const geometry of topology.objects.countries.geometries) {
+    const rings = prepare(ringsFrom(geometry, arcs));
+    if (rings) byName.set(geometry.properties.name, rings);
+  }
+
+  const wanted = new Set(Object.values(SUBUNIT_SOURCE));
+  const subunits = await loadCached(SUBUNITS_CACHE_FILE, SUBUNITS_SOURCE);
+  const bySubunit = new Map();
+  for (const feature of subunits.features) {
+    const name = feature.properties.SUBUNIT;
+    if (!wanted.has(name) || bySubunit.has(name)) continue;
+    const rings = prepare(ringsFromGeoJson(feature.geometry));
+    if (rings) bySubunit.set(name, rings);
   }
 
   const missing = [];
   const entries = [];
   for (const wing of wings) {
-    const name = NAME_OVERRIDES[wing.slug] ?? wing.country;
-    const rings = byName.get(name);
+    const subunit = SUBUNIT_SOURCE[wing.slug];
+    const name = subunit ?? NAME_OVERRIDES[wing.slug] ?? wing.country;
+    const rings = subunit ? bySubunit.get(subunit) : byName.get(name);
     if (!rings) {
       missing.push(`${wing.country} (looked for "${name}")`);
       continue;
