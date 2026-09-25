@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <style>
+    path, rect { fill: #0a0c0f; }
+    @media (prefers-color-scheme: dark) { path, rect { fill: #f4f1e8; } }
+  </style>
+  <path fill-rule="evenodd" d="M491.18 39H532.82L985 491.18V532.82L532.82 985H491.18L39 532.82V491.18ZM512 81.82L942.18 512L512 942.18L81.82 512Z"/>
+  <rect x="459" y="39" width="106" height="946"/>
+  <rect x="39" y="459" width="946" height="106"/>
+  <rect x="355" y="39" width="314" height="65"/>
+  <rect x="355" y="920" width="314" height="65"/>
+  <rect x="39" y="355" width="65" height="314"/>
+  <rect x="920" y="355" width="65" height="314"/>
+</svg>

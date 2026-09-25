@@ -21,9 +21,14 @@ import sharp from "sharp";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-/** The mark's own red, and the near-black the site is served on. */
+/**
+ * The mark's own red, the near-black the site is served on, and the parchment
+ * the site sets text in — which is also what the masthead mark inherits, so an
+ * icon drawn in it is the same white the rest of the site already uses.
+ */
 const RED = "#950101";
 const GROUND = "#0a0c0f";
+const INK = "#f4f1e8";
 
 /*
  * A 1024 grid with the figure centred on 512. The drawing supplied as reference
@@ -89,16 +94,44 @@ const RECTS = [
   { x: barFar, y: bar, width: BAR_DEPTH, height: BAR_LENGTH },
 ];
 
+const shapes = (indent) =>
+  [
+    `${indent}<path fill-rule="evenodd" d="${LOZENGE_PATH}"/>`,
+    ...RECTS.map(
+      (r) => `${indent}<rect x="${r.x}" y="${r.y}" width="${r.width}" height="${r.height}"/>`,
+    ),
+  ].join("\n");
+
 function mark(colour, ground) {
-  const rects = RECTS.map(
-    (r) => `    <rect x="${r.x}" y="${r.y}" width="${r.width}" height="${r.height}"/>`,
-  ).join("\n");
   const backdrop = ground ? `  <rect width="${BOX}" height="${BOX}" fill="${ground}"/>\n` : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BOX} ${BOX}" width="${BOX}" height="${BOX}">
 ${backdrop}  <g fill="${colour}">
-    <path fill-rule="evenodd" d="${LOZENGE_PATH}"/>
-${rects}
+${shapes("    ")}
   </g>
+</svg>
+`;
+}
+
+/**
+ * The tab icon, which has to work on a strip whose colour it cannot know.
+ *
+ * An SVG favicon can ask. `prefers-color-scheme` here reads the operating
+ * system's setting rather than the page's, so the mark comes out parchment
+ * against a dark strip and near-black against a light one, and is legible on
+ * both. The dark answer is the default because that is the failure that matters
+ * less: a browser old enough to ignore the query is usually one that ignores
+ * SVG icons too and falls back to the PNG.
+ *
+ * No `fill` attribute on the shapes — a presentation attribute would lose to
+ * the stylesheet anyway, and leaving it off makes the rule the only answer.
+ */
+function adaptiveMark() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${BOX} ${BOX}" width="${BOX}" height="${BOX}">
+  <style>
+    path, rect { fill: ${GROUND}; }
+    @media (prefers-color-scheme: dark) { path, rect { fill: ${INK}; } }
+  </style>
+${shapes("  ")}
 </svg>
 `;
 }
@@ -111,7 +144,6 @@ async function png(svg, size, file) {
 }
 
 const onTransparent = mark(RED, null);
-const onGround = mark(RED, GROUND);
 
 mkdirSync(join(ROOT, "public/brand"), { recursive: true });
 writeFileSync(join(ROOT, "public/brand/restore-europa-mark.svg"), onTransparent);
@@ -125,13 +157,26 @@ console.log("  public/brand/restore-europa-mark.svg");
 await png(onTransparent, 512, "public/brand/restore-europa-mark.png");
 
 /*
- * Tab and home-screen icons carry their ground with them. A transparent favicon
- * inherits whatever the browser puts behind it, and this red is too dark to
- * survive a light tab strip; iOS refuses transparency outright and composites
- * onto white.
+ * The tab icon, as an SVG that picks its own colour. Browsers that understand
+ * it prefer it to the PNG beside it.
  */
-await png(onGround, 512, "app/icon.png");
-await png(onGround, 180, "app/apple-icon.png");
+writeFileSync(join(ROOT, "app/icon.svg"), adaptiveMark());
+console.log("  app/icon.svg");
+
+/*
+ * The PNG the SVG falls back to, and the file Windows copies when the site is
+ * pinned to a taskbar or saved as a shortcut. Parchment on nothing at all: the
+ * surfaces that use it are dark, and a transparent icon sits on them without
+ * the black tile that an opaque one shows as.
+ */
+await png(mark(INK, null), 512, "app/icon.png");
+
+/*
+ * iOS is the exception. It refuses transparency and composites onto white, so a
+ * parchment mark on no ground would arrive as a blank tile. This one keeps the
+ * near-black with it.
+ */
+await png(mark(INK, GROUND), 180, "app/apple-icon.png");
 
 /*
  * The figure once more as data, for the one place that wants it in the reader's
