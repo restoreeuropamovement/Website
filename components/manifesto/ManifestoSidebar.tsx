@@ -12,16 +12,19 @@ export interface SectionLink {
 
 interface ManifestoSidebarProps {
   readonly sections: readonly SectionLink[];
+  readonly heading: string;
+  /** Distinguishes this nav from the masthead's to a screen reader. */
+  readonly navLabel: string;
 }
 
 /** Sticky table of contents for desktop reading. */
-export function ManifestoSidebar({ sections }: ManifestoSidebarProps) {
+export function ManifestoSidebar({ sections, heading, navLabel }: ManifestoSidebarProps) {
   const ids = useMemo(() => sections.map((section) => section.id), [sections]);
   const active = useActiveSection(ids);
 
   return (
-    <nav aria-label="Manifesto contents" className="sticky top-32 max-h-[calc(100svh-10rem)] overflow-y-auto pr-4">
-      <h2 className="eyebrow mb-5 text-muted">Contents</h2>
+    <nav aria-label={navLabel} className="sticky top-32 max-h-[calc(100svh-10rem)] overflow-y-auto pr-4">
+      <h2 className="eyebrow mb-5 text-muted">{heading}</h2>
       <ol className="flex flex-col border-l border-hairline">
         {sections.map((section) => {
           const current = section.id === active;

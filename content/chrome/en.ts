@@ -90,6 +90,9 @@ export const chrome = {
     siteNavLabel: "Site navigation",
     language: "Language",
     optional: "Optional",
+    /* The copy-link button, which the manifesto and the principles both use. */
+    copied: "Copied",
+    copiedToClipboard: "Link copied to clipboard",
   },
 
   notFound: {

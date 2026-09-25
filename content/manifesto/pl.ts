@@ -7,6 +7,17 @@ export const manifestoText: ManifestoText = {
     subtitle: "O cywilizację chrześcijańską, europejską i na ludzką miarę",
     status: "Dokument założycielski · Tekst poddany pod rozwagę przed formalnym przyjęciem",
   },
+  labels: {
+    eyebrow: "Dokument założycielski",
+    download: "Pobierz manifest",
+    contents: "Spis treści",
+    contentsNavLabel: "Spis treści manifestu",
+    progressLabel: "Postęp czytania",
+    copyDocument: "Skopiuj odnośnik do manifestu",
+    copySection: "Skopiuj odnośnik do części {numeral}, {title}",
+    reference:
+      "Wersją rozstrzygającą jest tekst angielski. Gdy jakiś fragment jest wewnątrz ruchu sporny, różnicę zdań się odnotowuje, a nie usuwa milczącą poprawką.",
+  },
   sections: {
     preamble: {
       title: "Preambuła",

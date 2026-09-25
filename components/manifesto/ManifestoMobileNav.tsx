@@ -8,13 +8,14 @@ import { useActiveSection } from "./useActiveSection";
 
 interface ManifestoMobileNavProps {
   readonly sections: readonly SectionLink[];
+  readonly contents: string;
 }
 
 /**
  * Section selector for small screens: a sticky bar naming the section being
  * read, which opens the full contents list.
  */
-export function ManifestoMobileNav({ sections }: ManifestoMobileNavProps) {
+export function ManifestoMobileNav({ sections, contents }: ManifestoMobileNavProps) {
   const ids = useMemo(() => sections.map((section) => section.id), [sections]);
   const active = useActiveSection(ids);
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ export function ManifestoMobileNav({ sections }: ManifestoMobileNavProps) {
           </span>
         </span>
         <span className="flex shrink-0 items-center gap-2">
-          <span className="eyebrow text-muted">Contents</span>
+          <span className="eyebrow text-muted">{contents}</span>
           <ChevronDown
             className={cn("size-4 text-muted transition-transform", open && "rotate-180")}
             strokeWidth={1.5}

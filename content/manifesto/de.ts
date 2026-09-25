@@ -7,6 +7,17 @@ export const manifestoText: ManifestoText = {
     subtitle: "Für eine christliche, europäische Zivilisation nach menschlichem Maß",
     status: "Gründungsdokument · Text in Prüfung vor der förmlichen Annahme",
   },
+  labels: {
+    eyebrow: "Gründungsdokument",
+    download: "Manifest herunterladen",
+    contents: "Inhalt",
+    contentsNavLabel: "Inhaltsverzeichnis des Manifests",
+    progressLabel: "Lesefortschritt",
+    copyDocument: "Link zum Manifest kopieren",
+    copySection: "Link zu Abschnitt {numeral}, {title} kopieren",
+    reference:
+      "Maßgeblich ist die englische Fassung. Wo eine Passage innerhalb der Bewegung umstritten ist, wird die Meinungsverschiedenheit festgehalten und nicht durch eine stillschweigende Änderung aufgelöst.",
+  },
   sections: {
     preamble: {
       title: "Präambel",

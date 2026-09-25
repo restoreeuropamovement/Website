@@ -949,6 +949,17 @@ export const manifestoText: ManifestoText = {
     subtitle: manifestoMeta.subtitle,
     status: manifestoMeta.status,
   },
+  labels: {
+    eyebrow: "Founding document",
+    download: "Download Manifesto",
+    contents: "Contents",
+    contentsNavLabel: "Manifesto contents",
+    progressLabel: "Reading progress",
+    copyDocument: "Copy link to the manifesto",
+    copySection: "Copy link to section {numeral}, {title}",
+    reference:
+      "This text is the reference version. Where a passage is disputed within the movement, the disagreement is recorded rather than resolved by amendment in silence.",
+  },
   sections: Object.fromEntries(
     manifestoSections.map((section) => [
       section.id,

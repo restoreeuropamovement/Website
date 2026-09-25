@@ -7,6 +7,17 @@ export const manifestoText: ManifestoText = {
     subtitle: "Pour une civilisation chrétienne, européenne et à l'échelle humaine",
     status: "Document fondateur · Texte en cours de révision avant adoption formelle",
   },
+  labels: {
+    eyebrow: "Document fondateur",
+    download: "Télécharger le manifeste",
+    contents: "Sommaire",
+    contentsNavLabel: "Sommaire du manifeste",
+    progressLabel: "Progression de la lecture",
+    copyDocument: "Copier le lien vers le manifeste",
+    copySection: "Copier le lien vers la section {numeral}, {title}",
+    reference:
+      "La version de référence est le texte anglais. Lorsqu'un passage est contesté au sein du mouvement, le désaccord est consigné plutôt que résolu par une modification faite en silence.",
+  },
   sections: {
     preamble: {
       title: "Préambule",

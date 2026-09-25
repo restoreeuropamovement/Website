@@ -12,6 +12,9 @@ interface PrincipleEntryProps {
   readonly locale: Locale;
   readonly inManifesto: string;
   readonly copyLinkTo: string;
+  /** The copy button's other two words, shared with the manifesto. */
+  readonly copied: string;
+  readonly copiedAnnouncement: string;
 }
 
 export function PrincipleEntry({
@@ -19,6 +22,8 @@ export function PrincipleEntry({
   locale,
   inManifesto,
   copyLinkTo,
+  copied,
+  copiedAnnouncement,
 }: PrincipleEntryProps) {
   return (
     <section
@@ -35,6 +40,8 @@ export function PrincipleEntry({
             <CopyLinkButton
               anchor={principle.id}
               label={`${copyLinkTo} ${principle.title}`}
+              copied={copied}
+              copiedAnnouncement={copiedAnnouncement}
             />
           </div>
 

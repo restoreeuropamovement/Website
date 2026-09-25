@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { isTranslatedLocale, TRANSLATED_LOCALES } from "@/lib/i18n";
+import { setRequestLocale } from "@/lib/request-locale";
 
 /**
  * The public site in a language other than English.
@@ -29,6 +30,9 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isTranslatedLocale(locale)) notFound();
+
+  // Read back by `not-found.tsx`, which is given no params of its own.
+  setRequestLocale(locale);
 
   return <SiteChrome locale={locale}>{children}</SiteChrome>;
 }

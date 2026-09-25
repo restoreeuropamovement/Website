@@ -6,11 +6,19 @@ import { useEffect, useState } from "react";
 interface CopyLinkButtonProps {
   /** Fragment identifier of the section, without the hash. */
   readonly anchor: string;
-  readonly label?: string;
+  readonly label: string;
+  /** Shown beside the tick, and announced, in the language being read. */
+  readonly copied: string;
+  readonly copiedAnnouncement: string;
 }
 
 /** Copies a permanent link to one section. Falls back to the plain anchor. */
-export function CopyLinkButton({ anchor, label = "Copy link to section" }: CopyLinkButtonProps) {
+export function CopyLinkButton({
+  anchor,
+  label,
+  copied: copiedLabel,
+  copiedAnnouncement,
+}: CopyLinkButtonProps) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -41,13 +49,13 @@ export function CopyLinkButton({ anchor, label = "Copy link to section" }: CopyL
       {copied ? (
         <>
           <Check className="size-3.5" strokeWidth={2} aria-hidden="true" />
-          <span className="eyebrow">Copied</span>
+          <span className="eyebrow">{copiedLabel}</span>
         </>
       ) : (
         <Link2 className="size-3.5" strokeWidth={1.75} aria-hidden="true" />
       )}
       <span aria-live="polite" className="sr-only">
-        {copied ? "Link copied to clipboard" : ""}
+        {copied ? copiedAnnouncement : ""}
       </span>
     </button>
   );

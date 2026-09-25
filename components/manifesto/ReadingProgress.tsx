@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 interface ReadingProgressProps {
   /** Element whose scroll extent the bar measures. */
   readonly targetId: string;
+  /** Names the bar to a screen reader; nothing about it is visible text. */
+  readonly label: string;
 }
 
 /**
@@ -12,7 +14,7 @@ interface ReadingProgressProps {
  * Deliberately not built on a scroll library: one passive listener and a
  * transform is cheaper and smooth enough.
  */
-export function ReadingProgress({ targetId }: ReadingProgressProps) {
+export function ReadingProgress({ targetId, label }: ReadingProgressProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function ReadingProgress({ targetId }: ReadingProgressProps) {
     <div
       className="sticky top-18 z-40 h-px w-full bg-hairline lg:top-20"
       role="progressbar"
-      aria-label="Reading progress"
+      aria-label={label}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(progress * 100)}

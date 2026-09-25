@@ -1,6 +1,6 @@
 import { createDictionary } from "@/lib/dictionary";
 import type { ContentBlock, ManifestoSectionData } from "@/lib/content-types";
-import type { Locale } from "@/lib/i18n";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import {
   manifestoMeta as enMeta,
   manifestoSections as enSections,
@@ -20,8 +20,9 @@ import { manifestoStructure, type ManifestoSectionId } from "./structure";
  * what makes it impossible for a translated edition to renumber itself, reorder
  * the document, or lose an anchor the policy catalogue links to.
  *
- * The plain-text download is always the English text, and the download button
- * says so.
+ * The plain-text download is generated from whichever edition is being read,
+ * so a reader on `/de/manifesto` downloads the German text rather than being
+ * handed the English one by a button with no language in it.
  */
 export { manifestoMeta, manifestoSections } from "./en";
 export { manifestoStructure } from "./structure";
@@ -33,19 +34,57 @@ export interface ManifestoSectionText {
   readonly body: readonly ContentBlock[];
 }
 
+/**
+ * The page around the document: the eyebrow, the download, the contents list
+ * and the note that closes it.
+ *
+ * These were written into `components/manifesto/` while the manifesto existed
+ * in English only, which meant a German reader was given the whole document in
+ * German under an English heading, with an English contents list beside it.
+ */
+export interface ManifestoLabels {
+  readonly eyebrow: string;
+  readonly download: string;
+  readonly contents: string;
+  /** Names the contents list to a screen reader, which sees several navs. */
+  readonly contentsNavLabel: string;
+  readonly progressLabel: string;
+  readonly copyDocument: string;
+  /**
+   * `{numeral}` and `{title}` are the section's own, from the structure. The
+   * button's other two words — "Copied", and what is announced — are shared
+   * with the principles page and live in `content/chrome`.
+   */
+  readonly copySection: string;
+  /**
+   * What authority this edition carries.
+   *
+   * The one string here that deliberately says something different in each
+   * language rather than the same thing: the English edition is the reference
+   * version, so the other five say so of the English rather than of
+   * themselves. A translation claiming to be authoritative would be a false
+   * statement about the movement's own text.
+   */
+  readonly reference: string;
+}
+
 export interface ManifestoText {
   readonly meta: {
     readonly title: string;
     readonly subtitle: string;
     readonly status: string;
   };
+  readonly labels: ManifestoLabels;
   readonly sections: Record<ManifestoSectionId, ManifestoSectionText>;
 }
 
 export interface ManifestoEdition {
+  /** Which language this edition is, for the download link and the `lang`. */
+  readonly locale: Locale;
   readonly title: string;
   readonly subtitle: string;
   readonly status: string;
+  readonly labels: ManifestoLabels;
   readonly sections: readonly ManifestoSectionData[];
 }
 
@@ -66,9 +105,11 @@ export async function getManifesto(locale: Locale): Promise<ManifestoEdition> {
   const text = await getManifestoText(locale);
 
   return {
+    locale,
     title: text.meta.title,
     subtitle: text.meta.subtitle,
     status: text.meta.status,
+    labels: text.labels,
     sections: manifestoStructure.map((structure) => ({
       id: structure.id,
       numeral: structure.numeral,
@@ -79,8 +120,10 @@ export async function getManifesto(locale: Locale): Promise<ManifestoEdition> {
 
 /** The English edition in the same shape, for routes with no locale in hand. */
 export const englishEdition: ManifestoEdition = {
+  locale: DEFAULT_LOCALE,
   title: enMeta.title,
   subtitle: enMeta.subtitle,
   status: enMeta.status,
+  labels: englishText.labels,
   sections: enSections,
 };

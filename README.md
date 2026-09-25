@@ -71,7 +71,8 @@ rather than accepting details they cannot store safely.
 ## Where things live
 
 ```
-app/(site)/            the public site — owns the navbar, footer and analytics
+app/(site)/            the public site in English — owns the navbar, footer and analytics
+app/[locale]/          the same pages in the other five languages
 app/admin/(entry)/     sign-in and first-passkey enrolment, unauthenticated
 app/admin/(dashboard)/ everything behind the session gate
 app/api/admin/auth/    the WebAuthn ceremonies
@@ -89,6 +90,14 @@ styles/                design tokens and global CSS
 Route groups — the names in parentheses — do not appear in URLs. They exist so
 that `app/layout.tsx` can stay a bare document shell and the admin surface can
 inherit none of the public chrome.
+
+A 404 answers in the language of the address. `/de/keine-seite` is matched by
+the catch-all at `app/[locale]/[...rest]`, which fails inside the locale layout
+so the boundary beside it can read back which language was being served — a
+`not-found.tsx` is given no params of its own, hence `lib/request-locale.ts`.
+An address with no language prefix, or one the site does not speak, falls to
+`app/not-found.tsx` and is answered in English, because an unknown prefix says
+nothing about what the reader reads.
 
 ### Editing the words
 

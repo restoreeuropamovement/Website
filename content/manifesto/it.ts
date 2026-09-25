@@ -7,6 +7,17 @@ export const manifestoText: ManifestoText = {
     subtitle: "Per una civiltà cristiana, europea e a misura d'uomo",
     status: "Documento fondativo · Testo in revisione prima dell'adozione formale",
   },
+  labels: {
+    eyebrow: "Documento fondativo",
+    download: "Scarica il manifesto",
+    contents: "Indice",
+    contentsNavLabel: "Indice del manifesto",
+    progressLabel: "Avanzamento della lettura",
+    copyDocument: "Copia il link al manifesto",
+    copySection: "Copia il link alla sezione {numeral}, {title}",
+    reference:
+      "La versione di riferimento è il testo inglese. Dove un passaggio è discusso all'interno del movimento, il disaccordo viene registrato anziché risolto con una modifica fatta in silenzio.",
+  },
   sections: {
     preamble: {
       title: "Preambolo",

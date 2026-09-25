@@ -1,8 +1,21 @@
 import { ContentBlocks } from "@/components/content/ContentBlocks";
+import type { ManifestoLabels } from "@/content/manifesto";
 import type { ManifestoSectionData } from "@/lib/content-types";
+import { fill } from "@/lib/format";
 import { CopyLinkButton } from "./CopyLinkButton";
 
-export function ManifestoSection({ section }: { readonly section: ManifestoSectionData }) {
+export function ManifestoSection({
+  section,
+  labels,
+  copied,
+  copiedAnnouncement,
+}: {
+  readonly section: ManifestoSectionData;
+  readonly labels: ManifestoLabels;
+  /** Shared with the principles page, so these come from the chrome. */
+  readonly copied: string;
+  readonly copiedAnnouncement: string;
+}) {
   return (
     <section
       id={section.id}
@@ -16,7 +29,12 @@ export function ManifestoSection({ section }: { readonly section: ManifestoSecti
           <span className="eyebrow text-burgundy">{section.numeral}</span>
           <CopyLinkButton
             anchor={section.id}
-            label={`Copy link to section ${section.numeral}, ${section.title}`}
+            label={fill(labels.copySection, {
+              numeral: section.numeral,
+              title: section.title,
+            })}
+            copied={copied}
+            copiedAnnouncement={copiedAnnouncement}
           />
         </div>
 

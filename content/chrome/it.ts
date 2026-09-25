@@ -74,6 +74,8 @@ export const chrome: ChromeContent = {
     siteNavLabel: "Navigazione del sito",
     language: "Lingua",
     optional: "Facoltativo",
+    copied: "Copiato",
+    copiedToClipboard: "Link copiato negli appunti",
   },
 
   notFound: {

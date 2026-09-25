@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PrincipleEntry } from "@/components/principles/PrincipleEntry";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { getChrome } from "@/content/chrome";
 import { getPrinciples } from "@/content/principles";
 import { localePath, type Locale } from "@/lib/i18n";
 import { routes } from "@/lib/site";
@@ -9,7 +10,10 @@ import { pad } from "@/lib/utils";
 
 /** The principles page in one language. Rendered by both public route trees. */
 export async function PrinciplesView({ locale }: { readonly locale: Locale }) {
-  const { meta, principles } = await getPrinciples(locale);
+  const [{ meta, principles }, chrome] = await Promise.all([
+    getPrinciples(locale),
+    getChrome(locale),
+  ]);
 
   return (
     <>
@@ -42,6 +46,8 @@ export async function PrinciplesView({ locale }: { readonly locale: Locale }) {
             locale={locale}
             inManifesto={meta.inManifesto}
             copyLinkTo={meta.copyLinkTo}
+            copied={chrome.common.copied}
+            copiedAnnouncement={chrome.common.copiedToClipboard}
           />
         ))}
       </Container>
