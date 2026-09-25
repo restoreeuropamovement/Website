@@ -1,11 +1,5 @@
 import Link from "next/link";
-import type {
-  PolicyCategory,
-  PolicyCategoryId,
-  PolicyEdition,
-  PolicyStatusId,
-  PolicyStatusOption,
-} from "@/content/policy";
+import type { PolicyCategory, PolicyCategoryId, PolicyEdition } from "@/content/policy";
 import { localePath } from "@/lib/i18n";
 import { policyHref } from "@/lib/policy";
 import { cn } from "@/lib/utils";
@@ -13,11 +7,8 @@ import { cn } from "@/lib/utils";
 interface PolicyFiltersProps {
   readonly edition: PolicyEdition;
   readonly categories: readonly PolicyCategory[];
-  /** Only statuses the catalogue actually uses, so no pill returns nothing. */
-  readonly statuses: readonly PolicyStatusOption[];
   readonly q: string;
   readonly category?: PolicyCategoryId;
-  readonly status?: PolicyStatusId;
 }
 
 const pill =
@@ -30,17 +21,10 @@ const pillOff = "border-hairline text-muted hover:border-ink hover:text-ink";
  * any view of the catalogue can be linked to, bookmarked and read without
  * JavaScript. The search box is an ordinary GET form for the same reason.
  */
-export function PolicyFilters({
-  edition,
-  categories,
-  statuses,
-  q,
-  category,
-  status,
-}: PolicyFiltersProps) {
+export function PolicyFilters({ edition, categories, q, category }: PolicyFiltersProps) {
   const { locale } = edition;
   const text = edition.filters;
-  const filtered = q !== "" || category !== undefined || status !== undefined;
+  const filtered = q !== "" || category !== undefined;
 
   return (
     <div className="flex flex-col gap-8">
@@ -64,9 +48,8 @@ export function PolicyFilters({
           />
         </div>
 
-        {/* The active filters survive a search, rather than being reset by it. */}
+        {/* The active filter survives a search, rather than being reset by it. */}
         {category ? <input type="hidden" name="category" value={category} /> : null}
-        {status ? <input type="hidden" name="status" value={status} /> : null}
 
         <div className="flex items-end gap-3">
           <button
@@ -91,7 +74,7 @@ export function PolicyFilters({
         <ul className="flex flex-wrap items-center gap-2">
           <li>
             <Link
-              href={policyHref(locale, { q, status })}
+              href={policyHref(locale, { q })}
               aria-current={category ? undefined : "true"}
               className={cn(pill, category ? pillOff : pillOn)}
             >
@@ -101,7 +84,7 @@ export function PolicyFilters({
           {categories.map((item) => (
             <li key={item.id}>
               <Link
-                href={policyHref(locale, { q, status, category: item.id })}
+                href={policyHref(locale, { q, category: item.id })}
                 aria-current={category === item.id ? "true" : undefined}
                 className={cn(pill, category === item.id ? pillOn : pillOff)}
               >
@@ -109,32 +92,6 @@ export function PolicyFilters({
                   {item.numeral}
                 </span>
                 {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <nav aria-label={text.statusNavLabel}>
-        <h2 className="eyebrow mb-3 text-muted">{text.statusHeading}</h2>
-        <ul className="flex flex-wrap items-center gap-2">
-          <li>
-            <Link
-              href={policyHref(locale, { q, category })}
-              aria-current={status ? undefined : "true"}
-              className={cn(pill, status ? pillOff : pillOn)}
-            >
-              {text.anyStatus}
-            </Link>
-          </li>
-          {statuses.map((item) => (
-            <li key={item.id}>
-              <Link
-                href={policyHref(locale, { q, category, status: item.id })}
-                aria-current={status === item.id ? "true" : undefined}
-                className={cn(pill, status === item.id ? pillOn : pillOff)}
-              >
-                {item.label}
               </Link>
             </li>
           ))}

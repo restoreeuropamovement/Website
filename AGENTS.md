@@ -120,7 +120,7 @@ ends up being decided by a translator.
 | Principles — the words      | `content/principles/en.ts`         |
 | Principles — order, anchors | `content/principles/structure.ts`  |
 | Policy catalogue — words    | `content/policy/en.ts`             |
-| Policy — slugs, statuses    | `content/policy/structure.ts`      |
+| Policy — slugs, ordering    | `content/policy/structure.ts`      |
 | Navigation, footer, 404     | `content/chrome/en.ts`             |
 | Vision                      | `content/vision/en.ts`             |
 | About                       | `content/about/en.ts`              |

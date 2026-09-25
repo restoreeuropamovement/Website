@@ -5,30 +5,16 @@ export const policyText: PolicyText = {
     eyebrow: "Positionen",
     title: "Programmkatalog",
     metaTitle: "Programmkatalog",
-    version: "Version 0.3",
-    framework: "Europäische integrale Erneuerung",
     lede: "Dieser Katalog beantwortet eine eng gefasste Frage: Was vertritt Restore Europa in dieser Sache? Er ersetzt das Manifest nicht. Das Manifest legt das Weltbild dar; hier stehen durchsuchbare Positionen, Thema für Thema.",
     description:
-      "Durchsuchbare Positionen des Restore Europa Movement, Thema für Thema, jede mit dem Vermerk, wie fest sie steht: sittliche Ordnung, Familie, Staatsbürgerschaft, Wirtschaft, Technik, Bildung, Justiz, Gesundheitswesen, Umwelt und Außenpolitik.",
+      "Durchsuchbare Positionen des Restore Europa Movement, Thema für Thema: sittliche Ordnung, Familie, Staatsbürgerschaft, Wirtschaft, Technik, Bildung, Justiz, Gesundheitswesen, Umwelt und Außenpolitik.",
     body: [
       "Wo die katholische Sittenlehre klar ist, übernimmt Restore Europa sie in der Regel als sittliche Grundlinie und nennt die Umsetzung im bürgerlichen Recht gesondert. Eine Abweichung ist ausdrücklich festgehalten: Bei der Todesstrafe hält Restore Europa an der älteren überlieferten Zulassung für Ausnahmefälle fest und nicht an der heutigen abolitionistischen Position.",
       "Der Katalog unterscheidet die Verfassungsordnung, die Restore Europa anstrebt, vom geltenden europäischen Recht. Mehrere Positionen — zur Staatsangehörigkeit, zur Aberkennung der Staatsbürgerschaft, zur Meinungsfreiheit, zur öffentlichen Stellung der Religion und zur Todesstrafe — setzten eine Verfassungs- oder Vertragsänderung voraus, ehe sie in einzelnen europäischen Staaten in Kraft gesetzt werden könnten.",
-      "Version 0.2 entscheidet die Fragen, die Version 0.1 offengelassen hatte: das Verhältnis zu den europäischen Institutionen, Asyl, Abschiebung, Löhne, Steuern, Renten, Wohnen, die Vertretung der Arbeitnehmer, digitale Identität und digitale Währung, biometrische Überwachung, Gentechnik, das Strafmaß, den Energiemix und jede offene Frage der Außenpolitik. Wo eine Formulierung der Version 0.2 einen früheren Eintrag geändert hat, gilt der neuere Text.",
-      "Version 0.3 fügt den Komplex zu Remigration und Vollzug hinzu. Er unterscheidet Staatsbürgerschaft, Aufenthaltsstatus, strafrechtliche Abschiebung, asylrechtliche Rückkehr und die Überprüfung der Staatsangehörigkeit, statt Remigration als eine einzige, undifferenzierte Befugnis zu behandeln, und ist als vorgeschlagene Verfassungs- und Gesetzespolitik verfasst, wobei das geltende europäische und internationale Recht in jedem Eintrag gesondert vermerkt wird. Zwei frühere Einträge — die Einbürgerung und die Abschiebung straffällig gewordener Ausländer — gehen in den neueren Formulierungen auf, statt daneben doppelt zu bestehen.",
     ],
-    notice:
-      "Jede Frage in diesem Katalog trägt eine Position. Einträge, die als Abgeleitet gekennzeichnet sind, folgen der Richtung des Manifests, ohne dass ihre Umsetzung feststünde. Positionen werden geändert, sobald die Bewegung entscheidet; Version und Datum oben sagen, welchen Text Sie lesen.",
-  },
-
-  labels: {
-    version: "Version",
-    date: "Datum",
-    framework: "Rahmen",
-    entries: "Einträge",
   },
 
   index: {
-    legendHeading: "Erläuterung der Status",
     showingAll: {
       one: "Die einzige Position wird angezeigt.",
       other: "Alle {count} Positionen werden angezeigt.",
@@ -44,24 +30,6 @@ export const policyText: PolicyText = {
       heading: "Nächstliegende Positionen",
       body: "Diese Einträge kommen dem Eingegebenen am nächsten. Sie verwenden möglicherweise andere Wörter.",
     },
-    openQueue: {
-      heading: "Offene Fragen der Programmarbeit",
-      body: "Diese Fragen sind als unentschieden festgehalten und nicht aus der Weltanschauung abgeleitet. Sie sind aufgeführt, damit die Lücken sichtbar bleiben, statt stillschweigend gefüllt zu werden.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "In der Richtung entschieden, nicht im Einzelnen",
-      body: "Jede Frage des Katalogs trägt inzwischen eine Position. Dies sind die Größen innerhalb dieser Positionen, die nicht festgelegt sind und die nicht erfunden werden, ehe es eine Grundlage für sie gibt.",
-      items: [
-        "Genaue Steuersätze und Schwellenwerte",
-        "Genaue Strafrahmen",
-        "Das Verfahren der Altersprüfung für soziale Medien",
-        "Netto-Null-Termine, CO₂-Preise und Emissionsquoten",
-        "Die Kriterien, Amt für Amt, für die öffentlichen Ämter mit beschränktem Zugang",
-        "Karenzzeiten für ausländische Einwohner nach unverschuldetem Verlust des Arbeitsplatzes",
-        "Titelabhängige Abwesenheitsfristen und Höchstdauern der Abschiebungshaft",
-      ],
-    },
   },
 
   filters: {
@@ -72,9 +40,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Positionen nach Abschnitt filtern",
     sectionHeading: "Abschnitt",
     allSections: "Alle",
-    statusNavLabel: "Positionen nach Status filtern",
-    statusHeading: "Status",
-    anyStatus: "Beliebig",
   },
 
   entry: {
@@ -91,27 +56,6 @@ export const policyText: PolicyText = {
     allPositions: "Alle Positionen",
     readManifesto: "Das Manifest lesen",
     notFound: "Position nicht gefunden",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Manifestkern",
-      description: "Ausdrücklich festgelegt im Manifest der europäischen integralen Erneuerung.",
-    },
-    agreed: {
-      label: "Beschlossene Position",
-      description:
-        "Eine Position, die nach der Abfassung des Manifests für diesen Katalog festgelegt wurde.",
-    },
-    derived: {
-      label: "Abgeleitet",
-      description:
-        "Vom Manifest oder von einer beschlossenen Position deutlich nahegelegt, aber die Umsetzung steht nicht fest.",
-    },
-    open: {
-      label: "Offen",
-      description: "Es wurde keine Position beschlossen.",
-    },
   },
 
   categories: {

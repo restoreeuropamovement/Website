@@ -5,30 +5,16 @@ export const policyText: PolicyText = {
     eyebrow: "Posiciones",
     title: "Catálogo programático",
     metaTitle: "Catálogo programático",
-    version: "Versión 0.3",
-    framework: "Restauracionismo integral europeo",
     lede: "Este catálogo responde a una pregunta concreta: ¿qué sostiene Restore Europa sobre este asunto? No sustituye al manifiesto. El manifiesto expone la visión del mundo; esto expone posiciones consultables, tema por tema.",
     description:
-      "Posiciones consultables, tema por tema, de Restore Europa Movement, cada una con la indicación de hasta qué punto está fijada: orden moral, familia, ciudadanía, economía, tecnología, educación, justicia, sanidad, medio ambiente y política exterior.",
+      "Posiciones consultables, tema por tema, de Restore Europa Movement: orden moral, familia, ciudadanía, economía, tecnología, educación, justicia, sanidad, medio ambiente y política exterior.",
     body: [
       "Allí donde la enseñanza moral católica es clara, Restore Europa la adopta por lo general como criterio moral de partida, y expone por separado su aplicación en el derecho civil. Se deja constancia explícita de una discrepancia: en materia de pena capital, Restore Europa asume la antigua admisión tradicional para casos excepcionales y no la posición abolicionista contemporánea.",
       "El catálogo distingue el orden constitucional al que aspira Restore Europa del derecho europeo tal como hoy está. Varias posiciones —sobre la nacionalidad, sobre la privación de la ciudadanía, sobre la libertad de expresión, sobre la posición pública de la religión y sobre la pena capital— exigirían una reforma constitucional o de los tratados antes de poder promulgarse en determinados Estados europeos.",
-      "La versión 0.2 resuelve las cuestiones que la versión 0.1 había dejado abiertas: la relación institucional europea, el asilo, la expulsión, los salarios, la fiscalidad, las pensiones, la vivienda, la representación laboral, la identidad y la moneda digitales, la vigilancia biométrica, la ingeniería genética, la determinación de las penas, el mix energético y todas las cuestiones pendientes de política exterior. Cuando una formulación de la v0.2 haya revisado una entrada anterior, rige el texto más reciente.",
-      "La versión 0.3 añade el conjunto de entradas sobre la remigración y su ejecución. Distingue la ciudadanía, el estatuto de residencia, la expulsión penal, el retorno tras el asilo y la revisión de la nacionalidad, en lugar de tratar la remigración como una única potestad indiferenciada, y está redactada como política constitucional y legal propuesta, señalando por separado en cada entrada el derecho europeo e internacional vigente. Dos entradas anteriores —la naturalización y la expulsión de delincuentes extranjeros— quedan integradas en las formulaciones más recientes en lugar de duplicarse junto a ellas.",
     ],
-    notice:
-      "Todas las cuestiones de este catálogo llevan una posición. Las entradas marcadas como Derivada siguen la orientación del manifiesto sin que su aplicación esté fijada. Las posiciones se revisan a medida que el movimiento decide; la versión y la fecha que figuran arriba indican qué texto está leyendo.",
-  },
-
-  labels: {
-    version: "Versión",
-    date: "Fecha",
-    framework: "Marco",
-    entries: "Entradas",
   },
 
   index: {
-    legendHeading: "Leyenda de estados",
     showingAll: {
       one: "Se muestra la única posición.",
       other: "Se muestran las {count} posiciones.",
@@ -44,24 +30,6 @@ export const policyText: PolicyText = {
       heading: "Posiciones más cercanas",
       body: "Estas son las entradas más próximas a lo que se ha escrito. Puede que no empleen las mismas palabras.",
     },
-    openQueue: {
-      heading: "Cuestiones abiertas en desarrollo",
-      body: "Estas cuestiones constan como no decididas en lugar de deducirse de la ideología. Se enumeran para que las lagunas queden a la vista y no se rellenen en silencio.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "Fijado en la orientación, no en el detalle",
-      body: "Todas las cuestiones del catálogo llevan ya una posición. Estas son las cifras contenidas en esas posiciones que no se han fijado, y que no se inventarán antes de que haya fundamento para ellas.",
-      items: [
-        "Los tipos impositivos y los umbrales exactos",
-        "Las horquillas exactas de las penas",
-        "El mecanismo de verificación de edad para las redes sociales",
-        "Las fechas de emisiones netas cero, los precios del carbono y las cuotas de emisión",
-        "Los criterios, cargo por cargo, de los cargos públicos restringidos",
-        "Los periodos de gracia para los residentes extranjeros tras una pérdida involuntaria del empleo",
-        "Los periodos de ausencia propios de cada permiso y los límites máximos del internamiento",
-      ],
-    },
   },
 
   filters: {
@@ -72,9 +40,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Filtrar las posiciones por sección",
     sectionHeading: "Sección",
     allSections: "Todas",
-    statusNavLabel: "Filtrar las posiciones por estado",
-    statusHeading: "Estado",
-    anyStatus: "Cualquiera",
   },
 
   entry: {
@@ -91,27 +56,6 @@ export const policyText: PolicyText = {
     allPositions: "Todas las posiciones",
     readManifesto: "Lee el manifiesto",
     notFound: "Posición no encontrada",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Núcleo del manifiesto",
-      description:
-        "Establecida expresamente por el Manifiesto del restauracionismo integral europeo.",
-    },
-    agreed: {
-      label: "Posición acordada",
-      description: "Una posición fijada para este catálogo después de redactarse el manifiesto.",
-    },
-    derived: {
-      label: "Derivada",
-      description:
-        "Firmemente implícita en el manifiesto o en una posición acordada, pero cuya aplicación no está fijada.",
-    },
-    open: {
-      label: "Abierta",
-      description: "No se ha adoptado ninguna posición.",
-    },
   },
 
   categories: {

@@ -5,30 +5,16 @@ export const policyText: PolicyText = {
     eyebrow: "Stanowiska",
     title: "Katalog programowy",
     metaTitle: "Katalog programowy",
-    version: "Wersja 0.3",
-    framework: "Europejska odnowa integralna",
     lede: "Ten katalog odpowiada na wąskie pytanie: jakie stanowisko zajmuje Restore Europa w tej sprawie? Nie zastępuje manifestu. Manifest wykłada światopogląd; tutaj wyłożone są stanowiska temat po temacie, z wyszukiwarką.",
     description:
-      "Stanowiska Restore Europa Movement temat po temacie, z wyszukiwarką, każde opatrzone informacją o tym, jak dalece jest rozstrzygnięte: ład moralny, rodzina, obywatelstwo, gospodarka, technika, edukacja, wymiar sprawiedliwości, ochrona zdrowia, środowisko i polityka zagraniczna.",
+      "Stanowiska Restore Europa Movement temat po temacie, z wyszukiwarką: ład moralny, rodzina, obywatelstwo, gospodarka, technika, edukacja, wymiar sprawiedliwości, ochrona zdrowia, środowisko i polityka zagraniczna.",
     body: [
       "Tam, gdzie katolicka nauka moralna jest jasna, Restore Europa z reguły przyjmuje ją jako moralny punkt wyjścia, a jej wykonanie w prawie cywilnym określa osobno. Jedno odstępstwo zapisujemy wprost: w sprawie kary śmierci Restore Europa przyjmuje dawniejsze, tradycyjne dopuszczenie jej w wypadkach wyjątkowych, a nie współczesne stanowisko abolicjonistyczne.",
       "Katalog odróżnia ład konstytucyjny, do którego Restore Europa dąży, od prawa europejskiego w jego obecnym stanie. Kilka stanowisk — w sprawie obywatelstwa, pozbawienia obywatelstwa, wolności słowa, publicznego statusu religii oraz kary śmierci — wymagałoby zmiany konstytucji lub traktatów, zanim mogłoby zostać wprowadzone w poszczególnych państwach Europy.",
-      "Wersja 0.2 rozstrzyga pytania, które wersja 0.1 pozostawiła otwarte: stosunek instytucjonalny do Europy, azyl, deportacje, wynagrodzenia, podatki, emerytury, mieszkalnictwo, reprezentację pracowniczą, tożsamość i walutę cyfrową, nadzór biometryczny, inżynierię genetyczną, wymiar kar, miks energetyczny i każde stałe pytanie polityki zagranicznej. Tam, gdzie sformułowanie z wersji 0.2 zmieniło wcześniejszy wpis, obowiązuje tekst nowszy.",
-      "Wersja 0.3 dodaje zespół wpisów o remigracji i jej egzekwowaniu. Odróżnia on obywatelstwo, status pobytowy, deportację z powodu przestępstwa, powrót po zakończeniu procedury azylowej oraz weryfikację obywatelstwa, zamiast traktować remigrację jako jedno nierozróżnione uprawnienie; jest napisany jako projektowana polityka konstytucyjna i ustawowa, a obowiązujące prawo europejskie i międzynarodowe wskazano osobno w każdym wpisie. Dwa wcześniejsze wpisy — naturalizacja oraz deportacja przestępców niebędących obywatelami — zostały wchłonięte przez nowsze sformułowania, zamiast istnieć obok nich podwójnie.",
     ],
-    notice:
-      "Każde pytanie w tym katalogu ma swoje stanowisko. Wpisy oznaczone jako Wyprowadzone idą w kierunku wskazanym przez manifest, choć ich wykonanie nie zostało ustalone. Stanowiska są zmieniane w miarę decyzji ruchu; wersja i data powyżej mówią, który tekst czytasz.",
-  },
-
-  labels: {
-    version: "Wersja",
-    date: "Data",
-    framework: "Ramy ideowe",
-    entries: "Wpisy",
   },
 
   index: {
-    legendHeading: "Legenda statusów",
     /*
      * Cztery formy, nie dwie. Polski liczy inaczej 1, inaczej 2–4 i inaczej 5
      * i więcej; `other` obsługuje przypadek ułamkowy, którego strona nigdy nie
@@ -53,24 +39,6 @@ export const policyText: PolicyText = {
       heading: "Najbliższe stanowiska",
       body: "To są wpisy najbliższe temu, co zostało wpisane. Mogą używać innych słów.",
     },
-    openQueue: {
-      heading: "Kolejka spraw otwartych",
-      body: "Te pytania zapisujemy jako nierozstrzygnięte, zamiast wywodzić odpowiedź z ideologii. Wymieniamy je, żeby luki były widoczne, a nie po cichu wypełnione.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "Rozstrzygnięte co do kierunku, nie co do szczegółu",
-      body: "Każde pytanie w katalogu ma już stanowisko. Poniżej wymieniamy liczby wewnątrz tych stanowisk, które nie zostały ustalone i nie zostaną wymyślone, dopóki nie będzie dla nich podstawy.",
-      items: [
-        "Dokładne stawki i progi podatkowe",
-        "Dokładne widełki kar w prawie karnym",
-        "Mechanizm weryfikacji wieku w mediach społecznościowych",
-        "Daty zerowej emisji netto, ceny emisji dwutlenku węgla i limity emisji",
-        "Kryteria — urząd po urzędzie — dla zastrzeżonych urzędów publicznych",
-        "Okresy ochronne dla cudzoziemców po niezawinionej utracie pracy",
-        "Okresy nieobecności właściwe dla poszczególnych zezwoleń i górne granice detencji imigracyjnej",
-      ],
-    },
   },
 
   filters: {
@@ -81,9 +49,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Filtruj stanowiska według działu",
     sectionHeading: "Dział",
     allSections: "Wszystkie",
-    statusNavLabel: "Filtruj stanowiska według statusu",
-    statusHeading: "Status",
-    anyStatus: "Dowolny",
   },
 
   entry: {
@@ -100,26 +65,6 @@ export const policyText: PolicyText = {
     allPositions: "Wszystkie stanowiska",
     readManifesto: "Przeczytaj manifest",
     notFound: "Nie znaleziono stanowiska",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Rdzeń manifestu",
-      description: "Ustalone wprost w Manifeście europejskiej odnowy integralnej.",
-    },
-    agreed: {
-      label: "Stanowisko przyjęte",
-      description: "Stanowisko określone dla tego katalogu po napisaniu manifestu.",
-    },
-    derived: {
-      label: "Wyprowadzone",
-      description:
-        "Silnie wynikające z manifestu albo z przyjętego stanowiska, ale wykonanie nie jest rozstrzygnięte.",
-    },
-    open: {
-      label: "Otwarte",
-      description: "Nie przyjęto żadnego stanowiska.",
-    },
   },
 
   categories: {

@@ -1,13 +1,11 @@
 import { manifestoSections } from "@/content/manifesto";
 import {
   policyCategoryIds,
-  policyStatusIds,
   POLICY_FIELD_WEIGHT,
   type PolicyCategory,
   type PolicyEdition,
   type PolicyEntry,
   type PolicyCategoryId,
-  type PolicyStatusId,
 } from "@/content/policy";
 import type { ManifestoSectionData } from "@/lib/content-types";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -39,11 +37,6 @@ export function getPolicyCategory(
   id: PolicyCategoryId,
 ): PolicyCategory | undefined {
   return edition.categories.find((category) => category.id === id);
-}
-
-/** An entry counts under both of its statuses where it carries two. */
-export function hasStatus(entry: PolicyEntry, status: PolicyStatusId): boolean {
-  return entry.status === status || entry.secondaryStatus === status;
 }
 
 /**
@@ -80,20 +73,6 @@ export function getActivePolicyCategories(edition: PolicyEdition): readonly Poli
 }
 
 /**
- * Statuses at least one entry currently carries.
- *
- * Offered as filters instead of the full scheme, so the catalogue never shows
- * a pill that returns nothing. `Open` disappeared when the v0.2 addendum
- * settled the last undecided question; the legend still explains what it would
- * mean, because the scheme has not changed.
- */
-export function getActivePolicyStatuses(edition: PolicyEdition) {
-  return edition.statuses.filter((status) =>
-    edition.entries.some((entry) => hasStatus(entry, status.id)),
-  );
-}
-
-/**
  * `/policy` with only the parameters that are actually set.
  *
  * The parameter *values* are ids and stay the same on every page. That is
@@ -106,13 +85,11 @@ export function policyHref(
   params: {
     readonly q?: string;
     readonly category?: string;
-    readonly status?: string;
   },
 ): string {
   const search = new URLSearchParams();
   if (params.q) search.set("q", params.q);
   if (params.category) search.set("category", params.category);
-  if (params.status) search.set("status", params.status);
   const query = search.toString();
   const base = localePath(locale, "/policy");
   return query ? `${base}?${query}` : base;
@@ -121,7 +98,6 @@ export function policyHref(
 export interface PolicyQuery {
   readonly q?: string;
   readonly category?: PolicyCategoryId;
-  readonly status?: PolicyStatusId;
 }
 
 /**
@@ -189,13 +165,11 @@ export interface PolicyResults {
  */
 export function runPolicyQuery(
   edition: PolicyEdition,
-  { q, category, status }: PolicyQuery,
+  { q, category }: PolicyQuery,
 ): PolicyResults {
-  const inScope = edition.entries.filter((entry) => {
-    if (category && entry.category !== category) return false;
-    if (status && !hasStatus(entry, status)) return false;
-    return true;
-  });
+  const inScope = category
+    ? edition.entries.filter((entry) => entry.category === category)
+    : edition.entries;
 
   const text = (q ?? "").trim();
   if (text === "") return { entries: inScope, suggestions: [], ranked: false };
@@ -252,14 +226,6 @@ export function parsePolicyCategory(
 ): PolicyCategoryId | undefined {
   const candidate = Array.isArray(value) ? value[0] : value;
   return policyCategoryIds.find((id) => id === candidate);
-}
-
-/** Parse a `?status=` value into a known status, ignoring anything else. */
-export function parsePolicyStatus(
-  value: string | string[] | undefined,
-): PolicyStatusId | undefined {
-  const candidate = Array.isArray(value) ? value[0] : value;
-  return policyStatusIds.find((id) => id === candidate);
 }
 
 export function parseQueryText(value: string | string[] | undefined): string {

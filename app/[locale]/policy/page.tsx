@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { PolicyDocument } from "@/components/policy/PolicyDocument";
 import { getPolicy } from "@/content/policy";
 import { localeAlternates, resolveLocale } from "@/lib/locale-metadata";
-import { parsePolicyCategory, parsePolicyStatus, parseQueryText } from "@/lib/policy";
+import { parsePolicyCategory, parseQueryText } from "@/lib/policy";
 import { routes } from "@/lib/site";
 
 export async function generateMetadata(props: {
@@ -32,7 +32,6 @@ export default async function TranslatedPolicyPage(props: {
       query={{
         q: parseQueryText(searchParams.q),
         category: parsePolicyCategory(searchParams.category),
-        status: parsePolicyStatus(searchParams.status),
       }}
     />
   );

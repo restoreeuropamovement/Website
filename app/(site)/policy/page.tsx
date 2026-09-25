@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { PolicyDocument } from "@/components/policy/PolicyDocument";
 import { englishPolicy } from "@/content/policy";
-import { parsePolicyCategory, parsePolicyStatus, parseQueryText } from "@/lib/policy";
+import { parsePolicyCategory, parseQueryText } from "@/lib/policy";
 
 export const metadata: Metadata = {
   title: englishPolicy.meta.metaTitle,
@@ -21,7 +21,6 @@ export default async function PolicyPage(props: {
       query={{
         q: parseQueryText(searchParams.q),
         category: parsePolicyCategory(searchParams.category),
-        status: parsePolicyStatus(searchParams.status),
       }}
     />
   );

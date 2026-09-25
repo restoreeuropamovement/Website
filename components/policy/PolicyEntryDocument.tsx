@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PolicyCard } from "@/components/policy/PolicyCard";
-import { PolicyStatusBadge } from "@/components/policy/PolicyStatusBadge";
 import { Container } from "@/components/ui/Container";
 import type { PolicyEdition, PolicyEntry } from "@/content/policy";
 import { localePath } from "@/lib/i18n";
@@ -15,7 +14,7 @@ interface PolicyEntryDocumentProps {
 
 /** One position, in one language. */
 export function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumentProps) {
-  const { locale, meta } = edition;
+  const { locale } = edition;
   const text = edition.entry;
 
   const category = getPolicyCategory(edition, entry.category);
@@ -43,13 +42,16 @@ export function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumentProps
             ) : null}
           </p>
 
+          {/*
+            Title and short answer, two columns, as every other page's header
+            sets a title against its lede. The badge that used to sit above
+            the title is gone with the status scheme, and so is the margin it
+            was clearing.
+          */}
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16 xl:gap-24">
-            <div>
-              <PolicyStatusBadge status={entry.status} label={entry.statusLabel} />
-              <h1 className="mt-6 max-w-4xl font-serif text-display-2 font-normal text-ink text-balance">
-                {entry.title}
-              </h1>
-            </div>
+            <h1 className="max-w-4xl font-serif text-display-2 font-normal text-ink text-balance">
+              {entry.title}
+            </h1>
 
             <p className="text-lede text-muted lg:pt-2">{entry.shortAnswer}</p>
           </div>
@@ -204,28 +206,23 @@ export function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumentProps
           </section>
         ) : null}
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-hairline pt-10 lg:mt-20">
-          <p className="max-w-(--container-reading) text-micro leading-relaxed text-faint">
-            {meta.notice}
-          </p>
-          <p className="mt-6 flex flex-wrap items-baseline gap-x-4 gap-y-2 text-[0.9375rem]">
-            <Link
-              href={localePath(locale, "/policy")}
-              className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
-            >
-              {text.allPositions}
-            </Link>
-            <span className="text-faint" aria-hidden="true">
-              ·
-            </span>
-            <Link
-              href={localePath(locale, "/manifesto")}
-              className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
-            >
-              {text.readManifesto}
-            </Link>
-          </p>
-        </div>
+        <p className="mt-16 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-hairline pt-10 text-[0.9375rem] lg:mt-20">
+          <Link
+            href={localePath(locale, "/policy")}
+            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+          >
+            {text.allPositions}
+          </Link>
+          <span className="text-faint" aria-hidden="true">
+            ·
+          </span>
+          <Link
+            href={localePath(locale, "/manifesto")}
+            className="text-ink underline decoration-rule underline-offset-[0.28em] hover:text-burgundy hover:decoration-burgundy"
+          >
+            {text.readManifesto}
+          </Link>
+        </p>
       </Container>
     </>
   );

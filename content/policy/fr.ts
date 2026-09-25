@@ -5,30 +5,16 @@ export const policyText: PolicyText = {
     eyebrow: "Positions",
     title: "Catalogue programmatique",
     metaTitle: "Catalogue programmatique",
-    version: "Version 0.3",
-    framework: "Restaurationnisme intégral européen",
     lede: "Ce catalogue répond à une question étroite : que soutient Restore Europa sur tel sujet ? Il ne remplace pas le manifeste. Le manifeste expose la vision du monde ; le catalogue expose des positions consultables, sujet par sujet.",
     description:
-      "Positions consultables, sujet par sujet, du mouvement Restore Europa, chacune signalant à quel point elle est arrêtée : ordre moral, famille, citoyenneté, économie, technique, éducation, justice, santé, environnement et politique étrangère.",
+      "Positions consultables, sujet par sujet, du mouvement Restore Europa : ordre moral, famille, citoyenneté, économie, technique, éducation, justice, santé, environnement et politique étrangère.",
     body: [
       "Là où l'enseignement moral catholique est clair, Restore Europa l'adopte généralement comme référence morale, et énonce séparément sa mise en œuvre en droit civil. Une divergence est consignée explicitement : sur la peine capitale, Restore Europa retient l'ancienne permission traditionnelle pour les cas exceptionnels plutôt que la position abolitionniste contemporaine.",
       "Le catalogue distingue l'ordre constitutionnel que recherche Restore Europa du droit européen tel qu'il se présente aujourd'hui. Plusieurs positions — sur la nationalité, sur la déchéance de la citoyenneté, sur la parole, sur le statut public de la religion et sur la peine capitale — exigeraient une révision constitutionnelle ou une modification des traités avant de pouvoir être adoptées dans tel ou tel État européen.",
-      "La version 0.2 tranche les questions que la version 0.1 avait laissées ouvertes : la relation institutionnelle européenne, l'asile, l'éloignement, les salaires, la fiscalité, les retraites, le logement, la représentation du travail, l'identité et la monnaie numériques, la surveillance biométrique, le génie génétique, la peine, le bouquet énergétique et toute question pendante de politique étrangère. Là où une formulation de la v0.2 a révisé une notice antérieure, c'est le texte le plus récent qui fait foi.",
-      "La version 0.3 ajoute l'ensemble consacré à la remigration et à son exécution. Il distingue la citoyenneté, le statut de séjour, l'expulsion pénale, le retour après asile et le contrôle de la nationalité, au lieu de traiter la remigration comme un pouvoir unique et indifférencié ; il est rédigé comme une politique constitutionnelle et législative proposée, le droit européen et international en vigueur étant signalé séparément dans chaque notice. Deux notices antérieures — la naturalisation et l'expulsion des délinquants non citoyens — sont refondues dans les formulations les plus récentes plutôt que maintenues en double à côté d'elles.",
     ],
-    notice:
-      "Chaque question de ce catalogue est assortie d'une position. Les notices marquées Dérivée suivent la direction du manifeste sans que leur mise en œuvre soit arrêtée. Les positions sont révisées à mesure que le mouvement décide ; la version et la date ci-dessus indiquent quel texte vous lisez.",
-  },
-
-  labels: {
-    version: "Version",
-    date: "Date",
-    framework: "Cadre",
-    entries: "Notices",
   },
 
   index: {
-    legendHeading: "Légende des statuts",
     showingAll: {
       one: "Affichage de l'unique position.",
       other: "Affichage de la totalité des {count} positions.",
@@ -44,24 +30,6 @@ export const policyText: PolicyText = {
       heading: "Positions les plus proches",
       body: "Ces entrées sont les plus proches de ce que vous avez saisi. Elles n'emploient pas forcément les mêmes mots.",
     },
-    openQueue: {
-      heading: "Questions en attente d'élaboration",
-      body: "Ces questions sont consignées comme non tranchées plutôt que déduites de l'idéologie. Elles sont énumérées pour que les lacunes restent visibles au lieu d'être discrètement comblées.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "Arrêté quant à la direction, non quant au détail",
-      body: "Chaque question du catalogue est désormais assortie d'une position. Voici les chiffres, à l'intérieur de ces positions, qui n'ont pas été fixés et qui ne seront pas inventés tant qu'il n'existera pas de base pour les établir.",
-      items: [
-        "Les taux et les seuils d'imposition exacts",
-        "Les échelles de peines exactes",
-        "Le mécanisme de vérification de l'âge pour les réseaux sociaux",
-        "Les échéances de neutralité carbone, les prix du carbone et les quotas d'émissions",
-        "Les critères, fonction par fonction, applicables aux charges publiques réservées",
-        "Les délais de carence accordés aux résidents étrangers après une perte d'emploi involontaire",
-        "Les durées d'absence propres à chaque titre et les plafonds de rétention administrative",
-      ],
-    },
   },
 
   filters: {
@@ -72,9 +40,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Filtrer les positions par section",
     sectionHeading: "Section",
     allSections: "Toutes",
-    statusNavLabel: "Filtrer les positions par statut",
-    statusHeading: "Statut",
-    anyStatus: "Tous",
   },
 
   entry: {
@@ -91,26 +56,6 @@ export const policyText: PolicyText = {
     allPositions: "Toutes les positions",
     readManifesto: "Lire le manifeste",
     notFound: "Position introuvable",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Noyau du manifeste",
-      description: "Explicitement établie par le Manifeste du restaurationnisme intégral européen.",
-    },
-    agreed: {
-      label: "Position adoptée",
-      description: "Une position précisée pour ce catalogue après la rédaction du manifeste.",
-    },
-    derived: {
-      label: "Dérivée",
-      description:
-        "Fortement impliquée par le manifeste ou par une position adoptée, mais dont la mise en œuvre n'est pas arrêtée.",
-    },
-    open: {
-      label: "Ouverte",
-      description: "Aucune position n'a été adoptée.",
-    },
   },
 
   categories: {

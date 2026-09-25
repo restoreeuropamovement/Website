@@ -1,10 +1,10 @@
 /**
  * The policy catalogue: everything about it that is not words.
  *
- * Slugs are published URLs, category ids are filter values and anchor
- * targets, and status ids appear in `?status=` — all three would otherwise
- * have been English prose travelling through a query string, which is how a
- * filter link stops working the moment the page is read in another language.
+ * Slugs are published URLs and category ids are filter values and anchor
+ * targets; both would otherwise have been English prose travelling through a
+ * query string, which is how a filter link stops working the moment the page
+ * is read in another language.
  *
  * `manifestoBasis` and `related` are cross-references between documents, and
  * `lastUpdated` is a date. None of them is a word.
@@ -39,28 +39,9 @@ export const policyCategoryNumerals: Record<PolicyCategoryId, string> = {
   "foreign-policy": "X",
 };
 
-/**
- * How settled a position is, from most to least.
- *
- * The id is what `?status=` carries; the label is in the language files. The
- * catalogue used to filter on the label itself, so `?status=Manifesto%20Core`
- * matched nothing on a translated page.
- */
-export const policyStatusIds = [
-  "manifesto-core",
-  "agreed",
-  "derived",
-  "open",
-] as const;
-
-export type PolicyStatusId = (typeof policyStatusIds)[number];
-
 export interface PolicyEntryStructure {
   readonly slug: string;
   readonly category: PolicyCategoryId;
-  readonly status: PolicyStatusId;
-  /** A few entries sit between two statuses in the source catalogue. */
-  readonly secondaryStatus?: PolicyStatusId;
   /** Manifesto sections this rests on, by `ManifestoSectionData.id`. */
   readonly manifestoBasis?: readonly string[];
   /** Other catalogue entries, by slug. */
@@ -73,7 +54,6 @@ export const policyStructure = [
   {
     slug: "catholic-confessional-state",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "democracy"],
     related: [
       "blasphemy-and-sacrilege",
@@ -85,7 +65,6 @@ export const policyStructure = [
   {
     slug: "abortion",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "family"],
     related: [
       "family",
@@ -97,7 +76,6 @@ export const policyStructure = [
   {
     slug: "euthanasia-and-assisted-suicide",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "person-not-atom"],
     related: [
       "abortion",
@@ -109,7 +87,6 @@ export const policyStructure = [
   {
     slug: "marriage-and-sexual-ethics",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["family", "moral-order"],
     related: ["family", "contraception", "sex-education-in-schools"],
     lastUpdated: "2026-09-15",
@@ -117,7 +94,6 @@ export const policyStructure = [
   {
     slug: "contraception",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["family", "moral-order"],
     related: ["family", "demographic-renewal", "sex-education-in-schools"],
     lastUpdated: "2026-09-15",
@@ -125,7 +101,6 @@ export const policyStructure = [
   {
     slug: "pornography",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "human-scale-life"],
     related: [
       "prostitution",
@@ -137,7 +112,6 @@ export const policyStructure = [
   {
     slug: "prostitution",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "person-not-atom"],
     related: [
       "pornography",
@@ -149,7 +123,6 @@ export const policyStructure = [
   {
     slug: "recreational-drugs",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "human-scale-life"],
     related: ["alcohol", "gambling", "prisons-punishment-and-rehabilitation"],
     lastUpdated: "2026-09-15",
@@ -157,7 +130,6 @@ export const policyStructure = [
   {
     slug: "alcohol",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "culture"],
     related: ["recreational-drugs", "gambling", "universal-healthcare-access"],
     lastUpdated: "2026-09-15",
@@ -165,7 +137,6 @@ export const policyStructure = [
   {
     slug: "gambling",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "finance"],
     related: ["alcohol", "recreational-drugs", "finance-lending-and-usury"],
     lastUpdated: "2026-09-15",
@@ -173,7 +144,6 @@ export const policyStructure = [
   {
     slug: "blasphemy-and-sacrilege",
     category: "constitutional",
-    status: "agreed",
     manifestoBasis: ["moral-order", "democracy"],
     related: ["free-speech-and-public-doctrine", "catholic-confessional-state"],
     lastUpdated: "2026-09-15",
@@ -181,7 +151,6 @@ export const policyStructure = [
   {
     slug: "family",
     category: "family",
-    status: "manifesto-core",
     manifestoBasis: ["family"],
     related: [
       "marriage-and-sexual-ethics",
@@ -194,7 +163,6 @@ export const policyStructure = [
   {
     slug: "demographic-renewal",
     category: "family",
-    status: "manifesto-core",
     manifestoBasis: ["family", "immigration"],
     related: [
       "family",
@@ -207,7 +175,6 @@ export const policyStructure = [
   {
     slug: "sunday-rest-and-trading",
     category: "family",
-    status: "agreed",
     manifestoBasis: ["family", "work", "culture"],
     related: ["work", "family", "catholic-confessional-state"],
     lastUpdated: "2026-09-15",
@@ -215,7 +182,6 @@ export const policyStructure = [
   {
     slug: "welfare-and-social-assistance",
     category: "family",
-    status: "agreed",
     manifestoBasis: ["subsidiarity", "family"],
     related: [
       "family",
@@ -228,7 +194,6 @@ export const policyStructure = [
   {
     slug: "nation-and-historical-continuity",
     category: "nation",
-    status: "manifesto-core",
     manifestoBasis: ["nation"],
     related: [
       "citizenship-general-principle",
@@ -241,7 +206,6 @@ export const policyStructure = [
   {
     slug: "immigration",
     category: "nation",
-    status: "manifesto-core",
     manifestoBasis: ["immigration"],
     related: [
       "asylum-and-international-protection",
@@ -256,7 +220,6 @@ export const policyStructure = [
   {
     slug: "asylum-and-international-protection",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "europe", "foreign-policy"],
     related: [
       "immigration",
@@ -269,7 +232,6 @@ export const policyStructure = [
   {
     slug: "asylum-work-and-public-assistance",
     category: "nation",
-    status: "agreed",
     manifestoBasis: [
       "family",
       "immigration",
@@ -288,7 +250,6 @@ export const policyStructure = [
   {
     slug: "deportation-of-criminal-offenders",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "subsidiarity", "democracy"],
     related: [
       "residence-permit-withdrawal",
@@ -303,7 +264,6 @@ export const policyStructure = [
   {
     slug: "citizenship-general-principle",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration"],
     related: [
       "naturalization",
@@ -316,7 +276,6 @@ export const policyStructure = [
   {
     slug: "naturalization",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["immigration", "nation"],
     related: [
       "citizenship-general-principle",
@@ -331,7 +290,6 @@ export const policyStructure = [
   {
     slug: "citizenship-by-descent",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation"],
     related: [
       "citizenship-general-principle",
@@ -343,7 +301,6 @@ export const policyStructure = [
   {
     slug: "voting-rights-after-naturalization",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["democracy", "nation"],
     related: [
       "naturalization",
@@ -355,7 +312,6 @@ export const policyStructure = [
   {
     slug: "high-public-office",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "subsidiarity", "democracy"],
     related: [
       "voting-rights-after-naturalization",
@@ -368,7 +324,6 @@ export const policyStructure = [
   {
     slug: "dual-citizenship",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "europe"],
     related: [
       "naturalization",
@@ -380,7 +335,6 @@ export const policyStructure = [
   {
     slug: "revocation-of-naturalized-citizenship",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "democracy"],
     related: [
       "naturalization",
@@ -392,16 +346,15 @@ export const policyStructure = [
     lastUpdated: "2026-09-15",
   },
   /*
-   * The remigration and enforcement cluster, in the order the v0.3 addendum
-   * numbers it. It sits after the citizenship entries and before Europe
-   * because it is the machinery those statuses imply, not a separate subject:
-   * each entry names one of admission, integration, residence, naturalization
-   * or return rather than treating remigration as a single power.
+   * The remigration and enforcement cluster. It sits after the citizenship
+   * entries and before Europe because it is the machinery those entries
+   * imply, not a separate subject: each entry names one of admission,
+   * integration, residence, naturalization or return rather than treating
+   * remigration as a single power.
    */
   {
     slug: "remigration-general-principle",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "subsidiarity"],
     related: [
       "immigration",
@@ -414,7 +367,6 @@ export const policyStructure = [
   {
     slug: "integration-general-definition",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "education", "subsidiarity"],
     related: [
       "naturalization",
@@ -427,7 +379,6 @@ export const policyStructure = [
   {
     slug: "regularized-irregular-immigration",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["immigration", "subsidiarity", "democracy"],
     related: [
       "remigration-general-principle",
@@ -440,7 +391,6 @@ export const policyStructure = [
   {
     slug: "employment-and-self-sufficiency-of-foreign-residents",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["economic-order", "work", "immigration"],
     related: [
       "integration-general-definition",
@@ -453,7 +403,6 @@ export const policyStructure = [
   {
     slug: "probationary-naturalization",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "democracy"],
     related: [
       "naturalization",
@@ -466,7 +415,6 @@ export const policyStructure = [
   {
     slug: "residence-permit-withdrawal",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["immigration", "subsidiarity", "democracy"],
     related: [
       "remigration-general-principle",
@@ -479,7 +427,6 @@ export const policyStructure = [
   {
     slug: "voluntary-return-and-reintegration",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["immigration", "foreign-policy"],
     related: [
       "return-readmission-identity-and-removal-procedure",
@@ -492,7 +439,6 @@ export const policyStructure = [
   {
     slug: "naturalized-citizenship-and-exceptionally-serious-crime",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["nation", "immigration", "democracy"],
     related: [
       "revocation-of-naturalized-citizenship",
@@ -505,7 +451,6 @@ export const policyStructure = [
   {
     slug: "return-readmission-identity-and-removal-procedure",
     category: "nation",
-    status: "agreed",
     manifestoBasis: [
       "immigration",
       "subsidiarity",
@@ -523,7 +468,6 @@ export const policyStructure = [
   {
     slug: "europe-as-a-civilization-of-nations",
     category: "nation",
-    status: "manifesto-core",
     manifestoBasis: ["europe", "subsidiarity"],
     related: [
       "european-union-institutional-relationship",
@@ -536,7 +480,6 @@ export const policyStructure = [
   {
     slug: "european-union-institutional-relationship",
     category: "nation",
-    status: "agreed",
     manifestoBasis: ["europe", "subsidiarity", "democracy"],
     related: [
       "europe-as-a-civilization-of-nations",
@@ -548,7 +491,6 @@ export const policyStructure = [
   {
     slug: "economic-order",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["economic-order"],
     related: [
       "private-property-and-broad-ownership",
@@ -561,7 +503,6 @@ export const policyStructure = [
   {
     slug: "private-property-and-broad-ownership",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["economic-order"],
     related: [
       "economic-order",
@@ -574,7 +515,6 @@ export const policyStructure = [
   {
     slug: "corporations-and-monopolies",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["economic-order"],
     related: [
       "private-property-and-broad-ownership",
@@ -586,7 +526,6 @@ export const policyStructure = [
   {
     slug: "guilds-chambers-and-corporatist-representation",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["corporatism", "subsidiarity"],
     related: [
       "economic-order",
@@ -599,7 +538,6 @@ export const policyStructure = [
   {
     slug: "finance-lending-and-usury",
     category: "economy",
-    status: "agreed",
     manifestoBasis: ["finance"],
     related: [
       "housing-and-financialization",
@@ -612,7 +550,6 @@ export const policyStructure = [
   {
     slug: "housing-and-financialization",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["finance", "architecture"],
     related: [
       "private-property-and-broad-ownership",
@@ -625,7 +562,6 @@ export const policyStructure = [
   {
     slug: "work",
     category: "economy",
-    status: "manifesto-core",
     manifestoBasis: ["work", "human-scale-life"],
     related: [
       "automation",
@@ -638,7 +574,6 @@ export const policyStructure = [
   {
     slug: "minimum-wage",
     category: "economy",
-    status: "agreed",
     manifestoBasis: ["moral-order", "economic-order", "corporatism", "work"],
     related: [
       "work",
@@ -651,7 +586,6 @@ export const policyStructure = [
   {
     slug: "taxation",
     category: "economy",
-    status: "derived",
     manifestoBasis: [
       "family",
       "economic-order",
@@ -671,7 +605,6 @@ export const policyStructure = [
   {
     slug: "pensions",
     category: "economy",
-    status: "agreed",
     manifestoBasis: [
       "family",
       "economic-order",
@@ -690,7 +623,6 @@ export const policyStructure = [
   {
     slug: "housing-restrictions",
     category: "economy",
-    status: "derived",
     manifestoBasis: ["family", "economic-order", "finance", "architecture"],
     related: [
       "housing-and-financialization",
@@ -703,7 +635,6 @@ export const policyStructure = [
   {
     slug: "trade-unions-and-vocational-representation",
     category: "economy",
-    status: "agreed",
     manifestoBasis: ["economic-order", "corporatism", "subsidiarity", "work"],
     related: [
       "guilds-chambers-and-corporatist-representation",
@@ -716,7 +647,6 @@ export const policyStructure = [
   {
     slug: "technology-general-doctrine",
     category: "technology",
-    status: "manifesto-core",
     manifestoBasis: ["technology", "human-scale-life"],
     related: [
       "artificial-intelligence",
@@ -729,8 +659,6 @@ export const policyStructure = [
   {
     slug: "artificial-intelligence",
     category: "technology",
-    status: "manifesto-core",
-    secondaryStatus: "derived",
     manifestoBasis: ["technology"],
     related: [
       "automation",
@@ -743,7 +671,6 @@ export const policyStructure = [
   {
     slug: "automation",
     category: "technology",
-    status: "manifesto-core",
     manifestoBasis: ["technology", "work"],
     related: ["work", "artificial-intelligence", "technology-general-doctrine"],
     lastUpdated: "2026-09-15",
@@ -751,7 +678,6 @@ export const policyStructure = [
   {
     slug: "cash-and-non-digital-access",
     category: "technology",
-    status: "manifesto-core",
     manifestoBasis: ["human-scale-life", "technology"],
     related: [
       "digital-identification",
@@ -764,7 +690,6 @@ export const policyStructure = [
   {
     slug: "right-to-repair",
     category: "technology",
-    status: "manifesto-core",
     manifestoBasis: ["technology", "stewardship"],
     related: [
       "technology-general-doctrine",
@@ -776,8 +701,6 @@ export const policyStructure = [
   {
     slug: "surveillance",
     category: "technology",
-    status: "manifesto-core",
-    secondaryStatus: "derived",
     manifestoBasis: ["human-scale-life", "technology"],
     related: [
       "artificial-intelligence",
@@ -790,8 +713,6 @@ export const policyStructure = [
   {
     slug: "children-social-media-and-attention-capture",
     category: "technology",
-    status: "manifesto-core",
-    secondaryStatus: "derived",
     manifestoBasis: ["family", "technology", "human-scale-life", "education"],
     related: [
       "family",
@@ -805,7 +726,6 @@ export const policyStructure = [
   {
     slug: "digital-identification",
     category: "technology",
-    status: "derived",
     manifestoBasis: ["technology", "human-scale-life"],
     related: [
       "cash-and-non-digital-access",
@@ -818,7 +738,6 @@ export const policyStructure = [
   {
     slug: "central-bank-digital-currencies",
     category: "technology",
-    status: "derived",
     manifestoBasis: ["technology", "human-scale-life"],
     related: [
       "cash-and-non-digital-access",
@@ -831,7 +750,6 @@ export const policyStructure = [
   {
     slug: "cryptocurrency",
     category: "technology",
-    status: "derived",
     manifestoBasis: [
       "economic-order",
       "finance",
@@ -849,7 +767,6 @@ export const policyStructure = [
   {
     slug: "facial-recognition",
     category: "technology",
-    status: "derived",
     manifestoBasis: ["technology", "human-scale-life"],
     related: [
       "surveillance",
@@ -862,7 +779,6 @@ export const policyStructure = [
   {
     slug: "communications-metadata-retention",
     category: "technology",
-    status: "derived",
     manifestoBasis: ["technology", "human-scale-life", "subsidiarity"],
     related: [
       "surveillance",
@@ -875,7 +791,6 @@ export const policyStructure = [
   {
     slug: "genetic-engineering",
     category: "technology",
-    status: "derived",
     manifestoBasis: ["moral-order", "person-not-atom", "family", "technology"],
     related: [
       "transhumanism-and-human-enhancement",
@@ -888,7 +803,6 @@ export const policyStructure = [
   {
     slug: "transhumanism-and-human-enhancement",
     category: "technology",
-    status: "derived",
     manifestoBasis: [
       "moral-order",
       "person-not-atom",
@@ -906,7 +820,6 @@ export const policyStructure = [
   {
     slug: "purpose-of-education",
     category: "education",
-    status: "manifesto-core",
     manifestoBasis: ["education"],
     related: [
       "state-schools-and-christianity",
@@ -919,7 +832,6 @@ export const policyStructure = [
   {
     slug: "homeschooling",
     category: "education",
-    status: "agreed",
     manifestoBasis: ["education", "family", "subsidiarity"],
     related: [
       "private-catholic-and-independent-schools",
@@ -932,7 +844,6 @@ export const policyStructure = [
   {
     slug: "private-catholic-and-independent-schools",
     category: "education",
-    status: "agreed",
     manifestoBasis: ["education", "subsidiarity"],
     related: [
       "homeschooling",
@@ -945,7 +856,6 @@ export const policyStructure = [
   {
     slug: "universities-and-academic-freedom",
     category: "education",
-    status: "agreed",
     manifestoBasis: ["education", "democracy"],
     related: [
       "purpose-of-education",
@@ -957,7 +867,6 @@ export const policyStructure = [
   {
     slug: "state-schools-and-christianity",
     category: "education",
-    status: "agreed",
     manifestoBasis: ["education", "moral-order"],
     related: [
       "catholic-confessional-state",
@@ -969,7 +878,6 @@ export const policyStructure = [
   {
     slug: "sex-education-in-schools",
     category: "education",
-    status: "agreed",
     manifestoBasis: ["education", "family"],
     related: [
       "contraception",
@@ -982,7 +890,6 @@ export const policyStructure = [
   {
     slug: "culture-and-homogenization",
     category: "education",
-    status: "manifesto-core",
     manifestoBasis: ["culture"],
     related: [
       "nation-and-historical-continuity",
@@ -994,7 +901,6 @@ export const policyStructure = [
   {
     slug: "architecture-and-historic-preservation",
     category: "education",
-    status: "manifesto-core",
     manifestoBasis: ["architecture"],
     related: [
       "culture-and-homogenization",
@@ -1006,7 +912,6 @@ export const policyStructure = [
   {
     slug: "authority-democracy-and-subsidiarity",
     category: "government",
-    status: "manifesto-core",
     manifestoBasis: ["subsidiarity", "democracy"],
     related: [
       "free-speech-and-public-doctrine",
@@ -1019,7 +924,6 @@ export const policyStructure = [
   {
     slug: "free-speech-and-public-doctrine",
     category: "government",
-    status: "agreed",
     manifestoBasis: ["democracy", "moral-order"],
     related: [
       "blasphemy-and-sacrilege",
@@ -1032,7 +936,6 @@ export const policyStructure = [
   {
     slug: "prisons-punishment-and-rehabilitation",
     category: "government",
-    status: "agreed",
     manifestoBasis: ["moral-order", "democracy"],
     related: [
       "criminal-sentencing",
@@ -1045,7 +948,6 @@ export const policyStructure = [
   {
     slug: "criminal-sentencing",
     category: "government",
-    status: "agreed",
     manifestoBasis: [
       "moral-order",
       "person-not-atom",
@@ -1064,7 +966,6 @@ export const policyStructure = [
   {
     slug: "death-penalty",
     category: "government",
-    status: "agreed",
     manifestoBasis: ["moral-order"],
     related: [
       "capital-punishment-for-aggravated-sexual-crimes",
@@ -1077,7 +978,6 @@ export const policyStructure = [
   {
     slug: "capital-punishment-for-aggravated-sexual-crimes",
     category: "government",
-    status: "agreed",
     manifestoBasis: ["moral-order", "democracy"],
     related: [
       "death-penalty",
@@ -1089,7 +989,6 @@ export const policyStructure = [
   {
     slug: "firearms-and-self-defense",
     category: "government",
-    status: "agreed",
     manifestoBasis: ["subsidiarity", "moral-order"],
     related: [
       "prisons-punishment-and-rehabilitation",
@@ -1100,7 +999,6 @@ export const policyStructure = [
   {
     slug: "universal-healthcare-access",
     category: "healthcare",
-    status: "agreed",
     manifestoBasis: ["moral-order", "subsidiarity"],
     related: [
       "catholic-medical-ethics",
@@ -1113,7 +1011,6 @@ export const policyStructure = [
   {
     slug: "catholic-medical-ethics",
     category: "healthcare",
-    status: "agreed",
     manifestoBasis: ["moral-order"],
     related: [
       "abortion",
@@ -1126,7 +1023,6 @@ export const policyStructure = [
   {
     slug: "environmental-stewardship",
     category: "environment",
-    status: "manifesto-core",
     manifestoBasis: ["stewardship"],
     related: [
       "energy-policy",
@@ -1139,7 +1035,6 @@ export const policyStructure = [
   {
     slug: "energy-policy",
     category: "environment",
-    status: "derived",
     manifestoBasis: ["stewardship", "foreign-policy"],
     related: [
       "nuclear-energy",
@@ -1153,7 +1048,6 @@ export const policyStructure = [
   {
     slug: "nuclear-energy",
     category: "environment",
-    status: "derived",
     manifestoBasis: ["technology", "stewardship", "foreign-policy"],
     related: [
       "energy-policy",
@@ -1166,7 +1060,6 @@ export const policyStructure = [
   {
     slug: "fossil-fuels",
     category: "environment",
-    status: "derived",
     manifestoBasis: ["stewardship", "foreign-policy"],
     related: [
       "energy-policy",
@@ -1179,7 +1072,6 @@ export const policyStructure = [
   {
     slug: "renewable-energy",
     category: "environment",
-    status: "derived",
     manifestoBasis: ["stewardship", "architecture"],
     related: [
       "energy-policy",
@@ -1192,7 +1084,6 @@ export const policyStructure = [
   {
     slug: "climate-policy",
     category: "environment",
-    status: "derived",
     manifestoBasis: ["technology", "stewardship", "foreign-policy"],
     related: [
       "energy-policy",
@@ -1205,7 +1096,6 @@ export const policyStructure = [
   {
     slug: "foreign-policy-doctrine",
     category: "foreign-policy",
-    status: "manifesto-core",
     manifestoBasis: ["foreign-policy"],
     related: [
       "europe-as-a-civilization-of-nations",
@@ -1218,7 +1108,6 @@ export const policyStructure = [
   {
     slug: "nato",
     category: "foreign-policy",
-    status: "derived",
     manifestoBasis: ["foreign-policy", "subsidiarity", "what-we-reject"],
     related: [
       "foreign-policy-doctrine",
@@ -1231,7 +1120,6 @@ export const policyStructure = [
   {
     slug: "russia",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["foreign-policy"],
     related: ["foreign-policy-doctrine", "ukraine", "nato", "sanctions"],
     lastUpdated: "2026-09-21",
@@ -1239,7 +1127,6 @@ export const policyStructure = [
   {
     slug: "ukraine",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["foreign-policy"],
     related: ["foreign-policy-doctrine", "russia", "nato", "foreign-aid"],
     lastUpdated: "2026-09-21",
@@ -1247,7 +1134,6 @@ export const policyStructure = [
   {
     slug: "united-states",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["europe", "technology", "culture", "foreign-policy"],
     related: [
       "foreign-policy-doctrine",
@@ -1260,7 +1146,6 @@ export const policyStructure = [
   {
     slug: "china",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["economic-order", "technology", "foreign-policy"],
     related: [
       "foreign-policy-doctrine",
@@ -1273,7 +1158,6 @@ export const policyStructure = [
   {
     slug: "israel-and-palestine",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["foreign-policy", "what-we-reject"],
     related: ["foreign-policy-doctrine", "foreign-aid", "sanctions"],
     lastUpdated: "2026-09-21",
@@ -1281,7 +1165,6 @@ export const policyStructure = [
   {
     slug: "foreign-aid",
     category: "foreign-policy",
-    status: "derived",
     manifestoBasis: ["moral-order", "immigration", "foreign-policy"],
     related: [
       "foreign-policy-doctrine",
@@ -1293,7 +1176,6 @@ export const policyStructure = [
   {
     slug: "sanctions",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["foreign-policy", "what-we-reject"],
     related: [
       "foreign-policy-doctrine",
@@ -1306,7 +1188,6 @@ export const policyStructure = [
   {
     slug: "conscription",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["person-not-atom", "education", "work", "foreign-policy"],
     related: [
       "foreign-policy-doctrine",
@@ -1319,7 +1200,6 @@ export const policyStructure = [
   {
     slug: "nuclear-weapons",
     category: "foreign-policy",
-    status: "agreed",
     manifestoBasis: ["foreign-policy", "what-we-reject"],
     related: ["foreign-policy-doctrine", "nato", "nuclear-energy"],
     lastUpdated: "2026-09-21",

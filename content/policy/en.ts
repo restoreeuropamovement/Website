@@ -5,28 +5,15 @@ export const policyText: PolicyText = {
     eyebrow: "Positions",
     title: "Policy Catalogue",
     metaTitle: "Policy Catalogue",
-    version: "Version 0.3",
-    framework: "European Integral Restorationism",
     lede: "This catalogue answers a narrow question: what does Restore Europa hold on this issue? It does not replace the manifesto. The manifesto sets out the worldview; this sets out searchable, topic-by-topic positions.",
-    description: "Searchable, topic-by-topic positions of Restore Europa Movement, each marked with how settled it is: moral order, family, citizenship, economy, technology, education, justice, healthcare, environment and foreign policy.",
+    description: "Searchable, topic-by-topic positions of Restore Europa Movement: moral order, family, citizenship, economy, technology, education, justice, healthcare, environment and foreign policy.",
     body: [
       "Where Catholic moral teaching is clear, Restore Europa generally adopts it as the moral baseline, and states civil-law implementation separately. One departure is recorded explicitly: on capital punishment Restore Europa takes the older traditional allowance for exceptional cases rather than the contemporary abolitionist position.",
       "The catalogue distinguishes the constitutional order Restore Europa seeks from European law as it currently stands. Several positions — on nationality, on deprivation of citizenship, on speech, on the public standing of religion and on capital punishment — would require constitutional or treaty change before they could be enacted in particular European states.",
-      "Version 0.2 settles the questions version 0.1 had left open: the European institutional relationship, asylum, deportation, wages, taxation, pensions, housing, labour representation, digital identity and currency, biometric surveillance, genetic engineering, sentencing, the energy mix and every standing question of foreign policy. Where a v0.2 formulation revised an earlier entry, the newer text governs.",
-      "Version 0.3 adds the remigration and enforcement cluster. It distinguishes citizenship, residence status, criminal deportation, asylum return and nationality review rather than treating remigration as a single undifferentiated power, and it is drafted as proposed constitutional and statutory policy, with current European and international law noted separately in each entry. Two earlier entries — naturalization and the deportation of non-citizen criminal offenders — are consolidated into the newer formulations rather than being duplicated beside them.",
     ],
-    notice: "Every question in this catalogue carries a position. Entries marked Derived follow the direction of the manifesto without their implementation being fixed. Positions are revised as the movement decides; the version and date above say which text you are reading.",
-  },
-
-  labels: {
-    version: "Version",
-    date: "Date",
-    framework: "Framework",
-    entries: "Entries",
   },
 
   index: {
-    legendHeading: "Status legend",
     showingAll: {
       one: "Showing the only position.",
       other: "Showing all {count} positions.",
@@ -42,24 +29,6 @@ export const policyText: PolicyText = {
       heading: "Closest positions",
       body: "These are the nearest entries to what you typed. They may not use the same words.",
     },
-    openQueue: {
-      heading: "Open policy development queue",
-      body: "These questions are recorded as undecided rather than inferred from the ideology. They are listed so the gaps are visible instead of being quietly filled in.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "Settled in direction, not in detail",
-      body: "Every question in the catalogue now carries a position. These are the figures inside those positions that have not been fixed, and will not be invented before there is a basis for them.",
-      items: [
-        "Exact tax rates and thresholds",
-        "Exact criminal sentencing ranges",
-        "The age-verification mechanism for social media",
-        "Net-zero dates, carbon prices and emissions quotas",
-        "Office-by-office criteria for restricted public offices",
-        "Grace periods after involuntary job loss for foreign residents",
-        "Permit-specific absence periods and immigration-detention ceilings",
-      ],
-    },
   },
 
   filters: {
@@ -70,9 +39,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Filter positions by section",
     sectionHeading: "Section",
     allSections: "All",
-    statusNavLabel: "Filter positions by status",
-    statusHeading: "Status",
-    anyStatus: "Any",
   },
 
   entry: {
@@ -89,25 +55,6 @@ export const policyText: PolicyText = {
     allPositions: "All positions",
     readManifesto: "Read the manifesto",
     notFound: "Position not found",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Manifesto Core",
-      description: "Explicitly established by the Manifesto of European Integral Restorationism.",
-    },
-    agreed: {
-      label: "Agreed Policy",
-      description: "A position specified for this catalogue after the manifesto was written.",
-    },
-    derived: {
-      label: "Derived",
-      description: "Strongly implied by the manifesto or by an agreed position, but the implementation is not settled.",
-    },
-    open: {
-      label: "Open",
-      description: "No position has been adopted.",
-    },
   },
 
   categories: {

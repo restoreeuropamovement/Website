@@ -111,7 +111,7 @@ No prose lives inside a component. To change what the site says, edit `content/`
 | Principles (order, links) | `content/principles/structure.ts`        |
 | Navigation, footer, 404   | `content/chrome/en.ts`                   |
 | Policy catalogue (text)   | `content/policy/en.ts`                   |
-| Policy (slugs, statuses)  | `content/policy/structure.ts`            |
+| Policy (slugs, ordering)  | `content/policy/structure.ts`            |
 | Vision                    | `content/vision/en.ts`                   |
 | About                     | `content/about/en.ts`                    |
 | National wings            | `content/wings/en.ts`                    |

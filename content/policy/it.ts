@@ -5,30 +5,16 @@ export const policyText: PolicyText = {
     eyebrow: "Posizioni",
     title: "Catalogo programmatico",
     metaTitle: "Catalogo programmatico",
-    version: "Versione 0.3",
-    framework: "Restaurazionismo integrale europeo",
     lede: "Questo catalogo risponde a una domanda circoscritta: che cosa sostiene Restore Europa su una determinata questione? Non sostituisce il Manifesto. Il Manifesto espone la visione del mondo; qui stanno posizioni consultabili, tema per tema.",
     description:
-      "Le posizioni del Restore Europa Movement, consultabili tema per tema e ciascuna contrassegnata dal proprio grado di definizione: ordine morale, famiglia, cittadinanza, economia, tecnologia, educazione, giustizia, sanità, ambiente e politica estera.",
+      "Le posizioni del Restore Europa Movement, consultabili tema per tema: ordine morale, famiglia, cittadinanza, economia, tecnologia, educazione, giustizia, sanità, ambiente e politica estera.",
     body: [
       "Dove la dottrina morale cattolica è chiara, Restore Europa di norma la assume come riferimento morale di base, e indica separatamente la sua attuazione nel diritto civile. Uno scostamento è registrato esplicitamente: sulla pena capitale Restore Europa assume la più antica ammissione tradizionale per i casi eccezionali anziché la posizione abolizionista contemporanea.",
       "Il catalogo distingue l'ordine costituzionale a cui Restore Europa tende dal diritto europeo quale oggi vige. Diverse posizioni — sulla nazionalità, sulla privazione della cittadinanza, sulla libertà di parola, sulla rilevanza pubblica della religione e sulla pena capitale — richiederebbero una modifica costituzionale o dei trattati prima di poter essere attuate in singoli Stati europei.",
-      "La versione 0.2 definisce le questioni che la versione 0.1 aveva lasciato aperte: il rapporto istituzionale europeo, l'asilo, l'espulsione, i salari, la fiscalità, le pensioni, la casa, la rappresentanza del lavoro, l'identità e la moneta digitali, la sorveglianza biometrica, l'ingegneria genetica, la commisurazione delle pene, il mix energetico e ogni questione pendente di politica estera. Dove una formulazione della v0.2 ha rivisto una voce precedente, vale il testo più recente.",
-      "La versione 0.3 aggiunge il complesso di voci sulla remigrazione e sulla sua esecuzione. Esso distingue la cittadinanza, lo status di soggiorno, l'espulsione per reato, il rimpatrio dopo la procedura di asilo e il riesame della nazionalità, anziché trattare la remigrazione come un unico potere indifferenziato; è redatto come politica costituzionale e legislativa proposta, e il diritto europeo e internazionale vigente è segnalato separatamente in ciascuna voce. Due voci precedenti — la naturalizzazione e l'espulsione degli stranieri autori di reato — sono confluite nelle formulazioni più recenti anziché restare duplicate accanto ad esse.",
     ],
-    notice:
-      "Ogni questione di questo catalogo porta una posizione. Le voci contrassegnate come Derivate seguono la direzione del Manifesto senza che la loro attuazione sia fissata. Le posizioni sono riviste man mano che il movimento decide; la versione e la data qui sopra dicono quale testo state leggendo.",
-  },
-
-  labels: {
-    version: "Versione",
-    date: "Data",
-    framework: "Quadro di riferimento",
-    entries: "Voci",
   },
 
   index: {
-    legendHeading: "Legenda degli stati",
     showingAll: {
       one: "Viene mostrata l'unica posizione.",
       other: "Vengono mostrate tutte le {count} posizioni.",
@@ -44,24 +30,6 @@ export const policyText: PolicyText = {
       heading: "Posizioni più vicine",
       body: "Queste voci sono le più vicine a quanto è stato digitato. Potrebbero non usare le stesse parole.",
     },
-    openQueue: {
-      heading: "Questioni programmatiche ancora aperte",
-      body: "Queste questioni sono registrate come non decise anziché dedotte dall'ideologia. Sono elencate perché le lacune restino visibili invece di essere colmate in silenzio.",
-      items: [],
-    },
-    derivedQueue: {
-      heading: "Definite nella direzione, non nel dettaglio",
-      body: "Ogni questione del catalogo porta ormai una posizione. Questi sono i numeri interni a quelle posizioni che non sono stati fissati, e che non verranno inventati prima che esista una base per stabilirli.",
-      items: [
-        "Le aliquote e le soglie fiscali esatte",
-        "Gli intervalli di pena esatti",
-        "Il meccanismo di verifica dell'età per i social media",
-        "Le date di neutralità climatica, i prezzi del carbonio e le quote di emissione",
-        "I criteri, carica per carica, per le cariche pubbliche riservate",
-        "I periodi di tolleranza per gli stranieri residenti dopo una perdita involontaria del lavoro",
-        "I periodi di assenza propri di ciascun titolo e i limiti massimi del trattenimento",
-      ],
-    },
   },
 
   filters: {
@@ -72,9 +40,6 @@ export const policyText: PolicyText = {
     sectionNavLabel: "Filtra le posizioni per sezione",
     sectionHeading: "Sezione",
     allSections: "Tutte",
-    statusNavLabel: "Filtra le posizioni per stato",
-    statusHeading: "Stato",
-    anyStatus: "Qualsiasi",
   },
 
   entry: {
@@ -91,26 +56,6 @@ export const policyText: PolicyText = {
     allPositions: "Tutte le posizioni",
     readManifesto: "Leggi il Manifesto",
     notFound: "Posizione non trovata",
-  },
-
-  statuses: {
-    "manifesto-core": {
-      label: "Nucleo del Manifesto",
-      description: "Stabilita esplicitamente dal Manifesto del restaurazionismo integrale europeo.",
-    },
-    agreed: {
-      label: "Posizione adottata",
-      description: "Una posizione precisata per questo catalogo dopo la stesura del Manifesto.",
-    },
-    derived: {
-      label: "Derivata",
-      description:
-        "Fortemente implicata dal Manifesto o da una posizione adottata, ma la cui attuazione non è definita.",
-    },
-    open: {
-      label: "Aperta",
-      description: "Nessuna posizione è stata adottata.",
-    },
   },
 
   categories: {

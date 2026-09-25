@@ -3,7 +3,6 @@ import type { PolicyEdition, PolicyEntry } from "@/content/policy";
 import { getPolicyCategory } from "@/lib/policy";
 import { localePath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { PolicyStatusBadge } from "./PolicyStatusBadge";
 
 interface PolicyCardProps {
   readonly edition: PolicyEdition;
@@ -19,7 +18,7 @@ interface PolicyCardProps {
 }
 
 /**
- * A listing row. Title, status and the short answer, so the catalogue can be
+ * A listing row. The title and the short answer, so the catalogue can be
  * scanned and a position understood without opening the full entry.
  *
  * The whole card is the target, not just the title. The card already lit up on
@@ -39,10 +38,7 @@ export function PolicyCard({ edition, entry, showCategory = true, className }: P
         className,
       )}
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <PolicyStatusBadge status={entry.status} label={entry.statusLabel} />
-        {category ? <span className="eyebrow text-faint">{category.title}</span> : null}
-      </div>
+      {category ? <p className="eyebrow text-faint">{category.title}</p> : null}
 
       <h3 className="font-serif text-display-4 font-normal text-ink">
         <Link

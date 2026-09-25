@@ -6,13 +6,11 @@ import { policyText as englishText } from "./en";
 import {
   policyCategoryIds,
   policyCategoryNumerals,
-  policyStatusIds,
   policyStructure,
   policySynonymGroupIds,
   type PolicyCategoryId,
   type PolicyEntryStructure,
   type PolicySlug,
-  type PolicyStatusId,
   type PolicySynonymGroupId,
 } from "./structure";
 
@@ -20,10 +18,9 @@ import {
  * The policy catalogue, and its translations.
  *
  * The manifesto carries the worldview; this answers the narrower question of
- * what the movement holds on a particular issue. Every entry carries a status,
- * so an adopted position can be told apart from one that has not been decided,
- * and an entry that departs from existing law says so in its own words rather
- * than describing itself as settled.
+ * what the movement holds on a particular issue. Every entry states a
+ * position, and an entry that departs from existing law says so in its own
+ * words.
  *
  * Ninety-eight entries in six languages is the largest thing on the site, and
  * the one where a translation drifting from the English would do the most
@@ -37,7 +34,6 @@ import {
 export {
   policyCategoryIds,
   policyCategoryNumerals,
-  policyStatusIds,
   policyStructure,
   policySynonymGroupIds,
 } from "./structure";
@@ -45,11 +41,10 @@ export type {
   PolicyCategoryId,
   PolicyEntryStructure,
   PolicySlug,
-  PolicyStatusId,
   PolicySynonymGroupId,
 } from "./structure";
 
-/** One entry's words. No slug, no status, no cross-references. */
+/** One entry's words. No slug, no cross-references. */
 export interface PolicyEntryText {
   readonly title: string;
   /** One or two sentences. Shown in listings and search results. */
@@ -71,27 +66,10 @@ export interface PolicyText {
     readonly eyebrow: string;
     readonly title: string;
     readonly metaTitle: string;
-    /** "Version 0.3". A version is a name, and names are written out. */
-    readonly version: string;
-    readonly framework: string;
     readonly lede: string;
     readonly description: string;
     readonly body: readonly string[];
-    readonly notice: string;
   };
-
-  /** Labels for the four-cell table beside the catalogue's lede. */
-  readonly labels: {
-    readonly version: string;
-    readonly date: string;
-    readonly framework: string;
-    readonly entries: string;
-  };
-
-  readonly statuses: Record<
-    PolicyStatusId,
-    { readonly label: string; readonly description: string }
-  >;
 
   readonly categories: Record<
     PolicyCategoryId,
@@ -99,7 +77,6 @@ export interface PolicyText {
   >;
 
   readonly index: {
-    readonly legendHeading: string;
     /** "Showing all {count} positions." */
     readonly showingAll: PluralForms;
     /** "{count} of {total} positions match." */
@@ -113,16 +90,6 @@ export interface PolicyText {
       readonly heading: string;
       readonly body: string;
     };
-    readonly openQueue: {
-      readonly heading: string;
-      readonly body: string;
-      readonly items: readonly string[];
-    };
-    readonly derivedQueue: {
-      readonly heading: string;
-      readonly body: string;
-      readonly items: readonly string[];
-    };
   };
 
   readonly filters: {
@@ -133,9 +100,6 @@ export interface PolicyText {
     readonly sectionNavLabel: string;
     readonly sectionHeading: string;
     readonly allSections: string;
-    readonly statusNavLabel: string;
-    readonly statusHeading: string;
-    readonly anyStatus: string;
   };
 
   readonly entry: {
@@ -190,13 +154,9 @@ export interface PolicyText {
 export interface PolicyEntry extends PolicyEntryText {
   readonly slug: PolicySlug;
   readonly category: PolicyCategoryId;
-  readonly status: PolicyStatusId;
-  readonly secondaryStatus?: PolicyStatusId;
   readonly manifestoBasis?: readonly string[];
   readonly related?: readonly string[];
   readonly lastUpdated: string;
-  /** "Manifesto Core / Derived" where an entry sits between two statuses. */
-  readonly statusLabel: string;
 }
 
 export interface PolicyCategory {
@@ -206,22 +166,14 @@ export interface PolicyCategory {
   readonly summary: string;
 }
 
-export interface PolicyStatusOption {
-  readonly id: PolicyStatusId;
-  readonly label: string;
-  readonly description: string;
-}
-
 export interface PolicyEdition {
   readonly locale: Locale;
   readonly meta: PolicyText["meta"];
-  readonly labels: PolicyText["labels"];
   readonly index: PolicyText["index"];
   readonly filters: PolicyText["filters"];
   readonly entry: PolicyText["entry"];
   readonly entries: readonly PolicyEntry[];
   readonly categories: readonly PolicyCategory[];
-  readonly statuses: readonly PolicyStatusOption[];
   /** The synonym groups of this language, as the search reads them. */
   readonly synonyms: readonly (readonly string[])[];
   /**
@@ -278,16 +230,10 @@ function edition(locale: Locale, text: PolicyText): PolicyEdition {
      * element has its own literal type and the optional keys are absent
      * rather than optional.
      */
-    .map((structure: PolicyEntryStructure & { readonly slug: PolicySlug }): PolicyEntry => {
-      const words = text.entries[structure.slug];
-      return {
-        ...structure,
-        ...words,
-        statusLabel: structure.secondaryStatus
-          ? `${text.statuses[structure.status].label} / ${text.statuses[structure.secondaryStatus].label}`
-          : text.statuses[structure.status].label,
-      };
-    })
+    .map((structure: PolicyEntryStructure & { readonly slug: PolicySlug }): PolicyEntry => ({
+      ...structure,
+      ...text.entries[structure.slug],
+    }))
     /*
      * Catalogue order: by category, then as authored within it. Not sorted
      * by title, in any language — the sequence inside a category is an
@@ -298,13 +244,11 @@ function edition(locale: Locale, text: PolicyText): PolicyEdition {
   return {
     locale,
     meta: text.meta,
-    labels: text.labels,
     index: text.index,
     filters: text.filters,
     entry: text.entry,
     entries,
     categories,
-    statuses: policyStatusIds.map((id) => ({ id, ...text.statuses[id] })),
     synonyms: policySynonymGroupIds.map((id) => text.search.synonyms[id]),
     /*
      * Searching a translated catalogue has to match translated words. A
