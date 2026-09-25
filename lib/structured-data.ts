@@ -11,7 +11,9 @@ export const organization = {
   slogan: site.tagline,
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/brand/restore-europa-crest.png`,
+    url: `${SITE_URL}/brand/restore-europa-mark.png`,
+    width: 512,
+    height: 512,
   },
 } as const;
 

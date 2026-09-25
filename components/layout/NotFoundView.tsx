@@ -19,7 +19,7 @@ export async function NotFoundView({ locale }: { readonly locale: Locale }) {
   return (
     <div lang={locale === DEFAULT_LOCALE ? undefined : localeTag(locale)}>
       <Container size="narrow" className="flex flex-col items-center py-28 text-center lg:py-40">
-        <RestoreEuropaMark className="h-16 w-auto" />
+        <RestoreEuropaMark className="h-16" />
         <p className="eyebrow mt-10 text-burgundy">{notFound.eyebrow}</p>
         <h1 className="mt-5 font-serif text-display-2 font-normal text-ink text-balance">
           {notFound.title}

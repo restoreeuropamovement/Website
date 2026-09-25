@@ -7,7 +7,6 @@ interface WordmarkProps {
   /** `stacked` sets the formal name beneath the letters. */
   readonly variant?: "compact" | "stacked";
   readonly size?: "sm" | "md" | "lg";
-  readonly preload?: boolean;
   /**
    * "Movement" in the reader's language. The name itself is never translated —
    * it is what the movement is called, not a phrase — but the word beneath it
@@ -41,13 +40,12 @@ export function Wordmark({
   className,
   variant = "compact",
   size = "md",
-  preload,
   descriptor = site.descriptor,
 }: WordmarkProps) {
   if (variant === "stacked") {
     return (
       <span className={cn("inline-flex flex-col items-start gap-2.5", className)}>
-        <RestoreEuropaMark className={markSize[size]} preload={preload} />
+        <RestoreEuropaMark className={markSize[size]} />
         <span className="flex flex-col gap-1">
           <span
             className={cn(
@@ -65,7 +63,7 @@ export function Wordmark({
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <RestoreEuropaMark className={markSize[size]} preload={preload} />
+      <RestoreEuropaMark className={markSize[size]} />
       <span
         className={cn("font-serif font-semibold tracking-[0.015em] text-current", letterSize[size])}
       >

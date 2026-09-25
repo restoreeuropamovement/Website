@@ -35,7 +35,7 @@ export function Navbar({
           href={localePath(locale, routes.home)}
           className="shrink-0 text-ink transition-opacity hover:opacity-70"
         >
-          <Wordmark descriptor={chrome.site.descriptor} preload />
+          <Wordmark descriptor={chrome.site.descriptor} />
           {/* Part of the link text rather than an aria-label, so the accessible
               name still contains the visible wordmark. */}
           <span className="sr-only">— {chrome.common.home}</span>

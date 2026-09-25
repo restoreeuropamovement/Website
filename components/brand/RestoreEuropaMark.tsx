@@ -1,38 +1,43 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { markLozenge, markRects, markViewBox } from "./mark-geometry";
 
 interface RestoreEuropaMarkProps {
   readonly className?: string;
   /** Provide a title only when the mark stands alone as the accessible label. */
   readonly title?: string;
-  /** Preload when the mark is in the first screen of a page, such as the masthead. */
-  readonly preload?: boolean;
-  /** Display width hint for the image optimizer. Chrome uses 80px; a nameplate needs more. */
-  readonly sizes?: string;
 }
 
 /**
- * The movement's crest: a sword over the globe, wreathed, with the motto
- * *In varietate concordia*. Colour, not a currentColor glyph — size it with
- * height (`h-* w-auto`) so the shield's portrait proportions stay intact.
+ * The movement's mark: a cross potent with its four tips joined by a lozenge.
+ *
+ * Drawn in `currentColor`, not in the brand red. In the masthead the mark sits
+ * a few pixels from the wordmark, and a red glyph beside parchment lettering
+ * reads as two marks rather than one; taking the colour of the text next to it
+ * makes the pair a single lockup. The red is where the mark stands alone and
+ * has nothing to agree with — the favicon, the home-screen icon and the crest
+ * on the link preview card, all cut from the same geometry by
+ * `scripts/generate-brand.mjs`.
+ *
+ * Inline rather than an `<Image>`: it is a few hundred bytes of path data, so
+ * inlining costs less than the request would and the masthead cannot render a
+ * frame without its mark.
+ *
+ * The figure is square. Size it by height and the width follows.
  */
-export function RestoreEuropaMark({
-  className,
-  title,
-  preload,
-  sizes = "80px",
-}: RestoreEuropaMarkProps) {
+export function RestoreEuropaMark({ className, title }: RestoreEuropaMarkProps) {
   return (
-    <Image
-      src="/brand/restore-europa-crest.png"
-      alt={title ?? ""}
-      width={451}
-      height={640}
-      sizes={sizes}
-      preload={preload}
-      className={cn("w-auto", className)}
+    <svg
+      viewBox={markViewBox}
+      className={cn("aspect-square", className)}
+      fill="currentColor"
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
-    />
+    >
+      {title ? <title>{title}</title> : null}
+      <path fillRule="evenodd" d={markLozenge} />
+      {markRects.map((rect) => (
+        <rect key={`${rect.x}:${rect.y}`} {...rect} />
+      ))}
+    </svg>
   );
 }

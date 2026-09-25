@@ -15,7 +15,7 @@ export default async function Image() {
   const [serif, sans, crest] = await Promise.all([
     loadGoogleFont("Source Serif 4", 400, glyphs),
     loadGoogleFont("Inter", 500, glyphs),
-    readFile(join(process.cwd(), "public/brand/restore-europa-crest.png")),
+    readFile(join(process.cwd(), "public/brand/restore-europa-mark.png")),
   ]);
 
   const fonts = [
@@ -42,7 +42,7 @@ export default async function Image() {
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element -- Satori renders
               this to a PNG at build time; next/image has no meaning here. */}
-          <img src={crestSrc} width={56} height={80} alt="" />
+          <img src={crestSrc} width={64} height={64} alt="" />
           <span
             style={{
               fontFamily: "Source Serif 4",
