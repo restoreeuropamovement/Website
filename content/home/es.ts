@@ -4,366 +4,158 @@ import type { HomeContent } from "./index";
 export const home: HomeContent = {
   hero: {
     headline: "Europa merece ser heredada.",
-    subheadline: "Por una civilización cristiana, europea y a escala humana.",
-    primaryCta: { label: "Lee nuestros principios", href: "/principles" },
-    secondaryCta: { label: "Lee el Manifiesto", href: "/manifesto" },
+    statement:
+      "Restore Europa es un movimiento político de las naciones de Europa, fundado sobre un manifiesto publicado y organizado como un ala nacional distinta en cada país en lugar de como un único partido europeo.",
+    primaryCta: "Lee nuestros principios",
+    secondaryCta: "Participa",
   },
 
-  philosophy: {
-    eyebrow: "La cuestión central",
-    statement: ["La economía existe para el hombre.", "El hombre no existe para la economía."],
-    body: [
-      {
-        type: "lead",
-        text: "Los sistemas políticos y económicos son instrumentos. Existen para hacer posible una buena vida humana —no al revés.",
-      },
-      {
-        type: "paragraph",
-        text: "Una civilización no puede medirse solo por lo que produce. El producto interior bruto, el consumo, la productividad, la eficiencia administrativa y la capacidad tecnológica describen los medios de una sociedad. No dicen casi nada sobre si quienes viven en ella pueden formar una familia, conservar un hogar, conocer a sus vecinos, ejercer un oficio o descansar.",
-      },
-      {
-        type: "paragraph",
-        text: "Cuando esos medios se toman por fines, las instituciones que sostienen la vida corriente se desmantelan en silencio para servirlos. Eso no es progreso. Es un desplazamiento de la finalidad desde la persona hacia el sistema.",
-      },
-    ] satisfies readonly ContentBlock[],
-    requirements: {
-      title: "El ser humano necesita tiempo y espacio para",
-      items: [
-        "Familia",
-        "Amistad",
-        "Fe",
-        "Comunidad",
-        "Naturaleza",
-        "Aprendizaje",
-        "Oficio",
-        "Belleza",
-        "Descanso",
-      ],
-    },
-    reductions: {
-      title: "Una civilización no puede reducirse a",
-      items: [
-        "Producto interior bruto",
-        "Consumo",
-        "Productividad",
-        "Eficiencia administrativa",
-        "Capacidad tecnológica",
-      ],
-    },
-  },
-
-  principles: {
-    title: "Lo que sostenemos, dicho brevemente.",
+  standFor: {
+    eyebrow: "Lo que defendemos",
+    title: "Cinco convicciones.",
+    lede: "Cinco de dieciséis. Cada una se argumenta por extenso en su propia página, junto a la sección del manifiesto en la que se apoya.",
     allLabel: "Los dieciséis principios",
     readFull: "leer el principio completo",
-    items: [
-      {
-        number: "01",
+    items: {
+      family: {
         title: "Familia y vida humana",
         statement:
-          "La sociedad debe hacer materialmente posibles la formación de una familia, la crianza de los hijos y una vida humana con sentido.",
-        href: "/principles#family",
+          "Un país que ha vuelto inasequibles a los hijos ya ha dicho algo sobre lo que valora. Lo ordinario — casarse, criar una familia, sostener un hogar — debería estar al alcance de la gente ordinaria.",
       },
-      {
-        number: "02",
+      nation: {
         title: "Nación y continuidad",
         statement:
-          "Las naciones europeas tienen el derecho legítimo de preservar su identidad histórica, su cultura y su continuidad.",
-        href: "/principles#nation-and-continuity",
+          "Una nación es un pueblo con memoria, no un conjunto de fronteras administrativas. Le está permitido querer seguir reconociéndose dentro de cien años.",
       },
-      {
-        number: "03",
+      property: {
         title: "Propiedad e independencia económica",
         statement:
-          "Una sociedad libre exige una propiedad ampliamente repartida y no la dependencia permanente de un número reducido de instituciones.",
-        href: "/principles#property",
+          "La libertad se ejerce mal desde la dependencia total. La propiedad debería estar ampliamente repartida — viviendas, tierra, oficios, pequeñas empresas — en lugar de reunida en unas pocas instituciones.",
       },
-      {
-        number: "04",
-        title: "Tecnología a escala humana",
+      technology: {
+        title: "Técnica a escala humana",
         statement:
-          "La tecnología debe reforzar la competencia humana, la autonomía y la comunidad, en lugar de reorganizar la sociedad en torno a la necesidad tecnológica.",
-        href: "/principles#technology",
+          "No todo lo que puede construirse ha de adoptarse. Una herramienta debe dejar a las personas más capaces de llevar su propia vida, no menos.",
       },
-      {
-        number: "05",
-        title: "Custodia y belleza",
-        statement:
-          "La tierra, la arquitectura y la naturaleza son herencias que hay que cultivar, proteger y transmitir.",
-        href: "/principles#environment",
-      },
-      {
-        number: "06",
+      subsidiarity: {
         title: "Autoridad y subsidiariedad",
-        statement: "La autoridad política debe ejercerse en el nivel competente más bajo.",
-        href: "/principles#subsidiarity",
+        statement:
+          "Nada debe decidirse más arriba de donde puede decidirse bien. Lo que una familia, un municipio o una nación puede hacer por sí mismo le pertenece.",
       },
-    ],
-  },
-
-  lifeAndWork: {
-    eyebrow: "Trabajo y vida",
-    statement: "No fuimos creados para trabajar hasta morir.",
-    body: [
-      {
-        type: "lead",
-        text: "El trabajo posee una dignidad real. Gracias a él las personas adquieren competencia, producen cosas útiles, mantienen a sus familias y participan en la vida de una comunidad.",
-      },
-      {
-        type: "paragraph",
-        text: "Pero el trabajo no es la finalidad total de la existencia humana. Un sistema económico está para proporcionar la base material de una vida —no para consumir la vida que debía sostener.",
-      },
-      {
-        type: "paragraph",
-        text: "Una sociedad ha perdido el rumbo cuando la gente corriente debe entregar casi todas sus horas de vigilia solo para asegurarse vivienda y comida; cuando los padres apenas ven a sus hijos; cuando las comunidades se vacían porque todo el mundo está agotado.",
-      },
-    ] satisfies readonly ContentBlock[],
-    diagram: {
-      top: "Trabajo",
-      middle: "sostiene",
-      bottom: "Vida",
-      separator: ": ",
-      orbit: [
-        "familia",
-        "amistad",
-        "fe",
-        "comunidad",
-        "naturaleza",
-        "aprendizaje",
-        "oficio",
-        "descanso",
-      ],
-    },
-    outcome: {
-      title: "Lo que la productividad debería comprar",
-      lead: "Los aumentos de lo que una sociedad es capaz de producir deberían aparecer en algún punto de la vida de quienes lo producen.",
-      items: [
-        "Mayor seguridad frente al infortunio corriente",
-        "Un ocio que sea verdaderamente propio",
-        "Tiempo con los hijos y con los padres",
-        "Autonomía para organizar la propia vida laboral",
-        "Independencia respecto de la deuda y la dependencia permanentes",
-      ],
     },
   },
 
-  economicOrder: {
-    eyebrow: "Orden económico",
-    statement: "Mercados sin culto al mercado.",
-    body: [
-      {
-        type: "lead",
-        text: "La propiedad privada es legítima. La empresa es legítima. El beneficio es legítimo. El éxito económico es legítimo.",
+  objectives: {
+    eyebrow: "Lo que queremos hacer",
+    title: "En concreto, este es el trabajo.",
+    lede: "A un movimiento se le juzga por lo que construye, no por lo que deplora. Hay cuatro cosas en marcha, y cada una se comprueba abriéndola.",
+    items: {
+      programme: {
+        title: "Poner el programa por escrito.",
+        body: "Diez ámbitos, de la familia y la economía a la técnica, la sanidad y la política exterior. Posiciones trabajadas en lugar de consignas, cada una ligada a la sección del manifiesto en la que se apoya y cada una fechada. Una posición que se puede citar es una posición de la que se nos puede pedir cuentas.",
+        linkLabel: "Leer el catálogo de políticas",
       },
-      {
-        type: "paragraph",
-        text: "Ninguna de estas cosas es la finalidad más alta de una sociedad. Las instituciones económicas son indispensables y deben permanecer subordinadas al bien común —que no es una restricción impuesta a la empresa desde fuera, sino la razón misma por la que merece la pena protegerla.",
+      wings: {
+        title: "Levantar un ala en cada nación europea.",
+        body: "El trabajo político ocurre dentro de un país, bajo su derecho y en sus condiciones. Cuarenta y siete naciones están en el mapa. Cada ala se da sus propios estatutos, concurre a sus propias elecciones y responde ante sus propios miembros, no ante una sede en otro sitio.",
+        linkLabel: "Ver las alas nacionales",
       },
-      {
-        type: "paragraph",
-        text: "Esta no es una posición contra la empresa. Es una posición contra la dominación: contra el punto en el que un mercado deja de ser un medio de intercambio entre muchos participantes y se convierte en un instrumento de control en manos de unos pocos.",
+      members: {
+        title: "Ser un partido de miembros, no de personalidades.",
+        body: "Un movimiento hecho de miembros puede rendirles cuentas. Nada se convierte en afiliación antes de que una persona haya leído la solicitud — ningún formulario decide por sí solo, y lo que escribes se cifra antes de guardarse.",
+        linkLabel: "Solicitar la afiliación",
       },
-    ] satisfies readonly ContentBlock[],
-    pillars: [
-      {
-        title: "Empresa",
-        lead: "Lo que apoyamos",
-        items: [
-          "Iniciativa empresarial",
-          "Inversión productiva",
-          "Empresas familiares",
-          "Oficios independientes",
-          "Pequeñas y medianas empresas",
-        ],
+      publication: {
+        title: "Publicar el argumento entero.",
+        body: "El manifiesto está en línea íntegro y se puede descargar como texto plano. Nada queda detrás de una dirección de correo, un formulario o un pago. Quien quiera contradecir a este movimiento puede leer exactamente lo que dijo.",
+        linkLabel: "Leer el manifiesto",
       },
-      {
-        title: "Propiedad",
-        lead: "Lo que ampliamos",
-        items: [
-          "Vivienda en propiedad",
-          "Cooperativas",
-          "Propiedad de los trabajadores",
-          "Explotaciones agrarias familiares",
-          "Banca local y regional",
-          "Propiedad del capital más repartida",
-        ],
-      },
-      {
-        title: "Límites",
-        lead: "Lo que contenemos",
-        items: [
-          "Concentración monopolística",
-          "Captura del regulador",
-          "Extracción financiera",
-          "Mercados inmobiliarios especulativos",
-          "Dominio empresarial de la política",
-        ],
-      },
-    ],
-    key: "La economía existe para la persona, la familia y la comunidad.",
-  },
-
-  technology: {
-    eyebrow: "Tecnología",
-    statement: "La máquina debe adaptarse al hombre.",
-    body: [
-      {
-        type: "lead",
-        text: "Restore Europa no está contra la tecnología. Rechazamos la inevitabilidad tecnológica —la suposición de que todo lo que puede construirse debe adoptarse y de que todo lo que aumenta la eficiencia ha de contar como progreso.",
-      },
-      {
-        type: "paragraph",
-        text: "Una tecnología introducida como opcional puede volverse económicamente necesaria. Lo que se vuelve necesario remodela las instituciones, y las instituciones reorganizan después la sociedad en torno a las exigencias de esa tecnología. Al final de esa secuencia, son las personas las que se adaptan a la máquina.",
-      },
-      {
-        type: "paragraph",
-        text: "Cada tecnología debe juzgarse por lo que hace con la autonomía humana, la vida familiar, la comunidad, la privacidad, el trabajo con sentido, la competencia humana y la descentralización política.",
-      },
-    ] satisfies readonly ContentBlock[],
-    liberates: {
-      title: "Tecnología que libera",
-      items: [
-        "Medicina",
-        "Saneamiento",
-        "Ingeniería",
-        "Descubrimiento científico",
-        "Herramientas útiles",
-        "Automatización del trabajo peligroso",
-      ],
-    },
-    dominates: {
-      title: "Tecnología que domina",
-      items: [
-        "Vigilancia masiva",
-        "Manipulación de la atención",
-        "Dependencia digital forzosa",
-        "Control algorítmico",
-        "Eliminación innecesaria de la capacidad humana de decidir",
-        "Sistemas que hacen imposible participar sin una dependencia tecnológica total",
-      ],
-    },
-    closing: ["No nos oponemos a la tecnología.", "Nos oponemos a la dominación tecnológica."],
-  },
-
-  stewardship: {
-    eyebrow: "Custodia",
-    title: "Custodia",
-    body: [
-      {
-        type: "lead",
-        text: "Los bosques, las tierras de cultivo, los ríos, las montañas, las costas, la biodiversidad y los núcleos históricos son bienes heredados. Se recibieron de personas que ya no están y se deben a personas que aún no han nacido.",
-      },
-      {
-        type: "paragraph",
-        text: "Eso los convierte en algo distinto de mercancías desechables. Una generación puede usarlos, y debe mantenerlos; no los posee en plena propiedad.",
-      },
-      {
-        type: "paragraph",
-        text: "Este no es un argumento que trate a la humanidad como una plaga sobre el mundo natural, ni uno que considere aceptable cualquier destrucción con tal de aumentar la producción a corto plazo. El hombre pertenece a la naturaleza —como su custodio, responsable de lo que deja tras de sí.",
-      },
-    ] satisfies readonly ContentBlock[],
-    categoriesTitle: "Lo que se tiene en custodia",
-    categories: [
-      { title: "Bosques", note: "Silvicultura responsable y turnos largos." },
-      { title: "Agricultura", note: "Suelos sanos y agricultura familiar." },
-      { title: "Agua", note: "Ríos, acuíferos y costas limpios." },
-      { title: "Biodiversidad", note: "Hábitats conservados intactos, no solo catalogados." },
-      { title: "Paisaje", note: "Formas de asentamiento que respetan el territorio." },
-      { title: "Arquitectura", note: "Construir para generaciones, no para ciclos." },
-      { title: "Producción regional", note: "Cadenas de suministro que una región puede ver." },
-      { title: "Durabilidad y reparación", note: "Cosas hechas para ser reparadas." },
-    ],
-  },
-
-  europe: {
-    eyebrow: "Europa",
-    title: "Una Europa de naciones.",
-    subtitle: "Cooperación sin homogeneización.",
-    nations: [
-      "Polonia debe seguir siendo reconociblemente polaca.",
-      "Italia debe seguir siendo reconociblemente italiana.",
-      "Francia debe seguir siendo reconociblemente francesa.",
-    ],
-    together: "Y juntas siguen siendo europeas.",
-    body: [
-      {
-        type: "lead",
-        text: "El principio que debe regir la organización política europea es la subsidiariedad: nada debería decidirse en un nivel superior cuando puede decidirse con competencia en uno inferior.",
-      },
-      {
-        type: "paragraph",
-        text: "El municipio no debe ceder innecesariamente ante la región, ni la región ante la nación, ni la nación ante las instituciones continentales. Allí donde una instancia más pequeña puede hacer bien el trabajo, el trabajo le pertenece —no como comodidad administrativa, sino como condición de la libertad política.",
-      },
-      {
-        type: "paragraph",
-        text: "Queda con ello mucho que los europeos solo pueden hacer juntos. La identidad nacional y la local siguen teniendo sentido político precisamente porque la cooperación se limita a los asuntos que realmente la exigen.",
-      },
-    ] satisfies readonly ContentBlock[],
-    cooperation: {
-      title: "Dónde corresponde la cooperación europea",
-      items: [
-        "Defensa",
-        "Infraestructuras estratégicas",
-        "Fronteras",
-        "Ciencia",
-        "Protección del medio ambiente",
-        "Medicina",
-        "Resiliencia energética",
-        "Industria estratégica",
-      ],
     },
   },
 
-  politicalCulture: {
-    eyebrow: "Cultura política",
-    statement: "El país antes que el partido.",
+  manifesto: {
+    eyebrow: "Del manifiesto",
+    title: "Preámbulo",
     body: [
       {
         type: "lead",
-        text: "El desacuerdo político es necesario. La guerra partidista permanente no lo es.",
+        text: "Europa es más que un continente, un mercado o un espacio administrativo.",
       },
       {
         type: "paragraph",
-        text: "Cuando están en juego los intereses duraderos de una nación y de su pueblo —la seguridad nacional, las infraestructuras críticas, la estabilidad demográfica, la protección de las familias, la continuidad constitucional—, los movimientos políticos deberían ser capaces de cooperar por encima de las líneas de partido.",
+        text: "Es una civilización — fruto del cristianismo y de la herencia clásica, de pueblos y lenguas distintos, de generaciones de familias, de paisajes cultivados, de ciudades y aldeas, de iglesias, arte, derecho, artesanía y memoria.",
       },
       {
         type: "paragraph",
-        text: "La finalidad de un partido político no es simplemente derrotar a otro partido. Su finalidad es servir a la comunidad política. La oposición es necesaria; la oposición por la oposición es corrosiva.",
+        text: "Nada de eso lo construyeron individuos desligados de la historia. Se entregó de una generación a la siguiente. Burke le dio en 1790 su formulación ya clásica, frente a una revolución que pretendía empezar de nuevo solo desde la razón: una sociedad es una asociación, y como sus fines no pueden alcanzarse dentro de una sola vida, es una asociación \u201cno solo entre los que viven, sino entre los que viven, los que han muerto y los que están por nacer\u201d.",
+      },
+      {
+        type: "paragraph",
+        text: "La Europa moderna trata cada vez más la herencia misma como sospechosa. No aceptamos que eso sea progreso.",
       },
     ] satisfies readonly ContentBlock[],
-    hierarchy: [
-      { label: "Pueblo", note: "La comunidad política misma, a lo largo de las generaciones." },
-      { label: "Nación", note: "Su continuidad, su seguridad y su vida común." },
-      { label: "Instituciones", note: "Los cargos que tienen a ambos en custodia." },
-      { label: "Partido", note: "Un instrumento de servicio, y el último de los cuatro." },
-    ],
-    clarification:
-      "Este es un orden de servicio y de responsabilidad, no una cadena de mando. Describe lo que un partido debe, no una autoridad que un partido pueda reclamar. Nada en él autoriza a gobernar sin consentimiento: la autoridad política sigue respondiendo ante la ley, ante los límites constitucionales y ante el pueblo.",
+    cta: "Leer el manifiesto completo",
   },
 
-  restoration: {
-    eyebrow: "Restauración",
-    statement: "Restauración, no rendición.",
-    body: [
-      {
-        type: "lead",
-        text: "La restauración no significa recrear un siglo histórico determinado. El pasado contuvo injusticia, pobreza, violencia y error; nada de ello merece nuestra nostalgia.",
+  explore: {
+    eyebrow: "Explorar",
+    title: "Explora Restore Europa.",
+    cards: {
+      principles: {
+        title: "Principios",
+        blurb: "Los dieciséis compromisos, argumentados uno a uno.",
       },
-      {
-        type: "paragraph",
-        text: "Significa recuperar los principios que la sociedad moderna ha desechado y aplicarlos con inteligencia a las condiciones en las que realmente vivimos. La historia no puede revertirse. El rumbo sí puede cambiarse.",
+      manifesto: {
+        title: "Manifiesto",
+        blurb: "El documento fundacional: un preámbulo y veintidós secciones, íntegro.",
       },
-    ] satisfies readonly ContentBlock[],
-    closing: "Nuestra herencia no nos correspondía crearla. No nos corresponde desecharla.",
-    primaryCta: { label: "Lee el Manifiesto", href: "/manifesto" },
-    secondaryCta: { label: "Nuestra visión", href: "/vision" },
+      policy: {
+        title: "Políticas",
+        blurb: "Posiciones trabajadas en diez ámbitos, consultables y fechadas.",
+      },
+      vision: {
+        title: "Visión",
+        blurb: "Lo que el programa significaría en una vida corriente.",
+      },
+      wings: {
+        title: "Alas",
+        blurb: "El ala nacional en cada una de las cuarenta y siete naciones europeas.",
+      },
+      about: {
+        title: "Quiénes somos",
+        blurb: "Quiénes somos y cómo está construido el movimiento.",
+      },
+    },
   },
 
-  join: {
-    eyebrow: "Afiliación",
-    statement: "Un movimiento son personas, o no es nada.",
-    body: "Restore Europa se organiza como un partido de miembros y no de personalidades. Ningún formulario decide nada: cada solicitud la lee una persona antes de convertirse en afiliación, y lo que usted escriba se cifra antes de almacenarse.",
-    primaryCta: { label: "Únete al movimiento", href: "/join" },
-    secondaryCta: { label: "Haz una pregunta", href: "/contact" },
+  participation: {
+    eyebrow: "Tomar parte",
+    title: "Qué significa realmente unirse.",
+    lede: "Dos maneras de entrar y una carta que escribir. Ninguna cuesta nada, porque el movimiento todavía no puede recibir dinero.",
+    ways: {
+      member: {
+        title: "Miembro",
+        note: "La vía ordinaria",
+        summary:
+          "Quedas contado. Aquí la afiliación es pertenencia y no una suscripción: cuando Restore Europa pueda recibir aportaciones, serán los miembros a quienes se pedirá que sostengan el trabajo.",
+        cta: "Solicitar la afiliación",
+      },
+      volunteer: {
+        title: "Voluntario",
+        note: "Todo el tiempo que puedas dar",
+        summary:
+          "La misma solicitud, con el ámbito en el que ayudarías — organización local, escritura, traducción, actos, derecho, técnica, agricultura, construcción, u otra cosa que sepas hacer.",
+        cta: "Ofrecerse como voluntario",
+      },
+      chapter: {
+        title: "Un ala donde vives",
+        note: "Escribe primero; no hay formulario",
+        summary:
+          "Estar en el mapa no significa que allí haya ya un ala constituida. Si quieres ayudar a fundar la de tu país, dilo — en esta etapa es lo más útil que nadie puede hacer por el movimiento.",
+        cta: "Escribir sobre un ala local",
+      },
+    },
+    closing:
+      "No hay ninguna lista de correo a la que apuntarse ni boletín al que suscribirse. La única dirección que este movimiento tiene es la que tú mismo escribiste en una solicitud o en una consulta, y se cifra antes de guardarse.",
   },
 };

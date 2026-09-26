@@ -3,372 +3,159 @@ import type { HomeContent } from "./index";
 
 export const home: HomeContent = {
   hero: {
-    headline: "Europa to dziedzictwo, które warto przyjąć.",
-    subheadline: "O cywilizację chrześcijańską, europejską i na ludzką miarę.",
-    primaryCta: { label: "Przeczytaj nasze zasady", href: "/principles" },
-    secondaryCta: { label: "Przeczytaj Manifest", href: "/manifesto" },
+    headline: "Europa jest dziedzictwem wartym przyjęcia.",
+    statement:
+      "Restore Europa to ruch polityczny narodów Europy, oparty na opublikowanym manifeście i zorganizowany jako osobne skrzydło narodowe w każdym kraju, a nie jako jedna europejska partia.",
+    primaryCta: "Przeczytaj nasze zasady",
+    secondaryCta: "Włącz się",
   },
 
-  philosophy: {
-    eyebrow: "Pytanie zasadnicze",
-    statement: ["Gospodarka istnieje dla człowieka.", "Człowiek nie istnieje dla gospodarki."],
-    body: [
-      {
-        type: "lead",
-        text: "Systemy polityczne i gospodarcze są narzędziami. Istnieją po to, by człowiek mógł dobrze żyć — nie odwrotnie.",
-      },
-      {
-        type: "paragraph",
-        text: "Cywilizacji nie da się zmierzyć samą wielkością produkcji. Produkt krajowy brutto, konsumpcja, produktywność, sprawność administracyjna i możliwości techniczne opisują środki, jakimi dysponuje społeczeństwo. Nie mówią jednak niemal nic o tym, czy ludzie, którzy w nim żyją, mogą zakładać rodziny, utrzymywać dom, znać sąsiadów, uprawiać rzemiosło i odpoczywać.",
-      },
-      {
-        type: "paragraph",
-        text: "Gdy te środki traktuje się jako cele, w ich imię po cichu demontuje się instytucje, które spajają zwyczajne życie. To nie postęp. To przeniesienie celu z osoby na system.",
-      },
-    ] satisfies readonly ContentBlock[],
-    requirements: {
-      title: "Człowiek potrzebuje czasu i przestrzeni na",
-      items: [
-        "Rodzinę",
-        "Przyjaźń",
-        "Wiarę",
-        "Wspólnotę",
-        "Przyrodę",
-        "Naukę",
-        "Rzemiosło",
-        "Piękno",
-        "Odpoczynek",
-      ],
-    },
-    reductions: {
-      title: "Cywilizacji nie można sprowadzić do",
-      items: [
-        "Produktu krajowego brutto",
-        "Konsumpcji",
-        "Produktywności",
-        "Sprawności administracyjnej",
-        "Możliwości technicznych",
-      ],
-    },
-  },
-
-  principles: {
-    title: "Co głosimy, w skrócie.",
+  standFor: {
+    eyebrow: "Za czym się opowiadamy",
+    title: "Pięć przekonań.",
+    lede: "Pięć z szesnastu. Każde jest szerzej uzasadnione na własnej stronie, przy tej części manifestu, na której się opiera.",
     allLabel: "Wszystkie szesnaście zasad",
-    readFull: "przeczytaj zasadę w całości",
-    items: [
-      {
-        number: "01",
+    readFull: "przeczytaj pełną zasadę",
+    items: {
+      family: {
         title: "Rodzina i życie ludzkie",
         statement:
-          "Społeczeństwo powinno zapewnić materialne warunki, w których da się założyć rodzinę, wychowywać dzieci i prowadzić sensowne życie.",
-        href: "/principles#family",
+          "Kraj, w którym dzieci stały się luksusem, już powiedział coś o tym, co ceni. Rzeczy zwyczajne — zawarcie małżeństwa, wychowanie dzieci, utrzymanie domu — powinny być w zasięgu zwyczajnych ludzi.",
       },
-      {
-        number: "02",
+      nation: {
         title: "Naród i ciągłość",
         statement:
-          "Narody Europy mają pełne prawo zachować swoją historyczną tożsamość, kulturę i ciągłość.",
-        href: "/principles#nation-and-continuity",
+          "Naród to lud obdarzony pamięcią, a nie zbiór granic administracyjnych. Wolno mu chcieć rozpoznawać siebie także za sto lat.",
       },
-      {
-        number: "03",
+      property: {
         title: "Własność i niezależność gospodarcza",
         statement:
-          "Wolne społeczeństwo wymaga szeroko rozproszonej własności, a nie trwałej zależności od kilku instytucji.",
-        href: "/principles#property",
+          "Trudno korzystać z wolności z pozycji całkowitej zależności. Własność powinna być szeroko rozproszona — domy, ziemia, rzemiosło, małe firmy — a nie skupiona w kilku instytucjach.",
       },
-      {
-        number: "04",
-        title: "Technika na ludzką miarę",
+      technology: {
+        title: "Technika na miarę człowieka",
         statement:
-          "Technika powinna umacniać ludzkie umiejętności, autonomię i wspólnotę, a nie przebudowywać społeczeństwa pod dyktando technologicznej konieczności.",
-        href: "/principles#technology",
+          "Nie wszystko, co da się zbudować, trzeba przyjąć. Narzędzie ma czynić ludzi bardziej zdolnymi do prowadzenia własnego życia, a nie mniej.",
       },
-      {
-        number: "05",
-        title: "Troska o dziedzictwo i piękno",
-        statement:
-          "Ziemia, architektura i przyroda to dziedzictwo, które trzeba pielęgnować, chronić i przekazywać dalej.",
-        href: "/principles#environment",
-      },
-      {
-        number: "06",
+      subsidiarity: {
         title: "Władza i pomocniczość",
         statement:
-          "Władzę polityczną należy sprawować na najniższym szczeblu, który jest do tego zdolny.",
-        href: "/principles#subsidiarity",
+          "Nic nie powinno być rozstrzygane wyżej, niż można to rozstrzygnąć dobrze. To, co rodzina, miasto albo naród potrafi zrobić sam, należy do niego.",
       },
-    ],
-  },
-
-  lifeAndWork: {
-    eyebrow: "Praca i życie",
-    statement: "Nie po to zostaliśmy stworzeni, żeby pracować do śmierci.",
-    body: [
-      {
-        type: "lead",
-        text: "Praca ma rzeczywistą godność. Dzięki niej ludzie zdobywają umiejętności, wytwarzają rzeczy pożyteczne, utrzymują rodziny i uczestniczą w życiu wspólnoty.",
-      },
-      {
-        type: "paragraph",
-        text: "Praca nie jest jednak całym celem ludzkiego życia. System gospodarczy ma dawać materialną podstawę życia, a nie pochłaniać życia, które miał wspierać.",
-      },
-      {
-        type: "paragraph",
-        text: "Społeczeństwo traci orientację, gdy zwyczajni ludzie muszą oddawać pracy niemal wszystkie godziny, jakie im zostają poza snem, żeby mieć dach nad głową i co jeść; gdy rodzice rzadko widzą swoje dzieci; gdy wspólnoty pustoszeją, bo wszyscy są wyczerpani.",
-      },
-    ] satisfies readonly ContentBlock[],
-    diagram: {
-      top: "Praca",
-      middle: "wspiera",
-      bottom: "Życie",
-      separator: ": ",
-      /* Accusative, governed by "wspiera", and lower case mid-sentence. */
-      orbit: [
-        "rodzinę",
-        "przyjaźń",
-        "wiarę",
-        "wspólnotę",
-        "przyrodę",
-        "naukę",
-        "rzemiosło",
-        "odpoczynek",
-      ],
-    },
-    outcome: {
-      title: "Co produktywność powinna nam przynosić",
-      lead: "Jeśli społeczeństwo wytwarza coraz więcej, powinno to być gdzieś widać w życiu ludzi, którzy na ten wzrost pracują.",
-      items: [
-        "Większe bezpieczeństwo na wypadek zwykłych nieszczęść",
-        "Czas wolny, który naprawdę należy do człowieka",
-        "Czas z dziećmi i z rodzicami",
-        "Samodzielność w urządzaniu własnej pracy",
-        "Życie bez trwałego długu i zależności",
-      ],
     },
   },
 
-  economicOrder: {
-    eyebrow: "Ład gospodarczy",
-    statement: "Rynek bez kultu rynku.",
-    body: [
-      {
-        type: "lead",
-        text: "Własność prywatna jest słuszna. Przedsiębiorczość jest słuszna. Zysk jest słuszny. Sukces gospodarczy jest słuszny.",
+  objectives: {
+    eyebrow: "Co chcemy robić",
+    title: "Konkretnie: na tym polega praca.",
+    lede: "Ruch ocenia się po tym, co buduje, a nie po tym, co potępia. Cztery rzeczy są w toku i każdą można sprawdzić, po prostu ją otwierając.",
+    items: {
+      programme: {
+        title: "Spisać program.",
+        body: "Dziesięć obszarów, od rodziny i gospodarki po technikę, zdrowie i politykę zagraniczną. Opracowane stanowiska zamiast haseł, każde powiązane z częścią manifestu, na której się opiera, i każde opatrzone datą. Stanowisko, które można zacytować, to stanowisko, z którego można nas rozliczyć.",
+        linkLabel: "Przeczytaj katalog polityk",
       },
-      {
-        type: "paragraph",
-        text: "Żadne z tych dóbr nie jest najwyższym celem społeczeństwa. Instytucje gospodarcze są niezbędne i muszą pozostać podporządkowane dobru wspólnemu — a dobro wspólne nie jest ograniczeniem narzuconym przedsiębiorczości z zewnątrz, lecz racją, dla której w ogóle warto ją chronić.",
+      wings: {
+        title: "Zbudować skrzydło w każdym narodzie Europy.",
+        body: "Praca polityczna toczy się wewnątrz kraju, pod jego prawem i w jego warunkach. Na mapie jest czterdzieści siedem narodów. Każde skrzydło ma własny statut, startuje we własnych wyborach i odpowiada przed własnymi członkami, a nie przed centralą gdzie indziej.",
+        linkLabel: "Zobacz skrzydła narodowe",
       },
-      {
-        type: "paragraph",
-        text: "Nie występujemy przeciw biznesowi. Występujemy przeciw dominacji: przeciw tej granicy, za którą rynek przestaje być sposobem wymiany między wieloma uczestnikami, a staje się narzędziem kontroli w rękach nielicznych.",
+      members: {
+        title: "Być partią członków, a nie osobowości.",
+        body: "Ruch złożony z członków może być przez nich rozliczany. Nic nie staje się członkostwem, zanim człowiek nie przeczyta zgłoszenia — żaden formularz nie rozstrzyga sam z siebie, a to, co piszesz, jest szyfrowane przed zapisaniem.",
+        linkLabel: "Złóż wniosek o członkostwo",
       },
-    ] satisfies readonly ContentBlock[],
-    pillars: [
-      {
-        title: "Przedsiębiorczość",
-        lead: "Co wspieramy",
-        items: [
-          "Inicjatywa gospodarcza",
-          "Inwestycje produkcyjne",
-          "Firmy rodzinne",
-          "Niezależne rzemiosło",
-          "Małe i średnie przedsiębiorstwa",
-        ],
+      publication: {
+        title: "Opublikować całość argumentu.",
+        body: "Manifest jest w całości dostępny w sieci i do pobrania jako zwykły tekst. Nic nie jest ukryte za adresem e-mail, formularzem ani płatnością. Kto chce z tym ruchem polemizować, może przeczytać dokładnie to, co powiedział.",
+        linkLabel: "Przeczytaj manifest",
       },
-      {
-        title: "Własność",
-        lead: "Co rozszerzamy",
-        items: [
-          "Mieszkanie na własność",
-          "Spółdzielnie",
-          "Własność pracownicza",
-          "Gospodarstwa rodzinne",
-          "Bankowość lokalna i regionalna",
-          "Szerzej rozproszona własność kapitału",
-        ],
-      },
-      {
-        title: "Granice",
-        lead: "Co ograniczamy",
-        items: [
-          "Koncentracja monopolistyczna",
-          "Zawłaszczenie regulatora",
-          "Drenaż finansowy",
-          "Spekulacja na rynku mieszkaniowym",
-          "Dominacja korporacji w polityce",
-        ],
-      },
-    ],
-    key: "Gospodarka istnieje dla osoby, rodziny i wspólnoty.",
-  },
-
-  technology: {
-    eyebrow: "Technika",
-    statement: "Maszyna musi się dostosować do człowieka.",
-    body: [
-      {
-        type: "lead",
-        text: "Restore Europa nie występuje przeciw technice. Odrzucamy technologiczną nieuchronność — założenie, że wszystko, co da się zbudować, trzeba wdrożyć, a wszystko, co podnosi wydajność, trzeba uznać za postęp.",
-      },
-      {
-        type: "paragraph",
-        text: "Technika, którą wprowadza się jako dobrowolną, może się stać gospodarczo konieczna. To, co staje się konieczne, przekształca instytucje, a instytucje przebudowują potem społeczeństwo pod wymagania tej techniki. Na końcu tego ciągu to człowiek dostosowuje się do maszyny.",
-      },
-      {
-        type: "paragraph",
-        text: "Każdą technikę trzeba oceniać po tym, co robi z ludzką autonomią, życiem rodzinnym, wspólnotą, prywatnością, sensowną pracą, ludzkimi umiejętnościami i decentralizacją polityczną.",
-      },
-    ] satisfies readonly ContentBlock[],
-    liberates: {
-      title: "Technika, która wyzwala",
-      items: [
-        "Medycyna",
-        "Kanalizacja i wodociągi",
-        "Inżynieria",
-        "Odkrycia naukowe",
-        "Pożyteczne narzędzia",
-        "Automatyzacja pracy niebezpiecznej",
-      ],
-    },
-    dominates: {
-      title: "Technika, która zniewala",
-      items: [
-        "Masowa inwigilacja",
-        "Manipulowanie uwagą",
-        "Wymuszona zależność cyfrowa",
-        "Kontrola algorytmiczna",
-        "Odbieranie ludziom sprawczości bez potrzeby",
-        "Systemy, w których nie można uczestniczyć bez całkowitej zależności od techniki",
-      ],
-    },
-    closing: ["Nie jesteśmy przeciw technice.", "Jesteśmy przeciw dominacji technologicznej."],
-  },
-
-  stewardship: {
-    eyebrow: "Troska o dziedzictwo",
-    title: "Troska o dziedzictwo",
-    body: [
-      {
-        type: "lead",
-        text: "Lasy, ziemia uprawna, rzeki, góry, wybrzeża, różnorodność biologiczna oraz zabytkowe miasta i wsie to dobra odziedziczone. Otrzymaliśmy je od ludzi, których już nie ma, i jesteśmy je winni tym, którzy się jeszcze nie narodzili.",
-      },
-      {
-        type: "paragraph",
-        text: "Dlatego nie są towarem, który wolno zużyć i wyrzucić. Pokolenie może z nich korzystać i musi o nie dbać; nie jest jednak ich wyłącznym właścicielem.",
-      },
-      {
-        type: "paragraph",
-        text: "Nie twierdzimy, że człowiek jest plagą dla świata przyrody, ani że każde zniszczenie jest dopuszczalne, jeśli tylko podnosi produkcję w krótkim okresie. Człowiek należy do przyrody — jako jej gospodarz, odpowiedzialny za to, co po sobie zostawia.",
-      },
-    ] satisfies readonly ContentBlock[],
-    categoriesTitle: "Co zostało nam powierzone",
-    categories: [
-      { title: "Lasy", note: "Odpowiedzialna gospodarka leśna i długie cykle rębne." },
-      { title: "Rolnictwo", note: "Zdrowe gleby i gospodarstwa rodzinne." },
-      { title: "Woda", note: "Czyste rzeki, wody podziemne i wybrzeża." },
-      {
-        title: "Różnorodność biologiczna",
-        note: "Siedliska zachowane w całości, a nie tylko skatalogowane.",
-      },
-      { title: "Krajobraz", note: "Układy osadnicze, które szanują ziemię." },
-      { title: "Architektura", note: "Budowanie na pokolenia, nie na cykle koniunkturalne." },
-      { title: "Produkcja regionalna", note: "Łańcuchy dostaw, które widać na miejscu." },
-      { title: "Trwałość i naprawa", note: "Rzeczy zrobione tak, by dały się naprawić." },
-    ],
-  },
-
-  europe: {
-    eyebrow: "Europa",
-    title: "Europa narodów.",
-    subtitle: "Współpraca bez ujednolicania.",
-    nations: [
-      "Polska powinna pozostać wyraźnie polska.",
-      "Włochy powinny pozostać wyraźnie włoskie.",
-      "Francja powinna pozostać wyraźnie francuska.",
-    ],
-    together: "A razem pozostają europejskie.",
-    body: [
-      {
-        type: "lead",
-        text: "Europejskim ustrojem politycznym powinna rządzić pomocniczość: niczego nie należy rozstrzygać na wyższym szczeblu, jeśli da się to kompetentnie rozstrzygnąć na niższym.",
-      },
-      {
-        type: "paragraph",
-        text: "Gmina nie powinna bez potrzeby ustępować regionowi, region narodowi, a naród instytucjom kontynentalnym. Tam, gdzie mniejsza wspólnota potrafi dobrze wykonać zadanie, zadanie to należy do niej — nie dla wygody administracyjnej, lecz jako warunek wolności politycznej.",
-      },
-      {
-        type: "paragraph",
-        text: "Pozostaje przy tym wiele spraw, które Europejczycy mogą zrobić tylko razem. Tożsamość narodowa i lokalna zachowuje polityczne znaczenie właśnie dlatego, że współpraca ogranicza się do tych spraw, które jej rzeczywiście wymagają.",
-      },
-    ] satisfies readonly ContentBlock[],
-    cooperation: {
-      title: "Gdzie jest miejsce na współpracę europejską",
-      items: [
-        "Obrona",
-        "Infrastruktura strategiczna",
-        "Granice",
-        "Nauka",
-        "Ochrona środowiska",
-        "Medycyna",
-        "Odporność energetyczna",
-        "Przemysł strategiczny",
-      ],
     },
   },
 
-  politicalCulture: {
-    eyebrow: "Kultura polityczna",
-    statement: "Kraj ponad partią.",
+  manifesto: {
+    eyebrow: "Z manifestu",
+    title: "Preambuła",
     body: [
       {
         type: "lead",
-        text: "Spór polityczny jest konieczny. Nieustanna wojna partyjna — nie.",
+        text: "Europa to więcej niż kontynent, rynek czy przestrzeń administracyjna.",
       },
       {
         type: "paragraph",
-        text: "Gdy stawką są trwałe interesy narodu i jego obywateli — bezpieczeństwo narodowe, infrastruktura krytyczna, stabilność demograficzna, ochrona rodzin, ciągłość konstytucyjna — ruchy polityczne powinny umieć współpracować ponad podziałami partyjnymi.",
+        text: "To cywilizacja — owoc chrześcijaństwa i dziedzictwa klasycznego, odrębnych ludów i języków, pokoleń rodzin, uprawianych krajobrazów, miast i wsi, kościołów, sztuki, prawa, rzemiosła i pamięci.",
       },
       {
         type: "paragraph",
-        text: "Celem partii politycznej nie jest jedynie pokonanie innej partii. Jej celem jest służba wspólnocie politycznej. Opozycja jest konieczna; opozycja dla samej opozycji tylko wyniszcza.",
+        text: "Nic z tego nie zostało zbudowane przez jednostki oderwane od historii. Przekazywano to z pokolenia na pokolenie. Burke nadał tej myśli jej klasyczne sformułowanie w 1790 roku, przeciw rewolucji, która chciała zacząć od nowa z samego rozumu: społeczeństwo jest wspólnotą, a ponieważ jej celów nie da się osiągnąć w ciągu jednego życia, jest wspólnotą \u201enie tylko między żyjącymi, lecz między tymi, którzy żyją, tymi, którzy umarli, i tymi, którzy dopiero się narodzą\u201d.",
+      },
+      {
+        type: "paragraph",
+        text: "Współczesna Europa coraz częściej traktuje samo dziedzictwo jako podejrzane. Nie zgadzamy się, że to jest postęp.",
       },
     ] satisfies readonly ContentBlock[],
-    hierarchy: [
-      { label: "Obywatele", note: "Sama wspólnota polityczna, przez pokolenia." },
-      { label: "Naród", note: "Jego ciągłość, bezpieczeństwo i wspólne życie." },
-      { label: "Instytucje", note: "Urzędy, którym powierzono jedno i drugie." },
-      { label: "Partia", note: "Narzędzie służby i ostatnia z czterech." },
-    ],
-    clarification:
-      "To porządek służby i odpowiedzialności, nie łańcuch dowodzenia. Opisuje to, co partia jest winna, a nie władzę, do której mogłaby rościć sobie prawo. Nic w nim nie uprawnia do rządzenia bez zgody rządzonych: władza polityczna pozostaje odpowiedzialna przed prawem i przed obywatelami, a jej granice wyznacza konstytucja.",
+    cta: "Przeczytaj cały manifest",
   },
 
-  restoration: {
-    eyebrow: "Odnowa",
-    statement: "Odnowa, nie kapitulacja.",
-    body: [
-      {
-        type: "lead",
-        text: "Odnowa nie polega na odtwarzaniu jakiegoś konkretnego stulecia. Przeszłość znała niesprawiedliwość, ubóstwo, przemoc i błąd; nic z tego nie zasługuje na naszą nostalgię.",
+  explore: {
+    eyebrow: "Przeglądaj",
+    title: "Poznaj Restore Europa.",
+    cards: {
+      principles: {
+        title: "Zasady",
+        blurb: "Szesnaście zobowiązań, uzasadnianych po kolei.",
       },
-      {
-        type: "paragraph",
-        text: "Polega na tym, żeby odzyskać zasady, które nowoczesne społeczeństwo odrzuciło, i rozumnie zastosować je do warunków, w jakich naprawdę żyjemy. Historii nie da się odwrócić. Kierunek można zmienić.",
+      manifesto: {
+        title: "Manifest",
+        blurb: "Dokument założycielski: preambuła i dwadzieścia dwie części, w całości.",
       },
-    ] satisfies readonly ContentBlock[],
-    closing: "Nie my stworzyliśmy to dziedzictwo. Nie nam je odrzucać.",
-    primaryCta: { label: "Przeczytaj Manifest", href: "/manifesto" },
-    secondaryCta: { label: "Nasza wizja", href: "/vision" },
+      policy: {
+        title: "Polityki",
+        blurb: "Opracowane stanowiska w dziesięciu obszarach, z wyszukiwarką i datami.",
+      },
+      vision: {
+        title: "Wizja",
+        blurb: "Co program oznaczałby w zwyczajnym życiu.",
+      },
+      wings: {
+        title: "Skrzydła",
+        blurb: "Skrzydło narodowe w każdym z czterdziestu siedmiu narodów Europy.",
+      },
+      about: {
+        title: "O nas",
+        blurb: "Kim jesteśmy i jak ruch jest zbudowany.",
+      },
+    },
   },
 
-  join: {
-    eyebrow: "Członkostwo",
-    statement: "Ruch to ludzie — albo nie ma go wcale.",
-    body: "Restore Europa organizuje się jako partia członków, a nie osobistości. Żaden formularz o niczym nie rozstrzyga: każde zgłoszenie czyta człowiek, zanim stanie się członkostwem, a to, co Państwo napiszą, jest szyfrowane przed zapisaniem.",
-    primaryCta: { label: "Dołącz do ruchu", href: "/join" },
-    secondaryCta: { label: "Zadaj pytanie", href: "/contact" },
+  participation: {
+    eyebrow: "Uczestnictwo",
+    title: "Co właściwie znaczy dołączyć.",
+    lede: "Dwie drogi do środka i jeden list do napisania. Żadna nic nie kosztuje, bo ruch nie może jeszcze przyjmować pieniędzy.",
+    ways: {
+      member: {
+        title: "Członek",
+        note: "Zwyczajna droga do środka",
+        summary:
+          "Jesteś policzony. Członkostwo jest tu przynależnością, a nie abonamentem: gdy Restore Europa będzie mogła przyjmować składki, to właśnie członków poprosimy o wsparcie pracy.",
+        cta: "Złóż wniosek o członkostwo",
+      },
+      volunteer: {
+        title: "Wolontariusz",
+        note: "Tyle czasu, ile możesz poświęcić",
+        summary:
+          "To samo zgłoszenie, wraz z dziedziną, w której chcesz pomóc — organizacja lokalna, pisanie, tłumaczenia, wydarzenia, prawo, technika, rolnictwo, budownictwo albo coś innego, co potrafisz.",
+        cta: "Zgłoś się jako wolontariusz",
+      },
+      chapter: {
+        title: "Skrzydło tam, gdzie mieszkasz",
+        note: "Najpierw napisz; nie ma formularza",
+        summary:
+          "Obecność na mapie nie znaczy, że skrzydło już tam powstało. Jeśli chcesz pomóc założyć je w swoim kraju, napisz — na tym etapie jest to najbardziej przydatna rzecz, jaką ktokolwiek może dla ruchu zrobić.",
+        cta: "Napisz o skrzydle lokalnym",
+      },
+    },
+    closing:
+      "Nie ma listy mailingowej, do której można się zapisać, ani biuletynu, który można zamówić. Jedyny adres, jaki ten ruch posiada, to ten, który sam wpisałeś do zgłoszenia albo zapytania, a jest on szyfrowany przed zapisaniem.",
   },
 };

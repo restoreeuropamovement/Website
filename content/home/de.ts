@@ -4,376 +4,158 @@ import type { HomeContent } from "./index";
 export const home: HomeContent = {
   hero: {
     headline: "Europa ist ein Erbe, das es wert ist, angetreten zu werden.",
-    subheadline: "Für eine christliche, europäische Zivilisation nach menschlichem Maß.",
-    primaryCta: { label: "Unsere Grundsätze lesen", href: "/principles" },
-    secondaryCta: { label: "Das Manifest lesen", href: "/manifesto" },
+    statement:
+      "Restore Europa ist eine politische Bewegung der Nationen Europas, gegründet auf ein veröffentlichtes Manifest und organisiert als eigener nationaler Flügel in jedem Land statt als eine einzige europäische Partei.",
+    primaryCta: "Unsere Grundsätze lesen",
+    secondaryCta: "Mitmachen",
   },
 
-  philosophy: {
-    eyebrow: "Die zentrale Frage",
-    statement: [
-      "Die Wirtschaft ist für den Menschen da.",
-      "Der Mensch ist nicht für die Wirtschaft da.",
-    ],
-    body: [
-      {
-        type: "lead",
-        text: "Politische und wirtschaftliche Systeme sind Werkzeuge. Sie sind dazu da, ein gutes menschliches Leben möglich zu machen — nicht umgekehrt.",
-      },
-      {
-        type: "paragraph",
-        text: "Eine Zivilisation lässt sich nicht allein an ihrer Wirtschaftsleistung messen. Bruttoinlandsprodukt, Konsum, Produktivität, Verwaltungseffizienz und technische Leistungsfähigkeit beschreiben die Mittel einer Gesellschaft. Darüber, ob die Menschen, die in ihr leben, eine Familie großziehen, ein Zuhause bewahren, ihre Nachbarn kennen, ein Handwerk ausüben oder zur Ruhe kommen können, sagen sie fast nichts.",
-      },
-      {
-        type: "paragraph",
-        text: "Werden diese Mittel zu Zwecken erklärt, so werden die Institutionen, die das gewöhnliche Leben zusammenhalten, stillschweigend abgebaut, um ihnen zu dienen. Das ist kein Fortschritt. Es ist eine Verlagerung des Zwecks vom Menschen auf das System.",
-      },
-    ] satisfies readonly ContentBlock[],
-    requirements: {
-      title: "Wofür Menschen Zeit und Raum brauchen",
-      items: [
-        "Familie",
-        "Freundschaft",
-        "Glaube",
-        "Gemeinschaft",
-        "Natur",
-        "Bildung",
-        "Handwerk",
-        "Schönheit",
-        "Ruhe",
-      ],
-    },
-    reductions: {
-      title: "Worauf eine Zivilisation nicht zu reduzieren ist",
-      items: [
-        "Bruttoinlandsprodukt",
-        "Konsum",
-        "Produktivität",
-        "Verwaltungseffizienz",
-        "Technische Leistungsfähigkeit",
-      ],
-    },
-  },
-
-  principles: {
-    title: "Was wir vertreten, kurz gesagt.",
+  standFor: {
+    eyebrow: "Wofür wir stehen",
+    title: "Fünf Überzeugungen.",
+    lede: "Fünf von sechzehn. Jede wird auf einer eigenen Seite ausführlich begründet, entlang des Abschnitts im Manifest, auf dem sie ruht.",
     allLabel: "Alle sechzehn Grundsätze",
     readFull: "den vollständigen Grundsatz lesen",
-    items: [
-      {
-        number: "01",
-        title: "Familie & menschliches Leben",
+    items: {
+      family: {
+        title: "Familie und menschliches Leben",
         statement:
-          "Die Gesellschaft sollte Familiengründung, Elternschaft und ein sinnvolles menschliches Leben materiell möglich machen.",
-        href: "/principles#family",
+          "Ein Land, das Kinder unbezahlbar gemacht hat, hat damit bereits gesagt, was ihm wichtig ist. Das Gewöhnliche — heiraten, eine Familie großziehen, ein Zuhause halten — sollte für gewöhnliche Menschen erreichbar sein.",
       },
-      {
-        number: "02",
-        title: "Nation & Kontinuität",
+      nation: {
+        title: "Nation und Kontinuität",
         statement:
-          "Die europäischen Nationen haben ein legitimes Recht, ihre historische Identität, ihre Kultur und ihre Kontinuität zu bewahren.",
-        href: "/principles#nation-and-continuity",
+          "Eine Nation ist ein Volk mit einem Gedächtnis, nicht eine Menge von Verwaltungsgrenzen. Sie darf sich wünschen, sich in hundert Jahren noch wiederzuerkennen.",
       },
-      {
-        number: "03",
-        title: "Eigentum & wirtschaftliche Unabhängigkeit",
+      property: {
+        title: "Eigentum und wirtschaftliche Unabhängigkeit",
         statement:
-          "Eine freie Gesellschaft braucht breit gestreutes Eigentum statt dauerhafter Abhängigkeit von einer kleinen Zahl von Institutionen.",
-        href: "/principles#property",
+          "Freiheit lässt sich aus vollständiger Abhängigkeit heraus schwer ausüben. Eigentum sollte breit gestreut sein — Wohnungen, Land, Handwerk, kleine Betriebe — statt sich in wenigen Institutionen zu sammeln.",
       },
-      {
-        number: "04",
+      technology: {
         title: "Technik nach menschlichem Maß",
         statement:
-          "Technik sollte menschliches Können, Selbstbestimmung und Gemeinschaft stärken, statt die Gesellschaft nach den Zwängen der Technik neu zu ordnen.",
-        href: "/principles#technology",
+          "Nicht alles, was gebaut werden kann, muss auch übernommen werden. Ein Werkzeug sollte Menschen befähigen, ihr Leben selbst zu führen, nicht weniger dazu befähigen.",
       },
-      {
-        number: "05",
-        title: "Bewahrung & Schönheit",
+      subsidiarity: {
+        title: "Autorität und Subsidiarität",
         statement:
-          "Land, Architektur und Natur sind ein Erbe, das zu pflegen, zu schützen und weiterzugeben ist.",
-        href: "/principles#environment",
+          "Nichts soll weiter oben entschieden werden, als es gut entschieden werden kann. Was eine Familie, eine Stadt oder eine Nation für sich selbst tun kann, gehört ihr.",
       },
-      {
-        number: "06",
-        title: "Autorität & Subsidiarität",
-        statement:
-          "Politische Autorität sollte auf der jeweils niedrigsten handlungsfähigen Ebene ausgeübt werden.",
-        href: "/principles#subsidiarity",
-      },
-    ],
-  },
-
-  lifeAndWork: {
-    eyebrow: "Arbeit und Leben",
-    statement: "Wir sind nicht dazu geschaffen, zu arbeiten, bis wir sterben.",
-    body: [
-      {
-        type: "lead",
-        text: "Arbeit hat wirkliche Würde. Durch sie erwerben Menschen Können, bringen nützliche Dinge hervor, ernähren Familien und nehmen am Leben einer Gemeinschaft teil.",
-      },
-      {
-        type: "paragraph",
-        text: "Aber Arbeit ist nicht der ganze Zweck des menschlichen Daseins. Ein Wirtschaftssystem soll die materielle Grundlage für ein Leben schaffen — und nicht das Leben verzehren, das es tragen sollte.",
-      },
-      {
-        type: "paragraph",
-        text: "Eine Gesellschaft hat die Orientierung verloren, wenn gewöhnliche Menschen nahezu alle ihre wachen Stunden hergeben müssen, nur um Wohnung und Nahrung zu sichern; wenn Eltern ihre Kinder kaum sehen; wenn Gemeinschaften ausdünnen, weil alle erschöpft sind.",
-      },
-    ] satisfies readonly ContentBlock[],
-    diagram: {
-      top: "Arbeit",
-      middle: "trägt",
-      bottom: "Leben",
-      separator: ": ",
-      orbit: [
-        "Familie",
-        "Freundschaft",
-        "Glaube",
-        "Gemeinschaft",
-        "Natur",
-        "Bildung",
-        "Handwerk",
-        "Ruhe",
-      ],
-    },
-    outcome: {
-      title: "Was Produktivität einbringen sollte",
-      lead: "Zuwächse an dem, was eine Gesellschaft hervorbringen kann, sollten irgendwo im Leben der Menschen sichtbar werden, die sie hervorbringen.",
-      items: [
-        "Größere Sicherheit gegenüber den gewöhnlichen Wechselfällen des Lebens",
-        "Muße, die wirklich einem selbst gehört",
-        "Zeit mit Kindern und Eltern",
-        "Selbstbestimmung darüber, wie ein Arbeitsleben eingerichtet wird",
-        "Unabhängigkeit von dauerhafter Verschuldung und Abhängigkeit",
-      ],
     },
   },
 
-  economicOrder: {
-    eyebrow: "Wirtschaftsordnung",
-    statement: "Märkte ohne Marktgläubigkeit.",
-    body: [
-      {
-        type: "lead",
-        text: "Privateigentum ist legitim. Unternehmertum ist legitim. Gewinn ist legitim. Wirtschaftlicher Erfolg ist legitim.",
+  objectives: {
+    eyebrow: "Was wir tun wollen",
+    title: "Konkret ist dies die Arbeit.",
+    lede: "Eine Bewegung wird daran gemessen, was sie aufbaut, nicht daran, was sie beklagt. Vier Dinge sind im Gange, und jedes davon lässt sich überprüfen, indem man es öffnet.",
+    items: {
+      programme: {
+        title: "Das Programm aufschreiben.",
+        body: "Zehn Bereiche, von Familie und Wirtschaft bis zu Technik, Gesundheit und Außenpolitik. Ausgearbeitete Positionen statt Parolen, jede an den Abschnitt des Manifests gebunden, auf dem sie ruht, und jede datiert. Eine Position, die man zitieren kann, ist eine Position, an der man uns messen kann.",
+        linkLabel: "Den Politikkatalog lesen",
       },
-      {
-        type: "paragraph",
-        text: "Nichts davon ist der höchste Zweck einer Gesellschaft. Wirtschaftliche Institutionen sind unentbehrlich und müssen dem Gemeinwohl untergeordnet bleiben — das keine von außen auferlegte Beschränkung des Unternehmertums ist, sondern der Grund, weshalb Unternehmertum überhaupt schützenswert ist.",
+      wings: {
+        title: "In jeder europäischen Nation einen Flügel aufbauen.",
+        body: "Politische Arbeit geschieht innerhalb eines Landes, nach dessen Recht und unter dessen Bedingungen. Siebenundvierzig Nationen sind verzeichnet. Jeder Flügel gibt sich eigene Statuten, tritt zu eigenen Wahlen an und ist seinen eigenen Mitgliedern verantwortlich, nicht einer Zentrale anderswo.",
+        linkLabel: "Die nationalen Flügel ansehen",
       },
-      {
-        type: "paragraph",
-        text: "Das ist keine Haltung gegen das Unternehmertum. Es ist eine Haltung gegen Herrschaft: gegen den Punkt, an dem ein Markt aufhört, ein Mittel des Austauschs unter vielen Beteiligten zu sein, und zum Instrument der Kontrolle durch einige wenige wird.",
+      members: {
+        title: "Eine Partei der Mitglieder sein, nicht der Personen.",
+        body: "Eine Bewegung aus Mitgliedern kann von ihnen zur Rechenschaft gezogen werden. Nichts wird zur Mitgliedschaft, bevor ein Mensch den Antrag gelesen hat — kein Formular entscheidet etwas von allein, und was Sie schreiben, wird vor dem Speichern verschlüsselt.",
+        linkLabel: "Mitgliedschaft beantragen",
       },
-    ] satisfies readonly ContentBlock[],
-    pillars: [
-      {
-        title: "Unternehmertum",
-        lead: "Was wir unterstützen",
-        items: [
-          "Unternehmergeist",
-          "Produktive Investitionen",
-          "Familienunternehmen",
-          "Selbstständiges Handwerk",
-          "Kleine und mittlere Unternehmen",
-        ],
+      publication: {
+        title: "Das ganze Argument veröffentlichen.",
+        body: "Das Manifest steht vollständig online und lässt sich als reiner Text herunterladen. Nichts liegt hinter einer E-Mail-Adresse, einem Formular oder einer Zahlung. Wer dieser Bewegung widersprechen möchte, kann genau nachlesen, was sie gesagt hat.",
+        linkLabel: "Das Manifest lesen",
       },
-      {
-        title: "Eigentum",
-        lead: "Was wir breiter streuen",
-        items: [
-          "Wohneigentum",
-          "Genossenschaften",
-          "Belegschaftseigentum",
-          "Bäuerliche Familienbetriebe",
-          "Örtliches und regionales Bankwesen",
-          "Breiter gestreutes Eigentum an Kapital",
-        ],
-      },
-      {
-        title: "Grenzen",
-        lead: "Was wir in Schranken halten",
-        items: [
-          "Monopolistische Konzentration",
-          "Vereinnahmung der Aufsichtsbehörden",
-          "Wertabschöpfung durch die Finanzwirtschaft",
-          "Spekulative Wohnungsmärkte",
-          "Beherrschung der Politik durch Konzerne",
-        ],
-      },
-    ],
-    key: "Die Wirtschaft ist für den Menschen, die Familie und die Gemeinschaft da.",
-  },
-
-  technology: {
-    eyebrow: "Technik",
-    statement: "Die Maschine muss sich dem Menschen anpassen.",
-    body: [
-      {
-        type: "lead",
-        text: "Restore Europa ist nicht gegen die Technik. Wir verwerfen die Vorstellung technischer Unausweichlichkeit — die Annahme, dass alles Machbare auch übernommen werden müsse und dass alles, was die Effizienz steigert, als Fortschritt zu gelten habe.",
-      },
-      {
-        type: "paragraph",
-        text: "Eine Technik, die als freiwilliges Angebot eingeführt wird, kann wirtschaftlich notwendig werden. Was notwendig wird, formt Institutionen um, und die Institutionen ordnen daraufhin die Gesellschaft nach den Erfordernissen der Technik neu. Am Ende dieser Kette passt sich der Mensch der Maschine an.",
-      },
-      {
-        type: "paragraph",
-        text: "Jede Technik ist danach zu beurteilen, was sie mit der Selbstbestimmung des Menschen, dem Familienleben, der Gemeinschaft, der Privatsphäre, der sinnvollen Arbeit, dem menschlichen Können und der politischen Dezentralisierung macht.",
-      },
-    ] satisfies readonly ContentBlock[],
-    liberates: {
-      title: "Technik, die befreit",
-      items: [
-        "Medizin",
-        "Sanitärversorgung",
-        "Ingenieurwesen",
-        "Wissenschaftliche Entdeckungen",
-        "Nützliche Werkzeuge",
-        "Automatisierung gefährlicher Arbeit",
-      ],
-    },
-    dominates: {
-      title: "Technik, die beherrscht",
-      items: [
-        "Massenüberwachung",
-        "Manipulation der Aufmerksamkeit",
-        "Erzwungene digitale Abhängigkeit",
-        "Algorithmische Steuerung",
-        "Unnötige Verdrängung menschlicher Handlungsfähigkeit",
-        "Systeme, die eine Teilhabe ohne vollständige technische Abhängigkeit unmöglich machen",
-      ],
-    },
-    closing: [
-      "Wir wenden uns nicht gegen die Technik.",
-      "Wir wenden uns gegen die Herrschaft der Technik.",
-    ],
-  },
-
-  stewardship: {
-    eyebrow: "Bewahrung",
-    title: "Bewahrung",
-    body: [
-      {
-        type: "lead",
-        text: "Wälder, Ackerland, Flüsse, Berge, Küsten, biologische Vielfalt und historische Siedlungen sind ererbte Güter. Wir haben sie von Menschen empfangen, die nicht mehr sind, und schulden sie Menschen, die noch nicht geboren sind.",
-      },
-      {
-        type: "paragraph",
-        text: "Das macht sie zu etwas anderem als beliebig verfügbaren Waren. Eine Generation darf sie nutzen und muss sie erhalten; unbeschränktes Eigentum an ihnen hat sie nicht.",
-      },
-      {
-        type: "paragraph",
-        text: "Das ist kein Argument, das den Menschen als Plage für die natürliche Welt behandelt, und auch keines, das jede Zerstörung hinnimmt, sofern sie den kurzfristigen Ertrag steigert. Der Mensch gehört in die Natur hinein — als ihr Sachwalter, verantwortlich für das, was er hinterlässt.",
-      },
-    ] satisfies readonly ContentBlock[],
-    categoriesTitle: "Was uns anvertraut ist",
-    categories: [
-      { title: "Wälder", note: "Verantwortliche Forstwirtschaft und lange Umtriebszeiten." },
-      { title: "Landwirtschaft", note: "Gesunde Böden und bäuerliche Familienbetriebe." },
-      { title: "Wasser", note: "Saubere Flüsse, Grundwasserleiter und Küsten." },
-      {
-        title: "Biologische Vielfalt",
-        note: "Lebensräume, die erhalten bleiben und nicht bloß erfasst werden.",
-      },
-      { title: "Landschaft", note: "Siedlungsformen, die das Land achten." },
-      { title: "Architektur", note: "Bauen für Generationen, nicht für Konjunkturzyklen." },
-      { title: "Regionale Produktion", note: "Lieferketten, die eine Region überschauen kann." },
-      { title: "Haltbarkeit & Reparatur", note: "Dinge, die zum Ausbessern gemacht sind." },
-    ],
-  },
-
-  europe: {
-    eyebrow: "Europa",
-    title: "Ein Europa der Nationen.",
-    subtitle: "Zusammenarbeit ohne Vereinheitlichung.",
-    nations: [
-      "Polen soll erkennbar polnisch bleiben.",
-      "Italien soll erkennbar italienisch bleiben.",
-      "Frankreich soll erkennbar französisch bleiben.",
-    ],
-    together: "Und gemeinsam bleiben sie europäisch.",
-    body: [
-      {
-        type: "lead",
-        text: "Der Grundsatz, der die politische Ordnung Europas bestimmen sollte, ist die Subsidiarität: Nichts soll auf einer höheren Ebene entschieden werden, was auf einer niedrigeren sachgerecht entschieden werden kann.",
-      },
-      {
-        type: "paragraph",
-        text: "Die Gemeinde soll nicht unnötig Zuständigkeiten an die Region abtreten, die Region nicht an die Nation und die Nation nicht an gesamteuropäische Institutionen. Wo eine kleinere Einheit die Aufgabe gut erfüllen kann, gehört die Aufgabe ihr — nicht als Bequemlichkeit der Verwaltung, sondern als Bedingung politischer Freiheit.",
-      },
-      {
-        type: "paragraph",
-        text: "Damit bleibt sehr viel, was die Europäer nur gemeinsam tun können. Nationale und örtliche Identität behalten gerade deshalb politisches Gewicht, weil die Zusammenarbeit auf die Angelegenheiten beschränkt bleibt, die sie wirklich erfordern.",
-      },
-    ] satisfies readonly ContentBlock[],
-    cooperation: {
-      title: "Wohin europäische Zusammenarbeit gehört",
-      items: [
-        "Verteidigung",
-        "Strategische Infrastruktur",
-        "Grenzen",
-        "Wissenschaft",
-        "Umweltschutz",
-        "Medizin",
-        "Widerstandsfähige Energieversorgung",
-        "Strategische Industrie",
-      ],
     },
   },
 
-  politicalCulture: {
-    eyebrow: "Politische Kultur",
-    statement: "Das Land vor der Partei.",
+  manifesto: {
+    eyebrow: "Aus dem Manifest",
+    title: "Präambel",
     body: [
       {
         type: "lead",
-        text: "Politische Meinungsverschiedenheit ist notwendig. Dauerhafter Parteienkampf ist es nicht.",
+        text: "Europa ist mehr als ein Kontinent, ein Markt oder ein Verwaltungsraum.",
       },
       {
         type: "paragraph",
-        text: "Wo die dauerhaften Interessen einer Nation und ihrer Bürger auf dem Spiel stehen — nationale Sicherheit, kritische Infrastruktur, demografische Stabilität, der Schutz der Familien, verfassungsmäßige Kontinuität —, sollten politische Bewegungen zur Zusammenarbeit über Parteigrenzen hinweg fähig sein.",
+        text: "Es ist eine Zivilisation — hervorgegangen aus Christentum und klassischem Erbe, aus eigenständigen Völkern und Sprachen, aus Generationen von Familien, gepflegten Landschaften, Städten und Dörfern, Kirchen, Kunst, Recht, Handwerk und Erinnerung.",
       },
       {
         type: "paragraph",
-        text: "Der Zweck einer politischen Partei ist nicht bloß, eine andere Partei zu besiegen. Ihr Zweck ist, der politischen Gemeinschaft zu dienen. Opposition ist notwendig; Opposition um ihrer selbst willen wirkt zerstörerisch.",
+        text: "Nichts davon wurde von Einzelnen geschaffen, die von der Geschichte losgelöst waren. Es wurde von einer Generation an die nächste weitergegeben. Burke gab diesem Gedanken 1790 seine bis heute gültige Fassung, gegen eine Revolution, die aus bloßer Vernunft neu beginnen wollte: Eine Gesellschaft ist eine Partnerschaft, und weil ihre Zwecke in einem einzigen Leben nicht zu erreichen sind, ist sie eine Partnerschaft \u201enicht nur zwischen den Lebenden, sondern zwischen denen, die leben, denen, die gestorben sind, und denen, die geboren werden sollen\u201c.",
+      },
+      {
+        type: "paragraph",
+        text: "Das moderne Europa behandelt das Erbe selbst zunehmend als verdächtig. Wir akzeptieren nicht, dass dies Fortschritt ist.",
       },
     ] satisfies readonly ContentBlock[],
-    hierarchy: [
-      { label: "Volk", note: "Die politische Gemeinschaft selbst, über die Generationen hinweg." },
-      { label: "Nation", note: "Ihre Kontinuität, ihre Sicherheit und ihr gemeinsames Leben." },
-      { label: "Institutionen", note: "Die Ämter, denen beides anvertraut ist." },
-      { label: "Partei", note: "Ein Werkzeug des Dienens und das Letzte der vier." },
-    ],
-    clarification:
-      "Dies ist eine Ordnung des Dienens und der Verantwortung, keine Befehlskette. Sie beschreibt, was eine Partei schuldet, nicht eine Befugnis, die eine Partei beanspruchen darf. Nichts daran erlaubt Herrschaft ohne Zustimmung: Politische Autorität bleibt dem Recht, den verfassungsmäßigen Grenzen und dem Volk gegenüber verantwortlich.",
+    cta: "Das vollständige Manifest lesen",
   },
 
-  restoration: {
-    eyebrow: "Erneuerung",
-    statement: "Erneuerung, nicht Selbstaufgabe.",
-    body: [
-      {
-        type: "lead",
-        text: "Erneuerung bedeutet nicht, ein bestimmtes historisches Jahrhundert nachzubilden. Die Vergangenheit kannte Ungerechtigkeit, Armut, Gewalt und Irrtum; keinem dieser Dinge schulden wir Nostalgie.",
+  explore: {
+    eyebrow: "Erkunden",
+    title: "Restore Europa erkunden.",
+    cards: {
+      principles: {
+        title: "Grundsätze",
+        blurb: "Die sechzehn Verpflichtungen, einzeln begründet.",
       },
-      {
-        type: "paragraph",
-        text: "Sie bedeutet, die Grundsätze wiederzugewinnen, die die moderne Gesellschaft verworfen hat, und sie mit Verstand auf die Verhältnisse anzuwenden, in denen wir tatsächlich leben. Geschichte lässt sich nicht zurückdrehen. Die Richtung lässt sich ändern.",
+      manifesto: {
+        title: "Manifest",
+        blurb: "Das Gründungsdokument: eine Präambel und zweiundzwanzig Abschnitte, vollständig.",
       },
-    ] satisfies readonly ContentBlock[],
-    closing: "Unser Erbe haben wir nicht geschaffen. Es zu verwerfen steht uns nicht zu.",
-    primaryCta: { label: "Das Manifest lesen", href: "/manifesto" },
-    secondaryCta: { label: "Unsere Vision", href: "/vision" },
+      policy: {
+        title: "Politik",
+        blurb: "Ausgearbeitete Positionen in zehn Bereichen, durchsuchbar und datiert.",
+      },
+      vision: {
+        title: "Vision",
+        blurb: "Was das Programm in einem gewöhnlichen Leben bedeuten würde.",
+      },
+      wings: {
+        title: "Flügel",
+        blurb: "Der nationale Flügel in jeder von siebenundvierzig europäischen Nationen.",
+      },
+      about: {
+        title: "Über uns",
+        blurb: "Wer wir sind und wie die Bewegung aufgebaut ist.",
+      },
+    },
   },
 
-  join: {
-    eyebrow: "Mitgliedschaft",
-    statement: "Eine Bewegung besteht aus Menschen — oder sie besteht nicht.",
-    body: "Restore Europa wird als Partei der Mitglieder aufgebaut, nicht als Partei der Persönlichkeiten. Kein Formular entscheidet etwas: Jeder Antrag wird von einem Menschen gelesen, bevor daraus eine Mitgliedschaft wird, und was Sie schreiben, wird vor der Speicherung verschlüsselt.",
-    primaryCta: { label: "Der Bewegung beitreten", href: "/join" },
-    secondaryCta: { label: "Eine Frage stellen", href: "/contact" },
+  participation: {
+    eyebrow: "Teilnehmen",
+    title: "Was es heißt, beizutreten.",
+    lede: "Zwei Wege hinein und ein Brief, den man schreiben kann. Keiner kostet etwas, denn die Bewegung kann noch kein Geld entgegennehmen.",
+    ways: {
+      member: {
+        title: "Mitglied",
+        note: "Der gewöhnliche Weg hinein",
+        summary:
+          "Sie werden gezählt. Mitgliedschaft ist hier Zugehörigkeit und kein Abonnement: Sobald Restore Europa Beiträge entgegennehmen kann, sind die Mitglieder diejenigen, die um Unterstützung der Arbeit gebeten werden.",
+        cta: "Mitgliedschaft beantragen",
+      },
+      volunteer: {
+        title: "Freiwillige Mitarbeit",
+        note: "So viel Zeit, wie Sie erübrigen können",
+        summary:
+          "Derselbe Antrag, ergänzt um den Bereich, in dem Sie helfen würden — Organisation vor Ort, Schreiben, Übersetzen, Veranstaltungen, Recht, Technik, Landwirtschaft, Bauen oder etwas anderes, das Sie können.",
+        cta: "Als Freiwillige bewerben",
+      },
+      chapter: {
+        title: "Ein Flügel dort, wo Sie leben",
+        note: "Schreiben Sie zuerst; ein Formular gibt es nicht",
+        summary:
+          "Auf der Karte zu stehen heißt nicht, dass dort schon ein Flügel gegründet ist. Wenn Sie helfen würden, den in Ihrem Land aufzubauen, sagen Sie es — in diesem Stadium ist das das Nützlichste, was jemand für die Bewegung tun kann.",
+        cta: "Über einen Flügel vor Ort schreiben",
+      },
+    },
+    closing:
+      "Es gibt keine Verteilerliste, in die man sich eintragen, und keinen Newsletter, den man abonnieren kann. Die einzige Adresse, die diese Bewegung hat, ist die, die Sie selbst in einen Antrag oder eine Anfrage geschrieben haben, und sie wird vor dem Speichern verschlüsselt.",
   },
 };
