@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Rechtliches",
     title: "Datenschutz",
     metaTitle: "Datenschutz",
-    lede: "Das Lesen dieser Seite erhebt nichts von Ihnen. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was damit geschieht, steht im Folgenden.",
+    lede: "Das Lesen dieser Seite erhebt nichts, was Sie identifiziert. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was damit geschieht, steht im Folgenden.",
     description:
-      "Das Lesen dieser Seite erhebt nichts: keine Analyse, keine Cookies, keine Nachverfolgung. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was gespeichert wird, was verschlüsselt ist und wie Sie es löschen lassen.",
+      "Das Lesen dieser Seite identifiziert niemanden: keine Cookies, keine Nachverfolgung, nur eine anonyme Zählung der Besuche. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was gespeichert wird, was verschlüsselt ist und wie Sie es löschen lassen.",
     sections: {
       "what-we-collect": {
         title: "Was diese Seite erhebt",

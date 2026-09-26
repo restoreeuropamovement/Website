@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Legal",
     title: "Privacy",
     metaTitle: "Privacy",
-    lede: "Reading this site collects nothing from you. Two pages ask for something, and only if you choose to give it. What happens to it is set out below.",
+    lede: "Reading this site collects nothing that identifies you. Two pages ask for something, and only if you choose to give it. What happens to it is set out below.",
     description:
-      "Reading this site collects nothing: no analytics, no cookies, no tracking. Two pages ask for something, and only if you choose to give it. What is held, what is encrypted, and how to have it erased.",
+      "Reading this site identifies nobody: no cookies, no tracking, only an anonymous count of visits. Two pages ask for something, and only if you choose to give it. What is held, what is encrypted, and how to have it erased.",
     sections: {
       "what-we-collect": {
         title: "What this site collects",

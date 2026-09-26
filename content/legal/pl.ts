@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Informacje prawne",
     title: "Prywatność",
     metaTitle: "Prywatność",
-    lede: "Czytanie tej strony nie zbiera od ciebie niczego. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co się z tym dalej dzieje, opisano poniżej.",
+    lede: "Czytanie tej strony nie zbiera niczego, co cię identyfikuje. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co się z tym dalej dzieje, opisano poniżej.",
     description:
-      "Czytanie tej strony nie zbiera niczego: żadnej analityki, żadnych ciasteczek, żadnego śledzenia. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co jest przechowywane, co jest zaszyfrowane i jak to usunąć.",
+      "Czytanie tej strony nikogo nie identyfikuje: żadnych ciasteczek, żadnego śledzenia, tylko anonimowe zliczanie wizyt. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co jest przechowywane, co jest zaszyfrowane i jak to usunąć.",
     sections: {
       "what-we-collect": {
         title: "Co zbiera ta strona",
