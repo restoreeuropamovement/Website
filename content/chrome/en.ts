@@ -55,6 +55,16 @@ export const chrome = {
     label: "Join the Movement",
   },
 
+  /**
+   * Heading above the list of accounts, and the note that completes each
+   * link's accessible name. The handles themselves are in `lib/site.ts`, so
+   * nothing here can change where a link goes.
+   */
+  social: {
+    title: "Follow",
+    newTab: "opens in a new tab",
+  },
+
   footer: {
     movement: {
       title: "The Movement",

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Wordmark } from "@/components/brand/Wordmark";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { SocialLinks } from "@/components/layout/SocialLinks";
 import { Container } from "@/components/ui/Container";
 import type { ChromeContent } from "@/content/chrome";
 import { localePath, type Locale } from "@/lib/i18n";
@@ -64,6 +65,10 @@ export function Footer({
             <p className="max-w-sm font-serif text-[1.125rem] leading-snug text-canvas/70 text-balance">
               {chrome.site.tagline}
             </p>
+            {/* Beneath the wordmark rather than as a fourth column: the grid
+                beside it is three groups of internal pages, and one outbound
+                account does not fill a column of its own. */}
+            <SocialLinks locale={locale} tone="inverse" className="mt-2" />
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3">

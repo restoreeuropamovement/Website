@@ -40,6 +40,11 @@ export const chrome: ChromeContent = {
     label: "Únete al movimiento",
   },
 
+  social: {
+    title: "Síguenos",
+    newTab: "se abre en una pestaña nueva",
+  },
+
   footer: {
     movement: {
       title: "El movimiento",

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { SocialLinks } from "@/components/layout/SocialLinks";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import type { InvolvementEdition } from "@/content/involvement";
@@ -41,6 +42,10 @@ export function ContactDocument({ edition }: { readonly edition: InvolvementEdit
               </li>
             ))}
           </ul>
+          {/* Alongside the channels, because a reader on this page is looking
+              for a way to reach the movement and this is the only one that
+              does not involve waiting for a reply. */}
+          <SocialLinks locale={locale} className="mt-10" />
         </section>
 
         <section aria-labelledby="write-heading" className="mt-16 lg:mt-24">

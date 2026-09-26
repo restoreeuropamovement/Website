@@ -1,3 +1,4 @@
+import { SocialLinks } from "@/components/layout/SocialLinks";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -62,9 +63,16 @@ export function ParticipationSection({
           })}
         </ul>
 
-        <p className="mt-12 max-w-reading border-t border-rule pt-6 text-[0.9375rem] leading-relaxed text-muted">
-          {content.closing}
-        </p>
+        {/* The account sits on the same rule as the closing line rather than
+            under a heading of its own. That sentence says there is no mailing
+            list and no newsletter, which raises the question this answers, and
+            the footer's own "Follow" block is one screen below. */}
+        <div className="mt-12 flex flex-col gap-6 border-t border-rule pt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
+          <p className="max-w-reading text-[0.9375rem] leading-relaxed text-muted">
+            {content.closing}
+          </p>
+          <SocialLinks locale={locale} showHeading={false} className="sm:shrink-0" />
+        </div>
       </Container>
     </Section>
   );

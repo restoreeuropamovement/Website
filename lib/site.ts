@@ -78,6 +78,45 @@ export const site = {
 } as const;
 
 /**
+ * The platforms the movement can hold an account on.
+ *
+ * A union rather than `string` so that adding one is a type error until it has
+ * a glyph in `components/layout/SocialLinks.tsx`. An account that renders as a
+ * blank square is worse than one that does not render at all.
+ */
+export type SocialId = "instagram";
+
+export interface Social {
+  readonly id: SocialId;
+  /** The platform's own name, for the accessible name of the link. */
+  readonly label: string;
+  /** Shown to the reader, `@` included, exactly as the platform writes it. */
+  readonly handle: string;
+  readonly href: string;
+}
+
+/**
+ * Accounts the movement actually holds.
+ *
+ * Here rather than in `content/chrome/*` because a handle is a fact, not a
+ * phrase: a translator edits words, and must never be able to change where a
+ * link points. Only the heading above the list is translated.
+ *
+ * Deliberately short, and annotated as `readonly Social[]` rather than left to
+ * infer so that emptying it stays valid. An account goes in once it exists and
+ * somebody reads it — a link to a profile with nothing on it costs more trust
+ * than the absence of a link.
+ */
+export const socials: readonly Social[] = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    handle: "@restoreeuropa.eu",
+    href: "https://www.instagram.com/restoreeuropa.eu/",
+  },
+];
+
+/**
  * Every public address, by id.
  *
  * Labels live in `content/chrome/*`, keyed by the same ids. Keeping the two
