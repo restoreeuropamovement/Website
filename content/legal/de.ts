@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Beim Lesen werden keine Cookies gesetzt und nichts in den lokalen Speicher oder den Sitzungsspeicher Ihres Browsers geschrieben. Über Ihren Besuch wird kein Profil erstellt, gekauft oder verkauft. Das einzige Skript ist der unten beschriebene Besucherzähler, der anonym ist und Sie nicht identifizieren kann.",
+            text: "Beim Lesen werden keine Cookies gesetzt und nichts in den lokalen Speicher oder den Sitzungsspeicher Ihres Browsers geschrieben. Über Ihren Besuch wird kein Profil erstellt, gekauft oder verkauft. Die einzigen Skripte sind die beiden unten beschriebenen Messungen — ein Besucherzähler und eine Messung, wie lange Seiten gelesen werden — und keine von beiden kann Sie identifizieren.",
           },
           {
             type: "paragraph",
@@ -153,11 +153,31 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Was dabei entsteht, ist eine Zählung von Seitenaufrufen und Besuchern, nach Seite und nach Land. Sie ist nicht mit den Mitgliedseinträgen verknüpft, und sie kann es nicht sein: Die beiden halten nichts gemeinsam, was sie verbinden würde.",
+            text: "Was dabei entsteht, ist eine Zählung von Seitenaufrufen und Besuchern, aufgeschlüsselt nach Seite, Land, Gerät, Betriebssystem und Browser. Sie ist nicht mit den Mitgliedseinträgen verknüpft, und sie kann es nicht sein: Die beiden halten nichts gemeinsam, was sie verbinden würde.",
           },
           {
             type: "paragraph",
-            text: "Die Verwaltungsseiten sind von der Zählung ausgenommen, sodass die Zahlen die Leser beschreiben und nicht unsere eigene redaktionelle Arbeit.",
+            text: "Diese Tageswerte werden jede Nacht in die eigene Datenbank dieses Projekts kopiert, weil der Zähldienst nur den jeweils letzten Monat aufbewahrt und wir gern ein ganzes Jahr überblicken würden. Kopiert werden allein die Summen — ein Datum, eine Zahl von Besuchern, eine Zahl von Seitenaufrufen — und nichts, was einen einzelnen Besuch beträfe.",
+          },
+          {
+            type: "paragraph",
+            text: "Zwei weitere Dinge werden hier gemessen und nicht vom Zähldienst; beide werden vollständig beschrieben, weil bei beiden Ihr Browser uns während des Lesens etwas sendet.",
+          },
+          {
+            type: "paragraph",
+            text: "Das erste ist, wie viele Menschen die Seite in diesem Augenblick geöffnet haben. Beim Laden erzeugt eine Seite eine Zufallszahl und hält sie im Arbeitsspeicher der Seite — nicht in einem Cookie, nicht im lokalen oder im Sitzungsspeicher, an keinem Ort, der fortbesteht. Sie wird verworfen, sobald Sie den Tab schließen oder neu laden, kann Sie also bei einer Rückkehr nicht wiedererkennen, und unsere Kopie wird neunzig Sekunden nach dem letzten Signal Ihres Browsers gelöscht. Beantworten lässt sich damit nur, wie viele Tabs offen sind und auf welchen Seiten; nicht, wessen.",
+          },
+          {
+            type: "paragraph",
+            text: "Das zweite ist, wie lange eine Seite einen Leser hält. Die Sekunden, die eine Seite vor Ihnen liegt, werden in demselben Vorgang, der sie entgegennimmt, unmittelbar zur Tagessumme dieser Seite addiert. Ihr einzelner Wert wird nie festgehalten: Es gibt nirgends einen Eintrag darüber, wie lange Sie sich womit befasst haben, und keiner ließe sich rekonstruieren. Ein Tab hinter einem anderen Fenster zählt gar nicht, und jede einzelne Lesung jenseits einer halben Stunde wird als halbe Stunde gezählt.",
+          },
+          {
+            type: "paragraph",
+            text: "Keine der beiden Messungen erfasst Ihre IP-Adresse, eine verschleierte Form davon, die Kennung Ihres Browsers oder irgendeinen Wert, der die aufgerufene Seite überdauert. Was entsteht, sind Summen je Seite und Tag; darum werden sie auf Dauer aufbewahrt, und darum ist darin nichts, was auf Verlangen zu löschen wäre.",
+          },
+          {
+            type: "paragraph",
+            text: "Die Verwaltungsseiten sind von all dem ausgenommen, sodass die Zahlen die Leser beschreiben und nicht unsere eigene redaktionelle Arbeit.",
           },
         ],
       },

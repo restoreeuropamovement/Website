@@ -15,7 +15,9 @@ import {
   fetchTotals,
   previousRange,
 } from "@/lib/admin/analytics";
+import { LiveNow, ReadingTime, YearCalendar } from "@/components/admin/Pulse";
 import { readGeography } from "@/lib/admin/geography";
+import { archiveBegins, readArchivedDays, readEngagement, readLive } from "@/lib/admin/pulse";
 import { intakeTrend } from "@/lib/admin/intake";
 import { membershipOverview } from "@/lib/admin/members";
 import { listArticlesForAdmin } from "@/lib/admin/journal";
@@ -36,6 +38,13 @@ function parseRange(value: string | string[] | undefined): number {
 /** Device types come back lowercase; they are labels here, not identifiers. */
 function deviceLabel(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+/** A year back from today, the widest the archive is ever asked for. */
+function yearAgo(): string {
+  const date = new Date();
+  date.setUTCFullYear(date.getUTCFullYear() - 1);
+  return date.toISOString().slice(0, 10);
 }
 
 /**
@@ -71,10 +80,16 @@ export default async function AdminOverview(props: {
     countries,
     referrers,
     devices,
+    systems,
+    browsers,
     articles,
     intake,
     membership,
     subscribers,
+    live,
+    engagement,
+    archived,
+    begins,
   ] = await Promise.all([
     fetchTotals(since, until),
     fetchTotals(previous.since, previous.until),
@@ -94,10 +109,21 @@ export default async function AdminOverview(props: {
     fetchByDimension("country", since, until, MAX_GROUP_LIMIT),
     fetchByDimension("referrerHostname", since, until, 8),
     fetchByDimension("deviceType", since, until, 8),
+    fetchByDimension("osName", since, until, 8),
+    fetchByDimension("browserName", since, until, 8),
     listArticlesForAdmin(),
     intakeTrend(days),
     membershipOverview(),
     subscriberCounts(),
+    /*
+     * The last four come from our own tables rather than from Vercel, which
+     * measures none of them: it has no realtime endpoint and no notion of
+     * time on page, and on this plan it forgets anything older than a month.
+     */
+    readLive(),
+    readEngagement(days),
+    readArchivedDays(yearAgo(), until),
+    archiveBegins(),
   ]);
 
   const published = articles.filter((article) => article.status === "published").length;
@@ -212,13 +238,13 @@ export default async function AdminOverview(props: {
         <div className="grid gap-6 lg:grid-cols-2">
           <Headline days={days} totals={totals} comparison={comparison} />
 
-          <ShareTable
-            title="Devices"
-            caption="How the site was reached. Visitors, then page views."
-            result={devices}
-            format={deviceLabel}
-            empty="No device types recorded in this range."
-          />
+          {/*
+           * Presence sits beside the headline although it comes from our own
+           * table rather than from Vercel, which has no realtime endpoint.
+           * The pairing is the point: one figure is the range, the other is
+           * this moment, and reading them together is the whole question.
+           */}
+          <LiveNow live={live} />
 
           <Trend days={days} result={daily} series={series} retention={RETENTION_NOTE} />
 
@@ -246,6 +272,54 @@ export default async function AdminOverview(props: {
             metric="pageviews"
             span
           />
+        </div>
+      </section>
+
+      <section aria-labelledby="attention-heading" className="flex flex-col gap-6">
+        <h2 id="attention-heading" className="eyebrow text-burgundy">
+          Attention
+        </h2>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/*
+           * Time on page answers what the view counts cannot: whether a page
+           * that is opened often is also read. It spans both columns because
+           * a list of routes against durations reads badly when narrow.
+           */}
+          <ReadingTime engagement={engagement} days={days} />
+
+          <ShareTable
+            title="Devices"
+            caption="How the site was reached. Visitors, then page views."
+            result={devices}
+            format={deviceLabel}
+            empty="No device types recorded in this range."
+          />
+
+          <ShareTable
+            title="Operating systems"
+            caption="Visitors, then page views."
+            result={systems}
+            empty="No operating systems recorded in this range."
+          />
+
+          <ShareTable
+            title="Browsers"
+            caption="Visitors, then page views."
+            result={browsers}
+            empty="No browsers recorded in this range."
+            span
+          />
+        </div>
+      </section>
+
+      <section aria-labelledby="year-heading" className="flex flex-col gap-6">
+        <h2 id="year-heading" className="eyebrow text-burgundy">
+          History
+        </h2>
+
+        <div className="grid gap-6">
+          <YearCalendar days={archived} begins={begins} />
         </div>
       </section>
     </div>

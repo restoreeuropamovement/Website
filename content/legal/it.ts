@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Leggerlo non imposta cookie e non scrive nulla nella memoria locale o di sessione del tuo browser. Nessun profilo della tua visita viene costruito, acquistato o venduto. L'unico script è il contatore di traffico descritto più sotto, che è anonimo e non può identificarti.",
+            text: "Leggerlo non imposta cookie e non scrive nulla nella memoria locale o di sessione del tuo browser. Nessun profilo della tua visita viene costruito, acquistato o venduto. Gli unici script sono le due misure descritte più sotto — un contatore di traffico e una misura di quanto a lungo le pagine vengono lette — e nessuna delle due può identificarti.",
           },
           {
             type: "paragraph",
@@ -153,11 +153,31 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Ciò che produce è un conteggio di visualizzazioni e di visitatori, per pagina e per paese. Non è collegato alle registrazioni dei soci, e non può esserlo: i due insiemi non hanno nulla in comune che li unisca.",
+            text: "Ciò che produce è un conteggio di visualizzazioni e di visitatori, suddiviso per pagina, per paese, per dispositivo, per sistema operativo e per browser. Non è collegato alle registrazioni dei soci, e non può esserlo: i due insiemi non hanno nulla in comune che li unisca.",
           },
           {
             type: "paragraph",
-            text: "Le pagine amministrative sono escluse dal conteggio, così che i dati descrivano i lettori e non il nostro stesso lavoro di redazione.",
+            text: "Questi totali giornalieri vengono copiati ogni notte nella banca dati propria di questo progetto, perché il servizio di conteggio conserva soltanto l'ultimo mese e ci piacerebbe poter abbracciare un anno intero. Ciò che viene copiato sono i totali stessi — una data, un numero di visitatori, un numero di visualizzazioni — e nulla che riguardi una singola visita.",
+          },
+          {
+            type: "paragraph",
+            text: "Altre due cose sono misurate qui e non dal servizio di conteggio, ed entrambe sono descritte per intero perché in entrambi i casi il tuo browser ci invia qualcosa mentre leggi.",
+          },
+          {
+            type: "paragraph",
+            text: "La prima è quante persone hanno il sito aperto in questo momento. Al caricamento una pagina genera un numero casuale e lo tiene nella memoria della pagina — non in un cookie, non nella memoria locale o di sessione, in nessun luogo che sopravviva. Viene scartato quando chiudi la scheda o ricarichi, così non può riconoscerti al tuo ritorno, e la nostra copia è cancellata novanta secondi dopo l'ultimo segnale del tuo browser. Tutto ciò a cui può rispondere è quante schede sono aperte e su quali pagine; mai di chi.",
+          },
+          {
+            type: "paragraph",
+            text: "La seconda è quanto a lungo una pagina trattiene un lettore. I secondi che una pagina passa davanti a te sono aggiunti direttamente al totale di quel giorno per quella pagina, nella stessa operazione che li riceve. La tua cifra personale non viene mai annotata: non esiste da nessuna parte una traccia di quanto tempo hai passato su qualcosa, e nessuna potrebbe essere ricostruita. Una scheda lasciata dietro un'altra finestra non conta nulla, e ogni singola lettura oltre la mezz'ora è contata come mezz'ora.",
+          },
+          {
+            type: "paragraph",
+            text: "Nessuna delle due misure registra il tuo indirizzo, una sua forma mascherata, l'identificativo del tuo browser o un qualsiasi valore che sopravviva alla pagina su cui ti trovi. Ciò che producono sono totali per pagina e per giorno: è per questo che sono conservati a tempo indeterminato ed è per questo che non contengono nulla da cancellare su richiesta.",
+          },
+          {
+            type: "paragraph",
+            text: "Le pagine amministrative sono escluse da tutto questo, così che i dati descrivano i lettori e non il nostro stesso lavoro di redazione.",
           },
         ],
       },

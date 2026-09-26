@@ -201,8 +201,24 @@ function dayAfter(date: string): string {
  * into one row; `requestPath` would give each essay separately. The dashboard
  * uses both, for different questions.
  */
+/**
+ * The groupings this project reads.
+ *
+ * A subset of what the API allows, and the omissions are deliberate: the `utm`
+ * dimensions answer 402 without the Web Analytics Plus add-on, and `flags` and
+ * `environment` describe our deployments rather than our readers.
+ */
+export type Dimension =
+  | "route"
+  | "requestPath"
+  | "country"
+  | "referrerHostname"
+  | "deviceType"
+  | "osName"
+  | "browserName";
+
 export async function fetchByDimension(
-  dimension: "route" | "requestPath" | "country" | "referrerHostname" | "deviceType",
+  dimension: Dimension,
   since: string,
   until: string,
   limit = 8,

@@ -405,3 +405,81 @@ CREATE TABLE IF NOT EXISTS newsletter_dispatch (
   recipients   integer NOT NULL DEFAULT 0,
   failures     integer NOT NULL DEFAULT 0
 );
+
+-- ---------------------------------------------------------------------------
+-- Traffic measurement
+-- ---------------------------------------------------------------------------
+--
+-- Three tables that together answer questions Vercel Web Analytics cannot:
+-- what the year looked like, who is reading right now, and how long a page
+-- holds someone. Each is built so that the answer survives without the
+-- question "which person was that?" ever becoming answerable.
+--
+-- The rule these share with `member`: assume the table will one day be read by
+-- someone who should not have it. None of them stores an address, an IP, a
+-- user agent, or any value that persists in a reader's browser.
+
+-- Vercel's daily figures, copied out before the plan forgets them.
+--
+-- The Hobby plan grants access to the latest 31 days and refuses older ranges
+-- outright, so a yearly view is not a matter of asking differently: the data
+-- ceases to exist. A nightly job writes each day here, and history accumulates
+-- from the day that job first runs. Nothing before it can ever be recovered.
+--
+-- Keyed by day and upserted, so re-running the job is harmless and a day
+-- captured while still in progress is corrected by the next night's pass.
+--
+-- `countries` is a plain object of ISO code to visitor count. It is a snapshot
+-- of an already-aggregated public statistic, not a set of records about
+-- people, which is why it can sit here in the clear when almost nothing else
+-- in this schema can.
+CREATE TABLE IF NOT EXISTS traffic_day (
+  day         date PRIMARY KEY,
+  visitors    integer NOT NULL DEFAULT 0,
+  pageviews   integer NOT NULL DEFAULT 0,
+  countries   jsonb NOT NULL DEFAULT '{}'::jsonb,
+  captured_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- Who is on the site in the last minute or so.
+--
+-- `token` is a random value the browser generates per tab and keeps only in a
+-- JavaScript variable. It is never written to a cookie, to localStorage or to
+-- sessionStorage, so it does not survive a reload and cannot be used to
+-- recognise a returning reader — which is what keeps the site's claim to set
+-- nothing on your device true, and keeps the cookie banner unnecessary.
+--
+-- Rows are swept on every read. The table is therefore a picture of the last
+-- ninety seconds rather than a log: there is no history here to subpoena,
+-- because yesterday's rows no longer exist.
+CREATE TABLE IF NOT EXISTS presence (
+  token     text PRIMARY KEY,
+  route     text NOT NULL,
+  last_seen timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS presence_last_seen_idx ON presence (last_seen);
+
+-- How long pages hold people, summed and never itemised.
+--
+-- The privacy question here is the whole design. A table of "this person spent
+-- four minutes on that page" is a behavioural record whatever it is keyed on,
+-- so no such row is ever written: the beacon's reading is added straight into
+-- a running total for the day and the route, and the individual figure is
+-- discarded in the same statement that consumes it.
+--
+-- What can be recovered from this table is "the manifesto held readers for an
+-- average of three minutes in September". What cannot be recovered, by anyone,
+-- including us, is anything about a reader.
+CREATE TABLE IF NOT EXISTS page_engagement (
+  day      date NOT NULL,
+  route    text NOT NULL,
+  locale   text NOT NULL,
+  -- Whole seconds of foreground time, summed across every reading.
+  seconds  bigint NOT NULL DEFAULT 0,
+  -- How many readings that sum is made of, so a mean can be taken honestly.
+  readings integer NOT NULL DEFAULT 0,
+  PRIMARY KEY (day, route, locale)
+);
+
+CREATE INDEX IF NOT EXISTS page_engagement_day_idx ON page_engagement (day DESC);

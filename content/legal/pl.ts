@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Czytanie nie ustawia ciasteczek i nie zapisuje niczego w pamięci lokalnej ani sesyjnej twojej przeglądarki. Żaden profil twojej wizyty nie jest tworzony, kupowany ani sprzedawany. Jedyny skrypt to opisany niżej licznik ruchu, który jest anonimowy i nie może cię zidentyfikować.",
+            text: "Czytanie nie ustawia ciasteczek i nie zapisuje niczego w pamięci lokalnej ani sesyjnej twojej przeglądarki. Żaden profil twojej wizyty nie jest tworzony, kupowany ani sprzedawany. Jedyne skrypty to dwa opisane niżej pomiary — licznik ruchu i pomiar czasu czytania stron — i żaden z nich nie może cię zidentyfikować.",
           },
           {
             type: "paragraph",
@@ -153,11 +153,31 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Powstaje z tego liczba odsłon i odwiedzających, w podziale na podstrony i kraje. Nie jest powiązana z wpisami członkowskimi i być nie może: jedno i drugie nie zawiera nic wspólnego, co pozwoliłoby je połączyć.",
+            text: "Powstaje z tego liczba odsłon i odwiedzających, w podziale na podstrony, kraje, urządzenia, systemy operacyjne i przeglądarki. Nie jest powiązana z wpisami członkowskimi i być nie może: jedno i drugie nie zawiera nic wspólnego, co pozwoliłoby je połączyć.",
           },
           {
             type: "paragraph",
-            text: "Strony administracyjne są wyłączone z licznika, więc dane opisują czytelników, a nie naszą własną pracę redakcyjną.",
+            text: "Te dzienne sumy są co noc kopiowane do własnej bazy danych tego projektu, ponieważ usługa licząca przechowuje tylko ostatni miesiąc, a chcielibyśmy widzieć cały rok. Kopiowane są same sumy — data, liczba odwiedzających, liczba odsłon — i nic, co dotyczyłoby pojedynczej wizyty.",
+          },
+          {
+            type: "paragraph",
+            text: "Dwie kolejne rzeczy mierzymy sami, a nie przez usługę liczącą, i obie opisujemy w całości, bo w obu wypadkach twoja przeglądarka coś nam wysyła, kiedy czytasz.",
+          },
+          {
+            type: "paragraph",
+            text: "Pierwsza to liczba osób, które mają teraz stronę otwartą. Przy wczytaniu strona losuje liczbę i trzyma ją w pamięci strony — nie w ciasteczku, nie w pamięci lokalnej ani sesyjnej, nigdzie, gdzie by przetrwała. Znika, gdy zamkniesz kartę albo odświeżysz, więc nie rozpozna cię po powrocie, a naszą kopię usuwamy dziewięćdziesiąt sekund po ostatnim sygnale twojej przeglądarki. Odpowiada tylko na pytanie, ile kart jest otwartych i na których podstronach; nigdy — czyich.",
+          },
+          {
+            type: "paragraph",
+            text: "Druga to czas, przez jaki strona zatrzymuje czytelnika. Sekundy, które strona spędza przed tobą, dodawane są wprost do sumy dnia dla tej podstrony, w tej samej operacji, która je przyjmuje. Twoja pojedyncza wartość nigdy nie zostaje zapisana: nigdzie nie ma zapisu, ile czasu na czymkolwiek spędziłeś, i żadnego nie dałoby się odtworzyć. Karta pozostawiona za innym oknem nie liczy się wcale, a każde pojedyncze czytanie dłuższe niż pół godziny liczone jest jako pół godziny.",
+          },
+          {
+            type: "paragraph",
+            text: "Żaden z tych pomiarów nie zapisuje twojego adresu, jego zamaskowanej postaci, identyfikatora twojej przeglądarki ani żadnej wartości, która przetrwałaby stronę, na której jesteś. Powstają z nich sumy na podstronę i dzień; dlatego przechowujemy je bezterminowo i dlatego nie ma w nich nic, co można by usunąć na żądanie.",
+          },
+          {
+            type: "paragraph",
+            text: "Strony administracyjne są wyłączone z tego wszystkiego, więc dane opisują czytelników, a nie naszą własną pracę redakcyjną.",
           },
         ],
       },
