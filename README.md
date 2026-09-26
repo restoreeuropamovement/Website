@@ -266,6 +266,19 @@ delete the directory to start over.
 - **The audit log holds no personal data.** It is not encrypted, so it records
   ids and keyed digests rather than names and addresses — otherwise it would
   slowly accumulate, in the clear, the very data the table beside it encrypts.
+- **The database connection is verified, not merely encrypted.** `lib/db.ts`
+  connects with `verify-full`, so the server's certificate is checked rather than
+  accepted. `require` — what most guides suggest — encrypts the tunnel without
+  establishing who is at the far end of it, which leaves an interceptor able to
+  answer in Postgres's place, read every column not encrypted by
+  `lib/admin/pii.ts` and keep the connection string. `DATABASE_SSL=disable`
+  exists for the loopback socket in development and is refused in production.
+- **Throttling buckets on an address the caller cannot choose.**
+  `lib/admin/request.ts` prefers `x-vercel-forwarded-for`, which the platform
+  writes and strips from the incoming request, over `x-forwarded-for`, which on
+  an unfronted host is whatever the client typed. The bucket is what limits
+  attempts at both ceremonies and both public forms, so a caller able to pick
+  their own would face no limit at all.
 
 ### The membership roll
 

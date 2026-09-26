@@ -1,5 +1,6 @@
 import postgres from "postgres";
 import { articles } from "../content/journal/articles";
+import { sslMode } from "../lib/db";
 
 /**
  * Copies the bundled essays into the database.
@@ -24,7 +25,7 @@ async function main(): Promise<void> {
 
   const sql = postgres(url, {
     max: 1,
-    ssl: process.env.DATABASE_SSL === "disable" ? false : "require",
+    ssl: sslMode(),
   });
 
   try {

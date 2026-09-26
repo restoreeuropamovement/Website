@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import postgres from "postgres";
+import { sslMode } from "../lib/db";
 
 /**
  * Applies `db/schema.sql`.
@@ -25,7 +26,7 @@ async function main(): Promise<void> {
   const schema = await readFile(join(here, "..", "db", "schema.sql"), "utf8");
   const sql = postgres(url, {
     max: 1,
-    ssl: process.env.DATABASE_SSL === "disable" ? false : "require",
+    ssl: sslMode(),
   });
 
   try {
