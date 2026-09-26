@@ -1,16 +1,26 @@
 import Link from "next/link";
-import { MetricTable, StatPair, TrendBars } from "@/components/admin/Analytics";
+import { Headline, Panel, ShareTable, Trend, VisitorMap } from "@/components/admin/Analytics";
 import {
   CountryTable,
   IntakeBars,
   IntakeTotals,
   PipelineTable,
 } from "@/components/admin/Intake";
-import { dateRange, fetchByDimension, fetchDaily, fetchTotals } from "@/lib/admin/analytics";
+import {
+  MAX_GROUP_LIMIT,
+  RETENTION_NOTE,
+  dateRange,
+  fetchByDimension,
+  fetchDaily,
+  fetchTotals,
+  previousRange,
+} from "@/lib/admin/analytics";
+import { readGeography } from "@/lib/admin/geography";
 import { intakeTrend } from "@/lib/admin/intake";
 import { membershipOverview } from "@/lib/admin/members";
 import { listArticlesForAdmin } from "@/lib/admin/journal";
 import { subscriberCounts } from "@/lib/admin/subscribers";
+import { compareTotals, readSeries } from "@/lib/admin/traffic";
 
 const RANGES = [
   { days: 7, label: "7 days" },
@@ -23,6 +33,11 @@ function parseRange(value: string | string[] | undefined): number {
   return RANGES.some((range) => range.days === candidate) ? candidate : 30;
 }
 
+/** Device types come back lowercase; they are labels here, not identifiers. */
+function deviceLabel(value: string): string {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
 /**
  * Overview.
  *
@@ -30,10 +45,11 @@ function parseRange(value: string | string[] | undefined): number {
  * same aggregated model as the Vercel dashboard — so these numbers agree with
  * what the team sees there rather than being a second, subtly different count.
  *
- * Beside them sit the movement's own figures — applications, enquiries and the
- * pipeline — which come from our database rather than from Vercel. Keeping the
- * two apart on the page is deliberate: traffic is how many people looked, and
- * intake is how many acted. Only the first of them can be unavailable.
+ * Beside them sit the movement's own figures — applications, enquiries, the
+ * pipeline and the journal — which come from our database rather than from
+ * Vercel. Keeping the two apart on the page is deliberate: traffic is how many
+ * people looked, and intake is how many acted. Only the first of them can be
+ * unavailable, and it says so rather than showing a zero.
  *
  * Every query is issued concurrently; they are independent, and running them
  * in sequence would make the page as slow as their sum.
@@ -44,25 +60,40 @@ export default async function AdminOverview(props: {
   const searchParams = await props.searchParams;
   const days = parseRange(searchParams.range);
   const { since, until } = dateRange(days);
+  const previous = previousRange(days);
 
   const [
     totals,
+    priorTotals,
     daily,
     routes,
     essays,
     countries,
     referrers,
+    devices,
     articles,
     intake,
     membership,
     subscribers,
   ] = await Promise.all([
     fetchTotals(since, until),
+    fetchTotals(previous.since, previous.until),
     fetchDaily(since, until),
     fetchByDimension("route", since, until, 8),
     fetchByDimension("requestPath", since, until, 8),
-    fetchByDimension("country", since, until, 8),
+    /*
+     * The country breakdown asks for the API's maximum rather than a tidy
+     * eight, and the reason is the map rather than the list. Vercel folds
+     * everything past the limit into one anonymous bucket, and while that
+     * bucket exists a nation with no row might be in it — so the map has to
+     * hatch every unlisted country as unknown instead of shading it as a
+     * measured zero. Asking for a hundred is what usually makes the breakdown
+     * exhaustive, and an exhaustive breakdown is what lets the map say
+     * something definite.
+     */
+    fetchByDimension("country", since, until, MAX_GROUP_LIMIT),
     fetchByDimension("referrerHostname", since, until, 8),
+    fetchByDimension("deviceType", since, until, 8),
     listArticlesForAdmin(),
     intakeTrend(days),
     membershipOverview(),
@@ -71,6 +102,20 @@ export default async function AdminOverview(props: {
 
   const published = articles.filter((article) => article.status === "published").length;
   const drafts = articles.length - published;
+
+  /*
+   * A comparison needs both windows. If the earlier one failed or is not
+   * configured, the current figure still stands on its own and simply carries
+   * no change beneath it — inferring one from a half-answer is how a panel
+   * ends up asserting a trend nobody measured.
+   */
+  const comparison =
+    totals.state === "ok" && priorTotals.state === "ok"
+      ? compareTotals(totals.data, priorTotals.data)
+      : undefined;
+
+  const series = daily.state === "ok" ? readSeries(daily.data, since, until) : undefined;
+  const geography = countries.state === "ok" ? readGeography(countries.data) : undefined;
 
   return (
     <div className="flex flex-col gap-10">
@@ -116,19 +161,19 @@ export default async function AdminOverview(props: {
 
         <IntakeBars days={days} trend={intake} />
 
-        <CountryTable overview={membership} />
-      </section>
-
-      <section aria-labelledby="traffic-heading" className="flex flex-col gap-6">
-        <h2 id="traffic-heading" className="eyebrow text-burgundy">
-          Traffic
-        </h2>
-
         <div className="grid gap-6 lg:grid-cols-2">
-          <StatPair label={`Total, last ${days} days`} result={totals} />
+          <CountryTable overview={membership} />
 
-          <section className="border border-hairline p-6">
-            <h3 className="eyebrow mb-5 text-muted">Journal and newsletter</h3>
+          {/*
+           * The journal and the newsletter are our own rows too, so they sit
+           * on this side of the page. They used to sit among the traffic
+           * panels, where a reader had no way of telling which figures could
+           * go unavailable and which could not.
+           */}
+          <Panel
+            title="Journal and newsletter"
+            caption="Standing totals, not confined to the selected range."
+          >
             <dl className="flex flex-wrap gap-x-10 gap-y-5">
               <div>
                 <dt className="text-micro text-faint">Published</dt>
@@ -155,24 +200,52 @@ export default async function AdminOverview(props: {
             >
               Manage the journal
             </Link>
-          </section>
+          </Panel>
         </div>
+      </section>
 
-        <TrendBars label="Page views by day" result={daily} />
+      <section aria-labelledby="traffic-heading" className="flex flex-col gap-6">
+        <h2 id="traffic-heading" className="eyebrow text-burgundy">
+          Traffic
+        </h2>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <MetricTable
-            label="Sections"
+          <Headline days={days} totals={totals} comparison={comparison} />
+
+          <ShareTable
+            title="Devices"
+            caption="How the site was reached. Visitors, then page views."
+            result={devices}
+            format={deviceLabel}
+            empty="No device types recorded in this range."
+          />
+
+          <Trend days={days} result={daily} series={series} retention={RETENTION_NOTE} />
+
+          <VisitorMap days={days} result={countries} geography={geography} />
+
+          <ShareTable
+            title="Sections"
             caption="Framework routes, so every essay rolls into /journal/[slug]. Page views, then visitors."
             result={routes}
+            metric="pageviews"
           />
-          <MetricTable
-            label="Individual pages"
-            caption="Exact paths, so single essays and positions appear separately."
+
+          <ShareTable
+            title="Referrers"
+            caption="The host a visitor arrived from. Visitors, then page views."
+            result={referrers}
+            empty="Nothing arrived with a referring host in this range."
+          />
+
+          {/* Full width: exact paths are long, and truncating them loses the end. */}
+          <ShareTable
+            title="Individual pages"
+            caption="Exact paths, so single essays and positions appear separately. Page views, then visitors."
             result={essays}
+            metric="pageviews"
+            span
           />
-          <MetricTable label="Countries" result={countries} />
-          <MetricTable label="Referrers" result={referrers} />
         </div>
       </section>
     </div>
