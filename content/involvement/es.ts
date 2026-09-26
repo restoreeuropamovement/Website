@@ -41,6 +41,8 @@ export const involvementText: InvolvementText = {
       "El registro de miembros no acepta solicitudes en este momento. Nada de lo que escriba aquí se ha enviado. Inténtelo de nuevo en breve.",
     throttled:
       "Ya se han enviado varias solicitudes desde esta conexión. Espere una hora antes de enviar otra.",
+    busy:
+      "En este momento llegan más solicitudes a la vez de las que este sitio puede aceptar. Nada de lo que ha escrito se ha enviado, y no hay nada incorrecto en lo que ha rellenado. Vuelva a intentarlo dentro de unos minutos.",
     problemCount: {
       one: "Este formulario tiene {count} problema",
       other: "Este formulario tiene {count} problemas",
@@ -125,6 +127,8 @@ export const involvementText: InvolvementText = {
       "No se puede recibir correspondencia en este momento. Nada de lo que escriba aquí se ha enviado. Inténtelo de nuevo en breve.",
     throttled:
       "Ya se han enviado varios mensajes desde esta conexión. Espere una hora antes de enviar otro.",
+    busy:
+      "En este momento llegan más mensajes a la vez de los que este sitio puede aceptar. Nada de lo que ha escrito se ha enviado, y no hay nada incorrecto en lo que ha rellenado. Vuelva a intentarlo dentro de unos minutos.",
     problemCount: {
       one: "Este formulario tiene {count} problema",
       other: "Este formulario tiene {count} problemas",

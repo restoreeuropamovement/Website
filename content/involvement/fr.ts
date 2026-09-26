@@ -41,6 +41,8 @@ export const involvementText: InvolvementText = {
       "Le registre des adhérents n'accepte pas de demandes pour le moment. Rien de ce que vous tapez ici n'a été envoyé. Veuillez réessayer sous peu.",
     throttled:
       "Plusieurs demandes ont déjà été envoyées depuis cette connexion. Veuillez attendre une heure avant d'en envoyer une autre.",
+    busy:
+      "Il arrive en ce moment plus de candidatures à la fois que ce site ne peut en accepter. Rien de ce que vous avez saisi n'a été envoyé, et rien de ce que vous avez écrit n'est en cause. Merci de réessayer dans quelques minutes.",
     problemCount: {
       one: "Ce formulaire présente {count} problème",
       other: "Ce formulaire présente {count} problèmes",
@@ -125,6 +127,8 @@ export const involvementText: InvolvementText = {
       "La correspondance ne peut pas être reçue pour le moment. Rien de ce que vous tapez ici n'a été envoyé. Veuillez réessayer sous peu.",
     throttled:
       "Plusieurs messages ont déjà été envoyés depuis cette connexion. Veuillez attendre une heure avant d'en envoyer un autre.",
+    busy:
+      "Il arrive en ce moment plus de messages à la fois que ce site ne peut en accepter. Rien de ce que vous avez saisi n'a été envoyé, et rien de ce que vous avez écrit n'est en cause. Merci de réessayer dans quelques minutes.",
     problemCount: {
       one: "Ce formulaire présente {count} problème",
       other: "Ce formulaire présente {count} problèmes",

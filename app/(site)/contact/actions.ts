@@ -94,7 +94,8 @@ export async function submitEnquiry(
       detail: { reason: "site-wide hourly ceiling reached", subject },
       ipHash,
     });
-    return { status: "throttled", errors: [] };
+    /* `busy`, not `throttled`. See the note in join/state.ts. */
+    return { status: "busy", errors: [] };
   }
 
   await createEnquiry({ name, email, subject, message });

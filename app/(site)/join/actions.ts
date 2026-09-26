@@ -169,7 +169,11 @@ export async function submitMembershipApplication(
       detail: { reason: "site-wide hourly ceiling reached", country },
       ipHash,
     });
-    return { status: "throttled", errors: [] };
+    /*
+     * `busy`, not `throttled`. This reader has almost certainly sent nothing;
+     * what they met was everybody else. See the note in `state.ts`.
+     */
+    return { status: "busy", errors: [] };
   }
 
   const outcome = await createMember({

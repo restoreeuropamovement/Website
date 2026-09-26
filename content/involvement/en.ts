@@ -40,6 +40,8 @@ export const involvementText: InvolvementText = {
       "The membership roll is not accepting applications at this moment. Nothing you type here has been sent. Please try again shortly.",
     throttled:
       "Several applications have already been submitted from this connection. Please wait an hour before sending another.",
+    busy:
+      "More applications are arriving at once than this site is set up to accept. Nothing you typed has been sent, and nothing is wrong with what you wrote. Please try again in a few minutes.",
     problemCount: {
       one: "There is {count} problem with this form",
       other: "There are {count} problems with this form",
@@ -124,6 +126,8 @@ export const involvementText: InvolvementText = {
       "Correspondence is not being accepted at this moment. Nothing you type here has been sent. Please try again shortly.",
     throttled:
       "Several messages have already been sent from this connection. Please wait an hour before sending another.",
+    busy:
+      "More messages are arriving at once than this site is set up to accept. Nothing you typed has been sent, and nothing is wrong with what you wrote. Please try again in a few minutes.",
     problemCount: {
       one: "There is {count} problem with this form",
       other: "There are {count} problems with this form",

@@ -41,6 +41,8 @@ export const involvementText: InvolvementText = {
       "Il registro dei soci non accetta domande in questo momento. Nulla di ciò che scrivi qui è stato inviato. Riprova tra poco.",
     throttled:
       "Da questa connessione sono già state inviate diverse domande. Attendi un'ora prima di inviarne un'altra.",
+    busy:
+      "In questo momento arrivano più domande insieme di quante questo sito possa accettarne. Nulla di ciò che hai scritto è stato inviato, e non c'è nulla di sbagliato in quello che hai compilato. Riprova fra qualche minuto.",
     problemCount: {
       one: "Questo modulo presenta {count} problema",
       other: "Questo modulo presenta {count} problemi",
@@ -125,6 +127,8 @@ export const involvementText: InvolvementText = {
       "Non è possibile ricevere corrispondenza in questo momento. Nulla di ciò che scrivi qui è stato inviato. Riprova tra poco.",
     throttled:
       "Da questa connessione sono già stati inviati diversi messaggi. Attendi un'ora prima di inviarne un altro.",
+    busy:
+      "In questo momento arrivano più messaggi insieme di quanti questo sito possa accettarne. Nulla di ciò che hai scritto è stato inviato, e non c'è nulla di sbagliato in quello che hai compilato. Riprova fra qualche minuto.",
     problemCount: {
       one: "Questo modulo presenta {count} problema",
       other: "Questo modulo presenta {count} problemi",

@@ -40,6 +40,8 @@ export const involvementText: InvolvementText = {
       "Rejestr członków nie przyjmuje w tej chwili zgłoszeń. Nic z tego, co tu wpisujesz, nie zostało wysłane. Spróbuj proszę za chwilę.",
     throttled:
       "Z tego połączenia wysłano już kilka zgłoszeń. Odczekaj proszę godzinę przed wysłaniem kolejnego.",
+    busy:
+      "W tej chwili napływa naraz więcej zgłoszeń, niż ta strona może przyjąć. Nic z tego, co wpisałeś, nie zostało wysłane i nic w twoim zgłoszeniu nie jest nie tak. Spróbuj ponownie za kilka minut.",
     problemCount: {
       one: "Ten formularz ma {count} problem",
       few: "Ten formularz ma {count} problemy",
@@ -126,6 +128,8 @@ export const involvementText: InvolvementText = {
       "W tej chwili nie można przyjmować korespondencji. Nic z tego, co tu wpisujesz, nie zostało wysłane. Spróbuj proszę za chwilę.",
     throttled:
       "Z tego połączenia wysłano już kilka wiadomości. Odczekaj proszę godzinę przed wysłaniem kolejnej.",
+    busy:
+      "W tej chwili napływa naraz więcej wiadomości, niż ta strona może przyjąć. Nic z tego, co wpisałeś, nie zostało wysłane i nic w twojej wiadomości nie jest nie tak. Spróbuj ponownie za kilka minut.",
     problemCount: {
       one: "Ten formularz ma {count} problem",
       few: "Ten formularz ma {count} problemy",

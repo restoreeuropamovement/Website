@@ -31,6 +31,14 @@ export function honeypotTripped(form: FormData): boolean {
  *
  * Tripping it is recorded as a failed submission, so a ceiling that is reached
  * shows up in the audit log rather than silently becoming the new normal.
+ *
+ * Raised from 300 before the movement's public launch. Three hundred an hour
+ * is a sensible ceiling for a site nobody has heard of and a poor one for the
+ * day it is announced: an hour of genuine interest would spend it, and every
+ * applicant after that is turned away at the exact moment the movement is
+ * most worth joining. The argument above decides the direction — the cost of
+ * setting this too low is refusing real people, and the cost of setting it
+ * too high is a queue an administrator empties.
  */
-export const GLOBAL_HOURLY_LIMIT = 300;
+export const GLOBAL_HOURLY_LIMIT = 2000;
 export const GLOBAL_WINDOW_SECONDS = 60 * 60;

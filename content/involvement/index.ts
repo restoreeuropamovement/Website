@@ -95,7 +95,15 @@ export interface InvolvementText {
       readonly privacyLink: string;
     };
     readonly unavailable: string;
+    /** This connection has sent several already. */
     readonly throttled: string;
+    /**
+     * The site-wide hourly ceiling was reached, which is a different fact and
+     * needs a different sentence: the reader has very probably sent nothing,
+     * and telling them they have already applied would be untrue precisely
+     * when the largest number of people are reading it.
+     */
+    readonly busy: string;
     /** "There are 2 problems with this form". */
     readonly problemCount: PluralForms;
     readonly errors: Record<JoinErrorCode, string>;
@@ -134,6 +142,8 @@ export interface InvolvementText {
     };
     readonly unavailable: string;
     readonly throttled: string;
+    /** See the note on the membership form's `busy`. */
+    readonly busy: string;
     readonly problemCount: PluralForms;
     readonly errors: Record<ContactErrorCode, string>;
     /**

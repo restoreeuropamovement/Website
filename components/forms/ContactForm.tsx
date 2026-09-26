@@ -59,6 +59,7 @@ export function ContactForm({ edition, initialSubject }: ContactFormProps) {
 
       {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}
       {state.status === "throttled" ? <Notice>{text.throttled}</Notice> : null}
+      {state.status === "busy" ? <Notice>{text.busy}</Notice> : null}
 
       {state.errors.length > 0 ? (
         <div className="border border-burgundy/40 bg-burgundy/5 p-5" role="alert">

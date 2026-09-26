@@ -41,6 +41,8 @@ export const involvementText: InvolvementText = {
       "Das Mitgliederverzeichnis nimmt derzeit keine Bewerbungen an. Nichts von dem, was Sie hier eingeben, wurde gesendet. Bitte versuchen Sie es in Kürze erneut.",
     throttled:
       "Von dieser Verbindung wurden bereits mehrere Bewerbungen abgeschickt. Bitte warten Sie eine Stunde, bevor Sie eine weitere senden.",
+    busy:
+      "Es treffen gerade mehr Anträge auf einmal ein, als diese Seite annehmen kann. Nichts von dem, was Sie eingegeben haben, wurde gesendet, und an Ihren Angaben ist nichts falsch. Bitte versuchen Sie es in einigen Minuten erneut.",
     problemCount: {
       one: "Dieses Formular hat {count} Problem",
       other: "Dieses Formular hat {count} Probleme",
@@ -125,6 +127,8 @@ export const involvementText: InvolvementText = {
       "Korrespondenz kann derzeit nicht angenommen werden. Nichts von dem, was Sie hier eingeben, wurde gesendet. Bitte versuchen Sie es in Kürze erneut.",
     throttled:
       "Von dieser Verbindung wurden bereits mehrere Nachrichten gesendet. Bitte warten Sie eine Stunde, bevor Sie eine weitere senden.",
+    busy:
+      "Es treffen gerade mehr Nachrichten auf einmal ein, als diese Seite annehmen kann. Nichts von dem, was Sie eingegeben haben, wurde gesendet, und an Ihren Angaben ist nichts falsch. Bitte versuchen Sie es in einigen Minuten erneut.",
     problemCount: {
       one: "Dieses Formular hat {count} Problem",
       other: "Dieses Formular hat {count} Probleme",
