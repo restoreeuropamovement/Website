@@ -67,6 +67,12 @@ export const operatorText: {
     readonly unread: PluralForms;
     readonly withheld: string;
   };
+  readonly enquiryAlert: {
+    readonly subject: string;
+    readonly intro: string;
+    readonly unread: PluralForms;
+    readonly withheld: string;
+  };
 } = {
   applicationAlert: {
     subject: "An application is waiting",
@@ -77,5 +83,21 @@ export const operatorText: {
     },
     withheld: `Who it is from is deliberately not in this message. Sign in and use your
 passkey to read it: {admin}`,
+  },
+  enquiryAlert: {
+    subject: "An enquiry is waiting",
+    intro: "A new enquiry arrived through the contact form.",
+    unread: {
+      one: "{count} enquiry has not been read yet.",
+      other: "{count} enquiries have not been read yet.",
+    },
+    /*
+     * Not even the subject line the sender picked. It is one of five fixed
+     * values and identifies nobody on its own, but "press" or "organisation"
+     * arriving in an inbox still says something about who is writing, and the
+     * count is all this message needs to do its job.
+     */
+    withheld: `Who it is from, and what it says, are deliberately not in this message.
+Sign in and use your passkey to read it: {admin}`,
   },
 };

@@ -1,10 +1,14 @@
 "use server";
 
+import { after } from "next/server";
+
 import { recordAudit } from "@/lib/admin/audit";
-import { createEnquiry } from "@/lib/admin/enquiries";
-import { hasDatabase, hasMemberEncryptionKey } from "@/lib/admin/env";
+import { createEnquiry, enquiryOverview } from "@/lib/admin/enquiries";
+import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
+import { enquiryAlert } from "@/content/emails";
+import { sendEmail } from "@/lib/email";
 import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
 import { isContactChannel, type ContactErrorCode } from "@/content/involvement";
 import { type ContactState } from "./state";
@@ -108,6 +112,40 @@ export async function submitEnquiry(
     detail: { subject },
     ipHash,
   });
+
+  /*
+   * After the response, for the reason the intake gives at greater length: the
+   * enquiry is already stored by this point, and a mail provider that is down
+   * or misconfigured must not turn a recorded enquiry into an error the writer
+   * sees. Nothing is sent to the writer — the page already told them it was
+   * received, and an unsolicited reply to an address typed into a public form
+   * is a message somebody else may have caused them to receive.
+   */
+  if (mailNotifyAddress()) {
+    after(async () => {
+      const notify = mailNotifyAddress();
+      if (!notify) return;
+
+      const { newCount } = await enquiryOverview();
+      const alert = await sendEmail({ to: notify, ...enquiryAlert(newCount) });
+
+      /*
+       * Recorded for the same reason the intake records it: an enquiry nobody
+       * is told about sits unread, and silent non-delivery is how that is
+       * discovered weeks later. `unconfigured` cannot occur here, since the
+       * address is set, but it is not a fault in any case.
+       */
+      if (!alert.ok && alert.reason !== "unconfigured") {
+        await recordAudit({
+          action: "enquiry.create.mail",
+          outcome: "failure",
+          actorLabel: "public contact form",
+          detail: { reason: alert.reason },
+          ipHash,
+        });
+      }
+    });
+  }
 
   return { status: "sent", errors: [] };
 }

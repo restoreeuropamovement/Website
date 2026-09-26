@@ -205,3 +205,24 @@ ${plural(DEFAULT_LOCALE, unread, text.unread)}
 ${fill(text.withheld, { admin: `${SITE_URL}/admin/members` })}`,
   };
 }
+
+/**
+ * The same, for an enquiry through `/contact`.
+ *
+ * `enquiry` is not the membership roll, but the reasoning is unchanged: the
+ * name, the address and the message body are encrypted in that table too, and
+ * a notification that quoted any of them would keep a readable copy in an
+ * inbox and in a mail provider's logs. A count and a link to sign in is the
+ * whole message.
+ */
+export function enquiryAlert(unread: number): Message {
+  const text = operatorText.enquiryAlert;
+  return {
+    subject: text.subject,
+    text: `${text.intro}
+
+${plural(DEFAULT_LOCALE, unread, text.unread)}
+
+${fill(text.withheld, { admin: `${SITE_URL}/admin/enquiries` })}`,
+  };
+}

@@ -55,6 +55,8 @@ export type AuditAction =
    */
   | "member.apply.mail"
   | "enquiry.create"
+  /* Non-delivery of the notification that an enquiry is waiting. */
+  | "enquiry.create.mail"
   | "enquiry.reveal"
   | "enquiry.update"
   | "enquiry.erase"
