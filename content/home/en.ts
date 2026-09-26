@@ -35,6 +35,38 @@ export const home = {
     secondaryCta: "Get Involved",
   },
 
+  /**
+   * The appeal, directly beneath the masthead.
+   *
+   * The movement's own words rather than a quotation, which is why nothing
+   * here is attributed and why it is set as a statement rather than inside
+   * quotation marks. It says the one thing the rest of the page cannot: that
+   * the argument is urgent, and that the reader is being asked to judge by it.
+   *
+   * Three short movements — the warning, the qualification, the instruction.
+   * The middle one is what keeps it from being nostalgia: it concedes that
+   * what is gone cannot be restored and that the old models had faults, which
+   * is the concession that makes the third movement an argument rather than a
+   * slogan.
+   */
+  creed: {
+    eyebrow: "Why now",
+    body: [
+      {
+        type: "lead",
+        text: "If we let our culture be disfigured by forces our grandparents could have governed, we will not read about our own passing in some later history. We will live to see it.",
+      },
+      {
+        type: "paragraph",
+        text: "For Europa to survive it has to return to those values and carry them forward. What Britain was cannot be brought back, and the older models had faults of their own that nobody should pretend away. What is left is to build something new here, and to build it from the bottom up.",
+      },
+      {
+        type: "statement",
+        text: "Put the peoples of Europa first, and measure every proposal put in front of you by whether it does.",
+      },
+    ] satisfies readonly ContentBlock[],
+  },
+
   standFor: {
     eyebrow: "What we stand for",
     title: "Five things we hold.",

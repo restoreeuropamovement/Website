@@ -10,6 +10,24 @@ export const home: HomeContent = {
     secondaryCta: "Mitmachen",
   },
 
+  creed: {
+    eyebrow: "Warum jetzt",
+    body: [
+      {
+        type: "lead",
+        text: "Lassen wir zu, dass unsere Kultur von Kräften entstellt wird, die unsere Großeltern noch hätten lenken können, so werden wir von unserem eigenen Untergang nicht erst in einer späteren Geschichtsschreibung lesen. Wir werden ihn erleben.",
+      },
+      {
+        type: "paragraph",
+        text: "Damit Europa überdauert, muss es zu diesen Werten zurückfinden und sie weitertragen. Was Britannien war, lässt sich nicht zurückholen, und die älteren Modelle hatten eigene Fehler, die niemand beschönigen sollte. Es bleibt, hier etwas Neues zu bauen — und es von unten aufzubauen.",
+      },
+      {
+        type: "statement",
+        text: "Stellen Sie die Völker Europas an die erste Stelle, und messen Sie jeden Vorschlag, der Ihnen vorgelegt wird, daran, ob er das tut.",
+      },
+    ] satisfies readonly ContentBlock[],
+  },
+
   standFor: {
     eyebrow: "Wofür wir stehen",
     title: "Fünf Überzeugungen.",

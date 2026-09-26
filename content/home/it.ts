@@ -10,6 +10,24 @@ export const home: HomeContent = {
     secondaryCta: "Partecipa",
   },
 
+  creed: {
+    eyebrow: "Perché ora",
+    body: [
+      {
+        type: "lead",
+        text: "Se lasciamo che la nostra cultura sia sfigurata da forze che i nostri nonni avrebbero saputo governare, della nostra fine non leggeremo in qualche storia successiva. La vedremo noi stessi.",
+      },
+      {
+        type: "paragraph",
+        text: "Perché l'Europa sopravviva deve tornare a quei valori e portarli avanti. Ciò che la Britannia è stata non può essere riportato indietro, e i modelli antichi avevano difetti propri che nessuno dovrebbe abbellire. Resta da costruire qui qualcosa di nuovo, e da costruirlo dal basso.",
+      },
+      {
+        type: "statement",
+        text: "Metti i popoli d'Europa al primo posto, e misura ogni proposta che ti viene messa davanti su quanto lo faccia.",
+      },
+    ] satisfies readonly ContentBlock[],
+  },
+
   standFor: {
     eyebrow: "Ciò che sosteniamo",
     title: "Cinque convinzioni.",

@@ -1,3 +1,4 @@
+import { Creed } from "@/components/home/Creed";
 import { ExploreGrid } from "@/components/home/ExploreGrid";
 import { Hero } from "@/components/home/Hero";
 import { ImageBreak } from "@/components/home/ImageBreak";
@@ -40,6 +41,12 @@ export async function HomeSections({ locale }: { readonly locale: Locale }) {
   return (
     <>
       <Hero content={home.hero} image={images.heroValley} locale={locale} />
+      {/*
+       * The appeal sits directly under the masthead photograph, on the one
+       * lifted ground the page uses. It is why the rest of the page matters,
+       * so it is read before the page starts enumerating.
+       */}
+      <Creed content={home.creed} locale={locale} />
       <StandForSection content={home.standFor} locale={locale} />
       <ObjectivesSection content={home.objectives} locale={locale} />
       <ManifestoPreview content={home.manifesto} locale={locale} />

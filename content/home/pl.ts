@@ -10,6 +10,24 @@ export const home: HomeContent = {
     secondaryCta: "Włącz się",
   },
 
+  creed: {
+    eyebrow: "Dlaczego teraz",
+    body: [
+      {
+        type: "lead",
+        text: "Jeśli pozwolimy, by naszą kulturę zniekształciły siły, nad którymi nasi dziadkowie jeszcze panowali, o własnym końcu nie przeczytamy w późniejszej historii. Zobaczymy go za życia.",
+      },
+      {
+        type: "paragraph",
+        text: "Aby Europa przetrwała, musi wrócić do tych wartości i ponieść je dalej. Tego, czym była Brytania, nie da się przywrócić, a dawne modele miały własne wady, których nikt nie powinien upiększać. Zostaje zbudować tutaj coś nowego — i budować to od dołu.",
+      },
+      {
+        type: "statement",
+        text: "Stawiaj ludy Europy na pierwszym miejscu i każdą propozycję, którą ci przedłożą, mierz tym, czy to robi.",
+      },
+    ] satisfies readonly ContentBlock[],
+  },
+
   standFor: {
     eyebrow: "Za czym się opowiadamy",
     title: "Pięć przekonań.",

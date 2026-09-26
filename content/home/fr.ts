@@ -10,6 +10,24 @@ export const home: HomeContent = {
     secondaryCta: "Participer",
   },
 
+  creed: {
+    eyebrow: "Pourquoi maintenant",
+    body: [
+      {
+        type: "lead",
+        text: "Si nous laissons notre culture être défigurée par des forces que nos grands-parents auraient pu gouverner, nous ne lirons pas notre propre disparition dans quelque histoire ultérieure. Nous la verrons de notre vivant.",
+      },
+      {
+        type: "paragraph",
+        text: "Pour que l'Europa survive, il lui faut revenir à ces valeurs et les porter plus loin. Ce que fut la Grande-Bretagne ne peut être ramené, et les modèles anciens avaient leurs propres défauts, que nul ne devrait farder. Reste à bâtir ici quelque chose de neuf, et à le bâtir depuis le bas.",
+      },
+      {
+        type: "statement",
+        text: "Placez les peuples d'Europa en premier, et jugez chaque proposition qu'on vous présente à ce qu'elle le fasse.",
+      },
+    ] satisfies readonly ContentBlock[],
+  },
+
   standFor: {
     eyebrow: "Ce que nous défendons",
     title: "Cinq convictions.",
