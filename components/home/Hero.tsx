@@ -8,9 +8,9 @@ import { localePath, type Locale } from "@/lib/i18n";
 import { routes, site } from "@/lib/site";
 
 /**
- * The front of the paper: the mark and the name, one line of argument, one
- * sentence saying plainly what this is, and the two ways forward. The
- * photograph is a band underneath — text is never set on the image.
+ * The front of the paper: the name, one line of argument, one sentence saying
+ * plainly what this is, and the two ways forward, with the mark large beside
+ * them. The photograph is a band underneath — text is never set on the image.
  *
  * The factual sentence earns its place. A reader arriving from a shared link
  * knows nothing, and a masthead that offers only a slogan makes them work out
@@ -29,28 +29,44 @@ export function Hero({
     <section>
       <Container className="pt-14 pb-10 lg:pt-20 lg:pb-14">
         {/*
-          The mark sits above the name rather than beside it. The masthead runs
-          to 7.25rem at full width, and a glyph set to match that height beside
-          it would be a 116px square of ink competing with the word it belongs
-          to; set below it, a crest at a sixth the height reads as the crest.
+          Two columns from `lg`, because the masthead only fills about half the
+          measure and the rest of the band was empty ground. The mark takes the
+          other half at a size that makes it the emblem of the page rather than
+          a favicon that wandered in.
+
+          The `lg` threshold matters: the text column needs its own width to
+          keep the masthead on one line, and below that the mark would either
+          squeeze the name or drop beneath it and push the photograph off the
+          first screen. On a phone the mark in the navbar is the one that does
+          this work.
         */}
-        <RestoreEuropaMark className="mb-6 h-12 text-ink sm:h-16 lg:mb-8" />
-        <h1 className="max-w-6xl font-serif text-display-masthead font-normal text-ink">
-          {site.short}
-        </h1>
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,24rem)]">
+          <div>
+            <h1 className="font-serif text-display-masthead font-normal text-ink">{site.short}</h1>
 
-        <p className="mt-8 max-w-2xl font-serif text-display-4 leading-snug text-ink sm:mt-10">
-          {content.headline}
-        </p>
-        <p className="mt-5 max-w-2xl text-reading leading-relaxed text-body">{content.statement}</p>
+            <p className="mt-8 max-w-2xl font-serif text-display-4 leading-snug text-ink sm:mt-10">
+              {content.headline}
+            </p>
+            <p className="mt-5 max-w-2xl text-reading leading-relaxed text-body">
+              {content.statement}
+            </p>
 
-        <div className="mt-9 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
-          <Button href={localePath(locale, routes.principles)} variant="primary" size="lg" block>
-            {content.primaryCta}
-          </Button>
-          <Button href={localePath(locale, routes.join)} variant="secondary" size="lg" block>
-            {content.secondaryCta}
-          </Button>
+            <div className="mt-9 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center">
+              <Button
+                href={localePath(locale, routes.principles)}
+                variant="primary"
+                size="lg"
+                block
+              >
+                {content.primaryCta}
+              </Button>
+              <Button href={localePath(locale, routes.join)} variant="secondary" size="lg" block>
+                {content.secondaryCta}
+              </Button>
+            </div>
+          </div>
+
+          <RestoreEuropaMark className="hidden w-full text-ink lg:block" />
         </div>
       </Container>
 
