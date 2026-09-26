@@ -5,8 +5,7 @@ import { after } from "next/server";
 import { recordAudit } from "@/lib/admin/audit";
 import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
 import { createMember, unreadMemberCount } from "@/lib/admin/members";
-import { applicationAlert, applicationReceived } from "@/content/emails";
-import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
+import { applicationAlert } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
@@ -107,15 +106,6 @@ export async function submitMembershipApplication(
   const consent = read("consent") === "yes";
 
   /*
-   * Which edition of the form was filled in, and so which language the
-   * acknowledgement is written in. Not validated into an error: a submission
-   * that reaches the action without it — an older cached page, a script — is a
-   * real application and is acknowledged in English rather than rejected.
-   */
-  const submittedLocale = read("locale");
-  const locale = isLocale(submittedLocale) ? submittedLocale : DEFAULT_LOCALE;
-
-  /*
    * Codes, not sentences — the form says it in the reader's language. The
    * three list checks are the same ones that decide what may be written to the
    * unencrypted columns, so they test against ids rather than against labels:
@@ -197,42 +187,47 @@ export async function submitMembershipApplication(
   });
 
   /*
-   * Mail goes out after the response, for two reasons beyond not making
-   * somebody watch a spinner while a third party is slow.
+   * The notification goes out after the response, for two reasons beyond not
+   * making somebody watch a spinner while a third party is slow.
    *
-   * It removes a timing oracle. Sending on `created` and not on `duplicate` is
-   * right — the address already had its acknowledgement the first time — but
-   * doing it inline would make the duplicate case measurably faster, which
-   * hands back through the clock exactly the distinction the identical reply
-   * above is careful not to state.
+   * It removes a timing oracle. Telling an operator on `created` and not on
+   * `duplicate` is right — a second application from the same address is not
+   * news — but doing it inline would make the duplicate case measurably
+   * faster, which hands back through the clock exactly the distinction the
+   * identical reply above is careful not to state.
    *
    * And it decouples the two failures. The application is already committed by
    * this point; a mail provider that is down, throttling or misconfigured must
    * not be able to turn a recorded application into an error the reader sees.
+   *
+   * Nothing is sent to the applicant. An acknowledgement would hand their
+   * address to the mail provider, which keeps delivery logs, and `/privacy`
+   * tells them their details are never passed to a third party for any
+   * purpose. The message is written and translated — see `applicationReceived`
+   * — but sending it means rewriting that promise first.
    */
-  if (outcome.kind === "created") {
+  if (outcome.kind === "created" && mailNotifyAddress()) {
     after(async () => {
-      const acknowledgement = await sendEmail({
-        to: email,
-        ...(await applicationReceived(locale)),
-      });
-
       const notify = mailNotifyAddress();
-      if (notify) {
-        await sendEmail({ to: notify, ...applicationAlert(await unreadMemberCount()) });
-      }
+      if (!notify) return;
+
+      const alert = await sendEmail({
+        to: notify,
+        ...applicationAlert(await unreadMemberCount()),
+      });
 
       /*
        * Worth recording: silent non-delivery is how a movement discovers six
-       * weeks late that nobody was ever acknowledged. `unconfigured` is a
-       * normal state on a deployment without mail, so it is not a failure.
+       * weeks late that nobody was ever told an application had arrived.
+       * `unconfigured` cannot arise here, the address being set, and would not
+       * be a failure in any case.
        */
-      if (!acknowledgement.ok && acknowledgement.reason !== "unconfigured") {
+      if (!alert.ok && alert.reason !== "unconfigured") {
         await recordAudit({
           action: "member.apply.mail",
           outcome: "failure",
           actorLabel: "public intake",
-          detail: { reason: acknowledgement.reason },
+          detail: { reason: alert.reason },
           ipHash,
         });
       }

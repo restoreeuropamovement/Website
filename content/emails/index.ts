@@ -94,7 +94,19 @@ function url(locale: Locale, path: string): string {
 }
 
 /**
- * Sent when somebody applies through `/join`.
+ * Written for somebody who applies through `/join`, and **deliberately not
+ * sent**.
+ *
+ * Delivering it would hand the applicant's address to the mail provider, which
+ * necessarily learns who was written to and keeps logs of it. `/privacy` tells
+ * an applicant their details are "never passed to a third party for any
+ * purpose", and with this unsent that stays literally true: the only address
+ * the site mails is the operator's own, and those messages carry counts. The
+ * join page promises no acknowledgement, so nothing on the site is left saying
+ * something that does not happen.
+ *
+ * Kept, with its five translations, because the decision may be revisited —
+ * but sending it means rewriting the privacy note first, not afterwards.
  *
  * Says plainly that a human decides and gives no estimate of when, because an
  * invented timescale is the kind of small false promise that costs more trust

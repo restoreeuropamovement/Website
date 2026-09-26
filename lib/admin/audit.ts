@@ -49,9 +49,9 @@ export type AuditAction =
    */
   | "member.apply"
   /*
-   * Non-delivery of the acknowledgement. Recorded because the alternative is
-   * finding out weeks later that nobody who applied was ever written to, and
-   * because a sudden run of these is itself worth noticing.
+   * Non-delivery of the notification that an application is waiting. Recorded
+   * because the alternative is finding out weeks later that nobody was ever
+   * told, and because a sudden run of these is itself worth noticing.
    */
   | "member.apply.mail"
   | "enquiry.create"
