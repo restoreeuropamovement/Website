@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { archiveTraffic } from "@/lib/admin/archive";
+import { sweepEphemera } from "@/lib/admin/sweep";
 
 /**
  * Nightly: copy Vercel's daily figures into `traffic_day` before the plan's
@@ -28,6 +29,17 @@ export async function GET(request: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "Unauthorised." }, { status: 401 });
   }
 
+  /*
+   * The sweep runs first and independently of the archive. It is the cheaper
+   * and the more load-bearing of the two: a night when Vercel is unreachable
+   * costs one day of history, whereas a month when nothing is swept leaves a
+   * row per visitor sitting in the throttle table forever.
+   */
+  const swept = await sweepEphemera();
   const outcome = await archiveTraffic();
-  return NextResponse.json(outcome, { status: outcome.state === "error" ? 502 : 200 });
+
+  return NextResponse.json(
+    { ...outcome, swept },
+    { status: outcome.state === "error" ? 502 : 200 },
+  );
 }

@@ -50,6 +50,37 @@ const BEACON_WINDOW_SECONDS = 300;
  */
 const NO_CONTENT = () => new NextResponse(null, { status: 204 });
 
+/**
+ * Whether this beacon came from a page of ours.
+ *
+ * Browsers attach `Origin` to every cross-origin request and to same-origin
+ * `POST`s, including `sendBeacon`, so a genuine reader always carries one that
+ * matches the host they are reading. Compared against `Host` rather than a
+ * configured domain, which keeps preview deployments working without adding a
+ * variable that would silently disable counting when it was forgotten.
+ *
+ * This is a floor, not a wall. Anything that can set a header can satisfy it,
+ * and nothing here could distinguish a forged beacon from a real one — the
+ * measurement carries no identity by design, which is exactly what keeps it
+ * anonymous and exactly what makes it forgeable. What the check does buy is
+ * that casual scripts and anything pointed at this endpoint from another site
+ * are ignored, which is most of what would ever actually arrive. The real
+ * defence against inflated figures is that Vercel's visitor counts are
+ * measured independently and cannot be reached from here at all, so the two
+ * disagree loudly when one of them is being lied to.
+ */
+function sameOrigin(request: Request): boolean {
+  const origin = request.headers.get("origin");
+  const host = request.headers.get("host");
+  if (!origin || !host) return false;
+
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request): Promise<NextResponse> {
   /*
    * Without a database there is nowhere to put any of this. Answering 204
@@ -58,6 +89,7 @@ export async function POST(request: Request): Promise<NextResponse> {
    * exactly as configured.
    */
   if (!hasDatabase()) return NO_CONTENT();
+  if (!sameOrigin(request)) return NO_CONTENT();
 
   let payload: unknown;
   try {
