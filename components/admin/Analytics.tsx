@@ -482,10 +482,10 @@ function paintFor(
 }
 
 /**
- * Visits by country, drawn on the outline of Europe from `content/wings-map.ts`.
+ * Visits by country, drawn on the outline of Europa from `content/wings-map.ts`.
  *
  * The geometry is the same module the public map on `/wings` renders, reused
- * rather than reinvented: there is exactly one description of where Europe's
+ * rather than reinvented: there is exactly one description of where Europa's
  * borders are in this repository, and a second one would eventually disagree
  * with it. Nothing about the shapes is changed here, only what they are filled
  * with.

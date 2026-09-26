@@ -18,7 +18,7 @@ export const aboutText: AboutText = {
       body: [
         {
           type: "lead",
-          text: "Restore Europa est un mouvement politique européen fondé sur la conviction que l'Europe est une civilisation qui mérite d'être continuée, et que la continuer relève de la politique ordinaire plutôt que du sentiment.",
+          text: "Restore Europa est un mouvement politique européen fondé sur la conviction que l'Europa est une civilisation qui mérite d'être continuée, et que la continuer relève de la politique ordinaire plutôt que du sentiment.",
         },
         {
           type: "paragraph",
@@ -58,7 +58,7 @@ export const aboutText: AboutText = {
         },
         {
           type: "paragraph",
-          text: "Nous affirmons l'héritage chrétien, et particulièrement catholique, de l'Europe comme fondement de sa civilisation — sans contraindre les consciences, et sans supposer qu'un héritage public commun exige une uniformité privée.",
+          text: "Nous affirmons l'héritage chrétien, et particulièrement catholique, de l'Europa comme fondement de sa civilisation — sans contraindre les consciences, et sans supposer qu'un héritage public commun exige une uniformité privée.",
         },
         {
           type: "paragraph",

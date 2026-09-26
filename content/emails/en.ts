@@ -23,7 +23,7 @@ What we hold and how it is protected is set out at {privacy}.`,
     subject: "Confirm your subscription",
     body: `Please confirm that you would like to receive the Restore Europa
 journal by email — roughly one essay a week on the movement and on what
-is happening in Europe.
+is happening in Europa.
 
 Confirm here:
 {confirm}

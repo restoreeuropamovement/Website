@@ -244,7 +244,7 @@ export const legalText: LegalText = {
     intro: [
       {
         type: "lead",
-        text: "Ce site est publié par le Restore Europa Movement, un mouvement politique des peuples nationaux d'Europe.",
+        text: "Ce site est publié par le Restore Europa Movement, un mouvement politique des peuples nationaux d'Europa.",
       },
       {
         type: "paragraph",

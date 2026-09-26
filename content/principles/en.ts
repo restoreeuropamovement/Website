@@ -82,7 +82,7 @@ export const principlesContent = {
         },
         {
           type: "paragraph",
-          text: "We therefore support affordable housing, family taxation, parental support, stable employment and the availability of time outside economic production. Europe's demographic renewal should come principally from making family life possible for Europeans themselves.",
+          text: "We therefore support affordable housing, family taxation, parental support, stable employment and the availability of time outside economic production. Europa's demographic renewal should come principally from making family life possible for Europeans themselves.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -103,7 +103,7 @@ export const principlesContent = {
         },
         {
           type: "paragraph",
-          text: "Preserving the historical cultures and peoples of Europe is no more inherently hostile than preserving the cultures and historical identities of any other civilization. We defend continuity, and we defend it for everyone.",
+          text: "Preserving the historical cultures and peoples of Europa is no more inherently hostile than preserving the cultures and historical identities of any other civilization. We defend continuity, and we defend it for everyone.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -134,14 +134,14 @@ export const principlesContent = {
     },
 
     europe: {
-      title: "Europe",
+      title: "Europa",
       statement:
         "A civilizational community of sovereign nations, cooperating where cooperation serves them.",
       summary: "Unity without uniformity; subsidiarity as the governing rule.",
       body: [
         {
           type: "paragraph",
-          text: "European unity should not require the dissolution of European nations. We reject both absolute national isolation and the transformation of Europe into a centralized post-national administrative state.",
+          text: "European unity should not require the dissolution of European nations. We reject both absolute national isolation and the transformation of Europa into a centralized post-national administrative state.",
         },
         {
           type: "paragraph",
@@ -149,7 +149,7 @@ export const principlesContent = {
         },
         {
           type: "paragraph",
-          text: "That still leaves a great deal Europeans can only do together — defense, borders, strategic infrastructure, science, environmental protection, medicine, energy resilience and strategic industry. Our vision is not a uniform Europe, but a Europe whose diversity remains distinctly European.",
+          text: "That still leaves a great deal Europeans can only do together — defense, borders, strategic infrastructure, science, environmental protection, medicine, energy resilience and strategic industry. Our vision is not a uniform Europa, but a Europa whose diversity remains distinctly European.",
         },
       ] satisfies readonly ContentBlock[],
     },

@@ -100,7 +100,7 @@ table will one day be read by someone who should not have it.
 npm run dev        # development server
 npm run check      # lint + typecheck + content tests + translation checks + production build
 npm run artwork    # regenerate the generated SVG artwork in public/images
-npm run map        # regenerate content/wings-map.ts, the outline of Europe on /wings
+npm run map        # regenerate content/wings-map.ts, the outline of Europa on /wings
 npm run db:migrate # apply db/schema.sql (idempotent)
 npm run db:seed    # copy the bundled essays into the database (idempotent)
 ```

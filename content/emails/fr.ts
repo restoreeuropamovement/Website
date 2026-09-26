@@ -24,7 +24,7 @@ l'adresse {privacy}.`,
     subject: "Confirmez votre abonnement",
     body: `Veuillez confirmer que vous souhaitez recevoir le journal de Restore
 Europa par courriel — environ un essai par semaine sur le mouvement et
-sur ce qui se passe en Europe.
+sur ce qui se passe en Europa.
 
 Confirmez ici :
 {confirm}

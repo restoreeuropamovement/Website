@@ -347,7 +347,7 @@ export const policyStructure = [
   },
   /*
    * The remigration and enforcement cluster. It sits after the citizenship
-   * entries and before Europe because it is the machinery those entries
+   * entries and before Europa because it is the machinery those entries
    * imply, not a separate subject: each entry names one of admission,
    * integration, residence, naturalization or return rather than treating
    * remigration as a single power.

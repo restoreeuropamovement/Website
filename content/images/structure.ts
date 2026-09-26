@@ -16,7 +16,7 @@
  *
  * Two standing rules for anything added here. **No recognisable faces:** a
  * photograph of an identifiable person on a political site implies an
- * endorsement they never gave, whatever the licence permits. **Europe only:**
+ * endorsement they never gave, whatever the licence permits. **Europa only:**
  * the subject has to be somewhere this movement is actually about — a
  * handsome terraced hillside in Asia would say something untrue on a page
  * arguing for European continuity, and a reader who recognises it will notice.

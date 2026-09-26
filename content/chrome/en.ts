@@ -20,7 +20,7 @@ export const chrome = {
     descriptor: "Movement",
     tagline: "For a Christian, European and Human-Scale Civilization.",
     description:
-      "A Christian political movement of Europe's nations. Nothing should be decided higher up than it can be decided well, and what Europe inherited is worth keeping.",
+      "A Christian political movement of Europa's nations. Nothing should be decided higher up than it can be decided well, and what Europa inherited is worth keeping.",
     closing: "Receive. Renew. Transmit.",
   },
 

@@ -21,9 +21,9 @@ export const manifestoText: ManifestoText = {
   sections: {
     preamble: {
       title: "Préambule",
-      summary: "L'Europe est une civilisation, et un héritage qui a été transmis plutôt qu'inventé.",
+      summary: "L'Europa est une civilisation, et un héritage qui a été transmis plutôt qu'inventé.",
       body: [
-        { type: "lead", text: "L'Europe est davantage qu'un continent, qu'un marché ou qu'un espace administratif." },
+        { type: "lead", text: "L'Europa est davantage qu'un continent, qu'un marché ou qu'un espace administratif." },
         {
           type: "paragraph",
           text: "Elle est une civilisation : l'œuvre du christianisme et de l'héritage classique, de peuples historiques distincts, de langues et de nations, de générations de familles, de paysages cultivés, de villes et de villages, d'églises et de monastères, d'art, de philosophie, de droit, d'artisanat, de sacrifice et de mémoire.",
@@ -36,7 +36,7 @@ export const manifestoText: ManifestoText = {
           type: "paragraph",
           text: "Burke en a fixé la formulation en 1790, contre une révolution qui prétendait tout recommencer à partir de la seule raison. Une société, écrivait-il, est une association — et, parce que les fins d'une telle association ne sauraient être atteintes dans l'espace d'une seule vie, elle est une association « non seulement entre les vivants, mais entre les vivants, les morts et ceux qui sont à naître ». Quoi que l'on conteste par ailleurs dans les pages qui suivent, cette phrase en est la prémisse.",
         },
-        { type: "paragraph", text: "Or l'Europe moderne tient de plus en plus l'héritage lui-même pour suspect." },
+        { type: "paragraph", text: "Or l'Europa moderne tient de plus en plus l'héritage lui-même pour suspect." },
         {
           type: "paragraph",
           text: "L'ordre dominant a placé l'autonomie individuelle au-dessus de l'obligation, la consommation au-dessus de la continuité, la croissance économique au-dessus de la communauté, la capacité technique au-dessus du jugement humain, et l'uniformité administrative au-dessus du caractère propre des peuples et des lieux. Il a progressivement affaibli les institutions qui se tenaient autrefois entre l'individu isolé et le pouvoir centralisé : la famille, la paroisse, la corporation, la commune, la région et la nation.",
@@ -81,7 +81,7 @@ export const manifestoText: ManifestoText = {
         },
         {
           type: "paragraph",
-          text: "On ne peut comprendre la civilisation européenne indépendamment du christianisme. Nous reconnaissons donc l'héritage chrétien de l'Europe, et singulièrement son héritage catholique, comme un élément fondateur de sa civilisation.",
+          text: "On ne peut comprendre la civilisation européenne indépendamment du christianisme. Nous reconnaissons donc l'héritage chrétien de l'Europa, et singulièrement son héritage catholique, comme un élément fondateur de sa civilisation.",
         },
         {
           type: "paragraph",
@@ -147,14 +147,14 @@ export const manifestoText: ManifestoText = {
         },
         {
           type: "paragraph",
-          text: "Le renouveau démographique de l'Europe doit procéder avant tout d'une vie de famille redevenue possible pour les Européens eux-mêmes, et non d'une immigration permanente de grande ampleur tenue pour un substitut à la naissance et à la continuité des générations futures.",
+          text: "Le renouveau démographique de l'Europa doit procéder avant tout d'une vie de famille redevenue possible pour les Européens eux-mêmes, et non d'une immigration permanente de grande ampleur tenue pour un substitut à la naissance et à la continuité des générations futures.",
         },
       ] satisfies readonly ContentBlock[],
     },
 
     nation: {
       title: "Nation, peuple et patrie",
-      summary: "L'humanité est universelle ; la civilisation est particulière. Les peuples d'Europe peuvent garder leur continuité.",
+      summary: "L'humanité est universelle ; la civilisation est particulière. Les peuples d'Europa peuvent garder leur continuité.",
       body: [
         { type: "lead", text: "L'humanité est universelle. La civilisation est particulière." },
         {
@@ -165,7 +165,7 @@ export const manifestoText: ManifestoText = {
           type: "paragraph",
           text: "La nation n'est donc pas une simple circonscription administrative. C'est une communauté à travers les générations, que tiennent ensemble la mémoire historique, la langue, les coutumes, les institutions, le territoire et le sentiment d'un destin commun.",
         },
-        { type: "paragraph", text: "Les peuples d'Europe ont un intérêt légitime à maintenir leur continuité historique." },
+        { type: "paragraph", text: "Les peuples d'Europa ont un intérêt légitime à maintenir leur continuité historique." },
         {
           type: "paragraph",
           text: "L'égalité en dignité n'implique pas que chaque pays doive devenir culturellement interchangeable avec tous les autres.",
@@ -181,7 +181,7 @@ export const manifestoText: ManifestoText = {
         },
         {
           type: "paragraph",
-          text: "Préserver les cultures et les peuples historiques de l'Europe n'est pas en soi plus hostile que de préserver les cultures et les identités historiques des autres civilisations.",
+          text: "Préserver les cultures et les peuples historiques de l'Europa n'est pas en soi plus hostile que de préserver les cultures et les identités historiques des autres civilisations.",
         },
         { type: "statement", text: "Nous défendons donc la continuité." },
       ] satisfies readonly ContentBlock[],
@@ -219,19 +219,19 @@ export const manifestoText: ManifestoText = {
     },
 
     europe: {
-      title: "L'Europe, civilisation de nations",
+      title: "L'Europa, civilisation de nations",
       summary: "La coopération entre nations souveraines, gouvernée de bout en bout par la subsidiarité.",
       body: [
         { type: "lead", text: "L'unité européenne ne doit pas avoir pour prix la dissolution des nations européennes." },
         {
           type: "paragraph",
-          text: "Nous refusons aussi bien l'isolement national absolu que la transformation de l'Europe en un État administratif centralisé et post-national.",
+          text: "Nous refusons aussi bien l'isolement national absolu que la transformation de l'Europa en un État administratif centralisé et post-national.",
         },
         {
           type: "paragraph",
-          text: "L'Europe doit devenir au contraire une communauté de civilisation formée de nations souveraines, coopérant là où la coopération sert véritablement leurs intérêts communs.",
+          text: "L'Europa doit devenir au contraire une communauté de civilisation formée de nations souveraines, coopérant là où la coopération sert véritablement leurs intérêts communs.",
         },
-        { type: "paragraph", text: "Le principe qui doit gouverner l'organisation politique de l'Europe est la subsidiarité :" },
+        { type: "paragraph", text: "Le principe qui doit gouverner l'organisation politique de l'Europa est la subsidiarité :" },
         {
           type: "statement",
           text: "Rien ne doit être décidé à un échelon supérieur lorsque cela peut l'être avec compétence à un échelon inférieur.",
@@ -247,10 +247,10 @@ export const manifestoText: ManifestoText = {
         },
         {
           type: "paragraph",
-          text: "L'Europe doit coopérer en matière de défense, de frontières, d'infrastructures stratégiques, de science, de protection de l'environnement et de sauvegarde de sa civilisation, tout en conservant les identités historiques et l'autonomie politique de ses nations.",
+          text: "L'Europa doit coopérer en matière de défense, de frontières, d'infrastructures stratégiques, de science, de protection de l'environnement et de sauvegarde de sa civilisation, tout en conservant les identités historiques et l'autonomie politique de ses nations.",
         },
-        { type: "paragraph", text: "Ce que nous voulons n'est pas une Europe uniforme." },
-        { type: "statement", text: "C'est une Europe dont la diversité demeure proprement européenne." },
+        { type: "paragraph", text: "Ce que nous voulons n'est pas une Europa uniforme." },
+        { type: "statement", text: "C'est une Europa dont la diversité demeure proprement européenne." },
       ] satisfies readonly ContentBlock[],
     },
 
@@ -772,7 +772,7 @@ export const manifestoText: ManifestoText = {
       title: "Politique étrangère",
       summary: "Indépendance stratégique, prudence, et forte présomption contre la guerre inutile.",
       body: [
-        { type: "lead", text: "L'Europe doit rechercher l'indépendance, non l'ambition impériale." },
+        { type: "lead", text: "L'Europa doit rechercher l'indépendance, non l'ambition impériale." },
         {
           type: "paragraph",
           text: "Les nations européennes doivent être en mesure de se défendre, de tenir leurs frontières et de conserver leur indépendance stratégique en matière d'alimentation, d'énergie, d'infrastructures, de médecine et d'industries essentielles.",
@@ -823,7 +823,7 @@ export const manifestoText: ManifestoText = {
       body: [
         {
           type: "lead",
-          text: "Nous voulons une Europe où la cloche de l'église, la table de famille, le marché du bourg, l'atelier, la ferme, la place du village, l'université, la forêt et la nation appartiennent de nouveau à un ordre social cohérent.",
+          text: "Nous voulons une Europa où la cloche de l'église, la table de famille, le marché du bourg, l'atelier, la ferme, la place du village, l'université, la forêt et la nation appartiennent de nouveau à un ordre social cohérent.",
         },
         {
           type: "list",
@@ -849,7 +849,7 @@ export const manifestoText: ManifestoText = {
       title: "Restauration",
       summary: "On ne renverse pas le cours de l'histoire, mais on peut en changer la direction.",
       body: [
-        { type: "lead", text: "Notre mouvement ne demande pas que l'Europe devienne un musée." },
+        { type: "lead", text: "Notre mouvement ne demande pas que l'Europa devienne un musée." },
         { type: "paragraph", text: "Nous ne demandons pas davantage que l'histoire soit renversée." },
         { type: "paragraph", text: "On ne renverse pas le cours de l'histoire." },
         { type: "statement", text: "Mais on peut en changer la direction." },
@@ -865,7 +865,7 @@ export const manifestoText: ManifestoText = {
             "Des paysages peuvent être restaurés.",
             "Des églises peuvent se remplir de nouveau.",
             "Des nations peuvent se rappeler ce qu'elles sont.",
-            "L'Europe peut redevenir reconnaissable comme elle-même.",
+            "L'Europa peut redevenir reconnaissable comme elle-même.",
           ],
         },
         { type: "paragraph", text: "Le choix qui s'offre à nous n'est donc pas simplement entre le passé et l'avenir." },
@@ -896,7 +896,7 @@ export const manifestoText: ManifestoText = {
             "Et restaurer plutôt que renoncer.",
           ],
         },
-        { type: "paragraph", text: "L'Europe doit reprendre conscience de ce qu'elle est." },
+        { type: "paragraph", text: "L'Europa doit reprendre conscience de ce qu'elle est." },
         { type: "paragraph", text: "Non parce que les autres civilisations seraient sans valeur." },
         {
           type: "paragraph",

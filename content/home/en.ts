@@ -28,9 +28,9 @@ export const home = {
    * choice that distinguishes it from the other European parties.
    */
   hero: {
-    headline: "Europe is worth inheriting.",
+    headline: "Europa is worth inheriting.",
     statement:
-      "Restore Europa is a political movement of Europe's nations, built on a published manifesto and organised as a separate national wing in each country rather than as one European party.",
+      "Restore Europa is a political movement of Europa's nations, built on a published manifesto and organised as a separate national wing in each country rather than as one European party.",
     primaryCta: "Read Our Principles",
     secondaryCta: "Get Involved",
   },
@@ -119,7 +119,7 @@ export const home = {
     body: [
       {
         type: "lead",
-        text: "Europe is more than a continent, a market or an administrative space.",
+        text: "Europa is more than a continent, a market or an administrative space.",
       },
       {
         type: "paragraph",
@@ -131,7 +131,7 @@ export const home = {
       },
       {
         type: "paragraph",
-        text: "Modern Europe increasingly treats inheritance itself as suspect. We do not accept that this is progress.",
+        text: "Modern Europa increasingly treats inheritance itself as suspect. We do not accept that this is progress.",
       },
     ] satisfies readonly ContentBlock[],
     cta: "Read the full manifesto",

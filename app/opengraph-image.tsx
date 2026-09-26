@@ -8,7 +8,7 @@ export const alt = `${site.formal} — ${site.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const HEADLINE = "Europe is worth inheriting.";
+const HEADLINE = "Europa is worth inheriting.";
 
 export default async function Image() {
   const glyphs = `${site.short}${site.name}${site.tagline}${HEADLINE}`;

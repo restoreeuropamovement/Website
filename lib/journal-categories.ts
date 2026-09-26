@@ -15,7 +15,7 @@ export const journalCategories: readonly JournalCategory[] = [
   "Technology",
   "Environment",
   "Architecture",
-  "Europe",
+  "Europa",
   "Demography",
   "Culture",
   "Foreign Policy",

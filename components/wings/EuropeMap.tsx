@@ -96,7 +96,7 @@ export function EuropeMap({ edition, className }: EuropeMapProps) {
        *
        * Both kinds of land are tinted from the same gold, and separate by value
        * alone. The palette's neutrals are all cool, so using one of them here
-       * put a blue Belarus and a blue Anatolia against a warm Europe, and the
+       * put a blue Belarus and a blue Anatolia against a warm Europa, and the
        * map read as two clashing pictures rather than one with something
        * highlighted in it.
        *

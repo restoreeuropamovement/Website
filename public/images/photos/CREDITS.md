@@ -61,7 +61,7 @@ as an endorsement they did not give, and no licence can grant permission the
 subject never offered. Landscapes, architecture, and distant or obscured figures
 only.
 
-**Europe only.** Stock searches for things like "terraced fields" return
+**Europa only.** Stock searches for things like "terraced fields" return
 mostly Asian rice terraces, which are often the better photographs — and would
 be quietly false on a page arguing for European continuity. Every image above
 was checked for where it was taken, not just what it looks like.

@@ -55,7 +55,7 @@ export const SITE_URL = resolveSiteUrl();
 export const site = {
   /**
    * Dominant brand mark, and the name the prose uses as a subject — "Restore
-   * Europe holds that…". Deliberately not an acronym: the policy catalogue
+   * Europa holds that…". Deliberately not an acronym: the policy catalogue
    * states positions in sentences, and initials read badly there.
    *
    * Untranslated in every language. It is the movement's name, not a phrase.

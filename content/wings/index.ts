@@ -22,7 +22,7 @@ import {
  * national wing is, what it is answerable for, and how to help establish one.
  *
  * The page chrome is in here too — "Where the wing sits", "Other wings in
- * Southern Europe", the count under each region heading. It was previously
+ * Southern Europa", the count under each region heading. It was previously
  * written into the components, which is the usual way a translated page ends
  * up with a German headline over English furniture.
  */

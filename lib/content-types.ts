@@ -107,7 +107,7 @@ export type JournalCategory =
   | "Technology"
   | "Environment"
   | "Architecture"
-  | "Europe"
+  | "Europa"
   | "Demography"
   | "Culture"
   | "Foreign Policy";

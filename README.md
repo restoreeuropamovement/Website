@@ -25,7 +25,7 @@ npm run dev        # http://localhost:3000
 | `npm run typecheck` | `tsc --noEmit`                                       |
 | `npm run check`     | Lint, typecheck, every content test and the build    |
 | `npm run artwork`   | Regenerate the generated SVG artwork                 |
-| `npm run map`       | Regenerate the outline of Europe used by `/wings`    |
+| `npm run map`       | Regenerate the outline of Europa used by `/wings`    |
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
 | `npm run db:migrate`| Apply `db/schema.sql` — idempotent                   |
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
@@ -414,7 +414,7 @@ architecture and ordinary civic life.
 The one image on the site that is not artwork or photography. Country outlines
 come from [Natural Earth](https://www.naturalearthdata.com/) at 1:50m, which is
 public domain and asks for no attribution; `npm run map` clips them to a window
-over Europe, projects them with EPSG:3035 and writes `content/wings-map.ts`.
+over Europa, projects them with EPSG:3035 and writes `content/wings-map.ts`.
 Run it again if the list of wings changes — a wing with no outline is a build
 error, not a gap in the picture.
 

@@ -50,7 +50,7 @@ export function WingsDocument({ edition }: { readonly edition: WingsEdition }) {
 
         <figure className="mt-14 lg:mt-16">
           {/*
-            Held to a plate rather than run to the container width. Europe is
+            Held to a plate rather than run to the container width. Europa is
             close to square in an equal-area projection, so a full-width map
             would be over a thousand pixels tall and push the list of wings —
             the copy of this that reads in any order, at any width — off the

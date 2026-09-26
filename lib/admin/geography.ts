@@ -4,7 +4,7 @@ import type { WingSlug } from "@/content/wings/structure";
 import type { DimensionBreakdown, DimensionRow } from "@/lib/admin/analytics";
 
 /**
- * Turning Vercel's country rows into something the map of Europe can shade.
+ * Turning Vercel's country rows into something the map of Europa can shade.
  *
  * The map draws forty-seven nations. Visitors arrive from rather more than
  * forty-seven places, so the first job here is to split the breakdown in two —

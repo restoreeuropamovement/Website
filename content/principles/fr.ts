@@ -73,7 +73,7 @@ export const principlesContent: PrinciplesContent = {
         },
         {
           type: "paragraph",
-          text: "Nous soutenons donc un logement abordable, une fiscalité familiale, un soutien à la parentalité, des emplois stables et la disponibilité d'un temps soustrait à la production économique. Le renouveau démographique de l'Europe doit procéder avant tout d'une vie de famille redevenue possible pour les Européens eux-mêmes.",
+          text: "Nous soutenons donc un logement abordable, une fiscalité familiale, un soutien à la parentalité, des emplois stables et la disponibilité d'un temps soustrait à la production économique. Le renouveau démographique de l'Europa doit procéder avant tout d'une vie de famille redevenue possible pour les Européens eux-mêmes.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -94,7 +94,7 @@ export const principlesContent: PrinciplesContent = {
         },
         {
           type: "paragraph",
-          text: "Préserver les cultures et les peuples historiques de l'Europe n'est pas en soi plus hostile que de préserver les cultures et les identités historiques de n'importe quelle autre civilisation. Nous défendons la continuité, et nous la défendons pour tous.",
+          text: "Préserver les cultures et les peuples historiques de l'Europa n'est pas en soi plus hostile que de préserver les cultures et les identités historiques de n'importe quelle autre civilisation. Nous défendons la continuité, et nous la défendons pour tous.",
         },
       ] satisfies readonly ContentBlock[],
     },
@@ -125,14 +125,14 @@ export const principlesContent: PrinciplesContent = {
     },
 
     europe: {
-      title: "Europe",
+      title: "Europa",
       statement:
         "Une communauté de civilisation formée de nations souveraines, coopérant là où la coopération les sert.",
       summary: "L'unité sans l'uniformité ; la subsidiarité pour règle.",
       body: [
         {
           type: "paragraph",
-          text: "L'unité européenne ne doit pas avoir pour prix la dissolution des nations européennes. Nous refusons aussi bien l'isolement national absolu que la transformation de l'Europe en un État administratif centralisé et post-national.",
+          text: "L'unité européenne ne doit pas avoir pour prix la dissolution des nations européennes. Nous refusons aussi bien l'isolement national absolu que la transformation de l'Europa en un État administratif centralisé et post-national.",
         },
         {
           type: "paragraph",
@@ -140,7 +140,7 @@ export const principlesContent: PrinciplesContent = {
         },
         {
           type: "paragraph",
-          text: "Il reste après cela bien des choses que les Européens ne peuvent faire qu'ensemble — la défense, les frontières, les infrastructures stratégiques, la science, la protection de l'environnement, la médecine, la résilience énergétique et l'industrie stratégique. Ce que nous voulons n'est pas une Europe uniforme, mais une Europe dont la diversité demeure proprement européenne.",
+          text: "Il reste après cela bien des choses que les Européens ne peuvent faire qu'ensemble — la défense, les frontières, les infrastructures stratégiques, la science, la protection de l'environnement, la médecine, la résilience énergétique et l'industrie stratégique. Ce que nous voulons n'est pas une Europa uniforme, mais une Europa dont la diversité demeure proprement européenne.",
         },
       ] satisfies readonly ContentBlock[],
     },

@@ -24,17 +24,17 @@ export const wingsText: WingsText = {
     ],
     note: "Wings are being established across the continent. If you would like to help start the one where you live, say so through Get Involved — it is the most useful thing anyone can do for the movement at this stage.",
     mapLabel:
-      "A map of Europe with the forty-seven nations listed on this page picked out from the land around them.",
+      "A map of Europa with the forty-seven nations listed on this page picked out from the land around them.",
     mapCaption:
       "The nations picked out here are the forty-seven listed below. Being on the map means the movement is organised around that nation, not that its wing is constituted or active.",
     mapHint: "Choose a nation on the map to open its wing.",
   },
 
   regions: {
-    western: "Western Europe",
-    northern: "Northern Europe",
-    southern: "Southern Europe",
-    "central-eastern": "Central and Eastern Europe",
+    western: "Western Europa",
+    northern: "Northern Europa",
+    southern: "Southern Europa",
+    "central-eastern": "Central and Eastern Europa",
   },
 
   countries: {
@@ -180,7 +180,7 @@ export const wingsText: WingsText = {
         "Producing and maintaining the authoritative text of our documents in the national language. Translations are the wing's responsibility, and are not published until they are good.",
     },
     europe: {
-      term: "Representation in Europe",
+      term: "Representation in Europa",
       description:
         "Speaking for its members within the wider movement, and cooperating with the other wings on the matters that genuinely require it.",
     },

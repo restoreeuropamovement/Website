@@ -23,9 +23,9 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
     id: "preamble",
     numeral: "—",
     title: "Preamble",
-    summary: "Europe is a civilization, and an inheritance that was handed on rather than invented.",
+    summary: "Europa is a civilization, and an inheritance that was handed on rather than invented.",
     body: [
-      { type: "lead", text: "Europe is more than a continent, a market, or an administrative space." },
+      { type: "lead", text: "Europa is more than a continent, a market, or an administrative space." },
       {
         type: "paragraph",
         text: "It is a civilization: the product of Christianity, classical inheritance, distinct historical peoples, languages and nations, generations of families, cultivated landscapes, towns and villages, churches and monasteries, art, philosophy, law, craftsmanship, sacrifice and memory.",
@@ -38,7 +38,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
         type: "paragraph",
         text: "Burke gave the idea its standing formulation in 1790, against a revolution that proposed to begin again from reason alone. A society, he wrote, is a partnership — and because the ends of that partnership cannot be reached within a single lifetime, it is a partnership “not only between those who are living, but between those who are living, those who are dead, and those who are to be born”. Whatever else is disputed in the pages that follow, that sentence is the premise underneath all of it.",
       },
-      { type: "paragraph", text: "Yet modern Europe increasingly treats inheritance itself as suspect." },
+      { type: "paragraph", text: "Yet modern Europa increasingly treats inheritance itself as suspect." },
       {
         type: "paragraph",
         text: "The dominant order has elevated individual autonomy above obligation, consumption above continuity, economic growth above community, technological capability above human judgment, and administrative uniformity above the particular character of peoples and places. It has progressively weakened the institutions that once stood between the isolated individual and centralized power: family, parish, guild, municipality, region and nation.",
@@ -84,7 +84,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
       },
       {
         type: "paragraph",
-        text: "European civilization cannot be understood apart from Christianity. We therefore affirm the Christian, and particularly Catholic, inheritance of Europe as a foundational element of its civilization.",
+        text: "European civilization cannot be understood apart from Christianity. We therefore affirm the Christian, and particularly Catholic, inheritance of Europa as a foundational element of its civilization.",
       },
       {
         type: "paragraph",
@@ -152,7 +152,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
       },
       {
         type: "paragraph",
-        text: "The demographic renewal of Europe should come principally through making family life possible for Europeans themselves, not through treating permanent mass immigration as a substitute for the birth and continuity of future generations.",
+        text: "The demographic renewal of Europa should come principally through making family life possible for Europeans themselves, not through treating permanent mass immigration as a substitute for the birth and continuity of future generations.",
       },
     ],
   },
@@ -187,7 +187,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
       },
       {
         type: "paragraph",
-        text: "The preservation of the historical cultures and peoples of Europe is no more inherently hateful than the preservation of the cultures and historical identities of other civilizations.",
+        text: "The preservation of the historical cultures and peoples of Europa is no more inherently hateful than the preservation of the cultures and historical identities of other civilizations.",
       },
       { type: "statement", text: "We therefore defend continuity." },
     ],
@@ -227,17 +227,17 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
   {
     id: "europe",
     numeral: "VI",
-    title: "Europe as a Civilization of Nations",
+    title: "Europa as a Civilization of Nations",
     summary: "Cooperation among sovereign nations, governed throughout by subsidiarity.",
     body: [
       { type: "lead", text: "European unity should not require the destruction of European nations." },
       {
         type: "paragraph",
-        text: "We reject both absolute national isolation and the transformation of Europe into a centralized post-national administrative state.",
+        text: "We reject both absolute national isolation and the transformation of Europa into a centralized post-national administrative state.",
       },
       {
         type: "paragraph",
-        text: "Europe should instead become a civilizational community of sovereign nations cooperating in areas where cooperation genuinely serves their shared interests.",
+        text: "Europa should instead become a civilizational community of sovereign nations cooperating in areas where cooperation genuinely serves their shared interests.",
       },
       { type: "paragraph", text: "The principle governing European political organization should be subsidiarity:" },
       {
@@ -255,10 +255,10 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
       },
       {
         type: "paragraph",
-        text: "Europe should cooperate in defense, borders, strategic infrastructure, science, environmental protection and civilizational preservation while retaining the historical identities and political autonomy of its nations.",
+        text: "Europa should cooperate in defense, borders, strategic infrastructure, science, environmental protection and civilizational preservation while retaining the historical identities and political autonomy of its nations.",
       },
-      { type: "paragraph", text: "Our vision is not a uniform Europe." },
-      { type: "statement", text: "It is a Europe whose diversity remains distinctly European." },
+      { type: "paragraph", text: "Our vision is not a uniform Europa." },
+      { type: "statement", text: "It is a Europa whose diversity remains distinctly European." },
     ],
   },
   {
@@ -793,7 +793,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
     title: "Foreign Policy",
     summary: "Strategic independence, prudence, and a strong presumption against unnecessary war.",
     body: [
-      { type: "lead", text: "Europe should seek independence rather than imperial ambition." },
+      { type: "lead", text: "Europa should seek independence rather than imperial ambition." },
       {
         type: "paragraph",
         text: "European nations should possess the capacity to defend themselves, secure their borders and maintain strategic independence in food, energy, infrastructure, medicine and essential industry.",
@@ -846,7 +846,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
     body: [
       {
         type: "lead",
-        text: "We seek a Europe in which the church bell, the family table, the local market, the workshop, the farm, the town square, the university, the forest and the nation once again belong to a coherent social order.",
+        text: "We seek a Europa in which the church bell, the family table, the local market, the workshop, the farm, the town square, the university, the forest and the nation once again belong to a coherent social order.",
       },
       {
         type: "list",
@@ -873,7 +873,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
     title: "Restoration",
     summary: "History cannot be reversed, but direction can be changed.",
     body: [
-      { type: "lead", text: "Our movement does not demand that Europe become a museum." },
+      { type: "lead", text: "Our movement does not demand that Europa become a museum." },
       { type: "paragraph", text: "Nor do we demand that history be reversed." },
       { type: "paragraph", text: "History cannot be reversed." },
       { type: "statement", text: "But direction can be changed." },
@@ -889,7 +889,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
           "Landscapes can be restored.",
           "Churches can again fill with life.",
           "Nations can remember what they are.",
-          "Europe can become recognizably itself.",
+          "Europa can become recognizably itself.",
         ],
       },
       { type: "paragraph", text: "The choice before us is therefore not simply between past and future." },
@@ -920,7 +920,7 @@ export const manifestoSections: readonly ManifestoSectionData[] = [
           "And restoration over surrender.",
         ],
       },
-      { type: "paragraph", text: "Europe must once again become conscious of what it is." },
+      { type: "paragraph", text: "Europa must once again become conscious of what it is." },
       { type: "paragraph", text: "Not because other civilizations are without value." },
       {
         type: "paragraph",

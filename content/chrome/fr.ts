@@ -5,7 +5,7 @@ export const chrome: ChromeContent = {
     descriptor: "Mouvement",
     tagline: "Pour une civilisation chrétienne, européenne et à l'échelle humaine.",
     description:
-      "Un mouvement politique chrétien des nations d'Europe. Rien ne doit être décidé plus haut que là où cela peut être bien décidé, et l'héritage de l'Europe mérite d'être gardé.",
+      "Un mouvement politique chrétien des nations d'Europa. Rien ne doit être décidé plus haut que là où cela peut être bien décidé, et l'héritage de l'Europa mérite d'être gardé.",
     closing: "Recevoir. Renouveler. Transmettre.",
   },
 

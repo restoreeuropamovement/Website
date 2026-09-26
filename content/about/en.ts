@@ -18,7 +18,7 @@ export const aboutText: AboutText = {
       body: [
         {
           type: "lead",
-          text: "Restore Europa is a European political movement founded on the conviction that Europe is a civilization worth continuing, and that continuing it is a matter of ordinary politics rather than of sentiment.",
+          text: "Restore Europa is a European political movement founded on the conviction that Europa is a civilization worth continuing, and that continuing it is a matter of ordinary politics rather than of sentiment.",
         },
         {
           type: "paragraph",
@@ -58,7 +58,7 @@ export const aboutText: AboutText = {
         },
         {
           type: "paragraph",
-          text: "We affirm the Christian, and particularly Catholic, inheritance of Europe as foundational to its civilization — without coercing belief, and without supposing that a shared public inheritance requires private uniformity.",
+          text: "We affirm the Christian, and particularly Catholic, inheritance of Europa as foundational to its civilization — without coercing belief, and without supposing that a shared public inheritance requires private uniformity.",
         },
         {
           type: "paragraph",

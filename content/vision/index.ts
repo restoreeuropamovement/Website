@@ -14,7 +14,7 @@ import { visionStructure, type VisionOutcomeId } from "./structure";
  * wrong principle.
  *
  * The heading above the list and the two links below it are text, so they live
- * in the language files too. Leaving "A Europe where —" hard-coded in the page
+ * in the language files too. Leaving "A Europa where —" hard-coded in the page
  * component is the usual way a translated page ends up three-quarters
  * translated.
  */

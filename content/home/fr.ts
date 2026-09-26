@@ -3,9 +3,9 @@ import type { HomeContent } from "./index";
 
 export const home: HomeContent = {
   hero: {
-    headline: "L'Europe vaut d'être reçue en héritage.",
+    headline: "L'Europa vaut d'être reçue en héritage.",
     statement:
-      "Restore Europa est un mouvement politique des nations d'Europe, fondé sur un manifeste publié et organisé en une aile nationale distincte dans chaque pays plutôt qu'en un parti européen unique.",
+      "Restore Europa est un mouvement politique des nations d'Europa, fondé sur un manifeste publié et organisé en une aile nationale distincte dans chaque pays plutôt qu'en un parti européen unique.",
     primaryCta: "Lire nos principes",
     secondaryCta: "Participer",
   },
@@ -79,7 +79,7 @@ export const home: HomeContent = {
     body: [
       {
         type: "lead",
-        text: "L'Europe est plus qu'un continent, un marché ou un espace administratif.",
+        text: "L'Europa est plus qu'un continent, un marché ou un espace administratif.",
       },
       {
         type: "paragraph",
@@ -91,7 +91,7 @@ export const home: HomeContent = {
       },
       {
         type: "paragraph",
-        text: "L'Europe moderne tient de plus en plus l'héritage lui-même pour suspect. Nous n'acceptons pas que ce soit là un progrès.",
+        text: "L'Europa moderne tient de plus en plus l'héritage lui-même pour suspect. Nous n'acceptons pas que ce soit là un progrès.",
       },
     ] satisfies readonly ContentBlock[],
     cta: "Lire le manifeste en entier",

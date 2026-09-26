@@ -3,7 +3,7 @@ import type { VisionText } from "./index";
 export const visionText: VisionText = {
   meta: {
     eyebrow: "Vision",
-    title: "À quoi l'Europe doit-elle servir ?",
+    title: "À quoi l'Europa doit-elle servir ?",
     metaTitle: "Vision",
     lede: "Les programmes politiques sont faciles à énoncer et difficiles à se représenter. Cette page décrit la vie ordinaire que nos principes doivent rendre possible — non pas un slogan, mais un ensemble de conditions que vous pouvez vérifier dans votre propre rue.",
     description:
@@ -20,7 +20,7 @@ export const visionText: VisionText = {
     ],
   },
 
-  outcomesHeading: "Une Europe où —",
+  outcomesHeading: "Une Europa où —",
   principleLink: "Le principe qui le fonde",
 
   outcomes: {

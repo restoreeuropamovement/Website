@@ -78,7 +78,7 @@ export const policyText: PolicyText = {
       summary: "The household as the first institution, and what public policy owes it.",
     },
     nation: {
-      title: "Nation, Citizenship, Immigration and Europe",
+      title: "Nation, Citizenship, Immigration and Europa",
       summary: "Membership of a political community, and the European order between nations.",
     },
     economy: {
@@ -868,9 +868,9 @@ export const policyText: PolicyText = {
 
     "demographic-renewal": {
       title: "Demographic Renewal",
-      shortAnswer: "Europe should answer demographic decline by making family formation viable for its own population rather than by permanent mass immigration.",
+      shortAnswer: "Europa should answer demographic decline by making family formation viable for its own population rather than by permanent mass immigration.",
       position: [
-        "Europe should address demographic decline principally by making family formation and child-rearing viable for its own population, rather than using permanent mass immigration as a substitute for births.",
+        "Europa should address demographic decline principally by making family formation and child-rearing viable for its own population, rather than using permanent mass immigration as a substitute for births.",
       ],
       keywords: [
         "demography",
@@ -1452,10 +1452,10 @@ export const policyText: PolicyText = {
     },
 
     "europe-as-a-civilization-of-nations": {
-      title: "Europe as a Civilization of Nations",
-      shortAnswer: "Europe should be a civilizational community of sovereign nations, not a centralized post-national state.",
+      title: "Europa as a Civilization of Nations",
+      shortAnswer: "Europa should be a civilizational community of sovereign nations, not a centralized post-national state.",
       position: [
-        "Europe should be a civilizational community of sovereign nations, not a centralized post-national state.",
+        "Europa should be a civilizational community of sovereign nations, not a centralized post-national state.",
       ],
       policies: [
         "European cooperation in defense, borders, strategic infrastructure, science, environmental protection and civilizational preservation.",
@@ -1463,7 +1463,7 @@ export const policyText: PolicyText = {
         "Subsidiarity governs the division of powers.",
       ],
       keywords: [
-        "Europe",
+        "Europa",
         "sovereignty",
         "confederation",
         "subsidiarity",
@@ -1483,7 +1483,7 @@ export const policyText: PolicyText = {
         "Retain European cooperation where scale genuinely makes it useful, including selected cross-border infrastructure, scientific cooperation, trade, border coordination and strategic security.",
         "Prevent EU institutions from imposing a uniform moral or cultural programme on member nations.",
         "Preserve national sovereignty, constitutional identity and historical continuity.",
-        "Seek a European civilizational framework that recognizes Europe's Christian inheritance while preserving national political autonomy.",
+        "Seek a European civilizational framework that recognizes Europa's Christian inheritance while preserving national political autonomy.",
       ],
       keywords: [
         "European Union",
@@ -1492,7 +1492,7 @@ export const policyText: PolicyText = {
         "subsidiarity",
         "European Commission",
         "treaty reform",
-        "Christian Europe",
+        "Christian Europa",
         "Brussels",
         "competences",
       ],
@@ -2641,7 +2641,7 @@ export const policyText: PolicyText = {
       keywords: [
         "Russia",
         "Russian Federation",
-        "Europe",
+        "Europa",
         "neutrality",
         "strategic independence",
         "diplomacy",
@@ -2706,7 +2706,7 @@ export const policyText: PolicyText = {
       title: "China",
       shortAnswer: "Pragmatic relations with China combined with strong protection against strategic dependence and control of critical infrastructure.",
       position: [
-        "China should be treated neither as an ideological enemy nor as a model for Europe.",
+        "China should be treated neither as an ideological enemy nor as a model for Europa.",
       ],
       policies: [
         "Maintain diplomatic relations and lawful trade.",
@@ -2744,7 +2744,7 @@ export const policyText: PolicyText = {
         "Permit humanitarian assistance where it reliably reaches civilians in genuine need.",
         "Avoid direct military involvement absent an extraordinary threat satisfying strict legitimate-defence criteria.",
         "Support realistic diplomatic efforts capable of reducing violence.",
-        "Do not permit imported sectarian intimidation or political violence within Europe.",
+        "Do not permit imported sectarian intimidation or political violence within Europa.",
       ],
       keywords: [
         "Israel",

@@ -80,7 +80,7 @@ export const policyText: PolicyText = {
       summary: "Le foyer comme première institution, et ce que l'action publique lui doit.",
     },
     nation: {
-      title: "Nation, citoyenneté, immigration et Europe",
+      title: "Nation, citoyenneté, immigration et Europa",
       summary: "L'appartenance à une communauté politique, et l'ordre européen entre les nations.",
     },
     economy: {
@@ -952,9 +952,9 @@ export const policyText: PolicyText = {
     "demographic-renewal": {
       title: "Renouveau démographique",
       shortAnswer:
-        "L'Europe doit répondre au déclin démographique en rendant la fondation d'une famille possible pour sa propre population plutôt que par une immigration de masse permanente.",
+        "L'Europa doit répondre au déclin démographique en rendant la fondation d'une famille possible pour sa propre population plutôt que par une immigration de masse permanente.",
       position: [
-        "L'Europe doit traiter le déclin démographique principalement en rendant la fondation d'une famille et l'éducation des enfants possibles pour sa propre population, plutôt qu'en recourant à une immigration de masse permanente comme substitut aux naissances.",
+        "L'Europa doit traiter le déclin démographique principalement en rendant la fondation d'une famille et l'éducation des enfants possibles pour sa propre population, plutôt qu'en recourant à une immigration de masse permanente comme substitut aux naissances.",
       ],
       keywords: ["démographie", "natalité", "fécondité", "population", "déclin"],
     },
@@ -1012,9 +1012,9 @@ export const policyText: PolicyText = {
     "nation-and-historical-continuity": {
       title: "Nation et continuité historique",
       shortAnswer:
-        "La nation est une communauté historique à travers les générations, et les peuples d'Europe ont un intérêt légitime à maintenir leur continuité culturelle et historique.",
+        "La nation est une communauté historique à travers les générations, et les peuples d'Europa ont un intérêt légitime à maintenir leur continuité culturelle et historique.",
       position: [
-        "La nation est une communauté historique à travers les générations, façonnée par la mémoire, la langue, les coutumes, les institutions, le territoire et le sentiment d'un destin commun. Les peuples d'Europe ont un intérêt légitime à maintenir leur continuité culturelle et historique.",
+        "La nation est une communauté historique à travers les générations, façonnée par la mémoire, la langue, les coutumes, les institutions, le territoire et le sentiment d'un destin commun. Les peuples d'Europa ont un intérêt légitime à maintenir leur continuité culturelle et historique.",
       ],
       keywords: ["nation", "peuple", "patrie", "continuité", "identité"],
     },
@@ -1518,18 +1518,18 @@ export const policyText: PolicyText = {
     },
 
     "europe-as-a-civilization-of-nations": {
-      title: "L'Europe, civilisation de nations",
+      title: "L'Europa, civilisation de nations",
       shortAnswer:
-        "L'Europe doit être une communauté de civilisation formée de nations souveraines, non un État centralisé post-national.",
+        "L'Europa doit être une communauté de civilisation formée de nations souveraines, non un État centralisé post-national.",
       position: [
-        "L'Europe doit être une communauté de civilisation formée de nations souveraines, non un État centralisé post-national.",
+        "L'Europa doit être une communauté de civilisation formée de nations souveraines, non un État centralisé post-national.",
       ],
       policies: [
         "Coopération européenne en matière de défense, de frontières, d'infrastructures stratégiques, de science, de protection de l'environnement et de sauvegarde de la civilisation.",
         "Autonomie politique nationale et identité historique conservées.",
         "La subsidiarité gouverne la répartition des compétences.",
       ],
-      keywords: ["Europe", "souveraineté", "confédération", "subsidiarité", "post-national"],
+      keywords: ["Europa", "souveraineté", "confédération", "subsidiarité", "post-national"],
     },
 
     "european-union-institutional-relationship": {
@@ -1545,7 +1545,7 @@ export const policyText: PolicyText = {
         "Conserver la coopération européenne là où l'échelle la rend véritablement utile, notamment pour certaines infrastructures transfrontalières, la coopération scientifique, le commerce, la coordination des frontières et la sécurité stratégique.",
         "Empêcher les institutions de l'Union d'imposer un programme moral ou culturel uniforme aux nations membres.",
         "Préserver la souveraineté nationale, l'identité constitutionnelle et la continuité historique.",
-        "Rechercher un cadre civilisationnel européen qui reconnaisse l'héritage chrétien de l'Europe tout en préservant l'autonomie politique nationale.",
+        "Rechercher un cadre civilisationnel européen qui reconnaisse l'héritage chrétien de l'Europa tout en préservant l'autonomie politique nationale.",
       ],
       keywords: [
         "Union européenne",
@@ -1554,7 +1554,7 @@ export const policyText: PolicyText = {
         "subsidiarité",
         "Commission européenne",
         "réforme des traités",
-        "Europe chrétienne",
+        "Europa chrétienne",
         "Bruxelles",
         "compétences",
       ],
@@ -2708,7 +2708,7 @@ export const policyText: PolicyText = {
       keywords: [
         "Russie",
         "Fédération de Russie",
-        "Europe",
+        "Europa",
         "neutralité",
         "indépendance stratégique",
         "diplomatie",
@@ -2776,7 +2776,7 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Des relations pragmatiques avec la Chine, assorties d'une protection forte contre la dépendance stratégique et la mainmise sur les infrastructures critiques.",
       position: [
-        "La Chine ne doit être traitée ni comme un ennemi idéologique ni comme un modèle pour l'Europe.",
+        "La Chine ne doit être traitée ni comme un ennemi idéologique ni comme un modèle pour l'Europa.",
       ],
       policies: [
         "Maintenir des relations diplomatiques et un commerce licite.",
@@ -2815,7 +2815,7 @@ export const policyText: PolicyText = {
         "Autoriser l'aide humanitaire là où elle parvient de façon fiable aux civils véritablement dans le besoin.",
         "Éviter toute implication militaire directe en l'absence d'une menace extraordinaire satisfaisant à des critères stricts de légitime défense.",
         "Soutenir les efforts diplomatiques réalistes susceptibles de réduire la violence.",
-        "Ne pas permettre en Europe l'importation d'intimidations sectaires ou de violences politiques.",
+        "Ne pas permettre en Europa l'importation d'intimidations sectaires ou de violences politiques.",
       ],
       keywords: [
         "Israël",

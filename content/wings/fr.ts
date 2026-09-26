@@ -24,17 +24,17 @@ export const wingsText: WingsText = {
     ],
     note: "Des branches se constituent partout sur le continent. Si vous souhaitez aider à lancer celle de votre pays, dites-le par « S'engager » — c'est, à ce stade, la chose la plus utile que quiconque puisse faire pour le mouvement.",
     mapLabel:
-      "Une carte de l'Europe où les quarante-sept nations énumérées sur cette page se détachent des terres qui les entourent.",
+      "Une carte de l'Europa où les quarante-sept nations énumérées sur cette page se détachent des terres qui les entourent.",
     mapCaption:
       "Les nations mises en évidence ici sont les quarante-sept énumérées ci-dessous. Figurer sur la carte signifie que le mouvement s'organise autour de cette nation, non que sa branche soit constituée ou active.",
     mapHint: "Choisissez une nation sur la carte pour ouvrir sa branche.",
   },
 
   regions: {
-    western: "Europe de l'Ouest",
-    northern: "Europe du Nord",
-    southern: "Europe du Sud",
-    "central-eastern": "Europe centrale et orientale",
+    western: "Europa de l'Ouest",
+    northern: "Europa du Nord",
+    southern: "Europa du Sud",
+    "central-eastern": "Europa centrale et orientale",
   },
 
   countries: {
@@ -180,7 +180,7 @@ export const wingsText: WingsText = {
         "Produire et tenir à jour le texte de référence de nos documents dans la langue nationale. Les traductions relèvent de la branche et ne sont pas publiées avant d'être bonnes.",
     },
     europe: {
-      term: "Représentation en Europe",
+      term: "Représentation en Europa",
       description:
         "Parler pour ses adhérents au sein du mouvement plus large, et coopérer avec les autres branches sur les sujets qui l'exigent réellement.",
     },

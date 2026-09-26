@@ -22,7 +22,7 @@ export const articles: readonly JournalArticle[] = [
     subtitle: "Subsidiarity is written into European law. That has not made it binding.",
     standfirst:
       "The principle we invoke most often is one the Commission also professes. The argument was never about the principle. It is about who decides whether it has been honoured, and what happens when the answer is no.",
-    category: "Europe",
+    category: "Europa",
     date: "2026-09-20",
     author: "Restore Europa Editorial Desk",
     readingMinutes: 7,
