@@ -1,0 +1,77 @@
+# Lint, typecheck, content tests and a production build, on every push.
+#
+# `npm run check` is the same command the project is developed against, and it
+# runs here unchanged so that the gate and the local habit cannot drift apart.
+# It builds the site, which is the part that matters: the public pages are
+# prerendered, so a broken page is a broken build rather than a broken request.
+#
+# None of this needs a secret. That is a property of the env contract in
+# lib/admin/env.ts — every admin variable is read lazily and the public site
+# must build with none of them set — and it is worth keeping. A CI job that
+# needs the production database is a CI job that eventually gets the production
+# database.
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Dependencies do not become vulnerable when somebody happens to push. The
+  # audit below is the reason this also runs on a clock.
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+# Actions are pinned to commit SHAs, not to `@v4`.
+#
+# A tag is a movable pointer in somebody else's repository. Whoever controls it
+# can repoint it at any commit they like, and every workflow trusting that tag
+# runs the new code on its next build — with a checkout of this repository and
+# whatever the job can reach. It is the cheapest supply-chain attack there is
+# against CI, and it has been used. A SHA cannot be repointed.
+#
+# The cost is that Dependabot now has to propose the upgrades, which is why
+# `github-actions` is in dependabot.yml. The comment after each SHA says which
+# release it is, because a bare hash tells a reviewer nothing.
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      # `npm ci` rather than `npm install`: it installs exactly what the
+      # lockfile pins and fails if the lockfile and package.json disagree,
+      # which is the difference between building what was reviewed and
+      # building whatever the registry served this morning.
+      - run: npm ci
+
+      - run: npm run check
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      # Runtime dependencies only. A vulnerability in a build-time package is
+      # worth knowing about and is not worth failing a deployment over; the nine
+      # packages that actually serve requests are.
+      #
+      # Separate from the job above so that an advisory published overnight is
+      # reported as itself rather than as "the build broke".
+      - run: npm audit --omit=dev --audit-level=high

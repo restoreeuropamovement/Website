@@ -1,0 +1,40 @@
+# Dependency updates, proposed as pull requests rather than applied.
+#
+# The weekly audit in ci.yml answers "is anything we ship known to be broken".
+# This answers the slower question behind it — staying close enough to current
+# that a security release is a small upgrade rather than a major-version
+# migration undertaken in a hurry.
+#
+# Grouped, because ten separate pull requests a week is how a repository learns
+# to ignore them, and every one of them still has to pass `npm run check`.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # The packages that serve requests. Kept apart from tooling so a patch to
+      # something in the request path is visible rather than buried in a batch
+      # of type definitions.
+      runtime:
+        dependency-type: production
+      tooling:
+        dependency-type: development
+    # Next and React move together and are the one upgrade that genuinely needs
+    # reading the release notes first, so they are not proposed automatically.
+    ignore:
+      - dependency-name: next
+        update-types: [version-update:semver-major]
+      - dependency-name: react
+        update-types: [version-update:semver-major]
+      - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
