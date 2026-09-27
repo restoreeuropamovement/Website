@@ -45,26 +45,54 @@ const LADDER = [1, 2, 5] as const;
  *
  * The floor is not zero. A country with one visitor has been somewhere a
  * country with none has not, and that difference has to survive on a dark
- * ground; below roughly this value it does not.
+ * ground; below roughly this value it does not. It is set high enough that the
+ * bottom of the ramp is still legible, because with the anchored ceilings
+ * below that is where an early map spends all its time.
  */
-export const SHADE_FLOOR = 0.16;
+export const SHADE_FLOOR = 0.22;
 export const SHADE_PEAK = 0.96;
 
 /**
- * The top of the scale: the first ladder rung at or above the busiest figure.
+ * Where the top of each ramp is anchored, until the figures outgrow it.
  *
- * Returns 1 for an empty or single-item range, which keeps `shadeOf` defined
- * — with a ceiling of 1 the only non-zero value there can be is 1, and it is
- * painted at full strength.
+ * These are judgements about what would be a good result, not measurements,
+ * and they are meant to be revised upwards once the real numbers are known.
+ * Each is the point at which a country or a day is drawn in full ink.
  */
-export function scaleCeiling(peak: number): number {
-  if (!Number.isFinite(peak) || peak <= 1) return 1;
+
+/** Visitors to one country over the reporting window. */
+export const VISITOR_CEILING = 1000;
+
+/** Visitors on a single day, which is a thirtieth of the same traffic. */
+export const DAILY_VISITOR_CEILING = 100;
+
+/** Records held for one country. A different quantity entirely, and far smaller. */
+export const MEMBER_CEILING = 50;
+
+/**
+ * The top of the scale: the first ladder rung at or above the busiest figure,
+ * but never below `floor`.
+ *
+ * The floor is what stops the scale from shrinking to fit a quiet week. Left
+ * purely adaptive, a ramp reading "1 to 5" paints five visitors in the same
+ * ink that fifty thousand would earn later, so the map looks identical in
+ * month one and month forty and growth is invisible — the one thing a picture
+ * of traffic over time is for. Anchoring the top to a figure that would be a
+ * genuinely busy result makes the shading mean the same thing every month, and
+ * leaves the early map honestly pale.
+ *
+ * Each caller sets its own, because a lot of visitors and a lot of members are
+ * different quantities by orders of magnitude, and one number for both would
+ * be wrong for at least one of them.
+ */
+export function scaleCeiling(peak: number, floor = 1): number {
+  if (!Number.isFinite(peak) || peak <= 1) return Math.max(1, floor);
 
   const magnitude = 10 ** Math.floor(Math.log10(peak));
   for (const rung of LADDER) {
-    if (rung * magnitude >= peak) return rung * magnitude;
+    if (rung * magnitude >= peak) return Math.max(rung * magnitude, floor);
   }
-  return 10 * magnitude;
+  return Math.max(10 * magnitude, floor);
 }
 
 /**

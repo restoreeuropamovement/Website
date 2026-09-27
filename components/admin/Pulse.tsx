@@ -1,6 +1,6 @@
 import { Panel } from "@/components/admin/Analytics";
 import { ShadeRamp } from "@/components/admin/ShadeRamp";
-import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
+import { DAILY_VISITOR_CEILING, scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import type { ArchivedDay, Engagement, Live } from "@/lib/admin/pulse";
 import { cn } from "@/lib/utils";
 
@@ -251,7 +251,10 @@ export function YearCalendar({
     weeks.push(column);
   }
 
-  const ceiling = scaleCeiling(Math.max(1, ...days.map((day) => day.visitors)));
+  const ceiling = scaleCeiling(
+    Math.max(1, ...days.map((day) => day.visitors)),
+    DAILY_VISITOR_CEILING,
+  );
   const recorded = days.length;
 
   /* Month labels sit above the week in which each month starts. */

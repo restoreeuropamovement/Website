@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { europeContext, europeViewBox, europeWings } from "@/content/wings-map";
 import type { AnalyticsResult, DimensionBreakdown, VisitTotals } from "@/lib/admin/analytics";
-import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
+import { VISITOR_CEILING, scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import type { Geography } from "@/lib/admin/geography";
 import { ShadeRamp } from "@/components/admin/ShadeRamp";
 import type { Change, Comparison, Series } from "@/lib/admin/traffic";
@@ -447,7 +447,7 @@ function paintFor(
   if (visitors !== undefined) {
     return {
       className: "fill-burgundy",
-      fillOpacity: shadeOf(visitors, scaleCeiling(geography.peak)),
+      fillOpacity: shadeOf(visitors, scaleCeiling(geography.peak, VISITOR_CEILING)),
     };
   }
   return geography.complete ? { className: "fill-surface" } : { fill: NO_DATA_FILL };
@@ -597,7 +597,7 @@ function Legend({ geography }: { readonly geography: Geography }) {
     <ul className="mt-6 flex flex-col gap-3">
       <li>
         <ShadeRamp
-          ceiling={scaleCeiling(geography.peak)}
+          ceiling={scaleCeiling(geography.peak, VISITOR_CEILING)}
           tone="burgundy"
           unit="visitors"
           format={num}

@@ -1,4 +1,4 @@
-import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
+import { MEMBER_CEILING, scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import { countryLabel } from "@/content/involvement";
 import { europeContext, europeViewBox, europeWings } from "@/content/wings-map";
 import type { CountryCount } from "@/lib/admin/members";
@@ -54,7 +54,7 @@ export function MemberMap({ counts, selected, hrefFor }: MemberMapProps) {
   const total = (row: CountryCount | undefined) =>
     row ? row.new + row.reviewing + row.awaiting + row.confirmed + row.declined : 0;
 
-  const ceiling = scaleCeiling(Math.max(0, ...counts.map((row) => total(row))));
+  const ceiling = scaleCeiling(Math.max(0, ...counts.map((row) => total(row))), MEMBER_CEILING);
 
   /*
    * The five nations a few pixels across are drawn last. Paint order is not
