@@ -1,6 +1,7 @@
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
+import { requireVeil } from "@/lib/admin/veil";
 import { beginAuthentication, pruneChallenges } from "@/lib/admin/webauthn";
 
 /**
@@ -11,6 +12,9 @@ import { beginAuthentication, pruneChallenges } from "@/lib/admin/webauthn";
  * alone who holds it.
  */
 export async function POST() {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const { ipHash } = await clientContext();
 
   const limit = await consumeRateLimit(`auth-options:${ipHash ?? "unknown"}`, 20, 300);

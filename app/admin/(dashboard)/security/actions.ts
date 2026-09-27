@@ -11,6 +11,7 @@ import {
   requireSession,
   revokeAllSessions,
 } from "@/lib/admin/session";
+import { withVeil } from "@/lib/admin/veil";
 import { deletePasskey } from "@/lib/admin/webauthn";
 
 /**
@@ -130,8 +131,17 @@ export async function createInviteAction(
      * any other host — the www variant, a preview deployment — produces a
      * ceremony the browser will refuse. Sending the wrong one wastes the
      * invitation and looks like a broken site.
+     *
+     * `withVeil` appends the curtain value when one is configured, because an
+     * invited administrator has no other way through it — to them the page
+     * would simply not exist. It is a no-op when no veil is set. Note that this
+     * puts the value in an email: it is not a credential and the invitation
+     * beside it is the thing worth protecting, but it is a reason to rotate
+     * `ADMIN_SESSION_SECRET` if an invitation is ever forwarded carelessly.
      */
-    link: `${relyingParty().origin}/admin/invite?token=${encodeURIComponent(result.token)}`,
+    link: withVeil(
+      `${relyingParty().origin}/admin/invite?token=${encodeURIComponent(result.token)}`,
+    ),
     expiresAt: result.expiresAt.toISOString(),
   };
 }

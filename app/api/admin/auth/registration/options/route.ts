@@ -6,6 +6,7 @@ import { bootstrapToken, hasBootstrapToken } from "@/lib/admin/env";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import { currentSession } from "@/lib/admin/session";
+import { requireVeil } from "@/lib/admin/veil";
 import { beginRegistration, credentialCount, findOrCreateUser } from "@/lib/admin/webauthn";
 
 /**
@@ -35,6 +36,9 @@ import { beginRegistration, credentialCount, findOrCreateUser } from "@/lib/admi
  * explicit intent in the request wins over an ambient cookie.
  */
 export async function POST(request: NextRequest) {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const { ipHash } = await clientContext();
 
   const limit = await consumeRateLimit(`register:${ipHash ?? "unknown"}`, 5, 600);

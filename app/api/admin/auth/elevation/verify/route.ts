@@ -5,6 +5,7 @@ import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import { currentSession, elevateSession } from "@/lib/admin/session";
+import { requireVeil } from "@/lib/admin/veil";
 import { finishAuthentication } from "@/lib/admin/webauthn";
 
 /**
@@ -16,6 +17,9 @@ import { finishAuthentication } from "@/lib/admin/webauthn";
  * machine is a plausible way to borrow a colleague's access to the roll.
  */
 export async function POST(request: NextRequest) {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const { ipHash } = await clientContext();
 
   const session = await currentSession();

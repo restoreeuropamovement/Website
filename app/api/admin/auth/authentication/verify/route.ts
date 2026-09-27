@@ -6,6 +6,7 @@ import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import { createSession } from "@/lib/admin/session";
+import { requireVeil } from "@/lib/admin/veil";
 import { finishAuthentication } from "@/lib/admin/webauthn";
 
 /**
@@ -15,6 +16,9 @@ import { finishAuthentication } from "@/lib/admin/webauthn";
  * hammer. Every attempt, successful or not, lands in the audit log.
  */
 export async function POST(request: NextRequest) {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const { ipHash, userAgent } = await clientContext();
 
   const limit = await consumeRateLimit(`auth-verify:${ipHash ?? "unknown"}`, 10, 300);

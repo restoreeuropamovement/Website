@@ -7,6 +7,7 @@ import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import { createSession, currentSession } from "@/lib/admin/session";
+import { requireVeil } from "@/lib/admin/veil";
 import { credentialCount, finishRegistration } from "@/lib/admin/webauthn";
 
 /**
@@ -18,6 +19,9 @@ import { credentialCount, finishRegistration } from "@/lib/admin/webauthn";
  * anything in the request body.
  */
 export async function POST(request: NextRequest) {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const { ipHash } = await clientContext();
 
   const limit = await consumeRateLimit(`register-verify:${ipHash ?? "unknown"}`, 10, 600);

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SetupNotice } from "@/components/admin/SetupNotice";
+import { requireVeil } from "@/lib/admin/veil";
 import { hasDatabase } from "@/lib/db";
 
 /**
@@ -26,7 +27,15 @@ export const metadata: Metadata = {
  */
 export const dynamic = "force-dynamic";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  /*
+   * Before anything else, including the setup notice below: when a veil is
+   * configured and this browser has not presented it, none of this exists. See
+   * `lib/admin/veil.ts` — it is a curtain and not a lock, and nothing after this
+   * line is relaxed on account of it.
+   */
+  await requireVeil();
+
   // Without a database there are no credentials to check a passkey against, so
   // there is nothing here that could be safely unlocked.
   if (!hasDatabase()) {

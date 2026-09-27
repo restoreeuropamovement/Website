@@ -1,6 +1,7 @@
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { currentSession } from "@/lib/admin/session";
+import { requireVeil } from "@/lib/admin/veil";
 import { beginAuthentication } from "@/lib/admin/webauthn";
 
 /**
@@ -12,6 +13,9 @@ import { beginAuthentication } from "@/lib/admin/webauthn";
  * second, quieter sign-in endpoint.
  */
 export async function POST() {
+  /* The curtain, before any work at all. See `lib/admin/veil.ts`. */
+  await requireVeil();
+
   const session = await currentSession();
   if (!session) return opaqueFailure(403);
 

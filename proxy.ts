@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { adminVeilSecret } from "@/lib/admin/env";
 import { SESSION_COOKIE, hasPlausibleSessionCookie } from "@/lib/admin/session";
+import {
+  VEIL_COOKIE,
+  VEIL_MAX_AGE,
+  VEIL_PARAM,
+  veilCookieValid,
+  veilParamMatches,
+  veilTag,
+} from "@/lib/admin/veil";
 
 /**
  * Gate and hardening for the administrative surface.
@@ -87,11 +96,93 @@ function adminCsp(nonce: string, isDev: boolean): string {
   ].join("; ");
 }
 
+/**
+ * Where a veiled request is sent to be answered: a path that resolves to
+ * nothing, in the same half of the route tree as the one that was asked for.
+ *
+ * Rewritten to rather than answered directly, because the reply then *is* the
+ * site's real 404 — same renderer, same markup, same status, same headers. A
+ * hand-written 404 would differ in its length or its markup, and a difference
+ * is all an enumerator needs.
+ *
+ * The target mirrors the shape of the request rather than being a constant,
+ * because the site's 404 is not one page. Measured against this build: a miss
+ * one segment deep renders the prerendered site 404 with the full navigation,
+ * about twenty-four kilobytes, carrying `etag` and Next's cache headers; a
+ * deeper miss, or any miss under `/api`, renders the bare root 404 at about
+ * sixteen, dynamically, carrying `link` instead. A single fixed destination
+ * therefore answers a good half of the admin surface with a reply no genuine
+ * miss at that address would produce — eight kilobytes of page furniture and
+ * the wrong header set, which is not a subtle difference.
+ *
+ * Replacing every character except the separators keeps the segment count and
+ * the total length, so the reply matches in size as well as in kind. `/api` is
+ * preserved because it is what selects the boundary.
+ *
+ * The filler cannot collide with a real route: nothing in this site is named in
+ * all `z`s, and `app/[locale]` sets `dynamicParams = false` against a closed
+ * list of locales so an unknown first segment cannot be captured by it either.
+ *
+ * This is also the only layer that can do the job at all. `requireVeil` in the
+ * routes is a useful second line, but a route handler runs only after the
+ * router has matched the path *and* the method — so a GET to a POST-only
+ * endpoint under `/api/admin` answers 405 before any of its code runs, and a
+ * 405 confirms the endpoint exists just as well as a 200 would. The proxy runs
+ * before the match and is indifferent to the method.
+ */
+function veiledTarget(pathname: string): string {
+  const prefix = pathname.startsWith("/api/") ? "/api" : "";
+  return prefix + pathname.slice(prefix.length).replace(/[^/]/g, "z");
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const isDev = process.env.NODE_ENV === "development";
   const nonce = crypto.randomUUID();
   const csp = adminCsp(nonce, isDev);
+
+  /*
+   * The curtain, checked before anything else and quite separately from
+   * authorisation. See `lib/admin/veil.ts` — in particular the part about this
+   * not being a security control, and nothing below being relaxed because of
+   * it. Unset, none of this runs and the surface behaves as it always has.
+   */
+  if (adminVeilSecret()) {
+    if (veilParamMatches(request.nextUrl.searchParams.get(VEIL_PARAM))) {
+      /*
+       * Accepted, and immediately removed from the URL. Redirecting rather than
+       * proceeding is the whole point: the value must not survive in the
+       * address bar, in history, in a bookmark made from this page, or in a
+       * screenshot of somebody's browser. Other parameters are preserved, so an
+       * invitation link still carries its token through.
+       */
+      const clean = request.nextUrl.clone();
+      clean.searchParams.delete(VEIL_PARAM);
+
+      const admitted = NextResponse.redirect(clean);
+      admitted.cookies.set(VEIL_COOKIE, await veilTag(), {
+        httpOnly: true,
+        secure: !isDev,
+        /*
+         * `lax`, where the session cookie is `strict`. An invitation arrives by
+         * email, and a strict cookie is not sent when the navigation comes from
+         * another site — so the invited administrator would be met by the 404
+         * this is supposed to have lifted for them. Nothing is authorised by
+         * this cookie, so the reason `strict` exists on the session does not
+         * apply to it.
+         */
+        sameSite: "lax",
+        path: "/",
+        maxAge: VEIL_MAX_AGE,
+      });
+      admitted.headers.set("Cache-Control", "no-store");
+      return admitted;
+    }
+
+    if (!(await veilCookieValid(request.cookies.get(VEIL_COOKIE)?.value))) {
+      return NextResponse.rewrite(new URL(veiledTarget(pathname), request.url));
+    }
+  }
 
   const authorised =
     isPublic(pathname) ||

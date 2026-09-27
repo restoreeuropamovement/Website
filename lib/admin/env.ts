@@ -143,6 +143,21 @@ export function hasMemberEncryptionKey(): boolean {
 }
 
 /**
+ * Pre-shared value that makes the administrative surface visible at all.
+ *
+ * Optional. Unset, `/admin` behaves as it always has. Set, every path under
+ * `/admin` and `/api/admin` returns the site's ordinary 404 until a browser
+ * presents it once — see `lib/admin/veil.ts`, which is also where the argument
+ * for why this is worth having and what it is emphatically not lives.
+ *
+ * Not validated for length. It is not a key and nothing is derived from it; it
+ * is a doormat, and a long random one is only sensible rather than required.
+ */
+export function adminVeilSecret(): string | undefined {
+  return process.env.ADMIN_VEIL_SECRET?.trim() || undefined;
+}
+
+/**
  * Addresses planted in the roll to detect that it has been copied. Comma
  * separated; optional, and empty by default. See `lib/admin/canary.ts`.
  *

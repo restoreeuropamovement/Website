@@ -303,6 +303,17 @@ delete the directory to start over.
   unset it; the site reads under either key throughout, so an interrupted
   rotation leaves a working site. It invalidates unsubscribe links in newsletter
   issues already sent, which are derived from the key rather than stored.
+- **The surface can be hidden entirely**, though hiding is not what protects it.
+  With `ADMIN_VEIL_SECRET` set, every path under `/admin` and `/api/admin`
+  answers with the site's real 404 — verified identical in status, size and
+  headers to a genuine miss of the same shape, for every HTTP method — until a
+  browser presents the value once as `?k=…`, which sets a six-month cookie and
+  redirects to the clean URL. Invitation links carry it automatically. It is a
+  curtain, not a lock: anyone who learns the value meets the same passkey. What
+  it buys is that an anonymous scanner cannot reach the pre-authentication code
+  at all, and that a failed sign-in in the log is now somebody who was invited
+  rather than background noise. `robots.txt` deliberately has no `Disallow:
+  /admin`, which would announce the thing this conceals.
 - **Throttling buckets on an address the caller cannot choose.**
   `lib/admin/request.ts` prefers `x-vercel-forwarded-for`, which the platform
   writes and strips from the incoming request, over `x-forwarded-for`, which on
