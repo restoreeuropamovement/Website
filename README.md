@@ -31,6 +31,7 @@ npm run dev        # http://localhost:3000
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
 | `npm run db:rotate-key`| Re-encrypt personal data under a new `MEMBER_ENCRYPTION_KEY` |
 | `npm run db:verify-audit`| Verify the audit log has not been rewritten     |
+| `npm run db:canary` | Plant the canary records from `CANARY_MEMBER_EMAILS` |
 | `npm run test:syntax`| Assert the journal notation round-trips losslessly  |
 | `npm run test:pii`  | Assert membership encryption behaves as designed      |
 | `npm run test:i18n` | Assert each translation still says what the English does |
@@ -303,6 +304,12 @@ delete the directory to start over.
   unset it; the site reads under either key throughout, so an interrupted
   rotation leaves a working site. It invalidates unsubscribe links in newsletter
   issues already sent, which are derived from the key rather than stored.
+- **A canary record detects a copy that has already been taken.** Addresses in
+  `CANARY_MEMBER_EMAILS` are planted in the roll and belong to no member, so mail
+  arriving at one from anyone else is proof the list is in somebody's hands.
+  Nothing in the database marks them — a column saying which row is the trap is
+  an instruction for which row to delete — so the environment variable is the
+  only record of which they are. `npm run db:canary` plants them.
 - **The surface can be hidden entirely**, though hiding is not what protects it.
   With `ADMIN_VEIL_SECRET` set, every path under `/admin` and `/api/admin`
   answers with the site's real 404 — verified identical in status, size and
