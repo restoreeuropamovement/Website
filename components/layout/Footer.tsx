@@ -29,7 +29,10 @@ export function Footer({
         { label: chrome.footer.movement.vision, href: routes.vision },
         { label: chrome.footer.movement.about, href: routes.about },
         { label: chrome.footer.movement.wings, href: routes.wings },
-        { label: chrome.footer.movement.materials, href: routes.materials },
+        /* `materials` is deliberately absent while the catalogue is unpublished.
+           The label stays in all six dictionaries and the route stays in
+           `lib/site.ts`, so `/materials` still answers for anyone reviewing it
+           and restoring this one line is the whole of publishing it. */
         { label: chrome.footer.movement.join, href: routes.join },
       ],
     },
