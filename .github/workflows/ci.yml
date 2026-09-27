@@ -43,9 +43,23 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      # `persist-credentials: false`, because nothing after this step runs git.
+      #
+      # By default checkout leaves the job's token in the checkout's git
+      # configuration for the rest of the job. That is what a job which pushes
+      # needs, and it is what this one does not: every step below is `npm ci`
+      # and `npm run check`, so the token would sit there for the duration of a
+      # build that executes several hundred packages' worth of other people's
+      # code. Withholding it removes one place such code can read a credential
+      # from — cheap, and the cheap half of the same argument that pins the
+      # actions to SHAs.
+      #
+      # A step added below that does need to push must ask for it back.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 22
           cache: npm
@@ -61,9 +75,13 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      # Withheld here for the reason given in the job above: this job runs one
+      # command, and that command is `npm audit`.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 22
           cache: npm
