@@ -2,7 +2,7 @@ import { InviteAdministrator } from "@/components/admin/InviteAdministrator";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { PasskeyEnrol } from "@/components/admin/PasskeyEnrol";
 import { listAdministrators, listPendingInvites } from "@/lib/admin/administrators";
-import { recentAudit } from "@/lib/admin/audit";
+import { recentAudit, verifyAuditChain } from "@/lib/admin/audit";
 import { isElevated, requireSession } from "@/lib/admin/session";
 import { listPasskeys } from "@/lib/admin/webauthn";
 import {
@@ -23,11 +23,18 @@ function formatMoment(value: Date): string {
 
 export default async function SecurityPage() {
   const session = await requireSession();
-  const [passkeys, administrators, invites, audit] = await Promise.all([
+  const [passkeys, administrators, invites, audit, chain] = await Promise.all([
     listPasskeys(session.user.id),
     listAdministrators(),
     listPendingInvites(),
     recentAudit(60),
+    /*
+     * Bounded to a window rather than the whole log, because this runs on every
+     * page load and an unbounded walk would get slower every week until nobody
+     * opened the page. The weekly cron does the complete check; this one is
+     * here so a break is noticed by whoever happens to look.
+     */
+    verifyAuditChain(200),
   ]);
 
   const single = passkeys.length <= 1;
@@ -228,6 +235,24 @@ export default async function SecurityPage() {
             Append-only. Failed sign-in attempts are recorded as well as successful ones — a run of
             failures is the only warning this system gives that someone is probing it. Addresses are
             stored as keyed hashes, never as addresses.
+          </p>
+          <p className="mt-2 text-micro leading-relaxed text-faint">
+            {chain.brokenAt === null ? (
+              <>
+                Each entry carries a keyed tag over itself and the one before it. The most recent{" "}
+                {chain.checked} verify, so nothing in that range has been altered or removed since it
+                was written.
+                {chain.unchained > 0
+                  ? ` ${chain.unchained} predate the chain and cannot be checked.`
+                  : null}
+              </>
+            ) : (
+              <span className="text-burgundy">
+                The chain does not verify: entry {chain.brokenAt} does not match what precedes it.
+                Either the log has been tampered with, or the session secret was rotated at that
+                point. Run <code>npm run db:verify-audit</code> for the full history.
+              </span>
+            )}
           </p>
         </div>
 

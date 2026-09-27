@@ -133,9 +133,9 @@ ALTER TABLE admin_session ADD COLUMN IF NOT EXISTS elevated_until timestamptz;
 -- Audit
 -- ---------------------------------------------------------------------------
 
--- Append-only by convention: nothing in the application issues UPDATE or DELETE
--- against this table. Failed sign-in attempts are recorded as well as successful
--- ones, because the failures are the interesting ones.
+-- Append-only, and enforced here rather than left to convention. Failed
+-- sign-in attempts are recorded as well as successful ones, because the
+-- failures are the interesting ones.
 CREATE TABLE IF NOT EXISTS admin_audit (
   id          bigserial PRIMARY KEY,
   at          timestamptz NOT NULL DEFAULT now(),
@@ -148,6 +148,67 @@ CREATE TABLE IF NOT EXISTS admin_audit (
 );
 
 CREATE INDEX IF NOT EXISTS admin_audit_at_idx ON admin_audit (at DESC);
+
+-- Keyed tag over this entry and the tag of the entry before it, forming a chain
+-- back to the first row. See `lib/admin/audit-chain.ts` for what it commits to
+-- and why `actor_id` is not part of it.
+--
+-- The trigger below stops the rows being rewritten. This makes it *detectable*
+-- if they are rewritten anyway, by someone who can drop the trigger first — and
+-- since the key is in the environment rather than the database, the detection
+-- survives a reader who holds the whole table. Not a defence; a receipt.
+--
+-- Nullable, because rows written before this column existed have no tag and are
+-- not forgeries. The verifier counts them separately.
+ALTER TABLE admin_audit ADD COLUMN IF NOT EXISTS chain text;
+
+-- Append-only, enforced by the database rather than promised by the
+-- application.
+--
+-- Nothing in this codebase updates or deletes an audit row, and that was
+-- previously the whole of the guarantee. It is the wrong place to keep it. The
+-- log exists to answer what somebody did after they turned out not to be
+-- trustworthy, and an attacker who reaches the database directly — a leaked
+-- connection string, an administrator acting in bad faith — is exactly the
+-- reader who would want to edit the record of their own activity. A promise
+-- made in application code is no obstacle to them; a trigger is at least an
+-- obstacle they must notice and deliberately remove, which is itself a
+-- privileged act against the schema rather than an ordinary statement.
+--
+-- The one write permitted is the foreign key above nulling `actor_id` when an
+-- administrator row is deleted. That is a deletion the schema already chose to
+-- allow so the log outlives the account, and `actor_label` keeps the name.
+-- Every other column must not move, and nothing may be removed at all.
+CREATE OR REPLACE FUNCTION admin_audit_append_only() RETURNS trigger AS $audit$
+BEGIN
+  IF TG_OP = 'DELETE' THEN
+    RAISE EXCEPTION 'admin_audit is append-only: entries may not be deleted';
+  END IF;
+
+  IF NEW.id          IS DISTINCT FROM OLD.id
+  OR NEW.at          IS DISTINCT FROM OLD.at
+  OR NEW.actor_label IS DISTINCT FROM OLD.actor_label
+  OR NEW.action      IS DISTINCT FROM OLD.action
+  OR NEW.outcome     IS DISTINCT FROM OLD.outcome
+  OR NEW.detail      IS DISTINCT FROM OLD.detail
+  OR NEW.ip_hash     IS DISTINCT FROM OLD.ip_hash
+  OR NEW.chain       IS DISTINCT FROM OLD.chain
+  OR NEW.actor_id    IS NOT NULL THEN
+    RAISE EXCEPTION 'admin_audit is append-only: entries may not be rewritten';
+  END IF;
+
+  RETURN NEW;
+END;
+$audit$ LANGUAGE plpgsql;
+
+-- Dropped and recreated rather than left alone, so that editing the function
+-- above reaches an existing database. This is the one drop in this file and it
+-- removes no data; `CREATE OR REPLACE TRIGGER` would say it better but needs
+-- PostgreSQL 14, which is a floor this schema does not otherwise set.
+DROP TRIGGER IF EXISTS admin_audit_append_only_trigger ON admin_audit;
+CREATE TRIGGER admin_audit_append_only_trigger
+  BEFORE UPDATE OR DELETE ON admin_audit
+  FOR EACH ROW EXECUTE FUNCTION admin_audit_append_only();
 
 -- Fixed-window counters for throttling authentication ceremonies.
 CREATE TABLE IF NOT EXISTS admin_rate_limit (

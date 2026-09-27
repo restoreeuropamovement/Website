@@ -29,6 +29,7 @@ npm run dev        # http://localhost:3000
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
 | `npm run db:migrate`| Apply `db/schema.sql` — idempotent                   |
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
+| `npm run db:verify-audit`| Verify the audit log has not been rewritten     |
 | `npm run test:syntax`| Assert the journal notation round-trips losslessly  |
 | `npm run test:pii`  | Assert membership encryption behaves as designed      |
 | `npm run test:i18n` | Assert each translation still says what the English does |
@@ -266,6 +267,13 @@ delete the directory to start over.
 - **The audit log holds no personal data.** It is not encrypted, so it records
   ids and keyed digests rather than names and addresses — otherwise it would
   slowly accumulate, in the clear, the very data the table beside it encrypts.
+- **The audit log is tamper-evident, not merely append-only.** A database
+  trigger refuses updates and deletes, and each entry also carries a keyed tag
+  over its own contents and the tag before it. The trigger stops an ordinary
+  statement; the chain means that somebody who drops the trigger first cannot
+  rewrite history *undetectably*, because the key is in the environment rather
+  than in the table. `/admin/security` verifies the recent window on every load
+  and `npm run db:verify-audit` verifies the lot.
 - **The database connection is verified, not merely encrypted.** `lib/db.ts`
   connects with `verify-full`, so the server's certificate is checked rather than
   accepted. `require` — what most guides suggest — encrypts the tunnel without
