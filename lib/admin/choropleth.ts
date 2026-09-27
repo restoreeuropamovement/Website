@@ -67,7 +67,7 @@ export const VISITOR_CEILING = 1000;
 export const DAILY_VISITOR_CEILING = 100;
 
 /** Records held for one country. A different quantity entirely, and far smaller. */
-export const MEMBER_CEILING = 50;
+export const MEMBER_CEILING = 100;
 
 /**
  * The top of the scale: the first ladder rung at or above the busiest figure,
