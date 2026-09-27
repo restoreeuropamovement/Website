@@ -29,6 +29,7 @@ export function Footer({
         { label: chrome.footer.movement.vision, href: routes.vision },
         { label: chrome.footer.movement.about, href: routes.about },
         { label: chrome.footer.movement.wings, href: routes.wings },
+        { label: chrome.footer.movement.materials, href: routes.materials },
         { label: chrome.footer.movement.join, href: routes.join },
       ],
     },

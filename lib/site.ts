@@ -132,6 +132,7 @@ export const routes = {
   vision: "/vision",
   about: "/about",
   wings: "/wings",
+  materials: "/materials",
   join: "/join",
   contact: "/contact",
   press: "/contact#press",

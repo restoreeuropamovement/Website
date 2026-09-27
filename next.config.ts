@@ -121,6 +121,24 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
+    serverActions: {
+      /*
+       * Raised from the 1 MB default so that a poster can be uploaded at
+       * `/admin/materials`. The figure is not arbitrary: the platform caps a
+       * serverless function's request body at 4.5 MB before any of this code
+       * runs, so this sits just under it, and `materialLimits.bytes` sits a
+       * further half-megabyte under that to leave room for what
+       * `multipart/form-data` adds around the file.
+       *
+       * It applies to every Server Action, which is worth saying out loud,
+       * because the other three take a handful of text fields. Raising the
+       * ceiling for one upload form also raises how much a caller can make
+       * the join form parse before it is rejected — a rate-limited endpoint
+       * behind a bucket the caller cannot choose, which is why four megabytes
+       * of wasted parsing is an acceptable trade and forty would not be.
+       */
+      bodySizeLimit: "4.5mb",
+    },
   },
   headers() {
     return Promise.resolve([{ source: "/:path*", headers: securityHeaders }]);

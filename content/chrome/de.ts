@@ -54,6 +54,7 @@ export const chrome: ChromeContent = {
       vision: "Vision",
       about: "Über uns",
       wings: "Landesverbände",
+      materials: "Materialien",
       join: "Mitmachen",
     },
     contact: {

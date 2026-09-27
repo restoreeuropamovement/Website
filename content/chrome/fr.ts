@@ -54,6 +54,7 @@ export const chrome: ChromeContent = {
       vision: "Vision",
       about: "À propos",
       wings: "Sections nationales",
+      materials: "Matériel",
       join: "Participer",
     },
     contact: {

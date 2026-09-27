@@ -118,6 +118,8 @@ No prose lives inside a component. To change what the site says, edit `content/`
 | National wings            | `content/wings/en.ts`                    |
 | Wings (countries, slugs)  | `content/wings/structure.ts`             |
 | Join / Contact            | `content/involvement/en.ts`              |
+| Materials page            | `content/materials/en.ts`                |
+| Material categories       | `content/materials/structure.ts`         |
 | Join / Contact field ids  | `content/involvement/structure.ts`       |
 | Privacy / Imprint         | `content/legal/en.ts`                    |
 | Image alt text            | `content/images/en.ts`                   |
@@ -351,6 +353,39 @@ distinction back through the clock.
 > everything else works unchanged — the application is recorded either way. Losing somebody's
 > application because a third-party mail provider was unreachable would be the worse failure by a
 > wide margin, so absence of mail is a supported state rather than an error.
+
+### Downloadable materials
+
+`/materials` offers the movement's logos, posters, stickers, wallpapers and
+social images to anybody, with no account and no sign-in. That is the whole
+point of it: the value of a logo pack is that people use it correctly, and an
+identity kept behind a gate is an identity redrawn from a screenshot.
+
+Files are uploaded at `/admin/materials` with a title, a short description and
+one of five categories. The bytes go to a Vercel Blob store with public access
+and `BLOB_READ_WRITE_TOKEN` is the only extra variable it needs; the database
+keeps the catalogue. Accepted: SVG, PNG, JPEG, WebP and PDF, up to 4 MB — a
+ceiling set by the platform's limit on the size of a request to a function
+rather than by preference, so a poster meant for printing should be a vector
+PDF.
+
+The token is needed only for writing. The public page lists rows and links to
+addresses the store already serves, so it holds no credential, and a deployment
+with the token missing still serves everything already published — `/admin`
+then says what is absent instead of half-working.
+
+Titles and descriptions are English in all six editions. They are entered by an
+administrator rather than commissioned as copy, like a journal essay, so a
+German reader gets a German heading over an English poster title. The page's own
+chrome is translated; the categories' ids are not, and live in
+`content/materials/structure.ts` so that a translator cannot change what a
+database row says.
+
+> **No terms of use are published, and none is invented.** The page says so.
+> Note also that printed political material is, in Germany and elsewhere,
+> required to name a person responsible for it — and `/imprint` currently says
+> no such person can yet be named. That is a decision about what to publish,
+> not about what to build.
 
 ### Editing essays
 

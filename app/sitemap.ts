@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { path: "/vision", changeFrequency: "monthly", priority: 0.8 },
       { path: "/about", changeFrequency: "monthly", priority: 0.7 },
       { path: "/wings", changeFrequency: "monthly", priority: 0.8 },
+      { path: "/materials", changeFrequency: "monthly", priority: 0.6 },
       { path: "/join", changeFrequency: "monthly", priority: 0.7 },
       { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
       { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },

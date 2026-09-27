@@ -74,6 +74,7 @@ export const chrome = {
       vision: "Vision",
       about: "About",
       wings: "National Wings",
+      materials: "Materials",
       join: "Get Involved",
     },
     contact: {

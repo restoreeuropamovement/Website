@@ -143,6 +143,45 @@ export function canaryMemberEmails(): readonly string[] {
 }
 
 /**
+ * Read and write access to the Vercel Blob store holding the downloadable
+ * materials — logos, posters, stickers and the rest of `/materials`.
+ *
+ * Required, and undefaulted, like everything else in this file. It is a
+ * credential that can write to and delete from a bucket this movement's name
+ * is on, which is reason enough; but the sharper one is that a token with a
+ * fallback would let `/admin/materials` look configured on a deployment where
+ * it is not, and the administrator would find out by uploading a poster that
+ * went nowhere.
+ *
+ * Note what does *not* read this. The public page at `/materials` lists rows
+ * from Postgres and links to addresses the store already serves to anybody, so
+ * it needs no token and must never acquire one — see `lib/materials.ts`. This
+ * accessor is reached only from `lib/admin/materials.ts`, which is the writing
+ * half.
+ *
+ * Passed explicitly to every call rather than left to the library's own
+ * `process.env` fallback. The fallback would work on Vercel and fail silently
+ * everywhere else, and it would put the decision about which credential is in
+ * use inside a dependency instead of in this file, which is the one place this
+ * project keeps that decision.
+ */
+export function blobToken(): string {
+  return required("BLOB_READ_WRITE_TOKEN");
+}
+
+/**
+ * Whether materials can be uploaded at all.
+ *
+ * Read by `/admin/materials` so the page can say what is missing instead of
+ * throwing when somebody presses Upload — the same arrangement as
+ * `hasMemberEncryptionKey`. Materials already published keep working without
+ * it: they are rows and public URLs, and neither needs this to be read.
+ */
+export function hasBlobStorage(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+}
+
+/**
  * Transactional mail.
  *
  * Optional, and lazy like everything else here, for a reason specific to what

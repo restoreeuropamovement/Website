@@ -637,3 +637,73 @@ CREATE TABLE IF NOT EXISTS page_engagement (
 );
 
 CREATE INDEX IF NOT EXISTS page_engagement_day_idx ON page_engagement (day DESC);
+
+-- ---------------------------------------------------------------------------
+-- Materials
+-- ---------------------------------------------------------------------------
+
+-- The catalogue of things anybody may download: logos, posters, stickers,
+-- wallpapers and images sized for the movement's accounts.
+--
+-- Worth reading beside `member`, because nearly every rule there is inverted
+-- here and deliberately so. That table assumes it will one day be read by
+-- somebody who should not have it. This one is published, in full, to
+-- strangers, on purpose. Nothing in it is encrypted, nothing needs a second
+-- passkey touch, and reading it is not audited — because the value of a logo
+-- pack is that people use it correctly, and a movement that made its own
+-- identity hard to obtain would find its identity drawn wrong by supporters
+-- doing their best from a screenshot.
+--
+-- The bytes are not here. They are objects in a Vercel Blob store with public
+-- access, and this table holds their addresses: a relational database is a
+-- poor place to keep a four-megabyte PDF and a worse one to serve it from.
+--
+-- Three address columns, which looks like two too many:
+--
+--   * `url`          identifies the object, and is what the withdrawal path
+--                    hands back to the provider.
+--   * `download_url` is what the page links to — the address that makes a
+--                    browser save the file rather than display it. Stored as
+--                    the provider returned it rather than composed from
+--                    `url`, because the relationship between the two is
+--                    theirs to define, and a line of code assuming it would
+--                    go on working right up until it did not.
+--   * `pathname`     is the object's key inside the store. Nothing renders
+--                    it. It is here so a person can match a row against the
+--                    store's own listing when the two get out of step, which
+--                    is the failure this arrangement actually has.
+--
+-- `category` carries no CHECK constraint, and that is a decision rather than
+-- an omission. `member.status` and `gathering.visibility` are constrained
+-- because each drives behaviour — one is a workflow, the other decides whether
+-- an address is stored readably — so a value outside the set would be a bug
+-- with consequences. A category decides which heading a poster appears under.
+-- The list is editorial and expected to grow; ADD CONSTRAINT has no IF NOT
+-- EXISTS, so constraining it would make adding a shelf cost the
+-- drop-and-recreate dance `member_status_check` needs, which is how a list
+-- quietly stops growing. The upload action validates against
+-- `content/materials/structure.ts` instead, and the reader treats an
+-- unrecognised value as a file to be re-filed rather than as a reason to fail.
+CREATE TABLE IF NOT EXISTS material (
+  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  -- Operator-entered, and English only — the same exception journal essays
+  -- make. See content/materials/en.ts for why these two are not translated.
+  title         text NOT NULL,
+  description   text NOT NULL DEFAULT '',
+  category      text NOT NULL,
+  url           text NOT NULL,
+  download_url  text NOT NULL,
+  pathname      text NOT NULL,
+  -- The media type the file was accepted as, from the closed list in
+  -- lib/materials.ts. The page prints its short name from that list; nothing
+  -- anywhere infers a format from the address.
+  content_type  text NOT NULL,
+  -- bigint rather than integer. The ceiling on an upload is a policy decision
+  -- that already depends on a platform limit, and a column that must be
+  -- altered before the ceiling can rise is a migration nobody remembers.
+  bytes         bigint NOT NULL,
+  created_at    timestamptz NOT NULL DEFAULT now()
+);
+
+-- The page groups by category and shows the newest first within each.
+CREATE INDEX IF NOT EXISTS material_category_idx ON material (category, created_at DESC);
