@@ -13,8 +13,20 @@ import {
 } from "@/lib/admin/session";
 import { deletePasskey } from "@/lib/admin/webauthn";
 
+/**
+ * Removes one of the signed-in administrator's own passkeys.
+ *
+ * Elevated, not merely signed in. A passkey is the only thing that can sign
+ * this account in, so removing one is a change to who holds the account — the
+ * same category as issuing an invitation, and it belongs at the same price. A
+ * stolen session cookie must not be able to strip the devices its owner would
+ * use to notice the theft and shut it out.
+ *
+ * It is also the natural reading of the check: the way to prove you may retire
+ * a passkey is to present one.
+ */
 export async function deletePasskeyAction(form: FormData): Promise<void> {
-  const session = await requireSession();
+  const session = await requireElevatedSession();
   const { ipHash } = await clientContext();
 
   const credentialId = String(form.get("credentialId") ?? "").trim();
@@ -124,9 +136,17 @@ export async function createInviteAction(
   };
 }
 
-/** Withdraws an unclaimed invitation. */
+/**
+ * Withdraws an unclaimed invitation.
+ *
+ * Elevated, matching `createInviteAction`. The two are one control seen from
+ * opposite ends — who may be admitted — and splitting the price between them
+ * left the cheaper half able to undo the dearer one. A stolen session should
+ * not be able to strand a colleague mid-enrolment, which is both a nuisance in
+ * its own right and a way to keep a second pair of eyes off the panel.
+ */
 export async function revokeInviteAction(form: FormData): Promise<void> {
-  const session = await requireSession();
+  const session = await requireElevatedSession();
   const { ipHash } = await clientContext();
 
   const inviteId = String(form.get("inviteId") ?? "").trim();
@@ -185,6 +205,14 @@ export async function disableAdministratorAction(form: FormData): Promise<void> 
  *
  * The response to a device going missing: the cookie on it stops working
  * immediately rather than lasting until it expires on its own.
+ *
+ * Deliberately *not* elevated, and it is the one action on this page where
+ * that is the right answer. Everything else here widens access and so must
+ * cost a passkey touch; this narrows it to nothing. It is reached by somebody
+ * who has just realised they cannot trust a session, quite possibly from a
+ * borrowed machine and without the device they would re-authenticate with, and
+ * the worst an attacker can do by calling it is sign everyone out. Making the
+ * emergency brake the hardest control to pull would be the wrong way round.
  */
 export async function revokeSessionsAction(): Promise<void> {
   const session = await requireSession();

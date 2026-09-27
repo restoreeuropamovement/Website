@@ -77,8 +77,14 @@ export default async function SecurityPage() {
                 <input type="hidden" name="credentialId" value={passkey.id} />
                 <button
                   type="submit"
-                  disabled={single}
-                  title={single ? "Enrol another passkey before removing this one." : undefined}
+                  disabled={single || !elevated}
+                  title={
+                    single
+                      ? "Enrol another passkey before removing this one."
+                      : elevated
+                        ? undefined
+                        : "Confirm your passkey below to remove one."
+                  }
                   className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Remove
@@ -177,7 +183,13 @@ export default async function SecurityPage() {
                     <input type="hidden" name="inviteId" value={invite.id} />
                     <button
                       type="submit"
-                      className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy"
+                      disabled={!elevated}
+                      title={
+                        elevated
+                          ? undefined
+                          : "Confirm your passkey below to withdraw an invitation."
+                      }
+                      className="border border-rule px-3 py-1.5 text-micro text-muted transition-colors hover:border-burgundy hover:text-burgundy disabled:cursor-not-allowed disabled:opacity-40"
                     >
                       Withdraw
                     </button>
