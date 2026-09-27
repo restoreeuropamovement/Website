@@ -227,6 +227,15 @@ export async function proxy(request: NextRequest) {
   /* Nothing here may be retained by a shared cache or the browser's disk cache. */
   response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, private");
   /*
+   * Stricter than the site-wide `strict-origin-when-cross-origin`, because on
+   * this surface the path itself is sensitive. The members page carries its
+   * search term in the query string, and that term is usually somebody's name —
+   * the one thing `queryDigest` exists to keep out of the audit log. Sending it
+   * anywhere in a `Referer` would put it back in the clear, so nothing leaves
+   * here with a referrer at all, cross-origin or not.
+   */
+  response.headers.set("Referrer-Policy", "no-referrer");
+  /*
    * The site-wide Permissions-Policy denies WebAuthn outright. The admin origin
    * needs it for its own frames only — this is the narrowest grant that lets a
    * passkey work at all.
