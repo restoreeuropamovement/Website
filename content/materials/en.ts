@@ -58,6 +58,26 @@ export const materialsText = {
     },
   },
 
+  /**
+   * One sentence of practical help, shown beside the downloads on the shelves
+   * whose files get printed and put up in public.
+   *
+   * Which shelves those are is not decided here — it is
+   * `materialImprintCategoryIds` in `structure.ts`, because it is a fact about
+   * what a poster is rather than a word anybody translates.
+   *
+   * It is general on purpose, and must stay that way. It names no country, no
+   * statute and no penalty, and it says nothing about what any particular law
+   * demands, because nobody here has established that and a confident sentence
+   * about it would be exactly the fabricated fact `AGENTS.md` forbids. What is
+   * being said is only what the movement knows about its own artwork — there is
+   * a blank field on it — and the one honest instruction that follows: find out
+   * what your own country expects.
+   */
+  imprint: {
+    note: "The artwork leaves a blank field for the name and address of a person responsible for the item; fill it in before putting anything up in public. What is required differs from country to country, so check what applies where you are.",
+  },
+
   file: {
     /** The affordance on each item. */
     download: "Download",

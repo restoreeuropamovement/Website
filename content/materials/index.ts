@@ -2,6 +2,7 @@ import { createDictionary } from "@/lib/dictionary";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { materialsText as englishText } from "./en";
 import {
+  carriesImprintNote,
   materialCategoryIds,
   type MaterialCategoryId,
 } from "./structure";
@@ -30,6 +31,17 @@ export interface MaterialCategory {
   readonly id: MaterialCategoryId;
   readonly label: string;
   readonly note: string;
+  /**
+   * The note about the blank field for a responsible person, on the shelves
+   * that carry it and `null` on the rest.
+   *
+   * Resolved here rather than in the component for the same reason the order of
+   * the shelves is: whether a shelf carries it comes from `structure.ts`, the
+   * sentence comes from a language file, and the page should have to know
+   * neither. A `null` is a shelf with nothing to say, not a missing
+   * translation — the text is one string shared by every shelf that shows it.
+   */
+  readonly imprintNote: string | null;
 }
 
 export interface MaterialsEdition {
@@ -64,7 +76,11 @@ function edition(locale: Locale, text: MaterialsText): MaterialsEdition {
      * happened to type the keys in, which is exactly the class of decision the
      * structure/text split exists to keep out of a language file.
      */
-    categories: materialCategoryIds.map((id) => ({ id, ...text.categories[id] })),
+    categories: materialCategoryIds.map((id) => ({
+      id,
+      ...text.categories[id],
+      imprintNote: carriesImprintNote(id) ? text.imprint.note : null,
+    })),
   };
 }
 

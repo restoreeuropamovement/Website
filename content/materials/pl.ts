@@ -33,6 +33,10 @@ export const materialsText: MaterialsText = {
     },
   },
 
+  imprint: {
+    note: "Projekty pozostawiają puste pole na nazwisko i adres osoby odpowiedzialnej za dany egzemplarz; wypełnij je, zanim cokolwiek wywiesisz w miejscu publicznym. Wymogi różnią się w zależności od kraju, więc sprawdź, jakie obowiązują tam, gdzie jesteś.",
+  },
+
   file: {
     download: "Pobierz",
     downloadLabel: "Pobierz {title}",

@@ -33,6 +33,10 @@ export const materialsText: MaterialsText = {
     },
   },
 
+  imprint: {
+    note: "Les visuels laissent un champ vide pour le nom et l'adresse d'une personne responsable de l'objet ; remplissez-le avant d'afficher quoi que ce soit en public. Ce qui est exigé varie d'un pays à l'autre : vérifiez ce qui s'applique chez vous.",
+  },
+
   file: {
     download: "Télécharger",
     downloadLabel: "Télécharger {title}",

@@ -33,3 +33,28 @@ export type MaterialCategoryId = (typeof materialCategoryIds)[number];
 export function isMaterialCategory(value: string): value is MaterialCategoryId {
   return (materialCategoryIds as readonly string[]).includes(value);
 }
+
+/**
+ * The shelves whose files end up printed and put up where strangers see them.
+ *
+ * Material displayed in public generally has to name a person answerable for
+ * it on the item itself, so the artwork leaves a field blank for whoever puts
+ * it up to complete, and the page says so beside the downloads it applies to.
+ *
+ * **Which shelves those are is structure, not words.** It is a fact about what
+ * a poster is for, identical in all six editions, and a translator who quietly
+ * dropped it from one language would leave that language's readers the only
+ * ones not told. The sentence itself is in the language files; this list is
+ * what decides where it appears.
+ *
+ * Logos, wallpapers and social images are absent on purpose rather than by
+ * oversight. A mark pasted into an account biography and an image sized for a
+ * telephone screen are not displayed the way a sheet on a lamp post is, and a
+ * note about a blank field would be advice about a field their reader does not
+ * have.
+ */
+export const materialImprintCategoryIds: readonly MaterialCategoryId[] = ["poster", "sticker"];
+
+export function carriesImprintNote(id: MaterialCategoryId): boolean {
+  return materialImprintCategoryIds.includes(id);
+}

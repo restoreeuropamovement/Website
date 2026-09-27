@@ -33,6 +33,10 @@ export const materialsText: MaterialsText = {
     },
   },
 
+  imprint: {
+    note: "Die Vorlagen lassen ein Feld für Namen und Adresse einer verantwortlichen Person frei; füllen Sie es aus, bevor Sie etwas öffentlich aushängen. Was verlangt wird, unterscheidet sich von Land zu Land — prüfen Sie also, was bei Ihnen gilt.",
+  },
+
   file: {
     download: "Herunterladen",
     downloadLabel: "{title} herunterladen",

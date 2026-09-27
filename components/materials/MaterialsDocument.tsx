@@ -85,6 +85,23 @@ export function MaterialsDocument({
                     <span className="text-[0.9375rem] text-faint">{category.note}</span>
                   </div>
 
+                  {/*
+                    The blank-field note, on the shelves that get printed and
+                    put up in public. It sits above the files it applies to
+                    rather than at the top of the page, because it is advice
+                    about a poster and not about a wallpaper: a reader who came
+                    for a logo should not have to work out that it is not
+                    addressed to them. Which shelves carry it is
+                    `materialImprintCategoryIds` in
+                    `content/materials/structure.ts`; `null` here means this one
+                    does not.
+                  */}
+                  {category.imprintNote ? (
+                    <p className="mb-6 max-w-(--container-reading) text-[0.9375rem] leading-relaxed text-muted">
+                      {category.imprintNote}
+                    </p>
+                  ) : null}
+
                   <ul className="flex flex-col border-t border-hairline">
                     {group.materials.map((material) => (
                       <MaterialItem key={material.id} material={material} edition={edition} />
