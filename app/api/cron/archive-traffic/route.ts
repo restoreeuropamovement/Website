@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { archiveTraffic } from "@/lib/admin/archive";
+import { constantTimeEqual } from "@/lib/admin/crypto";
 import { sweepEphemera } from "@/lib/admin/sweep";
 
 /**
@@ -25,7 +26,15 @@ export async function GET(request: Request): Promise<NextResponse> {
     );
   }
 
-  if (request.headers.get("authorization") !== `Bearer ${secret}`) {
+  /*
+   * Compared in constant time, like every other secret in this codebase. A
+   * network round trip buries the timing difference of an early-exit `!==`
+   * deep enough that this is not a practical attack on a high-entropy secret —
+   * but "not practical today" is a worse reason to write a comparison one way
+   * than "the same way as everywhere else" is to write it the other, and an
+   * exception here is the one a reader would have to stop and re-derive.
+   */
+  if (!constantTimeEqual(request.headers.get("authorization") ?? "", `Bearer ${secret}`)) {
     return NextResponse.json({ error: "Unauthorised." }, { status: 401 });
   }
 

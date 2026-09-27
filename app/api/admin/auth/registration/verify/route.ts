@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 import type { RegistrationResponseJSON } from "@simplewebauthn/server";
 import { claimInviteAttempt, consumeInvite } from "@/lib/admin/administrators";
+import { raiseSecurityAlert } from "@/lib/admin/alerts";
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
@@ -118,6 +119,15 @@ export async function POST(request: NextRequest) {
     ipHash,
   });
 
+  /*
+   * Mailed immediately, because this is the event an attacker most wants to
+   * pass unnoticed: a credential enrolled here is a permanent way in, tied to
+   * hardware nobody else holds and not expiring with a session. The first
+   * enrolment on an empty deployment is the movement setting itself up and is
+   * not worth a message; every one after it changes who can sign in.
+   */
+  if (!wasBootstrap) raiseSecurityAlert("passkey.register");
+
   if (redeemed) {
     await recordAudit({
       action: "admin.invite.redeem",
@@ -127,6 +137,7 @@ export async function POST(request: NextRequest) {
       detail: { inviteId: redeemed.id },
       ipHash,
     });
+    raiseSecurityAlert("admin.invite.redeem");
   }
 
   /*

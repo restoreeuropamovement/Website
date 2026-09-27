@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createInvite, disableAdministrator, revokeInvite } from "@/lib/admin/administrators";
+import { raiseSecurityAlert } from "@/lib/admin/alerts";
 import { recordAudit } from "@/lib/admin/audit";
 import { relyingParty } from "@/lib/admin/env";
 import { clientContext } from "@/lib/admin/request";
@@ -32,6 +33,15 @@ export async function deletePasskeyAction(form: FormData): Promise<void> {
     detail: { credentialId, reason: result.reason ?? null },
     ipHash,
   });
+
+  /*
+   * Mailed even though this action required a passkey to perform. Elevation
+   * proves the actor held an authenticator a moment ago; it does not prove they
+   * should be retiring this one. Removing the device an administrator would
+   * otherwise use to notice a takeover is a step in the takeover, and the
+   * message goes to a mailbox rather than to the surface being taken.
+   */
+  if (result.ok) raiseSecurityAlert("passkey.delete");
 
   revalidatePath("/admin/security");
 }
@@ -90,6 +100,13 @@ export async function createInviteAction(
   });
 
   if (!result.ok) return { status: "error", message: result.reason };
+
+  /*
+   * An invitation is a way in that has not been used yet. Alerting now rather
+   * than only on redemption means the administrators learn of an unexpected one
+   * while there is still time to withdraw it.
+   */
+  raiseSecurityAlert("admin.invite");
 
   revalidatePath("/admin/security");
 

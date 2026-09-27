@@ -1,5 +1,6 @@
 import type { NextRequest } from "next/server";
 import type { AuthenticationResponseJSON } from "@simplewebauthn/server";
+import { BRUTEFORCE_THRESHOLD, raiseSecurityAlert } from "@/lib/admin/alerts";
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
@@ -50,6 +51,21 @@ export async function POST(request: NextRequest) {
       detail: { reason: result.reason },
       ipHash,
     });
+
+    /*
+     * Counted globally rather than per source. Anyone with the patience to
+     * spread attempts across addresses defeats a per-IP threshold, and the
+     * question this alert answers is "is somebody working on the door", which
+     * does not depend on how many doors they knocked from. The rate limiter
+     * above still holds any single source to ten in five minutes.
+     *
+     * A separate counter from that one, on purpose: this bucket must not be
+     * incremented by the throttle rejecting an attempt, or one determined
+     * source would raise the alarm every hour on its own.
+     */
+    const failures = await consumeRateLimit("auth-failures", BRUTEFORCE_THRESHOLD, 3600);
+    if (!failures.allowed) raiseSecurityAlert("session.bruteforce");
+
     return opaqueFailure(401);
   }
 

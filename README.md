@@ -283,6 +283,13 @@ delete the directory to start over.
   answer in Postgres's place, read every column not encrypted by
   `lib/admin/pii.ts` and keep the connection string. `DATABASE_SSL=disable`
   exists for the loopback socket in development and is refused in production.
+- **Changes to who can get in are mailed immediately.** A passkey enrolled or
+  removed, an invitation issued or claimed, a session used from the wrong
+  browser, a run of failed sign-ins, or an audit chain that stops verifying.
+  Throttled to three per kind per hour so the channel cannot be flooded, and
+  carrying no names, addresses or identifiers — see `lib/admin/alerts.ts` for
+  why the list is deliberately short. A weekly digest goes out on Mondays with
+  counts and a full chain verification.
 - **Throttling buckets on an address the caller cannot choose.**
   `lib/admin/request.ts` prefers `x-vercel-forwarded-for`, which the platform
   writes and strips from the incoming request, over `x-forwarded-for`, which on

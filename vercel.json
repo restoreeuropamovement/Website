@@ -4,6 +4,10 @@
     {
       "path": "/api/cron/archive-traffic",
       "schedule": "40 3 * * *"
+    },
+    {
+      "path": "/api/cron/security-digest",
+      "schedule": "10 8 * * 1"
     }
   ]
 }
