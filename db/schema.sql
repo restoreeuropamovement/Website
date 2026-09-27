@@ -76,6 +76,19 @@ CREATE TABLE IF NOT EXISTS admin_invite (
 
 CREATE INDEX IF NOT EXISTS admin_invite_user_idx ON admin_invite (user_id);
 
+-- How many enrolment ceremonies this invitation has been presented for.
+--
+-- An invitation is redeemed only once a passkey has verified against it, so a
+-- failed ceremony no longer destroys it — which would let anyone who saw the
+-- link stop the recipient enrolling. This column is what stops that fix from
+-- granting a leaked link unlimited attempts: it is incremented before the
+-- response is checked and the invitation stops matching once it runs out. See
+-- `MAX_INVITE_ATTEMPTS` in lib/admin/administrators.ts.
+--
+-- Added separately so `npm run db:migrate` upgrades a database created before
+-- enrolment attempts were counted.
+ALTER TABLE admin_invite ADD COLUMN IF NOT EXISTS attempts integer NOT NULL DEFAULT 0;
+
 -- ---------------------------------------------------------------------------
 -- Ceremony state
 -- ---------------------------------------------------------------------------

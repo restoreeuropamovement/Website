@@ -35,6 +35,31 @@ import { db } from "@/lib/db";
  */
 const INVITE_TTL_HOURS = 24;
 
+/**
+ * How many enrolment ceremonies one invitation may be presented for.
+ *
+ * This number exists because of a conflict between two properties that both
+ * matter, and neither ordering of "spend the token" and "verify the passkey"
+ * gets both on its own.
+ *
+ * Spending it first makes the link single-*presentation*, which is the safe
+ * reading of single-use: a leaked invitation cannot be fed attempt after
+ * attempt at the ceremony. But it also means a single malformed request
+ * destroys the invitation, so whoever holds a copy of the link — a mail
+ * scanner, somebody reading over a shoulder, a compromised inbox — can stop
+ * the intended recipient from ever enrolling, without gaining anything
+ * themselves.
+ *
+ * Spending it last fixes that and reintroduces unlimited attempts.
+ *
+ * Counting presentations keeps both. The invitation survives a failed ceremony
+ * and is spent only when a passkey is actually verified against it, so a
+ * fumbled attempt costs nothing; and the count is bounded, so a leaked link is
+ * not an open door to keep knocking on. Five is far more than enrolment takes
+ * and far fewer than an attack needs.
+ */
+const MAX_INVITE_ATTEMPTS = 5;
+
 /** Enough to identify someone in an audit row, and nothing like an identity. */
 export interface Administrator {
   readonly id: string;
@@ -274,6 +299,36 @@ export async function resolveInvite(token: string): Promise<ResolvedInvite | nul
 }
 
 /**
+ * Claims one enrolment attempt against an invitation, atomically.
+ *
+ * Called at the start of the verify handler, before the WebAuthn response is
+ * checked. Incrementing inside the `UPDATE` rather than reading and writing
+ * back is what makes the count hold under a race: concurrent presentations
+ * each advance it by one, so opening several at once spends the allowance
+ * rather than sharing it.
+ *
+ * Returning the invitation does not redeem it — see `consumeInvite`, which the
+ * caller reaches only once a passkey has actually verified.
+ */
+export async function claimInviteAttempt(token: string): Promise<ResolvedInvite | null> {
+  if (!token) return null;
+
+  const [row] = await db()<{ id: string; user_id: string }[]>`
+    UPDATE admin_invite
+       SET attempts = attempts + 1
+     WHERE token_hash = ${await hashToken(token)}
+       AND consumed_at IS NULL
+       AND revoked_at IS NULL
+       AND expires_at > now()
+       AND attempts < ${MAX_INVITE_ATTEMPTS}
+    RETURNING id, user_id
+  `;
+
+  if (!row) return null;
+  return withUser(row.id, row.user_id);
+}
+
+/**
  * Spends an invitation, atomically.
  *
  * The `consumed_at IS NULL` predicate inside the UPDATE is what makes this
@@ -295,15 +350,19 @@ export async function consumeInvite(token: string): Promise<ResolvedInvite | nul
   `;
 
   if (!row) return null;
+  return withUser(row.id, row.user_id);
+}
 
+/** Attaches the invited account, refusing one that has since been disabled. */
+async function withUser(inviteId: string, userId: string): Promise<ResolvedInvite | null> {
   const [user] = await db()<{ id: string; username: string; display_name: string }[]>`
     SELECT id, username, display_name FROM admin_user
-    WHERE id = ${row.user_id} AND disabled_at IS NULL
+    WHERE id = ${userId} AND disabled_at IS NULL
   `;
 
   if (!user) return null;
   return {
-    id: row.id,
+    id: inviteId,
     user: { id: user.id, username: user.username, displayName: user.display_name },
   };
 }

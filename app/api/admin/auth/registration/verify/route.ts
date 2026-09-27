@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import type { RegistrationResponseJSON } from "@simplewebauthn/server";
-import { consumeInvite } from "@/lib/admin/administrators";
+import { claimInviteAttempt, consumeInvite } from "@/lib/admin/administrators";
 import { jsonResponse, opaqueFailure } from "@/lib/admin/api";
 import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
@@ -37,22 +37,29 @@ export async function POST(request: NextRequest) {
   const existingSession = await currentSession();
 
   /*
-   * An invitation is spent here rather than when the link was opened, because
+   * An invitation is claimed here rather than when the link was opened, because
    * opening it costs nothing and a URL gets fetched by things that are not the
-   * recipient. It is spent *before* the response is verified, not after: a
-   * single-use token has to be single-presentation, or a leaked link gets
-   * unlimited attempts at the ceremony. The cost of that ordering is close to
-   * nothing in practice — a dismissed biometric prompt fails in the browser and
-   * never reaches this endpoint at all.
+   * recipient.
+   *
+   * Claiming is not spending. This counts one presentation against a small
+   * allowance and leaves the invitation live; it is redeemed further down, once
+   * a passkey has actually verified against the account it names. Spending it
+   * at this point instead — which is what this handler used to do — meant a
+   * single malformed request destroyed the invitation, so anyone who saw the
+   * link could lock the intended recipient out of enrolling while gaining
+   * nothing themselves. The bounded count is what keeps that fix from handing a
+   * leaked link unlimited attempts at the ceremony; see `MAX_INVITE_ATTEMPTS`.
    */
   const invited = typeof body.invite === "string" && body.invite ? body.invite : null;
-  const invite = invited ? await consumeInvite(invited) : null;
+  const invite = invited ? await claimInviteAttempt(invited) : null;
 
   if (invited && !invite) {
     await recordAudit({
       action: "admin.invite.redeem",
       outcome: "failure",
-      detail: { reason: "Invitation expired, withdrawn or already used." },
+      detail: {
+        reason: "Invitation expired, withdrawn, already used, or out of attempts.",
+      },
       ipHash,
     });
     return opaqueFailure(403);
@@ -93,6 +100,16 @@ export async function POST(request: NextRequest) {
     return opaqueFailure(403);
   }
 
+  /*
+   * Redeemed only now, with a verified passkey attached to the account the
+   * invitation names. `consumeInvite` carries the same `consumed_at IS NULL`
+   * predicate as before, so two ceremonies completing together still spend it
+   * once; losing that race after enrolling is treated as not having redeemed
+   * an invitation rather than as a failure, because the passkey is real and
+   * the account is the right one either way.
+   */
+  const redeemed = invited ? await consumeInvite(invited) : null;
+
   await recordAudit({
     action: "passkey.register",
     outcome: "success",
@@ -101,13 +118,13 @@ export async function POST(request: NextRequest) {
     ipHash,
   });
 
-  if (invite) {
+  if (redeemed) {
     await recordAudit({
       action: "admin.invite.redeem",
       outcome: "success",
       actorId: result.userId,
-      actorLabel: invite.user.username,
-      detail: { inviteId: invite.id },
+      actorLabel: redeemed.user.username,
+      detail: { inviteId: redeemed.id },
       ipHash,
     });
   }
