@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { englishCountryNames } from "@/content/wings";
 import { europeContext, europeViewBox, europeWings } from "@/content/wings-map";
 import type { AnalyticsResult, DimensionBreakdown, VisitTotals } from "@/lib/admin/analytics";
 import { VISITOR_CEILING, scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
@@ -29,6 +30,9 @@ import { cn } from "@/lib/utils";
  */
 
 const num = (value: number) => value.toLocaleString("en-GB");
+
+/** "England, Scotland, Wales and Northern Ireland" — the Oxford comma left off. */
+const WINGS = new Intl.ListFormat("en-GB", { style: "long", type: "conjunction" });
 
 const TICK_DATE = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -646,6 +650,7 @@ function CountryRanking({ geography }: { readonly geography: Geography }) {
         peak={peak}
         total={geography.mappedVisitors}
         empty="No visitors from a country the map draws."
+        note={<SharedShades geography={geography} />}
       />
 
       <Ranked
@@ -673,18 +678,46 @@ function CountryRanking({ geography }: { readonly geography: Geography }) {
   );
 }
 
+/**
+ * Why several nations can carry one shade.
+ *
+ * Vercel measures at state level, so the United Kingdom arrives as a single
+ * figure covering four wings. The map shades all four alike, and an identical
+ * shade across neighbours is ambiguous on its own: it could as easily mean
+ * they were each measured and came out level. Only a sentence can tell the
+ * reader which of the two they are looking at, so here is the sentence.
+ */
+function SharedShades({ geography }: { readonly geography: Geography }) {
+  const shared = geography.mapped.filter((country) => country.slugs.length > 1);
+  if (shared.length === 0) return null;
+
+  return (
+    <p className="mt-3 text-micro leading-relaxed text-faint">
+      {shared.map((country) => (
+        <span key={country.code} className="block">
+          Vercel counts {country.name} as one country, so{" "}
+          {WINGS.format(country.slugs.map((slug) => englishCountryNames[slug]))} are shaded
+          together. The figure is theirs jointly, not each one&rsquo;s.
+        </span>
+      ))}
+    </p>
+  );
+}
+
 function Ranked({
   title,
   rows,
   peak,
   total,
   empty,
+  note,
 }: {
   readonly title: string;
   readonly rows: readonly { code: string; name: string; visitors: number; pageviews: number }[];
   readonly peak: number;
   readonly total: number;
   readonly empty: string;
+  readonly note?: ReactNode;
 }) {
   return (
     <div>
@@ -715,6 +748,8 @@ function Ranked({
           ))}
         </dl>
       )}
+
+      {note}
     </div>
   );
 }

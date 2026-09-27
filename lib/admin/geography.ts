@@ -1,5 +1,5 @@
 import { englishCountryNames } from "@/content/wings";
-import { wingSlugForCountryCode } from "@/content/wings/iso";
+import { wingsForCountryCode } from "@/content/wings/iso";
 import type { WingSlug } from "@/content/wings/structure";
 import type { DimensionBreakdown, DimensionRow } from "@/lib/admin/analytics";
 
@@ -15,7 +15,15 @@ import type { DimensionBreakdown, DimensionRow } from "@/lib/admin/analytics";
  */
 
 export interface MappedCountry {
-  readonly slug: WingSlug;
+  /**
+   * Every wing this row shades, which is usually one.
+   *
+   * `GB` is the exception and the reason this is a list: one state, four
+   * wings, and a country-level measurement that cannot be divided between
+   * them. All four take the same shade, which says "this is the British
+   * figure" rather than "each of these had that many".
+   */
+  readonly slugs: readonly WingSlug[];
   readonly code: string;
   readonly name: string;
   readonly visitors: number;
@@ -102,8 +110,9 @@ const UNATTRIBUTED = "Unattributed";
  * The tempting rule — complain about every code with no wing — would fire on
  * every visitor from the United States, which is not a fault but the ordinary
  * case. What is genuinely wrong is a code no region table has heard of, which
- * is how a renamed dimension or a non-ISO spelling such as `UK` would first
- * show itself. In development that is worth interrupting someone over; in
+ * is how a renamed dimension or a non-ISO spelling would first show itself —
+ * `UK` for `GB` was exactly that, and is now aliased in
+ * `content/wings/iso.ts`. In development that is worth interrupting someone over; in
  * production it is not, because the visitor is counted either way, in the
  * "elsewhere" list, under the raw code. Nothing disappears in either case.
  */
@@ -116,20 +125,31 @@ function warnUnknown(code: string): void {
 }
 
 export function readGeography(breakdown: DimensionBreakdown): Geography {
-  const mapped: MappedCountry[] = [];
+  /*
+   * Keyed by the code the lookup resolved to, not by the label, so that two
+   * spellings of one country add up instead of becoming two rows. `GB` and
+   * `UK` arriving together would otherwise have painted Britain with whichever
+   * happened to come last and dropped the other from the map without a word.
+   */
+  const byCode = new Map<string, MappedCountry>();
   const elsewhere: ElsewhereCountry[] = [];
 
   for (const row of breakdown.rows) {
     const code = row.label.trim().toUpperCase();
-    const slug = wingSlugForCountryCode(code);
+    const wings = wingsForCountryCode(code);
 
-    if (slug) {
-      mapped.push({
-        slug,
-        code,
-        name: englishCountryNames[slug],
-        visitors: row.visitors,
-        pageviews: row.pageviews,
+    if (wings) {
+      const running = byCode.get(wings.code);
+      byCode.set(wings.code, {
+        slugs: wings.slugs,
+        code: wings.code,
+        /*
+         * A state prints under its own name, not under the first of its
+         * wings: "United Kingdom", never "England" standing in for all four.
+         */
+        name: wings.stateName ?? englishCountryNames[wings.slugs[0]],
+        visitors: (running?.visitors ?? 0) + row.visitors,
+        pageviews: (running?.pageviews ?? 0) + row.pageviews,
       });
       continue;
     }
@@ -145,7 +165,7 @@ export function readGeography(breakdown: DimensionBreakdown): Geography {
   }
 
   const byVisitors = (a: { visitors: number }, b: { visitors: number }) => b.visitors - a.visitors;
-  mapped.sort(byVisitors);
+  const mapped = [...byCode.values()].sort(byVisitors);
   elsewhere.sort(byVisitors);
 
   const mappedVisitors = sum(mapped);
@@ -156,7 +176,9 @@ export function readGeography(breakdown: DimensionBreakdown): Geography {
     elsewhere,
     others: breakdown.others,
     complete: breakdown.complete,
-    byWing: new Map(mapped.map((country) => [country.slug, country])),
+    byWing: new Map(
+      mapped.flatMap((country) => country.slugs.map((slug) => [slug, country] as const)),
+    ),
     peak: Math.max(0, ...mapped.map((country) => country.visitors)),
     mappedVisitors,
     elsewhereVisitors,
