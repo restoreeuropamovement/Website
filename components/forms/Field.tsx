@@ -191,6 +191,8 @@ interface CheckboxFieldProps {
   /** Omit both to leave the box uncontrolled, as a plain form submission wants. */
   readonly checked?: boolean;
   readonly onChange?: (checked: boolean) => void;
+  /** Uncontrolled starting state. Ignored when `checked` is given. */
+  readonly defaultChecked?: boolean;
   readonly value?: string;
   readonly required?: boolean;
   readonly error?: string;
@@ -202,6 +204,7 @@ export function CheckboxField({
   name,
   checked,
   onChange,
+  defaultChecked,
   value,
   required,
   error,
@@ -217,7 +220,7 @@ export function CheckboxField({
           value={value}
           required={required}
           {...(checked === undefined
-            ? {}
+            ? { defaultChecked }
             : { checked, onChange: (event) => onChange?.(event.target.checked) })}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? `${id}-error` : undefined}

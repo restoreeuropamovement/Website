@@ -12,7 +12,8 @@ export const involvementText: InvolvementText = {
       "Ha llegado desde la sección en {country}, así que el formulario de abajo está puesto en ella. Cambie cualquiera de los dos campos si no es correcto.",
     roleLegend: "En calidad de qué solicita",
     fields: {
-      name: "Nombre",
+      name: "Nombre completo",
+      nameHint: "Su nombre y sus apellidos, tal como los escribiría en una carta.",
       email: "Correo electrónico",
       country: "País",
       region: "Región o ciudad",
@@ -49,6 +50,7 @@ export const involvementText: InvolvementText = {
     },
     errors: {
       name: "Indique su nombre, hasta 120 caracteres.",
+      surname: "Indique sus apellidos además de su nombre.",
       email: "Indique una dirección de correo válida.",
       country: "Elija un país de la lista.",
       region: "La región o ciudad está limitada a 120 caracteres.",

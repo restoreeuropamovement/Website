@@ -122,6 +122,35 @@ export function pickRole(value: string | string[] | undefined): InvolvementRoleI
   return resolveInvolvementRole(first(value));
 }
 
+/**
+ * Whether a name carries a family name as well as a given one.
+ *
+ * Applications routinely arrive as "Anna", which is not enough to vet anybody:
+ * an administrator reviewing the roll has to be able to tell two Annas apart,
+ * and a movement that admits people it cannot identify is not vetting at all.
+ *
+ * The rule is two whitespace-separated parts with at least two characters at
+ * each end. Deliberately not a pattern over letters: European names carry
+ * apostrophes, hyphens, particles and diacritics in every combination, and
+ * every regex anyone writes for "a real name" eventually rejects a real one.
+ * Middle initials pass, because only the ends are measured — "Anna B Smith" is
+ * a person, and refusing her would be the same mistake in miniature.
+ *
+ * Which leaves mononyms, who exist and are not served by this. That is why the
+ * check guards the public form and not `addMemberAction`: an administrator
+ * entering an application that reached them another way has met the evidence
+ * and can record a name this function would refuse. The human is the override,
+ * exactly as they are for everything else about a membership.
+ */
+export function hasSurname(value: string): boolean {
+  const parts = value.trim().split(/\s+/).filter(Boolean);
+  if (parts.length < 2) return false;
+
+  const given = parts[0] ?? "";
+  const family = parts[parts.length - 1] ?? "";
+  return given.length >= 2 && family.length >= 2;
+}
+
 /** Correspondence is handled by function rather than by individual. */
 export const contactChannelIds = [
   "general",
@@ -149,6 +178,13 @@ export function isContactChannel(value: string): value is ContactChannelId {
  */
 export const joinErrorCodes = [
   "name",
+  /*
+   * Separate from `name` because the two failures need different sentences.
+   * Somebody who typed "Anna" has not made a mistake about length, and telling
+   * them their name may be up to 120 characters answers a question they did
+   * not ask — they need to be told that the family name is missing.
+   */
+  "surname",
   "email",
   "country",
   "region",

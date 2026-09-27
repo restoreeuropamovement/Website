@@ -13,6 +13,7 @@ export const involvementText: InvolvementText = {
     roleLegend: "W jakim charakterze się zgłaszasz",
     fields: {
       name: "Imię i nazwisko",
+      nameHint: "Twoje imię i nazwisko, w takiej postaci, w jakiej zapisujesz je w liście.",
       email: "E-mail",
       country: "Kraj",
       region: "Region lub miasto",
@@ -50,6 +51,7 @@ export const involvementText: InvolvementText = {
     },
     errors: {
       name: "Podaj imię i nazwisko, najwyżej 120 znaków.",
+      surname: "Podaj nazwisko, nie tylko imię.",
       email: "Podaj poprawny adres e-mail.",
       country: "Wybierz kraj z listy.",
       region: "Region lub miasto ograniczono do 120 znaków.",

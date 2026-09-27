@@ -28,6 +28,7 @@ export {
   contactChannelIds,
   contactErrorCodes,
   countryValues,
+  hasSurname,
   interestAreaIds,
   involvementRoleIds,
   isContactChannel,
@@ -73,6 +74,8 @@ export interface InvolvementText {
     readonly roleLegend: string;
     readonly fields: {
       readonly name: string;
+      /** Says that the family name is wanted, before the form has to refuse it. */
+      readonly nameHint: string;
       readonly email: string;
       readonly country: string;
       readonly region: string;

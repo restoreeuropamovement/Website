@@ -53,8 +53,18 @@ export function ContactForm({ edition, initialSubject }: ContactFormProps) {
     );
   }
 
+  /*
+   * As on the join form: React empties an uncontrolled form once its action has
+   * run, and here that can only ever happen on a refusal, because a sent
+   * enquiry is replaced by the acknowledgement above. Losing a long message to
+   * a mistyped address is the same avoidable harm.
+   */
   return (
-    <form action={formAction} className="relative flex flex-col gap-8">
+    <form
+      action={formAction}
+      onReset={(event) => event.preventDefault()}
+      className="relative flex flex-col gap-8"
+    >
       <Honeypot />
 
       {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}

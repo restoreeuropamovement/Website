@@ -44,6 +44,16 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
     JOIN_INITIAL,
   );
 
+  /*
+   * What came back from a refusal, if anything.
+   *
+   * React resets an uncontrolled form once its action has run, which is what a
+   * successful application wants and the opposite of what a rejected one does.
+   * These feed `defaultValue`, and a reset restores each field to its default —
+   * so the very mechanism that empties the form on success refills it here.
+   */
+  const kept = state.values;
+
   if (state.status === "received") {
     return (
       <div className="border border-rule bg-surface p-8 lg:p-10" role="status">
@@ -63,8 +73,26 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
     );
   }
 
+  /*
+   * `onReset` refuses React's automatic clear-down.
+   *
+   * React empties an uncontrolled form once its action has run. That suits a
+   * form that succeeded — but this one is replaced by the acknowledgement panel
+   * above when it succeeds, so the clear-down only ever fires on a refusal,
+   * where it throws away everything the reader typed. Somebody told to add
+   * their family name would lose their address, country, area of interest and
+   * message along with it, and a fair number would not start again. Nothing
+   * here needs resetting: the form unmounts entirely when it is accepted.
+   *
+   * `defaultValue` below covers the same ground without script, where the page
+   * is rendered afresh by the server and there is no DOM left to preserve.
+   */
   return (
-    <form action={formAction} className="relative flex flex-col gap-10">
+    <form
+      action={formAction}
+      onReset={(event) => event.preventDefault()}
+      className="relative flex flex-col gap-10"
+    >
       <Honeypot />
 
       {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}
@@ -91,7 +119,8 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
         <ul className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
           {edition.roles.map((role, index) => {
             const id = `${uid}-role-${role.id}`;
-            const defaultChecked = initialRole ? initialRole === role.id : index === 0;
+            const chosen = kept?.role ?? initialRole;
+            const defaultChecked = chosen ? chosen === role.id : index === 0;
             return (
               <li key={role.id} className="bg-surface">
                 <label
@@ -123,10 +152,11 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           id={`${uid}-name`}
           name="name"
           label={text.fields.name}
+          hint={text.fields.nameHint}
           autoComplete="name"
           maxLength={120}
           required
-          defaultValue=""
+          defaultValue={kept?.name ?? ""}
         />
         <TextField
           id={`${uid}-email`}
@@ -136,7 +166,7 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           autoComplete="email"
           maxLength={180}
           required
-          defaultValue=""
+          defaultValue={kept?.email ?? ""}
         />
       </div>
 
@@ -154,7 +184,7 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           options={edition.countries}
           placeholder={text.fields.placeholder}
           required
-          defaultValue={initialCountry ?? ""}
+          defaultValue={kept?.country ?? initialCountry ?? ""}
         />
         <TextField
           id={`${uid}-region`}
@@ -163,7 +193,7 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           optional
           optionalLabel={text.fields.optional}
           maxLength={120}
-          defaultValue=""
+          defaultValue={kept?.region ?? ""}
         />
       </div>
 
@@ -174,7 +204,7 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
         options={edition.interests}
         placeholder={text.fields.placeholder}
         required
-        defaultValue=""
+        defaultValue={kept?.interest ?? ""}
       />
 
       <TextArea
@@ -186,10 +216,16 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
         hint={text.fields.messageHint}
         maxLength={1500}
         rows={6}
-        defaultValue=""
+        defaultValue={kept?.message ?? ""}
       />
 
-      <CheckboxField id={`${uid}-consent`} name="consent" value="yes" required>
+      <CheckboxField
+        id={`${uid}-consent`}
+        name="consent"
+        value="yes"
+        required
+        defaultChecked={kept?.consent ?? false}
+      >
         {text.consent}
       </CheckboxField>
 

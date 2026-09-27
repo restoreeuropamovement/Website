@@ -15,6 +15,7 @@ import {
   honeypotTripped,
 } from "@/lib/spam";
 import {
+  hasSurname,
   isCountryValue,
   isInterestArea,
   isInvolvementRole,
@@ -106,6 +107,24 @@ export async function submitMembershipApplication(
   const consent = read("consent") === "yes";
 
   /*
+   * Handed back with every refusal below so the reader does not lose the form
+   * to a correction. Built once, here, because a refusal that returned only
+   * some of the fields would be worse than one that returned none: the reader
+   * would fix what they were asked about and submit a form quietly missing
+   * whatever the action forgot to echo.
+   */
+  const values = {
+    role: involvementRole,
+    name,
+    email,
+    country,
+    region,
+    interest: interestArea,
+    message,
+    consent,
+  };
+
+  /*
    * Codes, not sentences — the form says it in the reader's language. The
    * three list checks are the same ones that decide what may be written to the
    * unencrypted columns, so they test against ids rather than against labels:
@@ -113,6 +132,12 @@ export async function submitMembershipApplication(
    */
   const errors: JoinErrorCode[] = [];
   if (name.length < 2 || name.length > 120) errors.push("name");
+  /*
+   * Only when the length is acceptable, so "A" is reported once as a name that
+   * is too short rather than twice as a name that is both too short and
+   * missing its second half.
+   */
+  else if (!hasSurname(name)) errors.push("surname");
   if (!EMAIL.test(email) || email.length > 180) errors.push("email");
   if (!isCountryValue(country)) errors.push("country");
   if (region.length > 120) errors.push("region");
@@ -121,7 +146,7 @@ export async function submitMembershipApplication(
   if (!isInterestArea(interestArea)) errors.push("interest");
   if (!consent) errors.push("consent");
 
-  if (errors.length > 0) return { status: "invalid", errors };
+  if (errors.length > 0) return { status: "invalid", errors, values };
 
   /*
    * Throttled on the hashed address rather than the submitted email, so that
@@ -137,7 +162,7 @@ export async function submitMembershipApplication(
     RATE_LIMIT,
     RATE_WINDOW_SECONDS,
   );
-  if (!limit.allowed) return { status: "throttled", errors: [] };
+  if (!limit.allowed) return { status: "throttled", errors: [], values };
 
   /*
    * And the ceiling the per-connection limit cannot see: the same script
@@ -163,7 +188,7 @@ export async function submitMembershipApplication(
      * `busy`, not `throttled`. This reader has almost certainly sent nothing;
      * what they met was everybody else. See the note in `state.ts`.
      */
-    return { status: "busy", errors: [] };
+    return { status: "busy", errors: [], values };
   }
 
   const outcome = await createMember({

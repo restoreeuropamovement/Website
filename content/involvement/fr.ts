@@ -12,7 +12,9 @@ export const involvementText: InvolvementText = {
       "Vous arrivez de la branche en {country}, le formulaire ci-dessous est donc réglé sur elle. Modifiez l'un ou l'autre champ si ce n'est pas exact.",
     roleLegend: "À quel titre vous candidatez",
     fields: {
-      name: "Nom",
+      name: "Nom complet",
+      nameHint:
+        "Votre prénom et votre nom de famille, tels que vous les écririez sur une lettre.",
       email: "Courriel",
       country: "Pays",
       region: "Région ou ville",
@@ -49,6 +51,7 @@ export const involvementText: InvolvementText = {
     },
     errors: {
       name: "Indiquez votre nom, 120 caractères au plus.",
+      surname: "Indiquez votre nom de famille en plus de votre prénom.",
       email: "Indiquez une adresse électronique valide.",
       country: "Choisissez un pays dans la liste.",
       region: "La région ou la ville est limitée à 120 caractères.",
