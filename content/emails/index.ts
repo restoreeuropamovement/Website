@@ -34,6 +34,31 @@ export interface Message {
   readonly text: string;
 }
 
+/**
+ * The events worth waking somebody up for.
+ *
+ * Kept short on purpose. An alert stream that includes ordinary administration
+ * gets filtered into a folder within a fortnight, and then the one message that
+ * mattered is in the folder too. Everything here is either a change to who can
+ * get in, or evidence that somebody is trying to — the two things an
+ * administrator cannot discover any other way and cannot afford to learn late.
+ *
+ * Routine activity, including reading the roll, belongs in the weekly digest
+ * and not here.
+ */
+export type SecurityEventKind =
+  /* Somebody can now sign in who could not before, or no longer can. */
+  | "passkey.register"
+  | "passkey.delete"
+  | "admin.invite"
+  | "admin.invite.redeem"
+  /* A session presented from a client it was not issued to. */
+  | "session.hijack"
+  /* A run of failed sign-in ceremonies from one source. */
+  | "session.bruteforce"
+  /* The audit chain stopped verifying. */
+  | "audit.broken";
+
 export interface EmailText {
   /** Sent to somebody who applied through `/join`. */
   readonly applicationReceived: {
@@ -227,6 +252,124 @@ ${fill(text.withheld, { admin: `${SITE_URL}/admin/members` })}`,
  * inbox and in a mail provider's logs. A count and a link to sign in is the
  * whole message.
  */
+/**
+ * Sent the moment one of the sharp events happens.
+ *
+ * Carries what changed and nothing about who or from where. The IP is not in
+ * the message even in hashed form: it would say nothing useful to the reader
+ * and would put a correlatable value into a mail provider's logs. Everything
+ * needed to investigate is behind the passkey, which is the point.
+ */
+export function securityAlert(kind: SecurityEventKind, occurrences = 1): Message {
+  const text = operatorText.securityAlert;
+  const count = occurrences > 1 ? `\n\nThis has happened ${occurrences} times in the last hour.` : "";
+
+  return {
+    subject: text.subject,
+    text: `${text.intro}
+
+${text.events[kind]}${count}
+
+${fill(text.close, { admin: `${SITE_URL}/admin/security` })}`,
+  };
+}
+
+export interface SecurityDigest {
+  /** Action name and how many times it was recorded, most frequent first. */
+  readonly activity: readonly (readonly [action: string, count: number])[];
+  /** The id of the earliest broken chain link, or null if the log verifies. */
+  readonly chainBrokenAt: string | null;
+}
+
+/**
+ * The weekly summary.
+ *
+ * Immediate alerts answer "is something happening now". This answers the
+ * question they cannot, which is "does the shape of the last week look like the
+ * week before". A slow rise in reveals, a sign-in at an hour nobody works, an
+ * administrator who has stopped appearing: none of those trips a threshold, and
+ * all of them are visible in a list of counts read over a coffee.
+ *
+ * It is also the only thing that makes the audit chain worth having. A tamper
+ * check nobody runs is a tamper check that reports the breach at the same time
+ * as the newspaper does.
+ */
+export function securityDigest(digest: SecurityDigest): Message {
+  const text = operatorText.securityDigest;
+
+  const lines = digest.activity.map(([action, count]) => `  ${count}\u00d7  ${action}`).join("\n");
+
+  const body = digest.activity.length === 0 ? text.quiet : lines;
+
+  const chain =
+    digest.chainBrokenAt === null
+      ? text.chainIntact
+      : fill(text.chainBroken, { entry: digest.chainBrokenAt });
+
+  return {
+    subject: text.subject,
+    text: `${text.intro}
+
+${body}
+
+${chain}
+
+${fill(text.close, { admin: `${SITE_URL}/admin/security` })}`,
+  };
+}
+
+export interface Applicant {
+  /** What to greet them by. The first word of the name, not the whole of it. */
+  readonly firstName: string;
+  /** The area of interest, already turned into a label. Volunteers only. */
+  readonly area: string;
+}
+
+/**
+ * The follow-up questionnaire, **composed for an administrator to send, not
+ * sent by the site**.
+ *
+ * The distinction is the whole design. `applicationReceived` above is kept
+ * unsent because delivering it would hand an applicant's address to the mail
+ * provider, and `/privacy` promises those details are never passed to a third
+ * party for any purpose. This letter would breach the same promise for the
+ * same reason — so it is not sent either. It is rendered in the admin surface,
+ * behind the passkey that already revealed the name, and copied into whatever
+ * mailbox the administrator uses. No address leaves the machine; nothing in
+ * the privacy note stops being true.
+ *
+ * That is also the only arrangement in which the letter's closing line is
+ * honest. It invites the applicant to reply directly, and a reply only reaches
+ * a person if the message came from a mailbox somebody reads. Sent through the
+ * site's provider it would arrive from an unattended sender, and the invitation
+ * would be a small lie in every copy.
+ *
+ * English, like the rest of the operator's text and unlike the messages above.
+ * These are drafts for a human to edit before sending, and the human reads
+ * English; a Polish applicant is better served by an administrator who knows
+ * they applied in Polish than by a machine translation nobody can check.
+ *
+ * Two letters rather than one with a conditional paragraph. A volunteer is
+ * being asked what they can do and how much time they have, an ordinary member
+ * is not, and the questions in between differ enough that merging them would
+ * produce a letter addressed to neither.
+ */
+export function vettingLetter(
+  role: "member" | "volunteer",
+  applicant: Applicant,
+): Message {
+  const text = operatorText.vettingLetter[role];
+  return {
+    subject: text.subject,
+    text: `${fill(text.body, { ...applicant })}
+
+Best regards,
+
+${site.formal}
+${SITE_URL}`,
+  };
+}
+
 export function enquiryAlert(unread: number): Message {
   const text = operatorText.enquiryAlert;
   return {

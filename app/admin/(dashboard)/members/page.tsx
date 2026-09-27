@@ -30,8 +30,11 @@ import {
   interestLabel,
   isCountryValue,
   isInvolvementRole,
+  resolveInvolvementRole,
   roleTitle,
 } from "@/content/involvement";
+import { vettingLetter } from "@/content/emails";
+import { FollowUpLetter } from "@/components/admin/FollowUpLetter";
 import { formatDate } from "@/lib/utils";
 import { MemberSearchForm } from "@/components/admin/MemberSearchForm";
 import { AddMember } from "@/components/admin/AddMember";
@@ -411,6 +414,7 @@ async function RevealedList({
                 ) : null}
 
                 <VettingNotes member={member} />
+                <FollowUp member={member} />
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -495,6 +499,36 @@ const NEXT_STATES: Record<MemberStatus, readonly (readonly [MemberStatus, string
   ],
   declined: [["reviewing", "Reopen"]],
 };
+
+/**
+ * The follow-up questionnaire for one applicant, drafted but not sent.
+ *
+ * Which of the two letters depends on what they applied as. `resolveInvolvementRole`
+ * rather than a bare comparison, because the retired roles are still in the
+ * table — somebody who applied as an "organizer" is a volunteer, and would
+ * otherwise silently get the member letter with no question about what they
+ * can do.
+ *
+ * The greeting takes the first word of the name. An administrator can edit the
+ * draft before sending, which is the answer for the names this gets wrong.
+ */
+function FollowUp({ member }: { readonly member: RevealedMember }) {
+  const role = resolveInvolvementRole(member.involvementRole) ?? "member";
+  const letter = vettingLetter(role, {
+    firstName: member.name.trim().split(/\s+/)[0] ?? member.name,
+    area: interestLabel(member.interestArea),
+  });
+
+  return (
+    <FollowUpLetter
+      id={member.id}
+      subject={letter.subject}
+      body={letter.text}
+      email={member.email}
+      canary={member.canary}
+    />
+  );
+}
 
 /**
  * The vetting note, collapsed until asked for.
