@@ -1,3 +1,4 @@
+import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import { countryLabel } from "@/content/involvement";
 import { europeContext, europeViewBox, europeWings } from "@/content/wings-map";
 import type { CountryCount } from "@/lib/admin/members";
@@ -44,13 +45,16 @@ export interface MemberMapProps {
  * Only nations that hold a record are links. The rest are inert — clicking one
  * would filter to an empty list, and making all forty-seven focusable would
  * put dozens of dead stops in the keyboard path before the roll itself.
+ *
+ * Shaded on the logarithmic ramp in `lib/admin/choropleth.ts`, the same one
+ * the visitor map uses, so a shade means the same thing on both.
  */
 export function MemberMap({ counts, selected, hrefFor }: MemberMapProps) {
   const byCountry = new Map(counts.map((row) => [row.country, row]));
   const total = (row: CountryCount | undefined) =>
     row ? row.new + row.reviewing + row.awaiting + row.confirmed + row.declined : 0;
 
-  const highest = Math.max(1, ...counts.map((row) => total(row)));
+  const ceiling = scaleCeiling(Math.max(0, ...counts.map((row) => total(row))));
 
   /*
    * The five nations a few pixels across are drawn last. Paint order is not
@@ -94,11 +98,20 @@ export function MemberMap({ counts, selected, hrefFor }: MemberMapProps) {
             <path
               d={shape.d}
               strokeWidth={isSelected ? 18 : 5}
+              fillOpacity={held > 0 ? shadeOf(held, ceiling) : undefined}
               className={cn(
                 "transition-colors",
-                fill(held, highest),
+                held > 0 ? "fill-burgundy" : "fill-gold/16",
                 isSelected ? "stroke-ink" : "stroke-canvas",
-                held > 0 && "group-hover:fill-gold group-focus-visible:fill-gold",
+                /*
+                 * The hover ink goes on at full strength whatever the count.
+                 * A stylesheet rule beats a presentation attribute, so this
+                 * overrides the opacity above — without it, pointing at a
+                 * country with two records would highlight it almost
+                 * invisibly, which is the opposite of what a hover is for.
+                 */
+                held > 0 &&
+                  "group-hover:fill-gold group-hover:[fill-opacity:1] group-focus-visible:fill-gold group-focus-visible:[fill-opacity:1]",
               )}
             />
 
@@ -107,6 +120,12 @@ export function MemberMap({ counts, selected, hrefFor }: MemberMapProps) {
              * pixels across at this scale. Without a marker they are
              * indistinguishable from the sea; without a hit target larger than
              * the outline they cannot be clicked.
+             *
+             * The marker is drawn at full strength rather than at the shade
+             * its count earns. It is a locator before it is a quantity, and a
+             * dot this small at the faint end of the ramp cannot be seen at
+             * all — which would hide the nation rather than report that it is
+             * quiet. What it holds is in the list and the tooltip.
              */}
             {shape.small ? (
               <>
@@ -169,23 +188,4 @@ export function MemberMap({ counts, selected, hrefFor }: MemberMapProps) {
       })}
     </svg>
   );
-}
-
-/**
- * Five steps, relative to the busiest nation rather than to an absolute count.
- *
- * Absolute thresholds would leave the whole map on the lowest step for the
- * first year and then saturate, which is the range in which the picture is
- * least useful. Relative shading always shows where the weight actually is —
- * at the cost of the shade meaning something different month to month, which
- * is why the legend states the top of the scale instead of implying one.
- */
-function fill(held: number, highest: number): string {
-  if (held === 0) return "fill-gold/16";
-
-  const ratio = held / highest;
-  if (ratio <= 0.25) return "fill-burgundy/30";
-  if (ratio <= 0.5) return "fill-burgundy/50";
-  if (ratio <= 0.75) return "fill-burgundy/70";
-  return "fill-burgundy/90";
 }

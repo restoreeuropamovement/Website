@@ -1,4 +1,6 @@
 import { Panel } from "@/components/admin/Analytics";
+import { ShadeRamp } from "@/components/admin/ShadeRamp";
+import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import type { ArchivedDay, Engagement, Live } from "@/lib/admin/pulse";
 import { cn } from "@/lib/utils";
 
@@ -192,14 +194,6 @@ export function ReadingTime({
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-/** Five shades plus "recorded, but nothing happened". */
-const SHADES = [
-  "bg-gold/15",
-  "bg-gold/30",
-  "bg-gold/50",
-  "bg-gold/70",
-  "bg-gold/90",
-] as const;
 
 interface Cell {
   readonly date: string;
@@ -257,7 +251,7 @@ export function YearCalendar({
     weeks.push(column);
   }
 
-  const peak = Math.max(1, ...days.map((day) => day.visitors));
+  const ceiling = scaleCeiling(Math.max(1, ...days.map((day) => day.visitors)));
   const recorded = days.length;
 
   /* Month labels sit above the week in which each month starts. */
@@ -295,13 +289,7 @@ export function YearCalendar({
             {weeks.flatMap((column) =>
               column.map((cell) => {
                 const known = cell.visitors !== undefined;
-                const band =
-                  known && cell.visitors! > 0
-                    ? Math.min(
-                        SHADES.length - 1,
-                        Math.floor(((cell.visitors! - 1) / peak) * SHADES.length),
-                      )
-                    : -1;
+                const busy = known && cell.visitors! > 0;
 
                 return (
                   <span
@@ -311,12 +299,20 @@ export function YearCalendar({
                         ? `${cell.date} — ${num(cell.visitors!)} visitors`
                         : `${cell.date} — not recorded`
                     }
+                    /*
+                     * Inline opacity rather than one of a handful of tints.
+                     * The admin policy in `proxy.ts` carries its nonce on
+                     * `script-src` and keeps `'unsafe-inline'` for styles, so
+                     * a computed one is permitted here as it is for the chart
+                     * geometry above.
+                     */
+                    style={busy ? { opacity: shadeOf(cell.visitors!, ceiling) } : undefined}
                     className={cn(
                       "aspect-square w-full",
                       known
-                        ? band === -1
-                          ? "bg-canvas-deep"
-                          : SHADES[band]
+                        ? busy
+                          ? "bg-gold"
+                          : "bg-canvas-deep"
                         : "border border-dashed border-hairline",
                     )}
                   />
@@ -336,12 +332,7 @@ export function YearCalendar({
           <span aria-hidden="true" className="size-3 bg-canvas-deep" />
           No visitors
         </span>
-        <span className="flex items-center gap-1.5">
-          {SHADES.map((shade) => (
-            <span key={shade} aria-hidden="true" className={cn("size-3", shade)} />
-          ))}
-          Up to {num(peak)}
-        </span>
+        <ShadeRamp ceiling={ceiling} tone="gold" unit="visitors" format={num} />
         <span>{num(recorded)} days recorded</span>
       </div>
 

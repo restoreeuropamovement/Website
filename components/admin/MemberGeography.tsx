@@ -68,8 +68,9 @@ export function MemberGeography({ countries, selected, hrefFor }: MemberGeograph
       <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-rule pb-3">
         <h2 className="font-serif text-display-4 font-normal text-ink">Where they are</h2>
         <p className="max-w-md text-micro text-faint">
-          Every record, in whatever state. Shading runs from the quietest country up to{" "}
-          {countryLabel(busiest.country)}, at {heldIn(busiest)}.
+          Every record, in whatever state. Shaded logarithmically, so a country darkens as its
+          count multiplies rather than as it gains one — {countryLabel(busiest.country)} leads, at{" "}
+          {heldIn(busiest)}.
         </p>
       </div>
 

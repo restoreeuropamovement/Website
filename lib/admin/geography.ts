@@ -14,9 +14,6 @@ import type { DimensionBreakdown, DimensionRow } from "@/lib/admin/analytics";
  * simplification, it is a wrong total.
  */
 
-/** How many shades the choropleth ramp has at most. */
-const STEPS = 5;
-
 export interface MappedCountry {
   readonly slug: WingSlug;
   readonly code: string;
@@ -55,8 +52,14 @@ export interface Geography {
    * every lookup in the renderer through a cast.
    */
   readonly byWing: ReadonlyMap<string, MappedCountry>;
-  /** Upper bound of each shade band, ascending. Empty when nothing was measured. */
-  readonly bands: readonly number[];
+  /**
+   * Visitors to the busiest country with an outline, or zero.
+   *
+   * The raw figure, not a rounded scale: `lib/admin/choropleth.ts` decides
+   * what the shading does with it, so that the two maps and the calendar
+   * cannot end up disagreeing about what a shade means.
+   */
+  readonly peak: number;
   readonly mappedVisitors: number;
   readonly elsewhereVisitors: number;
   readonly totalVisitors: number;
@@ -112,29 +115,6 @@ function warnUnknown(code: string): void {
   );
 }
 
-/**
- * Shade bands, as upper bounds.
- *
- * Even steps up to the busiest country, then deduplicated: with a peak of
- * three, five even steps would produce bands nothing could ever fall into, and
- * a legend with empty rows in it invites the reader to wonder what is missing.
- */
-function bandsFor(peak: number): readonly number[] {
-  if (peak <= 0) return [];
-  return [...new Set(Array.from({ length: STEPS }, (_, i) => Math.ceil((peak * (i + 1)) / STEPS)))];
-}
-
-/** Which band a figure sits in, as a zero-based index into `bands`. */
-export function bandOf(visitors: number, bands: readonly number[]): number {
-  const index = bands.findIndex((upper) => visitors <= upper);
-  return index === -1 ? Math.max(0, bands.length - 1) : index;
-}
-
-/** The inclusive lower bound of a band, for the legend. */
-export function bandFloor(bands: readonly number[], index: number): number {
-  return index === 0 ? 1 : (bands[index - 1] ?? 0) + 1;
-}
-
 export function readGeography(breakdown: DimensionBreakdown): Geography {
   const mapped: MappedCountry[] = [];
   const elsewhere: ElsewhereCountry[] = [];
@@ -177,7 +157,7 @@ export function readGeography(breakdown: DimensionBreakdown): Geography {
     others: breakdown.others,
     complete: breakdown.complete,
     byWing: new Map(mapped.map((country) => [country.slug, country])),
-    bands: bandsFor(Math.max(0, ...mapped.map((country) => country.visitors))),
+    peak: Math.max(0, ...mapped.map((country) => country.visitors)),
     mappedVisitors,
     elsewhereVisitors,
     totalVisitors: mappedVisitors + elsewhereVisitors + (breakdown.others?.visitors ?? 0),

@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import { europeContext, europeViewBox, europeWings } from "@/content/wings-map";
 import type { AnalyticsResult, DimensionBreakdown, VisitTotals } from "@/lib/admin/analytics";
-import { bandFloor, bandOf, type Geography } from "@/lib/admin/geography";
+import { scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
+import type { Geography } from "@/lib/admin/geography";
+import { ShadeRamp } from "@/components/admin/ShadeRamp";
 import type { Change, Comparison, Series } from "@/lib/admin/traffic";
 import { cn } from "@/lib/utils";
 
@@ -423,44 +425,6 @@ export function Trend({
 
 /* --------------------------------------------------------------------- map */
 
-/**
- * The ramp, darkest last. Written out as literal class names because Tailwind
- * reads the source and would not find a composed one.
- */
-const SHADES = [
-  "fill-burgundy/22",
-  "fill-burgundy/40",
-  "fill-burgundy/58",
-  "fill-burgundy/76",
-  "fill-burgundy/94",
-] as const;
-
-const SWATCHES = [
-  "bg-burgundy/22",
-  "bg-burgundy/40",
-  "bg-burgundy/58",
-  "bg-burgundy/76",
-  "bg-burgundy/94",
-] as const;
-
-/**
- * Spread however many bands there are evenly across the five shades, so that
- * a series with three bands uses the palest, the middle and the darkest rather
- * than three indistinguishable tints off one end.
- */
-function rampIndex(band: number, bands: number): number {
-  const index = bands <= 1 ? SHADES.length - 1 : Math.round((band * (SHADES.length - 1)) / (bands - 1));
-  return Math.min(Math.max(index, 0), SHADES.length - 1);
-}
-
-function shadeFor(band: number, bands: number): string {
-  return SHADES[rampIndex(band, bands)] ?? SHADES[0];
-}
-
-function swatchFor(band: number, bands: number): string {
-  return SWATCHES[rampIndex(band, bands)] ?? SWATCHES[0];
-}
-
 const NO_DATA_FILL = "url(#admin-map-unmeasured)";
 
 /**
@@ -470,13 +434,21 @@ const NO_DATA_FILL = "url(#admin-map-unmeasured)";
  * as an attribute *or* a class because only two of them are colours the design
  * tokens know about — the third is a pattern, which has to be referenced by
  * `fill` directly.
+ *
+ * A measured nation is one ink at a computed strength rather than one of a
+ * handful of ready-made tints. `fill-opacity` is an SVG presentation
+ * attribute, so this needs neither a Tailwind class Tailwind could not find in
+ * the source nor an inline style the admin policy would have to permit.
  */
 function paintFor(
   visitors: number | undefined,
   geography: Geography,
-): { readonly className?: string; readonly fill?: string } {
+): { readonly className?: string; readonly fill?: string; readonly fillOpacity?: number } {
   if (visitors !== undefined) {
-    return { className: shadeFor(bandOf(visitors, geography.bands), geography.bands.length) };
+    return {
+      className: "fill-burgundy",
+      fillOpacity: shadeOf(visitors, scaleCeiling(geography.peak)),
+    };
   }
   return geography.complete ? { className: "fill-surface" } : { fill: NO_DATA_FILL };
 }
@@ -579,6 +551,7 @@ export function VisitorMap({
                     d={shape.d}
                     strokeWidth={5}
                     fill={paint.fill}
+                    fillOpacity={paint.fillOpacity}
                     className={cn("stroke-canvas", paint.className)}
                   />
 
@@ -594,6 +567,7 @@ export function VisitorMap({
                       r={30}
                       strokeWidth={8}
                       fill={paint.fill}
+                      fillOpacity={paint.fillOpacity}
                       className={cn("stroke-canvas", paint.className)}
                     />
                   ) : null}
@@ -619,25 +593,16 @@ export function VisitorMap({
  * "none" for both would be quietly wrong half the time.
  */
 function Legend({ geography }: { readonly geography: Geography }) {
-  const { bands } = geography;
-
   return (
-    <ul className="mt-6 flex flex-col gap-2">
-      {bands.map((upper, index) => {
-        const floor = bandFloor(bands, index);
-        return (
-          <li key={upper} className="flex items-center gap-3 text-micro text-muted">
-            <span
-              aria-hidden="true"
-              className={cn("inline-block size-3 shrink-0", swatchFor(index, bands.length))}
-            />
-            <span className="numerals-tabular">
-              {floor === upper ? num(upper) : `${num(floor)}–${num(upper)}`}{" "}
-              {upper === 1 ? "visitor" : "visitors"}
-            </span>
-          </li>
-        );
-      })}
+    <ul className="mt-6 flex flex-col gap-3">
+      <li>
+        <ShadeRamp
+          ceiling={scaleCeiling(geography.peak)}
+          tone="burgundy"
+          unit="visitors"
+          format={num}
+        />
+      </li>
 
       <li className="flex items-center gap-3 text-micro text-muted">
         <span
