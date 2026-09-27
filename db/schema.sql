@@ -407,6 +407,86 @@ CREATE TABLE IF NOT EXISTS newsletter_dispatch (
 );
 
 -- ---------------------------------------------------------------------------
+-- Gatherings
+-- ---------------------------------------------------------------------------
+
+-- Where and when people will physically be.
+--
+-- Of everything in this database, this is the table whose disclosure could get
+-- somebody hurt. The membership roll tells an opponent who to report to an
+-- employer; a small meetup tells them which restaurant to turn up at, at what
+-- time, and roughly who will be sitting in it. Political gatherings do get
+-- broken up, and the people who do it find out where to go by being told.
+--
+-- So the rule the schema itself enforces: **an address is either meant to be
+-- published, in which case it is plain, or it is not, in which case this
+-- database never holds it in readable form.** The two `CHECK` constraints
+-- below make those the only possibilities. An application bug cannot put a
+-- private meetup's address into `venue`, and cannot leave it unencrypted by
+-- forgetting to encrypt it — the row is refused either way.
+--
+-- `visibility` is the whole of the policy:
+--
+--   * `public`      — an open event, everything publishable. `venue` is plain
+--                     text because a public page has to render it, and the
+--                     public site deliberately has no decryption key.
+--   * `invitation`  — that it is happening may be said; where, may not. The
+--                     city and the month are publishable, the address is
+--                     encrypted and given out by a person to people they have
+--                     decided to trust.
+--   * `private`     — nothing is publishable at all. The row exists so the
+--                     organisers have one place that remembers the plan.
+--
+-- `city` is deliberately in the clear for all three. A city is not a place
+-- anybody can be ambushed at, and per-wing counts are the one thing worth
+-- reading without a passkey touch.
+CREATE TABLE IF NOT EXISTS gathering (
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  title            text NOT NULL,
+
+  -- The national wing this belongs to, as a wing slug, or 'other'. Same
+  -- reasoning as `member.country`: an id rather than a label, so it means the
+  -- same thing in every edition of the site.
+  wing             text NOT NULL,
+  city             text NOT NULL,
+
+  starts_at        timestamptz NOT NULL,
+  ends_at          timestamptz,
+
+  visibility       text NOT NULL DEFAULT 'private'
+                     CHECK (visibility IN ('public', 'invitation', 'private')),
+
+  -- Safe to publish for any visibility that is published at all. Never write
+  -- an address into this.
+  summary          text NOT NULL DEFAULT '',
+
+  -- The address, in exactly one of two places and never both.
+  venue            text NOT NULL DEFAULT '',
+  venue_encrypted  text,
+
+  -- Organiser notes: who is bringing what, who has been told, what went wrong
+  -- last time. Encrypted whatever the visibility, because these are remarks
+  -- about named people in the same sense a vetting note is.
+  notes_encrypted  text,
+
+  cancelled_at     timestamptz,
+  created_at       timestamptz NOT NULL DEFAULT now(),
+  updated_at       timestamptz NOT NULL DEFAULT now(),
+
+  -- Only a public gathering may hold a readable address.
+  CONSTRAINT gathering_private_venue_is_encrypted
+    CHECK (visibility = 'public' OR venue = ''),
+  -- And a public one has no business holding an encrypted one, so there is
+  -- never a question of which of the two columns is authoritative.
+  CONSTRAINT gathering_public_venue_is_plain
+    CHECK (visibility <> 'public' OR venue_encrypted IS NULL)
+);
+
+CREATE INDEX IF NOT EXISTS gathering_when_idx ON gathering (starts_at DESC);
+CREATE INDEX IF NOT EXISTS gathering_publishable_idx
+  ON gathering (visibility, starts_at) WHERE cancelled_at IS NULL;
+
+-- ---------------------------------------------------------------------------
 -- Traffic measurement
 -- ---------------------------------------------------------------------------
 --

@@ -69,7 +69,18 @@ export type AuditAction =
   | "newsletter.subscribe"
   | "newsletter.confirm"
   | "newsletter.unsubscribe"
-  | "newsletter.dispatch";
+  | "newsletter.dispatch"
+  /*
+   * Gatherings. `reveal` is here for the same reason `member.reveal` is: the
+   * sensitive act is reading, because what is read is where people will
+   * physically be. The detail never carries the address or the city — this
+   * table is not encrypted, and a log of venues would undo the point of
+   * encrypting them in the first place.
+   */
+  | "gathering.reveal"
+  | "gathering.create"
+  | "gathering.update"
+  | "gathering.delete";
 
 export interface AuditEntry {
   readonly action: AuditAction;
