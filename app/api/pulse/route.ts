@@ -43,6 +43,42 @@ import {
 const BEACON_LIMIT = 120;
 const BEACON_WINDOW_SECONDS = 300;
 
+/**
+ * The ceiling the per-connection limit cannot see, on the same reasoning as the
+ * one guarding the intake: a script arriving from several hundred addresses sits
+ * comfortably inside every individual allowance while the writes still land.
+ *
+ * This endpoint needs it more than the forms do, because it is the only
+ * unauthenticated write the public site performs and the only page-view-rate
+ * path to the database. Everything else a visitor can reach is prerendered and
+ * served from the CDN without a query, so under a flood this is the one place
+ * the site can be made to do real work.
+ *
+ * Forty writes a second sustained, which is roughly twelve hundred people
+ * reading at once — generous for a movement that has just started promoting
+ * itself, and far below what the connection pool would struggle with. Tripping
+ * it costs an undercount in the dashboard and nothing else: no reader sees a
+ * difference, because this endpoint has never told anyone anything.
+ */
+const GLOBAL_BEACON_LIMIT = 12_000;
+
+/**
+ * Turns the beacon off without touching the code.
+ *
+ * Analytics is the one thing here that is purely nice to have, so it should be
+ * the first thing surrendered when the site is under load or costing money —
+ * and that decision should not require someone to be calm enough to write a
+ * patch. Read per request, so where the host can change a variable without a
+ * rebuild it takes effect without one.
+ *
+ * Absence means enabled. A measurement that silently stopped because a variable
+ * was never set would be discovered weeks later, in the form of a figure nobody
+ * could explain.
+ */
+function disabled(): boolean {
+  return process.env.PULSE_DISABLED === "true";
+}
+
 /*
  * Constructed per call rather than shared. A `Response` carries a stream that
  * is consumed when it is sent, so one instance handed to two requests is a
@@ -89,6 +125,7 @@ export async function POST(request: Request): Promise<NextResponse> {
    * exactly as configured.
    */
   if (!hasDatabase()) return NO_CONTENT();
+  if (disabled()) return NO_CONTENT();
   if (!sameOrigin(request)) return NO_CONTENT();
 
   let payload: unknown;
@@ -116,6 +153,24 @@ export async function POST(request: Request): Promise<NextResponse> {
   } catch {
     return NO_CONTENT();
   }
+
+  /*
+   * The site-wide ceiling is consumed before the per-connection one, which is
+   * the reverse of the intake and deliberate.
+   *
+   * Throttling here is itself a write, so the ordering decides what a flood
+   * costs. The global bucket is a single row, already hot; a per-connection
+   * bucket is a new row for every distinct address, and a distributed flood is
+   * distinct addresses by definition. Checking the cheap shared counter first
+   * means that once the ceiling is reached the endpoint stops growing
+   * `admin_rate_limit` at the rate it is being attacked.
+   */
+  const global = await consumeRateLimit(
+    "pulse:all",
+    GLOBAL_BEACON_LIMIT,
+    BEACON_WINDOW_SECONDS,
+  );
+  if (!global.allowed) return NO_CONTENT();
 
   const { allowed } = await consumeRateLimit(
     `pulse:${ipHash ?? "local"}`,
