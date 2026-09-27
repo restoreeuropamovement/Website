@@ -278,13 +278,6 @@ delete the directory to start over.
   rewrite history *undetectably*, because the key is in the environment rather
   than in the table. `/admin/security` verifies the recent window on every load
   and `npm run db:verify-audit` verifies the lot.
-- **The database connection is verified, not merely encrypted.** `lib/db.ts`
-  connects with `verify-full`, so the server's certificate is checked rather than
-  accepted. `require` — what most guides suggest — encrypts the tunnel without
-  establishing who is at the far end of it, which leaves an interceptor able to
-  answer in Postgres's place, read every column not encrypted by
-  `lib/admin/pii.ts` and keep the connection string. `DATABASE_SSL=disable`
-  exists for the loopback socket in development and is refused in production.
 - **Sessions are bound to the browser they were issued to.** A session presented
   with a different user agent is revoked rather than merely refused, audited,
   and mailed about. It is a modest control — an attacker who copies the cookie
@@ -321,6 +314,17 @@ delete the directory to start over.
   at all, and that a failed sign-in in the log is now somebody who was invited
   rather than background noise. `robots.txt` deliberately has no `Disallow:
   /admin`, which would announce the thing this conceals.
+- **CI runs the full check on every push**, with actions pinned to commit SHAs
+  rather than tags, so a repointed tag in somebody else's repository cannot put
+  new code into a job that has this repository checked out. Dependabot proposes
+  the upgrades; `npm audit` runs weekly against production dependencies.
+- **The database connection is verified, not merely encrypted.** `lib/db.ts`
+  connects with `verify-full`, so the server's certificate is checked rather than
+  accepted. `require` — what most guides suggest — encrypts the tunnel without
+  establishing who is at the far end of it, which leaves an interceptor able to
+  answer in Postgres's place, read every column not encrypted by
+  `lib/admin/pii.ts` and keep the connection string. `DATABASE_SSL=disable`
+  exists for the loopback socket in development and is refused in production.
 - **Throttling buckets on an address the caller cannot choose.**
   `lib/admin/request.ts` prefers `x-vercel-forwarded-for`, which the platform
   writes and strips from the incoming request, over `x-forwarded-for`, which on
@@ -538,9 +542,11 @@ cannot print a map whose borders are invented.
 - **No cookies for readers, no third-party requests.** No font CDN, no embeds, no
   hotlinked images. The one script is Vercel Web Analytics, which is cookieless,
   stores no personal data and is served from this origin — which is why the site
-  carries no consent banner. The only cookie on the site is the admin session,
-  set after a passkey sign-in. Anything that sets an identifier for readers would
-  change that, and `/privacy` would have to be rewritten first.
+  carries no consent banner. The only cookies on the site are the admin session,
+  set after a passkey sign-in, and — where `ADMIN_VEIL_SECRET` is configured —
+  the curtain in front of `/admin`; both are set on that surface only and
+  neither is ever sent to a reader. Anything that sets an identifier for readers
+  would change that, and `/privacy` would have to be rewritten first.
 
 ---
 
