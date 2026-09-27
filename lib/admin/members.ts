@@ -12,6 +12,7 @@ import {
   encryptPii,
   foldForSearch,
 } from "@/lib/admin/pii";
+import { requireElevatedSession } from "@/lib/admin/session";
 import { db } from "@/lib/db";
 
 /**
@@ -331,8 +332,18 @@ export interface MemberSearchResult {
 /**
  * Searches and sorts the roll, decrypting as it goes.
  *
- * **Privileged.** Returns names and email addresses in the clear, so callers
- * must hold an elevated session and must audit the call.
+ * **Privileged.** Returns names and email addresses in the clear, and therefore
+ * checks for an elevated session itself rather than trusting that it was only
+ * reached from somewhere that already had. The caller still has to audit the
+ * call — that part cannot be moved in here, because only the caller knows what
+ * it was asked for.
+ *
+ * The check is deliberately inside the function rather than in the page that
+ * renders it. A conditional at the call site is correct exactly as long as
+ * nobody adds a second call site, and the whole point of `requireElevatedSession`
+ * throwing is that forgetting it should be an error rather than a silent
+ * disclosure. Mutations against this table have always worked this way; the
+ * read is the more sensitive operation of the two and had the weaker guarantee.
  *
  * The country filter and the status filter are applied in SQL, where they are
  * indexed and cost nothing. Name and email matching happens after decryption,
@@ -343,6 +354,8 @@ export interface MemberSearchResult {
 export async function searchMembersRevealed(
   options: MemberSearch = {},
 ): Promise<MemberSearchResult> {
+  await requireElevatedSession();
+
   const sql = db();
   const pageSize = Math.min(Math.max(options.pageSize ?? 25, 1), 100);
   const sort = options.sort ?? "country";
