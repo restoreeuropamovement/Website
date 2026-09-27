@@ -1,4 +1,6 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { raiseSecurityAlert } from "@/lib/admin/alerts";
+import { recordAudit } from "@/lib/admin/audit";
 import { constantTimeEqual, hashToken, randomToken, sign } from "@/lib/admin/crypto";
 import { db } from "@/lib/db";
 
@@ -105,6 +107,61 @@ export async function createSession(
 }
 
 /**
+ * Ties a session to the client it was issued to.
+ *
+ * The user agent has been stored on every session row since sessions existed
+ * and was never read, which made it a record of a fact nobody checked. Checking
+ * it is worth a little because of what the realistic compromise looks like:
+ * malware copies the cookie off a laptop and replays it from the attacker's own
+ * machine, and their client almost never presents the same string. It is not a
+ * strong control — an attacker who takes the cookie can usually take the header
+ * too, and one who thinks to copy it defeats this in a line — but it costs one
+ * comparison and it raises the floor beneath elevation rather than replacing it.
+ *
+ * Deliberately *not* the IP address, which is stored for the audit log and must
+ * stay out of this test. Addresses change mid-session on any mobile network and
+ * behind most corporate egress; binding to one would sign people out constantly
+ * and teach them that being logged out means nothing.
+ *
+ * Compared exactly. A browser that updates and restarts mid-session changes its
+ * string and loses the session, which is a real cost — bounded by the fact that
+ * a session lives twelve hours at the outside, and paid in a sign-in rather
+ * than in lost work.
+ *
+ * A mismatch revokes rather than merely rejects. If this cookie is being
+ * replayed, the copy on the original machine is worth nothing either.
+ */
+async function userAgentMatches(sessionId: string, stored: string | null): Promise<boolean> {
+  const presented = (await headers()).get("user-agent")?.slice(0, 256) ?? null;
+  if (stored === presented) return true;
+
+  const [revoked] = await db()<{ id: string }[]>`
+    UPDATE admin_session SET revoked_at = now()
+     WHERE id = ${sessionId} AND revoked_at IS NULL
+    RETURNING id
+  `;
+
+  /*
+   * Only on the transition. Without the `RETURNING` guard, every subsequent
+   * request carrying the same dead cookie would record a fresh row and raise a
+   * fresh alert — so an attacker replaying a stolen cookie in a loop could bury
+   * the first, meaningful alert under its own repetitions.
+   */
+  if (revoked) {
+    await recordAudit({
+      action: "session.mismatch",
+      outcome: "failure",
+      actorLabel: "session guard",
+      /* Neither user agent is recorded: both are a fingerprint of a person. */
+      detail: { revoked: true },
+    });
+    raiseSecurityAlert("session.hijack");
+  }
+
+  return false;
+}
+
+/**
  * The authoritative check. Returns the signed-in administrator, or null.
  */
 export async function currentSession(): Promise<ActiveSession | null> {
@@ -127,11 +184,13 @@ export async function currentSession(): Promise<ActiveSession | null> {
       display_name: string;
       needs_touch: boolean;
       elevated_until: Date | null;
+      user_agent: string | null;
     }[]
   >`
     SELECT s.id,
            s.expires_at,
            s.elevated_until,
+           s.user_agent,
            u.id AS user_id,
            u.username,
            u.display_name,
@@ -146,6 +205,8 @@ export async function currentSession(): Promise<ActiveSession | null> {
   `;
 
   if (!row) return null;
+
+  if (!(await userAgentMatches(row.id, row.user_agent))) return null;
 
   // Sliding activity window, written at most once every few minutes so an
   // ordinary page view does not cost a write.

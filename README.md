@@ -283,6 +283,11 @@ delete the directory to start over.
   answer in Postgres's place, read every column not encrypted by
   `lib/admin/pii.ts` and keep the connection string. `DATABASE_SSL=disable`
   exists for the loopback socket in development and is refused in production.
+- **Sessions are bound to the browser they were issued to.** A session presented
+  with a different user agent is revoked rather than merely refused, audited,
+  and mailed about. It is a modest control — an attacker who copies the cookie
+  can usually copy the header — but it costs one comparison and catches the
+  common case, which is malware lifting a cookie and replaying it elsewhere.
 - **Changes to who can get in are mailed immediately.** A passkey enrolled or
   removed, an invitation issued or claimed, a session used from the wrong
   browser, a run of failed sign-ins, or an audit chain that stops verifying.
