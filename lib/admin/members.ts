@@ -4,6 +4,7 @@ import {
   type MemberSort,
   type MemberStatus,
 } from "@/lib/admin/member-status";
+import { isCanaryDigest } from "@/lib/admin/canary";
 import {
   decryptPiiSafe,
   emailDigest,
@@ -277,6 +278,15 @@ export interface RevealedMember {
   readonly status: MemberStatus;
   readonly statusChangedAt: Date;
   readonly createdAt: Date;
+  /**
+   * A planted address rather than a person — see `lib/admin/canary.ts`.
+   *
+   * Computed here and never stored, because a column saying which row is the
+   * trap is a column telling whoever steals the table which row to delete. The
+   * flag exists so an administrator meeting a member who does not exist is told
+   * why, rather than writing to them and setting off their own alarm.
+   */
+  readonly canary: boolean;
 }
 
 export interface MemberSearch {
@@ -339,6 +349,7 @@ export async function searchMembersRevealed(
       id: string;
       name_encrypted: string;
       email_encrypted: string;
+      email_digest: string;
       country: string;
       region_encrypted: string | null;
       message_encrypted: string | null;
@@ -350,7 +361,7 @@ export async function searchMembersRevealed(
       created_at: Date;
     }[]
   >`
-    SELECT id, name_encrypted, email_encrypted, country,
+    SELECT id, name_encrypted, email_encrypted, email_digest, country,
            region_encrypted, message_encrypted, notes_encrypted,
            involvement_role, interest_area, status, status_changed_at, created_at
       FROM member
@@ -386,6 +397,7 @@ export async function searchMembersRevealed(
       status: row.status,
       statusChangedAt: row.status_changed_at,
       createdAt: row.created_at,
+      canary: await isCanaryDigest(row.email_digest),
     })),
   );
 

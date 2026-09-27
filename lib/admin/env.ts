@@ -127,6 +127,22 @@ export function hasMemberEncryptionKey(): boolean {
 }
 
 /**
+ * Addresses planted in the roll to detect that it has been copied. Comma
+ * separated; optional, and empty by default. See `lib/admin/canary.ts`.
+ *
+ * Optional rather than required, unlike everything else in this file, because a
+ * canary is only as good as the mailbox watching it. Forcing a value would get
+ * one invented that nobody reads, which is worse than none: it would look like
+ * the control is in place.
+ */
+export function canaryMemberEmails(): readonly string[] {
+  return (process.env.CANARY_MEMBER_EMAILS ?? "")
+    .split(",")
+    .map((address) => address.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+/**
  * Transactional mail.
  *
  * Optional, and lazy like everything else here, for a reason specific to what
