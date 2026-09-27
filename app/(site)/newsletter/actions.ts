@@ -15,6 +15,7 @@ import {
 } from "@/lib/admin/subscribers";
 import { alreadySubscribed, confirmSubscription } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
+import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
 import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 import { NEWSLETTER_INITIAL, type NewsletterState } from "./state";
@@ -46,6 +47,32 @@ export async function subscribe(
     return { status: "unavailable", errors: [] };
   }
 
+  /*
+   * The decoy field, checked before anything else is read, and answered with
+   * the ordinary reply — see lib/spam.ts and the longer note in the membership
+   * intake. Whichever component eventually renders this form must include
+   * `<Honeypot />`; until one does, this costs a single absent-field lookup and
+   * is simply waiting for it.
+   */
+  if (honeypotTripped(form)) {
+    const { ipHash: decoyIpHash } = await clientContext();
+    const decoy = await consumeRateLimit(
+      `subscribe:${decoyIpHash ?? "unknown"}`,
+      RATE_LIMIT,
+      RATE_WINDOW_SECONDS,
+    );
+    if (decoy.allowed) {
+      await recordAudit({
+        action: "newsletter.subscribe",
+        outcome: "failure",
+        actorLabel: "public",
+        detail: { reason: "decoy field completed" },
+        ipHash: decoyIpHash,
+      });
+    }
+    return { status: "sent", errors: [] };
+  }
+
   const email = String(form.get("email") ?? "").trim();
   /*
    * The language to write to this address in, now and for every issue after
@@ -66,6 +93,31 @@ export async function subscribe(
     RATE_WINDOW_SECONDS,
   );
   if (!limit.allowed) return { status: "throttled", errors: [] };
+
+  /*
+   * And the ceiling the per-connection limit cannot see: one script spread
+   * across a few hundred addresses, each comfortably inside its own allowance.
+   * It matters more here than on the other two forms. A membership application
+   * ends in a queue an administrator empties; a subscription request ends in a
+   * message delivered to an address the sender chose, so the thing being
+   * rationed is other people's inboxes and this domain's standing with the
+   * providers that carry them.
+   */
+  const global = await consumeRateLimit(
+    "subscribe:all",
+    GLOBAL_HOURLY_LIMIT,
+    GLOBAL_WINDOW_SECONDS,
+  );
+  if (!global.allowed) {
+    await recordAudit({
+      action: "newsletter.subscribe",
+      outcome: "failure",
+      actorLabel: "public",
+      detail: { reason: "site-wide hourly ceiling reached" },
+      ipHash,
+    });
+    return { status: "busy", errors: [] };
+  }
 
   const outcome = await requestSubscription(email, locale);
 

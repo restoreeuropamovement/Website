@@ -9,7 +9,13 @@
  * address receives.
  */
 export interface NewsletterState {
-  readonly status: "idle" | "sent" | "invalid" | "unavailable" | "throttled";
+  /*
+   * `busy` is the site-wide ceiling, and it is separate from `throttled` for
+   * the reason `join` states at length: this reader has almost certainly sent
+   * nothing, and what they met was everybody else. Telling them they have been
+   * throttled would be a lie about their own conduct.
+   */
+  readonly status: "idle" | "sent" | "invalid" | "unavailable" | "throttled" | "busy";
   readonly errors: readonly string[];
 }
 

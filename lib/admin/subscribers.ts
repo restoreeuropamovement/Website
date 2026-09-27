@@ -1,5 +1,12 @@
 import { hashToken, randomToken } from "@/lib/admin/crypto";
-import { decryptPiiSafe, emailDigest, encryptPii, unsubscribeTag } from "@/lib/admin/pii";
+import {
+  decryptPiiSafe,
+  emailDigest,
+  emailDigestCandidates,
+  encryptPii,
+  unsubscribeTag,
+  unsubscribeTagMatches,
+} from "@/lib/admin/pii";
 import { db } from "@/lib/db";
 
 /**
@@ -57,46 +64,81 @@ export async function requestSubscription(
 ): Promise<SubscribeOutcome> {
   const digest = await emailDigest(email);
 
-  const [existing] = await db()<
-    { id: string; confirmed_at: Date | null; unsubscribed_at: Date | null }[]
-  >`
-    SELECT id, confirmed_at, unsubscribed_at FROM subscriber WHERE email_digest = ${digest}
-  `;
-
-  if (existing && existing.confirmed_at && !existing.unsubscribed_at) {
-    return { kind: "already", id: existing.id };
+  /*
+   * During a key rotation an existing row may still carry the outgoing key's
+   * digest, which would not collide with the one written below — so the upsert
+   * would insert a second row for an address already on the list, and the
+   * duplicate would outlive the rotation. Moving the digest across first is
+   * cheap, idempotent, and a no-op whenever no rotation is in progress.
+   */
+  const candidates = await emailDigestCandidates(email);
+  if (candidates.length > 1) {
+    await db()`
+      UPDATE subscriber SET email_digest = ${digest} WHERE email_digest = ${candidates[1]!}
+    `;
   }
 
   const token = randomToken();
   const tokenHash = await hashToken(token);
   const expires = new Date(Date.now() + CONFIRM_WINDOW_HOURS * 60 * 60 * 1000);
 
-  if (existing) {
-    /*
-     * Reissuing rather than inserting. This covers both the reader who lost the
-     * first message and the one returning after unsubscribing, and in each case
-     * the previous token stops working — a confirmation link that stays valid
-     * after a newer one was sent is a second live key to the same door.
-     */
-    await db()`
-      UPDATE subscriber
-         SET confirm_token_hash = ${tokenHash},
-             confirm_expires_at = ${expires},
+  /*
+   * One statement, deliberately, rather than a read followed by the write it
+   * implies.
+   *
+   * Written that way this function had a race with itself: two submissions of
+   * the same address arriving together both found no row, both inserted, and
+   * the one that lost `ON CONFLICT` still handed its caller a token that was
+   * never stored — a confirmation link that could not work, sent to somebody
+   * who did nothing wrong. The upsert has no such gap, because the conflict is
+   * resolved by the database inside the same statement that caused it.
+   *
+   * The `WHERE` on the update is what protects an existing subscriber. Without
+   * it a second submission of a confirmed address would reset `confirmed_at`
+   * and quietly unsubscribe somebody by re-entering their own address. With
+   * it, a confirmed and active row is left untouched, the statement returns
+   * nothing, and the caller is told `already` below.
+   *
+   * Reissuing covers the reader who lost the first message and the one
+   * returning after unsubscribing. In both cases the previous token stops
+   * working: a confirmation link still valid after a newer one was sent is a
+   * second live key to the same door.
+   */
+  const encrypted = await encryptPii(email.trim());
+
+  /*
+   * Twice at most. The second pass exists for one narrow case: the conflicting
+   * row was an unconfirmed subscription that `purgeExpiredUnconfirmed` deleted
+   * between the upsert and the read below, so neither statement found
+   * anything. Inserting again then succeeds outright. Anything beyond that is
+   * not a race this code can lose.
+   */
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const [reissued] = await db()<{ id: string }[]>`
+      INSERT INTO subscriber (email_encrypted, email_digest, confirm_token_hash, confirm_expires_at, locale)
+      VALUES (${encrypted}, ${digest}, ${tokenHash}, ${expires}, ${locale})
+      ON CONFLICT (email_digest) DO UPDATE
+         SET confirm_token_hash = EXCLUDED.confirm_token_hash,
+             confirm_expires_at = EXCLUDED.confirm_expires_at,
              confirmed_at       = NULL,
              unsubscribed_at    = NULL,
-             locale             = ${locale}
-       WHERE id = ${existing.id}
+             locale             = EXCLUDED.locale
+       WHERE subscriber.confirmed_at IS NULL
+          OR subscriber.unsubscribed_at IS NOT NULL
+      RETURNING id
     `;
-    return { kind: "pending", token };
+
+    /* Inserted, or reissued against a pending or previously removed row. */
+    if (reissued) return { kind: "pending", token };
+
+    /* The `WHERE` declined: the address is on the list and active. */
+    const [active] = await db()<{ id: string }[]>`
+      SELECT id FROM subscriber WHERE email_digest = ${digest}
+    `;
+    if (active) return { kind: "already", id: active.id };
   }
 
-  await db()`
-    INSERT INTO subscriber (email_encrypted, email_digest, confirm_token_hash, confirm_expires_at, locale)
-    VALUES (${await encryptPii(email.trim())}, ${digest}, ${tokenHash}, ${expires}, ${locale})
-    ON CONFLICT (email_digest) DO NOTHING
-  `;
-
-  return { kind: "pending", token };
+  throw new Error("Could not record the subscription request.");
 }
 
 /**
@@ -145,7 +187,7 @@ export async function unsubscribeByToken(token: string): Promise<boolean> {
   const tag = token.slice(separator + 1);
 
   /* Verified by recomputation under the key, never by a lookup in the table. */
-  if (tag !== (await unsubscribeTag(id))) return false;
+  if (!(await unsubscribeTagMatches(id, tag))) return false;
 
   await db()`
     UPDATE subscriber SET unsubscribed_at = now()
