@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
 import { Lock } from "lucide-react";
 import { recordAudit } from "@/lib/admin/audit";
+import { MemberGeography } from "@/components/admin/MemberGeography";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { hasMemberEncryptionKey } from "@/lib/admin/env";
 import {
@@ -58,12 +60,57 @@ import { EraseByEmail } from "@/components/admin/EraseByEmail";
  *
  * Which means an attacker holding a stolen session cookie gets the first state
  * and stops there.
+ *
+ * Four sections, in the order the work is done: what is waiting, where it is,
+ * who it is, and the tools for changing it. The tools come last because they
+ * are the rarest thing done here and the longest form on the page — kept
+ * between the results heading and the results themselves, as they once were,
+ * they pushed the roll below the fold on every visit.
  */
 
 function single(value: string | string[] | undefined): string | undefined {
   const candidate = Array.isArray(value) ? value[0] : value;
   const trimmed = candidate?.trim();
   return trimmed ? trimmed : undefined;
+}
+
+/**
+ * This page's own URL with some of the filters changed.
+ *
+ * Every filter on this page lives in the query string rather than in component
+ * state, so that a view can be bookmarked, reopened in a second tab and sent to
+ * another administrator. That only works if each control preserves the filters
+ * it does not own — the country a map click sets has to survive the status tab
+ * already chosen, and vice versa.
+ */
+function membersHref(
+  params: Record<string, string | string[] | undefined>,
+  changes: Record<string, string | undefined>,
+): string {
+  const next = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(params)) {
+    const flat = single(Array.isArray(value) ? value[0] : value);
+    if (flat) next.set(key, flat);
+  }
+
+  for (const [key, value] of Object.entries(changes)) {
+    if (value === undefined) next.delete(key);
+    else next.set(key, value);
+  }
+
+  const query = next.toString();
+  return query ? `/admin/members?${query}` : "/admin/members";
+}
+
+/** The rule and title that separate one part of this page from the next. */
+function SectionHead({ title, children }: { readonly title: string; readonly children?: ReactNode }) {
+  return (
+    <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-rule pb-3">
+      <h2 className="font-serif text-display-4 font-normal text-ink">{title}</h2>
+      {children}
+    </div>
+  );
 }
 
 export default async function AdminMembersPage(props: {
@@ -91,8 +138,11 @@ export default async function AdminMembersPage(props: {
   const overview = await membershipOverview();
   const elevated = isElevated(session);
 
+  const country = single(searchParams.country);
+  const selectedCountry = country && isCountryValue(country) ? country : undefined;
+
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-12">
       <header className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="eyebrow mb-4 text-burgundy">Membership</p>
@@ -120,13 +170,36 @@ export default async function AdminMembersPage(props: {
 
       <Tabs overview={overview} active={single(searchParams.status)} />
 
+      <MemberGeography
+        countries={overview.countries}
+        selected={selectedCountry}
+        hrefFor={(value) => membersHref(searchParams, { country: value, page: undefined })}
+      />
+
       {elevated ? (
         <RevealedList session={session} searchParams={searchParams} />
       ) : (
         <PasskeyElevation />
       )}
 
-      <CountryBreakdown overview={overview} />
+      {/*
+        Last, and only behind the passkey. Both write to the encrypted columns,
+        and the erasure tool cannot be undone; neither belongs in the path
+        somebody scrolls through to read the roll.
+      */}
+      {elevated ? (
+        <section className="flex flex-col gap-6">
+          <SectionHead title="Adding and erasing" />
+          <div className="grid gap-6 xl:grid-cols-2 xl:items-start">
+            <AddMember
+              countries={englishInvolvement.countries}
+              roles={englishInvolvement.roles}
+              interests={englishInvolvement.interests}
+            />
+            <EraseByEmail />
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }
@@ -208,52 +281,6 @@ function Tabs({
   );
 }
 
-function CountryBreakdown({
-  overview,
-}: {
-  readonly overview: Awaited<ReturnType<typeof membershipOverview>>;
-}) {
-  if (overview.countries.length === 0) {
-    return (
-      <p className="border-l-2 border-gold/65 py-1 pl-5 text-reading text-muted">
-        No records yet. Once applications are entered they appear here, counted by country.
-      </p>
-    );
-  }
-
-  const highest = Math.max(...overview.countries.map((row) => row.confirmed), 1);
-
-  return (
-    <section className="flex flex-col gap-4">
-      <h2 className="eyebrow text-muted">By country</h2>
-      <ul className="flex flex-col border-t border-hairline">
-        {overview.countries.map((row) => (
-          <li
-            key={row.country}
-            className="flex items-center gap-4 border-b border-hairline py-3"
-          >
-            <span className="w-44 shrink-0 text-[0.9375rem] text-ink">
-              {countryLabel(row.country)}
-            </span>
-            <span aria-hidden="true" className="h-1.5 flex-1 bg-hairline">
-              <span
-                className="block h-full bg-burgundy/60"
-                style={{ width: `${Math.round((row.confirmed / highest) * 100)}%` }}
-              />
-            </span>
-            <span className="w-24 shrink-0 text-right text-[0.9375rem] tabular-nums text-ink">
-              {row.confirmed}
-            </span>
-            <span className="w-32 shrink-0 text-right text-micro tabular-nums text-faint">
-              {row.new + row.reviewing > 0 ? `${row.new + row.reviewing} open` : ""}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 async function RevealedList({
   session,
   searchParams,
@@ -315,25 +342,19 @@ async function RevealedList({
 
   return (
     <section className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <h2 className="eyebrow text-muted">
-          {options.status && options.status !== "open"
-            ? MEMBER_STATUS_TAB[options.status]
-            : "Everything"}
-          {" · "}
-          {result.total} {result.total === 1 ? "record" : "records"}
-          {query ? ` matching “${query}”` : ""}
-        </h2>
-        <p className="text-micro text-faint">
-          This view is being recorded in the audit log.
-        </p>
-      </div>
+      <SectionHead title="The roll">
+        <p className="text-micro text-faint">This view is being recorded in the audit log.</p>
+      </SectionHead>
 
-      <AddMember
-        countries={englishInvolvement.countries}
-        roles={englishInvolvement.roles}
-        interests={englishInvolvement.interests}
-      />
+      <p className="eyebrow text-muted">
+        {options.status && options.status !== "open"
+          ? MEMBER_STATUS_TAB[options.status]
+          : "Everything"}
+        {options.country ? ` · ${countryLabel(options.country)}` : ""}
+        {" · "}
+        {result.total} {result.total === 1 ? "record" : "records"}
+        {query ? ` matching “${query}”` : ""}
+      </p>
 
       <MemberSearchForm
         countries={englishInvolvement.countries}
@@ -425,8 +446,6 @@ async function RevealedList({
       {result.pageCount > 1 ? (
         <Pagination page={result.page} pageCount={result.pageCount} params={searchParams} />
       ) : null}
-
-      <EraseByEmail />
     </section>
   );
 }
@@ -538,15 +557,7 @@ function Pagination({
   readonly pageCount: number;
   readonly params: Record<string, string | string[] | undefined>;
 }) {
-  const href = (target: number) => {
-    const next = new URLSearchParams();
-    for (const [key, value] of Object.entries(params)) {
-      const flat = Array.isArray(value) ? value[0] : value;
-      if (flat && key !== "page") next.set(key, flat);
-    }
-    next.set("page", String(target));
-    return `/admin/members?${next.toString()}`;
-  };
+  const href = (target: number) => membersHref(params, { page: String(target) });
 
   return (
     <nav aria-label="Pages" className="flex items-center gap-4 text-[0.875rem]">

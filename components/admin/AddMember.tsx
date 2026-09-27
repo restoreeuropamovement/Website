@@ -44,7 +44,7 @@ export function AddMember({
       <div className="flex items-start gap-3">
         <UserPlus className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden="true" />
         <div>
-          <h2 className="eyebrow text-muted">Add a record</h2>
+          <h3 className="eyebrow text-muted">Add a record</h3>
           <p className="mt-2 max-w-xl text-[0.875rem] leading-relaxed text-muted">
             For an application that arrived by post, email or in person. The name and address are
             encrypted before they are written down. Add it as{" "}

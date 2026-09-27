@@ -24,7 +24,7 @@ export function EraseByEmail() {
   return (
     <section className="flex flex-col gap-4 border border-burgundy/40 p-6">
       <div>
-        <h2 className="eyebrow text-burgundy">Erasure request</h2>
+        <h3 className="eyebrow text-burgundy">Erasure request</h3>
         <p className="mt-3 max-w-xl text-[0.875rem] leading-relaxed text-muted">
           Under GDPR a member may have their record deleted on request, without giving a reason and
           without undue delay. Enter the address the request came from. This cannot be undone, and
