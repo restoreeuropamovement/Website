@@ -12,8 +12,8 @@ export const involvementText: InvolvementText = {
       "Sei arrivato dalla sezione in {country}, quindi il modulo qui sotto è impostato su di essa. Cambia l'uno o l'altro campo se non è esatto.",
     roleLegend: "A che titolo ti candidi",
     fields: {
-      name: "Nome e cognome",
-      nameHint: "Il tuo nome e il tuo cognome, come li scriveresti su una lettera.",
+      givenName: "Nome",
+      familyName: "Cognome",
       email: "Email",
       country: "Paese",
       region: "Regione o città",
@@ -49,8 +49,8 @@ export const involvementText: InvolvementText = {
       other: "Questo modulo presenta {count} problemi",
     },
     errors: {
-      name: "Inserisci il tuo nome, al massimo 120 caratteri.",
-      surname: "Inserisci il cognome oltre al nome.",
+      givenName: "Inserisci il tuo nome, tra 2 e 60 caratteri.",
+      familyName: "Inserisci il tuo cognome, tra 2 e 60 caratteri.",
       email: "Inserisci un indirizzo email valido.",
       country: "Scegli un paese dall'elenco.",
       region: "Regione o città è limitata a 120 caratteri.",

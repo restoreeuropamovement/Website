@@ -11,8 +11,8 @@ export const involvementText: InvolvementText = {
       "You arrived from the wing in {country}, so the form below is set to it. Change either field if that is not right.",
     roleLegend: "How you are applying",
     fields: {
-      name: "Full name",
-      nameHint: "Your given name and your family name, as you would write them on a letter.",
+      givenName: "First name",
+      familyName: "Last name",
       email: "Email",
       country: "Country",
       region: "Region or city",
@@ -48,8 +48,8 @@ export const involvementText: InvolvementText = {
       other: "There are {count} problems with this form",
     },
     errors: {
-      name: "Enter your name, up to 120 characters.",
-      surname: "Enter your family name as well as your given name.",
+      givenName: "Enter your first name, between 2 and 60 characters.",
+      familyName: "Enter your last name, between 2 and 60 characters.",
       email: "Enter a valid email address.",
       country: "Choose a country from the list.",
       region: "Region or city is limited to 120 characters.",

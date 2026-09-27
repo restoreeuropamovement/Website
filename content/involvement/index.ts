@@ -28,7 +28,6 @@ export {
   contactChannelIds,
   contactErrorCodes,
   countryValues,
-  hasSurname,
   interestAreaIds,
   involvementRoleIds,
   isContactChannel,
@@ -36,6 +35,8 @@ export {
   isInterestArea,
   isInvolvementRole,
   joinErrorCodes,
+  NAME_PART_MAX,
+  NAME_PART_MIN,
   OTHER_COUNTRY,
   pickCountry,
   pickRole,
@@ -73,9 +74,8 @@ export interface InvolvementText {
     readonly prefilled: string;
     readonly roleLegend: string;
     readonly fields: {
-      readonly name: string;
-      /** Says that the family name is wanted, before the form has to refuse it. */
-      readonly nameHint: string;
+      readonly givenName: string;
+      readonly familyName: string;
       readonly email: string;
       readonly country: string;
       readonly region: string;

@@ -8,7 +8,7 @@ import { JOIN_INITIAL, type JoinState } from "@/app/(site)/join/state";
 import { CheckboxField, SelectField, TextArea, TextField } from "@/components/forms/Field";
 import { Honeypot } from "@/components/forms/Honeypot";
 import { Button } from "@/components/ui/Button";
-import type { InvolvementEdition } from "@/content/involvement";
+import { type InvolvementEdition, NAME_PART_MAX } from "@/content/involvement";
 import { plural } from "@/lib/format";
 import { localePath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -147,17 +147,33 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
         </ul>
       </fieldset>
 
+      {/*
+        Two boxes rather than one, so that a family name is asked for plainly
+        instead of being inferred from whatever was typed into "Full name".
+        What is stored is still a single encrypted name; see the action.
+      */}
       <div className="grid gap-6 sm:grid-cols-2">
         <TextField
-          id={`${uid}-name`}
-          name="name"
-          label={text.fields.name}
-          hint={text.fields.nameHint}
-          autoComplete="name"
-          maxLength={120}
+          id={`${uid}-given-name`}
+          name="givenName"
+          label={text.fields.givenName}
+          autoComplete="given-name"
+          maxLength={NAME_PART_MAX}
           required
-          defaultValue={kept?.name ?? ""}
+          defaultValue={kept?.givenName ?? ""}
         />
+        <TextField
+          id={`${uid}-family-name`}
+          name="familyName"
+          label={text.fields.familyName}
+          autoComplete="family-name"
+          maxLength={NAME_PART_MAX}
+          required
+          defaultValue={kept?.familyName ?? ""}
+        />
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-2">
         <TextField
           id={`${uid}-email`}
           name="email"
@@ -167,6 +183,15 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           maxLength={180}
           required
           defaultValue={kept?.email ?? ""}
+        />
+        <TextField
+          id={`${uid}-region`}
+          name="region"
+          label={text.fields.region}
+          optional
+          optionalLabel={text.fields.optional}
+          maxLength={120}
+          defaultValue={kept?.region ?? ""}
         />
       </div>
 
@@ -186,26 +211,16 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
           required
           defaultValue={kept?.country ?? initialCountry ?? ""}
         />
-        <TextField
-          id={`${uid}-region`}
-          name="region"
-          label={text.fields.region}
-          optional
-          optionalLabel={text.fields.optional}
-          maxLength={120}
-          defaultValue={kept?.region ?? ""}
+        <SelectField
+          id={`${uid}-interest`}
+          name="interest"
+          label={text.fields.interest}
+          options={edition.interests}
+          placeholder={text.fields.placeholder}
+          required
+          defaultValue={kept?.interest ?? ""}
         />
       </div>
-
-      <SelectField
-        id={`${uid}-interest`}
-        name="interest"
-        label={text.fields.interest}
-        options={edition.interests}
-        placeholder={text.fields.placeholder}
-        required
-        defaultValue={kept?.interest ?? ""}
-      />
 
       <TextArea
         id={`${uid}-message`}

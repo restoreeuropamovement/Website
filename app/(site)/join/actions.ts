@@ -15,11 +15,12 @@ import {
   honeypotTripped,
 } from "@/lib/spam";
 import {
-  hasSurname,
   isCountryValue,
   isInterestArea,
   isInvolvementRole,
   type JoinErrorCode,
+  NAME_PART_MAX,
+  NAME_PART_MIN,
 } from "@/content/involvement";
 import { JOIN_INITIAL, type JoinState } from "./state";
 
@@ -96,8 +97,9 @@ export async function submitMembershipApplication(
     return { status: "received", errors: [] };
   }
 
-  const read = (name: string) => String(form.get(name) ?? "").trim();
-  const name = read("name");
+  const read = (field: string) => String(form.get(field) ?? "").trim();
+  const givenName = read("givenName");
+  const familyName = read("familyName");
   const email = read("email");
   const country = read("country");
   const region = read("region");
@@ -115,7 +117,8 @@ export async function submitMembershipApplication(
    */
   const values = {
     role: involvementRole,
-    name,
+    givenName,
+    familyName,
     email,
     country,
     region,
@@ -131,13 +134,9 @@ export async function submitMembershipApplication(
    * a label is different in every edition and would reject five of them.
    */
   const errors: JoinErrorCode[] = [];
-  if (name.length < 2 || name.length > 120) errors.push("name");
-  /*
-   * Only when the length is acceptable, so "A" is reported once as a name that
-   * is too short rather than twice as a name that is both too short and
-   * missing its second half.
-   */
-  else if (!hasSurname(name)) errors.push("surname");
+  const named = (part: string) => part.length >= NAME_PART_MIN && part.length <= NAME_PART_MAX;
+  if (!named(givenName)) errors.push("givenName");
+  if (!named(familyName)) errors.push("familyName");
   if (!EMAIL.test(email) || email.length > 180) errors.push("email");
   if (!isCountryValue(country)) errors.push("country");
   if (region.length > 120) errors.push("region");
@@ -191,8 +190,14 @@ export async function submitMembershipApplication(
     return { status: "busy", errors: [], values };
   }
 
+  /*
+   * Stored as one encrypted name, as it always has been. The two boxes are
+   * there so the form can insist on both halves; splitting the column as well
+   * would be a migration of Article 9 data and a rewrite of the privacy note,
+   * bought for nothing the roll actually needs.
+   */
   const outcome = await createMember({
-    name,
+    name: `${givenName} ${familyName}`,
     email,
     country,
     region,

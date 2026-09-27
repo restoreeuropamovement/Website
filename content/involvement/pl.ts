@@ -12,8 +12,8 @@ export const involvementText: InvolvementText = {
       "Przychodzisz od oddziału w kraju {country}, więc formularz poniżej jest na niego ustawiony. Zmień oba pola, jeśli to się nie zgadza.",
     roleLegend: "W jakim charakterze się zgłaszasz",
     fields: {
-      name: "Imię i nazwisko",
-      nameHint: "Twoje imię i nazwisko, w takiej postaci, w jakiej zapisujesz je w liście.",
+      givenName: "Imię",
+      familyName: "Nazwisko",
       email: "E-mail",
       country: "Kraj",
       region: "Region lub miasto",
@@ -50,8 +50,8 @@ export const involvementText: InvolvementText = {
       other: "Ten formularz ma {count} problemu",
     },
     errors: {
-      name: "Podaj imię i nazwisko, najwyżej 120 znaków.",
-      surname: "Podaj nazwisko, nie tylko imię.",
+      givenName: "Podaj imię, od 2 do 60 znaków.",
+      familyName: "Podaj nazwisko, od 2 do 60 znaków.",
       email: "Podaj poprawny adres e-mail.",
       country: "Wybierz kraj z listy.",
       region: "Region lub miasto ograniczono do 120 znaków.",

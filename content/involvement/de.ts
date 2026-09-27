@@ -12,9 +12,8 @@ export const involvementText: InvolvementText = {
       "Sie kommen vom Verband in {country}, daher ist das Formular darauf eingestellt. Ändern Sie beide Felder, wenn das nicht stimmt.",
     roleLegend: "Wie Sie sich bewerben",
     fields: {
-      name: "Vollständiger Name",
-      nameHint:
-        "Ihr Vorname und Ihr Familienname, so wie Sie sie auf einem Brief schreiben würden.",
+      givenName: "Vorname",
+      familyName: "Nachname",
       email: "E-Mail",
       country: "Land",
       region: "Region oder Stadt",
@@ -50,8 +49,8 @@ export const involvementText: InvolvementText = {
       other: "Dieses Formular hat {count} Probleme",
     },
     errors: {
-      name: "Geben Sie Ihren Namen an, höchstens 120 Zeichen.",
-      surname: "Geben Sie neben Ihrem Vornamen auch Ihren Familiennamen an.",
+      givenName: "Geben Sie Ihren Vornamen an, zwischen 2 und 60 Zeichen.",
+      familyName: "Geben Sie Ihren Nachnamen an, zwischen 2 und 60 Zeichen.",
       email: "Geben Sie eine gültige E-Mail-Adresse an.",
       country: "Wählen Sie ein Land aus der Liste.",
       region: "Region oder Stadt ist auf 120 Zeichen begrenzt.",

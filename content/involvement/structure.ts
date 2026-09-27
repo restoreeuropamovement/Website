@@ -123,33 +123,32 @@ export function pickRole(value: string | string[] | undefined): InvolvementRoleI
 }
 
 /**
- * Whether a name carries a family name as well as a given one.
+ * How long each half of an applicant's name may be.
  *
- * Applications routinely arrive as "Anna", which is not enough to vet anybody:
- * an administrator reviewing the roll has to be able to tell two Annas apart,
- * and a movement that admits people it cannot identify is not vetting at all.
+ * The public form asks for a given name and a family name in two boxes, and
+ * each is bounded on its own. Applications routinely used to arrive as "Anna",
+ * which is not enough to vet anybody: an administrator reviewing the roll has
+ * to be able to tell two Annas apart, and a movement that admits people it
+ * cannot identify is not vetting at all. Two boxes, both required, ask the
+ * question plainly instead of inspecting one box and guessing.
  *
- * The rule is two whitespace-separated parts with at least two characters at
- * each end. Deliberately not a pattern over letters: European names carry
- * apostrophes, hyphens, particles and diacritics in every combination, and
- * every regex anyone writes for "a real name" eventually rejects a real one.
- * Middle initials pass, because only the ends are measured — "Anna B Smith" is
- * a person, and refusing her would be the same mistake in miniature.
+ * Two characters is the floor because a single letter is an initial. Sixty is
+ * room for the longest European forms, including the particles and
+ * double-barrelled families a tighter bound would cut in half.
  *
- * Which leaves mononyms, who exist and are not served by this. That is why the
- * check guards the public form and not `addMemberAction`: an administrator
- * entering an application that reached them another way has met the evidence
- * and can record a name this function would refuse. The human is the override,
- * exactly as they are for everything else about a membership.
+ * Deliberately a length and nothing else. European names carry apostrophes,
+ * hyphens, particles and diacritics in every combination, and every pattern
+ * anyone writes for "a real name" eventually refuses a real one.
+ *
+ * Which leaves mononyms, who exist and are not served by two boxes. That is
+ * why this governs the public form and not `addMemberAction`, where a single
+ * name field remains: an administrator entering an application that reached
+ * them another way has met the evidence and can record a name this would
+ * refuse. The human is the override, as they are for everything else about a
+ * membership.
  */
-export function hasSurname(value: string): boolean {
-  const parts = value.trim().split(/\s+/).filter(Boolean);
-  if (parts.length < 2) return false;
-
-  const given = parts[0] ?? "";
-  const family = parts[parts.length - 1] ?? "";
-  return given.length >= 2 && family.length >= 2;
-}
+export const NAME_PART_MIN = 2;
+export const NAME_PART_MAX = 60;
 
 /** Correspondence is handled by function rather than by individual. */
 export const contactChannelIds = [
@@ -177,14 +176,12 @@ export function isContactChannel(value: string): value is ContactChannelId {
  * client-supplied value to choose server behaviour for no gain.
  */
 export const joinErrorCodes = [
-  "name",
   /*
-   * Separate from `name` because the two failures need different sentences.
-   * Somebody who typed "Anna" has not made a mistake about length, and telling
-   * them their name may be up to 120 characters answers a question they did
-   * not ask — they need to be told that the family name is missing.
+   * Two codes, because the name is asked for in two boxes and a reader told
+   * only that "your name" is wrong would not know which of them to go back to.
    */
-  "surname",
+  "givenName",
+  "familyName",
   "email",
   "country",
   "region",

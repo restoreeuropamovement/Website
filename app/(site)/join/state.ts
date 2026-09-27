@@ -34,7 +34,8 @@ import type { JoinErrorCode } from "@/content/involvement";
  */
 export interface JoinValues {
   readonly role: string;
-  readonly name: string;
+  readonly givenName: string;
+  readonly familyName: string;
   readonly email: string;
   readonly country: string;
   readonly region: string;

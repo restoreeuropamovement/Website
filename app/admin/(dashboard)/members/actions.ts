@@ -60,11 +60,12 @@ export async function addMemberAction(
   const errors: string[] = [];
   if (name.length < 2 || name.length > 120) errors.push("Enter a name, up to 120 characters.");
   /*
-   * No `hasSurname` check here, unlike the public intake, and the asymmetry is
-   * deliberate rather than an omission to be tidied up.
+   * One name field here, where the public intake asks for a given name and a
+   * family name separately. The asymmetry is deliberate rather than an
+   * omission to be tidied up.
    *
-   * The public form refuses a lone given name because "Anna" is not something
-   * an administrator can vet, and the person typing it is right there to add
+   * The public form insists on both because "Anna" is not something an
+   * administrator can vet, and the person typing it is right there to add
    * the rest. This path is the opposite situation: somebody is transcribing an
    * application that arrived by post or in person, they have the evidence in
    * front of them, and the name on it may legitimately be one word. Refusing
