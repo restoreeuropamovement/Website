@@ -24,14 +24,31 @@ updates:
         dependency-type: production
       tooling:
         dependency-type: development
-    # Next and React move together and are the one upgrade that genuinely needs
-    # reading the release notes first, so they are not proposed automatically.
+    # Major bumps that need a person to read the release notes first, so they are
+    # not proposed automatically. Next and React move together and are the
+    # obvious case. The compiler and the linter are the same kind of upgrade for
+    # a less obvious reason: they do not change what the site does, they change
+    # what counts as an error, so a major lands as a diff across files nobody
+    # meant to touch. Grouping makes that worse rather than better — the first
+    # run of this config proposed TypeScript 7, ESLint 10 and a tsx patch as one
+    # pull request, which `npm run check` failed as a unit, taking the harmless
+    # patch down with it.
+    #
+    # @types/node is pinned to the runtime's major on purpose. Typings for a
+    # newer Node than the one that serves requests describe APIs that are not
+    # there, and the compiler stops being able to tell us so.
     ignore:
       - dependency-name: next
         update-types: [version-update:semver-major]
       - dependency-name: react
         update-types: [version-update:semver-major]
       - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: "@types/node"
         update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
