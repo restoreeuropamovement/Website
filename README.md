@@ -29,6 +29,7 @@ npm run dev        # http://localhost:3000
 | `npm run db:dev`    | A local Postgres, nothing to install                 |
 | `npm run db:migrate`| Apply `db/schema.sql` — idempotent                   |
 | `npm run db:seed`   | Copy the bundled essays into the database — idempotent |
+| `npm run db:rotate-key`| Re-encrypt personal data under a new `MEMBER_ENCRYPTION_KEY` |
 | `npm run db:verify-audit`| Verify the audit log has not been rewritten     |
 | `npm run test:syntax`| Assert the journal notation round-trips losslessly  |
 | `npm run test:pii`  | Assert membership encryption behaves as designed      |
@@ -295,6 +296,13 @@ delete the directory to start over.
   carrying no names, addresses or identifiers — see `lib/admin/alerts.ts` for
   why the list is deliberately short. A weekly digest goes out on Mondays with
   counts and a full chain verification.
+- **The membership key can be rotated.** Application-layer encryption means the
+  provider cannot re-key data it cannot read, so without this "the key may have
+  leaked" would be a question with no answer that keeps the roll. Set
+  `MEMBER_ENCRYPTION_KEY_PREVIOUS`, run `npm run db:rotate-key -- --commit`, then
+  unset it; the site reads under either key throughout, so an interrupted
+  rotation leaves a working site. It invalidates unsubscribe links in newsletter
+  issues already sent, which are derived from the key rather than stored.
 - **Throttling buckets on an address the caller cannot choose.**
   `lib/admin/request.ts` prefers `x-vercel-forwarded-for`, which the platform
   writes and strips from the incoming request, over `x-forwarded-for`, which on

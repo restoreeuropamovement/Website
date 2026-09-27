@@ -8,6 +8,7 @@ import { isCanaryDigest } from "@/lib/admin/canary";
 import {
   decryptPiiSafe,
   emailDigest,
+  emailDigestCandidates,
   encryptPii,
   foldForSearch,
 } from "@/lib/admin/pii";
@@ -108,6 +109,20 @@ export async function createMember(input: MemberInput): Promise<CreateOutcome> {
       region ? encryptPii(region) : Promise.resolve(null),
       message ? encryptPii(message) : Promise.resolve(null),
     ]);
+
+  /*
+   * During a key rotation the existing record for this address may still carry
+   * the outgoing key's digest, which `ON CONFLICT` below would not match — so a
+   * resubmission would be accepted as a new application rather than rejected as
+   * a duplicate. Moving the digest across first closes that window. A no-op
+   * whenever no rotation is in progress, which is almost always.
+   */
+  const candidates = await emailDigestCandidates(input.email);
+  if (candidates.length > 1) {
+    await db()`
+      UPDATE member SET email_digest = ${digest} WHERE email_digest = ${candidates[1]!}
+    `;
+  }
 
   const [row] = await db()<{ id: string }[]>`
     INSERT INTO member (
@@ -447,10 +462,15 @@ export async function eraseMember(id: string): Promise<boolean> {
  * Finds a record from an address, for an erasure or access request arriving by
  * email. Goes through the keyed digest, so it works without a search over
  * decrypted rows.
+ *
+ * Matches against the outgoing key's digest too during a rotation. Failing to
+ * find a record here does not look like a failure — it looks like "that person
+ * is not a member", which would be answered to someone exercising a legal right
+ * and would be wrong.
  */
 export async function findMemberIdByEmail(email: string): Promise<string | undefined> {
   const [row] = await db()<{ id: string }[]>`
-    SELECT id FROM member WHERE email_digest = ${await emailDigest(email)}
+    SELECT id FROM member WHERE email_digest = ANY(${await emailDigestCandidates(email)})
   `;
   return row?.id;
 }

@@ -16,6 +16,7 @@
     "db:dev": "node scripts/dev-db.mjs",
     "db:migrate": "tsx --env-file-if-exists=.env.local scripts/db-migrate.ts",
     "db:seed": "tsx --env-file-if-exists=.env.local scripts/db-seed.ts",
+    "db:rotate-key": "tsx --env-file-if-exists=.env.local scripts/rotate-member-key.ts",
     "db:verify-audit": "tsx --env-file-if-exists=.env.local scripts/verify-audit-chain.ts",
     "test:syntax": "tsx scripts/check-journal-syntax.ts",
     "test:pii": "tsx scripts/check-pii.ts",

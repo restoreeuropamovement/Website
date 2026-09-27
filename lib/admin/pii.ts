@@ -1,5 +1,5 @@
 import { fromBase64Url, toBase64Url } from "@/lib/admin/crypto";
-import { memberEncryptionKey } from "@/lib/admin/env";
+import { memberEncryptionKey, previousMemberEncryptionKey } from "@/lib/admin/env";
 
 /**
  * Encryption for the identifying fields of a membership record.
@@ -69,7 +69,7 @@ interface DerivedKeys {
   readonly digest: CryptoKey;
 }
 
-let cached: { secret: string; keys: Promise<DerivedKeys> } | undefined;
+const cached = new Map<string, Promise<DerivedKeys>>();
 
 async function derive(secret: string): Promise<DerivedKeys> {
   const master = await crypto.subtle.importKey(
@@ -108,14 +108,27 @@ async function derive(secret: string): Promise<DerivedKeys> {
 
 /**
  * Derivation is cached per process, and keyed on the secret so that rotating it
- * in a long-lived dev server does not keep using the previous key.
+ * in a long-lived dev server does not keep using the previous key. The map holds
+ * at most two entries — the live key and, during a rotation, the outgoing one.
  */
-function keys(): Promise<DerivedKeys> {
-  const secret = memberEncryptionKey();
-  if (cached?.secret !== secret) {
-    cached = { secret, keys: derive(secret) };
+function derivedFor(secret: string): Promise<DerivedKeys> {
+  let keys = cached.get(secret);
+  if (!keys) {
+    keys = derive(secret);
+    cached.set(secret, keys);
   }
-  return cached.keys;
+  return keys;
+}
+
+/** The key everything is written under. */
+function keys(): Promise<DerivedKeys> {
+  return derivedFor(memberEncryptionKey());
+}
+
+/** The outgoing key, during a rotation only. Null the rest of the time. */
+function previousKeys(): Promise<DerivedKeys> | null {
+  const secret = previousMemberEncryptionKey();
+  return secret ? derivedFor(secret) : null;
 }
 
 export async function encryptPii(plaintext: string): Promise<string> {
@@ -136,6 +149,13 @@ export async function encryptPii(plaintext: string): Promise<string> {
  * decrypting a whole page of records should use `decryptPiiSafe` instead: one
  * corrupt row should not take out the page that would let an administrator find
  * and delete it.
+ *
+ * During a rotation the outgoing key is tried second. GCM's authentication tag
+ * is what makes that safe to do blindly: a value encrypted under the other key
+ * fails the tag check rather than decrypting to plausible rubbish, so falling
+ * back cannot produce a wrong answer, only a slower right one. Nothing is ever
+ * *written* under the old key — the fallback exists so that an interrupted or
+ * half-finished rotation degrades into a working site.
  */
 export async function decryptPii(payload: string): Promise<string> {
   const [version, nonce, ciphertext] = payload.split(".");
@@ -143,13 +163,21 @@ export async function decryptPii(payload: string): Promise<string> {
     throw new Error(`Unrecognised encrypted value (expected ${VERSION}.<nonce>.<ciphertext>)`);
   }
 
-  const plaintext = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv: fromBase64Url(nonce) },
-    (await keys()).cipher,
-    fromBase64Url(ciphertext),
-  );
+  const iv = fromBase64Url(nonce);
+  const body = fromBase64Url(ciphertext);
 
-  return decoder.decode(plaintext);
+  try {
+    return decoder.decode(
+      await crypto.subtle.decrypt({ name: "AES-GCM", iv }, (await keys()).cipher, body),
+    );
+  } catch (error) {
+    const fallback = previousKeys();
+    if (!fallback) throw error;
+
+    return decoder.decode(
+      await crypto.subtle.decrypt({ name: "AES-GCM", iv }, (await fallback).cipher, body),
+    );
+  }
 }
 
 /** Decrypts, or returns `null` where `decryptPii` would throw. */
@@ -175,12 +203,34 @@ export async function decryptPiiSafe(payload: string): Promise<string | null> {
  * search term can never collide with one computed for an address.
  */
 async function blindDigest(label: string, value: string): Promise<string> {
+  return digestUnder(await keys(), label, value);
+}
+
+async function digestUnder(derived: DerivedKeys, label: string, value: string): Promise<string> {
   const signature = await crypto.subtle.sign(
     "HMAC",
-    (await keys()).digest,
+    derived.digest,
     encoder.encode(`${label}:${foldForSearch(value)}`),
   );
   return toBase64Url(new Uint8Array(signature));
+}
+
+/**
+ * Every digest a stored row might legitimately carry for this value — the live
+ * one first, and the outgoing one while a rotation is in progress.
+ *
+ * Unlike ciphertext, a digest gives no signal that it was computed under the
+ * wrong key; it simply fails to match, and a failed match here means "not a
+ * member", which is the answer that lets a duplicate through or loses an
+ * erasure request. So anything that *looks a row up* by digest has to try both,
+ * while anything that *writes* one uses only the current key.
+ */
+export async function emailDigestCandidates(email: string): Promise<string[]> {
+  const current = await emailDigest(email);
+  const fallback = previousKeys();
+  if (!fallback) return [current];
+
+  return [current, await digestUnder(await fallback, "email", email)];
 }
 
 /**
@@ -225,9 +275,33 @@ export function queryDigest(query: string): Promise<string> {
  * Keyed with the same HMAC key as the digests above, under its own label, so a
  * tag cannot be produced by anyone who has the database but not the key, and
  * cannot be confused with a digest computed for any other purpose.
+ *
+ * The one thing rotation cannot repair. Ciphertext in the table gets re-wrapped;
+ * a link already sitting in somebody's inbox does not, and once the outgoing key
+ * is unset the tags in every issue sent before the rotation stop verifying. That
+ * is a cost of rotating and not a reason to avoid it — but it is a reason for
+ * the unsubscribe page to keep a path that does not depend on the tag, because
+ * "the unsubscribe link is broken" is precisely the complaint that turns a
+ * newsletter into spam.
  */
 export function unsubscribeTag(subscriberId: string): Promise<string> {
   return blindDigest("unsubscribe", subscriberId);
+}
+
+/**
+ * Whether `tag` is a valid unsubscribe tag for this subscriber under any key
+ * currently trusted. See `unsubscribeTag` for why the window is narrow.
+ */
+export async function unsubscribeTagMatches(
+  subscriberId: string,
+  tag: string,
+): Promise<boolean> {
+  if (tag === (await unsubscribeTag(subscriberId))) return true;
+
+  const fallback = previousKeys();
+  if (!fallback) return false;
+
+  return tag === (await digestUnder(await fallback, "unsubscribe", subscriberId));
 }
 
 /**

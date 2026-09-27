@@ -119,6 +119,22 @@ export function memberEncryptionKey(): string {
       "MEMBER_ENCRYPTION_KEY must be 32 bytes, base64url-encoded. Generate one with: node -e \"console.log(crypto.randomBytes(32).toString('base64url'))\"",
     );
   }
+  /*
+   * The two keys must not be the same value.
+   *
+   * Setting them alike is an easy thing to do when generating both from the
+   * same command and pasting once, and it silently collapses the separation the
+   * paragraph above exists to create: rotating session signing after a
+   * suspected token leak would then make the membership roll undecryptable, so
+   * the emergency response becomes the incident. Read directly rather than
+   * through `sessionSecret()`, which throws when unset — absence is somebody
+   * else's error to report, and not a reason to refuse here.
+   */
+  if (process.env.ADMIN_SESSION_SECRET === key) {
+    throw new Error(
+      "MEMBER_ENCRYPTION_KEY and ADMIN_SESSION_SECRET are set to the same value. They protect different things and must be rotated independently — generate a separate key for each.",
+    );
+  }
   return key;
 }
 
@@ -140,6 +156,42 @@ export function canaryMemberEmails(): readonly string[] {
     .split(",")
     .map((address) => address.trim().toLowerCase())
     .filter(Boolean);
+}
+
+/**
+ * The key being rotated away from, set only while a rotation is in progress.
+ *
+ * Rotation exists because the alternative to it is worse than it sounds. Until
+ * there was one, "the member key may have leaked" had no available response:
+ * the data cannot be re-encrypted without decrypting it first, and decrypting
+ * it needs the key you no longer trust. A movement in that position would have
+ * had to choose between carrying on with a compromised key and destroying the
+ * roll, and it would have carried on.
+ *
+ * The sequence is: set this to the old key, set `MEMBER_ENCRYPTION_KEY` to the
+ * new one, run `npm run db:rotate-key`, then unset this. While both are set,
+ * values written under either key can still be read, so an interrupted rotation
+ * leaves a working site rather than an unreadable table.
+ *
+ * Optional and unvalidated beyond length on purpose: absence is the normal
+ * state, and the only deployment that should ever have it set is one in the
+ * middle of a deliberate operation.
+ */
+export function previousMemberEncryptionKey(): string | undefined {
+  const key = process.env.MEMBER_ENCRYPTION_KEY_PREVIOUS?.trim();
+  if (!key) return undefined;
+
+  if (key.length < 43) {
+    throw new Error(
+      "MEMBER_ENCRYPTION_KEY_PREVIOUS is set but is not a 32-byte base64url key. Unset it if no rotation is in progress.",
+    );
+  }
+  if (key === process.env.MEMBER_ENCRYPTION_KEY) {
+    throw new Error(
+      "MEMBER_ENCRYPTION_KEY_PREVIOUS is the same as MEMBER_ENCRYPTION_KEY. Nothing would be rotated — unset it.",
+    );
+  }
+  return key;
 }
 
 /**
