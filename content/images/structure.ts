@@ -9,10 +9,13 @@
  * To change a photograph: drop a replacement at the same path and ratio, and
  * rewrite `alt` in all six languages to describe what is actually in it.
  *
- * Everything is served from this origin — nothing is hotlinked, which is what
- * lets the privacy note promise that loading a page discloses your visit to
- * nobody. Licences and sources are recorded in
- * `public/images/photos/CREDITS.md`.
+ * Every slot is served from this origin — nothing here is hotlinked, and the
+ * privacy note's account of what a page fetches rests on it. The one image on
+ * the site that comes from elsewhere is not a slot: `/materials` shows the
+ * uploaded artwork from the file store that holds it, which is why that page is
+ * named in `/privacy` and why `img-src` has one entry. Nothing in this module is
+ * that exception, and nothing added to it should be. Licences and sources are
+ * recorded in `public/images/photos/CREDITS.md`.
  *
  * Two standing rules for anything added here. **No recognisable faces:** a
  * photograph of an identifiable person on a political site implies an

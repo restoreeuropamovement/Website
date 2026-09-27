@@ -1,3 +1,5 @@
+import type { PluralForms } from "@/lib/format";
+
 /**
  * The words of `/materials`, and only the words.
  *
@@ -87,6 +89,86 @@ export const materialsText = {
      * Takes `{title}`.
      */
     downloadLabel: "Download {title}",
+  },
+
+  /**
+   * The thumbnail on each card.
+   *
+   * `alt` is a real description rather than the word "preview", and it is built
+   * from the title an administrator wrote, because that is the only description
+   * of the artwork this site has. Two of the five formats do not reach it: a
+   * PDF cannot be shown — nothing in either of this project's content security
+   * policies will embed one, and there is no honest way to draw its first page
+   * — so its tile says the format and says there is no preview, in that order,
+   * which is what somebody deciding whether to download it needs.
+   *
+   * `none` is visible text and not alternative text. It describes the page's
+   * own limitation rather than an image, and the format beside it comes from
+   * `lib/material-formats.ts`, where "PDF" is the same word in six languages.
+   */
+  preview: {
+    alt: "Preview of {title}",
+    none: "No preview",
+  },
+
+  /**
+   * The filter and sort controls.
+   *
+   * None of the ids is here. The kinds are `materialCategoryIds` and the orders
+   * are `materialSortIds`, both in `structure.ts`; the formats are the
+   * extensions in `lib/material-formats.ts`. What is here is the word for each
+   * of them and the word for the dimension itself, which is all a translator
+   * should be deciding — `?sort=newest` must mean the same thing on the German
+   * page as on the English one.
+   */
+  catalogue: {
+    /** Names the group of controls for a screen reader reaching it by landmark. */
+    label: "Filter and order the catalogue",
+    kindLabel: "Kind",
+    kindAll: "Every kind",
+    formatLabel: "Format",
+    formatAll: "Every format",
+    sortLabel: "Order",
+    /**
+     * Keyed by the ids in `structure.ts`. The order of the control comes from
+     * that list and not from the order these happen to be typed in here.
+     */
+    sort: {
+      newest: "Newest first",
+      oldest: "Oldest first",
+      title: "Title, A to Z",
+      largest: "Largest file first",
+      smallest: "Smallest file first",
+    },
+    /**
+     * The button that submits the controls as an ordinary form.
+     *
+     * Present for readers without JavaScript, and removed once the page has
+     * hydrated, because from that moment a change to any control is applied as
+     * it is made and a button that does nothing would be worse than none.
+     */
+    apply: "Apply",
+    clear: "Show everything",
+    /**
+     * How many files are in view.
+     *
+     * Two plurals, as on the policy catalogue: one sentence for the whole
+     * catalogue and one for a filtered part of it. The forms are the language's
+     * own — Polish distinguishes four where English distinguishes two — and the
+     * annotation below is the only type in this file. It is there so that a
+     * translation may carry `few` and `many`, which a type inferred from these
+     * two English keys would refuse.
+     */
+    showingAll: {
+      one: "Showing the only file.",
+      other: "Showing all {count} files.",
+    } as PluralForms,
+    showingSome: {
+      one: "{count} of {total} files matches.",
+      other: "{count} of {total} files match.",
+    } as PluralForms,
+    /** A filter that excludes everything. Not the same as an empty catalogue. */
+    noMatch: "Nothing here matches that.",
   },
 
   /** Nothing has been published. The page is reachable and the shelf is bare. */

@@ -187,7 +187,11 @@ export const legalText: LegalText = {
         body: [
           {
             type: "paragraph",
-            text: "Die Schriftarten werden von dieser Seite selbst ausgeliefert und nicht aus einem Schriftennetzwerk, sodass das Laden einer Seite Ihren Besuch keinem Dritten offenbart. Alle Bilder liegen lokal; nichts wird von einer anderen Domain eingebunden.",
+            text: "Die Schriftarten werden von dieser Seite selbst ausgeliefert und nicht aus einem Schriftennetzwerk, sodass das Laden einer Seite Ihren Besuch keinem Dritten offenbart. Auch jedes Bild, das die Seiten selbst verwenden, liegt hier; nichts davon wird von einer anderen Domain eingebunden.",
+          },
+          {
+            type: "paragraph",
+            text: "Eine Seite ist die Ausnahme, und sie wird hier benannt statt übergangen. Die Vorlagen auf der Materialseite liegen im eigenen Dateispeicher der Bewegung, den dasselbe Unternehmen betreibt, das diese Website betreibt, und die Vorschaubilder auf jener Seite werden unmittelbar von dort geladen. Das Öffnen dieser Seite ruft also Bilder von einer anderen Adresse ab — allerdings nicht von einer anderen Organisation, und die Anfrage trägt nichts über Sie: die Adresse benennt die Datei und nicht den Leser, und der mitgesendete Referrer ist auf den Namen dieser Website ohne die Seite gekürzt, auf der Sie waren. Keine andere Seite ruft irgendetwas von anderswo ab.",
           },
         ],
       },

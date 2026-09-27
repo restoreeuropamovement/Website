@@ -187,7 +187,11 @@ export const legalText: LegalText = {
         body: [
           {
             type: "paragraph",
-            text: "Kroje pisma są udostępniane z tej strony, a nie z sieci dostarczającej fonty, więc wczytanie strony nie ujawnia twojej wizyty osobie trzeciej. Wszystkie obrazy są przechowywane lokalnie; nic nie jest wczytywane bezpośrednio z innej domeny.",
+            text: "Kroje pisma są udostępniane z tej strony, a nie z sieci dostarczającej fonty, więc wczytanie strony nie ujawnia twojej wizyty osobie trzeciej. Każdy obraz, którego używają same strony serwisu, również leży tutaj; żaden nie jest wczytywany bezpośrednio z innej domeny.",
+          },
+          {
+            type: "paragraph",
+            text: "Jedna strona jest wyjątkiem i zostaje tu nazwana, a nie przemilczana. Projekty na stronie z materiałami leżą we własnym magazynie plików ruchu, który prowadzi ta sama firma, co utrzymuje ten serwis, a podglądy na tej stronie wczytywane są wprost z niego. Otwarcie jej pobiera więc obrazy z innego adresu — ale nie od innej organizacji, a żądanie nie niesie niczego o tobie: adres wskazuje plik, a nie czytającego, i wysyłany z nim referer jest skrócony do nazwy tego serwisu, bez adresu strony, z której nastąpiło przejście. Żadna inna strona nie pobiera niczego skądkolwiek indziej.",
           },
         ],
       },

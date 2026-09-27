@@ -58,3 +58,35 @@ export const materialImprintCategoryIds: readonly MaterialCategoryId[] = ["poste
 export function carriesImprintNote(id: MaterialCategoryId): boolean {
   return materialImprintCategoryIds.includes(id);
 }
+
+/**
+ * The orders the catalogue can be read in.
+ *
+ * Ids rather than labels, and here rather than in a language file, for the same
+ * reason as the categories: a sort key travels in a URL as `?sort=oldest`, is
+ * compared against by code on the server and again in the browser, and has to
+ * mean the same thing in both places. A translator who improved one of these
+ * words would change what the page does, in one language only, and nothing
+ * would fail.
+ *
+ * The order of this list is the order of the control. There is no filter id
+ * beside them because the two filters already have ids of their own —
+ * `materialCategoryIds` above, and the file formats in
+ * `lib/material-formats.ts`, keyed by the extension that is already in that
+ * table. A third list naming the same formats again is a list that drifts.
+ */
+export const materialSortIds = ["newest", "oldest", "title", "largest", "smallest"] as const;
+
+export type MaterialSortId = (typeof materialSortIds)[number];
+
+/**
+ * Newest first, because it is the order `publishedMaterials` already returns.
+ * The page's unfiltered state and its default sorted state are therefore the
+ * same page, which is what lets the sort be an enhancement over a list that is
+ * already complete rather than the thing that puts the list in an order.
+ */
+export const DEFAULT_MATERIAL_SORT: MaterialSortId = "newest";
+
+export function isMaterialSort(value: string): value is MaterialSortId {
+  return (materialSortIds as readonly string[]).includes(value);
+}

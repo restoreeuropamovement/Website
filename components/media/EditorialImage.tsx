@@ -14,9 +14,14 @@ interface EditorialImageProps {
 }
 
 /**
- * The single image component. Every slot is a local asset — nothing is
- * hotlinked, which is what lets the privacy note promise that loading a page
- * discloses your visit to nobody.
+ * The image component for everything the site itself publishes. Every slot is a
+ * local asset — nothing reached through here is hotlinked.
+ *
+ * The one exception on the site is deliberately not this component:
+ * `/materials` renders uploaded artwork from the store that holds it, through
+ * `components/materials/MaterialPreview.tsx`, which has no intrinsic dimensions
+ * to work from and one format `next/image` will not touch. Keeping the two apart
+ * is what keeps "an `ImageSlot` is local" true.
  */
 export function EditorialImage({
   slot,

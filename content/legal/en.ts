@@ -187,7 +187,24 @@ export const legalText: LegalText = {
         body: [
           {
             type: "paragraph",
-            text: "Typefaces are served from this site rather than from a font network, so loading a page does not disclose your visit to a third party. All imagery is stored locally; nothing is hotlinked from another domain.",
+            text: "Typefaces are served from this site rather than from a font network, so loading a page does not disclose your visit to a third party. Every image the site's own pages use is stored here as well; none of it is hotlinked from another domain.",
+          },
+          /*
+           * Named in words and deliberately not linked, which is the one thing
+           * about this paragraph that will look like an oversight.
+           *
+           * The materials page is unlisted while the catalogue is empty —
+           * nothing public links to it and it is not in the sitemap, and those
+           * two together are the entire mechanism. A `[label][materials]` here
+           * would be a link from an indexed page and would quietly undo it. The
+           * route id still exists in `lib/site.ts`, so restoring the link is the
+           * same one-line job as restoring the footer entry, and it should
+           * happen at the same time: a reader told that one page fetches
+           * something from elsewhere should be able to go and look at it.
+           */
+          {
+            type: "paragraph",
+            text: "One page is the exception, and it is named here rather than glossed over. The artwork on the materials page is held in this movement's own file store, which is operated by the same company that hosts this website, and the previews on that page are loaded straight from it. So opening it does fetch images from another address — though not from another organisation, and the request carries nothing about you: the address names the file rather than the reader, and the referrer sent with it is trimmed to this site's name without the page you were on. No other page fetches anything from anywhere else.",
           },
         ],
       },

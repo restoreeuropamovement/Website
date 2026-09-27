@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react";
 
 import { deleteMaterialAction } from "@/app/admin/(dashboard)/materials/actions";
 import { MaterialUpload } from "@/components/admin/MaterialUpload";
+import { MaterialPreview } from "@/components/materials/MaterialPreview";
 import type { SelectOption } from "@/components/forms/Field";
 import { englishMaterials } from "@/content/materials";
 import { hasBlobStorage } from "@/lib/admin/env";
@@ -133,6 +134,25 @@ function PublishedRow({
 }) {
   return (
     <li className="flex flex-wrap items-start gap-x-6 gap-y-3 border-b border-hairline py-4">
+      {/*
+        The thumbnail the comment below the withdraw control used to argue
+        against. The argument was that showing the file here would mean widening
+        two content security policies to save a click; the public catalogue has
+        now widened the first of them for a reason of its own, which leaves this
+        one line and a genuine use. It is the only check an administrator has
+        that the object in the store is the export they meant — a title and a
+        byte count cannot tell somebody they uploaded last week's draft. A PDF
+        gets the same honest "no preview" tile it gets on the public page.
+      */}
+      <div className="relative aspect-[4/3] w-24 shrink-0 overflow-hidden border border-hairline bg-canvas-deep">
+        <MaterialPreview
+          material={material}
+          alt={`Preview of ${material.title}`}
+          noPreview="No preview"
+          sizes="96px"
+        />
+      </div>
+
       <div className="min-w-0 flex-1">
         <p className="eyebrow mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
           <span className="text-gold">{categoryLabel}</span>
@@ -158,12 +178,11 @@ function PublishedRow({
 
       <div className="flex flex-wrap items-start gap-2">
         {/*
-          A link rather than a preview. Rendering the image here would mean
-          admitting the store's host into `img-src` — in the public policy in
-          next.config.ts and again in the nonce policy proxy.ts writes for
-          /admin — and widening two content security policies to save a click
-          is the wrong way round. The store's own address is also the only
-          honest check that the file is really there.
+          Kept beside the thumbnail rather than replaced by it. A rendered
+          preview says the bytes are an image; the store's own address is the
+          only thing that says the object is really there, answering, and
+          answering with what the row claims — and it is the only way to look at
+          a PDF at all.
         */}
         <a
           href={material.url}

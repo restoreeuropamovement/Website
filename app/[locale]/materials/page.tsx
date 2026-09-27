@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { MaterialsDocument } from "@/components/materials/MaterialsDocument";
 import { getMaterials } from "@/content/materials";
 import { localeAlternates, resolveLocale } from "@/lib/locale-metadata";
-import { groupMaterials, publishedMaterials } from "@/lib/materials";
+import { parseMaterialSelection } from "@/lib/material-catalogue";
+import { publishedMaterials } from "@/lib/materials";
 import { routes } from "@/lib/site";
 
 /** Per request, for the reason given in `app/(site)/materials/page.tsx`. */
@@ -22,8 +23,10 @@ export async function generateMetadata(props: {
   };
 }
 
+/** The query string carries the filter and the order, as in the English route. */
 export default async function TranslatedMaterialsPage(props: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const locale = resolveLocale((await props.params).locale);
   const materials = await publishedMaterials();
@@ -31,7 +34,8 @@ export default async function TranslatedMaterialsPage(props: {
   return (
     <MaterialsDocument
       edition={await getMaterials(locale)}
-      groups={materials === null ? null : groupMaterials(materials)}
+      materials={materials}
+      selection={parseMaterialSelection(await props.searchParams)}
     />
   );
 }

@@ -1,10 +1,5 @@
-import {
-  isMaterialCategory,
-  materialCategoryIds,
-  type MaterialCategoryId,
-} from "@/content/materials/structure";
+import { isMaterialCategory, type MaterialCategoryId } from "@/content/materials/structure";
 import { db, hasDatabase } from "@/lib/db";
-import { type Locale } from "@/lib/i18n";
 
 /**
  * The catalogue of downloadable materials, as the public site reads it.
@@ -26,9 +21,10 @@ import { type Locale } from "@/lib/i18n";
  * Re-exported for server callers, so a page that wants a format's name does
  * not have to know which of two modules it is in. The list itself lives in a
  * module free of any database import, because the upload form is a client
- * component and reads it too.
+ * component and reads it too — and so, now, is the public catalogue's grid.
  */
 export {
+  formatMaterialSize,
   isMaterialContentType,
   materialAccept,
   materialFormatLabel,
@@ -70,37 +66,6 @@ export interface Material {
   readonly contentType: string;
   readonly bytes: number;
   readonly createdAt: Date;
-}
-
-/**
- * A file's size, in the reader's own language.
- *
- * `Intl.NumberFormat` rather than a hand-written suffix, so a French reader
- * gets "1,2 Mo" and a German one "1,2 MB" without either string existing in a
- * language file. A size is a number with a unit, and both of those belong to
- * the locale rather than to a translator.
- *
- * Thousands, not 1024. The symbol printed is kB, and kB means a thousand
- * bytes; taking the binary step while printing the decimal symbol is the small
- * lie that makes a downloaded file look the wrong size beside what the
- * operating system says about it afterwards.
- */
-export function formatMaterialSize(locale: Locale, bytes: number): string {
-  const [unit, value] =
-    bytes >= 1_000_000
-      ? (["megabyte", bytes / 1_000_000] as const)
-      : bytes >= 1_000
-        ? (["kilobyte", bytes / 1_000] as const)
-        : (["byte", bytes] as const);
-
-  return new Intl.NumberFormat(locale, {
-    style: "unit",
-    unit,
-    unitDisplay: "short",
-    /* One decimal place while it still means something: "1.2 MB" is useful,
-       "1,234.6 kB" is noise. */
-    maximumFractionDigits: unit !== "byte" && value < 10 ? 1 : 0,
-  }).format(value);
 }
 
 /** One row as the driver hands it back. Exported so the admin half can use it. */
@@ -169,25 +134,4 @@ export async function publishedMaterials(): Promise<readonly Material[] | null> 
   `;
 
   return rows.map(materialFromRow).filter((material) => material !== null);
-}
-
-export interface MaterialGroup {
-  readonly id: MaterialCategoryId;
-  readonly materials: readonly Material[];
-}
-
-/**
- * Shelves, in the order `structure.ts` fixed, with the empty ones left out.
- *
- * Grouped here rather than in the component because which shelves exist and
- * what order they come in is a property of the catalogue rather than of the
- * layout — and because the English page and the five translated ones have to
- * agree about it exactly. A category with nothing in it is omitted rather than
- * rendered as a heading over a gap: a movement with no posters should show no
- * posters heading, not an empty promise of one.
- */
-export function groupMaterials(materials: readonly Material[]): readonly MaterialGroup[] {
-  return materialCategoryIds
-    .map((id) => ({ id, materials: materials.filter((one) => one.category === id) }))
-    .filter((group) => group.materials.length > 0);
 }

@@ -187,7 +187,11 @@ export const legalText: LegalText = {
         body: [
           {
             type: "paragraph",
-            text: "Les polices de caractères sont servies depuis ce site plutôt que depuis un réseau de polices, de sorte que le chargement d'une page ne révèle pas votre visite à un tiers. Toutes les images sont stockées localement ; rien n'est appelé directement depuis un autre domaine.",
+            text: "Les polices de caractères sont servies depuis ce site plutôt que depuis un réseau de polices, de sorte que le chargement d'une page ne révèle pas votre visite à un tiers. Toutes les images sont stockées localement ; aucune des images que les pages du site utilisent n'est appelée depuis un autre domaine.",
+          },
+          {
+            type: "paragraph",
+            text: "Une page fait exception, et elle est nommée ici plutôt que passée sous silence. Les visuels de la page Matériel sont conservés dans le dépôt de fichiers propre au mouvement, exploité par l'entreprise même qui héberge ce site, et les aperçus de cette page y sont chargés directement. L'ouvrir va donc chercher des images à une autre adresse — mais non auprès d'une autre organisation, et la requête n'emporte rien qui vous concerne : l'adresse désigne le fichier et non le lecteur, et le référent envoyé avec elle est réduit au nom de ce site, sans la page où vous étiez. Aucune autre page ne va chercher quoi que ce soit ailleurs.",
           },
         ],
       },

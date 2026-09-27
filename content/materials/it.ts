@@ -42,6 +42,38 @@ export const materialsText: MaterialsText = {
     downloadLabel: "Scarica {title}",
   },
 
+  preview: {
+    alt: "Anteprima di {title}",
+    none: "Nessuna anteprima",
+  },
+
+  catalogue: {
+    label: "Filtra e ordina il catalogo",
+    kindLabel: "Tipo",
+    kindAll: "Tutti i tipi",
+    formatLabel: "Formato",
+    formatAll: "Tutti i formati",
+    sortLabel: "Ordine",
+    sort: {
+      newest: "Prima i più recenti",
+      oldest: "Prima i più vecchi",
+      title: "Titolo, dalla A alla Z",
+      largest: "Prima il file più grande",
+      smallest: "Prima il file più piccolo",
+    },
+    apply: "Applica",
+    clear: "Mostra tutto",
+    showingAll: {
+      one: "Si mostra l'unico file.",
+      other: "Si mostrano tutti i {count} file.",
+    },
+    showingSome: {
+      one: "{count} file su {total} corrisponde.",
+      other: "{count} file su {total} corrispondono.",
+    },
+    noMatch: "Qui non corrisponde nulla.",
+  },
+
   empty: {
     title: "Non è ancora stato pubblicato nulla.",
     body: "Questa pagina si riempie man mano che i file vengono fatti.",

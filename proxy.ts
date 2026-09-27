@@ -84,7 +84,22 @@ function adminCsp(nonce: string, isDev: boolean): string {
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""}`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:",
+    /*
+     * The materials store, for the thumbnails on `/admin/materials`. Written out
+     * rather than imported from `next.config.ts`, where the same host is reasoned
+     * about at length: this file is the other of the two policies this project
+     * keeps deliberately separate, and sharing a constant between them is the
+     * first step towards sharing the policy. Two lines that have to be changed
+     * together is the intended cost of that separation.
+     *
+     * It is the narrower of the two grants. The public page shows an uploaded
+     * poster to strangers; this one shows it to the administrator who uploaded
+     * it, which is the only honest check that the file in the store is the file
+     * they meant — a title and a byte count cannot tell them they picked the
+     * wrong export. Confined to `https`, to the `materials/` prefix, and to
+     * images.
+     */
+    "img-src 'self' data: blob: https://*.public.blob.vercel-storage.com/materials/",
     "font-src 'self'",
     `connect-src 'self'${isDev ? " ws: wss:" : ""}`,
     "object-src 'none'",

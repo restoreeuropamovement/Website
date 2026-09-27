@@ -416,6 +416,26 @@ addresses the store already serves, so it holds no credential, and a deployment
 with the token missing still serves everything already published — `/admin`
 then says what is absent instead of half-working.
 
+The page is a catalogue rather than a list. Each item carries a thumbnail, and a
+filter by kind and by format sits above the grid with an order — newest, oldest,
+title, largest, smallest. The sort ids are in `content/materials/structure.ts`
+beside the categories, the format ids are the extensions in
+`lib/material-formats.ts`, and all of it travels in the query string, so a
+filtered view is an address that can be shared and is applied by the server. The
+controls are an enhancement over a complete list: with scripting off the whole
+catalogue is rendered anyway and the controls still work, as an ordinary `GET`
+form with a submit button that is removed once the page has hydrated.
+
+Previews are why `img-src` and `images.remotePatterns` admit the store's host;
+the argument for widening the policy is written where the policy is, in
+`next.config.ts`. PNG, JPEG and WebP go through `next/image`, which downscales
+them on this origin. SVG cannot — `next/image` will not touch one without
+`dangerouslyAllowSVG`, which stays off — so it is rendered by a plain
+unoptimised `<img>`; an SVG loaded as an image executes nothing, and the store
+shares no origin, cookie or session with this site. **PDF gets no preview**,
+honestly labelled as such: `frame-src` is `'none'` in both policies, so one
+cannot be embedded, and there is no first page to be had without inventing it.
+
 Titles and descriptions are English in all six editions. They are entered by an
 administrator rather than commissioned as copy, like a journal essay, so a
 German reader gets a German heading over an English poster title. The page's own
@@ -539,8 +559,14 @@ cannot print a map whose borders are invented.
   cite only this movement's own published documents.
 - **No fabricated figures.** The admin dashboard reports analytics from Vercel's
   API or states that the source is not connected. It never estimates.
-- **No cookies for readers, no third-party requests.** No font CDN, no embeds, no
-  hotlinked images. The one script is Vercel Web Analytics, which is cookieless,
+- **No cookies for readers, and one host besides this one.** No font CDN, no
+  embeds, no hotlinked editorial images. The exception is named rather than
+  glossed: `/materials` shows thumbnails of the uploaded artwork, which is served
+  by the Vercel Blob store that holds the files, so `img-src` admits
+  `*.public.blob.vercel-storage.com/materials/` and nothing else does. No new
+  organisation is involved — the store is run by the same company that serves
+  every page — and `/privacy` says so in all six languages. The one script is
+  Vercel Web Analytics, which is cookieless,
   stores no personal data and is served from this origin — which is why the site
   carries no consent banner. The only cookies on the site are the admin session,
   set after a passkey sign-in, and — where `ADMIN_VEIL_SECRET` is configured —

@@ -4,7 +4,9 @@ import { materialsText as englishText } from "./en";
 import {
   carriesImprintNote,
   materialCategoryIds,
+  materialSortIds,
   type MaterialCategoryId,
+  type MaterialSortId,
 } from "./structure";
 
 /**
@@ -23,7 +25,7 @@ import {
  * a German reader gets a German heading over an English poster title.
  */
 export { isMaterialCategory, materialCategoryIds } from "./structure";
-export type { MaterialCategoryId } from "./structure";
+export type { MaterialCategoryId, MaterialSortId } from "./structure";
 
 export type MaterialsText = typeof englishText;
 
@@ -44,14 +46,28 @@ export interface MaterialCategory {
   readonly imprintNote: string | null;
 }
 
+/**
+ * One entry in the order control: the id that travels in the URL beside the
+ * word that names it. Resolved here for the same reason the categories are, so
+ * that the component iterates a list already in the right order and the right
+ * order is `materialSortIds`.
+ */
+export interface MaterialSort {
+  readonly id: MaterialSortId;
+  readonly label: string;
+}
+
 export interface MaterialsEdition {
   readonly locale: Locale;
   readonly meta: MaterialsText["meta"];
   readonly file: MaterialsText["file"];
+  readonly preview: MaterialsText["preview"];
+  readonly catalogue: MaterialsText["catalogue"];
   readonly empty: MaterialsText["empty"];
   readonly unavailable: MaterialsText["unavailable"];
   readonly usage: MaterialsText["usage"];
   readonly categories: readonly MaterialCategory[];
+  readonly sorts: readonly MaterialSort[];
 }
 
 const getMaterialsText = createDictionary<MaterialsText>(englishText, {
@@ -67,6 +83,8 @@ function edition(locale: Locale, text: MaterialsText): MaterialsEdition {
     locale,
     meta: text.meta,
     file: text.file,
+    preview: text.preview,
+    catalogue: text.catalogue,
     empty: text.empty,
     unavailable: text.unavailable,
     usage: text.usage,
@@ -81,6 +99,10 @@ function edition(locale: Locale, text: MaterialsText): MaterialsEdition {
       ...text.categories[id],
       imprintNote: carriesImprintNote(id) ? text.imprint.note : null,
     })),
+    /* Driven by the id list for the same reason: `Object.entries` would put the
+       control in whatever order a translator happened to type the keys in, and
+       the order the orders are offered in is a decision about the page. */
+    sorts: materialSortIds.map((id) => ({ id, label: text.catalogue.sort[id] })),
   };
 }
 

@@ -42,6 +42,47 @@ export const materialsText: MaterialsText = {
     downloadLabel: "Pobierz {title}",
   },
 
+  preview: {
+    alt: "Podgląd: {title}",
+    none: "Brak podglądu",
+  },
+
+  catalogue: {
+    label: "Filtruj i porządkuj katalog",
+    kindLabel: "Rodzaj",
+    kindAll: "Wszystkie rodzaje",
+    formatLabel: "Format",
+    formatAll: "Wszystkie formaty",
+    sortLabel: "Kolejność",
+    sort: {
+      newest: "Najnowsze najpierw",
+      oldest: "Najstarsze najpierw",
+      title: "Tytuł, od A do Z",
+      largest: "Największy plik najpierw",
+      smallest: "Najmniejszy plik najpierw",
+    },
+    apply: "Zastosuj",
+    clear: "Pokaż wszystko",
+    /*
+     * Cztery formy, nie dwie — jak w katalogu programowym. Polski liczy
+     * inaczej 1, inaczej 2–4 i inaczej 5 i więcej; `other` obsługuje przypadek
+     * ułamkowy, którego strona nigdy nie wytworzy.
+     */
+    showingAll: {
+      one: "Pokazujemy jedyny plik.",
+      few: "Pokazujemy wszystkie {count} pliki.",
+      many: "Pokazujemy wszystkie {count} plików.",
+      other: "Pokazujemy wszystkie {count} pliki.",
+    },
+    showingSome: {
+      one: "Pasuje {count} z {total} plików.",
+      few: "Pasują {count} z {total} plików.",
+      many: "Pasuje {count} z {total} plików.",
+      other: "Pasuje {count} z {total} plików.",
+    },
+    noMatch: "Nic tutaj temu nie odpowiada.",
+  },
+
   empty: {
     title: "Nic jeszcze nie opublikowano.",
     body: "Ta strona zapełnia się w miarę, jak powstają pliki.",

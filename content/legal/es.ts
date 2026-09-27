@@ -187,7 +187,11 @@ export const legalText: LegalText = {
         body: [
           {
             type: "paragraph",
-            text: "Las tipografías se sirven desde este sitio y no desde una red de fuentes, de modo que cargar una página no revela su visita a un tercero. Todas las imágenes se almacenan localmente; nada se enlaza directamente desde otro dominio.",
+            text: "Las tipografías se sirven desde este sitio y no desde una red de fuentes, de modo que cargar una página no revela su visita a un tercero. También cada imagen que usan las páginas del propio sitio se guarda aquí; ninguna se enlaza directamente desde otro dominio.",
+          },
+          {
+            type: "paragraph",
+            text: "Una página es la excepción, y se nombra aquí en lugar de pasarse por alto. Los diseños de la página de materiales se guardan en el almacén de archivos propio del movimiento, operado por la misma empresa que aloja este sitio, y las vistas previas de esa página se cargan directamente desde allí. Abrirla, por tanto, sí va a buscar imágenes a otra dirección — aunque no a otra organización, y la petición no lleva nada sobre usted: la dirección nombra el archivo y no a quien lee, y el referente enviado con ella se reduce al nombre de este sitio, sin la página en la que estaba. Ninguna otra página va a buscar nada a otro lugar.",
           },
         ],
       },

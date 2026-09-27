@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { MaterialsDocument } from "@/components/materials/MaterialsDocument";
 import { englishMaterials } from "@/content/materials";
 import { alternateLanguages } from "@/lib/i18n";
-import { groupMaterials, publishedMaterials } from "@/lib/materials";
+import { parseMaterialSelection } from "@/lib/material-catalogue";
+import { publishedMaterials } from "@/lib/materials";
 import { routes } from "@/lib/site";
 
 /**
@@ -32,13 +33,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function MaterialsPage() {
+/**
+ * The filter and the order arrive in the query string, so that a view of the
+ * catalogue is an address: linkable, bookmarkable, and applied by the server for
+ * a reader whose browser is running none of this page's JavaScript. Reading them
+ * costs nothing that has not already been paid, because this route is rendered
+ * per request either way.
+ */
+export default async function MaterialsPage(props: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const materials = await publishedMaterials();
 
   return (
     <MaterialsDocument
       edition={englishMaterials}
-      groups={materials === null ? null : groupMaterials(materials)}
+      materials={materials}
+      selection={parseMaterialSelection(await props.searchParams)}
     />
   );
 }

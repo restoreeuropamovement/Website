@@ -42,6 +42,38 @@ export const materialsText: MaterialsText = {
     downloadLabel: "{title} herunterladen",
   },
 
+  preview: {
+    alt: "Vorschau von {title}",
+    none: "Keine Vorschau",
+  },
+
+  catalogue: {
+    label: "Katalog filtern und ordnen",
+    kindLabel: "Art",
+    kindAll: "Alle Arten",
+    formatLabel: "Format",
+    formatAll: "Alle Formate",
+    sortLabel: "Reihenfolge",
+    sort: {
+      newest: "Neueste zuerst",
+      oldest: "Älteste zuerst",
+      title: "Titel, A bis Z",
+      largest: "Größte Datei zuerst",
+      smallest: "Kleinste Datei zuerst",
+    },
+    apply: "Anwenden",
+    clear: "Alles zeigen",
+    showingAll: {
+      one: "Es wird die einzige Datei gezeigt.",
+      other: "Es werden alle {count} Dateien gezeigt.",
+    },
+    showingSome: {
+      one: "{count} von {total} Dateien passt.",
+      other: "{count} von {total} Dateien passen.",
+    },
+    noMatch: "Hier passt dazu nichts.",
+  },
+
   empty: {
     title: "Noch nichts veröffentlicht.",
     body: "Diese Seite füllt sich, sobald die Dateien entstehen.",
