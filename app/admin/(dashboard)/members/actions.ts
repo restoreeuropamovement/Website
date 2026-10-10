@@ -192,13 +192,14 @@ export async function setMemberNotesAction(form: FormData): Promise<void> {
  * is most of what the roll is protecting, and somebody able to grant an office
  * without a passkey could find out by granting one and reading the board.
  *
- * Nothing here can produce an invalid combination, which is why it returns
- * nothing and reports nothing. The office select offers only known offices and
- * the wing select only known wings and never a blank, so the one judgement left
- * is whether this office takes a wing at all — and `grantOffice` makes that
- * decision in one place rather than trusting the form's hidden state. A
- * submission that names an office or a wing the lists do not contain is not a
- * mistake an administrator can make through the interface; it is somebody
+ * Returns nothing, like the status and note actions beside it: the page is
+ * revalidated and the offices it then prints are the answer. The one thing a
+ * person can get wrong through the interface is asking for a wing-scoped
+ * office without choosing a wing, which the wing select cannot prevent without
+ * also forbidding the movement-wide offices that legitimately have none. That
+ * is refused here and nothing appears, so the form's own line says a wing must
+ * be chosen. A submission naming an office or a wing the lists do not contain
+ * is not a mistake available through the interface at all; it is somebody
  * calling the endpoint, and it is recorded as a failure and dropped.
  *
  * The audit detail carries the member's id and a keyed digest of the office

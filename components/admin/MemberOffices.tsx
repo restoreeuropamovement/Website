@@ -95,21 +95,22 @@ export function MemberOffices({
           </label>
 
           {/*
-            Opened on the member's own country, where that is a wing.
-            Usually it is, and a select already showing the likely answer is
-            one fewer thing to get wrong — but "elsewhere" is a real answer on
-            the public form and no wing of elsewhere exists to lead. For those
-            records the placeholder stays selected and the browser refuses to
-            submit, rather than the first nation on the list quietly becoming
-            the answer. The action refuses it a second time, since a select is
-            a convenience and not a check.
+            Opened on the member's own country, where that is a wing. Usually
+            it is, and a select already showing the likely answer is one fewer
+            thing to get wrong — but "elsewhere" is a real answer on the public
+            form and there is no wing of elsewhere to lead. For those records
+            the placeholder stays selected, so the first nation on the list
+            cannot quietly become the answer to a question nobody answered.
 
-            The movement-wide roles ignore whatever is showing here, which the
-            line below says out loud rather than leaving to be discovered.
+            Not `required`, deliberately. It would read as the stricter choice
+            and is the weaker one: the movement-wide roles need no wing, so
+            requiring one would make them ungrantable for exactly the records
+            whose country is not a wing. The action decides instead, which it
+            has to do regardless — a select is a convenience and not a check.
           */}
           <label className="flex flex-col gap-1">
             <span className="eyebrow text-muted">Wing</span>
-            <select name="wing" required defaultValue={opensOn} className={select}>
+            <select name="wing" defaultValue={opensOn} className={select}>
               <option value="" disabled>
                 Which wing…
               </option>
@@ -134,8 +135,9 @@ export function MemberOffices({
           {WING_SCOPED_OFFICES.map((office) => MEMBER_OFFICE_LABEL[office].toLowerCase()).join(
             ", ",
           )}
-          ; the rest are movement-wide and ignore it. A role is encrypted like the name above it,
-          and the audit log records that one changed without recording which.
+          , which need one chosen; the rest are movement-wide and ignore it. A role is encrypted
+          like the name above it, and the audit log records that one changed without recording
+          which.
         </p>
       </div>
     </details>
