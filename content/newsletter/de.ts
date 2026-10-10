@@ -86,7 +86,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Wird entfernt …",
     done: {
       title: "Erledigt. Es wird nichts weiter gesendet.",
-      body: "Wir sagen nicht, ob die Adresse auf der Liste stand, denn wer diesen Link in Händen hält, ist nicht zwangsläufig die Person, der die Adresse gehört, und einem Unbekannten beantworten wir diese Frage nicht. Sie können jederzeit erneut abonnieren; es beginnt dann wieder mit der Bestätigung.",
+      body: "Wir sagen nicht, ob die Adresse auf der Liste stand, denn wer diesen Link in Händen hält, ist nicht zwangsläufig die Person, der die Adresse gehört, und einem Unbekannten beantworten wir diese Frage nicht. Sie können jederzeit erneut abonnieren; es beginnt dann wieder mit der Bestätigung. Sollte dennoch etwas ankommen, stammt der benutzte Link aus der Zeit vor dem jetzt gültigen Schlüssel und wird nicht mehr anerkannt; der am Fuß der neuesten Nachricht wird es.",
     },
     missing:
       "Diese Adresse trägt kein Merkmal, es gibt hier also nichts zu entfernen. Verwenden Sie den Link am Fuß einer Nachricht, die Ihnen gesendet wurde.",

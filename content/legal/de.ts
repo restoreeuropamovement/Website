@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Das Abbestellen kostet einen Klick und kein Benutzerkonto.** Jede Nachricht trägt einen Link, der die Adresse entfernt, Ihr Mailprogramm bietet unter Umständen eine eigene Abbestellfunktion an, die denselben Link benutzt, und keiner von beiden fragt nach einem Grund oder hält einen fest. Dieser Link ist kein in einer Tabelle hinterlegtes Merkmal: er wird bei jedem Gebrauch aus dem Datensatz und dem Schlüssel neu berechnet, sodass eine gestohlene Kopie der Datenbank niemandem ein Mittel gäbe, die Liste zu leeren, und eine in einem Archiv wiedergefundene Nachricht auch Jahre später noch funktioniert.",
+            text: "**Das Abbestellen kostet einen Klick und kein Benutzerkonto.** Jede Nachricht trägt einen Link, der die Adresse entfernt, Ihr Mailprogramm bietet unter Umständen eine eigene Abbestellfunktion an, die denselben Link benutzt, und keiner von beiden fragt nach einem Grund oder hält einen fest. Dieser Link ist kein in einer Tabelle hinterlegtes Merkmal: er wird bei jedem Gebrauch aus dem Datensatz und dem Schlüssel neu berechnet, sodass eine gestohlene Kopie der Datenbank niemandem ein Mittel gäbe, die Liste zu leeren, und eine in einem Archiv wiedergefundene Nachricht auch Jahre später noch funktioniert, solange dieser Schlüssel gilt. Wird der Schlüssel ersetzt — eine gelegentliche Wartungsarbeit, keine regelmäßige —, verlieren die Links in zuvor versandten Ausgaben ihre Gültigkeit.",
           },
           {
             type: "paragraph",

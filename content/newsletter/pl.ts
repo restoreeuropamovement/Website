@@ -85,7 +85,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Usuwanie…",
     done: {
       title: "Gotowe. Nic więcej nie zostanie wysłane.",
-      body: "Nie mówimy, czy adres był na liście, bo ten, kto trzyma w ręku ten odnośnik, niekoniecznie jest osobą, do której adres należy, a na to pytanie nieznajomemu nie odpowiemy. Możesz zapisać się ponownie w dowolnej chwili; zacznie się to od kroku z potwierdzeniem.",
+      body: "Nie mówimy, czy adres był na liście, bo ten, kto trzyma w ręku ten odnośnik, niekoniecznie jest osobą, do której adres należy, a na to pytanie nieznajomemu nie odpowiemy. Możesz zapisać się ponownie w dowolnej chwili; zacznie się to od kroku z potwierdzeniem. Jeśli mimo wszystko coś jeszcze przyjdzie, użyty odnośnik pochodzi sprzed obecnego klucza szyfrowania i nie jest już uznawany; ten na dole najnowszej wiadomości będzie.",
     },
     missing:
       "Ten adres nie niesie żadnego znacznika, więc nie ma tu czego usuwać. Użyj odnośnika na dole którejkolwiek z wysłanych do ciebie wiadomości.",

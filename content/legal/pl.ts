@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Odejście zajmuje jedno kliknięcie i nie wymaga konta.** Każda wiadomość niesie odnośnik usuwający adres, twój program pocztowy może pokazywać własny przycisk rezygnacji korzystający z tego samego odnośnika, i ani jedno, ani drugie nie pyta o powód ani go nie zapisuje. Ten odnośnik nie jest znacznikiem trzymanym w tabeli: przy każdym użyciu jest wyliczany z wpisu i z klucza szyfrowania, więc skradziona kopia bazy nie dałaby nikomu sposobu na opróżnienie listy, a wiadomość odnaleziona w archiwum po latach nadal działa.",
+            text: "**Odejście zajmuje jedno kliknięcie i nie wymaga konta.** Każda wiadomość niesie odnośnik usuwający adres, twój program pocztowy może pokazywać własny przycisk rezygnacji korzystający z tego samego odnośnika, i ani jedno, ani drugie nie pyta o powód ani go nie zapisuje. Ten odnośnik nie jest znacznikiem trzymanym w tabeli: przy każdym użyciu jest wyliczany z wpisu i z klucza szyfrowania, więc skradziona kopia bazy nie dałaby nikomu sposobu na opróżnienie listy, a wiadomość odnaleziona w archiwum po latach nadal działa, dopóki działa ten klucz. Wymiana klucza — rzecz robiona od czasu do czasu, nie rutynowo — unieważnia odnośniki w numerach wysłanych wcześniej.",
           },
           {
             type: "paragraph",

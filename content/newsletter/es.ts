@@ -85,7 +85,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Eliminando…",
     done: {
       title: "Hecho. No se enviará nada más.",
-      body: "No decimos si la dirección estaba en la lista, porque quien tiene este enlace no es necesariamente la persona a la que pertenece la dirección, y esa no es una pregunta que vayamos a responderle a un desconocido. Puedes suscribirte de nuevo cuando quieras; empezará otra vez por el paso de la confirmación.",
+      body: "No decimos si la dirección estaba en la lista, porque quien tiene este enlace no es necesariamente la persona a la que pertenece la dirección, y esa no es una pregunta que vayamos a responderle a un desconocido. Puedes suscribirte de nuevo cuando quieras; empezará otra vez por el paso de la confirmación. Si aun así llega algo, el enlace que usaste es anterior a la clave de cifrado actual y ya no se reconoce; el del pie del mensaje más reciente sí lo será.",
     },
     missing:
       "Esta dirección no lleva ninguna ficha, así que aquí no hay nada que eliminar. Usa el enlace al pie de cualquiera de los mensajes que se te enviaron.",

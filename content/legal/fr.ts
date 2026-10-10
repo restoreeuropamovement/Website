@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Partir prend un clic et aucun compte.** Chaque message porte un lien qui retire l'adresse, votre logiciel de messagerie propose peut-être sa propre commande de désabonnement qui emploie ce même lien, et ni l'un ni l'autre ne demande de motif ni n'en consigne. Ce lien n'est pas un jeton gardé dans une table : il est recalculé à partir de l'enregistrement et de la clef de chiffrement à chaque usage, de sorte qu'une copie volée de la base ne donnerait à personne un moyen de vider la liste, et qu'un message retrouvé dans une archive des années plus tard fonctionne encore.",
+            text: "**Partir prend un clic et aucun compte.** Chaque message porte un lien qui retire l'adresse, votre logiciel de messagerie propose peut-être sa propre commande de désabonnement qui emploie ce même lien, et ni l'un ni l'autre ne demande de motif ni n'en consigne. Ce lien n'est pas un jeton gardé dans une table : il est recalculé à partir de l'enregistrement et de la clef de chiffrement à chaque usage, de sorte qu'une copie volée de la base ne donnerait à personne un moyen de vider la liste, et qu'un message retrouvé dans une archive des années plus tard fonctionne encore, aussi longtemps que cette clef vaut. Remplacer la clef — un entretien occasionnel, et non une routine — périme les liens des numéros envoyés auparavant.",
           },
           {
             type: "paragraph",

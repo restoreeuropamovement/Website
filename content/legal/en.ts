@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Leaving takes one click and no account.** Every message carries a link that removes the address, your mail program may offer an unsubscribe control of its own that uses the same link, and neither asks for a reason or records one. That link is not a token kept in a table: it is recomputed from the record and the encryption key each time it is used, so a stolen copy of the database would give nobody a means of emptying the list, and a message found in an archive years from now still works.",
+            text: "**Leaving takes one click and no account.** Every message carries a link that removes the address, your mail program may offer an unsubscribe control of its own that uses the same link, and neither asks for a reason or records one. That link is not a token kept in a table: it is recomputed from the record and the encryption key each time it is used, so a stolen copy of the database would give nobody a means of emptying the list, and a message found in an archive years from now still works for as long as that key does. Replacing the key — which is an occasional piece of maintenance, not a routine one — retires the links in issues sent before it.",
           },
           {
             type: "paragraph",

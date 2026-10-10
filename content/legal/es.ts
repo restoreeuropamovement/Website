@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Marcharse cuesta un clic y ninguna cuenta.** Cada mensaje lleva un enlace que elimina la dirección, su programa de correo puede ofrecer su propio mando de baja que usa ese mismo enlace, y ni uno ni otro pide un motivo ni lo registra. Ese enlace no es una ficha guardada en una tabla: se recalcula a partir del registro y de la clave de cifrado cada vez que se usa, de modo que una copia robada de la base de datos no daría a nadie un medio de vaciar la lista, y un mensaje reencontrado en un archivo años después sigue funcionando.",
+            text: "**Marcharse cuesta un clic y ninguna cuenta.** Cada mensaje lleva un enlace que elimina la dirección, su programa de correo puede ofrecer su propio mando de baja que usa ese mismo enlace, y ni uno ni otro pide un motivo ni lo registra. Ese enlace no es una ficha guardada en una tabla: se recalcula a partir del registro y de la clave de cifrado cada vez que se usa, de modo que una copia robada de la base de datos no daría a nadie un medio de vaciar la lista, y un mensaje reencontrado en un archivo años después sigue funcionando mientras esa clave valga. Sustituir la clave — un mantenimiento ocasional, no rutinario — jubila los enlaces de los números enviados antes.",
           },
           {
             type: "paragraph",

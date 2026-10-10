@@ -16,6 +16,12 @@ import type { NewsletterEdition } from "@/content/newsletter";
  * subscribed" would answer a question about somebody else's address to a
  * stranger.
  *
+ * Reporting success unconditionally does mean the one case where the removal
+ * genuinely did not happen — a tag from an issue sent before the encryption
+ * key was last replaced — is reported as though it had. `done.body` therefore
+ * names that case and says what to do about it, which is the only honest way
+ * to keep both the silence and the accuracy.
+ *
  * It asks for no sign-in and no reason. Leaving a political mailing list has
  * to be at least as easy as joining one, and a removal behind an account
  * would be no removal at all for the reader who most needs it.

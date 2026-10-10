@@ -169,7 +169,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Andarsene costa un clic e nessun account.** Ogni messaggio porta un collegamento che rimuove l'indirizzo, il tuo programma di posta può offrire un proprio comando di cancellazione che usa lo stesso collegamento, e né l'uno né l'altro chiede un motivo o ne registra uno. Quel collegamento non è un gettone custodito in una tabella: viene ricalcolato dal registro e dalla chiave di cifratura a ogni uso, così una copia rubata della banca dati non darebbe a nessuno un mezzo per svuotare la lista, e un messaggio ritrovato in un archivio dopo anni funziona ancora.",
+            text: "**Andarsene costa un clic e nessun account.** Ogni messaggio porta un collegamento che rimuove l'indirizzo, il tuo programma di posta può offrire un proprio comando di cancellazione che usa lo stesso collegamento, e né l'uno né l'altro chiede un motivo o ne registra uno. Quel collegamento non è un gettone custodito in una tabella: viene ricalcolato dal registro e dalla chiave di cifratura a ogni uso, così una copia rubata della banca dati non darebbe a nessuno un mezzo per svuotare la lista, e un messaggio ritrovato in un archivio dopo anni funziona ancora, finché vale quella chiave. Sostituire la chiave — una manutenzione saltuaria, non una routine — manda in pensione i collegamenti dei numeri inviati prima.",
           },
           {
             type: "paragraph",

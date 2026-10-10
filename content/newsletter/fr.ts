@@ -86,7 +86,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Retrait…",
     done: {
       title: "C'est fait. Rien ne sera plus envoyé.",
-      body: "Nous ne disons pas si l'adresse figurait sur la liste, car celui qui détient ce lien n'est pas forcément la personne à qui l'adresse appartient, et ce n'est pas une question à laquelle nous répondrons à un inconnu. Vous pouvez vous réabonner quand vous voulez ; cela repartira de l'étape de confirmation.",
+      body: "Nous ne disons pas si l'adresse figurait sur la liste, car celui qui détient ce lien n'est pas forcément la personne à qui l'adresse appartient, et ce n'est pas une question à laquelle nous répondrons à un inconnu. Vous pouvez vous réabonner quand vous voulez ; cela repartira de l'étape de confirmation. Si quelque chose arrive malgré tout, le lien employé est antérieur à la clef de chiffrement actuelle et n'est plus reconnu ; celui au bas du message le plus récent le sera.",
     },
     missing:
       "Cette adresse ne porte aucun jeton : il n'y a donc rien à retirer ici. Utilisez le lien au bas d'un message qui vous a été envoyé.",

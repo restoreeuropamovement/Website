@@ -86,7 +86,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Rimozione…",
     done: {
       title: "Fatto. Non verrà inviato altro.",
-      body: "Non diciamo se l'indirizzo fosse sulla lista, perché chi ha in mano questo collegamento non è necessariamente la persona a cui l'indirizzo appartiene, e non è una domanda a cui risponderemo a uno sconosciuto. Puoi iscriverti di nuovo quando vuoi; si ripartirà dal passaggio della conferma.",
+      body: "Non diciamo se l'indirizzo fosse sulla lista, perché chi ha in mano questo collegamento non è necessariamente la persona a cui l'indirizzo appartiene, e non è una domanda a cui risponderemo a uno sconosciuto. Puoi iscriverti di nuovo quando vuoi; si ripartirà dal passaggio della conferma. Se malgrado questo arrivasse ancora qualcosa, il collegamento che hai usato è anteriore alla chiave di cifratura attuale e non viene più riconosciuto; quello in fondo al messaggio più recente lo sarà.",
     },
     missing:
       "Questo indirizzo non porta alcun gettone, quindi qui non c'è nulla da rimuovere. Usa il collegamento in calce a uno qualsiasi dei messaggi che ti sono stati inviati.",

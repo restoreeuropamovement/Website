@@ -85,7 +85,7 @@ export const newsletterText: NewsletterText = {
     submitting: "Removing…",
     done: {
       title: "Done. Nothing further will be sent.",
-      body: "We do not say whether the address was on the list, because whoever is holding this link is not necessarily the person who owns the address, and that is not a question we will answer to a stranger. You can subscribe again at any time, and it will start from the confirmation step.",
+      body: "We do not say whether the address was on the list, because whoever is holding this link is not necessarily the person who owns the address, and that is not a question we will answer to a stranger. You can subscribe again at any time, and it will start from the confirmation step. If anything does still arrive, the link you used was issued before the encryption key now in use and is no longer recognised; the one at the foot of the newest message will be.",
     },
     missing:
       "This address carries no token, so there is nothing here to remove. Use the link at the foot of any message you were sent.",
