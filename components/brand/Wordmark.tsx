@@ -13,6 +13,8 @@ interface WordmarkProps {
    * is an ordinary noun and reads as a mistake left in English.
    */
   readonly descriptor?: string;
+  /** Passed to the mark. `heraldic` paints it navy-and-gold instead of taking the text colour. */
+  readonly markTone?: "current" | "heraldic";
 }
 
 const markSize = {
@@ -41,11 +43,12 @@ export function Wordmark({
   variant = "compact",
   size = "md",
   descriptor = site.descriptor,
+  markTone = "current",
 }: WordmarkProps) {
   if (variant === "stacked") {
     return (
       <span className={cn("inline-flex flex-col items-start gap-2.5", className)}>
-        <RestoreEuropaMark className={markSize[size]} />
+        <RestoreEuropaMark className={markSize[size]} tone={markTone} />
         <span className="flex flex-col gap-1">
           <span
             className={cn(
@@ -63,7 +66,7 @@ export function Wordmark({
 
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <RestoreEuropaMark className={markSize[size]} />
+      <RestoreEuropaMark className={markSize[size]} tone={markTone} />
       <span
         className={cn("font-serif font-semibold tracking-[0.015em] text-current", letterSize[size])}
       >
