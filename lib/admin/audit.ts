@@ -42,6 +42,24 @@ export type AuditAction =
    * and this table is not encrypted. Only that it changed, and on which row.
    */
   | "member.note"
+  /*
+   * An office was granted, withdrawn, or the board of them read.
+   *
+   * `grant` and `revoke` carry the member's id and a keyed digest of the
+   * office and its wing — never the office in words. An office held by one
+   * person, beside a country held in the clear, names that person, which is
+   * why `member_office` encrypts it; writing it here in words would put the
+   * movement's whole organisational chart, in plaintext, in the one table that
+   * is not encrypted. The digest keeps "was anybody made leader of the German
+   * wing?" answerable and "list who holds what" unanswerable, exactly as
+   * `queryDigest` does for a search term.
+   *
+   * `reveal` is here for the reason `member.reveal` is: reading who runs a
+   * wing is reading a list of people, so the read is the event.
+   */
+  | "member.office.grant"
+  | "member.office.revoke"
+  | "member.office.reveal"
   | "member.erase"
   /*
    * The two writes the public site performs. Recorded with the same care as an

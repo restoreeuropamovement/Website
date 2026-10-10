@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Ein Eintrag enthält höchstens sieben Dinge: Ihren Namen, Ihre E-Mail-Adresse, Ihr Land, die Rolle, um die Sie gebeten haben, ein Interessengebiet und — nur wenn Sie sie angeben wollen — Ihre Region oder Stadt und eine Nachricht. Es gibt keine Postanschrift, keine Telefonnummer und kein Geburtsdatum. Nichts wird erschlossen, angereichert oder von irgendwoher zugekauft.",
+            text: "Ein Eintrag enthält höchstens sieben Dinge, und jedes einzelne davon geben Sie selbst an: Ihren Namen, Ihre E-Mail-Adresse, Ihr Land, die Rolle, um die Sie gebeten haben, ein Interessengebiet und — nur wenn Sie sie angeben wollen — Ihre Region oder Stadt und eine Nachricht. Es gibt keine Postanschrift, keine Telefonnummer und kein Geburtsdatum. Nichts wird erschlossen, angereichert oder von irgendwoher zugekauft. Zwei weitere Dinge können einem Eintrag später hinzugefügt werden, von einem Menschen und nicht von Ihnen, und beide sind unten dargelegt.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "Eines, das nicht Sie geschrieben haben",
+            text: "Zwei Dinge, die nicht Sie geschrieben haben",
           },
           {
             type: "paragraph",
-            text: "Während der Prüfung einer Bewerbung kann ein Administrator ihr eine kurze Notiz beifügen — den Inhalt eines Gesprächs, den Grund für eine Entscheidung, wem Sie vorgestellt werden sollten. Das ist das Einzige in Ihrem Eintrag, das Sie nicht selbst geschrieben haben, und es ist das einzige Feld der ganzen Datenbank, das die Beurteilung eines Menschen durch einen anderen enthält; darum ist es **wie alles Übrige verschlüsselt** und wird niemals in das Verwaltungsprotokoll geschrieben.",
+            text: "Das Erste ist eine Notiz. Während der Prüfung einer Bewerbung kann ein Administrator ihr eine kurze beifügen — den Inhalt eines Gesprächs, den Grund für eine Entscheidung, wem Sie vorgestellt werden sollten. Es ist das einzige Feld der ganzen Datenbank, das die Beurteilung eines Menschen durch einen anderen enthält; darum ist es **wie alles Übrige verschlüsselt** und wird niemals in das Verwaltungsprotokoll geschrieben.",
           },
           {
             type: "paragraph",
             text: "Sie ist auch Teil Ihres Eintrags im Sinne eines Auskunftsersuchens. Wenn Sie fragen, was über Sie gespeichert ist, gehört die Notiz zur Antwort. Von jedem, der eine schreibt, wird erwartet, dass er sie in diesem Wissen schreibt.",
+          },
+          {
+            type: "paragraph",
+            text: "Das Zweite ist ein Amt in der Bewegung, und das ist nicht dasselbe wie die Rolle, um die Sie bei Ihrer Bewerbung gebeten haben. Die meisten Einträge enthalten keines. Festgehalten wird es nur für die wenigen Menschen, die eine Verantwortung übernehmen — die Leitung eines Landesverbands, die Stellvertretung derjenigen Person, die ihn leitet, die Organisation einer Ortsgruppe, die Koordination zwischen den Verbänden, die Pressearbeit —, und es nennt den Verband, zu dem es gehört. Nichts wird erschlossen und nichts geschieht automatisch: Es besteht, weil ein Mensch es aufgeschrieben hat, nachdem Sie zugestimmt haben, es wird auf demselben Weg wieder entzogen, und es ist wie alles andere Teil Ihres Eintrags im Sinne eines Auskunftsersuchens.",
+          },
+          {
+            type: "paragraph",
+            text: "**Ein Amt wird wie Ihr Name verschlüsselt**, und das aus einem schärferen Grund als alles andere im Eintrag. Es gibt einen Leiter eines Landesverbands. Ihr Land wird unverschlüsselt gespeichert, weil es für sich allein eine Gruppe von Menschen beschreibt und niemanden identifiziert — doch die Leitung des Verbands in Ihrem Land beschreibt keine Gruppe, sie beschreibt Sie. Wo das Land also offen gezählt werden kann, kann ein Amt, das Sie darin heraushebt, es nicht, und es wird dort aufbewahrt, wo auch Ihre übrigen Angaben liegen.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Ihr Name, Ihre E-Mail-Adresse, Ihre Region, Ihre Nachricht und jede über Sie geschriebene Notiz werden verschlüsselt**, bevor sie niedergeschrieben werden, mit einem Schlüssel, der nicht in der Datenbank liegt. Eine gestohlene Kopie der Datenbank oder einer Sicherung davon entschlüsselt zu nichts.",
-              "**Ihr Land wird unverschlüsselt gespeichert**, denn nach Ländern zu zählen und zu organisieren ist der Grund, aus dem das Verzeichnis besteht. Für sich allein identifiziert es niemanden. Ihre Region, die Sie viel stärker eingrenzen würde, wird nicht so behandelt — sie wird mit allem Übrigen verschlüsselt.",
+              "**Ihr Name, Ihre E-Mail-Adresse, Ihre Region, Ihre Nachricht, jedes Amt, das Sie innehaben, und jede über Sie geschriebene Notiz werden verschlüsselt**, bevor sie niedergeschrieben werden, mit einem Schlüssel, der nicht in der Datenbank liegt. Eine gestohlene Kopie der Datenbank oder einer Sicherung davon entschlüsselt zu nichts.",
+              "**Ihr Land wird unverschlüsselt gespeichert**, denn nach Ländern zu zählen und zu organisieren ist der Grund, aus dem das Verzeichnis besteht. Für sich allein identifiziert es niemanden. Ihre Region und jedes Amt, das Sie innehaben, würden Sie jeweils viel stärker eingrenzen und werden nicht so behandelt: Beides wird mit allem Übrigen verschlüsselt.",
               "**Niemand meldet sich mit einem Passwort an.** Der Verwaltungszugang verlangt einen Passkey auf einem physischen Gerät, der sich nicht erraten, nicht durch Phishing erlangen und nicht aus einer gestohlenen Datenbank ablesen lässt.",
-              "**Namen oder Nachrichten zu lesen verlangt eine zweite Bestätigung.** Angemeldet zu sein zeigt nur Zahlen; eine einzelne Person offenzulegen oder eine Zuschrift zu öffnen, erfordert eine erneute Berührung des Passkeys, die nur Minuten gilt. Wer eine aktive Sitzung stiehlt, erhält Statistik, keine Menschen.",
-              "**Jeder Lesevorgang wird protokolliert** — wer nachgesehen hat und wann. Nicht bloß jede Änderung: Bei einem Verzeichnis wie diesem ist der Akt des Nachsehens das, was aufzuzeichnen lohnt. Wonach gesucht wurde, wird als Einweg-Prüfwert festgehalten, sodass das Protokoll bestätigen kann, ob eine bestimmte Person nachgesehen wurde, ohne selbst zu einer Namensliste zu werden.",
+              "**Namen oder Nachrichten zu lesen verlangt eine zweite Bestätigung.** Angemeldet zu sein zeigt nur Zahlen; eine einzelne Person offenzulegen, eine Zuschrift zu öffnen oder zu sehen, wer welches Amt innehat, erfordert eine erneute Berührung des Passkeys, die nur Minuten gilt. Wer eine aktive Sitzung stiehlt, erhält Statistik, keine Menschen.",
+              "**Jeder Lesevorgang wird protokolliert** — wer nachgesehen hat und wann. Nicht bloß jede Änderung: Bei einem Verzeichnis wie diesem ist der Akt des Nachsehens das, was aufzuzeichnen lohnt. Wonach gesucht wurde, wird als Einweg-Prüfwert festgehalten, sodass das Protokoll bestätigen kann, ob eine bestimmte Person nachgesehen wurde, ohne selbst zu einer Namensliste zu werden. Wird ein Amt verliehen oder entzogen, wird es auf demselben Weg festgehalten: Das Protokoll zeigt, dass eines sich geändert hat und bei welchem Eintrag, niemals aber, welches Amt es war.",
               "**Es gibt keine Exportfunktion.** Das Verzeichnis lässt sich nicht als Datei herunterladen, denn eine Datei ist die Form, in der solche Verzeichnisse entkommen.",
             ],
           },

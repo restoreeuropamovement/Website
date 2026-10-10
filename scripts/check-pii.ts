@@ -41,7 +41,7 @@ async function main(): Promise<void> {
   ).toString("base64url");
 
   // Imported after the key is set, since the module reads it on first use.
-  const { decryptPii, emailDigest, encryptPii, foldForSearch } = await import(
+  const { decryptPii, emailDigest, encryptPii, foldForSearch, officeDigest } = await import(
     "../lib/admin/pii"
   );
 
@@ -90,6 +90,28 @@ async function main(): Promise<void> {
   );
   check("digest separates distinct addresses", digest !== (await emailDigest("other@example.test")));
   check("digest does not embed the address", !digest.toLowerCase().includes("person"));
+
+  /*
+   * The office digest is a uniqueness constraint rather than a lookup, so the
+   * failure it has to be guarded against is the opposite of the one above: not
+   * a false match, but a false *collision*. If the wing were dropped from the
+   * input, a second wing's leadership would be refused as a duplicate of the
+   * first — silently, and only for the second wing anybody appointed.
+   */
+  const alice = "8f14e45f-ceea-467a-9ba7-4cbb1e9d4a1f";
+  const bob = "c9f0f895-fb98-4b2a-9a9c-5a1d06b9cbe4";
+  const lead = await officeDigest(alice, "wing-lead", "germany");
+
+  check("office digest is stable", lead === (await officeDigest(alice, "wing-lead", "germany")));
+  check("office digest separates wings", lead !== (await officeDigest(alice, "wing-lead", "poland")));
+  check("office digest separates offices", lead !== (await officeDigest(alice, "wing-deputy", "germany")));
+  check("office digest separates members", lead !== (await officeDigest(bob, "wing-lead", "germany")));
+  check(
+    "a movement-wide office needs no wing",
+    (await officeDigest(alice, "press-officer", null)) ===
+      (await officeDigest(alice, "press-officer", "")),
+  );
+  check("office digest does not embed the office", !lead.toLowerCase().includes("wing"));
 
   if (failures > 0) {
     console.error(`\nMembership encryption is not behaving as designed: ${failures} failed.`);

@@ -70,6 +70,15 @@ table will one day be read by someone who should not have it.
   Region is not in that group: it narrows a person far more than a country does. The same applies to
   the `enquiry` table, where the name, address and message body are encrypted and only the
   fixed-list `subject` is readable.
+- **The roles members hold are in `member_office`, and they are encrypted** — the role and the wing
+  both. This is the one case where a value drawn from a fixed list is *not* in the clear with
+  `country` and `involvement_role`, and the test is the one those two pass: does the value identify
+  a person? There is one leader of a wing, so `wing-lead` beside a readable `germany` names
+  somebody rather than describing a category of people, and it names the row an opponent would most
+  want. Nothing is lost by it, because there is no non-identifying view of leadership to count in
+  SQL — every view of who runs a wing is a list of people. Reading them therefore takes
+  `requireElevatedSession()` like a name, and `admin_audit` records a grant as a keyed digest
+  (`officeDigest`) rather than in words.
 - **Encryption is non-deterministic on purpose**, so those columns cannot be indexed or searched in
   SQL. Search decrypts candidates and filters in memory — see `searchMembersRevealed`. Do not
   "optimise" this into a deterministic index: that would let whoever steals the table test who is

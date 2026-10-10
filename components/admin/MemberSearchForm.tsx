@@ -1,6 +1,11 @@
 import Link from "next/link";
 
 import {
+  MEMBER_OFFICES,
+  MEMBER_OFFICE_LABEL,
+  type MemberOffice,
+} from "@/lib/admin/member-offices";
+import {
   MEMBER_STATUSES,
   MEMBER_STATUS_LABEL,
   type MemberSort,
@@ -24,6 +29,7 @@ export function MemberSearchForm({
   query,
   country,
   role,
+  office,
   status,
   sort,
 }: {
@@ -33,6 +39,7 @@ export function MemberSearchForm({
   readonly query?: string;
   readonly country?: string;
   readonly role?: string;
+  readonly office?: MemberOffice;
   readonly status?: MemberStatus | "open";
   readonly sort: MemberSort;
 }) {
@@ -76,6 +83,28 @@ export function MemberSearchForm({
           {roles.map((option) => (
             <option key={option.id} value={option.id}>
               {option.title}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/*
+        Two selects that look alike and ask different questions. "Applied as"
+        reads `involvement_role`, which is how somebody joined; this reads
+        `member_office`, which is what they answer for now. The parameter is
+        `office` rather than `role` because `role` was taken by the first of
+        them before the second existed, and it is bookmarkable.
+
+        Narrowed in memory rather than in SQL, because the column it filters is
+        encrypted — see `searchMembersRevealed`.
+      */}
+      <label className="flex flex-col gap-1.5">
+        <span className="eyebrow text-muted">Role held</span>
+        <select name="office" defaultValue={office ?? ""} className={select}>
+          <option value="">Any or none</option>
+          {MEMBER_OFFICES.map((value) => (
+            <option key={value} value={value}>
+              {MEMBER_OFFICE_LABEL[value]}
             </option>
           ))}
         </select>

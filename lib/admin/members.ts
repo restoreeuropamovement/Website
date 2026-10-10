@@ -5,6 +5,8 @@ import {
   type MemberStatus,
 } from "@/lib/admin/member-status";
 import { isCanaryDigest } from "@/lib/admin/canary";
+import type { MemberOffice } from "@/lib/admin/member-offices";
+import { officesRevealed, type HeldOffice } from "@/lib/admin/offices";
 import {
   decryptPiiSafe,
   emailDigest,
@@ -32,6 +34,11 @@ import { db } from "@/lib/db";
  *   * `searchMembersRevealed` decrypts. It must only ever be reached from a
  *     session that has re-asserted its passkey — see `requireElevatedSession`
  *     in lib/admin/session.ts — and every call is audited by the caller.
+ *
+ * The offices members hold are a table of their own, in
+ * `lib/admin/offices.ts`, which this module reads and does not own. They are
+ * encrypted, for a sharper version of the reason a region is — see the comment
+ * above `member_office` in db/schema.sql.
  *
  * There is no bulk-export function here, and that is a deliberate omission
  * rather than an oversight. Exporting is the operation that turns a controlled
@@ -289,6 +296,14 @@ export interface RevealedMember {
   readonly message: string;
   readonly involvementRole: string;
   readonly interestArea: string;
+  /**
+   * The offices this person holds, decrypted. Empty for almost everybody.
+   *
+   * Carried on the record rather than fetched by the row that renders it,
+   * because `member_office` is one small table and the alternative is a query
+   * per member on a page that shows twenty-five of them.
+   */
+  readonly offices: readonly HeldOffice[];
   /** Vetting notes, decrypted. Empty when none were written. */
   readonly notes: string;
   readonly status: MemberStatus;
@@ -315,6 +330,20 @@ export interface MemberSearch {
    * because it names a kind of application rather than a person.
    */
   readonly role?: string;
+  /**
+   * An office id from `lib/admin/member-offices.ts`.
+   *
+   * Called `office` rather than `role` because `role` was taken, by
+   * `involvement_role`, which this page labels "Applied as". The two are
+   * different questions — what somebody applied as, and what they now answer
+   * for — and the older name stays where it is: the query parameter is
+   * bookmarkable and the key `role` already means "applied as" in every
+   * `member.reveal` row ever written to an append-only log.
+   *
+   * Cannot be filtered in SQL, because the column is ciphertext. See
+   * `searchMembersRevealed` for how it is applied instead.
+   */
+  readonly office?: MemberOffice;
   readonly sort?: MemberSort;
   readonly page?: number;
   readonly pageSize?: number;
@@ -350,6 +379,11 @@ export interface MemberSearchResult {
  * which is the price of the encrypted columns not being searchable — and is the
  * right way round: the alternative is a deterministic index that would let
  * whoever steals this table test who is in it.
+ *
+ * The office filter is a third case, and sits between the two: the column it
+ * reads is encrypted like a name, but it lives in a table small enough to
+ * decrypt whole, so the ids are resolved first and the query asks for them by
+ * name. See the comment beside `holders` below.
  */
 export async function searchMembersRevealed(
   options: MemberSearch = {},
@@ -371,6 +405,47 @@ export async function searchMembersRevealed(
       : options.status === "open"
         ? OPEN_STATUSES
         : [options.status];
+
+  /*
+   * Offices, every time, because every record on the page prints the ones it
+   * holds. Read once here rather than per row: the table holds a committee
+   * rather than a membership, so this is a handful of rows and a handful of
+   * decryptions however many members are being listed.
+   */
+  const offices = await officesRevealed();
+  const heldBy = new Map<string, HeldOffice[]>();
+  for (const held of offices) {
+    const existing = heldBy.get(held.memberId);
+    if (existing) existing.push(held);
+    else heldBy.set(held.memberId, [held]);
+  }
+
+  /*
+   * Filtering by office happens *before* the scan rather than after it, which
+   * is the one place this differs from filtering by name.
+   *
+   * A name has to be matched against every candidate, because the only way to
+   * know whether a row matches is to decrypt it. An office is the other way
+   * round: the offices are already in hand, so the set of members who hold one
+   * is known before the roll is touched, and the query can ask for exactly
+   * those ids. Which matters for more than speed — narrowing afterwards would
+   * read `SEARCH_SCAN_LIMIT` rows to find three wing leaders, and could report
+   * itself truncated while showing every record that matched.
+   */
+  const holders =
+    options.office === undefined
+      ? null
+      : [
+          ...new Set(
+            offices
+              .filter((held) => held.office === options.office)
+              .map((held) => held.memberId),
+          ),
+        ];
+
+  if (holders !== null && holders.length === 0) {
+    return { members: [], total: 0, page: 1, pageCount: 1, truncated: false };
+  }
 
   const rows = await sql<
     {
@@ -396,6 +471,7 @@ export async function searchMembersRevealed(
      WHERE (${options.country ?? null}::text IS NULL OR country = ${options.country ?? null})
        AND (${statuses === null} OR status = ANY(${statuses ?? []}::text[]))
        AND (${options.role ?? null}::text IS NULL OR involvement_role = ${options.role ?? null})
+       AND (${holders === null} OR id = ANY(${holders ?? []}::uuid[]))
      ORDER BY country ASC, created_at DESC
      LIMIT ${SEARCH_SCAN_LIMIT + 1}
   `;
@@ -422,6 +498,7 @@ export async function searchMembersRevealed(
         : "",
       involvementRole: row.involvement_role,
       interestArea: row.interest_area,
+      offices: heldBy.get(row.id) ?? [],
       status: row.status,
       statusChangedAt: row.status_changed_at,
       createdAt: row.created_at,
@@ -463,7 +540,13 @@ export async function searchMembersRevealed(
   };
 }
 
-/** Erases one record outright. The GDPR right to erasure, and the only delete. */
+/**
+ * Erases one record outright. The GDPR right to erasure, and the only delete.
+ *
+ * Any offices the person held go with it, by the cascade on
+ * `member_office.member_id`. An erasure that left "the member who led the
+ * German wing" behind would have erased nothing worth erasing.
+ */
 export async function eraseMember(id: string): Promise<boolean> {
   const [row] = await db()<{ id: string }[]>`
     DELETE FROM member WHERE id = ${id} RETURNING id

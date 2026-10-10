@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "A record holds seven things at most: your name, your email address, your country, the role you asked for, one area of interest, and — only if you choose to give them — your region or city and a message. There is no postal address, no telephone number and no date of birth. Nothing is inferred, enriched or bought in from anywhere else.",
+            text: "A record holds seven things at most, and you give every one of them: your name, your email address, your country, the role you asked for, one area of interest, and — only if you choose to give them — your region or city and a message. There is no postal address, no telephone number and no date of birth. Nothing is inferred, enriched or bought in from anywhere else. Two further things can be added to a record afterwards, by a person rather than by you, and both are set out below.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "One thing you did not write",
+            text: "Two things you did not write",
           },
           {
             type: "paragraph",
-            text: "While considering an application, an administrator can attach a short note to it — the substance of a conversation, a reason for a decision, who to introduce you to. This is the only thing in your record that you did not write yourself, and it is the only field in the entire database holding one person's assessment of another, so it is **encrypted like the rest** and is never written to the administrative log.",
+            text: "The first is a note. While considering an application, an administrator can attach a short one to it — the substance of a conversation, a reason for a decision, who to introduce you to. It is the only field in the entire database holding one person's assessment of another, so it is **encrypted like the rest** and is never written to the administrative log.",
           },
           {
             type: "paragraph",
             text: "It is also part of your record for the purpose of a subject access request. If you ask what is held about you, the note is included in the answer. Anyone writing one is expected to write it knowing that.",
+          },
+          {
+            type: "paragraph",
+            text: "The second is a position in the movement, which is not the same thing as the role you asked for when you applied. Most records hold none. One is recorded only for the few people who take on a responsibility — leading a national wing, standing deputy to whoever leads it, organising a chapter, coordinating between wings, speaking to the press — and it names the wing it belongs to. Nothing is inferred and nothing is automatic: it exists because a person wrote it down after you agreed to it, it is withdrawn the same way, and it is part of your record for a subject access request like everything else.",
+          },
+          {
+            type: "paragraph",
+            text: "**A position is encrypted like your name**, and for a sharper reason than anything else in the record. There is one leader of a wing. Your country is held unencrypted because on its own it describes a group of people and identifies nobody — but the leadership of the wing in your country does not describe a group, it describes you. So where the country can be counted in the open, a position that would single you out within it cannot, and it is kept where the rest of your details are kept.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Your name, email address, region, message and any note written about you are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
-              "**Your country is held unencrypted**, because counting and organising by country is the reason the list exists. On its own it identifies nobody. Your region, which would narrow you down much further, is not treated this way — it is encrypted with the rest.",
+              "**Your name, email address, region, message, any position you hold and any note written about you are encrypted** before they are written down, with a key that is not kept in the database. A stolen copy of the database, or of a backup of it, decrypts to nothing.",
+              "**Your country is held unencrypted**, because counting and organising by country is the reason the list exists. On its own it identifies nobody. Your region, and any position you hold, would each narrow you down much further and are not treated this way: both are encrypted with the rest.",
               "**Nobody signs in with a password.** Administrative access requires a passkey held on a physical device, which cannot be guessed, phished or read out of a stolen database.",
-              "**Reading names or messages requires a second confirmation.** Being signed in shows only counts; revealing any individual, or opening any letter, needs a fresh passkey touch valid for minutes. Someone who steals an active session gets statistics, not people.",
-              "**Every reading is logged** — who looked, and when. Not merely every change: for a list like this, the act of looking is the thing worth recording. What was searched for is recorded as a one-way digest, so the log can confirm whether a particular person was looked up without itself becoming a list of names.",
+              "**Reading names or messages requires a second confirmation.** Being signed in shows only counts; revealing any individual, opening any letter, or seeing who holds which position, needs a fresh passkey touch valid for minutes. Someone who steals an active session gets statistics, not people.",
+              "**Every reading is logged** — who looked, and when. Not merely every change: for a list like this, the act of looking is the thing worth recording. What was searched for is recorded as a one-way digest, so the log can confirm whether a particular person was looked up without itself becoming a list of names. A position being granted or withdrawn is recorded the same way: the log shows that one changed and on which record, never which position it was.",
               "**There is no export function.** The list cannot be downloaded as a file, because a file is the form in which such lists escape.",
             ],
           },

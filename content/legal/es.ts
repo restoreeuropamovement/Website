@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Un registro contiene siete cosas como máximo: su nombre, su dirección de correo electrónico, su país, la calidad en la que solicitó, un área de interés y — solo si usted decide darlos — su región o ciudad y un mensaje. No hay dirección postal, ni número de teléfono, ni fecha de nacimiento. Nada se infiere, ni se enriquece, ni se compra en ninguna otra parte.",
+            text: "Un registro contiene siete cosas como máximo, y todas las da usted: su nombre, su dirección de correo electrónico, su país, la calidad en la que solicitó, un área de interés y — solo si usted decide darlos — su región o ciudad y un mensaje. No hay dirección postal, ni número de teléfono, ni fecha de nacimiento. Nada se infiere, ni se enriquece, ni se compra en ninguna otra parte. Dos cosas más pueden añadirse a un registro después, por una persona y no por usted, y ambas se exponen a continuación.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "Una cosa que no escribió usted",
+            text: "Dos cosas que no escribió usted",
           },
           {
             type: "paragraph",
-            text: "Mientras considera una solicitud, un administrador puede adjuntarle una nota breve — el contenido de una conversación, el motivo de una decisión, a quién conviene presentarle. Es lo único de su registro que no ha escrito usted mismo, y es el único campo de toda la base de datos que contiene la apreciación de una persona sobre otra, de modo que está **cifrada como el resto** y no se escribe nunca en el registro administrativo.",
+            text: "La primera es una nota. Mientras considera una solicitud, un administrador puede adjuntarle una breve — el contenido de una conversación, el motivo de una decisión, a quién conviene presentarle. Es el único campo de toda la base de datos que contiene la apreciación de una persona sobre otra, de modo que está **cifrada como el resto** y no se escribe nunca en el registro administrativo.",
           },
           {
             type: "paragraph",
             text: "También forma parte de su registro a efectos del derecho de acceso. Si pregunta qué se conserva sobre usted, la nota se incluye en la respuesta. De quien escriba una se espera que la escriba sabiéndolo.",
+          },
+          {
+            type: "paragraph",
+            text: "La segunda es un cargo en el movimiento, que no es lo mismo que la calidad en la que usted solicitó. La mayoría de los registros no tiene ninguno. Solo se anota para las pocas personas que asumen una responsabilidad — dirigir una sección nacional, hacer de adjunto de quien la dirige, animar una agrupación local, coordinar entre secciones, hablar con la prensa — y nombra la sección a la que pertenece. Nada se infiere y nada es automático: existe porque una persona lo anotó después de que usted accediera, se retira del mismo modo, y forma parte de su registro a efectos del derecho de acceso como todo lo demás.",
+          },
+          {
+            type: "paragraph",
+            text: "**Un cargo se cifra como su nombre**, y por una razón más aguda que cualquier otra cosa del registro. De una sección hay un solo responsable. Su país se conserva sin cifrar porque por sí solo describe a un grupo de personas y no identifica a nadie — pero la dirección de la sección de su país no describe un grupo, le describe a usted. Así que allí donde el país puede contarse a la vista, un cargo que le singularizaría dentro de él no puede, y se guarda donde se guardan sus demás datos.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Su nombre, su dirección de correo electrónico, su región, su mensaje y cualquier nota escrita sobre usted están cifrados** antes de anotarse, con una clave que no se guarda en la base de datos. Una copia robada de la base de datos, o de una copia de seguridad suya, no descifra nada.",
-              "**Su país se conserva sin cifrar**, porque contar y organizar por países es la razón de que el registro exista. Por sí solo no identifica a nadie. Su región, que le acotaría mucho más, no se trata así — se cifra con lo demás.",
+              "**Su nombre, su dirección de correo electrónico, su región, su mensaje, cualquier cargo que ocupe y cualquier nota escrita sobre usted están cifrados** antes de anotarse, con una clave que no se guarda en la base de datos. Una copia robada de la base de datos, o de una copia de seguridad suya, no descifra nada.",
+              "**Su país se conserva sin cifrar**, porque contar y organizar por países es la razón de que el registro exista. Por sí solo no identifica a nadie. Su región, y cualquier cargo que ocupe, le acotarían mucho más y no se tratan así: ambos se cifran con lo demás.",
               "**Nadie inicia sesión con contraseña.** El acceso administrativo exige una passkey guardada en un dispositivo físico, que no puede adivinarse, ni obtenerse por suplantación, ni leerse en una base de datos robada.",
-              "**Leer nombres o mensajes exige una segunda confirmación.** Tener la sesión iniciada solo muestra recuentos; revelar a cualquier persona, o abrir cualquier carta, requiere una confirmación nueva con la passkey, válida durante unos minutos. Quien robe una sesión activa obtiene estadísticas, no personas.",
-              "**Toda lectura queda registrada** — quién miró, y cuándo. No solo cada cambio: en un registro como este, el acto de mirar es lo que merece anotarse. Lo que se buscó se anota como un resumen criptográfico irreversible, de modo que el registro puede confirmar si se consultó a una persona determinada sin convertirse él mismo en una lista de nombres.",
+              "**Leer nombres o mensajes exige una segunda confirmación.** Tener la sesión iniciada solo muestra recuentos; revelar a cualquier persona, abrir cualquier carta, o ver quién ocupa qué cargo, requiere una confirmación nueva con la passkey, válida durante unos minutos. Quien robe una sesión activa obtiene estadísticas, no personas.",
+              "**Toda lectura queda registrada** — quién miró, y cuándo. No solo cada cambio: en un registro como este, el acto de mirar es lo que merece anotarse. Lo que se buscó se anota como un resumen criptográfico irreversible, de modo que el registro puede confirmar si se consultó a una persona determinada sin convertirse él mismo en una lista de nombres. La concesión o la retirada de un cargo se anota del mismo modo: el registro muestra que uno cambió y en qué registro, nunca cuál era.",
               "**No existe ninguna función de exportación.** El registro no puede descargarse como archivo, porque un archivo es la forma en que esas listas se escapan.",
             ],
           },

@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Una registrazione contiene al massimo sette cose: il tuo nome, il tuo indirizzo email, il tuo paese, il ruolo per cui ti sei candidato, un'area di interesse e — soltanto se scegli di darli — la tua regione o città e un messaggio. Non c'è alcun indirizzo postale, alcun numero di telefono né alcuna data di nascita. Nulla viene dedotto, arricchito o acquistato altrove.",
+            text: "Una registrazione contiene al massimo sette cose, e sei tu a darle tutte: il tuo nome, il tuo indirizzo email, il tuo paese, il ruolo per cui ti sei candidato, un'area di interesse e — soltanto se scegli di darli — la tua regione o città e un messaggio. Non c'è alcun indirizzo postale, alcun numero di telefono né alcuna data di nascita. Nulla viene dedotto, arricchito o acquistato altrove. Due ulteriori cose possono essere aggiunte a una registrazione in seguito, da una persona e non da te, ed entrambe sono esposte qui sotto.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "Una cosa che non hai scritto tu",
+            text: "Due cose che non hai scritto tu",
           },
           {
             type: "paragraph",
-            text: "Nell'esaminare una domanda, un amministratore può allegarvi una breve annotazione — il contenuto di una conversazione, la ragione di una decisione, a chi presentarti. È l'unica cosa nella tua registrazione che non hai scritto tu, ed è l'unico campo in tutta la banca dati a contenere il giudizio di una persona su un'altra: perciò è **cifrata come il resto** e non viene mai scritta nel registro amministrativo.",
+            text: "La prima è un'annotazione. Nell'esaminare una domanda, un amministratore può allegarvene una breve — il contenuto di una conversazione, la ragione di una decisione, a chi presentarti. È l'unico campo in tutta la banca dati a contenere il giudizio di una persona su un'altra: perciò è **cifrata come il resto** e non viene mai scritta nel registro amministrativo.",
           },
           {
             type: "paragraph",
             text: "Fa parte inoltre della tua registrazione ai fini del diritto di accesso. Se chiedi che cosa viene conservato su di te, l'annotazione è compresa nella risposta. Chi ne scrive una è tenuto a scriverla sapendolo.",
+          },
+          {
+            type: "paragraph",
+            text: "La seconda è un incarico nel movimento, che non è la stessa cosa del ruolo per cui ti sei candidato. La maggior parte delle registrazioni non ne porta alcuno. Viene annotato soltanto per le poche persone che si assumono una responsabilità — guidare una sezione nazionale, farne da vice a chi la guida, animare un circolo locale, coordinare fra le sezioni, parlare alla stampa — e nomina la sezione a cui appartiene. Nulla viene dedotto e nulla è automatico: esiste perché una persona l'ha annotato dopo il tuo assenso, è revocato nello stesso modo, e come ogni altra cosa fa parte della tua registrazione ai fini del diritto di accesso.",
+          },
+          {
+            type: "paragraph",
+            text: "**Un incarico è cifrato come il tuo nome**, e per una ragione più acuta di qualunque altra cosa nella registrazione. Di una sezione c'è un solo responsabile. Il tuo paese è conservato non cifrato perché da solo descrive un gruppo di persone e non identifica nessuno — ma la guida della sezione del tuo paese non descrive un gruppo, descrive te. Là dove il paese può dunque essere contato in chiaro, un incarico che ti distinguerebbe al suo interno non può esserlo, ed è custodito dove sono custoditi gli altri tuoi dati.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Il tuo nome, il tuo indirizzo email, la tua regione, il tuo messaggio e qualunque annotazione scritta su di te sono cifrati** prima di essere annotati, con una chiave che non è conservata nella banca dati. Una copia rubata della banca dati, o di una sua copia di sicurezza, non si decifra in nulla.",
-              "**Il tuo paese è conservato non cifrato**, perché contare e organizzare per paese è la ragione per cui l'elenco esiste. Da solo non identifica nessuno. La tua regione, che ti circoscriverebbe molto di più, non è trattata così — è cifrata con il resto.",
+              "**Il tuo nome, il tuo indirizzo email, la tua regione, il tuo messaggio, qualunque incarico tu ricopra e qualunque annotazione scritta su di te sono cifrati** prima di essere annotati, con una chiave che non è conservata nella banca dati. Una copia rubata della banca dati, o di una sua copia di sicurezza, non si decifra in nulla.",
+              "**Il tuo paese è conservato non cifrato**, perché contare e organizzare per paese è la ragione per cui l'elenco esiste. Da solo non identifica nessuno. La tua regione, come qualunque incarico tu ricopra, ti circoscriverebbe molto di più e non è trattata così: entrambe sono cifrate con il resto.",
               "**Nessuno accede con una password.** L'accesso amministrativo richiede una passkey custodita su un dispositivo fisico, che non si può indovinare, carpire con un inganno né leggere da una banca dati rubata.",
-              "**Leggere nomi o messaggi richiede una seconda conferma.** Essere autenticati mostra soltanto dei conteggi; scoprire una singola persona, o aprire una lettera, richiede una nuova conferma con la passkey, valida per pochi minuti. Chi rubasse una sessione attiva otterrebbe statistiche, non persone.",
-              "**Ogni lettura è registrata** — chi ha guardato, e quando. Non soltanto ogni modifica: per un elenco come questo, è l'atto di guardare la cosa che merita di essere annotata. Ciò che è stato cercato è annotato come impronta non reversibile, così che il registro possa confermare se una determinata persona sia stata cercata senza diventare esso stesso un elenco di nomi.",
+              "**Leggere nomi o messaggi richiede una seconda conferma.** Essere autenticati mostra soltanto dei conteggi; scoprire una singola persona, aprire una lettera, o vedere chi ricopre quale incarico, richiede una nuova conferma con la passkey, valida per pochi minuti. Chi rubasse una sessione attiva otterrebbe statistiche, non persone.",
+              "**Ogni lettura è registrata** — chi ha guardato, e quando. Non soltanto ogni modifica: per un elenco come questo, è l'atto di guardare la cosa che merita di essere annotata. Ciò che è stato cercato è annotato come impronta non reversibile, così che il registro possa confermare se una determinata persona sia stata cercata senza diventare esso stesso un elenco di nomi. Un incarico conferito o revocato è annotato nello stesso modo: il registro mostra che uno è cambiato e su quale registrazione, mai quale fosse.",
               "**Non esiste alcuna funzione di esportazione.** L'elenco non può essere scaricato come file, perché il file è la forma in cui elenchi simili sfuggono.",
             ],
           },

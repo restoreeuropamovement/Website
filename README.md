@@ -340,8 +340,8 @@ database will be read by somebody who should not have it.
 
 **Names and email addresses are encrypted** with `MEMBER_ENCRYPTION_KEY`, which is held in the
 environment and never in the database. A leaked dump, backup or connection string yields ciphertext.
-Country, role and area of interest are stored in the clear, because sorting and counting by region
-is what the page is for and none of the three identifies anybody on its own.
+Country, the kind of application and the area of interest are stored in the clear, because sorting
+and counting by region is what the page is for and none of the three identifies anybody on its own.
 
 The encryption is **non-deterministic**: the same name encrypts differently every time, so the table
 cannot be mined for who shares a surname, and cannot be used to test whether a particular person is
@@ -358,6 +358,29 @@ becomes a plaintext list of members' names.
 
 There is **no export function**, and that is deliberate. A downloadable file is the form in which
 membership lists escape, and adding one would undo most of the above.
+
+### Who answers for what
+
+A member may be given a role: wing leader, deputy wing leader or chapter organiser, each tied to one
+of the national wings, and European coordinator or press officer, which belong to the movement
+rather than to a wing. A person may hold several — a movement in formation is run by a handful of
+people wearing more than one hat — and a wing may have more than one leader, because a handover
+needs a day on which both names are recorded. Roles are granted on a record in the roll, and
+`/admin/members` reads them back the other way round, by wing, under *Who answers for what*,
+including which countries hold records and have nobody recorded as leading them.
+
+**The role and its wing are encrypted**, and that is the one place this departs from the rule above.
+A country is left readable because it describes thousands of people and identifies none of them.
+There is one leader of a wing, so `wing-lead` beside a readable `germany` does not describe a
+category containing a person — it *is* a person, singled out of a table whose whole defence is that
+its rows are indistinguishable. Nothing is given up by encrypting it, either, which is the other
+half of the argument: per-country counts are useful without naming anybody, and there is no
+equivalent view of leadership, because every useful view of who runs a wing is a list of people.
+So reading roles needs the same passkey touch as reading a name, every such reading is audited, and
+the audit log records a grant as a keyed digest — enough to answer "was anybody made leader of the
+German wing?", never enough to list who holds what. The list of roles is in
+`lib/admin/member-offices.ts`; adding one is a line there and no migration, since a column of
+ciphertext can carry no `CHECK` constraint anyway.
 
 ### How an application works
 

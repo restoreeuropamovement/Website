@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Un enregistrement contient sept choses au plus : votre nom, votre adresse électronique, votre pays, le titre auquel vous avez candidaté, un domaine d'intérêt, et — seulement si vous choisissez de les donner — votre région ou ville et un message. Il n'y a pas d'adresse postale, pas de numéro de téléphone et pas de date de naissance. Rien n'est déduit, enrichi ni acheté ailleurs.",
+            text: "Un enregistrement contient sept choses au plus, et c'est vous qui les donnez toutes : votre nom, votre adresse électronique, votre pays, le titre auquel vous avez candidaté, un domaine d'intérêt, et — seulement si vous choisissez de les donner — votre région ou ville et un message. Il n'y a pas d'adresse postale, pas de numéro de téléphone et pas de date de naissance. Rien n'est déduit, enrichi ni acheté ailleurs. Deux choses de plus peuvent être ajoutées ensuite à un enregistrement, par une personne et non par vous, et toutes deux sont exposées ci-dessous.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "Une chose que vous n'avez pas écrite",
+            text: "Deux choses que vous n'avez pas écrites",
           },
           {
             type: "paragraph",
-            text: "Pendant l'examen d'une demande, un administrateur peut y joindre une note brève — la substance d'un échange, le motif d'une décision, la personne à qui vous présenter. C'est la seule chose de votre enregistrement que vous n'avez pas écrite vous-même, et c'est le seul champ de toute la base de données qui contienne l'appréciation d'une personne par une autre ; il est donc **chiffré comme le reste** et n'est jamais inscrit dans le journal d'administration.",
+            text: "La première est une note. Pendant l'examen d'une demande, un administrateur peut y joindre une note brève — la substance d'un échange, le motif d'une décision, la personne à qui vous présenter. C'est le seul champ de toute la base de données qui contienne l'appréciation d'une personne par une autre ; il est donc **chiffré comme le reste** et n'est jamais inscrit dans le journal d'administration.",
           },
           {
             type: "paragraph",
             text: "Elle fait aussi partie de votre enregistrement au titre du droit d'accès. Si vous demandez ce qui est conservé à votre sujet, la note figure dans la réponse. Quiconque en rédige une est censé le faire en le sachant.",
+          },
+          {
+            type: "paragraph",
+            text: "La seconde est une fonction au sein du mouvement, ce qui n'est pas la même chose que le titre auquel vous avez candidaté. La plupart des enregistrements n'en portent aucune. Elle n'est consignée que pour les quelques personnes qui prennent une responsabilité — diriger une branche nationale, être l'adjoint de celui qui la dirige, animer une section locale, coordonner entre les branches, parler à la presse — et elle nomme la branche à laquelle elle appartient. Rien n'est déduit et rien n'est automatique. Elle existe parce qu'une personne l'a consignée après votre accord, elle est retirée de la même manière, et elle fait partie de votre enregistrement au titre du droit d'accès comme tout le reste.",
+          },
+          {
+            type: "paragraph",
+            text: "**Une fonction est chiffrée comme votre nom**, et pour une raison plus aiguë que tout le reste de l'enregistrement. Il n'y a qu'un dirigeant par branche. Votre pays est conservé en clair parce qu'à lui seul il décrit un groupe de personnes et n'identifie personne — mais la direction de la branche de votre pays ne décrit pas un groupe, elle vous décrit. Là où le pays peut donc être compté à découvert, une fonction qui vous distinguerait en son sein ne peut pas l'être, et elle est gardée là où sont gardées vos autres coordonnées.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Votre nom, votre adresse électronique, votre région, votre message et toute note écrite à votre sujet sont chiffrés** avant d'être consignés, avec une clé qui n'est pas conservée dans la base de données. Une copie volée de la base, ou d'une de ses sauvegardes, ne se déchiffre en rien.",
-              "**Votre pays est conservé en clair**, parce que compter et organiser par pays est la raison d'être de cette liste. À lui seul, il n'identifie personne. Votre région, qui resserrerait bien davantage l'identification, n'est pas traitée ainsi — elle est chiffrée avec le reste.",
+              "**Votre nom, votre adresse électronique, votre région, votre message, toute fonction que vous exercez et toute note écrite à votre sujet sont chiffrés** avant d'être consignés, avec une clé qui n'est pas conservée dans la base de données. Une copie volée de la base, ou d'une de ses sauvegardes, ne se déchiffre en rien.",
+              "**Votre pays est conservé en clair**, parce que compter et organiser par pays est la raison d'être de cette liste. À lui seul, il n'identifie personne. Votre région, comme toute fonction que vous exercez, resserrerait bien davantage l'identification et n'est pas traitée ainsi — l'une et l'autre sont chiffrées avec le reste.",
               "**Personne ne se connecte avec un mot de passe.** L'accès administratif exige une clé d'accès détenue sur un appareil physique, qui ne peut être ni devinée, ni hameçonnée, ni lue dans une base de données volée.",
-              "**Lire des noms ou des messages exige une seconde confirmation.** Être connecté ne montre que des dénombrements ; révéler une personne, ou ouvrir une lettre, exige une nouvelle validation par clé d'accès, valable quelques minutes. Qui vole une session active obtient des statistiques, non des personnes.",
-              "**Chaque consultation est journalisée** — qui a regardé, et quand. Pas seulement chaque modification : pour une liste comme celle-ci, le fait de regarder est ce qui mérite d'être consigné. Ce qui a été recherché est consigné sous la forme d'une empreinte à sens unique, de sorte que le journal peut confirmer si telle personne a été recherchée sans devenir lui-même une liste de noms.",
+              "**Lire des noms ou des messages exige une seconde confirmation.** Être connecté ne montre que des dénombrements ; révéler une personne, ouvrir une lettre, ou voir qui exerce quelle fonction, exige une nouvelle validation par clé d'accès, valable quelques minutes. Qui vole une session active obtient des statistiques, non des personnes.",
+              "**Chaque consultation est journalisée** — qui a regardé, et quand. Pas seulement chaque modification : pour une liste comme celle-ci, le fait de regarder est ce qui mérite d'être consigné. Ce qui a été recherché est consigné sous la forme d'une empreinte à sens unique, de sorte que le journal peut confirmer si telle personne a été recherchée sans devenir lui-même une liste de noms. Une fonction accordée ou retirée est consignée de la même manière — le journal montre qu'une fonction a changé et sur quel enregistrement, jamais laquelle.",
               "**Il n'existe aucune fonction d'exportation.** La liste ne peut pas être téléchargée sous forme de fichier, car le fichier est la forme sous laquelle de telles listes s'échappent.",
             ],
           },

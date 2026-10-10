@@ -16,6 +16,10 @@ import {
   type RevealedMember,
 } from "@/lib/admin/members";
 import { cn } from "@/lib/utils";
+import { isMemberOffice, MEMBER_OFFICE_LABEL } from "@/lib/admin/member-offices";
+import { officeHoldersRevealed, officeTally } from "@/lib/admin/offices";
+import { MemberOffices } from "@/components/admin/MemberOffices";
+import { OfficeBoard } from "@/components/admin/OfficeBoard";
 import { queryDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireSession } from "@/lib/admin/session";
@@ -33,6 +37,8 @@ import {
   resolveInvolvementRole,
   roleTitle,
 } from "@/content/involvement";
+import { englishWings } from "@/content/wings";
+import type { SelectOption } from "@/components/forms/Field";
 import { vettingLetter } from "@/content/emails";
 import { FollowUpLetter } from "@/components/admin/FollowUpLetter";
 import { formatDate } from "@/lib/utils";
@@ -64,11 +70,17 @@ import { EraseByEmail } from "@/components/admin/EraseByEmail";
  * Which means an attacker holding a stolen session cookie gets the first state
  * and stops there.
  *
- * Four sections, in the order the work is done: what is waiting, where it is,
- * who it is, and the tools for changing it. The tools come last because they
- * are the rarest thing done here and the longest form on the page — kept
- * between the results heading and the results themselves, as they once were,
- * they pushed the roll below the fold on every visit.
+ * Five sections, in the order the work is done: what is waiting, where it is,
+ * who answers for it, who it is, and the tools for changing it. The tools come
+ * last because they are the rarest thing done here and the longest form on the
+ * page — kept between the results heading and the results themselves, as they
+ * once were, they pushed the roll below the fold on every visit.
+ *
+ * "Who answers for it" sits above the roll rather than inside it because it is
+ * a page of its own length: four lines naming who runs which wing, where the
+ * roll is hundreds of records. It is also the one section whose subject is the
+ * movement rather than the queue, and reading it is the thing an administrator
+ * does first on a day when the question is organisational.
  */
 
 function single(value: string | string[] | undefined): string | undefined {
@@ -76,6 +88,19 @@ function single(value: string | string[] | undefined): string | undefined {
   const trimmed = candidate?.trim();
   return trimmed ? trimmed : undefined;
 }
+
+/**
+ * The wings, for the selects that grant an office.
+ *
+ * Drawn from the wings edition rather than from the involvement form's country
+ * list, which is nearly the same thing and differs in exactly the way that
+ * matters: that list ends in "elsewhere", and there is no national wing of
+ * elsewhere to lead. Already sorted by English name by the edition.
+ */
+const WING_OPTIONS: readonly SelectOption[] = englishWings.wings.map((wing) => ({
+  value: wing.slug,
+  label: wing.country,
+}));
 
 /**
  * This page's own URL with some of the filters changed.
@@ -138,7 +163,14 @@ export default async function AdminMembersPage(props: {
     );
   }
 
-  const overview = await membershipOverview();
+  /*
+   * Both are counts over columns nobody can read: one over `country`, which is
+   * in the clear, and one over the number of rows in `member_office`, whose own
+   * columns are ciphertext. Neither decrypts anything and neither names
+   * anybody, so both sit above the passkey wall — a signed-in administrator can
+   * see that the movement has a committee without being told who is on it.
+   */
+  const [overview, offices] = await Promise.all([membershipOverview(), officeTally()]);
   const elevated = isElevated(session);
 
   const country = single(searchParams.country);
@@ -155,6 +187,9 @@ export default async function AdminMembersPage(props: {
             {overview.open > 0 ? `, ${overview.open} awaiting a decision` : ""} across{" "}
             {overview.countries.length}{" "}
             {overview.countries.length === 1 ? "country" : "countries"}.
+            {offices > 0
+              ? ` ${offices} ${offices === 1 ? "role" : "roles"} recorded.`
+              : ""}
           </p>
         </div>
 
@@ -180,31 +215,73 @@ export default async function AdminMembersPage(props: {
       />
 
       {elevated ? (
-        <RevealedList session={session} searchParams={searchParams} />
-      ) : (
-        <PasskeyElevation />
-      )}
+        <>
+          <Board countries={overview.countries} session={session} />
 
-      {/*
-        Last, and only behind the passkey. Both write to the encrypted columns,
-        and the erasure tool cannot be undone; neither belongs in the path
-        somebody scrolls through to read the roll.
-      */}
-      {elevated ? (
-        <section className="flex flex-col gap-6">
-          <SectionHead title="Adding and erasing" />
-          <div className="grid gap-6 xl:grid-cols-2 xl:items-start">
-            <AddMember
-              countries={englishInvolvement.countries}
-              roles={englishInvolvement.roles}
-              interests={englishInvolvement.interests}
-            />
-            <EraseByEmail />
-          </div>
-        </section>
-      ) : null}
+          <RevealedList session={session} searchParams={searchParams} />
+
+          {/*
+            Last, and only behind the passkey. Both write to the encrypted
+            columns, and the erasure tool cannot be undone; neither belongs in
+            the path somebody scrolls through to read the roll.
+          */}
+          <section className="flex flex-col gap-6">
+            <SectionHead title="Adding and erasing" />
+            <div className="grid gap-6 xl:grid-cols-2 xl:items-start">
+              <AddMember
+                countries={englishInvolvement.countries}
+                roles={englishInvolvement.roles}
+                interests={englishInvolvement.interests}
+              />
+              <EraseByEmail />
+            </div>
+          </section>
+        </>
+      ) : (
+        /*
+         * One wall in front of three sections rather than three walls.
+         *
+         * The reason given is the roles as well as the names, because the
+         * wall is now in front of both and the default sentence would have
+         * described half of what is behind it. An office held by one person,
+         * beside a country held in the clear, is a name — so it is on this
+         * side of the passkey for the same reason a name is.
+         */
+        <PasskeyElevation reason="Members' names, email addresses and the roles they hold are held encrypted. Reading any of them needs a fresh passkey touch, so that a signed-in session left unattended cannot be used to copy the roll — or to find out who leads a wing." />
+      )}
     </div>
   );
+}
+
+/**
+ * Who answers for what, and the audit row that records having looked.
+ *
+ * A read of identities, so it is audited exactly as the roll is. The detail
+ * carries counts and nothing else: there is no search term to digest here
+ * because the whole board is the answer, and recording which offices were
+ * shown would copy into an unencrypted table the thing `member_office`
+ * encrypts.
+ */
+async function Board({
+  countries,
+  session,
+}: {
+  readonly countries: Awaited<ReturnType<typeof membershipOverview>>["countries"];
+  readonly session: Awaited<ReturnType<typeof requireSession>>;
+}) {
+  const holders = await officeHoldersRevealed();
+  const { ipHash } = await clientContext();
+
+  await recordAudit({
+    action: "member.office.reveal",
+    outcome: "success",
+    actorId: session.user.id,
+    actorLabel: session.user.username,
+    detail: { returned: holders.length },
+    ipHash,
+  });
+
+  return <OfficeBoard holders={holders} countries={countries} />;
 }
 
 /**
@@ -295,6 +372,7 @@ async function RevealedList({
   const country = single(searchParams.country);
   const statusFilter = single(searchParams.status);
   const roleFilter = single(searchParams.role);
+  const officeFilter = single(searchParams.office);
   const sortParam = single(searchParams.sort);
   const pageParam = Number(single(searchParams.page) ?? "1");
 
@@ -302,6 +380,7 @@ async function RevealedList({
     query,
     country: country && isCountryValue(country) ? country : undefined,
     role: roleFilter && isInvolvementRole(roleFilter) ? roleFilter : undefined,
+    office: officeFilter && isMemberOffice(officeFilter) ? officeFilter : undefined,
     status:
       statusFilter === "open" || (statusFilter && isMemberStatus(statusFilter))
         ? statusFilter
@@ -337,6 +416,14 @@ async function RevealedList({
       country: options.country ?? null,
       status: options.status ?? null,
       role: options.role ?? null,
+      /*
+       * The office *filter* is named, where a granted office is digested.
+       * Not an inconsistency: this says which of five fixed questions was
+       * asked of the roll, which is no more about a person than "country:
+       * germany" beside it. A grant says which person holds which office,
+       * which is the thing that must not be written here in words.
+       */
+      office: options.office ?? null,
       returned: result.members.length,
       matched: result.total,
     },
@@ -354,6 +441,7 @@ async function RevealedList({
           ? MEMBER_STATUS_TAB[options.status]
           : "Everything"}
         {options.country ? ` · ${countryLabel(options.country)}` : ""}
+        {options.office ? ` · ${MEMBER_OFFICE_LABEL[options.office]}` : ""}
         {" · "}
         {result.total} {result.total === 1 ? "record" : "records"}
         {query ? ` matching “${query}”` : ""}
@@ -365,6 +453,7 @@ async function RevealedList({
         query={query}
         country={options.country}
         role={options.role}
+        office={options.office}
         status={options.status}
         sort={options.sort ?? "country"}
       />
@@ -403,6 +492,24 @@ async function RevealedList({
                 </p>
                 <p className="font-serif text-[1.1875rem] leading-snug text-ink">{member.name}</p>
                 <p className="mt-0.5 text-[0.875rem] text-muted">{member.email}</p>
+
+                {/*
+                  Printed on the row rather than folded into the control below
+                  it. What somebody answers for belongs beside their name the
+                  way their country does; it is only granting and withdrawing
+                  that is rare enough to collapse.
+                */}
+                {member.offices.length > 0 ? (
+                  <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.875rem] text-gold">
+                    {member.offices.map((held) => (
+                      <span key={held.id}>
+                        {MEMBER_OFFICE_LABEL[held.office]}
+                        {held.wingLabel ? ` — ${held.wingLabel}` : ""}
+                      </span>
+                    ))}
+                  </p>
+                ) : null}
+
                 <p className="mt-0.5 text-micro text-faint">
                   {interestLabel(member.interestArea)}
                   {member.region ? ` · ${member.region}` : ""}
@@ -413,6 +520,11 @@ async function RevealedList({
                   </p>
                 ) : null}
 
+                <MemberOffices
+                  member={member}
+                  country={member.country}
+                  wings={WING_OPTIONS}
+                />
                 <VettingNotes member={member} />
                 <FollowUp member={member} />
               </div>

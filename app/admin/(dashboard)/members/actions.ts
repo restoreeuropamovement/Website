@@ -10,6 +10,9 @@ import {
   setMemberNotes,
   setMemberStatus,
 } from "@/lib/admin/members";
+import { isMemberOffice, isWingScoped } from "@/lib/admin/member-offices";
+import { grantOffice, isWingValue, revokeOffice } from "@/lib/admin/offices";
+import { officeDigest } from "@/lib/admin/pii";
 import { clientContext } from "@/lib/admin/request";
 import { dropElevation, requireElevatedSession } from "@/lib/admin/session";
 import {
@@ -172,6 +175,118 @@ export async function setMemberNotesAction(form: FormData): Promise<void> {
     actorId: session.user.id,
     actorLabel: session.user.username,
     detail: { id, cleared: notes.trim().length === 0 },
+    ipHash,
+  });
+
+  revalidatePath("/admin/members");
+}
+
+/**
+ * Grants one office to one member.
+ *
+ * Elevated, like every other mutation in this file, and here the reason is not
+ * only that it writes. The form that calls this sits on a member's row inside
+ * the revealed roll, so it is reached by somebody who has already been shown a
+ * name — and a grant form that worked without elevation would be a way to take
+ * the step-up's own answer apart: "which record is the German wing's leader"
+ * is most of what the roll is protecting, and somebody able to grant an office
+ * without a passkey could find out by granting one and reading the board.
+ *
+ * Nothing here can produce an invalid combination, which is why it returns
+ * nothing and reports nothing. The office select offers only known offices and
+ * the wing select only known wings and never a blank, so the one judgement left
+ * is whether this office takes a wing at all — and `grantOffice` makes that
+ * decision in one place rather than trusting the form's hidden state. A
+ * submission that names an office or a wing the lists do not contain is not a
+ * mistake an administrator can make through the interface; it is somebody
+ * calling the endpoint, and it is recorded as a failure and dropped.
+ *
+ * The audit detail carries the member's id and a keyed digest of the office
+ * and its wing. Never the office in words — see `officeDigest`.
+ */
+export async function grantOfficeAction(form: FormData): Promise<void> {
+  const session = await requireElevatedSession();
+  const { ipHash } = await clientContext();
+
+  const memberId = String(form.get("member") ?? "").trim();
+  const office = String(form.get("office") ?? "").trim();
+  const wing = String(form.get("wing") ?? "").trim();
+
+  const audit = async (outcome: "success" | "failure", detail: Record<string, unknown>) => {
+    await recordAudit({
+      action: "member.office.grant",
+      outcome,
+      actorId: session.user.id,
+      actorLabel: session.user.username,
+      detail,
+      ipHash,
+    });
+  };
+
+  if (!memberId || !isMemberOffice(office)) {
+    await audit("failure", { reason: "no such office" });
+    return;
+  }
+
+  /*
+   * A wing-scoped office with no usable wing is refused rather than defaulted
+   * to the member's own country. The two are not the same fact — somebody in
+   * France may organise the Belgian wing — and a silent default would record
+   * a guess as though a person had decided it.
+   */
+  const scoped = isWingScoped(office);
+  if (scoped && !isWingValue(wing)) {
+    await audit("failure", { memberId, reason: "no such wing" });
+    return;
+  }
+
+  const held = scoped ? wing : null;
+  const outcome = await grantOffice(memberId, office, held);
+
+  await audit(outcome.kind === "granted" ? "success" : "failure", {
+    memberId,
+    officeDigest: await officeDigest(memberId, office, held),
+    ...(outcome.kind === "granted"
+      ? { id: outcome.id }
+      : { reason: "already held by this member" }),
+  });
+
+  revalidatePath("/admin/members");
+}
+
+/**
+ * Withdraws one office.
+ *
+ * The row is deleted, so the digest has to be computed from what came back out
+ * of it rather than from the id in the form — which is also what makes the log
+ * able to pair a withdrawal with the grant that preceded it, since both carry
+ * the same digest.
+ */
+export async function revokeOfficeAction(form: FormData): Promise<void> {
+  const session = await requireElevatedSession();
+  const { ipHash } = await clientContext();
+
+  const id = String(form.get("id") ?? "").trim();
+  if (!id) return;
+
+  const withdrawn = await revokeOffice(id);
+
+  await recordAudit({
+    action: "member.office.revoke",
+    outcome: withdrawn ? "success" : "failure",
+    actorId: session.user.id,
+    actorLabel: session.user.username,
+    detail: withdrawn
+      ? {
+          id,
+          memberId: withdrawn.memberId,
+          officeDigest: await officeDigest(
+            withdrawn.memberId,
+            withdrawn.office,
+            withdrawn.wing,
+          ),
+        }
+      : { id, reason: "no such office held" },
     ipHash,
   });
 

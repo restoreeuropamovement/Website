@@ -40,7 +40,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Wpis zawiera najwyżej siedem rzeczy: twoje imię i nazwisko, adres e-mail, kraj, charakter, o jaki prosiłeś, jeden obszar zainteresowań oraz — tylko jeśli zdecydujesz się je podać — twój region lub miasto i wiadomość. Nie ma adresu pocztowego, numeru telefonu ani daty urodzenia. Nic nie jest wywnioskowane, wzbogacone ani dokupione skądkolwiek indziej.",
+            text: "Wpis zawiera najwyżej siedem rzeczy, a każdą z nich podajesz ty sam: twoje imię i nazwisko, adres e-mail, kraj, charakter, o jaki prosiłeś, jeden obszar zainteresowań oraz — tylko jeśli zdecydujesz się je podać — twój region lub miasto i wiadomość. Nie ma adresu pocztowego, numeru telefonu ani daty urodzenia. Nic nie jest wywnioskowane, wzbogacone ani dokupione skądkolwiek indziej. Dwie dalsze rzeczy mogą zostać dodane do wpisu później, przez człowieka, a nie przez ciebie, i obie opisano niżej.",
           },
           {
             type: "paragraph",
@@ -48,15 +48,23 @@ export const legalText: LegalText = {
           },
           {
             type: "subheading",
-            text: "Jedna rzecz, której nie napisałeś",
+            text: "Dwie rzeczy, których nie napisałeś",
           },
           {
             type: "paragraph",
-            text: "Rozpatrując zgłoszenie, administrator może dołączyć do niego krótką notatkę — treść rozmowy, powód decyzji, z kim cię poznać. To jedyna rzecz w twoim wpisie, której nie napisałeś sam, i jedyne pole w całej bazie danych zawierające ocenę jednej osoby przez drugą, dlatego jest **szyfrowane jak reszta** i nigdy nie trafia do dziennika administracyjnego.",
+            text: "Pierwszą jest notatka. Rozpatrując zgłoszenie, administrator może dołączyć do niego krótką — treść rozmowy, powód decyzji, z kim cię poznać. To jedyne pole w całej bazie danych zawierające ocenę jednej osoby przez drugą, dlatego jest **szyfrowane jak reszta** i nigdy nie trafia do dziennika administracyjnego.",
           },
           {
             type: "paragraph",
             text: "Jest też częścią twojego wpisu na potrzeby wniosku o dostęp do danych. Jeśli zapytasz, co jest o tobie przechowywane, notatka znajdzie się w odpowiedzi. Od każdego, kto ją pisze, oczekuje się, że napisze ją, mając to na uwadze.",
+          },
+          {
+            type: "paragraph",
+            text: "Drugą jest funkcja w ruchu, a to nie to samo co charakter, o jaki prosiłeś przy zgłoszeniu. Większość wpisów nie zawiera żadnej. Zapisuje się ją tylko dla tych niewielu osób, które biorą na siebie odpowiedzialność — kierowanie oddziałem krajowym, zastępowanie osoby, która nim kieruje, prowadzenie koła lokalnego, koordynowanie między oddziałami, kontakt z prasą — i nazywa oddział, do którego należy. Nic nie jest wywnioskowane i nic nie dzieje się automatycznie: funkcja istnieje, bo człowiek ją zapisał po twojej zgodzie, odbiera się ją tą samą drogą, i jak wszystko inne jest częścią twojego wpisu na potrzeby wniosku o dostęp do danych.",
+          },
+          {
+            type: "paragraph",
+            text: "**Funkcja jest szyfrowana jak twoje imię i nazwisko**, i to z powodu ostrzejszego niż cokolwiek innego we wpisie. Oddziałem krajowym kieruje jedna osoba. Twój kraj jest przechowywany bez szyfrowania, bo sam z siebie opisuje grupę ludzi i nie identyfikuje nikogo — ale kierowanie oddziałem w twoim kraju nie opisuje grupy, opisuje ciebie. Tam więc, gdzie kraj można liczyć otwarcie, funkcji, która wyróżniałaby cię w jego obrębie, liczyć tak nie można, i jest przechowywana tam, gdzie reszta twoich danych.",
           },
           {
             type: "subheading",
@@ -111,11 +119,11 @@ export const legalText: LegalText = {
             type: "list",
             marker: "rule",
             items: [
-              "**Twoje imię i nazwisko, adres e-mail, region, wiadomość oraz każda notatka napisana o tobie są szyfrowane** przed zapisaniem, kluczem, którego nie przechowuje się w bazie danych. Ukradziona kopia bazy danych albo jej kopii zapasowej po odszyfrowaniu nie daje niczego.",
-              "**Twój kraj jest przechowywany bez szyfrowania**, bo liczenie i organizowanie się według krajów jest powodem, dla którego ta lista istnieje. Sam z siebie nie identyfikuje nikogo. Twojego regionu, który zawężałby krąg znacznie bardziej, nie traktuje się tak samo — jest szyfrowany razem z resztą.",
+              "**Twoje imię i nazwisko, adres e-mail, region, wiadomość, każda sprawowana przez ciebie funkcja oraz każda notatka napisana o tobie są szyfrowane** przed zapisaniem, kluczem, którego nie przechowuje się w bazie danych. Ukradziona kopia bazy danych albo jej kopii zapasowej po odszyfrowaniu nie daje niczego.",
+              "**Twój kraj jest przechowywany bez szyfrowania**, bo liczenie i organizowanie się według krajów jest powodem, dla którego ta lista istnieje. Sam z siebie nie identyfikuje nikogo. Twojego regionu oraz każdej sprawowanej przez ciebie funkcji, które zawężałyby krąg znacznie bardziej, nie traktuje się tak samo — jedno i drugie jest szyfrowane razem z resztą.",
               "**Nikt nie loguje się hasłem.** Dostęp administracyjny wymaga klucza dostępu przechowywanego na fizycznym urządzeniu, którego nie da się odgadnąć, wyłudzić ani odczytać z ukradzionej bazy danych.",
-              "**Odczytanie nazwisk albo wiadomości wymaga drugiego potwierdzenia.** Samo zalogowanie pokazuje tylko liczby; ujawnienie pojedynczej osoby albo otwarcie jakiegokolwiek listu wymaga świeżego użycia klucza dostępu, ważnego przez kilka minut. Kto ukradnie aktywną sesję, dostaje statystyki, a nie ludzi.",
-              "**Każde odczytanie jest zapisywane w dzienniku** — kto patrzył i kiedy. Nie tylko każda zmiana: przy takiej liście samo patrzenie jest tym, co warto zapisać. Czego szukano, zapisuje się jako jednokierunkowy skrót, więc dziennik może potwierdzić, czy dana osoba była wyszukiwana, sam nie stając się listą nazwisk.",
+              "**Odczytanie nazwisk albo wiadomości wymaga drugiego potwierdzenia.** Samo zalogowanie pokazuje tylko liczby; ujawnienie pojedynczej osoby, otwarcie jakiegokolwiek listu albo zobaczenie, kto sprawuje jaką funkcję, wymaga świeżego użycia klucza dostępu, ważnego przez kilka minut. Kto ukradnie aktywną sesję, dostaje statystyki, a nie ludzi.",
+              "**Każde odczytanie jest zapisywane w dzienniku** — kto patrzył i kiedy. Nie tylko każda zmiana: przy takiej liście samo patrzenie jest tym, co warto zapisać. Czego szukano, zapisuje się jako jednokierunkowy skrót, więc dziennik może potwierdzić, czy dana osoba była wyszukiwana, sam nie stając się listą nazwisk. Nadanie albo odebranie funkcji zapisuje się tą samą drogą: dziennik pokazuje, że któraś się zmieniła i przy którym wpisie, nigdy jednak która to była.",
               "**Nie ma funkcji eksportu.** Listy nie da się pobrać jako pliku, bo plik jest tą postacią, w której takie listy wyciekają.",
             ],
           },

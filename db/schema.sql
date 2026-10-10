@@ -291,6 +291,10 @@ CREATE INDEX IF NOT EXISTS journal_article_published_idx
 --     reason the name is. A region narrows a person far more than a country,
 --     and free text is where people disclose their employer, their family and
 --     their legal exposure. Neither is ever written to `admin_audit`.
+--   * The offices somebody holds are in `member_office` below, encrypted, for
+--     a sharper version of the same reason: there is one leader of a wing, so
+--     an office beside a plain country names a person rather than describing
+--     a category of them.
 --
 -- Two things write here: the public intake at `app/(site)/join/actions.ts`, and
 -- an administrator entering an application from `/admin/members`. Both land as
@@ -374,6 +378,79 @@ ALTER TABLE member ALTER COLUMN status SET DEFAULT 'new';
 
 CREATE INDEX IF NOT EXISTS member_country_idx ON member (country);
 CREATE INDEX IF NOT EXISTS member_status_idx ON member (status, created_at DESC);
+
+-- Who answers for what: the offices somebody holds in the movement.
+--
+-- One row per office held, not per member, because both multiplicities are
+-- genuinely many. A movement in formation is run by a handful of people
+-- wearing several hats at once, so a single column would force a choice
+-- between the wing somebody leads and the press they also handle, and whichever
+-- was recorded would be the wrong half. In the other direction a wing is
+-- allowed more than one leader: co-leadership while a wing is being founded is
+-- ordinary, and a handover needs a day on which both names are recorded. A
+-- unique constraint on (office, wing) would make that day impossible and would
+-- turn every succession into a deletion first.
+--
+-- **The office and the wing are encrypted, and `member.country` is not.** That
+-- asymmetry is the whole of the design here, so it is worth the paragraph.
+--
+-- The test that left `country`, `involvement_role` and `interest_area` in the
+-- clear is whether a value identifies a person. It does not: a country holds
+-- thousands and 'member' holds all of them, and sorting and counting on them
+-- is the entire purpose of the admin view. An office fails that test in the
+-- sharpest possible way. There is one leader of a national wing. With the
+-- country beside it in the clear, 'wing-lead' + germany is not a category
+-- containing a person, it *is* a person — a single row, pointed at, in a dump
+-- whose whole defence is that the rows are indistinguishable ciphertext. And it
+-- is the worst row to point at: an office-holder is who an opponent reports to
+-- an employer, names publicly or prosecutes, and the exposure attaches to the
+-- office rather than to the membership.
+--
+-- Nothing is lost by encrypting it, which is the other half of the argument.
+-- `country` is plain because per-country counts are useful *without*
+-- identifying anybody; there is no equivalent for leadership, because every
+-- useful view of who runs a wing is a list of people. So the one benefit of
+-- plaintext does not exist here and the cost does. Reading this table in the
+-- clear therefore requires the same elevated session as reading a name, and
+-- `admin_audit` records a grant as a keyed digest for the same reason it
+-- records a search term that way.
+--
+-- Note also what the public site refuses to assert: `/imprint` names no
+-- publisher and no officer, because none is established. Holding 'who leads
+-- Germany' readably in a column would put in the database, in the clear,
+-- exactly the fact the published pages decline to state.
+--
+-- `office_digest` is a keyed HMAC over the member, the office and the wing —
+-- same construction and same reasoning as `member.email_digest`. It exists so
+-- the one collision that is certainly a mistake, granting the same person the
+-- same office in the same wing twice, is refused by Postgres rather than
+-- caught by a check that two administrators clicking at once can race through.
+-- It is keyed rather than hashed because the input space is small enough to
+-- enumerate: five offices by forty-seven wings is a table anyone could build.
+--
+-- Cascaded, so that erasing a member erases the offices they held. An erasure
+-- that left this table holding 'the member who led the German wing' would have
+-- erased nothing worth erasing.
+CREATE TABLE IF NOT EXISTS member_office (
+  id               uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  member_id        uuid NOT NULL REFERENCES member(id) ON DELETE CASCADE,
+  -- An office id from lib/admin/member-offices.ts, encrypted. Deliberately
+  -- carries no CHECK constraint, and could not have one: the column holds
+  -- ciphertext, so the list of offices is enforced where it is read and
+  -- written instead. One consequence worth naming is pleasant — adding an
+  -- office is a line in a TypeScript module and no migration at all.
+  office_encrypted text NOT NULL,
+  -- The national wing the office belongs to, as a wing slug from
+  -- content/wings/structure.ts, encrypted; NULL for the movement-wide offices.
+  -- A slug rather than a country name for the reason `member.country` is one:
+  -- a wing is a thing with a page and a URL, and a free-text country would
+  -- drift away from the list that defines them.
+  wing_encrypted   text,
+  office_digest    text NOT NULL UNIQUE,
+  granted_at       timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS member_office_member_idx ON member_office (member_id);
 
 -- ---------------------------------------------------------------------------
 -- Correspondence

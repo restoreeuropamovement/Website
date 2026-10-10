@@ -262,6 +262,41 @@ export function queryDigest(query: string): Promise<string> {
 }
 
 /**
+ * Digest of one office held by one member, for `member_office.office_digest`
+ * and for the audit log.
+ *
+ * Two jobs, and they want the same value for different reasons.
+ *
+ * In the table it is the uniqueness constraint. `office_encrypted` is
+ * non-deterministic, so the database cannot see that two rows say the same
+ * thing, and granting the same person the same office in the same wing twice
+ * is the one collision that is certainly a mistake rather than a decision — a
+ * double submit, or two administrators acting at once. Checking in memory
+ * after decrypting would be a check with a race through it.
+ *
+ * In the log it is what lets an administrator quietly making themselves the
+ * leader of a wing be found afterwards, without the log becoming the plaintext
+ * copy of the thing `member_office` encrypts. "Was anybody granted the German
+ * wing's leadership?" is answered by computing this and looking for it. "List
+ * who holds what" is not answerable from the log at all — which is the same
+ * trade `queryDigest` makes for a search term, and for the same reason: this
+ * table is not encrypted and must not slowly accumulate what the table beside
+ * it protects.
+ *
+ * Keyed, like every digest here, because the input space is trivially
+ * enumerable: five offices by forty-seven wings. The member id is in it so the
+ * constraint is per person rather than per office — a wing may have two
+ * leaders, and must be able to during a handover.
+ */
+export function officeDigest(
+  memberId: string,
+  office: string,
+  wing: string | null,
+): Promise<string> {
+  return blindDigest("office", `${memberId}|${office}|${wing ?? ""}`);
+}
+
+/**
  * Tag authorising the unsubscribe link at the foot of a newsletter issue.
  *
  * Derived rather than stored, which is the opposite of how the confirmation
