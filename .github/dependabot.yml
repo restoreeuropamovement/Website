@@ -20,10 +20,23 @@ updates:
       # The packages that serve requests. Kept apart from tooling so a patch to
       # something in the request path is visible rather than buried in a batch
       # of type definitions.
+      #
+      # Neither group takes majors, and that restriction is the whole point. A
+      # group is a single merge decision, so the slowest member sets the pace
+      # for all of them — and a major is slow by definition, because somebody
+      # has to read the release notes. On 5 October this grouped Next 16.3.8,
+      # which closed a critical remote code execution, together with major bumps
+      # of lucide-react and motion; the security patch then sat unmerged for
+      # five days, because taking it meant taking two migrations with it. The
+      # comment below already drew this conclusion from a failing check and did
+      # not apply it here. A major now arrives on its own, where declining it
+      # costs nothing else.
       runtime:
         dependency-type: production
+        update-types: [minor, patch]
       tooling:
         dependency-type: development
+        update-types: [minor, patch]
     # Major bumps that need a person to read the release notes first, so they are
     # not proposed automatically. Next and React move together and are the
     # obvious case. The compiler and the linter are the same kind of upgrade for
