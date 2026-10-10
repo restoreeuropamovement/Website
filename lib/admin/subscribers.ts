@@ -281,7 +281,7 @@ export async function recipientsForDispatch(): Promise<Recipient[]> {
  * indefinitely would mean keeping a record of a person's supposed political
  * interest that they never once affirmed.
  *
- * Called from `app/api/cron/purge-unconfirmed` twice a day, and again
+ * Called once a day from `app/api/cron/maintenance`, and again
  * opportunistically from the subscribe path. The schedule is what makes the
  * sentence in `/privacy` a promise rather than a description of a busy list:
  * run from the form alone, this deleted an unconfirmed address when the next

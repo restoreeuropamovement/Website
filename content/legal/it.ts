@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**A un indirizzo non viene inviato nulla finché quell'indirizzo non conferma.** L'iscrizione conserva il registro come non confermato e invia un solo messaggio, che porta un collegamento valido due giorni e usabile una volta. Nessun saggio viene inviato prima che quel collegamento sia stato seguito, e un indirizzo mai confermato è cancellato senza che nessuno lo abbia guardato: il collegamento scade due giorni dopo l'invio, e due volte al giorno una passata cancella ciò che è scaduto. È l'opposto della regola che vale per le domande di iscrizione, dove nulla viene cancellato allo scadere di un termine, e la differenza è voluta: una domanda non ancora letta è la domanda di qualcuno, mentre un indirizzo non confermato può essere stato digitato da un estraneo e non è stato affermato nemmeno una volta dalla persona a cui appartiene.",
+            text: "**A un indirizzo non viene inviato nulla finché quell'indirizzo non conferma.** L'iscrizione conserva il registro come non confermato e invia un solo messaggio, che porta un collegamento valido due giorni e usabile una volta. Nessun saggio viene inviato prima che quel collegamento sia stato seguito, e un indirizzo mai confermato è cancellato senza che nessuno lo abbia guardato: il collegamento scade due giorni dopo l'invio, e una volta al giorno una passata cancella ciò che è già scaduto. Poiché la passata arriva dopo la scadenza e non nel momento stesso, tre giorni — e non due — sono il tempo massimo per cui un indirizzo del genere può essere conservato, e di solito l'attesa è più breve. È l'opposto della regola che vale per le domande di iscrizione, dove nulla viene cancellato allo scadere di un termine, e la differenza è voluta: una domanda non ancora letta è la domanda di qualcuno, mentre un indirizzo non confermato può essere stato digitato da un estraneo e non è stato affermato nemmeno una volta dalla persona a cui appartiene.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Il registro amministrativo annota che un'iscrizione è stata chiesta, confermata o ritirata, con l'ora e un'impronta a senso unico della connessione da cui è arrivata. L'indirizzo non lo annota mai. Vi è annotata anche la passata che corre due volte al giorno, con il numero di indirizzi non confermati che ha cancellato e nient'altro, perché la cancellazione promessa sopra si possa dimostrare e non resti soltanto affermata qui. Vi è annotato anche un invio — quale saggio, e quanti messaggi sono partiti — perché scrivere all'intera lista in una volta è la cosa più gravida di conseguenze che l'amministrazione di questo movimento possa fare.",
+            text: "Il registro amministrativo annota che un'iscrizione è stata chiesta, confermata o ritirata, con l'ora e un'impronta a senso unico della connessione da cui è arrivata. L'indirizzo non lo annota mai. Vi è annotata anche la passata quotidiana, con il numero di indirizzi non confermati che ha cancellato e nient'altro, perché la cancellazione promessa sopra si possa dimostrare e non resti soltanto affermata qui. Vi è annotato anche un invio — quale saggio, e quanti messaggi sono partiti — perché scrivere all'intera lista in una volta è la cosa più gravida di conseguenze che l'amministrazione di questo movimento possa fare.",
           },
         ],
       },

@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**An eine Adresse wird nichts gesandt, bevor diese Adresse bestätigt hat.** Das Abonnement speichert den Datensatz unbestätigt und sendet eine einzige Nachricht dorthin, mit einem Link, der zwei Tage gilt und einmal verwendet werden kann. Vor dem Aufruf dieses Links wird kein Essay gesandt, und eine nie bestätigte Adresse wird gelöscht, ohne dass jemand sie angesehen hätte: der Link verfällt zwei Tage nach dem Versand, und zweimal täglich löscht ein Durchlauf, was verfallen ist. Das ist das Gegenteil der Regel für Mitgliedsanträge, bei denen nichts nach Fristablauf gelöscht wird, und der Unterschied ist gewollt: ein ungeprüfter Antrag ist jemandes Antrag, eine unbestätigte Adresse dagegen kann von einem Fremden eingetippt worden sein und ist von der Person, der sie gehört, kein einziges Mal bejaht worden.",
+            text: "**An eine Adresse wird nichts gesandt, bevor diese Adresse bestätigt hat.** Das Abonnement speichert den Datensatz unbestätigt und sendet eine einzige Nachricht dorthin, mit einem Link, der zwei Tage gilt und einmal verwendet werden kann. Vor dem Aufruf dieses Links wird kein Essay gesandt, und eine nie bestätigte Adresse wird gelöscht, ohne dass jemand sie angesehen hätte: der Link verfällt zwei Tage nach dem Versand, und einmal täglich löscht ein Durchlauf, was bereits verfallen ist. Weil der Durchlauf nach dem Verfall kommt und nicht in demselben Augenblick, sind drei Tage — nicht zwei — die längste Zeit, die eine solche Adresse gespeichert bleiben kann, und gewöhnlich geht es schneller. Das ist das Gegenteil der Regel für Mitgliedsanträge, bei denen nichts nach Fristablauf gelöscht wird, und der Unterschied ist gewollt: ein ungeprüfter Antrag ist jemandes Antrag, eine unbestätigte Adresse dagegen kann von einem Fremden eingetippt worden sein und ist von der Person, der sie gehört, kein einziges Mal bejaht worden.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Das Verwaltungsprotokoll hält fest, dass ein Abonnement angefordert, bestätigt oder widerrufen wurde, mit Zeitpunkt und einem Einwegwert der Verbindung, von der es kam. Die Adresse hält es nie fest. Auch der zweimal tägliche Durchlauf wird festgehalten, mit der Zahl der gelöschten unbestätigten Adressen und nichts weiter, damit sich die oben zugesagte Löschung belegen lässt und nicht bloß hier behauptet ist. Auch ein Versand wird protokolliert — welcher Essay und wie viele Nachrichten hinausgingen —, denn an die gesamte Liste auf einmal zu schreiben ist das Folgenreichste, was die Verwaltung dieser Bewegung tun kann.",
+            text: "Das Verwaltungsprotokoll hält fest, dass ein Abonnement angefordert, bestätigt oder widerrufen wurde, mit Zeitpunkt und einem Einwegwert der Verbindung, von der es kam. Die Adresse hält es nie fest. Auch der tägliche Durchlauf wird festgehalten, mit der Zahl der gelöschten unbestätigten Adressen und nichts weiter, damit sich die oben zugesagte Löschung belegen lässt und nicht bloß hier behauptet ist. Auch ein Versand wird protokolliert — welcher Essay und wie viele Nachrichten hinausgingen —, denn an die gesamte Liste auf einmal zu schreiben ist das Folgenreichste, was die Verwaltung dieser Bewegung tun kann.",
           },
         ],
       },

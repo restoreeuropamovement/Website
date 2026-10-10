@@ -478,12 +478,15 @@ editor carries this key in a collapsible panel beside the field.
 the record is stored unconfirmed, one message goes to the address with a link
 good for two days and usable once, and nothing else is sent until that link is
 followed. An address that is never confirmed is deleted unread once that link
-has expired, by `app/api/cron/purge-unconfirmed` — the third scheduled job in
-`vercel.json`, running twice a day. The subscribe path sweeps as well, but the
-schedule is what the privacy note rests on: where the sweep happens only when
-somebody else subscribes, the retention period is the traffic rather than the
-rule. The
-confirmation and the removal are both buttons on a page rather than something
+has expired, by `app/api/cron/maintenance` — one of the two scheduled jobs in
+`vercel.json`, running once a day. Because the sweep deletes what has already
+expired, the outside life of an unconfirmed record is three days rather than
+two, and `/privacy`, `/newsletter` and the confirmation message all say three.
+The subscribe path sweeps as well, but the schedule is what the privacy note
+rests on: where the sweep happens only when somebody else subscribes, the
+retention period is the traffic rather than the rule.
+
+The confirmation and the removal are both buttons on a page rather than something
 that happens when a link is opened, because corporate mail filters fetch every
 address in an incoming message — a GET that confirmed or unsubscribed would
 have those scanners doing both on readers' behalf.

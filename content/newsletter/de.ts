@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**Sie werden um eine Bestätigung gebeten.** Die Adresse bleibt unbestätigt, bis ein an sie gesandter Link aufgerufen wird; vorher wird nichts zugestellt, und eine nie bestätigte Adresse wird ungelesen gelöscht, sobald ihr Link zwei Tage später verfallen ist. Das ist keine Formalie. Jeder kann die Adresse eines Fremden in ein Feld tippen, und für jemanden, den sein Interesse an dieser Bewegung die Stelle kosten würde, ist ungebetene politische Post ein echter Schaden, angerichtet in seinem Namen.",
+      text: "**Sie werden um eine Bestätigung gebeten.** Die Adresse bleibt unbestätigt, bis ein an sie gesandter Link aufgerufen wird; vorher wird nichts zugestellt, und eine nie bestätigte Adresse wird ungelesen gelöscht: Der Link verfällt nach zwei Tagen, und ein Durchlauf einmal am Tag räumt fort, was verfallen ist, sodass nichts länger als drei Tage gespeichert bleibt. Das ist keine Formalie. Jeder kann die Adresse eines Fremden in ein Feld tippen, und für jemanden, den sein Interesse an dieser Bewegung die Stelle kosten würde, ist ungebetene politische Post ein echter Schaden, angerichtet in seinem Namen.",
     },
     {
       type: "paragraph",

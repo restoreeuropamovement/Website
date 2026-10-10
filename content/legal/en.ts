@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Nothing is sent to an address until that address confirms.** Subscribing stores the record unconfirmed and sends one message to it, carrying a link that is good for two days and can be used once. No essay is sent before that link is followed, and an address that is never confirmed is deleted without anybody having looked at it: the link expires two days after it is sent, and a sweep that runs twice a day deletes what has expired. That is the opposite of the rule on membership applications, where nothing is deleted on a timer, and the difference is deliberate: an unreviewed application is somebody's application, while an unconfirmed address may have been typed in by a stranger and has never once been affirmed by the person it belongs to.",
+            text: "**Nothing is sent to an address until that address confirms.** Subscribing stores the record unconfirmed and sends one message to it, carrying a link that is good for two days and can be used once. No essay is sent before that link is followed, and an address that is never confirmed is deleted without anybody having looked at it: the link expires two days after it is sent, and a sweep that runs once a day deletes what has already expired. Because the sweep comes after the expiry rather than at it, three days — not two — is the longest such an address can be held, and the usual wait is shorter. That is the opposite of the rule on membership applications, where nothing is deleted on a timer, and the difference is deliberate: an unreviewed application is somebody's application, while an unconfirmed address may have been typed in by a stranger and has never once been affirmed by the person it belongs to.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "The administrative log records that a subscription was requested, confirmed or withdrawn, with the time and a one-way hash of the connection it came from. It never records the address. The twice-daily sweep is recorded too, with the number of unconfirmed addresses it deleted and nothing else, so that the deletion promised above can be shown to have happened rather than merely stated here. A send is logged as well — which essay, and how many messages went out — because writing to the whole list at once is the single most consequential thing this movement's administration can do.",
+            text: "The administrative log records that a subscription was requested, confirmed or withdrawn, with the time and a one-way hash of the connection it came from. It never records the address. The daily sweep is recorded too, with the number of unconfirmed addresses it deleted and nothing else, so that the deletion promised above can be shown to have happened rather than merely stated here. A send is logged as well — which essay, and how many messages went out — because writing to the whole list at once is the single most consequential thing this movement's administration can do.",
           },
         ],
       },

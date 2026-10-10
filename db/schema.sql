@@ -427,10 +427,12 @@ CREATE INDEX IF NOT EXISTS enquiry_status_idx ON enquiry (status, created_at DES
 -- it on a timer would discard it. Here, an unconfirmed row is the residue of an
 -- address that never consented — possibly typed by someone else entirely — so
 -- keeping it is the harm rather than the service. The sweep is scheduled —
--- `app/api/cron/purge-unconfirmed`, twice a day — because the expiry is
--- promised to readers on `/privacy` and a promise cannot be contingent on the
--- next person subscribing. `subscriber_confirm_expiry_idx` exists to make it
--- cheap.
+-- `app/api/cron/maintenance`, once a day — because the expiry is promised to
+-- readers on `/privacy` and a promise cannot be contingent on the next person
+-- subscribing. A daily sweep deletes what has *already* expired, so the row's
+-- outside life is forty-eight hours plus the wait for the next run: the pages
+-- say three days rather than two for that reason.
+-- `subscriber_confirm_expiry_idx` exists to make it cheap.
 CREATE TABLE IF NOT EXISTS subscriber (
   id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   email_encrypted        text NOT NULL,

@@ -147,8 +147,8 @@ export async function subscribe(
 
     /*
      * Opportunistic, and not the thing the privacy note relies on. Addresses
-     * that were entered and never confirmed are swept twice a day by
-     * `app/api/cron/purge-unconfirmed`, because a sweep that happens only as
+     * that were entered and never confirmed are swept once a day by
+     * `app/api/cron/maintenance`, because a sweep that happens only as
      * often as people subscribe is no promise to the person whose address was
      * entered. This call stays because it is free on a path already writing to
      * the table, and clears an expired row the moment anybody comes past

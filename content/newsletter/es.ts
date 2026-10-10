@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**Se te pedirá que confirmes.** La dirección queda sin confirmar hasta que se sigue un enlace enviado a ella; antes de eso no se entrega nada, y una dirección nunca confirmada se borra sin haber sido leída, en cuanto su enlace caduca dos días después. No es un trámite. Cualquiera puede escribir en un campo la dirección de un desconocido, y para quien su interés por este movimiento le costaría el empleo, el correo político que no pidió es un daño real hecho en su nombre.",
+      text: "**Se te pedirá que confirmes.** La dirección queda sin confirmar hasta que se sigue un enlace enviado a ella; antes de eso no se entrega nada, y una dirección nunca confirmada se borra sin haber sido leída: el enlace caduca a los dos días, y un barrido que pasa una vez al día limpia lo que ha caducado, de modo que nada se conserva más de tres días. No es un trámite. Cualquiera puede escribir en un campo la dirección de un desconocido, y para quien su interés por este movimiento le costaría el empleo, el correo político que no pidió es un daño real hecho en su nombre.",
     },
     {
       type: "paragraph",

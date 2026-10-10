@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**Poprosimy cię o potwierdzenie.** Adres pozostaje niepotwierdzony, dopóki nie zostanie otwarty wysłany na niego odnośnik; wcześniej nic nie jest dostarczane, a adres nigdy niepotwierdzony zostaje usunięty nieprzeczytany, gdy dwa dni później jego odnośnik straci ważność. To nie jest formalność. Każdy może wpisać w pole adres obcej osoby, a dla kogoś, kogo zainteresowanie tym ruchem kosztowałoby posadę, niezamówiona poczta polityczna jest realną szkodą wyrządzoną w jego imieniu.",
+      text: "**Poprosimy cię o potwierdzenie.** Adres pozostaje niepotwierdzony, dopóki nie zostanie otwarty wysłany na niego odnośnik; wcześniej nic nie jest dostarczane, a adres nigdy niepotwierdzony zostaje usunięty nieprzeczytany: odnośnik traci ważność po dwóch dniach, a przebieg idący raz na dobę usuwa to, czego ważność minęła, więc nic nie jest przechowywane dłużej niż trzy dni. To nie jest formalność. Każdy może wpisać w pole adres obcej osoby, a dla kogoś, kogo zainteresowanie tym ruchem kosztowałoby posadę, niezamówiona poczta polityczna jest realną szkodą wyrządzoną w jego imieniu.",
     },
     {
       type: "paragraph",

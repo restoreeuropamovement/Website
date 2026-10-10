@@ -77,7 +77,7 @@ export type AuditAction =
    * and the reason it is written is that: `/privacy` promises the deletion
    * happens on a timer, so the log is the one place that promise leaves
    * evidence of having been kept. A night that removed nothing is recorded
-   * too — see the longer note in `app/api/cron/purge-unconfirmed`.
+   * too — see the longer note on `purgeTask` in `lib/admin/maintenance.ts`.
    */
   | "newsletter.purge"
   /*
