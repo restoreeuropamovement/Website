@@ -34,7 +34,7 @@ export const materialsText: MaterialsText = {
   },
 
   imprint: {
-    note: "La grafica lascia in bianco un campo per il nome e l'indirizzo di una persona responsabile dell'esemplare; compilalo prima di esporre qualcosa in pubblico. Quello che viene richiesto varia da paese a paese, quindi controlla che cosa vale dove ti trovi.",
+    note: "La grafica non riporta alcuna indicazione di responsabilità; aggiungila tu: il nome e l'indirizzo di una persona responsabile dell'esemplare, su tutto ciò che viene stampato ed esposto in pubblico. Quello che viene richiesto varia da paese a paese, quindi controlla che cosa vale dove ti trovi.",
   },
 
   file: {

@@ -71,13 +71,17 @@ export const materialsText = {
    * It is general on purpose, and must stay that way. It names no country, no
    * statute and no penalty, and it says nothing about what any particular law
    * demands, because nobody here has established that and a confident sentence
-   * about it would be exactly the fabricated fact `AGENTS.md` forbids. What is
-   * being said is only what the movement knows about its own artwork — there is
-   * a blank field on it — and the one honest instruction that follows: find out
-   * what your own country expects.
+   * about it would be exactly the fabricated fact `AGENTS.md` forbids.
+   *
+   * It also describes no property of the files, which is the other way this
+   * sentence could become untrue. An earlier draft said the artwork left a
+   * blank field to be filled in; it does not, and nothing checks that it does,
+   * so the claim would have quietly become false the first time somebody
+   * uploaded a design without one. Written as an instruction it stays correct
+   * whatever is on the shelf.
    */
   imprint: {
-    note: "The artwork leaves a blank field for the name and address of a person responsible for the item; fill it in before putting anything up in public. What is required differs from country to country, so check what applies where you are.",
+    note: "The artwork carries no imprint, so add one yourself: the name and address of a person responsible for the item, on anything printed and put up in public. What is required differs from country to country, so check what applies where you are.",
   },
 
   file: {

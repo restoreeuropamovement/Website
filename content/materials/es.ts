@@ -34,7 +34,7 @@ export const materialsText: MaterialsText = {
   },
 
   imprint: {
-    note: "El diseño deja un campo en blanco para el nombre y la dirección de una persona responsable del ejemplar; rellénelo antes de colocar nada en público. Lo que se exige varía de un país a otro, así que compruebe qué se aplica donde usted esté.",
+    note: "El diseño no lleva ningún pie de imprenta; añádalo usted: el nombre y la dirección de una persona responsable del ejemplar, en todo lo que se imprima y se coloque en público. Lo que se exige varía de un país a otro, así que compruebe qué se aplica donde usted esté.",
   },
 
   file: {

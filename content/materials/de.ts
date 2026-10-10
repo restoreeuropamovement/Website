@@ -34,7 +34,7 @@ export const materialsText: MaterialsText = {
   },
 
   imprint: {
-    note: "Die Vorlagen lassen ein Feld für Namen und Adresse einer verantwortlichen Person frei; füllen Sie es aus, bevor Sie etwas öffentlich aushängen. Was verlangt wird, unterscheidet sich von Land zu Land — prüfen Sie also, was bei Ihnen gilt.",
+    note: "Die Vorlagen enthalten kein Impressum; fügen Sie selbst eines hinzu: Namen und Adresse einer für das Exemplar verantwortlichen Person, auf allem, was gedruckt und öffentlich ausgehängt wird. Was verlangt wird, unterscheidet sich von Land zu Land — prüfen Sie also, was bei Ihnen gilt.",
   },
 
   file: {

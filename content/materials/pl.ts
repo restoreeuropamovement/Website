@@ -34,7 +34,7 @@ export const materialsText: MaterialsText = {
   },
 
   imprint: {
-    note: "Projekty pozostawiają puste pole na nazwisko i adres osoby odpowiedzialnej za dany egzemplarz; wypełnij je, zanim cokolwiek wywiesisz w miejscu publicznym. Wymogi różnią się w zależności od kraju, więc sprawdź, jakie obowiązują tam, gdzie jesteś.",
+    note: "Projekty nie zawierają informacji o osobie odpowiedzialnej; dodaj ją sam: nazwisko i adres osoby odpowiedzialnej za dany egzemplarz, na wszystkim, co drukujesz i wywieszasz w miejscu publicznym. Wymogi różnią się w zależności od kraju, więc sprawdź, jakie obowiązują tam, gdzie jesteś.",
   },
 
   file: {

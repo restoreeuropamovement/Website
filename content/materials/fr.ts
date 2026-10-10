@@ -34,7 +34,7 @@ export const materialsText: MaterialsText = {
   },
 
   imprint: {
-    note: "Les visuels laissent un champ vide pour le nom et l'adresse d'une personne responsable de l'objet ; remplissez-le avant d'afficher quoi que ce soit en public. Ce qui est exigé varie d'un pays à l'autre : vérifiez ce qui s'applique chez vous.",
+    note: "Les visuels ne portent aucune mention de responsabilité ; ajoutez-la vous-même : le nom et l'adresse d'une personne responsable de l'objet, sur tout ce qui est imprimé et affiché en public. Ce qui est exigé varie d'un pays à l'autre : vérifiez ce qui s'applique chez vous.",
   },
 
   file: {
