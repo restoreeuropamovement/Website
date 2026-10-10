@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**Une confirmation vous sera demandée.** L'adresse reste non confirmée tant qu'un lien qui lui est envoyé n'a pas été suivi ; rien n'est délivré avant cela, et une adresse jamais confirmée est supprimée sous deux jours. Ce n'est pas une formalité. N'importe qui peut taper l'adresse d'un inconnu dans un champ, et pour celui à qui son intérêt pour ce mouvement coûterait son emploi, du courrier politique qu'il n'a pas demandé est un tort réel commis en son nom.",
+      text: "**Une confirmation vous sera demandée.** L'adresse reste non confirmée tant qu'un lien qui lui est envoyé n'a pas été suivi ; rien n'est délivré avant cela, et une adresse jamais confirmée est supprimée sans avoir été lue, dès que son lien a expiré deux jours plus tard. Ce n'est pas une formalité. N'importe qui peut taper l'adresse d'un inconnu dans un champ, et pour celui à qui son intérêt pour ce mouvement coûterait son emploi, du courrier politique qu'il n'a pas demandé est un tort réel commis en son nom.",
     },
     {
       type: "paragraph",

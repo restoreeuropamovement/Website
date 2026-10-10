@@ -426,8 +426,11 @@ CREATE INDEX IF NOT EXISTS enquiry_status_idx ON enquiry (status, created_at DES
 -- on `member`. There, an unreviewed row is somebody's application and deleting
 -- it on a timer would discard it. Here, an unconfirmed row is the residue of an
 -- address that never consented — possibly typed by someone else entirely — so
--- keeping it is the harm rather than the service. `subscriber_confirm_expiry_idx`
--- exists to make that sweep cheap.
+-- keeping it is the harm rather than the service. The sweep is scheduled —
+-- `app/api/cron/purge-unconfirmed`, twice a day — because the expiry is
+-- promised to readers on `/privacy` and a promise cannot be contingent on the
+-- next person subscribing. `subscriber_confirm_expiry_idx` exists to make it
+-- cheap.
 CREATE TABLE IF NOT EXISTS subscriber (
   id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   email_encrypted        text NOT NULL,

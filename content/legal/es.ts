@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**A ninguna dirección se le envía nada hasta que esa dirección confirma.** La suscripción guarda el registro sin confirmar y envía un solo mensaje, que lleva un enlace válido durante dos días y utilizable una vez. Ningún ensayo se envía antes de que se siga ese enlace, y una dirección que nunca se confirma se borra en dos días sin que nadie la haya mirado. Es lo contrario de la regla que rige las solicitudes de afiliación, donde nada se borra al vencer un plazo, y la diferencia es deliberada: una solicitud sin leer es la solicitud de alguien, mientras que una dirección sin confirmar puede haberla escrito un desconocido y la persona a la que pertenece no la ha afirmado ni una sola vez.",
+            text: "**A ninguna dirección se le envía nada hasta que esa dirección confirma.** La suscripción guarda el registro sin confirmar y envía un solo mensaje, que lleva un enlace válido durante dos días y utilizable una vez. Ningún ensayo se envía antes de que se siga ese enlace, y una dirección que nunca se confirma se borra sin que nadie la haya mirado: el enlace caduca dos días después de enviarse, y dos veces al día un barrido borra lo que ha caducado. Es lo contrario de la regla que rige las solicitudes de afiliación, donde nada se borra al vencer un plazo, y la diferencia es deliberada: una solicitud sin leer es la solicitud de alguien, mientras que una dirección sin confirmar puede haberla escrito un desconocido y la persona a la que pertenece no la ha afirmado ni una sola vez.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "El registro administrativo anota que una suscripción se pidió, se confirmó o se retiró, con la hora y una huella de un solo sentido de la conexión de la que vino. La dirección no la anota nunca. También se anota un envío — qué ensayo, y cuántos mensajes salieron — porque escribir a la lista entera de una vez es lo más cargado de consecuencias que la administración de este movimiento puede hacer.",
+            text: "El registro administrativo anota que una suscripción se pidió, se confirmó o se retiró, con la hora y una huella de un solo sentido de la conexión de la que vino. La dirección no la anota nunca. También se anota el barrido que pasa dos veces al día, con el número de direcciones sin confirmar que borró y nada más, para que el borrado prometido arriba pueda demostrarse y no quede solo afirmado aquí. También se anota un envío — qué ensayo, y cuántos mensajes salieron — porque escribir a la lista entera de una vez es lo más cargado de consecuencias que la administración de este movimiento puede hacer.",
           },
         ],
       },

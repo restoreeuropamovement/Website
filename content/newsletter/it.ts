@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**Ti verrà chiesta una conferma.** L'indirizzo resta non confermato finché non viene seguito un collegamento inviato ad esso; prima di allora non viene recapitato nulla, e un indirizzo mai confermato è cancellato entro due giorni. Non è una formalità. Chiunque può digitare in un campo l'indirizzo di uno sconosciuto, e per chi dal proprio interesse per questo movimento rischierebbe il posto di lavoro, posta politica non richiesta è un danno vero, fatto a suo nome.",
+      text: "**Ti verrà chiesta una conferma.** L'indirizzo resta non confermato finché non viene seguito un collegamento inviato ad esso; prima di allora non viene recapitato nulla, e un indirizzo mai confermato è cancellato senza essere letto, appena il suo collegamento scade due giorni dopo. Non è una formalità. Chiunque può digitare in un campo l'indirizzo di uno sconosciuto, e per chi dal proprio interesse per questo movimento rischierebbe il posto di lavoro, posta politica non richiesta è un danno vero, fatto a suo nome.",
     },
     {
       type: "paragraph",

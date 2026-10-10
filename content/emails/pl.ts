@@ -28,8 +28,9 @@ Potwierdź tutaj:
 {confirm}
 
 Jeśli to nie twoja prośba, zignoruj tę wiadomość. Nic nie zostanie do
-ciebie wysłane, nie musisz odpowiadać, a adres zostanie usunięty w ciągu
-dwóch dni bez żadnego działania z twojej strony.`,
+ciebie wysłane, nie musisz odpowiadać, a adres zostanie usunięty, gdy
+powyższy odnośnik straci ważność po dwóch dniach, bez żadnego działania
+z twojej strony.`,
   },
 
   alreadySubscribed: {

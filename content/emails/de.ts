@@ -30,8 +30,8 @@ Hier bestätigen:
 
 Falls Sie darum nicht gebeten haben, ignorieren Sie diese Nachricht. Es
 wird Ihnen nichts zugesandt, Sie brauchen nicht zu antworten, und die
-Adresse wird innerhalb von zwei Tagen gelöscht, ohne dass Sie etwas tun
-müssen.`,
+Adresse wird gelöscht, sobald der Link oben in zwei Tagen verfallen ist,
+ohne dass Sie etwas tun müssen.`,
   },
 
   alreadySubscribed: {

@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Rien n'est envoyé à une adresse avant que cette adresse ne confirme.** L'abonnement enregistre la fiche non confirmée et envoie un seul message, porteur d'un lien valable deux jours et utilisable une fois. Aucun essai n'est envoyé avant que ce lien ne soit suivi, et une adresse jamais confirmée est supprimée sous deux jours sans que personne l'ait regardée. C'est l'inverse de la règle qui vaut pour les demandes d'adhésion, où rien n'est supprimé à l'échéance d'un délai, et la différence est délibérée : une demande non examinée est la demande de quelqu'un, tandis qu'une adresse non confirmée a pu être tapée par un inconnu et n'a pas été affirmée une seule fois par la personne à qui elle appartient.",
+            text: "**Rien n'est envoyé à une adresse avant que cette adresse ne confirme.** L'abonnement enregistre la fiche non confirmée et envoie un seul message, porteur d'un lien valable deux jours et utilisable une fois. Aucun essai n'est envoyé avant que ce lien ne soit suivi, et une adresse jamais confirmée est supprimée sans que personne l'ait regardée : le lien expire deux jours après son envoi, et un balayage qui passe deux fois par jour supprime ce qui a expiré. C'est l'inverse de la règle qui vaut pour les demandes d'adhésion, où rien n'est supprimé à l'échéance d'un délai, et la différence est délibérée : une demande non examinée est la demande de quelqu'un, tandis qu'une adresse non confirmée a pu être tapée par un inconnu et n'a pas été affirmée une seule fois par la personne à qui elle appartient.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Le journal d'administration consigne qu'un abonnement a été demandé, confirmé ou retiré, avec l'heure et une empreinte à sens unique de la connexion d'où il venait. Il ne consigne jamais l'adresse. Un envoi y est consigné aussi — quel essai, et combien de messages sont partis — car écrire à la liste entière d'un coup est la chose la plus lourde de conséquences que l'administration de ce mouvement puisse faire.",
+            text: "Le journal d'administration consigne qu'un abonnement a été demandé, confirmé ou retiré, avec l'heure et une empreinte à sens unique de la connexion d'où il venait. Il ne consigne jamais l'adresse. Le balayage qui passe deux fois par jour y est consigné également, avec le nombre d'adresses non confirmées qu'il a supprimées et rien d'autre, afin que la suppression promise plus haut puisse être démontrée et non seulement affirmée ici. Un envoi y est consigné aussi — quel essai, et combien de messages sont partis — car écrire à la liste entière d'un coup est la chose la plus lourde de conséquences que l'administration de ce mouvement puisse faire.",
           },
         ],
       },

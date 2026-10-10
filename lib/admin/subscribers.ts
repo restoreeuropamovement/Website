@@ -281,8 +281,15 @@ export async function recipientsForDispatch(): Promise<Recipient[]> {
  * indefinitely would mean keeping a record of a person's supposed political
  * interest that they never once affirmed.
  *
- * Called opportunistically from the subscribe path rather than on a schedule,
- * which keeps the deployment free of a cron job it would otherwise need.
+ * Called from `app/api/cron/purge-unconfirmed` twice a day, and again
+ * opportunistically from the subscribe path. The schedule is what makes the
+ * sentence in `/privacy` a promise rather than a description of a busy list:
+ * run from the form alone, this deleted an unconfirmed address when the next
+ * person happened to subscribe, which on a movement in formation is not a
+ * retention period at all. The opportunistic call is kept beside it because it
+ * costs one indexed statement on a path that is already writing to this table,
+ * removes the row sooner whenever anybody does come past, and takes nothing
+ * the scheduled run would not have taken.
  */
 export async function purgeExpiredUnconfirmed(): Promise<number> {
   const rows = await db()`

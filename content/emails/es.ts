@@ -28,8 +28,8 @@ Confirme aquí:
 {confirm}
 
 Si no lo ha pedido, ignore este mensaje. No se le enviará nada, no hace
-falta que responda, y la dirección se borrará en el plazo de dos días sin
-que usted tenga que hacer nada.`,
+falta que responda, y la dirección se borrará en cuanto el enlace de
+arriba caduque, dentro de dos días, sin que usted tenga que hacer nada.`,
   },
 
   alreadySubscribed: {

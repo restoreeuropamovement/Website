@@ -29,8 +29,9 @@ Conferma qui:
 {confirm}
 
 Se non l'hai chiesto tu, ignora questo messaggio. Non ti sarà inviato
-nulla, non devi rispondere, e l'indirizzo sarà cancellato entro due
-giorni senza che tu debba fare alcunché.`,
+nulla, non devi rispondere, e l'indirizzo sarà cancellato appena il
+collegamento qui sopra scade, fra due giorni, senza che tu debba fare
+alcunché.`,
   },
 
   alreadySubscribed: {

@@ -29,8 +29,9 @@ Confirm here:
 {confirm}
 
 If you did not ask for this, ignore this message. Nothing will be sent to
-you, you do not need to reply, and the address will be deleted within two
-days without any action on your part.`,
+you, you do not need to reply, and the address will be deleted once the
+link above has expired, two days from now, without any action on your
+part.`,
   },
 
   alreadySubscribed: {

@@ -30,8 +30,9 @@ Confirmez ici :
 {confirm}
 
 Si vous n'avez rien demandé, ignorez ce message. Rien ne vous sera
-envoyé, vous n'avez pas à répondre, et l'adresse sera supprimée sous deux
-jours sans que vous ayez quoi que ce soit à faire.`,
+envoyé, vous n'avez pas à répondre, et l'adresse sera supprimée dès que
+le lien ci-dessus aura expiré, dans deux jours, sans que vous ayez quoi
+que ce soit à faire.`,
   },
 
   alreadySubscribed: {

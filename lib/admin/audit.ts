@@ -72,6 +72,15 @@ export type AuditAction =
   | "newsletter.unsubscribe"
   | "newsletter.dispatch"
   /*
+   * The scheduled discarding of addresses that were never confirmed, carrying
+   * a count and nothing else. The only entry here written by no person at all,
+   * and the reason it is written is that: `/privacy` promises the deletion
+   * happens on a timer, so the log is the one place that promise leaves
+   * evidence of having been kept. A night that removed nothing is recorded
+   * too — see the longer note in `app/api/cron/purge-unconfirmed`.
+   */
+  | "newsletter.purge"
+  /*
    * A session was presented from a client it was not issued to, and was
    * revoked. Usually a browser that updated; occasionally the thing it looks
    * like. Recorded either way, because the distinction is only visible in how

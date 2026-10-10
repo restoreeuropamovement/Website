@@ -19,7 +19,7 @@ export const newsletterText: NewsletterText = {
     },
     {
       type: "paragraph",
-      text: "**You will be asked to confirm.** The address is held unconfirmed until a link sent to it is followed, nothing is delivered before that, and an address that is never confirmed is deleted within two days. This is not a formality. Anyone can type a stranger's address into a box, and for somebody whose interest in this movement would cost them their job, political mail they did not ask for is a real harm done in their name.",
+      text: "**You will be asked to confirm.** The address is held unconfirmed until a link sent to it is followed, nothing is delivered before that, and an address that is never confirmed is deleted unread once its link has expired two days later. This is not a formality. Anyone can type a stranger's address into a box, and for somebody whose interest in this movement would cost them their job, political mail they did not ask for is a real harm done in their name.",
     },
     {
       type: "paragraph",

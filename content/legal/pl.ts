@@ -157,7 +157,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "**Na żaden adres nic nie jest wysyłane, dopóki ten adres nie potwierdzi.** Zapis zachowuje wpis jako niepotwierdzony i wysyła tam jedną wiadomość z odnośnikiem ważnym dwa dni i do jednorazowego użycia. Przed otwarciem tego odnośnika nie jest wysyłany żaden esej, a adres nigdy niepotwierdzony zostaje usunięty w ciągu dwóch dni, bez tego, by ktokolwiek na niego spojrzał. To odwrotność zasady obowiązującej przy zgłoszeniach członkowskich, gdzie nic nie jest usuwane po upływie terminu, i różnica jest zamierzona: nieprzeczytane zgłoszenie jest czyimś zgłoszeniem, a niepotwierdzony adres mógł wpisać ktoś obcy i osoba, do której należy, ani razu go nie potwierdziła.",
+            text: "**Na żaden adres nic nie jest wysyłane, dopóki ten adres nie potwierdzi.** Zapis zachowuje wpis jako niepotwierdzony i wysyła tam jedną wiadomość z odnośnikiem ważnym dwa dni i do jednorazowego użycia. Przed otwarciem tego odnośnika nie jest wysyłany żaden esej, a adres nigdy niepotwierdzony zostaje usunięty, bez tego, by ktokolwiek na niego spojrzał: odnośnik traci ważność dwa dni po wysłaniu, a dwa razy na dobę przebieg usuwa to, czego ważność minęła. To odwrotność zasady obowiązującej przy zgłoszeniach członkowskich, gdzie nic nie jest usuwane po upływie terminu, i różnica jest zamierzona: nieprzeczytane zgłoszenie jest czyimś zgłoszeniem, a niepotwierdzony adres mógł wpisać ktoś obcy i osoba, do której należy, ani razu go nie potwierdziła.",
           },
           {
             type: "paragraph",
@@ -181,7 +181,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Dziennik administracyjny zapisuje, że zapis został poproszony, potwierdzony albo cofnięty, wraz z czasem i jednokierunkowym skrótem połączenia, z którego przyszedł. Adresu nie zapisuje nigdy. Zapisywana jest też wysyłka — który esej i ile wiadomości poszło — bo napisanie naraz do całej listy jest najbardziej brzemienną w skutki rzeczą, jaką administracja tego ruchu może zrobić.",
+            text: "Dziennik administracyjny zapisuje, że zapis został poproszony, potwierdzony albo cofnięty, wraz z czasem i jednokierunkowym skrótem połączenia, z którego przyszedł. Adresu nie zapisuje nigdy. Zapisywany jest też przebieg, który idzie dwa razy na dobę, wraz z liczbą usuniętych adresów niepotwierdzonych i niczym więcej, żeby obiecane wyżej usunięcie dało się wykazać, a nie tylko tutaj zapewnić. Zapisywana jest też wysyłka — który esej i ile wiadomości poszło — bo napisanie naraz do całej listy jest najbardziej brzemienną w skutki rzeczą, jaką administracja tego ruchu może zrobić.",
           },
         ],
       },

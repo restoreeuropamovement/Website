@@ -146,10 +146,13 @@ export async function subscribe(
     }
 
     /*
-     * Opportunistic rather than scheduled. Addresses that were entered and
-     * never confirmed are cleared here, which spares the deployment a cron job
-     * for a sweep that only needs to happen roughly as often as people
-     * subscribe.
+     * Opportunistic, and not the thing the privacy note relies on. Addresses
+     * that were entered and never confirmed are swept twice a day by
+     * `app/api/cron/purge-unconfirmed`, because a sweep that happens only as
+     * often as people subscribe is no promise to the person whose address was
+     * entered. This call stays because it is free on a path already writing to
+     * the table, and clears an expired row the moment anybody comes past
+     * instead of at the next scheduled run.
      */
     await purgeExpiredUnconfirmed();
   });
