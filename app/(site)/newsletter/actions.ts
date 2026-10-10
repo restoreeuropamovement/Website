@@ -17,7 +17,6 @@ import { alreadySubscribed, confirmSubscription } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
 import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
 import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
-import { SITE_URL } from "@/lib/site";
 import { NEWSLETTER_INITIAL, type NewsletterState } from "./state";
 
 /**
@@ -50,9 +49,9 @@ export async function subscribe(
   /*
    * The decoy field, checked before anything else is read, and answered with
    * the ordinary reply — see lib/spam.ts and the longer note in the membership
-   * intake. Whichever component eventually renders this form must include
-   * `<Honeypot />`; until one does, this costs a single absent-field lookup and
-   * is simply waiting for it.
+   * intake. `components/newsletter/SubscribeForm.tsx` renders `<Honeypot />`,
+   * and is the only component that may render this action: one that omitted it
+   * would turn this check into a lookup for a field that is never present.
    */
   if (honeypotTripped(form)) {
     const { ipHash: decoyIpHash } = await clientContext();
@@ -140,10 +139,10 @@ export async function subscribe(
     if (outcome.kind === "pending") {
       await sendEmail({ to: email, ...(await confirmSubscription(locale, outcome.token)) });
     } else {
-      const url = `${SITE_URL}/newsletter/unsubscribe?token=${encodeURIComponent(
-        await unsubscribeToken(outcome.id),
-      )}`;
-      await sendEmail({ to: email, ...(await alreadySubscribed(locale, url)) });
+      await sendEmail({
+        to: email,
+        ...(await alreadySubscribed(locale, await unsubscribeToken(outcome.id))),
+      });
     }
 
     /*

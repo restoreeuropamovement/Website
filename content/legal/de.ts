@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Rechtliches",
     title: "Datenschutz",
     metaTitle: "Datenschutz",
-    lede: "Das Lesen dieser Seite erhebt nichts, was Sie identifiziert. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was damit geschieht, steht im Folgenden.",
+    lede: "Das Lesen dieser Seite erhebt nichts, was Sie identifiziert. Drei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was damit geschieht, steht im Folgenden.",
     description:
-      "Das Lesen dieser Seite identifiziert niemanden: keine Cookies, keine Nachverfolgung, nur eine anonyme Zählung der Besuche. Zwei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was gespeichert wird, was verschlüsselt ist und wie Sie es löschen lassen.",
+      "Das Lesen dieser Seite identifiziert niemanden: keine Cookies, keine Nachverfolgung, nur eine anonyme Zählung der Besuche. Drei Seiten bitten um etwas, und nur dann, wenn Sie es geben wollen. Was gespeichert wird, was verschlüsselt ist und wie Sie es löschen lassen.",
     sections: {
       "what-we-collect": {
         title: "Was diese Seite erhebt",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Es gibt zwei Stellen auf dieser Seite, über die Sie personenbezogene Daten übergeben können, und an beiden müssen Sie es ernst meinen: die Bewerbung um die Mitgliedschaft unter [Mitmachen][join] und das Nachrichtenformular unter [Kontakt][contact]. Nichts sonst auf der Seite übermittelt etwas, und keines der beiden Formulare ist versehentlich zu erreichen.",
+            text: "Es gibt drei Stellen auf dieser Seite, über die Sie personenbezogene Daten übergeben können, und an allen dreien müssen Sie es ernst meinen: die Bewerbung um die Mitgliedschaft unter [Mitmachen][join], das Nachrichtenformular unter [Kontakt][contact] und das Eintragefeld auf der [Rundbrief-Seite][newsletter]. Nichts sonst auf der Seite übermittelt etwas, und keines der drei Formulare ist versehentlich zu erreichen.",
           },
         ],
       },
@@ -127,7 +127,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "Die zwei Formulare",
+        title: "Die drei Formulare",
         body: [
           {
             type: "paragraph",
@@ -140,6 +140,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "Zuschriften werden aufbewahrt, bis sie erledigt sind, und nicht länger, als ihre Beantwortung erfordert; sie werden auf Verlangen gelöscht und niemals dazu verwendet, Sie in das Mitgliederverzeichnis aufzunehmen. Der Beitritt ist eine gesonderte Entscheidung, die Sie bewusst treffen müssen. Auf der Kontaktseite sind keine E-Mail-Adressen abgedruckt, denn jede wird erst veröffentlicht, wenn die Funktion, zu der sie gehört, besteht und jemand dafür verantwortlich ist, sie zu lesen.",
+          },
+          {
+            type: "paragraph",
+            text: "Das dritte ist das Eintragefeld auf der [Rundbrief-Seite][newsletter], das nach einer E-Mail-Adresse fragt und nach nichts sonst. Es hat weiter unten einen eigenen Abschnitt, denn was mit einer Adresse auf einem Verteiler geschieht, ist eine andere Frage als das, was mit einem Schreiben geschieht, das jemand liest.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "Wenn Sie den Rundbrief abonnieren",
+        body: [
+          {
+            type: "paragraph",
+            text: "Das Formular auf der [Rundbrief-Seite][newsletter] fragt nach einer einzigen Sache: einer E-Mail-Adresse. Kein Name, kein Land und nichts zu schreiben. Daneben hält der Datensatz fest, welche der sechs Sprachausgaben Sie gelesen haben, damit das, was die Bewegung um jeden Essay herum sagt, Sie in dieser Sprache erreicht, sowie die Zeitpunkte der Eintragung und der Bestätigung.",
+          },
+          {
+            type: "paragraph",
+            text: "**An eine Adresse wird nichts gesandt, bevor diese Adresse bestätigt hat.** Das Abonnement speichert den Datensatz unbestätigt und sendet eine einzige Nachricht dorthin, mit einem Link, der zwei Tage gilt und einmal verwendet werden kann. Vor dem Aufruf dieses Links wird kein Essay gesandt, und eine nie bestätigte Adresse wird binnen zwei Tagen gelöscht, ohne dass jemand sie angesehen hätte. Das ist das Gegenteil der Regel für Mitgliedsanträge, bei denen nichts nach Fristablauf gelöscht wird, und der Unterschied ist gewollt: ein ungeprüfter Antrag ist jemandes Antrag, eine unbestätigte Adresse dagegen kann von einem Fremden eingetippt worden sein und ist von der Person, der sie gehört, kein einziges Mal bejaht worden.",
+          },
+          {
+            type: "paragraph",
+            text: "**Die Adresse wird vor dem Speichern verschlüsselt**, mit demselben Verfahren und demselben Schlüssel wie die eines Mitglieds — siehe den Abschnitt oben. Die Sprache und die Zeitpunkte liegen unverschlüsselt vor, denn keines von beidem identifiziert jemanden. Es gibt keinen Export, und keine Seite der Verwaltung zeigt überhaupt die Adresse eines Abonnenten an. Ein einziger Vorgang entschlüsselt sie, nämlich der Versand einer Ausgabe, und er verlangt eine Passkey-Bestätigung aus den letzten Minuten statt bloß einer angemeldeten Sitzung. Auch der Austausch des Schlüssels, den derjenige, der die Schlüssel verwahrt, über die Kommandozeile vornimmt, liest sie, um sie unter dem neuen Schlüssel wieder abzulegen.",
+          },
+          {
+            type: "paragraph",
+            text: "**Die Antwort des Formulars ist dieselbe, gleichgültig ob die Adresse bereits auf der Liste stand.** Was von beidem zutraf, steht allein in der Nachricht, die darauf folgt, und diese Nachricht erreicht denjenigen, der das Postfach öffnen kann. Ohne das wäre das Formular ein Mittel, um Adresse für Adresse zu prüfen, ob eine bestimmte Person den Rundbrief dieser Bewegung liest. Das Formular ist pro Verbindung in der Häufigkeit begrenzt, unterliegt derselben Stundengrenze wie die beiden anderen und trägt dasselbe unsichtbare Lockfeld; auch hier gibt es kein CAPTCHA und keine Bot-Erkennung Dritter.",
+          },
+          {
+            type: "paragraph",
+            text: "**Das Abbestellen kostet einen Klick und kein Benutzerkonto.** Jede Nachricht trägt einen Link, der die Adresse entfernt, Ihr Mailprogramm bietet unter Umständen eine eigene Abbestellfunktion an, die denselben Link benutzt, und keiner von beiden fragt nach einem Grund oder hält einen fest. Dieser Link ist kein in einer Tabelle hinterlegtes Merkmal: er wird bei jedem Gebrauch aus dem Datensatz und dem Schlüssel neu berechnet, sodass eine gestohlene Kopie der Datenbank niemandem ein Mittel gäbe, die Liste zu leeren, und eine in einem Archiv wiedergefundene Nachricht auch Jahre später noch funktioniert.",
+          },
+          {
+            type: "paragraph",
+            text: "**Ein Unternehmen von außen ist beteiligt, und zwar dasjenige, das die Post befördert.** Die Nachrichten werden von Resend zugestellt, das notwendigerweise erfährt, an welche Adresse jede einzelne geht, und darüber eigene Aufzeichnungen führt. Daran lässt sich nichts ändern — die Adresse ist das Ziel —, also wird alles andere herausgehalten. Die Nachrichten sind reiner Text ohne Bilder, ohne Zählpixel und ohne Link, der den Leser erkennbar macht, der ihm gefolgt ist; weder der Anbieter noch die Bewegung kann also feststellen, ob Sie eine davon geöffnet haben. Ihre Adresse wird nicht verkauft, mit keiner anderen Organisation geteilt, für kein Profil verwendet und an niemanden weitergegeben außer an den Anbieter, der sie zustellt.",
+          },
+          {
+            type: "paragraph",
+            text: "**Nach Ihrem Austritt bleibt** der Datensatz selbst bestehen, als beendet gekennzeichnet — die verschlüsselte Adresse, die Sprache und die Zeitpunkte — und nicht etwa nichts. Er erhält keine Post mehr, und eine erneute Eintragung derselben Adresse beginnt wieder bei der Bestätigung, denn eine widerrufene Einwilligung ist keine Einwilligung. Die vollständige Löschung gehört zu den unten dargestellten Rechten. Abonnement und Mitgliedsantrag sind vollständig getrennt: keine der beiden Listen wird aus der anderen gebildet, und nichts, was Sie hier tun, trägt Sie in das Mitgliederverzeichnis ein.",
+          },
+          {
+            type: "paragraph",
+            text: "Das Verwaltungsprotokoll hält fest, dass ein Abonnement angefordert, bestätigt oder widerrufen wurde, mit Zeitpunkt und einem Einwegwert der Verbindung, von der es kam. Die Adresse hält es nie fest. Auch ein Versand wird protokolliert — welcher Essay und wie viele Nachrichten hinausgingen —, denn an die gesamte Liste auf einmal zu schreiben ist das Folgenreichste, was die Verwaltung dieser Bewegung tun kann.",
           },
         ],
       },

@@ -99,10 +99,14 @@ export type ExploreCardId = (typeof exploreCards)[number]["id"];
  *
  * `member` and `volunteer` are the two values `involvement_role` accepts;
  * `supporter` was retired and now resolves to `member`, so it is not offered
- * here either. There is no newsletter entry because there is no newsletter —
- * no list, no provider, nowhere to store a subscriber — and a fourth card
- * promising one would be the only paragraph on the page the site could not
- * keep.
+ * here either.
+ *
+ * The newsletter is not a fourth card, although it now exists and is linked
+ * from the footer. These three are ways of taking part, and each ends with a
+ * person reading what you sent; subscribing is a way of being written to, and
+ * asks nothing of you beyond an address. Putting it here would flatter the
+ * list by making a mailing list look like participation, which is the kind of
+ * small dishonesty this page was built to avoid.
  */
 export interface ParticipationStructure {
   readonly id: string;

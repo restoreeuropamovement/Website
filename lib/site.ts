@@ -134,6 +134,7 @@ export const routes = {
   wings: "/wings",
   materials: "/materials",
   join: "/join",
+  newsletter: "/newsletter",
   contact: "/contact",
   press: "/contact#press",
   research: "/contact#research",

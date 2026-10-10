@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const SECTIONS = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/journal", label: "Journal" },
+  { href: "/admin/newsletter", label: "Newsletter" },
   { href: "/admin/members", label: "Members" },
   { href: "/admin/gatherings", label: "Gatherings" },
   { href: "/admin/materials", label: "Materials" },

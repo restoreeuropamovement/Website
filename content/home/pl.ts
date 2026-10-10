@@ -174,6 +174,6 @@ export const home: HomeContent = {
       },
     },
     closing:
-      "Nie ma listy mailingowej, do której można się zapisać, ani biuletynu, który można zamówić. Jedyny adres, jaki ten ruch posiada, to ten, który sam wpisałeś do zgłoszenia albo zapytania, a jest on szyfrowany przed zapisaniem.",
+      "Każdy adres, jaki ten ruch posiada, został wpisany w jeden z jego własnych formularzy — zgłoszenie, zapytanie albo biuletyn, który możesz zamówić — i każdy jest szyfrowany przed zapisaniem. Nic nie jest kupione i nic nie jest zbierane skądinąd.",
   },
 };

@@ -174,6 +174,6 @@ export const home: HomeContent = {
       },
     },
     closing:
-      "Non c'è nessuna lista di distribuzione a cui iscriversi né alcuna newsletter da sottoscrivere. L'unico indirizzo che questo movimento possiede è quello che hai scritto tu stesso in una domanda o in un messaggio, ed è cifrato prima di essere conservato.",
+      "Ogni indirizzo che questo movimento possiede è stato scritto in uno dei suoi moduli — una domanda, un messaggio, o la lettera a cui puoi iscriverti — e ciascuno è cifrato prima di essere conservato. Nulla è comprato, e nulla è raccolto altrove.",
   },
 };

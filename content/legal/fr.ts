@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Informations légales",
     title: "Confidentialité",
     metaTitle: "Confidentialité",
-    lede: "Lire ce site ne recueille rien qui vous identifie. Deux pages demandent quelque chose, et seulement si vous choisissez de le donner. Ce qu'il en advient est exposé ci-dessous.",
+    lede: "Lire ce site ne recueille rien qui vous identifie. Trois pages demandent quelque chose, et seulement si vous choisissez de le donner. Ce qu'il en advient est exposé ci-dessous.",
     description:
-      "Lire ce site n'identifie personne : aucun cookie, aucun pistage, seulement un comptage anonyme des visites. Deux pages demandent quelque chose, et seulement si vous choisissez de le donner. Ce qui est conservé, ce qui est chiffré, et comment le faire effacer.",
+      "Lire ce site n'identifie personne : aucun cookie, aucun pistage, seulement un comptage anonyme des visites. Trois pages demandent quelque chose, et seulement si vous choisissez de le donner. Ce qui est conservé, ce qui est chiffré, et comment le faire effacer.",
     sections: {
       "what-we-collect": {
         title: "Ce que ce site recueille",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Il existe deux endroits sur ce site par lesquels vous pouvez transmettre des données à caractère personnel, et dans les deux cas il faut le vouloir : la demande d'adhésion sur [S'engager][join] et le formulaire de message sur [Contact][contact]. Rien d'autre sur ce site ne transmet quoi que ce soit, et aucun des deux formulaires n'est accessible par accident.",
+            text: "Il existe trois endroits sur ce site par lesquels vous pouvez transmettre des données à caractère personnel, et dans les trois cas il faut le vouloir : la demande d'adhésion sur [S'engager][join], le formulaire de message sur [Contact][contact] et le champ d'inscription de la [page de la lettre][newsletter]. Rien d'autre sur ce site ne transmet quoi que ce soit, et aucun des trois formulaires n'est accessible par accident.",
           },
         ],
       },
@@ -127,7 +127,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "Les deux formulaires",
+        title: "Les trois formulaires",
         body: [
           {
             type: "paragraph",
@@ -140,6 +140,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "La correspondance est conservée jusqu'à ce qu'elle ait été traitée et pas plus longtemps que la réponse ne l'exige, elle est effacée sur demande, et elle ne sert jamais à vous inscrire au registre des adhérents. Adhérer est une décision distincte que vous devez prendre délibérément. Aucune adresse électronique n'est imprimée sur la page de contact, car chacune n'est publiée que lorsque la fonction à laquelle elle appartient existe et que quelqu'un répond de sa lecture.",
+          },
+          {
+            type: "paragraph",
+            text: "Le troisième est le champ d'inscription de la [page de la lettre][newsletter], qui demande une adresse électronique et rien d'autre. Il a sa propre section plus bas, car ce qu'il advient d'une adresse sur une liste de diffusion est une autre question que ce qu'il advient d'une lettre que quelqu'un lit.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "Si vous vous abonnez à la lettre",
+        body: [
+          {
+            type: "paragraph",
+            text: "Le formulaire de la [page de la lettre][newsletter] demande une seule chose, une adresse électronique. Pas de nom, pas de pays et rien à écrire. À côté, l'enregistrement retient laquelle des six éditions linguistiques vous lisiez, afin que ce que le mouvement dit autour de chaque essai vous parvienne dans cette langue, ainsi que les dates de l'inscription et de la confirmation.",
+          },
+          {
+            type: "paragraph",
+            text: "**Rien n'est envoyé à une adresse avant que cette adresse ne confirme.** L'abonnement enregistre la fiche non confirmée et envoie un seul message, porteur d'un lien valable deux jours et utilisable une fois. Aucun essai n'est envoyé avant que ce lien ne soit suivi, et une adresse jamais confirmée est supprimée sous deux jours sans que personne l'ait regardée. C'est l'inverse de la règle qui vaut pour les demandes d'adhésion, où rien n'est supprimé à l'échéance d'un délai, et la différence est délibérée : une demande non examinée est la demande de quelqu'un, tandis qu'une adresse non confirmée a pu être tapée par un inconnu et n'a pas été affirmée une seule fois par la personne à qui elle appartient.",
+          },
+          {
+            type: "paragraph",
+            text: "**L'adresse est chiffrée** avant d'être écrite, par la même méthode et avec la même clef que celle d'un adhérent — voir la section plus haut. La langue et les dates sont en clair, car ni l'une ni les autres n'identifient quiconque. Il n'y a pas d'export, et aucune page de l'administration n'affiche l'adresse d'un abonné. Une seule opération les déchiffre, celle qui envoie un numéro, et elle exige une confirmation par clef d'accès datant de quelques minutes et non une simple session ouverte. Le remplacement de la clef de chiffrement, effectué en ligne de commande par qui détient les clefs, les lit également pour les réécrire sous la nouvelle.",
+          },
+          {
+            type: "paragraph",
+            text: "**La réponse que vous donne le formulaire est la même, que l'adresse ait déjà été sur la liste ou non.** Laquelle des deux situations s'appliquait n'est dite que dans le message qui suit, et ce message parvient à la personne qui peut ouvrir la boîte. Sans cela, le formulaire serait un moyen de vérifier, une adresse à la fois, si une personne nommée lit la lettre de ce mouvement. Le formulaire est limité en fréquence par connexion, relève du même plafond horaire que les deux autres et porte le même champ-leurre invisible ; ici non plus, pas de CAPTCHA ni de détection de robots par un tiers.",
+          },
+          {
+            type: "paragraph",
+            text: "**Partir prend un clic et aucun compte.** Chaque message porte un lien qui retire l'adresse, votre logiciel de messagerie propose peut-être sa propre commande de désabonnement qui emploie ce même lien, et ni l'un ni l'autre ne demande de motif ni n'en consigne. Ce lien n'est pas un jeton gardé dans une table : il est recalculé à partir de l'enregistrement et de la clef de chiffrement à chaque usage, de sorte qu'une copie volée de la base ne donnerait à personne un moyen de vider la liste, et qu'un message retrouvé dans une archive des années plus tard fonctionne encore.",
+          },
+          {
+            type: "paragraph",
+            text: "**Une entreprise extérieure intervient, et c'est celle qui achemine le courrier.** Les messages sont délivrés par Resend, qui apprend nécessairement à quelle adresse chacun est envoyé et en conserve sa propre trace. Rien ne peut y être fait — l'adresse est la destination —, aussi tout le reste en est-il tenu à l'écart. Les messages sont en texte brut, sans images, sans pixel de pistage et sans lien identifiant le lecteur qui l'a suivi : ni le prestataire ni le mouvement ne peuvent donc savoir si vous en avez ouvert un. Votre adresse n'est ni vendue, ni partagée avec une autre organisation, ni employée à construire un profil, et n'est transmise à personne au-delà du prestataire qui la délivre.",
+          },
+          {
+            type: "paragraph",
+            text: "**Après votre départ subsiste** l'enregistrement lui-même, marqué comme arrêté — l'adresse chiffrée, la langue et les dates — plutôt que rien du tout. Il ne reçoit plus rien, et saisir à nouveau l'adresse repart de l'étape de confirmation, car un consentement retiré n'est pas un consentement. L'effacer purement et simplement fait partie des droits exposés plus bas. S'abonner et demander l'adhésion sont entièrement distincts : aucune des deux listes n'est bâtie à partir de l'autre, et rien de ce que vous faites ici ne vous inscrit au registre des adhérents.",
+          },
+          {
+            type: "paragraph",
+            text: "Le journal d'administration consigne qu'un abonnement a été demandé, confirmé ou retiré, avec l'heure et une empreinte à sens unique de la connexion d'où il venait. Il ne consigne jamais l'adresse. Un envoi y est consigné aussi — quel essai, et combien de messages sont partis — car écrire à la liste entière d'un coup est la chose la plus lourde de conséquences que l'administration de ce mouvement puisse faire.",
           },
         ],
       },

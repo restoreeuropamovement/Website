@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Informacje prawne",
     title: "Prywatność",
     metaTitle: "Prywatność",
-    lede: "Czytanie tej strony nie zbiera niczego, co cię identyfikuje. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co się z tym dalej dzieje, opisano poniżej.",
+    lede: "Czytanie tej strony nie zbiera niczego, co cię identyfikuje. Trzy podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co się z tym dalej dzieje, opisano poniżej.",
     description:
-      "Czytanie tej strony nikogo nie identyfikuje: żadnych ciasteczek, żadnego śledzenia, tylko anonimowe zliczanie wizyt. Dwie podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co jest przechowywane, co jest zaszyfrowane i jak to usunąć.",
+      "Czytanie tej strony nikogo nie identyfikuje: żadnych ciasteczek, żadnego śledzenia, tylko anonimowe zliczanie wizyt. Trzy podstrony o coś proszą, i tylko wtedy, gdy zdecydujesz się to podać. Co jest przechowywane, co jest zaszyfrowane i jak to usunąć.",
     sections: {
       "what-we-collect": {
         title: "Co zbiera ta strona",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Są na tej stronie dwa miejsca, przez które możesz przekazać dane osobowe, i w obu trzeba tego naprawdę chcieć: zgłoszenie członkowskie na [Włącz się][join] i formularz wiadomości na [Kontakt][contact]. Nic innego na stronie niczego nie przesyła, a do żadnego z tych formularzy nie trafia się przypadkiem.",
+            text: "Są na tej stronie trzy miejsca, przez które możesz przekazać dane osobowe, i we wszystkich trzech trzeba tego naprawdę chcieć: zgłoszenie członkowskie na [Włącz się][join], formularz wiadomości na [Kontakt][contact] i pole zapisu na [stronie biuletynu][newsletter]. Nic innego na stronie niczego nie przesyła, a do żadnego z tych formularzy nie trafia się przypadkiem.",
           },
         ],
       },
@@ -127,7 +127,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "Dwa formularze",
+        title: "Trzy formularze",
         body: [
           {
             type: "paragraph",
@@ -140,6 +140,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "Korespondencję przechowuje się, dopóki nie zostanie załatwiona, i nie dłużej, niż wymaga tego odpowiedź; usuwa się ją na życzenie i nigdy nie służy do dopisania cię do rejestru członków. Przystąpienie jest odrębną decyzją, którą musisz podjąć świadomie. Na stronie kontaktowej nie ma podanych adresów e-mail, bo każdy zostaje opublikowany wtedy, gdy funkcja, do której należy, istnieje i ktoś odpowiada za jego czytanie.",
+          },
+          {
+            type: "paragraph",
+            text: "Trzeci to pole zapisu na [stronie biuletynu][newsletter], które pyta o adres poczty elektronicznej i o nic więcej. Ma niżej własny rozdział, bo to, co dzieje się z adresem na liście wysyłkowej, jest innym pytaniem niż to, co dzieje się z listem, który ktoś czyta.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "Jeśli zapiszesz się na biuletyn",
+        body: [
+          {
+            type: "paragraph",
+            text: "Formularz na [stronie biuletynu][newsletter] pyta o jedno: o adres poczty elektronicznej. Żadnego nazwiska, żadnego kraju i niczego do napisania. Obok wpis przechowuje to, które z sześciu wydań językowych czytałeś, żeby to, co ruch mówi wokół każdego eseju, docierało do ciebie w tym języku, oraz daty zapisania i potwierdzenia.",
+          },
+          {
+            type: "paragraph",
+            text: "**Na żaden adres nic nie jest wysyłane, dopóki ten adres nie potwierdzi.** Zapis zachowuje wpis jako niepotwierdzony i wysyła tam jedną wiadomość z odnośnikiem ważnym dwa dni i do jednorazowego użycia. Przed otwarciem tego odnośnika nie jest wysyłany żaden esej, a adres nigdy niepotwierdzony zostaje usunięty w ciągu dwóch dni, bez tego, by ktokolwiek na niego spojrzał. To odwrotność zasady obowiązującej przy zgłoszeniach członkowskich, gdzie nic nie jest usuwane po upływie terminu, i różnica jest zamierzona: nieprzeczytane zgłoszenie jest czyimś zgłoszeniem, a niepotwierdzony adres mógł wpisać ktoś obcy i osoba, do której należy, ani razu go nie potwierdziła.",
+          },
+          {
+            type: "paragraph",
+            text: "**Adres jest szyfrowany** przed zapisaniem, tą samą metodą i tym samym kluczem co dane członka — zobacz rozdział powyżej. Język i daty są jawne, bo żadne z nich nikogo nie identyfikuje. Nie ma eksportu, a żadna strona panelu administracyjnego w ogóle nie pokazuje adresu osoby zapisanej. Odszyfrowuje je jedna operacja — ta, która wysyła numer — i wymaga ona potwierdzenia kluczem dostępu sprzed kilku minut, a nie samego zalogowania. Wymiana klucza szyfrowania, przeprowadzana z wiersza poleceń przez tego, kto trzyma klucze, również je odczytuje, żeby zapisać je z powrotem pod nowym.",
+          },
+          {
+            type: "paragraph",
+            text: "**Odpowiedź, jaką daje formularz, jest taka sama niezależnie od tego, czy adres już był na liście.** Który z dwóch przypadków zachodził, mówi dopiero wiadomość, która potem przychodzi, a ta wiadomość trafia do osoby umiejącej otworzyć tę skrzynkę. Bez tego formularz byłby sposobem sprawdzania, adres po adresie, czy wskazana osoba czyta biuletyn tego ruchu. Formularz ma ograniczoną częstotliwość na połączenie, podlega temu samemu godzinowemu pułapowi co dwa pozostałe i niesie to samo niewidoczne pole-wabik; tu również nie ma CAPTCHA ani cudzego wykrywania robotów.",
+          },
+          {
+            type: "paragraph",
+            text: "**Odejście zajmuje jedno kliknięcie i nie wymaga konta.** Każda wiadomość niesie odnośnik usuwający adres, twój program pocztowy może pokazywać własny przycisk rezygnacji korzystający z tego samego odnośnika, i ani jedno, ani drugie nie pyta o powód ani go nie zapisuje. Ten odnośnik nie jest znacznikiem trzymanym w tabeli: przy każdym użyciu jest wyliczany z wpisu i z klucza szyfrowania, więc skradziona kopia bazy nie dałaby nikomu sposobu na opróżnienie listy, a wiadomość odnaleziona w archiwum po latach nadal działa.",
+          },
+          {
+            type: "paragraph",
+            text: "**Bierze w tym udział jedna firma z zewnątrz i jest to ta, która przewozi pocztę.** Wiadomości doręcza Resend, który siłą rzeczy dowiaduje się, na jaki adres każda z nich idzie, i prowadzi o tym własne zapisy. Nic się na to nie poradzi — adres jest celem — więc wszystko inne jest poza tym trzymane. Wiadomości są zwykłym tekstem bez obrazków, bez piksela śledzącego i bez odnośnika wskazującego, który czytelnik za nim poszedł, więc ani dostawca, ani ruch nie mogą stwierdzić, czy którąś otworzyłeś. Twój adres nie jest sprzedawany, nie jest udostępniany żadnej innej organizacji, nie służy do budowania profilu i nie trafia do nikogo poza dostawcą, który go doręcza.",
+          },
+          {
+            type: "paragraph",
+            text: "**Po twoim odejściu zostaje** sam wpis, oznaczony jako zakończony — zaszyfrowany adres, język i daty — a nie zupełnie nic. Nie dostaje już żadnej poczty, a ponowne wpisanie tego adresu zaczyna się od kroku z potwierdzeniem, bo cofnięta zgoda nie jest zgodą. Całkowite usunięcie należy do praw opisanych niżej. Zapis na biuletyn i zgłoszenie członkowskie są całkiem odrębne: żadna z list nie powstaje z drugiej, a nic, co tu robisz, nie dopisuje cię do rejestru członków.",
+          },
+          {
+            type: "paragraph",
+            text: "Dziennik administracyjny zapisuje, że zapis został poproszony, potwierdzony albo cofnięty, wraz z czasem i jednokierunkowym skrótem połączenia, z którego przyszedł. Adresu nie zapisuje nigdy. Zapisywana jest też wysyłka — który esej i ile wiadomości poszło — bo napisanie naraz do całej listy jest najbardziej brzemienną w skutki rzeczą, jaką administracja tego ruchu może zrobić.",
           },
         ],
       },

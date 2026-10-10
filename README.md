@@ -66,7 +66,7 @@ In order:
    estimating it.
 
 The public site builds and serves with none of this configured. Without a
-database or an encryption key the two forms decline submissions and say so,
+database or an encryption key the three forms decline submissions and say so,
 rather than accepting details they cannot store safely.
 
 ---
@@ -123,6 +123,7 @@ No prose lives inside a component. To change what the site says, edit `content/`
 | Materials page            | `content/materials/en.ts`                |
 | Material categories       | `content/materials/structure.ts`         |
 | Join / Contact field ids  | `content/involvement/structure.ts`       |
+| Newsletter pages          | `content/newsletter/en.ts`               |
 | Privacy / Imprint         | `content/legal/en.ts`                    |
 | Image alt text            | `content/images/en.ts`                   |
 | Image slots (paths, size) | `content/images/structure.ts`            |
@@ -470,6 +471,45 @@ separated by blank lines; a line with no prefix is an ordinary paragraph:
 
 `**bold**`, `*italic*` and `[^1]` work inside any block, as elsewhere. The
 editor carries this key in a collapsible panel beside the field.
+
+### The newsletter
+
+`/newsletter` takes an email address and nothing else. It is double opt-in:
+the record is stored unconfirmed, one message goes to the address with a link
+good for two days and usable once, and nothing else is sent until that link is
+followed. An address that is never confirmed is deleted within two days. The
+confirmation and the removal are both buttons on a page rather than something
+that happens when a link is opened, because corporate mail filters fetch every
+address in an incoming message — a GET that confirmed or unsubscribed would
+have those scanners doing both on readers' behalf.
+
+The form's reply is the same whether or not the address is already on the
+list, for the reason `/join`'s is: otherwise it is a way to test, one address
+at a time, who reads this movement's letter. Which case it was is said only in
+the message that follows.
+
+Addresses are encrypted like a member's, matched by keyed digest, and never
+shown anywhere in `/admin` — there is no subscriber list to look at and no
+export. The unsubscribe link carries the record's id and an HMAC tag over it
+computed from `MEMBER_ENCRYPTION_KEY`, so nothing in the table is a usable
+removal token and a link in a message sent years ago still verifies. Rotating
+the key invalidates those links; that cost is listed under "How it is secured"
+above.
+
+`/admin/newsletter` sends one published essay to every confirmed subscriber.
+It requires a passkey touch from the last few minutes rather than merely a
+session, and the slug has to be typed to confirm, because the operation
+decrypts the whole list and writes to all of it at once with no way back.
+`newsletter_dispatch` holds one row per essay with a unique slug, claimed
+before anything is read or sent, so the same essay cannot go out twice.
+Messages are paced, carry a `List-Unsubscribe` header, and go out from the
+request's `after()` — which bounds the size of list this can serve to what the
+platform will let one function do, and is the point at which a queue becomes
+worth building.
+
+The journal has no public pages, so the issue carries the essay in full,
+footnotes and citations included, and omits the "read it on the site" line
+rather than printing an address that 404s.
 
 ---
 

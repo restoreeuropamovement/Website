@@ -38,6 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
          precisely how a crawler reaches a page that nothing links to, so
          leaving the entry here would undo the unlisting on its own. */
       { path: "/join", changeFrequency: "monthly", priority: 0.7 },
+      /* `/newsletter` only. `/newsletter/confirm` and `/newsletter/unsubscribe`
+         are addressed by a token in a message and say nothing without one;
+         listing them would invite a crawler to spend confirmation links. */
+      { path: "/newsletter", changeFrequency: "yearly", priority: 0.5 },
       { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
       { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
       { path: "/imprint", changeFrequency: "yearly", priority: 0.3 },

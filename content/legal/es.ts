@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Legal",
     title: "Privacidad",
     metaTitle: "Privacidad",
-    lede: "Leer este sitio no recoge nada que le identifique. Dos páginas piden algo, y solo si usted decide darlo. Lo que ocurre con ello se expone a continuación.",
+    lede: "Leer este sitio no recoge nada que le identifique. Tres páginas piden algo, y solo si usted decide darlo. Lo que ocurre con ello se expone a continuación.",
     description:
-      "Leer este sitio no identifica a nadie: sin cookies, sin rastreo, solo un recuento anónimo de visitas. Dos páginas piden algo, y solo si usted decide darlo. Qué se conserva, qué está cifrado y cómo hacer que se borre.",
+      "Leer este sitio no identifica a nadie: sin cookies, sin rastreo, solo un recuento anónimo de visitas. Tres páginas piden algo, y solo si usted decide darlo. Qué se conserva, qué está cifrado y cómo hacer que se borre.",
     sections: {
       "what-we-collect": {
         title: "Qué recoge este sitio",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Hay dos lugares en este sitio a través de los cuales puede usted entregar datos personales, y en ambos tiene que quererlo de veras: la solicitud de afiliación en [Participar][join] y el formulario de mensaje en [Contacto][contact]. Nada más en el sitio transmite nada, y a ninguno de los dos formularios se llega por accidente.",
+            text: "Hay tres lugares en este sitio a través de los cuales puede usted entregar datos personales, y en los tres tiene que quererlo de veras: la solicitud de afiliación en [Participar][join], el formulario de mensaje en [Contacto][contact] y la casilla de suscripción de la [página del boletín][newsletter]. Nada más en el sitio transmite nada, y a ninguno de los tres formularios se llega por accidente.",
           },
         ],
       },
@@ -127,7 +127,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "Los dos formularios",
+        title: "Los tres formularios",
         body: [
           {
             type: "paragraph",
@@ -140,6 +140,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "La correspondencia se conserva hasta que se ha atendido y no más tiempo del que su respuesta requiera, se borra a petición y no se usa nunca para incorporarle al registro de miembros. Afiliarse es una decisión aparte que usted tiene que tomar deliberadamente. En la página de contacto no se imprime ninguna dirección de correo electrónico, porque cada una se publica solo cuando la función a la que pertenece existe y alguien responde de leerla.",
+          },
+          {
+            type: "paragraph",
+            text: "El tercero es la casilla de suscripción de la [página del boletín][newsletter], que pide una dirección de correo electrónico y nada más. Tiene una sección propia más abajo, porque lo que ocurre con una dirección en una lista de distribución es una pregunta distinta de lo que ocurre con una carta que alguien lee.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "Si se suscribe al boletín",
+        body: [
+          {
+            type: "paragraph",
+            text: "El formulario de la [página del boletín][newsletter] pide una sola cosa: una dirección de correo electrónico. Ningún nombre, ningún país y nada que escribir. Junto a ella el registro guarda cuál de las seis ediciones lingüísticas estaba usted leyendo, para que lo que el movimiento dice alrededor de cada ensayo le llegue en ese idioma, y las fechas en que el registro se creó y se confirmó.",
+          },
+          {
+            type: "paragraph",
+            text: "**A ninguna dirección se le envía nada hasta que esa dirección confirma.** La suscripción guarda el registro sin confirmar y envía un solo mensaje, que lleva un enlace válido durante dos días y utilizable una vez. Ningún ensayo se envía antes de que se siga ese enlace, y una dirección que nunca se confirma se borra en dos días sin que nadie la haya mirado. Es lo contrario de la regla que rige las solicitudes de afiliación, donde nada se borra al vencer un plazo, y la diferencia es deliberada: una solicitud sin leer es la solicitud de alguien, mientras que una dirección sin confirmar puede haberla escrito un desconocido y la persona a la que pertenece no la ha afirmado ni una sola vez.",
+          },
+          {
+            type: "paragraph",
+            text: "**La dirección se cifra** antes de escribirse, con el mismo método y la misma clave que los datos de un miembro — véase la sección anterior. El idioma y las fechas se guardan en claro, porque ninguno de los dos identifica a nadie. No hay exportación, y ninguna página de la administración muestra la dirección de un suscriptor. Una sola operación las descifra, la que envía un número del boletín, y exige una confirmación con llave de acceso de los últimos minutos y no una simple sesión iniciada. La sustitución de la clave de cifrado, que realiza desde la línea de órdenes quien custodia las claves, también las lee para volver a escribirlas bajo la nueva.",
+          },
+          {
+            type: "paragraph",
+            text: "**La respuesta que le da el formulario es la misma tanto si la dirección ya estaba en la lista como si no.** Cuál de los dos casos era solo lo dice el mensaje que llega después, y ese mensaje alcanza a quien puede abrir ese buzón. Sin eso, el formulario sería una manera de comprobar, dirección por dirección, si una persona determinada lee el boletín de este movimiento. El formulario está limitado en frecuencia por conexión, queda bajo el mismo tope por hora que los otros dos y lleva el mismo campo señuelo invisible; aquí tampoco hay CAPTCHA ni detección de robots encargada a un tercero.",
+          },
+          {
+            type: "paragraph",
+            text: "**Marcharse cuesta un clic y ninguna cuenta.** Cada mensaje lleva un enlace que elimina la dirección, su programa de correo puede ofrecer su propio mando de baja que usa ese mismo enlace, y ni uno ni otro pide un motivo ni lo registra. Ese enlace no es una ficha guardada en una tabla: se recalcula a partir del registro y de la clave de cifrado cada vez que se usa, de modo que una copia robada de la base de datos no daría a nadie un medio de vaciar la lista, y un mensaje reencontrado en un archivo años después sigue funcionando.",
+          },
+          {
+            type: "paragraph",
+            text: "**Interviene una sola empresa ajena, y es la que transporta el correo.** Los mensajes los entrega Resend, que necesariamente conoce la dirección a la que va cada uno y guarda su propio registro de haberlo hecho. Nada puede hacerse al respecto — la dirección es el destino — así que todo lo demás se mantiene fuera. Los mensajes son texto sencillo sin imágenes, sin píxel de rastreo y sin enlaces que identifiquen al lector que los siguió, de modo que ni el proveedor ni el movimiento pueden saber si usted abrió alguno. Su dirección no se vende, no se comparte con ninguna otra organización, no se usa para construir ningún perfil y no se pasa a nadie más allá del proveedor que la entrega.",
+          },
+          {
+            type: "paragraph",
+            text: "**Tras su marcha queda** el registro mismo, marcado como detenido — la dirección cifrada, el idioma y las fechas — y no nada en absoluto. No recibe más correo, y volver a introducir esa dirección empieza por el paso de la confirmación, porque un consentimiento retirado no es consentimiento. Borrarlo del todo está entre los derechos que se exponen más abajo. Suscribirse y solicitar la afiliación son cosas enteramente separadas: ninguna de las dos listas se construye a partir de la otra, y nada de lo que haga aquí le incorpora al registro de miembros.",
+          },
+          {
+            type: "paragraph",
+            text: "El registro administrativo anota que una suscripción se pidió, se confirmó o se retiró, con la hora y una huella de un solo sentido de la conexión de la que vino. La dirección no la anota nunca. También se anota un envío — qué ensayo, y cuántos mensajes salieron — porque escribir a la lista entera de una vez es lo más cargado de consecuencias que la administración de este movimiento puede hacer.",
           },
         ],
       },

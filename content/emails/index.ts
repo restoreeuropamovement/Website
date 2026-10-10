@@ -119,6 +119,25 @@ function url(locale: Locale, path: string): string {
 }
 
 /**
+ * The two addresses a newsletter message carries.
+ *
+ * Built here from the token rather than passed in ready-made, which is the
+ * same rule the rest of this file follows for a reason that bites hardest on
+ * these two: they are the only links in the whole system that a reader *must*
+ * be able to use, and a caller assembling one by hand is a caller who can
+ * forget the locale. A German subscriber who meets an English page at the
+ * moment they want to leave presses the provider's spam button instead, and
+ * that costs the movement every other reader's delivery as well as this one's.
+ */
+function confirmUrl(locale: Locale, token: string): string {
+  return `${url(locale, `${routes.newsletter}/confirm`)}?token=${encodeURIComponent(token)}`;
+}
+
+function unsubscribeUrl(locale: Locale, token: string): string {
+  return `${url(locale, `${routes.newsletter}/unsubscribe`)}?token=${encodeURIComponent(token)}`;
+}
+
+/**
  * Written for somebody who applies through `/join`, and **deliberately not
  * sent**.
  *
@@ -158,11 +177,7 @@ export async function confirmSubscription(locale: Locale, token: string): Promis
   const text = (await getEmails(locale)).confirmSubscription;
   return {
     subject: text.subject,
-    text: signed(
-      fill(text.body, {
-        confirm: `${SITE_URL}/newsletter/confirm?token=${encodeURIComponent(token)}`,
-      }),
-    ),
+    text: signed(fill(text.body, { confirm: confirmUrl(locale, token) })),
   };
 }
 
@@ -174,31 +189,56 @@ export async function confirmSubscription(locale: Locale, token: string): Promis
  * find out who subscribes. The message can, because it only reaches the person
  * who owns the address.
  */
-export async function alreadySubscribed(
-  locale: Locale,
-  unsubscribeUrl: string,
-): Promise<Message> {
+export async function alreadySubscribed(locale: Locale, token: string): Promise<Message> {
   const text = (await getEmails(locale)).alreadySubscribed;
   return {
     subject: text.subject,
-    text: signed(fill(text.body, { unsubscribe: unsubscribeUrl })),
+    text: signed(fill(text.body, { unsubscribe: unsubscribeUrl(locale, token) })),
   };
 }
 
 export interface JournalDispatch {
   readonly title: string;
   readonly standfirst: string;
+  /** The essay, already rendered to plain text. English; see below. */
   readonly body: string;
-  readonly slug: string;
-  readonly unsubscribeUrl: string;
+  /**
+   * That subscriber's own removal token, from `unsubscribeToken`.
+   */
+  readonly unsubscribeToken: string;
+  /**
+   * Where the essay can be read on the site, if it can be read there at all.
+   *
+   * Optional, and currently never supplied, because the journal is unlisted:
+   * it has no public route, so `/journal/<slug>` answers with a 404. A line
+   * reading "read it on the site" above an address that does not resolve is
+   * worse than no line — it is the first thing in the message a reader can
+   * check, and the first thing they find broken.
+   *
+   * `journalIssue.readOnSite` therefore goes unused in all six languages
+   * rather than being deleted from them. Restoring the journal's public
+   * routes is one change in `lib/site.ts` and `content/chrome/*`; having to
+   * re-translate a paragraph at the same time would be a reason to put it
+   * off.
+   */
+  readonly url?: string;
 }
 
-/** One issue of the journal, sent to a confirmed subscriber. */
+/**
+ * One issue of the journal, sent to a confirmed subscriber.
+ *
+ * The essay arrives whole rather than as a teaser. That is partly because
+ * there is nowhere else to read it at the moment, and partly because a
+ * message whose purpose is to make you click is a message that has to track
+ * whether you did.
+ */
 export async function journalIssue(
   locale: Locale,
-  { title, standfirst, body, slug, unsubscribeUrl }: JournalDispatch,
+  { title, standfirst, body, unsubscribeToken, url: essayUrl }: JournalDispatch,
 ): Promise<Message> {
   const text = (await getEmails(locale)).journalIssue;
+  const onSite = essayUrl ? `${fill(text.readOnSite, { url: essayUrl })}\n\n` : "";
+
   return {
     subject: title,
     text: `${title}
@@ -207,11 +247,9 @@ ${standfirst}
 
 ${body}
 
-${fill(text.readOnSite, { url: `${SITE_URL}/journal/${slug}` })}
+${onSite}${signature}
 
-${signature}
-
-${fill(text.unsubscribeNote, { unsubscribe: unsubscribeUrl })}`,
+${fill(text.unsubscribeNote, { unsubscribe: unsubscribeUrl(locale, unsubscribeToken) })}`,
   };
 }
 

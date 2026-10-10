@@ -451,9 +451,17 @@ CREATE TABLE IF NOT EXISTS subscriber (
 
   unsubscribed_at        timestamptz,
 
-  -- Which language edition they subscribed from. Not personal data, and not
-  -- currently acted on — the letter is written in English — but it is the only
-  -- honest signal of which translation would be worth the effort first.
+  -- Which language edition they subscribed from. Not personal data: it says
+  -- which of six pages somebody was reading and nothing about who they are,
+  -- which is why it is the one column here held in the clear.
+  --
+  -- The essays themselves are written in English and are not translated. What
+  -- is written in this language is everything the movement says around one —
+  -- the confirmation request, the note at the foot of an issue, and the page
+  -- the unsubscribe link lands on. That last is the reason this column has to
+  -- be read rather than merely recorded: meeting a language you do not speak
+  -- at the moment you want to leave a mailing list is how a reader reaches for
+  -- the provider's "this is spam" button instead.
   locale                 text NOT NULL DEFAULT 'en',
 
   created_at             timestamptz NOT NULL DEFAULT now()

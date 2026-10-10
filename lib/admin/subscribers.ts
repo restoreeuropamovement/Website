@@ -230,6 +230,13 @@ export interface Recipient {
   readonly id: string;
   readonly email: string;
   readonly unsubscribeToken: string;
+  /**
+   * The edition they subscribed from, as a raw column value rather than a
+   * `Locale`: the database is not bound by the union, and a row written
+   * before a language was retired must not crash a send. The caller narrows
+   * it, falling back to English.
+   */
+  readonly locale: string;
 }
 
 /**
@@ -242,8 +249,8 @@ export interface Recipient {
  * failing the whole send: one damaged record should not stop the letter.
  */
 export async function recipientsForDispatch(): Promise<Recipient[]> {
-  const rows = await db()<{ id: string; email_encrypted: string }[]>`
-    SELECT id, email_encrypted FROM subscriber
+  const rows = await db()<{ id: string; email_encrypted: string; locale: string }[]>`
+    SELECT id, email_encrypted, locale FROM subscriber
      WHERE confirmed_at IS NOT NULL AND unsubscribed_at IS NULL
      ORDER BY created_at
   `;
@@ -252,7 +259,12 @@ export async function recipientsForDispatch(): Promise<Recipient[]> {
     rows.map(async (row) => {
       const email = await decryptPiiSafe(row.email_encrypted);
       if (!email) return null;
-      return { id: row.id, email, unsubscribeToken: await unsubscribeToken(row.id) };
+      return {
+        id: row.id,
+        email,
+        unsubscribeToken: await unsubscribeToken(row.id),
+        locale: row.locale,
+      };
     }),
   );
 

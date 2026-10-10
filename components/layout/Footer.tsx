@@ -34,6 +34,7 @@ export function Footer({
            `lib/site.ts`, so `/materials` still answers for anyone reviewing it
            and restoring this one line is the whole of publishing it. */
         { label: chrome.footer.movement.join, href: routes.join },
+        { label: chrome.footer.movement.newsletter, href: routes.newsletter },
       ],
     },
     {

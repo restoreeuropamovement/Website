@@ -174,6 +174,6 @@ export const home: HomeContent = {
       },
     },
     closing:
-      "Es gibt keine Verteilerliste, in die man sich eintragen, und keinen Newsletter, den man abonnieren kann. Die einzige Adresse, die diese Bewegung hat, ist die, die Sie selbst in einen Antrag oder eine Anfrage geschrieben haben, und sie wird vor dem Speichern verschlüsselt.",
+      "Jede Adresse, die diese Bewegung hat, wurde in eines ihrer eigenen Formulare eingetragen — einen Antrag, eine Anfrage oder den Rundbrief, den Sie abonnieren können — und jede wird vor dem Speichern verschlüsselt. Nichts ist zugekauft, und nichts wird anderswoher erhoben.",
   },
 };
