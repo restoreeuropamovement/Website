@@ -97,11 +97,13 @@ table will one day be read by someone who should not have it.
   a public form; enrolling an opponent to damage them is a real tactic. Public applications land as
   `pending` and an administrator vets them. Nothing is deleted on a timer — an unreviewed row is
   somebody's application, not a stale token.
-- **The public site has exactly two server actions**, both in `app/(site)`: the membership intake
-  (`join/actions.ts`) and the contact form (`contact/actions.ts`). Both validate server-side, rate
-  limit per connection, encrypt before storing and audit without personal data. The intake's reply
-  must not vary with what is already stored, or it becomes an oracle for testing whether a named
-  person is a member. Do not add a third without the same four properties.
+- **The public site has exactly three server actions**, all in `app/(site)`: the membership intake
+  (`join/actions.ts`), the contact form (`contact/actions.ts`) and the newsletter signup
+  (`newsletter/actions.ts`). Each validates server-side, rate limits per connection, encrypts before
+  storing and audits without personal data. Two of them must also answer identically whatever is
+  already stored: the intake, or it becomes an oracle for testing whether a named person is a
+  member, and the signup, or it becomes one for testing who reads the letter. Do not add a fourth
+  without the same four properties.
 
 ## Commands
 
