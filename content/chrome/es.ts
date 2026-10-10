@@ -56,6 +56,7 @@ export const chrome: ChromeContent = {
       wings: "Secciones nacionales",
       materials: "Materiales",
       join: "Participa",
+      newsletter: "Boletín",
     },
     contact: {
       title: "Contacto",

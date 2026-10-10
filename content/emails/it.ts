@@ -29,8 +29,10 @@ Conferma qui:
 {confirm}
 
 Se non l'hai chiesto tu, ignora questo messaggio. Non ti sarà inviato
-nulla, non devi rispondere, e l'indirizzo sarà cancellato entro due
-giorni senza che tu debba fare alcunché.`,
+nulla, non devi rispondere, e l'indirizzo sarà cancellato senza che tu
+debba fare alcunché: il collegamento qui sopra scade fra due giorni, e
+una passata che corre una volta al giorno rimuove ciò che è scaduto,
+così che il registro sparisce entro tre giorni.`,
   },
 
   alreadySubscribed: {

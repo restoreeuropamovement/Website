@@ -220,12 +220,20 @@ export default async function AdminOverview(props: {
               {subscribers.pending.toLocaleString("en-GB")} awaiting confirmation,{" "}
               {subscribers.unsubscribed.toLocaleString("en-GB")} unsubscribed.
             </p>
-            <Link
-              href="/admin/journal"
-              className="mt-4 inline-block text-[0.875rem] text-muted underline underline-offset-4 hover:text-burgundy"
-            >
-              Manage the journal
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+              <Link
+                href="/admin/journal"
+                className="text-[0.875rem] text-muted underline underline-offset-4 hover:text-burgundy"
+              >
+                Manage the journal
+              </Link>
+              <Link
+                href="/admin/newsletter"
+                className="text-[0.875rem] text-muted underline underline-offset-4 hover:text-burgundy"
+              >
+                Send an issue
+              </Link>
+            </div>
           </Panel>
         </div>
       </section>

@@ -16,6 +16,10 @@ export const privacySectionIds = [
   "membership",
   "how-it-is-protected",
   "forms",
+  /* The subscriber list. After `forms`, which introduces it, and before the
+     measurement sections, because it is the last thing on this page that is
+     about somebody handing an identifier over on purpose. */
+  "newsletter",
   "analytics",
   "fonts-and-assets",
   "server-logs",

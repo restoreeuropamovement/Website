@@ -503,8 +503,13 @@ CREATE INDEX IF NOT EXISTS enquiry_status_idx ON enquiry (status, created_at DES
 -- on `member`. There, an unreviewed row is somebody's application and deleting
 -- it on a timer would discard it. Here, an unconfirmed row is the residue of an
 -- address that never consented — possibly typed by someone else entirely — so
--- keeping it is the harm rather than the service. `subscriber_confirm_expiry_idx`
--- exists to make that sweep cheap.
+-- keeping it is the harm rather than the service. The sweep is scheduled —
+-- `app/api/cron/maintenance`, once a day — because the expiry is promised to
+-- readers on `/privacy` and a promise cannot be contingent on the next person
+-- subscribing. A daily sweep deletes what has *already* expired, so the row's
+-- outside life is forty-eight hours plus the wait for the next run: the pages
+-- say three days rather than two for that reason.
+-- `subscriber_confirm_expiry_idx` exists to make it cheap.
 CREATE TABLE IF NOT EXISTS subscriber (
   id                     uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   email_encrypted        text NOT NULL,
@@ -528,9 +533,17 @@ CREATE TABLE IF NOT EXISTS subscriber (
 
   unsubscribed_at        timestamptz,
 
-  -- Which language edition they subscribed from. Not personal data, and not
-  -- currently acted on — the letter is written in English — but it is the only
-  -- honest signal of which translation would be worth the effort first.
+  -- Which language edition they subscribed from. Not personal data: it says
+  -- which of six pages somebody was reading and nothing about who they are,
+  -- which is why it is the one column here held in the clear.
+  --
+  -- The essays themselves are written in English and are not translated. What
+  -- is written in this language is everything the movement says around one —
+  -- the confirmation request, the note at the foot of an issue, and the page
+  -- the unsubscribe link lands on. That last is the reason this column has to
+  -- be read rather than merely recorded: meeting a language you do not speak
+  -- at the moment you want to leave a mailing list is how a reader reaches for
+  -- the provider's "this is spam" button instead.
   locale                 text NOT NULL DEFAULT 'en',
 
   created_at             timestamptz NOT NULL DEFAULT now()

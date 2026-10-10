@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Legal",
     title: "Privacy",
     metaTitle: "Privacy",
-    lede: "Reading this site collects nothing that identifies you. Two pages ask for something, and only if you choose to give it. What happens to it is set out below.",
+    lede: "Reading this site collects nothing that identifies you. Three pages ask for something, and only if you choose to give it. What happens to it is set out below.",
     description:
-      "Reading this site identifies nobody: no cookies, no tracking, only an anonymous count of visits. Two pages ask for something, and only if you choose to give it. What is held, what is encrypted, and how to have it erased.",
+      "Reading this site identifies nobody: no cookies, no tracking, only an anonymous count of visits. Three pages ask for something, and only if you choose to give it. What is held, what is encrypted, and how to have it erased.",
     sections: {
       "what-we-collect": {
         title: "What this site collects",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "There are two places on this site through which you can hand over personal data, and in both you have to mean it: the membership application on [Get Involved][join] and the message form on [Contact][contact]. Nothing else on the site transmits anything, and neither form is reachable by accident.",
+            text: "There are three places on this site through which you can hand over personal data, and in all three you have to mean it: the membership application on [Get Involved][join], the message form on [Contact][contact], and the subscription box on the [newsletter page][newsletter]. Nothing else on the site transmits anything, and none of the three is reachable by accident.",
           },
         ],
       },
@@ -135,7 +135,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "The two forms",
+        title: "The three forms",
         body: [
           {
             type: "paragraph",
@@ -148,6 +148,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "Correspondence is kept until it has been dealt with and for no longer than answering it requires, is erased on request, and is never used to add you to the membership roll. Joining is a separate decision you have to make deliberately. No email addresses are printed on the contact page because each is published only when the function it belongs to exists and somebody is answerable for reading it.",
+          },
+          {
+            type: "paragraph",
+            text: "The third is the subscription box on the [newsletter page][newsletter], which asks for an email address and nothing else. It has a section of its own below, because what happens to an address on a mailing list is a different question from what happens to a letter somebody reads.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "If you subscribe to the newsletter",
+        body: [
+          {
+            type: "paragraph",
+            text: "The form on the [newsletter page][newsletter] asks for one thing: an email address. There is no name, no country and nothing to write. Beside it the record holds which of the six language editions you were reading, so that what the movement says around each essay reaches you in that language, and the dates on which the record was made and confirmed.",
+          },
+          {
+            type: "paragraph",
+            text: "**Nothing is sent to an address until that address confirms.** Subscribing stores the record unconfirmed and sends one message to it, carrying a link that is good for two days and can be used once. No essay is sent before that link is followed, and an address that is never confirmed is deleted without anybody having looked at it: the link expires two days after it is sent, and a sweep that runs once a day deletes what has already expired. Because the sweep comes after the expiry rather than at it, three days — not two — is the longest such an address can be held, and the usual wait is shorter. That is the opposite of the rule on membership applications, where nothing is deleted on a timer, and the difference is deliberate: an unreviewed application is somebody's application, while an unconfirmed address may have been typed in by a stranger and has never once been affirmed by the person it belongs to.",
+          },
+          {
+            type: "paragraph",
+            text: "**The address is encrypted** before it is written down, by the same method and with the same key as a member's — see the section above. The language and the dates are held in the clear, because neither identifies anybody. There is no export, and no page in the administration displays a subscriber's address at all. One operation decrypts them, which is the one that sends an issue, and it requires a passkey confirmation from the last few minutes rather than merely a signed-in session. Replacing the encryption key, which is done from a command line by whoever holds the keys, also reads them in order to write them back under the new one.",
+          },
+          {
+            type: "paragraph",
+            text: "**The reply the form gives you is the same whether or not the address was already on the list.** Which of the two it was is said only in the message that follows, and that message reaches the person who can open the inbox. Without this the form would be a way to test, one address at a time, whether a named person reads this movement's letter. The form is rate-limited per connection, sits under the same hourly ceiling as the other two, and carries the same invisible decoy field; there is no CAPTCHA and no third-party bot detection here either.",
+          },
+          {
+            type: "paragraph",
+            text: "**Leaving takes one click and no account.** Every message carries a link that removes the address, your mail program may offer an unsubscribe control of its own that uses the same link, and neither asks for a reason or records one. That link is not a token kept in a table: it is recomputed from the record and the encryption key each time it is used, so a stolen copy of the database would give nobody a means of emptying the list, and a message found in an archive years from now still works for as long as that key does. Replacing the key — which is an occasional piece of maintenance, not a routine one — retires the links in issues sent before it.",
+          },
+          {
+            type: "paragraph",
+            text: "**One outside company is involved, and it is the one that carries the mail.** Messages are delivered by Resend, which necessarily learns the address each one is sent to and keeps its own record of having delivered it. Nothing can be done about that — the address is the destination — so what is kept out of it is everything else. The messages are plain text with no images, no tracking pixel and no link that identifies the reader who followed it, which means neither the provider nor the movement can tell whether you opened one. Your address is not sold, not shared with any other organisation, not used to build any profile, and passed to nobody beyond the provider that delivers it.",
+          },
+          {
+            type: "paragraph",
+            text: "**What remains after you leave** is the record itself, marked as having stopped — the encrypted address, the language and the dates — rather than nothing at all. It receives no further mail, and entering the address again starts from the confirmation step, because a consent that was withdrawn is not consent. Erasing it outright is among the rights set out below. Subscribing and applying for membership are entirely separate: neither list is built from the other, and nothing you do here adds you to the roll.",
+          },
+          {
+            type: "paragraph",
+            text: "The administrative log records that a subscription was requested, confirmed or withdrawn, with the time and a one-way hash of the connection it came from. It never records the address. The daily sweep is recorded too, with the number of unconfirmed addresses it deleted and nothing else, so that the deletion promised above can be shown to have happened rather than merely stated here. A send is logged as well — which essay, and how many messages went out — because writing to the whole list at once is the single most consequential thing this movement's administration can do.",
           },
         ],
       },

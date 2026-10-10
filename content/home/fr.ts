@@ -174,6 +174,6 @@ export const home: HomeContent = {
       },
     },
     closing:
-      "Il n'y a aucune liste de diffusion à rejoindre ni aucune lettre d'information à laquelle s'abonner. La seule adresse que ce mouvement détient est celle que vous avez vous-même écrite dans une demande ou un message, et elle est chiffrée avant d'être conservée.",
+      "Toute adresse que ce mouvement détient a été écrite dans l'un de ses propres formulaires — une demande, un message, ou la lettre à laquelle vous pouvez vous abonner — et chacune est chiffrée avant d'être conservée. Rien n'est acheté, et rien n'est recueilli ailleurs.",
   },
 };

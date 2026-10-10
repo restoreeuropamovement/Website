@@ -174,6 +174,6 @@ export const home: HomeContent = {
       },
     },
     closing:
-      "No hay ninguna lista de correo a la que apuntarse ni boletín al que suscribirse. La única dirección que este movimiento tiene es la que tú mismo escribiste en una solicitud o en una consulta, y se cifra antes de guardarse.",
+      "Toda dirección que este movimiento tiene se escribió en uno de sus propios formularios — una solicitud, una consulta, o el boletín al que puedes suscribirte — y cada una se cifra antes de guardarse. Nada se compra, y nada se recoge en ningún otro sitio.",
   },
 };

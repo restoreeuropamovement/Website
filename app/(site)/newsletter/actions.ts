@@ -17,7 +17,6 @@ import { alreadySubscribed, confirmSubscription } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
 import { GLOBAL_HOURLY_LIMIT, GLOBAL_WINDOW_SECONDS, honeypotTripped } from "@/lib/spam";
 import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
-import { SITE_URL } from "@/lib/site";
 import { NEWSLETTER_INITIAL, type NewsletterState } from "./state";
 
 /**
@@ -50,9 +49,9 @@ export async function subscribe(
   /*
    * The decoy field, checked before anything else is read, and answered with
    * the ordinary reply — see lib/spam.ts and the longer note in the membership
-   * intake. Whichever component eventually renders this form must include
-   * `<Honeypot />`; until one does, this costs a single absent-field lookup and
-   * is simply waiting for it.
+   * intake. `components/newsletter/SubscribeForm.tsx` renders `<Honeypot />`,
+   * and is the only component that may render this action: one that omitted it
+   * would turn this check into a lookup for a field that is never present.
    */
   if (honeypotTripped(form)) {
     const { ipHash: decoyIpHash } = await clientContext();
@@ -140,17 +139,20 @@ export async function subscribe(
     if (outcome.kind === "pending") {
       await sendEmail({ to: email, ...(await confirmSubscription(locale, outcome.token)) });
     } else {
-      const url = `${SITE_URL}/newsletter/unsubscribe?token=${encodeURIComponent(
-        await unsubscribeToken(outcome.id),
-      )}`;
-      await sendEmail({ to: email, ...(await alreadySubscribed(locale, url)) });
+      await sendEmail({
+        to: email,
+        ...(await alreadySubscribed(locale, await unsubscribeToken(outcome.id))),
+      });
     }
 
     /*
-     * Opportunistic rather than scheduled. Addresses that were entered and
-     * never confirmed are cleared here, which spares the deployment a cron job
-     * for a sweep that only needs to happen roughly as often as people
-     * subscribe.
+     * Opportunistic, and not the thing the privacy note relies on. Addresses
+     * that were entered and never confirmed are swept once a day by
+     * `app/api/cron/maintenance`, because a sweep that happens only as
+     * often as people subscribe is no promise to the person whose address was
+     * entered. This call stays because it is free on a path already writing to
+     * the table, and clears an expired row the moment anybody comes past
+     * instead of at the next scheduled run.
      */
     await purgeExpiredUnconfirmed();
   });

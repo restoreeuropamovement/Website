@@ -235,6 +235,6 @@ export const home = {
       },
     } satisfies Record<ParticipationId, { title: string; note: string; summary: string; cta: string }>,
     closing:
-      "There is no mailing list to join and no newsletter to subscribe to. The only address this movement holds is one you typed into an application or an enquiry yourself, and it is encrypted before it is stored.",
+      "Every address this movement holds was typed into one of its own forms — an application, an enquiry, or the letter you can subscribe to — and each is encrypted before it is stored. Nothing is bought in, and nothing is gathered from anywhere else.",
   },
 };

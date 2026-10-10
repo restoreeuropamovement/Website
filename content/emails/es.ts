@@ -28,8 +28,10 @@ Confirme aquí:
 {confirm}
 
 Si no lo ha pedido, ignore este mensaje. No se le enviará nada, no hace
-falta que responda, y la dirección se borrará en el plazo de dos días sin
-que usted tenga que hacer nada.`,
+falta que responda, y la dirección se borrará sin que usted tenga que
+hacer nada: el enlace de arriba caduca dentro de dos días, y un barrido
+que pasa una vez al día borra lo que ha caducado, de modo que el
+registro habrá desaparecido en menos de tres días.`,
   },
 
   alreadySubscribed: {

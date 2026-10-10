@@ -12,9 +12,10 @@ import { routes } from "@/lib/site";
  * The ask, and the only place on the site that says plainly what taking part
  * involves before anybody types anything into a form.
  *
- * Three cards because there are three routes in, and the closing line names
- * what the movement does *not* run. Saying "there is no mailing list" costs
- * nothing and answers the question a cautious reader is actually asking.
+ * Three cards because there are three routes in, and the closing line says
+ * where every address the movement holds came from. That is the question a
+ * cautious reader is actually asking, and it is worth answering here rather
+ * than leaving to the privacy note.
  *
  * `surface` rather than the `ink` slab used elsewhere: the footer is already
  * `ink`, and two dark bands stacked read as one mass at the foot of the page.
@@ -64,9 +65,10 @@ export function ParticipationSection({
         </ul>
 
         {/* The account sits on the same rule as the closing line rather than
-            under a heading of its own. That sentence says there is no mailing
-            list and no newsletter, which raises the question this answers, and
-            the footer's own "Follow" block is one screen below. */}
+            under a heading of its own. That sentence is about where the
+            movement's addresses come from, which is the moment a reader
+            weighs giving it one; an account they can follow without giving
+            anything is the obvious thing to set beside it. */}
         <div className="mt-12 flex flex-col gap-6 border-t border-rule pt-6 sm:flex-row sm:items-start sm:justify-between sm:gap-12">
           <p className="max-w-reading text-[0.9375rem] leading-relaxed text-muted">
             {content.closing}

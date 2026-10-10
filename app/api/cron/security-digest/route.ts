@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { securityDigest } from "@/content/emails";
 import { raiseSecurityAlert } from "@/lib/admin/alerts";
 import { auditSummary, recordAudit, verifyAuditChain } from "@/lib/admin/audit";
-import { constantTimeEqual } from "@/lib/admin/crypto";
+import { refuseUnauthorisedCron } from "@/lib/admin/cron";
 import { mailNotifyAddress } from "@/lib/admin/env";
 import { sendEmail } from "@/lib/email";
 
@@ -22,21 +22,12 @@ import { sendEmail } from "@/lib/email";
  * is worth knowing; a system that only mails when something is wrong cannot be
  * distinguished from one that has quietly stopped mailing.
  *
- * Authorised exactly like the nightly archive: `CRON_SECRET`, no default,
- * refuse when unset.
+ * Authorised exactly like the nightly maintenance run, through the same
+ * function: `CRON_SECRET`, no default, refuse when unset.
  */
 export async function GET(request: Request): Promise<NextResponse> {
-  const secret = process.env.CRON_SECRET;
-  if (!secret) {
-    return NextResponse.json(
-      { error: "CRON_SECRET is not set; refusing to run." },
-      { status: 503 },
-    );
-  }
-
-  if (!constantTimeEqual(request.headers.get("authorization") ?? "", `Bearer ${secret}`)) {
-    return NextResponse.json({ error: "Unauthorised." }, { status: 401 });
-  }
+  const refusal = refuseUnauthorisedCron(request);
+  if (refusal) return refusal;
 
   /*
    * Verified before the summary is composed, and over the whole log rather than

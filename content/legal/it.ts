@@ -5,9 +5,9 @@ export const legalText: LegalText = {
     eyebrow: "Note legali",
     title: "Privacy",
     metaTitle: "Privacy",
-    lede: "Leggere questo sito non raccoglie nulla che ti identifichi. Due pagine chiedono qualcosa, e soltanto se scegli di darlo. Che cosa ne viene fatto è esposto qui sotto.",
+    lede: "Leggere questo sito non raccoglie nulla che ti identifichi. Tre pagine chiedono qualcosa, e soltanto se scegli di darlo. Che cosa ne viene fatto è esposto qui sotto.",
     description:
-      "Leggere questo sito non identifica nessuno: nessun cookie, nessun tracciamento, solo un conteggio anonimo delle visite. Due pagine chiedono qualcosa, e soltanto se scegli di darlo. Che cosa viene conservato, che cosa è cifrato e come farlo cancellare.",
+      "Leggere questo sito non identifica nessuno: nessun cookie, nessun tracciamento, solo un conteggio anonimo delle visite. Tre pagine chiedono qualcosa, e soltanto se scegli di darlo. Che cosa viene conservato, che cosa è cifrato e come farlo cancellare.",
     sections: {
       "what-we-collect": {
         title: "Che cosa raccoglie questo sito",
@@ -22,7 +22,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Su questo sito ci sono due soli luoghi attraverso i quali puoi consegnare dati personali, e in entrambi devi volerlo davvero: la domanda di iscrizione su [Partecipa][join] e il modulo per i messaggi su [Contatti][contact]. Nient'altro nel sito trasmette qualcosa, e nessuno dei due moduli si raggiunge per caso.",
+            text: "Su questo sito ci sono tre soli luoghi attraverso i quali puoi consegnare dati personali, e in tutti e tre devi volerlo davvero: la domanda di iscrizione su [Partecipa][join], il modulo per i messaggi su [Contatti][contact] e la casella di iscrizione sulla [pagina della lettera][newsletter]. Nient'altro nel sito trasmette qualcosa, e nessuno dei tre moduli si raggiunge per caso.",
           },
         ],
       },
@@ -135,7 +135,7 @@ export const legalText: LegalText = {
       },
 
       forms: {
-        title: "I due moduli",
+        title: "I tre moduli",
         body: [
           {
             type: "paragraph",
@@ -148,6 +148,48 @@ export const legalText: LegalText = {
           {
             type: "paragraph",
             text: "La corrispondenza è conservata finché non è stata trattata e non più a lungo di quanto la risposta richieda, è cancellata su richiesta e non è mai usata per aggiungerti al registro dei soci. Iscriversi è una decisione distinta, che devi prendere deliberatamente. Sulla pagina dei contatti non è stampato alcun indirizzo email, perché ciascuno viene pubblicato soltanto quando la funzione a cui appartiene esiste e qualcuno risponde della sua lettura.",
+          },
+          {
+            type: "paragraph",
+            text: "Il terzo è la casella di iscrizione sulla [pagina della lettera][newsletter], che chiede un indirizzo di posta elettronica e nient'altro. Ha una sezione propria più sotto, perché che cosa accada a un indirizzo su una lista di distribuzione è una domanda diversa da che cosa accada a una lettera che qualcuno legge.",
+          },
+        ],
+      },
+
+      newsletter: {
+        title: "Se ti iscrivi alla lettera",
+        body: [
+          {
+            type: "paragraph",
+            text: "Il modulo sulla [pagina della lettera][newsletter] chiede una cosa sola: un indirizzo di posta elettronica. Nessun nome, nessun paese e niente da scrivere. Accanto, il registro conserva quale delle sei edizioni linguistiche stavi leggendo, perché ciò che il movimento dice attorno a ogni saggio ti raggiunga in quella lingua, e le date in cui il registro è stato creato e confermato.",
+          },
+          {
+            type: "paragraph",
+            text: "**A un indirizzo non viene inviato nulla finché quell'indirizzo non conferma.** L'iscrizione conserva il registro come non confermato e invia un solo messaggio, che porta un collegamento valido due giorni e usabile una volta. Nessun saggio viene inviato prima che quel collegamento sia stato seguito, e un indirizzo mai confermato è cancellato senza che nessuno lo abbia guardato: il collegamento scade due giorni dopo l'invio, e una volta al giorno una passata cancella ciò che è già scaduto. Poiché la passata arriva dopo la scadenza e non nel momento stesso, tre giorni — e non due — sono il tempo massimo per cui un indirizzo del genere può essere conservato, e di solito l'attesa è più breve. È l'opposto della regola che vale per le domande di iscrizione, dove nulla viene cancellato allo scadere di un termine, e la differenza è voluta: una domanda non ancora letta è la domanda di qualcuno, mentre un indirizzo non confermato può essere stato digitato da un estraneo e non è stato affermato nemmeno una volta dalla persona a cui appartiene.",
+          },
+          {
+            type: "paragraph",
+            text: "**L'indirizzo è cifrato** prima di essere scritto, con lo stesso metodo e la stessa chiave dei dati di un socio — vedi la sezione sopra. La lingua e le date sono in chiaro, perché né l'una né le altre identificano nessuno. Non esiste esportazione, e nessuna pagina dell'amministrazione mostra l'indirizzo di un iscritto. Una sola operazione li decifra, quella che invia un numero della lettera, e richiede una conferma con chiave d'accesso degli ultimi minuti e non la semplice sessione aperta. Anche la sostituzione della chiave di cifratura, eseguita da riga di comando da chi custodisce le chiavi, li legge per riscriverli sotto quella nuova.",
+          },
+          {
+            type: "paragraph",
+            text: "**La risposta che il modulo ti dà è la stessa, che l'indirizzo fosse già sulla lista oppure no.** Quale dei due casi fosse lo dice soltanto il messaggio che segue, e quel messaggio arriva a chi può aprire quella casella. Senza questo, il modulo sarebbe un modo per verificare, un indirizzo alla volta, se una persona determinata legge la lettera di questo movimento. Il modulo è limitato nella frequenza per connessione, ricade sotto lo stesso tetto orario degli altri due e porta lo stesso campo-esca invisibile; anche qui non c'è alcun CAPTCHA e nessun rilevamento di robot affidato a terzi.",
+          },
+          {
+            type: "paragraph",
+            text: "**Andarsene costa un clic e nessun account.** Ogni messaggio porta un collegamento che rimuove l'indirizzo, il tuo programma di posta può offrire un proprio comando di cancellazione che usa lo stesso collegamento, e né l'uno né l'altro chiede un motivo o ne registra uno. Quel collegamento non è un gettone custodito in una tabella: viene ricalcolato dal registro e dalla chiave di cifratura a ogni uso, così una copia rubata della banca dati non darebbe a nessuno un mezzo per svuotare la lista, e un messaggio ritrovato in un archivio dopo anni funziona ancora, finché vale quella chiave. Sostituire la chiave — una manutenzione saltuaria, non una routine — manda in pensione i collegamenti dei numeri inviati prima.",
+          },
+          {
+            type: "paragraph",
+            text: "**C'è di mezzo una sola azienda esterna, ed è quella che trasporta la posta.** I messaggi sono recapitati da Resend, che necessariamente viene a sapere a quale indirizzo ciascuno è inviato e ne tiene una propria registrazione. Non c'è nulla da fare al riguardo — l'indirizzo è la destinazione — quindi tutto il resto ne viene tenuto fuori. I messaggi sono testo semplice senza immagini, senza pixel di tracciamento e senza collegamenti che identifichino il lettore che li ha seguiti: né il fornitore né il movimento possono dunque sapere se ne hai aperto uno. Il tuo indirizzo non è venduto, non è condiviso con nessun'altra organizzazione, non è usato per costruire alcun profilo e non è passato a nessuno oltre al fornitore che lo recapita.",
+          },
+          {
+            type: "paragraph",
+            text: "**Dopo che te ne sei andato resta** il registro stesso, segnato come cessato — l'indirizzo cifrato, la lingua e le date — e non il nulla. Non riceve più posta, e inserire di nuovo quell'indirizzo riparte dal passaggio della conferma, perché un consenso ritirato non è consenso. Cancellarlo del tutto rientra fra i diritti esposti più sotto. Iscriversi alla lettera e chiedere l'iscrizione al movimento sono cose del tutto distinte: nessuna delle due liste è costruita dall'altra, e nulla di ciò che fai qui ti aggiunge al registro dei soci.",
+          },
+          {
+            type: "paragraph",
+            text: "Il registro amministrativo annota che un'iscrizione è stata chiesta, confermata o ritirata, con l'ora e un'impronta a senso unico della connessione da cui è arrivata. L'indirizzo non lo annota mai. Vi è annotata anche la passata quotidiana, con il numero di indirizzi non confermati che ha cancellato e nient'altro, perché la cancellazione promessa sopra si possa dimostrare e non resti soltanto affermata qui. Vi è annotato anche un invio — quale saggio, e quanti messaggi sono partiti — perché scrivere all'intera lista in una volta è la cosa più gravida di conseguenze che l'amministrazione di questo movimento possa fare.",
           },
         ],
       },

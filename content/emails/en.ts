@@ -29,8 +29,10 @@ Confirm here:
 {confirm}
 
 If you did not ask for this, ignore this message. Nothing will be sent to
-you, you do not need to reply, and the address will be deleted within two
-days without any action on your part.`,
+you, you do not need to reply, and the address will be deleted without
+any action on your part: the link above expires two days from now, and a
+sweep that runs once a day removes what has expired, so the record is
+gone within three days.`,
   },
 
   alreadySubscribed: {
