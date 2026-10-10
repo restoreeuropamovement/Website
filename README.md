@@ -588,10 +588,19 @@ cannot print a map whose borders are invented.
 
 ## Things this site deliberately does not do
 
-- **No backend it does not admit to.** `/contact` validates in the browser and
-  transmits nothing, and says so on the page. `/join` genuinely does transmit and
-  store, and says that instead, above the fields rather than only in the privacy
-  note. Changing either means rewriting `/privacy` first, not afterwards.
+- **No backend it does not admit to.** All three public forms transmit and
+  store, and each says so where it is used rather than only in the privacy
+  note. `/join` writes an application to `member`, and its lede says the form
+  encrypts a name and an address before storing them. `/contact` encrypts the
+  name, the address and the message body and writes a row to `enquiry`, which
+  an administrator reads at `/admin/enquiries`; the line beside the button
+  says "Encrypted before it is stored", and the panel after sending says the
+  three fields were encrypted and can be erased on request. Nothing is mailed
+  back to the writer — an address typed into a public form may not be its
+  owner's — but the notification address, where one is configured, is told
+  that an enquiry is waiting. `/newsletter` stores the address unconfirmed and
+  says on the page that nothing is sent until it is confirmed. Changing any of
+  them means rewriting `/privacy` first, not afterwards.
 - **No data collected that is not kept, and none kept that is not needed.** The
   application form has no postal address, no telephone number, no date of birth
   and no free-text field.
