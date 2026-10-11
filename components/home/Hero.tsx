@@ -66,7 +66,7 @@ export function Hero({
             </div>
           </div>
 
-          <RestoreEuropaMark className="hidden w-full text-ink lg:block" tone="heraldic" />
+          <RestoreEuropaMark className="hidden w-full text-ink lg:block" />
         </div>
       </Container>
 

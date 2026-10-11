@@ -64,12 +64,7 @@ export function Footer({
               href={localePath(locale, routes.home)}
               className="w-fit text-canvas transition-opacity hover:opacity-70"
             >
-              <Wordmark
-                variant="stacked"
-                size="lg"
-                descriptor={chrome.site.descriptor}
-                markTone="heraldic"
-              />
+              <Wordmark variant="stacked" size="lg" descriptor={chrome.site.descriptor} />
               <span className="sr-only">— {chrome.common.home}</span>
             </Link>
             <p className="max-w-sm font-serif text-[1.125rem] leading-snug text-canvas/70 text-balance">
