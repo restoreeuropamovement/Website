@@ -33,7 +33,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "Datenschutzerklärung",
     received: {
       title: "Ihre Bewerbung ist eingegangen.",
-      body: "Sie wartet nun darauf, von einem Menschen geprüft zu werden. Die Mitgliedschaft beginnt, wenn diese Prüfung abgeschlossen ist, nicht mit dem Absenden eines Formulars — es ist also noch nichts entschieden, und nichts über Sie ist irgendwo veröffentlicht worden.",
+      body: "Sie wartet nun darauf, von einem Menschen geprüft zu werden. Die Mitgliedschaft beginnt, wenn diese Prüfung abgeschlossen ist, nicht mit dem Absenden eines Formulars — es ist also noch nichts entschieden, und nichts über Sie ist irgendwo veröffentlicht worden. An die von Ihnen angegebene Adresse geht gleich eine kurze Eingangsbestätigung, und wenn die Prüfung abgeschlossen ist, schreiben wir Ihnen dorthin — achten Sie also darauf.",
       privacy:
         "Ihr Name und Ihre Adresse wurden verschlüsselt, bevor sie festgehalten wurden. Was wir speichern, wie lange wir es speichern und wie Sie es löschen lassen, steht in der",
       privacyLink: "Datenschutzerklärung",

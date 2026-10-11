@@ -63,7 +63,13 @@ export interface EmailText {
   /** Sent to somebody who applied through `/join`. */
   readonly applicationReceived: {
     readonly subject: string;
-    /** `{privacy}` is the address of the privacy note in this language. */
+    /**
+     * `{privacy}` is the address of the privacy note in this language, and
+     * `{contact}` the contact form in the same edition. The second exists
+     * because this message must not invite a reply: it leaves an unattended
+     * sender, and the domain has no mailbox behind it, so a reply is not
+     * merely ignored but bounced back at somebody who did as they were asked.
+     */
     readonly body: string;
   };
 
@@ -138,29 +144,41 @@ function unsubscribeUrl(locale: Locale, token: string): string {
 }
 
 /**
- * Written for somebody who applies through `/join`, and **deliberately not
- * sent**.
+ * Sent to somebody who applies through `/join`.
  *
- * Delivering it would hand the applicant's address to the mail provider, which
- * necessarily learns who was written to and keeps logs of it. `/privacy` tells
- * an applicant their details are "never passed to a third party for any
- * purpose", and with this unsent that stays literally true: the only address
- * the site mails is the operator's own, and those messages carry counts. The
- * join page promises no acknowledgement, so nothing on the site is left saying
- * something that does not happen.
+ * It was written long before it was sent, and the gap is worth recording. The
+ * objection was never that an acknowledgement is unwanted — it is that
+ * delivering one hands the address to the mail provider, which keeps logs, and
+ * the subject line names the movement, so the provider learns that this
+ * address applied to a political movement. That is Article 9 data, and it
+ * cannot be avoided while writing to somebody at all: the sender's domain
+ * would give it away even under a blank subject.
  *
- * Kept, with its five translations, because the decision may be revisited —
- * but sending it means rewriting the privacy note first, not afterwards.
+ * What changed is not the calculation but the alternative. Silence was costing
+ * more: applicants heard nothing, had no reason to expect the letter that
+ * eventually arrives from an administrator, and stopped answering. So the
+ * exposure is now accepted and, as `AGENTS.md` requires, written into
+ * `/privacy` before it started happening rather than after — naming the
+ * company, what it sees, and that this is the reason nothing used to be sent.
+ *
+ * The body still restates nothing the applicant told us. The provider gets the
+ * address, the subject and a text that would read the same for anybody.
  *
  * Says plainly that a human decides and gives no estimate of when, because an
  * invented timescale is the kind of small false promise that costs more trust
- * than the silence it was meant to fill.
+ * than the silence it was meant to fill. It does say that a person will write,
+ * which is a promise of a different kind — one the movement keeps by hand.
  */
 export async function applicationReceived(locale: Locale): Promise<Message> {
   const text = (await getEmails(locale)).applicationReceived;
   return {
     subject: text.subject,
-    text: signed(fill(text.body, { privacy: url(locale, routes.privacy) })),
+    text: signed(
+      fill(text.body, {
+        privacy: url(locale, routes.privacy),
+        contact: url(locale, routes.contact),
+      }),
+    ),
   };
 }
 
@@ -367,20 +385,20 @@ export interface Applicant {
  * The follow-up questionnaire, **composed for an administrator to send, not
  * sent by the site**.
  *
- * The distinction is the whole design. `applicationReceived` above is kept
- * unsent because delivering it would hand an applicant's address to the mail
- * provider, and `/privacy` promises those details are never passed to a third
- * party for any purpose. This letter would breach the same promise for the
- * same reason — so it is not sent either. It is rendered in the admin surface,
- * behind the passkey that already revealed the name, and copied into whatever
- * mailbox the administrator uses. No address leaves the machine; nothing in
- * the privacy note stops being true.
+ * The distinction is the whole design, and it survives `applicationReceived`
+ * above becoming a message the site does send. That one could be automated
+ * because it asks for nothing: it acknowledges, and it points at the contact
+ * form for anybody who wants to say something back. This one cannot, because
+ * its closing line invites the applicant to reply directly, and a reply only
+ * reaches a person if the message came from a mailbox somebody reads. Sent
+ * through the site's provider it would arrive from an unattended sender on a
+ * domain with no mailbox behind it, so the invitation would not merely go
+ * unanswered — it would bounce, in every copy.
  *
- * That is also the only arrangement in which the letter's closing line is
- * honest. It invites the applicant to reply directly, and a reply only reaches
- * a person if the message came from a mailbox somebody reads. Sent through the
- * site's provider it would arrive from an unattended sender, and the invitation
- * would be a small lie in every copy.
+ * So it is rendered in the admin surface, behind the passkey that already
+ * revealed the name, and copied into whatever mailbox the administrator uses.
+ * It reaches the applicant from an address a person actually reads, which is
+ * the only arrangement in which asking them to write back is honest.
  *
  * English, like the rest of the operator's text and unlike the messages above.
  * These are drafts for a human to edit before sending, and the human reads

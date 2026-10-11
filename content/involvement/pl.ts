@@ -32,7 +32,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "notę o prywatności",
     received: {
       title: "Twoje zgłoszenie dotarło.",
-      body: "Czeka teraz na rozpatrzenie przez człowieka. Członkostwo zaczyna się wtedy, gdy to rozpatrzenie się kończy, a nie gdy wysyła się formularz — nic więc jeszcze nie zostało rozstrzygnięte i nic o tobie nigdzie nie zostało opublikowane.",
+      body: "Czeka teraz na rozpatrzenie przez człowieka. Członkostwo zaczyna się wtedy, gdy to rozpatrzenie się kończy, a nie gdy wysyła się formularz — nic więc jeszcze nie zostało rozstrzygnięte i nic o tobie nigdzie nie zostało opublikowane. Na podany przez ciebie adres idzie właśnie krótkie potwierdzenie, a kiedy rozpatrzenie się zakończy, napiszemy do ciebie na ten sam adres — warto go pilnować.",
       privacy:
         "Twoje imię i adres zostały zaszyfrowane, zanim je zapisano. Co przechowujemy, jak długo i jak to usunąć, wyjaśnia",
       privacyLink: "nota o prywatności",

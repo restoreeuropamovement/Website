@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Przynależność do ruchu politycznego wskazuje na poglądy polityczne, które RODO traktuje jako szczególne kategorie danych osobowych w rozumieniu artykułu 9 i chroni surowiej niż zwykłe dane osobowe. Opieramy się na twojej wyraźnej zgodzie, udzielonej przy zgłoszeniu, w powiązaniu z artykułem 9 ust. 2 lit. d, który pozwala niezarobkowemu podmiotowi o celach politycznych przetwarzać dane swoich własnych członków — pod warunkiem że dane nie są ujawniane poza ten podmiot bez zgody. Nie są i nie będą.",
+            text: "Przynależność do ruchu politycznego wskazuje na poglądy polityczne, które RODO traktuje jako szczególne kategorie danych osobowych w rozumieniu artykułu 9 i chroni surowiej niż zwykłe dane osobowe. Opieramy się na twojej wyraźnej zgodzie, udzielonej przy zgłoszeniu, w powiązaniu z artykułem 9 ust. 2 lit. d, który pozwala niezarobkowemu podmiotowi o celach politycznych przetwarzać dane swoich własnych członków — pod warunkiem że dane nie są ujawniane poza ten podmiot bez zgody. Nie są. Jedyna firma, która cokolwiek widzi, działa na nasze zlecenie, nie realizuje przy tym żadnego własnego celu i uczestniczy w tym wyłącznie po to, by dostarczyć ci naszą wiadomość; co widzi, opisano niżej.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Twoje dane nigdy nie są sprzedawane, nigdy nie są udostępniane innej organizacji, nigdy nie służą do budowania profilu reklamowego i nigdy nie są przekazywane osobom trzecim w żadnym celu. Nie podejmuje się wobec ciebie żadnej decyzji automatycznej.",
+            text: "Twoje dane nigdy nie są sprzedawane, nigdy nie są udostępniane innej organizacji i nigdy nie służą do budowania profilu reklamowego. Nie podejmuje się wobec ciebie żadnej decyzji automatycznej.",
+          },
+          {
+            type: "paragraph",
+            text: "**Uczestniczy w tym jedna firma z zewnątrz, i to wyłącznie po to, byśmy mogli do ciebie napisać.** Kiedy twoje zgłoszenie zostanie zapisane, serwis wysyła krótkie potwierdzenie na podany przez ciebie adres, a wiadomość tę dostarcza Resend — ten sam i jedyny dostawca, który doręcza opisane niżej pismo. Siłą rzeczy widzi on adres odbiorcy i temat wiadomości, a temat wymienia nazwę ruchu; dostawca dowiaduje się więc, że z tego adresu złożono tu zgłoszenie, i prowadzi własny zapis doręczenia. Nie da się tego uniknąć, jeśli w ogóle mamy do ciebie pisać, i z tego właśnie powodu wcześniej nie wysyłano zgłaszającym się niczego. Nic więcej do niego nie trafia: ani twoje nazwisko, ani region, ani twoja wiadomość — żadne z nich nie pojawia się w treści. Wiadomość jest czystym tekstem, bez obrazków i bez czegokolwiek, co meldowałoby zwrotnie, więc ani dostawca, ani ruch nie są w stanie stwierdzić, czy ją otworzyłeś. To jedyna wiadomość, jaką serwis do ciebie wysyła — zgłoszenie nie zapisuje cię na żadną listę wysyłkową, a pismo to osobny wybór, którego musiałbyś dokonać sam.",
           },
         ],
       },

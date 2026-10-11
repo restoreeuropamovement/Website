@@ -9,12 +9,16 @@ export const emails: EmailText = {
 Your application has been recorded and will be read by a person before
 anything further happens. There is no automatic approval, and we would
 rather take the time to read properly than answer quickly, so we are not
-going to promise you a date.
+going to promise you a date. When it has been read we will write to you
+at this address, so it is worth watching for.
+
+This message was sent automatically, and nobody reads the address it came
+from. Anything you want to say to us reaches a person at {contact}.
 
 If you did not fill in this form, you do not need to do anything. Nothing
 has been published, nothing has been shared, and an application that is
-never approved never becomes a membership. If you would like the record
-removed before then, reply to this message and say so.
+never approved never becomes a membership. If you would rather the record
+went now, ask there and it will be erased.
 
 What we hold and how it is protected is set out at {privacy}.`,
   },

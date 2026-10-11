@@ -8,13 +8,18 @@ export const emails: EmailText = {
 Votre demande a été consignée et sera lue par une personne avant toute
 autre chose. Il n'y a pas d'admission automatique, et nous préférons
 prendre le temps de lire correctement plutôt que de répondre vite : nous
-ne vous promettrons donc pas de date.
+ne vous promettrons donc pas de date. Une fois qu'elle aura été lue,
+nous vous écrirons à cette adresse : surveillez-la.
+
+Ce message a été envoyé automatiquement, et personne ne lit l'adresse
+dont il provient. Tout ce que vous voulez nous dire atteint une personne
+à l'adresse {contact}.
 
 Si vous n'avez pas rempli ce formulaire, vous n'avez rien à faire. Rien
 n'a été publié, rien n'a été transmis, et une demande qui n'est jamais
-acceptée ne devient jamais une adhésion. Si vous souhaitez que
-l'enregistrement soit effacé avant cela, répondez à ce message et
-dites-le.
+acceptée ne devient jamais une adhésion. Si vous préférez que
+l'enregistrement disparaisse dès maintenant, dites-le là et il sera
+effacé.
 
 Ce que nous conservons et la manière dont c'est protégé sont exposés à
 l'adresse {privacy}.`,

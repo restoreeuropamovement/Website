@@ -8,12 +8,17 @@ export const emails: EmailText = {
 Zostało ono zapisane i zanim wydarzy się cokolwiek dalej, przeczyta je
 człowiek. Nie ma żadnego automatycznego przyjęcia, a wolimy przeczytać
 spokojnie, niż odpowiedzieć szybko — dlatego nie obiecujemy terminu.
+Kiedy zgłoszenie zostanie przeczytane, napiszemy do ciebie na ten adres,
+więc warto go pilnować.
+
+Tę wiadomość wysłano automatycznie i nikt nie czyta adresu, z którego
+przyszła. Wszystko, co chcesz nam powiedzieć, trafi do człowieka pod
+adresem {contact}.
 
 Jeśli ten formularz wypełnił ktoś inny, nie musisz nic robić. Nic nie
 zostało opublikowane, nic nie zostało nikomu przekazane, a zgłoszenie,
 które nigdy nie zostanie przyjęte, nigdy nie stanie się członkostwem.
-Jeśli chcesz, by wpis usunięto wcześniej, odpowiedz na tę wiadomość i
-napisz o tym.
+Jeśli wolisz, by wpis zniknął od razu, napisz tam, a zostanie usunięty.
 
 Co przechowujemy i jak jest to chronione, wyjaśnia {privacy}.`,
   },

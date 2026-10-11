@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Appartenir à un mouvement politique implique une opinion politique, que le règlement général sur la protection des données (RGPD) range parmi les catégories particulières de données à caractère personnel au titre de l'article 9 et protège plus strictement que les données à caractère personnel ordinaires. Nous nous fondons sur votre consentement explicite, donné lorsque vous avez candidaté, ainsi que sur l'article 9, paragraphe 2, point d), qui permet à un organisme sans but lucratif poursuivant une finalité politique de traiter les données de ses propres membres — à condition que ces données ne soient pas communiquées en dehors de l'organisme sans consentement. Elles ne le sont pas, et ne le seront pas.",
+            text: "Appartenir à un mouvement politique implique une opinion politique, que le règlement général sur la protection des données (RGPD) range parmi les catégories particulières de données à caractère personnel au titre de l'article 9 et protège plus strictement que les données à caractère personnel ordinaires. Nous nous fondons sur votre consentement explicite, donné lorsque vous avez candidaté, ainsi que sur l'article 9, paragraphe 2, point d), qui permet à un organisme sans but lucratif poursuivant une finalité politique de traiter les données de ses propres membres — à condition que ces données ne soient pas communiquées en dehors de l'organisme sans consentement. Elles ne le sont pas. La seule entreprise qui voie quoi que ce soit agit sur nos instructions, sans aucune finalité propre, et uniquement pour acheminer notre message jusqu'à vous ; ce qu'elle voit est exposé plus bas.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Vos coordonnées ne sont jamais vendues, jamais communiquées à une autre organisation, jamais utilisées pour constituer un profil publicitaire, et jamais transmises à un tiers à quelque fin que ce soit. Aucune décision automatisée n'est prise à votre sujet.",
+            text: "Vos coordonnées ne sont jamais vendues, jamais communiquées à une autre organisation et jamais utilisées pour constituer un profil publicitaire. Aucune décision automatisée n'est prise à votre sujet.",
+          },
+          {
+            type: "paragraph",
+            text: "**Une seule entreprise extérieure intervient, et uniquement pour que nous puissions vous écrire.** Dès que votre demande est enregistrée, le site envoie un bref accusé de réception à l'adresse que vous avez indiquée, et ce message est acheminé par Resend — le même prestataire, et le seul, que celui qui distribue la lettre décrite plus bas. Il voit nécessairement l'adresse destinataire et l'objet du message, et cet objet nomme le mouvement : le prestataire apprend donc que cette adresse a candidaté ici, et il en conserve sa propre trace de distribution. C'est inévitable dès lors que nous vous écrivons, et c'est la raison pour laquelle rien n'était envoyé aux candidats auparavant. Rien d'autre ne lui parvient : ni votre nom, ni votre région, ni votre message, dont aucun n'apparaît dans le texte. Le message est en texte brut, sans images et sans rien qui rende compte de quoi que ce soit, de sorte que ni le prestataire ni le mouvement ne peuvent savoir si vous l'avez ouvert. C'est le seul message que le site vous adresse : candidater ne vous inscrit sur aucune liste de diffusion, et la lettre est un choix distinct qu'il vous appartiendrait de faire.",
           },
         ],
       },

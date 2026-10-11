@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Belonging to a political movement implies a political opinion, which the General Data Protection Regulation treats as a special category of data under Article 9 and protects more strictly than ordinary personal data. We rely on your explicit consent, given when you applied, together with Article 9(2)(d), which permits a not-for-profit body with a political aim to process the data of its own members — provided the data is not disclosed outside the body without consent. It is not, and will not be.",
+            text: "Belonging to a political movement implies a political opinion, which the General Data Protection Regulation treats as a special category of data under Article 9 and protects more strictly than ordinary personal data. We rely on your explicit consent, given when you applied, together with Article 9(2)(d), which permits a not-for-profit body with a political aim to process the data of its own members — provided the data is not disclosed outside the body without consent. It is not. The one company that sees anything acts on our instructions, for no purpose of its own, and only in order to carry our message to you; what it sees is set out below.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Your details are never sold, never shared with another organisation, never used to build an advertising profile, and never passed to a third party for any purpose. No automated decision is made about you.",
+            text: "Your details are never sold, never shared with another organisation, and never used to build an advertising profile. No automated decision is made about you.",
+          },
+          {
+            type: "paragraph",
+            text: "**One outside company is involved, and only so that we can write to you.** When your application is recorded the site sends a short acknowledgement to the address you gave, and that message is carried by Resend — the same provider, and the only one, that delivers the letter described further down. It necessarily sees the address it is sent to and the subject line, and the subject names the movement, so the provider learns that this address applied here and keeps its own record of having delivered the message. That is unavoidable in writing to you at all, and it is the reason nothing was sent to applicants before. Nothing else reaches them: not your name, not your region, not your message, none of which appears anywhere in the text. The message is plain text with no images and nothing that reports back, so neither the provider nor the movement can tell whether you opened it. It is the only message the site sends you — applying puts you on no mailing list, and the letter is a separate choice you would have to make yourself.",
           },
         ],
       },

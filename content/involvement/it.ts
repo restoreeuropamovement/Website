@@ -33,7 +33,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "nota sulla riservatezza",
     received: {
       title: "La tua domanda è stata ricevuta.",
-      body: "Ora attende di essere esaminata da una persona. L'iscrizione comincia quando quell'esame è concluso, non quando si invia un modulo — dunque nulla è ancora deciso, e nulla che ti riguardi è stato pubblicato da nessuna parte.",
+      body: "Ora attende di essere esaminata da una persona. L'iscrizione comincia quando quell'esame è concluso, non quando si invia un modulo — dunque nulla è ancora deciso, e nulla che ti riguardi è stato pubblicato da nessuna parte. All'indirizzo che hai indicato sta arrivando una breve conferma, e quando l'esame sarà concluso ti scriveremo lì: vale la pena tenerlo d'occhio.",
       privacy:
         "Il tuo nome e il tuo indirizzo sono stati cifrati prima di essere annotati. Cosa conserviamo, per quanto tempo e come farlo cancellare è esposto nella",
       privacyLink: "nota sulla riservatezza",

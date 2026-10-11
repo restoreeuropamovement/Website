@@ -8,12 +8,17 @@ export const emails: EmailText = {
 Ha quedado registrada y será leída por una persona antes de que ocurra
 nada más. No hay aprobación automática, y preferimos tomarnos el tiempo
 de leerla bien a responder deprisa, de modo que no le vamos a prometer
-una fecha.
+una fecha. Cuando se haya leído le escribiremos a esta dirección, así
+que conviene estar atento.
+
+Este mensaje se ha enviado automáticamente, y nadie lee la dirección
+desde la que llega. Todo lo que quiera decirnos llega a una persona en
+{contact}.
 
 Si no fue usted quien rellenó este formulario, no tiene que hacer nada.
 No se ha publicado nada, no se ha compartido nada, y una solicitud que
-nunca se aprueba nunca llega a ser una afiliación. Si desea que el
-registro se borre antes de entonces, responda a este mensaje y dígalo.
+nunca se aprueba nunca llega a ser una afiliación. Si prefiere que el
+registro desaparezca ya, dígalo ahí y se borrará.
 
 Qué conservamos y cómo está protegido se expone en {privacy}.`,
   },

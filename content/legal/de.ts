@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Die Zugehörigkeit zu einer politischen Bewegung lässt auf eine politische Meinung schließen, und die DSGVO zählt diese nach Artikel 9 zu den besonderen Kategorien personenbezogener Daten und schützt sie strenger als gewöhnliche personenbezogene Daten. Wir stützen uns auf Ihre ausdrückliche Einwilligung, die Sie mit der Bewerbung erteilt haben, zusammen mit Artikel 9 Absatz 2 Buchstabe d, der es einer nicht gewinnorientierten Einrichtung mit politischer Zielsetzung erlaubt, die Daten ihrer eigenen Mitglieder zu verarbeiten — sofern die Daten nicht ohne Einwilligung außerhalb der Einrichtung offengelegt werden. Das geschieht nicht und wird nicht geschehen.",
+            text: "Die Zugehörigkeit zu einer politischen Bewegung lässt auf eine politische Meinung schließen, und die DSGVO zählt diese nach Artikel 9 zu den besonderen Kategorien personenbezogener Daten und schützt sie strenger als gewöhnliche personenbezogene Daten. Wir stützen uns auf Ihre ausdrückliche Einwilligung, die Sie mit der Bewerbung erteilt haben, zusammen mit Artikel 9 Absatz 2 Buchstabe d, der es einer nicht gewinnorientierten Einrichtung mit politischer Zielsetzung erlaubt, die Daten ihrer eigenen Mitglieder zu verarbeiten — sofern die Daten nicht ohne Einwilligung außerhalb der Einrichtung offengelegt werden. Das geschieht nicht. Das eine Unternehmen, das überhaupt etwas zu sehen bekommt, handelt in unserem Auftrag, verfolgt dabei keinen eigenen Zweck und ist nur daran beteiligt, unsere Nachricht an Sie zu befördern; was es sieht, steht weiter unten.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Ihre Angaben werden niemals verkauft, niemals an eine andere Organisation weitergegeben, niemals zum Aufbau eines Werbeprofils verwendet und niemals zu irgendeinem Zweck an Dritte übermittelt. Über Sie wird keine automatisierte Entscheidung getroffen.",
+            text: "Ihre Angaben werden niemals verkauft, niemals an eine andere Organisation weitergegeben und niemals zum Aufbau eines Werbeprofils verwendet. Über Sie wird keine automatisierte Entscheidung getroffen.",
+          },
+          {
+            type: "paragraph",
+            text: "**Ein einziges außenstehendes Unternehmen ist beteiligt, und zwar nur, damit wir Ihnen schreiben können.** Sobald Ihre Bewerbung erfasst ist, sendet die Website eine kurze Eingangsbestätigung an die von Ihnen angegebene Adresse, und diese Nachricht wird von Resend befördert — demselben und einzigen Anbieter, der auch das weiter unten beschriebene Rundschreiben zustellt. Er sieht zwangsläufig die Empfängeradresse und die Betreffzeile, und der Betreff nennt die Bewegung; der Anbieter erfährt also, dass sich diese Adresse hier beworben hat, und führt darüber eine eigene Zustellaufzeichnung. Das lässt sich nicht vermeiden, wenn wir Ihnen überhaupt schreiben wollen, und es ist der Grund, weshalb Bewerbern zuvor nichts zugesandt wurde. Mehr erreicht ihn nicht: weder Ihr Name noch Ihre Region noch Ihre Nachricht — nichts davon kommt im Text vor. Die Nachricht ist reiner Text ohne Bilder und ohne irgendetwas, das zurückmeldet, sodass weder der Anbieter noch die Bewegung erkennen kann, ob Sie sie geöffnet haben. Es ist die einzige Nachricht, die die Website Ihnen schickt — mit der Bewerbung landen Sie auf keiner Verteilerliste, und das Rundschreiben ist eine gesonderte Entscheidung, die Sie selbst treffen müssten.",
           },
         ],
       },

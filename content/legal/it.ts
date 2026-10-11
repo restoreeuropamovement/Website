@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "L'appartenenza a un movimento politico implica un'opinione politica, che il Regolamento generale sulla protezione dei dati (GDPR) annovera fra le categorie particolari di dati personali all'articolo 9 e tutela più rigorosamente dei dati personali ordinari. Ci fondiamo sul tuo consenso esplicito, prestato al momento della domanda, insieme all'articolo 9, paragrafo 2, lettera d), che consente a un organismo senza scopo di lucro che persegua una finalità politica di trattare i dati dei propri membri — a condizione che i dati non siano comunicati all'esterno dell'organismo senza consenso. Non lo sono, e non lo saranno.",
+            text: "L'appartenenza a un movimento politico implica un'opinione politica, che il Regolamento generale sulla protezione dei dati (GDPR) annovera fra le categorie particolari di dati personali all'articolo 9 e tutela più rigorosamente dei dati personali ordinari. Ci fondiamo sul tuo consenso esplicito, prestato al momento della domanda, insieme all'articolo 9, paragrafo 2, lettera d), che consente a un organismo senza scopo di lucro che persegua una finalità politica di trattare i dati dei propri membri — a condizione che i dati non siano comunicati all'esterno dell'organismo senza consenso. Non lo sono. L'unica azienda che veda alcunché agisce su nostra istruzione, senza alcuna finalità propria, e solo per recapitarti il nostro messaggio; che cosa veda è esposto più sotto.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "I tuoi dati non sono mai venduti, mai condivisi con un'altra organizzazione, mai usati per costruire un profilo pubblicitario e mai trasmessi a terzi per alcuno scopo. Nessuna decisione automatizzata viene presa nei tuoi confronti.",
+            text: "I tuoi dati non sono mai venduti, mai condivisi con un'altra organizzazione e mai usati per costruire un profilo pubblicitario. Nessuna decisione automatizzata viene presa nei tuoi confronti.",
+          },
+          {
+            type: "paragraph",
+            text: "**È coinvolta una sola azienda esterna, e soltanto perché possiamo scriverti.** Quando la tua domanda viene registrata, il sito invia una breve conferma all'indirizzo che hai indicato, e quel messaggio è recapitato da Resend — lo stesso fornitore, e l'unico, che consegna la lettera descritta più sotto. Vede necessariamente l'indirizzo del destinatario e l'oggetto, e l'oggetto nomina il movimento: il fornitore viene quindi a sapere che da quell'indirizzo è stata presentata una domanda qui, e ne conserva una propria registrazione di consegna. È inevitabile se vogliamo scriverti, ed è la ragione per cui prima non veniva inviato nulla a chi faceva domanda. Nient'altro gli arriva: né il tuo nome, né la tua regione, né il tuo messaggio, nessuno dei quali compare nel testo. Il messaggio è testo semplice, senza immagini e senza nulla che riferisca indietro, così né il fornitore né il movimento possono sapere se l'hai aperto. È l'unico messaggio che il sito ti manda: fare domanda non ti iscrive ad alcuna lista, e la lettera è una scelta distinta che dovresti compiere tu.",
           },
         ],
       },

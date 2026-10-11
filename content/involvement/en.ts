@@ -32,7 +32,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "privacy note",
     received: {
       title: "Your application has been received.",
-      body: "It now waits to be reviewed by a person. Membership begins when that review is complete, not when a form is submitted — so nothing has been decided yet, and nothing about you has been published anywhere.",
+      body: "It now waits to be reviewed by a person. Membership begins when that review is complete, not when a form is submitted — so nothing has been decided yet, and nothing about you has been published anywhere. A short acknowledgement is on its way to the address you gave, and when the review is done we will write to you there, so it is worth watching for.",
       privacy:
         "Your name and address were encrypted before they were written down. What we hold, how long we hold it and how to have it erased are set out in the",
       privacyLink: "privacy note",

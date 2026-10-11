@@ -8,13 +8,17 @@ export const emails: EmailText = {
 È stata registrata e sarà letta da una persona prima che accada altro.
 Non esiste alcuna approvazione automatica, e preferiamo prenderci il
 tempo di leggere bene piuttosto che rispondere in fretta: non ti
-promettiamo quindi una data.
+promettiamo quindi una data. Quando sarà stata letta ti scriveremo a
+questo indirizzo, perciò vale la pena tenerlo d'occhio.
+
+Questo messaggio è stato inviato automaticamente, e nessuno legge
+l'indirizzo da cui proviene. Tutto ciò che vuoi dirci raggiunge una
+persona all'indirizzo {contact}.
 
 Se non hai compilato tu questo modulo, non devi fare nulla. Non è stato
 pubblicato niente, non è stato trasmesso niente, e una domanda che non
 viene mai accolta non diventa mai un'iscrizione. Se preferisci che
-l'annotazione sia cancellata prima di allora, rispondi a questo messaggio
-e dillo.
+l'annotazione sparisca subito, dillo lì e sarà cancellata.
 
 Cosa conserviamo e come è protetto è esposto all'indirizzo {privacy}.`,
   },

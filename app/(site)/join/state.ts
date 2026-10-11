@@ -5,9 +5,15 @@ import type { JoinErrorCode } from "@/content/involvement";
  *
  * Errors are codes, not sentences. The action runs on the server and has no
  * business deciding what language the reader is in; the form does, and turns
- * each code into a sentence from its own edition. Posting a locale to the
- * action instead would mean a client-supplied value steering server behaviour
- * to no purpose.
+ * each code into a sentence from its own edition.
+ *
+ * The form does post a locale, which this once argued against. The objection
+ * was to a client-supplied value steering server behaviour for no purpose,
+ * and the second half of that has stopped being true: the acknowledgement is
+ * written on the server and has to be written in some language. It steers
+ * nothing else. It is checked against `LOCALES` before it is used, an
+ * unrecognised value falls back to English, and no reply on this type varies
+ * with it.
  */
 /**
  * `throttled` and `busy` are both refusals to accept a form, and separating

@@ -5,8 +5,9 @@ import { after } from "next/server";
 import { recordAudit } from "@/lib/admin/audit";
 import { hasDatabase, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
 import { createMember, unreadMemberCount } from "@/lib/admin/members";
-import { applicationAlert } from "@/content/emails";
+import { applicationAlert, applicationReceived } from "@/content/emails";
 import { sendEmail } from "@/lib/email";
+import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
 import {
@@ -107,6 +108,22 @@ export async function submitMembershipApplication(
   const involvementRole = read("role");
   const interestArea = read("interest");
   const consent = read("consent") === "yes";
+
+  /*
+   * Which edition the reader was in, so the acknowledgement is written in the
+   * language they applied in rather than in English.
+   *
+   * Not kept: it is used once, after the response, and never written to the
+   * row. The roll needs no new column for this, and a column on `member` is
+   * a migration of Article 9 data — see the note on the name fields below.
+   *
+   * A hidden field rather than a guess from the request, and validated here
+   * against `LOCALES` regardless, because a Server Action is a POST endpoint
+   * anybody can call directly. Anything that is not a language the site
+   * publishes falls back to English instead of steering what gets sent.
+   */
+  const submittedLocale = read("locale");
+  const locale = isLocale(submittedLocale) ? submittedLocale : DEFAULT_LOCALE;
 
   /*
    * Handed back with every refusal below so the reader does not lose the form
@@ -217,7 +234,7 @@ export async function submitMembershipApplication(
   });
 
   /*
-   * The notification goes out after the response, for two reasons beyond not
+   * Both messages go out after the response, for two reasons beyond not
    * making somebody watch a spinner while a third party is slow.
    *
    * It removes a timing oracle. Telling an operator on `created` and not on
@@ -226,43 +243,67 @@ export async function submitMembershipApplication(
    * faster, which hands back through the clock exactly the distinction the
    * identical reply above is careful not to state.
    *
-   * And it decouples the two failures. The application is already committed by
+   * And it decouples the failures. The application is already committed by
    * this point; a mail provider that is down, throttling or misconfigured must
    * not be able to turn a recorded application into an error the reader sees.
-   *
-   * Nothing is sent to the applicant. An acknowledgement would hand their
-   * address to the mail provider, which keeps delivery logs, and `/privacy`
-   * tells them their details are never passed to a third party for any
-   * purpose. The message is written and translated — see `applicationReceived`
-   * — but sending it means rewriting that promise first.
    */
-  if (outcome.kind === "created" && mailNotifyAddress()) {
-    after(async () => {
-      const notify = mailNotifyAddress();
-      if (!notify) return;
-
-      const alert = await sendEmail({
-        to: notify,
-        ...applicationAlert(await unreadMemberCount()),
+  after(async () => {
+    /*
+     * The acknowledgement, and the one thing in this file that changed what
+     * the movement discloses rather than how it stores it.
+     *
+     * Sending it hands the address to the mail provider, and the subject names
+     * the movement, so the provider learns that this address applied to a
+     * political movement. Nothing makes that avoidable — the sender's own
+     * domain would say as much under a blank subject — which is why nothing
+     * was sent here for so long. It is sent now because silence cost more:
+     * an applicant who hears nothing has no reason to expect the letter an
+     * administrator eventually writes, and does not answer it. `/privacy` was
+     * rewritten to name the company and say what it sees before this line
+     * started running, which is the order `AGENTS.md` requires.
+     *
+     * Sent on `duplicate` as well as `created`, which is the opposite of the
+     * rule for the operator alert below, and for the opposite reason. The
+     * operator does not need telling twice; the applicant does, because from
+     * where they sit a second application met with silence looks exactly like
+     * a form that does not work.
+     */
+    const ack = await sendEmail({ to: email, ...(await applicationReceived(locale)) });
+    if (!ack.ok && ack.reason !== "unconfigured") {
+      await recordAudit({
+        action: "member.apply.mail",
+        outcome: "failure",
+        actorLabel: "public intake",
+        /* Which message failed, not who it was for. */
+        detail: { reason: ack.reason, recipient: "applicant" },
+        ipHash,
       });
+    }
 
-      /*
-       * Worth recording: silent non-delivery is how a movement discovers six
-       * weeks late that nobody was ever told an application had arrived.
-       * `unconfigured` cannot arise here, the address being set, and would not
-       * be a failure in any case.
-       */
-      if (!alert.ok && alert.reason !== "unconfigured") {
-        await recordAudit({
-          action: "member.apply.mail",
-          outcome: "failure",
-          actorLabel: "public intake",
-          detail: { reason: alert.reason },
-          ipHash,
-        });
-      }
+    const notify = mailNotifyAddress();
+    if (outcome.kind !== "created" || !notify) return;
+
+    const alert = await sendEmail({
+      to: notify,
+      ...applicationAlert(await unreadMemberCount()),
     });
-  }
+
+    /*
+     * Worth recording: silent non-delivery is how a movement discovers six
+     * weeks late that nobody was ever told an application had arrived.
+     * `unconfigured` cannot arise here, the address being set, and would not
+     * be a failure in any case.
+     */
+    if (!alert.ok && alert.reason !== "unconfigured") {
+      await recordAudit({
+        action: "member.apply.mail",
+        outcome: "failure",
+        actorLabel: "public intake",
+        detail: { reason: alert.reason, recipient: "operator" },
+        ipHash,
+      });
+    }
+  });
 
   /* Identical for `created` and `duplicate`. See the note above. */
   return { status: "received", errors: [] };

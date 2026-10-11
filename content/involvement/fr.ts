@@ -33,7 +33,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "note de confidentialité",
     received: {
       title: "Votre demande a bien été reçue.",
-      body: "Elle attend maintenant d'être examinée par une personne. L'adhésion commence lorsque cet examen est achevé, non lorsqu'un formulaire est envoyé — rien n'est donc décidé, et rien vous concernant n'a été publié où que ce soit.",
+      body: "Elle attend maintenant d'être examinée par une personne. L'adhésion commence lorsque cet examen est achevé, non lorsqu'un formulaire est envoyé — rien n'est donc décidé, et rien vous concernant n'a été publié où que ce soit. Un bref accusé de réception part vers l'adresse que vous avez indiquée, et une fois l'examen achevé nous vous écrirons à cette adresse : surveillez-la.",
       privacy:
         "Votre nom et votre adresse ont été chiffrés avant d'être consignés. Ce que nous conservons, combien de temps et comment le faire effacer sont exposés dans la",
       privacyLink: "note de confidentialité",

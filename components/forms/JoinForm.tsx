@@ -95,6 +95,15 @@ export function JoinForm({ edition, initialCountry, initialRole }: JoinFormProps
     >
       <Honeypot />
 
+      {/*
+        Which edition the reader applied from, so the acknowledgement is
+        written in that language. A hidden field rather than a guess from the
+        request, and validated against `LOCALES` again on the server — this one
+        is typed by the page, but a server action is a POST endpoint anybody
+        can call directly. Nothing stores it; it is used once and discarded.
+      */}
+      <input type="hidden" name="locale" value={locale} />
+
       {state.status === "unavailable" ? <Notice>{text.unavailable}</Notice> : null}
       {state.status === "throttled" ? <Notice>{text.throttled}</Notice> : null}
       {state.status === "busy" ? <Notice>{text.busy}</Notice> : null}

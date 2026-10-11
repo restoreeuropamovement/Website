@@ -72,7 +72,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Pertenecer a un movimiento político implica una opinión política, que el Reglamento General de Protección de Datos (RGPD) trata como una de las categorías especiales de datos personales con arreglo a su artículo 9 y protege con más rigor que los datos personales ordinarios. Nos amparamos en su consentimiento explícito, prestado cuando solicitó, junto con el artículo 9, apartado 2, letra d), que permite a una entidad sin ánimo de lucro con finalidad política tratar los datos de sus propios miembros — siempre que los datos no se comuniquen fuera de la entidad sin consentimiento. No se comunican, ni se comunicarán.",
+            text: "Pertenecer a un movimiento político implica una opinión política, que el Reglamento General de Protección de Datos (RGPD) trata como una de las categorías especiales de datos personales con arreglo a su artículo 9 y protege con más rigor que los datos personales ordinarios. Nos amparamos en su consentimiento explícito, prestado cuando solicitó, junto con el artículo 9, apartado 2, letra d), que permite a una entidad sin ánimo de lucro con finalidad política tratar los datos de sus propios miembros — siempre que los datos no se comuniquen fuera de la entidad sin consentimiento. No se comunican. La única empresa que ve algo actúa siguiendo nuestras instrucciones, sin finalidad propia alguna, y solo para hacerle llegar nuestro mensaje; qué es lo que ve se expone más abajo.",
           },
           {
             type: "subheading",
@@ -103,7 +103,11 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Sus datos no se venden nunca, no se comparten nunca con otra organización, no se utilizan nunca para construir un perfil publicitario y no se ceden nunca a un tercero con ningún fin. No se toma sobre usted ninguna decisión automatizada.",
+            text: "Sus datos no se venden nunca, no se comparten nunca con otra organización y no se utilizan nunca para construir un perfil publicitario. No se toma sobre usted ninguna decisión automatizada.",
+          },
+          {
+            type: "paragraph",
+            text: "**Interviene una sola empresa externa, y únicamente para que podamos escribirle.** Cuando su solicitud queda registrada, el sitio envía un breve acuse de recibo a la dirección que usted indicó, y ese mensaje lo transporta Resend — el mismo proveedor, y el único, que entrega la carta descrita más abajo. Ve necesariamente la dirección de destino y el asunto, y el asunto nombra al movimiento: el proveedor se entera, por tanto, de que desde esa dirección se ha solicitado aquí, y conserva su propio registro de haberlo entregado. Es inevitable si queremos escribirle, y es la razón por la que antes no se enviaba nada a quienes solicitaban. Nada más le llega: ni su nombre, ni su región, ni su mensaje, ninguno de los cuales aparece en el texto. El mensaje es texto plano, sin imágenes y sin nada que informe de vuelta, de modo que ni el proveedor ni el movimiento pueden saber si usted lo abrió. Es el único mensaje que el sitio le envía: solicitar no le inscribe en ninguna lista de correo, y la carta es una decisión aparte que tendría que tomar usted.",
           },
         ],
       },

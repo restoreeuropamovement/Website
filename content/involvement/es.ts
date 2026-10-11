@@ -33,7 +33,7 @@ export const involvementText: InvolvementText = {
     privacyLink: "nota de privacidad",
     received: {
       title: "Su solicitud se ha recibido.",
-      body: "Ahora espera a ser revisada por una persona. La afiliación empieza cuando esa revisión concluye, no cuando se envía un formulario — así que nada está decidido todavía, y nada sobre usted se ha publicado en ninguna parte.",
+      body: "Ahora espera a ser revisada por una persona. La afiliación empieza cuando esa revisión concluye, no cuando se envía un formulario — así que nada está decidido todavía, y nada sobre usted se ha publicado en ninguna parte. A la dirección que ha indicado va camino un breve acuse de recibo, y cuando la revisión concluya le escribiremos ahí, así que conviene estar atento.",
       privacy:
         "Su nombre y su dirección se cifraron antes de anotarse. Qué conservamos, cuánto tiempo lo conservamos y cómo hacer que se borre se explica en la",
       privacyLink: "nota de privacidad",

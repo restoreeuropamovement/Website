@@ -8,13 +8,18 @@ export const emails: EmailText = {
 Ihre Bewerbung ist festgehalten worden und wird von einem Menschen
 gelesen, bevor irgendetwas weiter geschieht. Es gibt keine automatische
 Aufnahme, und wir lesen lieber in Ruhe, als schnell zu antworten — ein
-Datum werden wir Ihnen deshalb nicht versprechen.
+Datum werden wir Ihnen deshalb nicht versprechen. Wenn sie gelesen
+worden ist, schreiben wir Ihnen an diese Adresse; achten Sie also darauf.
+
+Diese Nachricht wurde automatisch versandt, und die Absenderadresse liest
+niemand. Alles, was Sie uns sagen möchten, erreicht einen Menschen unter
+{contact}.
 
 Falls Sie dieses Formular nicht ausgefüllt haben, brauchen Sie nichts zu
 tun. Nichts ist veröffentlicht, nichts ist weitergegeben worden, und eine
 Bewerbung, die nie angenommen wird, wird auch nie eine Mitgliedschaft.
-Wenn Sie möchten, dass der Eintrag schon vorher gelöscht wird, antworten
-Sie auf diese Nachricht und sagen Sie es.
+Wenn Ihnen lieber ist, dass der Eintrag sofort verschwindet, sagen Sie
+dort Bescheid, und er wird gelöscht.
 
 Was wir speichern und wie es geschützt ist, steht unter {privacy}.`,
   },
