@@ -340,6 +340,36 @@ export async function unsubscribeTagMatches(
 }
 
 /**
+ * The same device for a member asking to stop receiving notices, under its own
+ * label.
+ *
+ * The label is the entire reason this is not `unsubscribeTag` called with a
+ * member id. Both tables key on a uuid, so one function would mean a tag minted
+ * for a subscriber row verified against a member row with the same id — not a
+ * collision anybody could engineer, but the kind of thing that stops being
+ * impossible the moment either table changes. Separate domains make the two
+ * links unable to act on each other's table at all, which is a property worth
+ * having for free rather than an argument to be rechecked later.
+ *
+ * Everything in the note above about rotation applies here unchanged: the tag
+ * in a notice somebody keeps stops verifying once the outgoing key is unset,
+ * and the page that handles these has to say something useful when it does.
+ */
+export function noticeOptOutTag(memberId: string): Promise<string> {
+  return blindDigest("member-notice-opt-out", memberId);
+}
+
+/** Whether `tag` authorises stopping notices for this member, under any key. */
+export async function noticeOptOutTagMatches(memberId: string, tag: string): Promise<boolean> {
+  if (tag === (await noticeOptOutTag(memberId))) return true;
+
+  const fallback = previousKeys();
+  if (!fallback) return false;
+
+  return tag === (await digestUnder(await fallback, "member-notice-opt-out", memberId));
+}
+
+/**
  * Folds a value to the form both search and duplicate-detection compare on:
  * case-insensitive, accent-insensitive, and insensitive to runs of whitespace.
  *

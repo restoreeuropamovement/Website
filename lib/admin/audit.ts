@@ -43,6 +43,23 @@ export type AuditAction =
    */
   | "member.note"
   /*
+   * A notice was written to the membership, and a member stopped receiving
+   * them.
+   *
+   * `member.notice` carries the subject, the number intended and — only when
+   * something went wrong — the number the provider refused. The subject is
+   * operator-written and names nobody; the body is nowhere, here or in
+   * `member_notice`, because keeping it would build an archive of everything
+   * the movement has said to its members beside the roll it was said to.
+   *
+   * `member.notices.stop` carries nothing at all. The token in the link
+   * contains the member's id, so recording either the token or the outcome
+   * against a row would turn the log into a list of who had asked to be left
+   * alone — a smaller list than the roll, and a more telling one.
+   */
+  | "member.notice"
+  | "member.notices.stop"
+  /*
    * An office was granted, withdrawn, or the board of them read.
    *
    * `grant` and `revoke` carry the member's id and a keyed digest of the

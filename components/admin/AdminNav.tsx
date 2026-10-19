@@ -13,6 +13,7 @@ const SECTIONS = [
   { href: "/admin/journal", label: "Journal" },
   { href: "/admin/newsletter", label: "Newsletter" },
   { href: "/admin/members", label: "Members" },
+  { href: "/admin/notices", label: "Notices" },
   { href: "/admin/gatherings", label: "Gatherings" },
   { href: "/admin/materials", label: "Materials" },
   { href: "/admin/enquiries", label: "Enquiries" },

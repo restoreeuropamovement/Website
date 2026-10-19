@@ -104,6 +104,27 @@ export const operatorText: {
     readonly member: { readonly subject: string; readonly body: string };
     readonly volunteer: { readonly subject: string; readonly body: string };
   };
+  /**
+   * The frame around a notice to the membership. The body is typed by an
+   * administrator; these are the three lines added under it. See
+   * `memberNotice` in `./index.ts` for why each one is there.
+   */
+  readonly memberNotice: {
+    readonly why: string;
+    /** `{contact}` — the contact form, because replies to the sender bounce. */
+    readonly reply: string;
+    /** `{stop}` — the link that stops further notices. */
+    readonly stop: string;
+    /**
+     * Offered as the opening of the first notice ever sent, and only that one.
+     * Members who joined before notices existed were told, on the privacy
+     * page, that applying put them on no mailing list. That sentence has been
+     * rewritten, but rewriting a page is not telling anybody, so the first
+     * message has to say what changed in its own words — before asking for
+     * their attention about anything else.
+     */
+    readonly firstNoticePreamble: string;
+  };
 } = {
   applicationAlert: {
     subject: "An application is waiting",
@@ -218,5 +239,24 @@ Please answer in your own words. There are no "correct" answers — the purpose 
 
 You can reply directly to this email with your answers.`,
     },
+  },
+
+  memberNotice: {
+    why: `You are receiving this because you are a member of the Restore Europa
+Movement. This is not the journal, which is a separate list you would have
+subscribed to yourself.`,
+    reply: `This message was sent automatically, and nobody reads the address it came
+from. Anything you want to say to us reaches a person at {contact}.`,
+    stop: `If you would rather not receive these, stop them here and remain a member:
+{stop}`,
+    firstNoticePreamble: `Before anything else: this is the first message of its kind we have sent, and
+when you applied the privacy note said that joining would put you on no
+mailing list. That was true of applicants and it is still true of them — an
+application still brings one acknowledgement and nothing more. What has
+changed is that accepted members now hear from the movement about its own
+affairs, which is what this is. The privacy note has been rewritten to say so.
+
+If that is not what you want, there is a link at the bottom of this message
+that stops it. Using it does not affect your membership in any way.`,
   },
 };

@@ -426,6 +426,66 @@ ${SITE_URL}`,
   };
 }
 
+/**
+ * A notice written to the membership.
+ *
+ * **English, like the rest of the operator's text**, and for a blunter reason
+ * than `vettingLetter`'s. The body is typed by an administrator into a box;
+ * there is no sixth edition of a sentence that was written once, and a
+ * dictionary cannot translate text it has never seen. Wrapping English prose
+ * in a German frame would only make the message look like a translation that
+ * had failed. If notices are ever to arrive in a member's own language, the
+ * missing piece is the operator writing six versions, not a key in `de.ts`.
+ *
+ * Three things are added to whatever was typed, and each is load-bearing.
+ *
+ * The first says why the message arrived. A political movement writing
+ * unbidden to somebody's inbox owes them that sentence, and it is also the
+ * practical difference between a reader who remembers joining and one who
+ * reaches for "report spam" — which would cost the delivery of every later
+ * message to every other member.
+ *
+ * The second says where a reply goes. The sending domain has no mailbox, so a
+ * reply to this message bounces; pointing at the contact form is the same fix
+ * the acknowledgement needed and for the same reason.
+ *
+ * The third stops the next one. It is a link rather than an instruction to
+ * write in, because a member who wants out should not have to ask a person for
+ * it, and `List-Unsubscribe` puts the mail client's own control beside it.
+ * `List-Unsubscribe-Post` is deliberately absent here exactly as it is for the
+ * journal — see `listHeaders` in `lib/admin/dispatch.ts`. The page asks for a
+ * press, so one-click cannot honestly be declared.
+ */
+/**
+ * Where the link at the foot of a notice points.
+ *
+ * Exported because the send needs the same address twice — once in the text
+ * and once in `List-Unsubscribe` — and two places building it from the token
+ * is how the header and the link drift apart.
+ */
+export function noticeStopUrl(optOutToken: string): string {
+  return `${SITE_URL}/notices/stop?token=${encodeURIComponent(optOutToken)}`;
+}
+
+export function memberNotice(subject: string, body: string, optOutToken: string): Message {
+  const text = operatorText.memberNotice;
+  const stopUrl = noticeStopUrl(optOutToken);
+
+  return {
+    subject,
+    text: `${body.trim()}
+
+${signature}
+
+--
+${text.why}
+
+${fill(text.reply, { contact: `${SITE_URL}${routes.contact}` })}
+
+${fill(text.stop, { stop: stopUrl })}`,
+  };
+}
+
 export function enquiryAlert(unread: number): Message {
   const text = operatorText.enquiryAlert;
   return {

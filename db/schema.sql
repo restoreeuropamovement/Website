@@ -376,8 +376,27 @@ ALTER TABLE member
   CHECK (status IN ('new', 'reviewing', 'awaiting', 'confirmed', 'declined'));
 ALTER TABLE member ALTER COLUMN status SET DEFAULT 'new';
 
+-- When this member asked to stop receiving notices, if they have.
+--
+-- A column rather than a deletion, because the two mean opposite things. Asking
+-- not to be written to is not resigning from the movement, and erasing the row
+-- would both lose a member and leave nothing to stop the next send from writing
+-- to them again if they ever reapplied.
+--
+-- Null for everyone who has not asked, which is why the send filters on IS NULL
+-- rather than on a boolean. There is no opt-*in* column, because membership is
+-- the opt-in: /privacy says that once an application is accepted the movement
+-- writes to its members about its own affairs, and that sentence is the consent
+-- the column records exceptions to.
+ALTER TABLE member ADD COLUMN IF NOT EXISTS notices_opt_out_at timestamptz;
+
 CREATE INDEX IF NOT EXISTS member_country_idx ON member (country);
 CREATE INDEX IF NOT EXISTS member_status_idx ON member (status, created_at DESC);
+
+-- Who a notice would reach: confirmed, and not opted out. The partial index
+-- matches the predicate in `recipientsForNotice` exactly.
+CREATE INDEX IF NOT EXISTS member_notice_audience_idx
+  ON member (created_at) WHERE status = 'confirmed' AND notices_opt_out_at IS NULL;
 
 -- Who answers for what: the offices somebody holds in the movement.
 --
@@ -569,6 +588,30 @@ CREATE TABLE IF NOT EXISTS newsletter_dispatch (
   recipients   integer NOT NULL DEFAULT 0,
   failures     integer NOT NULL DEFAULT 0
 );
+
+-- One row per notice written to the membership.
+--
+-- The counterpart of `newsletter_dispatch`, and deliberately not the same
+-- table: a notice is composed in the admin surface and exists nowhere else, so
+-- there is no slug to make unique and nothing to collide with. What takes the
+-- place of that constraint is that the row is written before a single message
+-- leaves, so a notice interrupted halfway is still visible as having happened.
+--
+-- The subject is held in the clear and the body is not held at all. The subject
+-- is operator-written and names no person — it is the one part worth showing in
+-- a list of what has been sent. Keeping the body would turn this into an
+-- archive of everything the movement has ever said to its members, sitting
+-- beside the roll it was said to, which is a worse thing to steal than either.
+CREATE TABLE IF NOT EXISTS member_notice (
+  id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  subject    text NOT NULL,
+  sent_at    timestamptz NOT NULL DEFAULT now(),
+  -- Counts, not addresses, exactly as in `newsletter_dispatch`.
+  recipients integer NOT NULL DEFAULT 0,
+  failures   integer NOT NULL DEFAULT 0
+);
+
+CREATE INDEX IF NOT EXISTS member_notice_sent_idx ON member_notice (sent_at DESC);
 
 -- ---------------------------------------------------------------------------
 -- Gatherings
