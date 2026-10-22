@@ -38,6 +38,11 @@ function NoDatabase({ what }: { readonly what: string }) {
 /**
  * Readers in the last ninety seconds.
  *
+ * Readers, not open tabs: a tab goes quiet once it is hidden or has sat
+ * untouched for five minutes, and drops out of this count when it does. The
+ * figure is therefore smaller than the number of people who have the site
+ * open somewhere, and is the more useful of the two.
+ *
  * Presented as a plain count with no auto-refresh. A number that moves on its
  * own invites watching it, and this one is a diagnostic rather than a
  * scoreboard; the page reloads when somebody asks it to.
@@ -54,7 +59,7 @@ export function LiveNow({ live }: { readonly live: Live | undefined }) {
   return (
     <Panel
       title="Reading now"
-      caption="Tabs seen in the last ninety seconds. Refresh for a newer figure."
+      caption="Tabs being read in the last ninety seconds. Refresh for a newer figure."
     >
       <p className="numerals-tabular font-serif text-display-2 leading-none text-ink">
         {num(live.total)}
@@ -88,8 +93,10 @@ export function LiveNow({ live }: { readonly live: Live | undefined }) {
 /**
  * How long each page holds a reader.
  *
- * Foreground time only: a tab open in a background window accumulates
- * nothing, which is the difference between time spent reading and time spent
+ * Foreground time only, and only up to the last sign of life: a tab open in a
+ * background window accumulates nothing, and a reading ends five minutes
+ * after the last scroll or keystroke rather than when the page is finally
+ * closed. That is the difference between time spent reading and time spent
  * existing. The mean is printed beside the total because a large total is
  * ambiguous on its own — it is equally the mark of one absorbing page and of
  * a great many indifferent ones.
@@ -114,7 +121,7 @@ export function ReadingTime({
   return (
     <Panel
       title="Time on page"
-      caption={`Foreground seconds per reading, last ${days} days. A hidden tab counts for nothing.`}
+      caption={`Foreground seconds per reading, last ${days} days. A hidden tab counts for nothing, and a reading ends at the last sign of life.`}
       span
     >
       {engagement.rows.length === 0 ? (

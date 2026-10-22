@@ -24,37 +24,41 @@ import { routes } from "@/lib/site";
  */
 
 /**
- * Whether the beacon runs at all. **Off unless switched on**, which is the
- * reverse of how this started, and the reversal was paid for.
+ * Whether the beacon runs at all. **On unless switched off**, and the reason
+ * that is safe is not in this file.
  *
- * It used to read `PULSE_DISABLED`, so absence meant enabled, on the argument
- * that a measurement which silently stopped because a variable was never set
- * would be discovered weeks later as a figure nobody could explain. That
- * argument was right about the failure it described and wrong about which
- * failure was worse.
+ * What happened when it was last on by default: every open tab posted a
+ * heartbeat twice a minute for as long as it existed — hidden, idle or
+ * abandoned, it made no difference. Each beat is three writes, and the writes
+ * were never the cost. A serverless Postgres sleeps after five minutes of
+ * silence and is billed for the hours it is awake, so the bill follows how
+ * much of the day something is talking to it and not how often. One forgotten
+ * tab answered "all of it". The month's compute allowance went on measuring
+ * who was reading, the provider suspended the project, and the membership
+ * form spent that time returning a server error to anybody who filled it in.
+ * Analytics took down the intake.
  *
- * What actually happened: every open tab posts a heartbeat twice a minute, and
- * each one is three writes. The writes are trivial. Keeping the database awake
- * is not — a serverless Postgres sleeps after five minutes of silence and is
- * billed for the hours it is awake, so a heartbeat from any reader anywhere
- * means it never sleeps at all. The month's compute allowance went on
- * measuring who was reading, the provider suspended the project, and the
- * membership form spent that time returning a server error to anybody who
- * filled it in. Analytics took down the intake.
+ * The obvious repair — beat less often — would have saved nothing at all, and
+ * that is the thing worth remembering here. A ping every five minutes keeps a
+ * database awake exactly as thoroughly as a ping every thirty seconds. What
+ * was needed was for the beacon to stop when there is nobody there, which is
+ * now what `IDLE_MS` in `components/layout/Pulse.tsx` makes it do. Awake time
+ * is therefore bounded by time actually spent reading the site rather than by
+ * time spent having it open, and on a site this size those two differ by more
+ * than an order of magnitude.
  *
- * So the default is now the safe one. A beacon that is off when nobody asked
- * for it costs a dashboard figure; a beacon that is on when nobody asked for
- * it costs the database. The first is noticed by one administrator looking at
- * a panel, which is the whole of the original objection, and it is a smaller
- * thing than the second by every measure that matters.
+ * Hence the default comes back. The original argument for it stands and was
+ * never the thing that failed: a measurement that silently stopped because a
+ * variable was never set is a figure nobody can explain weeks later.
  *
- * Read per request in the route. The site chrome reads it too, so on a
- * prerendered page the answer is fixed at build and changing it needs a
- * deploy — which is the right trade for not shipping a client-side timer to
- * every reader in order to have it do nothing.
+ * `PULSE_DISABLED="true"` is the way out if the sums ever stop working. The
+ * route refuses on the next request; the chrome stops mounting the timer at
+ * the next build, because it is read there too and most pages are prerendered
+ * — which is the right trade for not shipping a client-side timer to every
+ * reader in order to have it do nothing.
  */
 export function pulseEnabled(): boolean {
-  return process.env.PULSE_ENABLED === "true";
+  return process.env.PULSE_DISABLED !== "true";
 }
 
 /** How long a heartbeat counts for. Two missed beats and a reader is gone. */

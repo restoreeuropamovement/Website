@@ -15,6 +15,11 @@ import { localeFromPath } from "@/lib/i18n";
  * site's promise to set nothing on your device literally true and keeps the
  * consent banner unnecessary.
  *
+ * It is also silent whenever there is nothing to report: a hidden tab and a
+ * tab nobody has touched for five minutes both stop talking to the server
+ * altogether. See `IDLE_MS`, which is the part of this file that decides what
+ * the whole measurement costs.
+ *
  * Renders nothing.
  */
 
@@ -31,6 +36,33 @@ function tabToken(): string {
 
 /** Often enough to survive the ninety-second window, rare enough to be cheap. */
 const HEARTBEAT_MS = 30_000;
+
+/**
+ * How long a tab may go without a sign of life before it stops reporting.
+ *
+ * This constant, and not the interval above, is what the measurement costs.
+ * A serverless database is billed for the hours it is awake and sleeps after
+ * five minutes of silence, so the bill follows how much of the day something
+ * is talking to it and not how often. Halving the heartbeat would have saved
+ * nothing; one forgotten tab beating away at any rate at all keeps the
+ * database awake around the clock, and that is precisely what happened.
+ *
+ * So the beacon reports only while the tab is visible and only while somebody
+ * is still doing something in it. Five minutes of stillness and it goes quiet
+ * until the next scroll, keypress or movement, which also ends the reading —
+ * a page is held by a reader for as long as there is a reader, not for as
+ * long as it is on the screen.
+ */
+const IDLE_MS = 5 * 60_000;
+
+/**
+ * What counts as somebody still being there.
+ *
+ * Deliberately coarse. Anything finer would be a behavioural record, and the
+ * only thing done with these events is to move a timestamp held in a local
+ * variable — nothing about them is sent anywhere or written down.
+ */
+const ACTIVITY = ["pointerdown", "pointermove", "keydown", "wheel", "touchstart", "scroll"] as const;
 
 interface Beacon {
   readonly token: string;
@@ -82,38 +114,76 @@ export function Pulse() {
     const id = tabToken();
 
     engaged.current = 0;
-    since.current = document.visibilityState === "visible" ? Date.now() : undefined;
+    since.current = undefined;
 
-    const banked = () => {
-      const running = since.current === undefined ? 0 : Date.now() - since.current;
+    /** The timer, and by its existence whether this tab is reporting at all. */
+    let timer: number | undefined;
+    let lastActive = Date.now();
+
+    /** Foreground seconds so far, counted up to `until`. */
+    const banked = (until: number) => {
+      const running = since.current === undefined ? 0 : Math.max(0, until - since.current);
       return Math.round((engaged.current + running) / 1000);
     };
 
-    send({ token: id, path, locale }, false);
-    const timer = window.setInterval(() => send({ token: id, path, locale }, false), HEARTBEAT_MS);
-
-    const onVisibility = () => {
-      if (document.visibilityState === "visible") {
-        since.current = Date.now();
-        send({ token: id, path, locale }, false);
-        return;
-      }
-
-      /*
-       * Hiding is reported as leaving. On a phone this is usually the last
-       * event a page gets, so the reading is banked here rather than gambled
-       * on `pagehide` firing later; coming back re-announces presence above.
-       */
-      if (since.current !== undefined) {
-        engaged.current += Date.now() - since.current;
-        since.current = undefined;
-      }
-      send({ token: id, path, locale, seconds: banked(), leaving: true }, true);
-      engaged.current = 0;
+    /** Announce presence and start beating. Ignored unless the tab is visible. */
+    const begin = () => {
+      if (timer !== undefined || document.visibilityState !== "visible") return;
+      since.current = Date.now();
+      send({ token: id, path, locale }, false);
+      timer = window.setInterval(beat, HEARTBEAT_MS);
     };
 
-    const onPageHide = () => send({ token: id, path, locale, seconds: banked(), leaving: true }, true);
+    /**
+     * Stop reporting, banking the reading up to `until`.
+     *
+     * The reading and the departure go in one beacon because `sendBeacon`
+     * during `pagehide` gets a single chance, and a second request would
+     * simply not be delivered.
+     */
+    const end = (until: number, unloading: boolean) => {
+      if (timer === undefined) return;
+      window.clearInterval(timer);
+      timer = undefined;
 
+      const seconds = banked(until);
+      since.current = undefined;
+      engaged.current = 0;
+      send({ token: id, path, locale, seconds, leaving: true }, unloading);
+    };
+
+    /*
+     * The reading is banked up to the last sign of life rather than up to the
+     * moment the stillness was noticed, so the five minutes spent deciding
+     * that nobody is there are not themselves counted as reading.
+     */
+    const beat = () => {
+      if (Date.now() - lastActive >= IDLE_MS) end(lastActive, false);
+      else send({ token: id, path, locale }, false);
+    };
+
+    const onActivity = () => {
+      lastActive = Date.now();
+      begin();
+    };
+
+    /*
+     * Hiding is reported as leaving. On a phone this is usually the last
+     * event a page gets, so the reading is banked here rather than gambled on
+     * `pagehide` firing later; coming back re-announces presence.
+     */
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") onActivity();
+      else end(Date.now(), true);
+    };
+
+    const onPageHide = () => end(Date.now(), true);
+
+    begin();
+
+    for (const event of ACTIVITY) {
+      document.addEventListener(event, onActivity, { passive: true });
+    }
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pagehide", onPageHide);
 
@@ -124,10 +194,15 @@ export function Pulse() {
      * row here would make them flicker out of the live count between pages.
      */
     return () => {
-      window.clearInterval(timer);
+      for (const event of ACTIVITY) document.removeEventListener(event, onActivity);
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pagehide", onPageHide);
-      const seconds = banked();
+
+      if (timer === undefined) return;
+      window.clearInterval(timer);
+      timer = undefined;
+
+      const seconds = banked(Date.now());
       if (seconds >= 1) send({ token: id, path, locale, seconds }, false);
     };
   }, [pathname]);
