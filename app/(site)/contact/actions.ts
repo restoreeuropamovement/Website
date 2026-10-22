@@ -29,7 +29,24 @@ const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 60 * 60;
 
+/**
+ * As with the intake: a configured database is not a reachable one, and an
+ * outage must say so rather than discard what somebody wrote. See the note on
+ * `submitMembershipApplication` for what went wrong and why nothing is mailed
+ * out to rescue the message.
+ */
 export async function submitEnquiry(
+  state: ContactState,
+  form: FormData,
+): Promise<ContactState> {
+  try {
+    return await recordEnquiry(state, form);
+  } catch {
+    return { status: "unavailable", errors: [] };
+  }
+}
+
+async function recordEnquiry(
   _state: ContactState,
   form: FormData,
 ): Promise<ContactState> {

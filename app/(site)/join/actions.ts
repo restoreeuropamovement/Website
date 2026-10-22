@@ -55,7 +55,45 @@ const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 60 * 60;
 
+/**
+ * The intake, with the database allowed to be absent *and* allowed to fail.
+ *
+ * `hasDatabase()` below answers whether a connection string was configured,
+ * which is not the same question as whether the database will answer, and the
+ * difference turned out to matter: the provider suspended the project over a
+ * quota, every call threw, and the action returned a server error. What the
+ * applicant saw was "this page couldn't load", and what they had typed was
+ * gone. A form that silently discards an application is the one failure this
+ * project refuses outright, and for a week it was the failure we had.
+ *
+ * So an outage is folded into the state that already existed for the case
+ * where there is nowhere to write: the reader is told the roll is not
+ * accepting applications and invited to come back, which is true, rather than
+ * being shown a crash that implies they did something wrong.
+ *
+ * Nothing is mailed to anybody on this path. The obvious rescue — post the
+ * application to an administrator so it is not lost — would put a name, an
+ * address and a political opinion into an inbox, which is precisely what the
+ * encrypted column and the passkey exist to prevent. Losing the submission is
+ * the lesser harm, and saying so plainly is the honest response to it.
+ *
+ * The catch is deliberately broad. Distinguishing "the provider refused" from
+ * any other throw would mean matching on error text owned by somebody else,
+ * and every outcome here is the same for the person at the keyboard: nothing
+ * was written, so nothing may be claimed.
+ */
 export async function submitMembershipApplication(
+  state: JoinState,
+  form: FormData,
+): Promise<JoinState> {
+  try {
+    return await recordApplication(state, form);
+  } catch {
+    return { status: "unavailable", errors: [] };
+  }
+}
+
+async function recordApplication(
   _state: JoinState,
   form: FormData,
 ): Promise<JoinState> {

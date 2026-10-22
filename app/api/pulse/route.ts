@@ -6,6 +6,7 @@ import {
   dropPresence,
   isPresenceToken,
   normaliseRoute,
+  pulseEnabled,
   readLocale,
   recordEngagement,
   recordPresence,
@@ -62,23 +63,6 @@ const BEACON_WINDOW_SECONDS = 300;
  */
 const GLOBAL_BEACON_LIMIT = 12_000;
 
-/**
- * Turns the beacon off without touching the code.
- *
- * Analytics is the one thing here that is purely nice to have, so it should be
- * the first thing surrendered when the site is under load or costing money —
- * and that decision should not require someone to be calm enough to write a
- * patch. Read per request, so where the host can change a variable without a
- * rebuild it takes effect without one.
- *
- * Absence means enabled. A measurement that silently stopped because a variable
- * was never set would be discovered weeks later, in the form of a figure nobody
- * could explain.
- */
-function disabled(): boolean {
-  return process.env.PULSE_DISABLED === "true";
-}
-
 /*
  * Constructed per call rather than shared. A `Response` carries a stream that
  * is consumed when it is sent, so one instance handed to two requests is a
@@ -125,7 +109,7 @@ export async function POST(request: Request): Promise<NextResponse> {
    * exactly as configured.
    */
   if (!hasDatabase()) return NO_CONTENT();
-  if (disabled()) return NO_CONTENT();
+  if (!pulseEnabled()) return NO_CONTENT();
   if (!sameOrigin(request)) return NO_CONTENT();
 
   let payload: unknown;

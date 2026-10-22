@@ -5,6 +5,7 @@ import { Pulse } from "@/components/layout/Pulse";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { getChrome } from "@/content/chrome";
 import { DEFAULT_LOCALE, localeTag, type Locale } from "@/lib/i18n";
+import { pulseEnabled } from "@/lib/pulse";
 
 /**
  * The public site's frame, in one language.
@@ -53,8 +54,13 @@ export async function SiteChrome({
        * Presence and reading time, which Vercel does not measure. Mounted
        * beside the counter and for the same reason: scoped to the public site
        * so the figures describe readers rather than our own editing.
+       *
+       * Off unless `PULSE_ENABLED` says otherwise, and gated here as well as in
+       * the route so that a reader whose beacons would be refused is not sent a
+       * timer to fire them. See `pulseEnabled` for what switching this on costs
+       * on a database that is billed for being awake.
        */}
-      <Pulse />
+      {pulseEnabled() ? <Pulse /> : null}
     </div>
   );
 }

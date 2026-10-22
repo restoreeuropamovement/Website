@@ -38,7 +38,25 @@ const EMAIL = /^[^\s@]+@[^\s@.]+(\.[^\s@.]+)+$/;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 60 * 60;
 
+/**
+ * As with the intake. One extra reason here: this action must answer
+ * identically whatever is already stored, or it becomes an oracle for testing
+ * who reads the letter — and a server error is a distinguishable answer. An
+ * outage that crashed on some addresses and not others would leak exactly what
+ * the uniform reply exists to hide.
+ */
 export async function subscribe(
+  state: NewsletterState,
+  form: FormData,
+): Promise<NewsletterState> {
+  try {
+    return await recordSubscription(state, form);
+  } catch {
+    return { status: "unavailable", errors: [] };
+  }
+}
+
+async function recordSubscription(
   _state: NewsletterState,
   form: FormData,
 ): Promise<NewsletterState> {
