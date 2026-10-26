@@ -219,7 +219,7 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
 
           <aside className="flex flex-col gap-10 border-t border-hairline pt-8 lg:sticky lg:top-24 lg:self-start lg:border-t-0 lg:pt-2">
             {/*
-              Ninety-eight positions, and until now an entry said nothing about
+              A hundred positions and more, and until now an entry said nothing about
               being one of them. The section it belongs to, and which of that
               section's entries it is — both counted from the catalogue's own
               order.

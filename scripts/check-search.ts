@@ -1,7 +1,7 @@
 /**
  * Guards the policy catalogue's search.
  *
- * A catalogue of ninety-eight positions is only as good as the chance of
+ * A catalogue of a hundred and one positions is only as good as the chance of
  * finding the one you came for, and the failure mode is silent: a reader who
  * types `abortoin`, or `gay marriage`, or a Polish noun in the genitive, and
  * is told nothing matches, concludes the movement has no position on their
@@ -19,7 +19,7 @@
  * Runs in `npm run check`. Needs no database, no key and no network.
  */
 import { getPolicy, type PolicyEdition } from "../content/policy";
-import { policySynonymGroupIds } from "../content/policy/structure";
+import { policyStructure, policySynonymGroupIds } from "../content/policy/structure";
 import { LOCALES, type Locale } from "../lib/i18n";
 import { runPolicyQuery } from "../lib/policy";
 import {
@@ -129,7 +129,14 @@ function expectFinds(edition: PolicyEdition, q: string, slug: string): void {
 
 function english(edition: PolicyEdition): void {
   const all = runPolicyQuery(edition, {});
-  check("an empty query returns the whole catalogue", all.entries.length === 98);
+  /*
+   * Counted from the structure rather than written down here. The literal
+   * that used to sit in this line was correct until the catalogue grew by
+   * three entries, at which point the one test guarding "a reader sees
+   * everything" became the one test standing between a correct catalogue and
+   * a green build.
+   */
+  check("an empty query returns the whole catalogue", all.entries.length === policyStructure.length);
   check("an empty query keeps catalogue order", all.ranked === false);
   check("an empty query offers no suggestions", all.suggestions.length === 0);
 

@@ -22,7 +22,8 @@ import {
  * position, and an entry that departs from existing law says so in its own
  * words.
  *
- * Ninety-eight entries in six languages is the largest thing on the site, and
+ * A hundred and one entries in six languages is the largest thing on the site,
+ * and
  * the one where a translation drifting from the English would do the most
  * damage: these are the movement's stated positions on abortion, euthanasia,
  * capital punishment and the standing of religion in law. A reader in Polish
@@ -317,4 +318,4 @@ editions.set(DEFAULT_LOCALE, englishPolicy);
 export const policySlugs: readonly PolicySlug[] = englishPolicy.entries.map((e) => e.slug);
 
 /** ISO date of the catalogue as a whole. Structural: a date is not a word. */
-export const POLICY_DATE = "2026-09-23";
+export const POLICY_DATE = "2026-10-26";

@@ -1500,9 +1500,22 @@ export const policyText: PolicyText = {
 
     "economic-order": {
       title: "Economic Order",
-      shortAnswer: "Restore Europa rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
+      shortAnswer: "An order founded on private property, productive work and the widespread ownership of capital: distributist in ownership, corporatist in organization, subsidiary in administration.",
       position: [
-        "Restore Europa rejects both unrestricted capitalism and centralized socialism. Its economic ideal is distributist in ownership and corporatist in organization.",
+        "Restore Europa upholds an economic order founded on private property, productive work, family independence, fair competition, social responsibility and the widespread ownership of productive capital. The model is distributist in ownership, corporatist in professional organization, and guided by subsidiarity in public administration.",
+        "Economic power should not become excessively concentrated in either a small number of corporations or a centralized state. Markets and entrepreneurship remain essential instruments of cooperation, investment and innovation, and their operation must respect human dignity, just employment conditions, lawful competition and the common good.",
+      ],
+      policies: [
+        "Treat private property, productive work and family independence as the foundations of economic life.",
+        "Keep markets and entrepreneurship as instruments of cooperation and investment rather than as ends in themselves.",
+        "Resist the concentration of economic power in a few corporations and in the central state alike.",
+        "Organize professions through representative institutions rather than through the state directly.",
+        "Settle economic questions at the lowest level of administration competent to decide them.",
+      ],
+      principle: "Not dependence on the state, nor productive property in a few private hands, but families, workers and communities with economic independence of their own.",
+      limits: [
+        "Distributism does not require the abolition of large enterprises, wage employment, financial markets or private investment.",
+        "It requires neither compulsory cooperativization nor the arbitrary confiscation of property.",
       ],
       keywords: [
         "economy",
@@ -1510,6 +1523,7 @@ export const policyText: PolicyText = {
         "corporatism",
         "capitalism",
         "socialism",
+        "subsidiarity",
       ],
     },
 
@@ -1517,57 +1531,159 @@ export const policyText: PolicyText = {
       title: "Private Property and Broad Ownership",
       shortAnswer: "Property is a source of independence and responsibility. The answer to concentration is wider ownership, not the abolition of property.",
       position: [
-        "Private property is a source of independence and responsibility. The response to excessive concentration is wider ownership rather than the abolition of property.",
+        "Private property is a source of independence and responsibility, and the response to excessive concentration is wider ownership rather than the abolition of property. Public policy should expand the practical opportunities households have to acquire productive property of their own.",
+        "Such property is acquired principally through enterprise formation, saving, investment, voluntary transfer, inheritance and lawful financing. Public assistance should lower the genuine barriers to acquiring it without guaranteeing private profits or moving an owner's investment risk onto the taxpayer.",
       ],
       policies: [
-        "Widespread home ownership.",
-        "Family-owned enterprises.",
-        "Independent craftsmen and trades.",
-        "Small and medium-sized firms.",
-        "Cooperatives and employee ownership.",
-        "Family agriculture.",
-        "Local and regional banking.",
+        "Independent businesses and professional practices.",
+        "Family enterprises and farms.",
+        "Employee shares and cooperative membership.",
+        "Productive equipment and workshops.",
+        "Diversified savings and investments.",
+        "Residential property and other legitimate productive assets.",
       ],
       principle: "Many proprietors rather than few.",
+      limits: [
+        "Assistance lowers the barriers to ownership; it does not guarantee that an investment will return a profit.",
+        "Risk that belongs to an owner is not transferred to the public.",
+      ],
       keywords: [
         "property",
         "ownership",
         "distributism",
         "cooperatives",
-        "smallholders",
+        "savings",
+        "inheritance",
+      ],
+    },
+
+    "family-business-and-small-enterprise": {
+      title: "Family Business and Small Enterprise",
+      shortAnswer: "Smaller and family-owned firms should have fair access to finance, procurement and premises, and a viable business should be able to pass to the next generation.",
+      position: [
+        "Family-owned and smaller enterprises should receive fair access to financing, public procurement, commercial premises and administrative services. Business formation and ordinary compliance requirements should be simplified wherever that is possible without weakening worker protection, consumer safety or fiscal enforcement.",
+        "Succession policy should allow a viable family enterprise to continue operating rather than be broken up to meet a tax bill. Where a business does fail, the law should offer a predictable route through insolvency and restructuring, including a reasonable opportunity to begin again.",
+      ],
+      policies: [
+        "Give family-owned and smaller firms fair access to financing, public procurement and commercial premises.",
+        "Simplify business formation and routine compliance without weakening protection for workers or consumers.",
+        "Allow relief on business succession where the enterprise continues in genuine productive activity.",
+        "Guard that relief against artificial fragmentation arranged in order to qualify for it.",
+        "Provide predictable insolvency and restructuring law, with a reasonable opportunity for a second start.",
+      ],
+      limits: [
+        "Simplification stops where it would weaken worker protection, consumer safety or fiscal enforcement.",
+        "Relief follows genuine productive activity, never a business form adopted in order to obtain it.",
+      ],
+      keywords: [
+        "family business",
+        "small business",
+        "enterprise",
+        "succession",
+        "insolvency",
+        "procurement",
+      ],
+    },
+
+    "worker-ownership-and-cooperatives": {
+      title: "Worker Ownership and Cooperatives",
+      shortAnswer: "Cooperatives, employee ownership and profit-sharing are legitimate ways of spreading productive property, and taking part in them must remain voluntary.",
+      position: [
+        "Restore Europa recognizes worker cooperatives, employee ownership trusts, direct employee shareholding and profit-sharing arrangements as legitimate means of distributing productive property. Employee buyouts and succession transfers may receive appropriately regulated access to finance where an independent assessment establishes that the business is commercially viable.",
+        "Participation remains voluntary. No employee should be compelled to buy shares in their employer or to place their savings in the same enterprise that already provides their income, because that concentrates the risk a household carries instead of spreading it.",
+      ],
+      policies: [
+        "Recognize cooperatives, ownership trusts, employee shareholding and profit-sharing in law.",
+        "Keep participation in worker ownership voluntary in every form it takes.",
+        "Open regulated finance to employee buyouts and succession transfers assessed as viable.",
+        "Require cooperatives to hold legal personality, transparent accounts and democratic internal governance.",
+        "Give cooperatives access to ordinary business and insolvency law.",
+      ],
+      limits: [
+        "Cooperative or social status exempts no firm from competition, consumer or financial regulation.",
+        "No worker may be required to risk their income and their savings in the same enterprise.",
+      ],
+      keywords: [
+        "cooperatives",
+        "employee ownership",
+        "worker ownership",
+        "profit sharing",
+        "buyouts",
       ],
     },
 
     "corporations-and-monopolies": {
-      title: "Corporations and Monopolies",
-      shortAnswer: "Corporations are legitimate instruments but remain subordinate to the common good, and concentrated corporate power may be restrained.",
+      title: "Corporations, Industry and Competition",
+      shortAnswer: "Large enterprises are legitimate where their scale is necessary or useful. What policy restrains is abusive dominance, not size as such.",
       position: [
-        "Corporations are legitimate instruments but must remain subordinate to the common good. Excessive concentrated corporate power may be restrained.",
+        "Large enterprises remain legitimate where their scale is economically necessary or beneficial, and they remain subordinate to the common good. Distributism does not require artificially dividing every large factory, research institution, railway or industrial enterprise into small businesses.",
+        "What public policy addresses is abusive market dominance, exclusionary conduct and harmful concentration, through competition law administered independently of the government of the day. Industrial policy may support strategically important production, research, energy security, critical infrastructure and resilient supply chains.",
       ],
       policies: [
-        "Strong competition and anti-monopoly policy.",
-        "Restraint where firms dominate political institutions or essential markets.",
-        "Protection of viable communities, family life and political independence from destructive concentration.",
+        "Administer competition law independently, against abusive dominance and exclusionary conduct.",
+        "Restrain concentration where firms come to dominate political institutions or essential markets.",
+        "Support strategically important production, research, energy security and critical infrastructure.",
+        "Make industrial assistance transparent and subject to independent evaluation.",
+        "Protect viable communities, family life and political independence from destructive concentration.",
+      ],
+      limits: [
+        "Size alone is not an offence; the test is conduct and its effect on a market.",
+        "Industrial assistance is not permanent, and is withdrawn rather than left to subsidize an unviable enterprise.",
       ],
       keywords: [
         "corporations",
         "monopoly",
         "antitrust",
         "competition",
+        "industrial policy",
         "concentration",
+      ],
+    },
+
+    "trade-and-economic-sovereignty": {
+      title: "Trade and Economic Sovereignty",
+      shortAnswer: "Trade compatible with national resilience and fair competition — neither dependence on a single supplier nor the pretence that a country can make everything itself.",
+      position: [
+        "Restore Europa supports international trade compatible with national economic resilience, fair competition and the preservation of strategically important productive capabilities. A country should not pursue total economic autarky where specialization and trade provide substantial benefits.",
+        "Critical dependencies should be assessed deliberately rather than discovered during a crisis, through supply-chain resilience, strategic inventories, diversified sourcing and appropriate domestic production capacity. Measures concerning trade and investment must be reviewed against the European and international obligations that apply to them.",
+      ],
+      policies: [
+        "Assess critical dependencies in supply chains before they become strategic vulnerabilities.",
+        "Hold strategic inventories and diversify sourcing for essential goods.",
+        "Preserve domestic production capacity where a capability is strategically important.",
+        "Review trade and investment measures against applicable European and international obligations.",
+      ],
+      limits: [
+        "Autarky is not the objective; specialization and trade are accepted where the benefit is substantial.",
+        "Resilience is not a general licence to shelter industry that is merely uncompetitive.",
+      ],
+      keywords: [
+        "trade",
+        "tariffs",
+        "supply chains",
+        "sovereignty",
+        "resilience",
+        "autarky",
       ],
     },
 
     "guilds-chambers-and-corporatist-representation": {
       title: "Guilds, Chambers and Corporatist Representation",
-      shortAnswer: "Workers, employers, craftsmen, farmers and professions should participate in sectoral institutions setting standards, apprenticeships and labour conditions.",
+      shortAnswer: "Professional institutions should carry vocational formation, qualifications and sectoral dialogue, without replacing independent unions or closing an occupation to newcomers.",
       position: [
-        "Workers, employers, craftsmen, farmers and professions should participate in sectoral institutions capable of setting standards, apprenticeships, labour conditions and mediation mechanisms.",
+        "Modern professional institutions should support vocational formation, qualifications, employment standards, sectoral dialogue and the peaceful resolution of disputes. Sectoral councils may facilitate consultation and collective bargaining, subject to representative governance, legal oversight and competition safeguards.",
+        "Independent trade unions retain the right to represent workers and to negotiate collective agreements. Professional chambers stand beside them rather than in their place, and corporatism as a whole remains subordinate to subsidiarity.",
       ],
       policies: [
-        "Professional chambers and vocational corporations should remain sufficiently independent of centralized government.",
-        "Occupational organizations may have structured representation in public life.",
-        "Corporatism remains subordinate to subsidiarity.",
+        "Give professional chambers responsibility for vocational formation, qualifications and employment standards.",
+        "Keep those chambers sufficiently independent of centralized government.",
+        "Allow sectoral councils to facilitate consultation and bargaining under representative governance.",
+        "Preserve the right of independent unions to represent workers and negotiate agreements.",
+        "Subject sectoral institutions to legal oversight and competition safeguards.",
+      ],
+      limits: [
+        "No chamber replaces an independent union, or holds unchecked authority over entry into an occupation.",
+        "No guild or chamber may act as an unlawful cartel or raise arbitrary barriers against new entrepreneurs.",
       ],
       keywords: [
         "guilds",
@@ -1575,42 +1691,65 @@ export const policyText: PolicyText = {
         "corporatism",
         "apprenticeships",
         "trades",
+        "collective bargaining",
       ],
     },
 
     "finance-lending-and-usury": {
-      title: "Finance, Lending and Usury",
-      shortAnswer: "Finance should serve productive activity. Legitimate lending and reasonable return are accepted; exploitative interest and debt traps are not.",
+      title: "Finance, Lending and Access to Capital",
+      shortAnswer: "A diversified financial system serving productive activity. Legitimate lending and a reasonable return are accepted; exploitative interest and debt traps are not.",
       position: [
-        "Finance should serve productive activity. Restore Europa accepts legitimate lending and a reasonable return on capital, while opposing exploitative interest, predatory lending and debt traps.",
+        "Finance should serve productive activity. Restore Europa accepts legitimate lending and a reasonable return on capital while opposing exploitative interest, predatory lending and debt traps, and supports a diversified system of cooperative banks, regional banks, credit unions, commercial banks and responsibly governed public development institutions.",
+        "A distributist development-finance institution may support viable employee buyouts, cooperative enterprises, family business succession, independent entrepreneurship and productive investment in underserved regions. Public lending and guarantees require sound financial assessment, transparent reporting, independent supervision and a clear statement of the losses that may follow.",
       ],
       policies: [
-        "Tight restrictions or caps on payday-style predatory lending.",
-        "Transparent disclosure of the full cost of credit.",
-        "Restrictions on abusive late fees and compounding penalties.",
-        "Courts may void clearly unconscionable loan terms.",
-        "Policy should favour productive lending for homes, family businesses and long-term investment.",
-        "Local and regional banking encouraged.",
+        "Maintain a diversified system of cooperative, regional, commercial and development banks.",
+        "Direct development finance to employee buyouts, cooperatives, family succession and underserved regions.",
+        "Require sound assessment, transparent reporting and independent supervision of public lending.",
+        "Cap or tightly restrict payday-style predatory lending, and require full disclosure of the cost of credit.",
+        "Restrict abusive late fees and compounding penalties, and let courts void unconscionable terms.",
+        "Favour productive lending for homes, family businesses and long-term investment.",
       ],
-      keywords: ["finance", "usury", "interest", "lending", "debt", "banks"],
+      limits: [
+        "Political officials do not direct individual loans, and no loan is made for partisan purposes.",
+        "Household savings, pensions and deposits are not a compulsory source of speculative financing.",
+      ],
+      keywords: [
+        "finance",
+        "usury",
+        "interest",
+        "lending",
+        "banks",
+        "credit unions",
+      ],
     },
 
     "housing-and-financialization": {
       title: "Housing and Financialization",
       shortAnswer: "Housing should principally serve habitation and community rather than function as an endlessly appreciating financial asset.",
       position: [
-        "Housing should principally serve habitation and community rather than function primarily as an endlessly appreciating financial asset.",
+        "Housing should principally serve habitation and community rather than function primarily as an endlessly appreciating financial asset. Restore Europa supports widespread homeownership, viable family farms, housing cooperatives and the responsible stewardship of productive land.",
+        "Policy should work on supply and on finance together: improved construction capacity, appropriate planning reform, fair mortgage access, and measures against speculation where the harm it does can be demonstrated. Farm succession and land-access programmes should preserve viable agricultural production while respecting property rights and lawful competition.",
       ],
       policies: [
-        "Widespread home ownership is a central goal.",
-        "Speculative and concentrated ownership may be restrained where it prevents ordinary family ownership.",
+        "Make widespread owner-occupation a central objective of housing policy.",
+        "Improve construction capacity and reform planning where it obstructs appropriate family housing.",
+        "Secure fair mortgage access and predictable long-term finance.",
+        "Restrain speculative and concentrated ownership where it displaces ordinary family ownership.",
+        "Support housing cooperatives and locally rooted models of ownership.",
+        "Preserve viable agricultural production through farm succession and land-access programmes.",
+      ],
+      limits: [
+        "Measures address speculation that is demonstrably harmful, not ordinary ownership or saving.",
+        "Land and farm policy respects property rights and lawful competition.",
       ],
       keywords: [
         "housing",
         "home ownership",
         "rent",
         "speculation",
-        "landlords",
+        "land",
+        "agriculture",
       ],
     },
 
@@ -1618,14 +1757,28 @@ export const policyText: PolicyText = {
       title: "Work",
       shortAnswer: "Work has dignity but is not the purpose of human existence. Economic progress should increase security, leisure and command over one's own life.",
       position: [
-        "Work has dignity but is not the purpose of human existence. Economic progress should increase security, leisure, family time, meaningful work and command over one's life.",
+        "Work has dignity but is not the purpose of human existence. Economic progress should increase security, leisure, family time, meaningful work and command over one's own life, and independent self-employment and ordinary salaried work remain equally legitimate choices.",
+        "Technological development should improve human welfare and productive capability rather than reduce workers and households to dependence on a narrow concentration of capital owners. What broadens the benefit of automation is employee participation in productivity gains, skills training, enterprise formation and access to productive technology.",
       ],
       policies: [
-        "Renewed social status for craftsmanship, agriculture, engineering, care work, teaching and skilled trades.",
-        "Productivity gains should not merely increase labour extraction.",
-        "Automation should not eliminate meaningful human participation solely for numerical efficiency.",
+        "Restore social standing to craftsmanship, agriculture, engineering, care work, teaching and skilled trades.",
+        "Direct part of productivity gains to security and leisure rather than to extraction alone.",
+        "Keep self-employment and salaried employment as equally legitimate ways to work.",
+        "Give employees a share in productivity gains, skills training and access to productive technology.",
+        "Protect workers against exploitative employment practices.",
       ],
-      keywords: ["work", "labour", "employment", "craftsmanship", "leisure"],
+      limits: [
+        "Automation should relieve genuinely degrading labour; removing human participation is not itself a goal.",
+        "Innovation is not to be prohibited merely because it raises productivity.",
+      ],
+      keywords: [
+        "work",
+        "labour",
+        "employment",
+        "craftsmanship",
+        "leisure",
+        "automation",
+      ],
     },
 
     "minimum-wage": {
@@ -1633,6 +1786,7 @@ export const policyText: PolicyText = {
       shortAnswer: "Every worker is entitled to a just wage sufficient for a dignified life and the reasonable support of a family.",
       position: [
         "Catholic social teaching sets a substantive just-wage standard rather than one universal statutory mechanism. Restore Europa therefore favours sectoral and regional wage-setting through representative institutions, backed by statutory protection where necessary.",
+        "Work should provide remuneration reflecting professional responsibility, working conditions, productivity and reasonable household needs. Wage policy has to weigh employment opportunities, the viability of small enterprises and the effect on consumer prices at the same time, which is why the level is settled sector by sector rather than announced for a continent.",
       ],
       policies: [
         "Establish the principle of a legally protected just wage.",
@@ -1642,6 +1796,10 @@ export const policyText: PolicyText = {
         "Take family needs into account rather than treating individual subsistence as the sole standard.",
         "Use family allowances or child benefits where appropriate so that raising children does not create an unreasonable economic penalty.",
         "Consider enterprise viability, productivity and employment opportunities.",
+      ],
+      limits: [
+        "No single rate is prescribed for Europa; the level is settled sectorally and regionally.",
+        "Sectoral standards are adjusted to regional conditions rather than imposed uniformly.",
       ],
       keywords: [
         "minimum wage",
@@ -1661,6 +1819,7 @@ export const policyText: PolicyText = {
       shortAnswer: "Taxation is legitimate for the common good but should be fair, family-sensitive, non-confiscatory and compatible with broad ownership, productive work and subsidiarity.",
       position: [
         "The tax system should finance legitimate public functions without becoming a mechanism for eliminating private property, discouraging family formation or unnecessarily centralizing social responsibilities.",
+        "What is raised and what is spent are one question, not two. Government expenditure and borrowing belong under transparent multiyear budgeting, independent audit and a sustainable management of the public debt, since a tax system judged on its own cannot show whether a country is living within its means.",
       ],
       policies: [
         "Apply taxes by clear law, reasonably and fairly.",
@@ -1673,9 +1832,11 @@ export const policyText: PolicyText = {
         "Protect ordinary family homes, farms and operating family businesses from inheritance-tax structures that force unnecessary liquidation.",
         "Remain cautious toward recurrent general wealth taxes that can tax illiquid property independently of income.",
         "Use reduced consumption-tax treatment for essentials where practicable.",
+        "Evaluate every tax incentive for its fiscal cost, its effectiveness and the avoidance it invites.",
       ],
       limits: [
         "Exact rates are not prescribed and remain a national implementation question.",
+        "No nominal business form is privileged where it carries no genuine productive or ownership benefit.",
       ],
       keywords: [
         "tax",
@@ -1695,6 +1856,7 @@ export const policyText: PolicyText = {
       shortAnswer: "A mixed pension system should combine basic old-age security with occupational provision, personal savings, family property and intergenerational responsibility.",
       position: [
         "Older people who have contributed to society should not face destitution, but retirement provision should not make citizens wholly dependent on one centralized state system.",
+        "A pension promise is a claim on a future economy, so the test of a system is whether it can be kept. Provision should therefore rest on several foundations at once — a basic public guarantee, occupational funds, household saving and family property — rather than on any single one of them.",
       ],
       policies: [
         "Guarantee a basic pension sufficient to protect elderly citizens from poverty.",
@@ -1704,6 +1866,10 @@ export const policyText: PolicyText = {
         "Avoid pension rules that structurally penalize marriage, parenthood or family care.",
         "Maintain fiscal sustainability so one generation does not impose unpayable obligations on the next.",
         "Permit national variation in the balance between public, occupational and private provision.",
+      ],
+      limits: [
+        "No retirement age or contribution rate is prescribed; both remain national questions.",
+        "Encouraging private saving is not a step toward withdrawing the basic public guarantee.",
       ],
       keywords: [
         "pensions",
@@ -1722,6 +1888,7 @@ export const policyText: PolicyText = {
       shortAnswer: "Housing should principally serve habitation and community, with policy aimed at widespread family ownership rather than permanent financial extraction.",
       position: [
         "Private property is protected, while proportionate restrictions may address practices that turn scarce housing into a vehicle for artificial scarcity, monopoly or speculative accumulation.",
+        "The restrictions set out below are the detailed form of that judgement. Each is aimed at a practice rather than at ownership itself, and each is proportionate to a scarcity that can be shown — which is also the condition on which it should be lifted.",
       ],
       policies: [
         "Make widespread owner-occupation a central housing objective.",
@@ -1734,6 +1901,10 @@ export const policyText: PolicyText = {
         "Protect family homes, family farms and ordinary inherited property from forced liquidation.",
         "Support cooperatives and locally rooted ownership models where they broaden meaningful ownership.",
         "Prefer proportionate tenant protections over rent-control systems that make new housing economically impossible.",
+      ],
+      limits: [
+        "Restrictions follow a demonstrated scarcity and are lifted when it no longer holds.",
+        "The target is a practice that withholds housing, never ownership or letting as such.",
       ],
       keywords: [
         "housing",
@@ -1752,6 +1923,7 @@ export const policyText: PolicyText = {
       shortAnswer: "Workers may organize independently, while labour relations should move toward a corporatist system of permanent sectoral institutions representing workers, employers and professions.",
       position: [
         "Restore Europa rejects both worker powerlessness before concentrated capital and permanent class conflict as the organizing principle of economic life.",
+        "Independent trade unions are part of the settlement rather than a stage on the way out of it. Workers retain freedom of association and lawful collective bargaining whatever sectoral institutions exist alongside them, because a chamber that has absorbed the union it was meant to sit beside represents nobody.",
       ],
       policies: [
         "Protect the right to form and join independent trade unions.",
@@ -1763,6 +1935,10 @@ export const policyText: PolicyText = {
         "Prevent unions from becoming compulsory organs of the state.",
         "Prevent employers from controlling supposedly independent worker organizations.",
         "Permit genuine plural representation rather than one state-controlled union.",
+      ],
+      limits: [
+        "Sectoral institutions are built beside independent unions, never out of them.",
+        "Nothing here makes membership of a union or a chamber a condition of working.",
       ],
       keywords: [
         "trade unions",

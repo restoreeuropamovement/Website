@@ -1563,11 +1563,32 @@ export const policyText: PolicyText = {
     "economic-order": {
       title: "Ordre économique",
       shortAnswer:
-        "Restore Europa refuse aussi bien le capitalisme sans frein que le socialisme centralisé. Son idéal économique est distributiste quant à la propriété et corporatiste quant à l'organisation.",
+        "Un ordre fondé sur la propriété privée, le travail productif et une propriété du capital largement répartie : distributiste quant à la propriété, corporatiste quant à l'organisation, subsidiaire quant à l'administration.",
       position: [
-        "Restore Europa refuse aussi bien le capitalisme sans frein que le socialisme centralisé. Son idéal économique est distributiste quant à la propriété et corporatiste quant à l'organisation.",
+        "Restore Europa défend un ordre économique fondé sur la propriété privée, le travail productif, l'indépendance de la famille, une concurrence loyale, la responsabilité sociale et une propriété du capital productif largement répartie. Le modèle est distributiste quant à la propriété, corporatiste quant à l'organisation professionnelle, et guidé par la subsidiarité dans l'administration publique.",
+        "La puissance économique ne doit se concentrer excessivement ni entre les mains d'un petit nombre de sociétés commerciales, ni entre celles d'un État centralisé. Le marché et l'entreprise demeurent des instruments essentiels de coopération, d'investissement et d'innovation, et leur fonctionnement doit respecter la dignité humaine, des conditions d'emploi justes, une concurrence licite et le bien commun.",
       ],
-      keywords: ["économie", "distributisme", "corporatisme", "capitalisme", "socialisme"],
+      policies: [
+        "Tenir la propriété privée, le travail productif et l'indépendance de la famille pour les fondements de la vie économique.",
+        "Maintenir le marché et l'entreprise comme instruments de coopération et d'investissement plutôt que comme fins en soi.",
+        "S'opposer à la concentration de la puissance économique aussi bien entre quelques sociétés commerciales qu'entre les mains de l'État central.",
+        "Organiser les professions par des institutions représentatives plutôt que directement par l'État.",
+        "Trancher les questions économiques à l'échelon administratif compétent le plus bas.",
+      ],
+      principle:
+        "Ni la dépendance envers l'État, ni la propriété productive entre quelques mains privées, mais des familles, des travailleurs et des communautés disposant de leur propre indépendance économique.",
+      limits: [
+        "Le distributisme n'exige pas l'abolition des grandes entreprises, du salariat, des marchés financiers ou de l'investissement privé.",
+        "Il n'exige ni une coopérativisation obligatoire, ni la confiscation arbitraire de la propriété.",
+      ],
+      keywords: [
+        "économie",
+        "distributisme",
+        "corporatisme",
+        "capitalisme",
+        "socialisme",
+        "subsidiarité",
+      ],
     },
 
     "private-property-and-broad-ownership": {
@@ -1575,59 +1596,164 @@ export const policyText: PolicyText = {
       shortAnswer:
         "La propriété est une source d'indépendance et de responsabilité. La réponse à la concentration est une propriété plus largement répartie, non l'abolition de la propriété.",
       position: [
-        "La propriété privée est une source d'indépendance et de responsabilité. La réponse à une concentration excessive est une propriété plus largement répartie plutôt que l'abolition de la propriété.",
+        "La propriété privée est une source d'indépendance et de responsabilité, et la réponse à une concentration excessive est une propriété plus largement répartie plutôt que l'abolition de la propriété. L'action publique doit élargir les possibilités concrètes qu'ont les ménages d'acquérir une propriété productive qui leur soit propre.",
+        "Une telle propriété s'acquiert principalement par la création d'entreprise, l'épargne, l'investissement, la transmission volontaire, l'héritage et un financement licite. Le soutien public doit abaisser les obstacles réels à son acquisition sans garantir des profits privés ni transférer au contribuable le risque d'investissement qui revient au propriétaire.",
       ],
       policies: [
-        "Une accession à la propriété du logement largement répandue.",
-        "Des entreprises familiales.",
-        "Des artisans et des métiers indépendants.",
-        "Des petites et moyennes entreprises.",
-        "Des coopératives et l'actionnariat salarié.",
-        "Une agriculture familiale.",
-        "Une banque locale et régionale.",
+        "Des entreprises indépendantes et des cabinets de profession libérale.",
+        "Des entreprises familiales et des exploitations agricoles familiales.",
+        "L'actionnariat salarié et le sociétariat coopératif.",
+        "Des équipements productifs et des ateliers.",
+        "Une épargne et des placements diversifiés.",
+        "La propriété du logement et d'autres actifs productifs légitimes.",
       ],
       principle: "Beaucoup de propriétaires plutôt que quelques-uns.",
+      limits: [
+        "Le soutien abaisse les obstacles à la propriété ; il ne garantit pas qu'un investissement rapportera un profit.",
+        "Le risque qui revient au propriétaire n'est pas transféré à la collectivité.",
+      ],
       keywords: [
         "propriété",
         "possession",
         "distributisme",
         "coopératives",
-        "petits propriétaires",
+        "épargne",
+        "héritage",
+      ],
+    },
+
+    "family-business-and-small-enterprise": {
+      title: "Entreprise familiale et petite entreprise",
+      shortAnswer:
+        "Les petites entreprises et les entreprises familiales doivent avoir un accès équitable au financement, à la commande publique et aux locaux, et une entreprise viable doit pouvoir passer à la génération suivante.",
+      position: [
+        "Les entreprises familiales et les petites entreprises doivent bénéficier d'un accès équitable au financement, aux marchés publics, aux locaux commerciaux et aux services administratifs. La création d'entreprise et les obligations courantes de conformité doivent être simplifiées partout où cela est possible sans affaiblir la protection des travailleurs, la sécurité des consommateurs ou le recouvrement de l'impôt.",
+        "Le régime de la transmission doit permettre à une entreprise familiale viable de poursuivre son activité plutôt que d'être démembrée pour acquitter une facture fiscale. Lorsqu'une entreprise échoue, la loi doit offrir un cheminement prévisible à travers l'insolvabilité et la restructuration, y compris une possibilité raisonnable de recommencer.",
+      ],
+      policies: [
+        "Donner aux entreprises familiales et aux petites entreprises un accès équitable au financement, aux marchés publics et aux locaux commerciaux.",
+        "Simplifier la création d'entreprise et la conformité courante sans affaiblir la protection des travailleurs ou des consommateurs.",
+        "Admettre un allègement à la transmission d'entreprise là où celle-ci poursuit une activité productive véritable.",
+        "Prémunir cet allègement contre un fractionnement artificiel organisé pour en bénéficier.",
+        "Prévoir un droit de l'insolvabilité et de la restructuration prévisible, offrant une possibilité raisonnable de repartir.",
+      ],
+      limits: [
+        "La simplification s'arrête là où elle affaiblirait la protection des travailleurs, la sécurité des consommateurs ou le recouvrement de l'impôt.",
+        "L'allègement suit une activité productive véritable, jamais une forme juridique adoptée pour l'obtenir.",
+      ],
+      keywords: [
+        "entreprise familiale",
+        "petite entreprise",
+        "PME",
+        "transmission d'entreprise",
+        "insolvabilité",
+        "marchés publics",
+      ],
+    },
+
+    "worker-ownership-and-cooperatives": {
+      title: "Propriété des travailleurs et coopératives",
+      shortAnswer:
+        "Les coopératives, l'actionnariat salarié et l'intéressement aux bénéfices sont des moyens légitimes de répartir plus largement la propriété productive, et la participation doit y demeurer volontaire.",
+      position: [
+        "Restore Europa reconnaît les coopératives de travailleurs, les fiducies de propriété salariée, l'actionnariat salarié direct et les dispositifs d'intéressement aux bénéfices comme des moyens légitimes de répartir la propriété productive. Les reprises par les salariés et les transmissions d'entreprise peuvent bénéficier d'un accès au financement dûment encadré lorsqu'une évaluation indépendante établit que l'entreprise est commercialement viable.",
+        "La participation demeure volontaire. Aucun salarié ne doit être contraint d'acheter des parts de son employeur ni de placer son épargne dans l'entreprise même qui lui fournit déjà son revenu, car cela concentre le risque que porte un ménage au lieu de le répartir.",
+      ],
+      policies: [
+        "Reconnaître en droit les coopératives, les fiducies de propriété, l'actionnariat salarié et l'intéressement aux bénéfices.",
+        "Maintenir volontaire la participation à la propriété salariée, sous quelque forme qu'elle prenne.",
+        "Ouvrir un financement encadré aux reprises par les salariés et aux transmissions jugées viables.",
+        "Exiger des coopératives la personnalité juridique, des comptes transparents et une gouvernance interne démocratique.",
+        "Donner aux coopératives accès au droit commun des sociétés et de l'insolvabilité.",
+      ],
+      limits: [
+        "Le statut coopératif ou social n'exonère aucune entreprise du droit de la concurrence, du droit de la consommation ou de la réglementation financière.",
+        "Aucun travailleur ne peut être tenu de risquer son revenu et son épargne dans la même entreprise.",
+      ],
+      keywords: [
+        "coopératives",
+        "actionnariat salarié",
+        "propriété des travailleurs",
+        "intéressement",
+        "reprise par les salariés",
       ],
     },
 
     "corporations-and-monopolies": {
-      title: "Sociétés commerciales et monopoles",
+      title: "Sociétés commerciales, industrie et concurrence",
       shortAnswer:
-        "Les sociétés commerciales sont des instruments légitimes mais demeurent subordonnées au bien commun, et la puissance économique concentrée peut être contenue.",
+        "Les grandes entreprises sont légitimes là où leur taille est nécessaire ou utile. Ce que l'action publique contient, c'est l'abus de position dominante, non la taille en elle-même.",
       position: [
-        "Les sociétés commerciales sont des instruments légitimes mais doivent demeurer subordonnées au bien commun. Une puissance économique concentrée excessive peut être contenue.",
+        "Les grandes entreprises demeurent légitimes là où leur taille est économiquement nécessaire ou bénéfique, et elles demeurent subordonnées au bien commun. Le distributisme n'exige pas de diviser artificiellement en petites entreprises chaque grande usine, chaque institut de recherche, chaque chemin de fer ou chaque entreprise industrielle.",
+        "Ce que l'action publique vise, ce sont les abus de position dominante, les pratiques d'éviction et les concentrations nuisibles, au moyen d'un droit de la concurrence appliqué indépendamment du gouvernement du moment. La politique industrielle peut soutenir les productions stratégiquement importantes, la recherche, la sécurité énergétique, les infrastructures critiques et des chaînes d'approvisionnement résilientes.",
       ],
       policies: [
-        "Une politique de concurrence et de lutte contre les monopoles vigoureuse.",
-        "Une mise sous contrainte là où des entreprises dominent les institutions politiques ou des marchés essentiels.",
-        "La protection des communautés viables, de la vie de famille et de l'indépendance politique contre une concentration destructrice.",
+        "Appliquer le droit de la concurrence de manière indépendante, contre les abus de position dominante et les pratiques d'éviction.",
+        "Contenir la concentration là où des entreprises en viennent à dominer les institutions politiques ou des marchés essentiels.",
+        "Soutenir les productions stratégiquement importantes, la recherche, la sécurité énergétique et les infrastructures critiques.",
+        "Rendre les aides industrielles transparentes et les soumettre à une évaluation indépendante.",
+        "Protéger les communautés viables, la vie de famille et l'indépendance politique contre une concentration destructrice.",
+      ],
+      limits: [
+        "La taille à elle seule n'est pas une faute ; le critère est le comportement et son effet sur un marché.",
+        "Les aides industrielles ne sont pas permanentes : elles sont retirées plutôt que laissées à subventionner une entreprise non viable.",
       ],
       keywords: [
         "sociétés commerciales",
         "monopole",
         "droit de la concurrence",
         "concurrence",
+        "politique industrielle",
         "concentration",
+      ],
+    },
+
+    "trade-and-economic-sovereignty": {
+      title: "Commerce et souveraineté économique",
+      shortAnswer:
+        "Un commerce compatible avec la résilience nationale et une concurrence loyale — ni la dépendance envers un fournisseur unique, ni la prétention qu'un pays puisse tout produire lui-même.",
+      position: [
+        "Restore Europa soutient un commerce international compatible avec la résilience économique nationale, une concurrence loyale et la préservation des capacités productives stratégiquement importantes. Un pays ne doit pas rechercher une autarcie économique totale là où la spécialisation et le commerce procurent des avantages substantiels.",
+        "Les dépendances critiques doivent être évaluées délibérément plutôt que découvertes au cours d'une crise, par la résilience des chaînes d'approvisionnement, des stocks stratégiques, une diversification des sources et une capacité de production nationale appropriée. Les mesures touchant au commerce et à l'investissement doivent être examinées au regard des obligations européennes et internationales qui leur sont applicables.",
+      ],
+      policies: [
+        "Évaluer les dépendances critiques dans les chaînes d'approvisionnement avant qu'elles ne deviennent des vulnérabilités stratégiques.",
+        "Constituer des stocks stratégiques et diversifier les sources d'approvisionnement pour les biens essentiels.",
+        "Préserver la capacité de production nationale là où un savoir-faire est stratégiquement important.",
+        "Examiner les mesures de commerce et d'investissement au regard des obligations européennes et internationales applicables.",
+      ],
+      limits: [
+        "L'autarcie n'est pas l'objectif : la spécialisation et le commerce sont admis là où l'avantage est substantiel.",
+        "La résilience n'est pas un blanc-seing pour abriter une industrie simplement non compétitive.",
+      ],
+      keywords: [
+        "commerce",
+        "droits de douane",
+        "chaînes d'approvisionnement",
+        "souveraineté",
+        "résilience",
+        "autarcie",
       ],
     },
 
     "guilds-chambers-and-corporatist-representation": {
       title: "Corps de métier, chambres et représentation corporatiste",
       shortAnswer:
-        "Les salariés, les employeurs, les artisans, les agriculteurs et les professions doivent prendre part à des institutions de branche fixant les règles, l'apprentissage et les conditions de travail.",
+        "Les institutions professionnelles doivent porter la formation professionnelle, les qualifications et le dialogue de branche, sans se substituer aux syndicats indépendants ni fermer un métier aux nouveaux venus.",
       position: [
-        "Les salariés, les employeurs, les artisans, les agriculteurs et les professions doivent prendre part à des institutions de branche capables de fixer les règles de la profession, l'apprentissage, les conditions de travail et les mécanismes de médiation.",
+        "Les institutions professionnelles modernes doivent soutenir la formation professionnelle, les qualifications, les normes d'emploi, le dialogue de branche et le règlement pacifique des différends. Des conseils de branche peuvent faciliter la consultation et la négociation collective, sous réserve d'une gouvernance représentative, d'un contrôle juridique et de garde-fous en matière de concurrence.",
+        "Les syndicats indépendants conservent le droit de représenter les travailleurs et de négocier des conventions collectives. Les chambres professionnelles se tiennent à côté d'eux et non à leur place, et le corporatisme dans son ensemble demeure subordonné à la subsidiarité.",
       ],
       policies: [
-        "Les chambres professionnelles et les corporations de métier doivent demeurer suffisamment indépendantes de l'administration centrale.",
-        "Les organisations professionnelles peuvent disposer d'une représentation structurée dans la vie publique.",
-        "Le corporatisme demeure subordonné à la subsidiarité.",
+        "Confier aux chambres professionnelles la responsabilité de la formation professionnelle, des qualifications et des normes d'emploi.",
+        "Maintenir ces chambres suffisamment indépendantes de l'administration centrale.",
+        "Permettre à des conseils de branche de faciliter la consultation et la négociation sous une gouvernance représentative.",
+        "Préserver le droit des syndicats indépendants de représenter les travailleurs et de négocier des conventions.",
+        "Soumettre les institutions de branche à un contrôle juridique et à des garde-fous en matière de concurrence.",
+      ],
+      limits: [
+        "Aucune chambre ne remplace un syndicat indépendant, ni ne détient un pouvoir sans contrôle sur l'accès à un métier.",
+        "Aucun corps de métier ni aucune chambre ne peut agir comme une entente illicite ni dresser des barrières arbitraires contre les nouveaux entrepreneurs.",
       ],
       keywords: [
         "corps de métier",
@@ -1635,25 +1761,31 @@ export const policyText: PolicyText = {
         "corporatisme",
         "apprentissage",
         "artisanat",
+        "négociation collective",
       ],
     },
 
     "finance-lending-and-usury": {
-      title: "Finance, crédit et usure",
+      title: "Finance, crédit et accès au capital",
       shortAnswer:
-        "La finance doit servir l'activité productive. Le prêt légitime et un rendement raisonnable sont admis ; l'intérêt abusif et les pièges de l'endettement ne le sont pas.",
+        "Un système financier diversifié au service de l'activité productive. Le prêt légitime et un rendement raisonnable sont admis ; l'intérêt abusif et les pièges de l'endettement ne le sont pas.",
       position: [
-        "La finance doit servir l'activité productive. Restore Europa admet le prêt légitime et un rendement raisonnable du capital, tout en s'opposant à l'intérêt abusif, au crédit prédateur et aux pièges de l'endettement.",
+        "La finance doit servir l'activité productive. Restore Europa admet le prêt légitime et un rendement raisonnable du capital, tout en s'opposant à l'intérêt abusif, au crédit prédateur et aux pièges de l'endettement, et soutient un système diversifié de banques coopératives, de banques régionales, de caisses de crédit mutuel, de banques commerciales et d'institutions publiques de développement gouvernées de façon responsable.",
+        "Une institution distributiste de financement du développement peut soutenir les reprises viables par les salariés, les entreprises coopératives, la transmission des entreprises familiales, l'entrepreneuriat indépendant et l'investissement productif dans les régions mal desservies. Les prêts et les garanties publics exigent une évaluation financière solide, une information transparente, une supervision indépendante et un exposé clair des pertes qui peuvent en découler.",
       ],
       policies: [
-        "Restrictions strictes ou plafonnement du crédit prédateur de type crédit sur salaire.",
-        "Information transparente sur le coût total du crédit.",
-        "Restrictions des pénalités de retard abusives et des intérêts composés punitifs.",
-        "Les tribunaux peuvent annuler des clauses de prêt manifestement léonines.",
-        "L'action publique doit favoriser le crédit productif destiné au logement, aux entreprises familiales et à l'investissement de long terme.",
-        "La banque locale et régionale encouragée.",
+        "Maintenir un système diversifié de banques coopératives, régionales, commerciales et de développement.",
+        "Orienter le financement du développement vers les reprises par les salariés, les coopératives, la transmission familiale et les régions mal desservies.",
+        "Exiger une évaluation solide, une information transparente et une supervision indépendante du crédit public.",
+        "Plafonner ou restreindre strictement le crédit prédateur de type crédit sur salaire, et imposer une information complète sur le coût du crédit.",
+        "Restreindre les pénalités de retard abusives et les intérêts composés punitifs, et permettre aux tribunaux d'annuler les clauses manifestement léonines.",
+        "Favoriser le crédit productif destiné au logement, aux entreprises familiales et à l'investissement de long terme.",
       ],
-      keywords: ["finance", "usure", "intérêt", "crédit", "dette", "banques"],
+      limits: [
+        "Les responsables politiques ne décident pas des prêts individuels, et aucun prêt n'est consenti à des fins partisanes.",
+        "L'épargne des ménages, les retraites et les dépôts ne sont pas une source obligatoire de financement spéculatif.",
+      ],
+      keywords: ["finance", "usure", "intérêt", "crédit", "banques", "crédit mutuel"],
     },
 
     "housing-and-financialization": {
@@ -1661,13 +1793,29 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Le logement doit servir principalement à habiter et à faire communauté plutôt que fonctionner comme un actif financier indéfiniment valorisé.",
       position: [
-        "Le logement doit servir principalement à habiter et à faire communauté plutôt que fonctionner d'abord comme un actif financier indéfiniment valorisé.",
+        "Le logement doit servir principalement à habiter et à faire communauté plutôt que fonctionner d'abord comme un actif financier indéfiniment valorisé. Restore Europa soutient une accession à la propriété du logement largement répandue, des exploitations agricoles familiales viables, les coopératives d'habitation et une intendance responsable des terres productives.",
+        "L'action publique doit porter à la fois sur l'offre et sur le financement : une capacité de construction accrue, une réforme appropriée de l'urbanisme, un accès équitable au crédit immobilier et des mesures contre la spéculation là où le dommage qu'elle cause peut être démontré. Les programmes de transmission des exploitations et d'accès au foncier doivent préserver une production agricole viable tout en respectant le droit de propriété et une concurrence licite.",
       ],
       policies: [
-        "L'accession à la propriété du logement largement répandue est un objectif central.",
-        "La propriété spéculative et concentrée peut être contenue là où elle empêche la propriété familiale ordinaire.",
+        "Faire de l'accession largement répandue à la propriété occupée un objectif central de la politique du logement.",
+        "Accroître la capacité de construction et réformer l'urbanisme là où il fait obstacle à un logement familial approprié.",
+        "Garantir un accès équitable au crédit immobilier et un financement de long terme prévisible.",
+        "Contenir la propriété spéculative et concentrée là où elle évince la propriété familiale ordinaire.",
+        "Soutenir les coopératives d'habitation et les modèles de propriété enracinés localement.",
+        "Préserver une production agricole viable par des programmes de transmission des exploitations et d'accès au foncier.",
       ],
-      keywords: ["logement", "accession à la propriété", "loyer", "spéculation", "bailleurs"],
+      limits: [
+        "Les mesures visent la spéculation dont la nocivité est démontrée, non la propriété ou l'épargne ordinaires.",
+        "La politique foncière et agricole respecte le droit de propriété et une concurrence licite.",
+      ],
+      keywords: [
+        "logement",
+        "accession à la propriété",
+        "loyer",
+        "spéculation",
+        "foncier",
+        "agriculture",
+      ],
     },
 
     work: {
@@ -1675,14 +1823,21 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Le travail possède une dignité, mais il n'est pas la finalité de l'existence humaine. Le progrès économique doit accroître la sécurité, le loisir et la maîtrise de sa propre vie.",
       position: [
-        "Le travail possède une dignité, mais il n'est pas la finalité de l'existence humaine. Le progrès économique doit accroître la sécurité, le loisir, le temps passé en famille, le travail qui a du sens et la maîtrise de sa propre vie.",
+        "Le travail possède une dignité, mais il n'est pas la finalité de l'existence humaine. Le progrès économique doit accroître la sécurité, le loisir, le temps passé en famille, le travail qui a du sens et la maîtrise de sa propre vie, et le travail indépendant comme le salariat ordinaire demeurent des choix également légitimes.",
+        "Le développement technique doit améliorer le bien-être humain et la capacité productive plutôt que réduire les travailleurs et les ménages à la dépendance envers une poignée de détenteurs de capital. Ce qui élargit le bénéfice de l'automatisation, c'est la participation des salariés aux gains de productivité, la formation aux qualifications, la création d'entreprise et l'accès aux technologies productives.",
       ],
       policies: [
-        "Un rang social retrouvé pour l'artisanat, l'agriculture, l'ingénierie, les métiers du soin, l'enseignement et les métiers qualifiés.",
-        "Les gains de productivité ne doivent pas se borner à accroître l'extraction de travail.",
-        "L'automatisation ne doit pas supprimer la participation humaine qui a du sens au seul motif de l'efficacité chiffrée.",
+        "Rendre un rang social à l'artisanat, à l'agriculture, à l'ingénierie, aux métiers du soin, à l'enseignement et aux métiers qualifiés.",
+        "Consacrer une part des gains de productivité à la sécurité et au loisir plutôt qu'à la seule extraction.",
+        "Maintenir le travail indépendant et le salariat comme des façons de travailler également légitimes.",
+        "Donner aux salariés une part des gains de productivité, une formation aux qualifications et un accès aux technologies productives.",
+        "Protéger les travailleurs contre les pratiques d'emploi abusives.",
       ],
-      keywords: ["travail", "emploi", "salariat", "artisanat", "loisir"],
+      limits: [
+        "L'automatisation doit soulager des travaux véritablement dégradants ; supprimer la participation humaine n'est pas en soi un but.",
+        "L'innovation ne doit pas être interdite au seul motif qu'elle augmente la productivité.",
+      ],
+      keywords: ["travail", "emploi", "salariat", "artisanat", "loisir", "automatisation"],
     },
 
     "minimum-wage": {
@@ -1691,6 +1846,7 @@ export const policyText: PolicyText = {
         "Tout travailleur a droit à un juste salaire suffisant pour une vie digne et pour l'entretien raisonnable d'une famille.",
       position: [
         "La doctrine sociale de l'Église fixe une exigence substantielle de juste salaire plutôt qu'un mécanisme légal universel unique. Restore Europa est donc favorable à une fixation des salaires par branche et par région au moyen d'institutions représentatives, appuyée si nécessaire par une protection légale.",
+        "Le travail doit procurer une rémunération qui reflète la responsabilité professionnelle, les conditions de travail, la productivité et les besoins raisonnables du ménage. La politique salariale doit peser en même temps les possibilités d'emploi, la viabilité des petites entreprises et l'effet sur les prix à la consommation, raison pour laquelle le niveau se règle branche par branche plutôt que de s'annoncer pour un continent entier.",
       ],
       policies: [
         "Établir le principe d'un juste salaire protégé par la loi.",
@@ -1700,6 +1856,10 @@ export const policyText: PolicyText = {
         "Prendre en compte les besoins de la famille plutôt que de traiter la subsistance individuelle comme seule norme.",
         "Recourir, lorsque cela est approprié, aux allocations familiales ou aux prestations pour enfant, afin que l'éducation des enfants n'entraîne pas de pénalité économique déraisonnable.",
         "Tenir compte de la viabilité de l'entreprise, de la productivité et des possibilités d'emploi.",
+      ],
+      limits: [
+        "Aucun taux unique n'est prescrit pour Europa ; le niveau se fixe par branche et par région.",
+        "Les normes de branche sont ajustées aux conditions régionales plutôt qu'imposées uniformément.",
       ],
       keywords: [
         "salaire minimum",
@@ -1720,6 +1880,7 @@ export const policyText: PolicyText = {
         "L'impôt est légitime au service du bien commun, mais il doit être équitable, attentif à la famille, non confiscatoire et compatible avec une propriété largement répartie, le travail productif et la subsidiarité.",
       position: [
         "Le système fiscal doit financer les fonctions publiques légitimes sans devenir un mécanisme d'élimination de la propriété privée, de découragement de la fondation d'une famille ou de centralisation inutile des responsabilités sociales.",
+        "Ce qui est prélevé et ce qui est dépensé forment une seule question, non deux. La dépense publique et l'emprunt relèvent d'une budgétisation pluriannuelle transparente, d'un audit indépendant et d'une gestion soutenable de la dette publique, car un système fiscal jugé isolément ne peut montrer si un pays vit selon ses moyens.",
       ],
       policies: [
         "Appliquer les impôts par une loi claire, de manière raisonnable et équitable.",
@@ -1732,9 +1893,11 @@ export const policyText: PolicyText = {
         "Protéger les logements familiaux ordinaires, les exploitations agricoles familiales et les entreprises familiales en activité des mécanismes de droits de succession qui contraignent à une liquidation inutile.",
         "Rester prudent à l'égard des impôts généraux récurrents sur la fortune, qui peuvent frapper un patrimoine illiquide indépendamment du revenu.",
         "Appliquer un traitement réduit de la taxe sur la consommation aux biens de première nécessité lorsque cela est praticable.",
+        "Évaluer chaque incitation fiscale à l'aune de son coût budgétaire, de son efficacité et de l'évitement qu'elle suscite.",
       ],
       limits: [
         "Les taux exacts ne sont pas prescrits et demeurent une question nationale de mise en œuvre.",
+        "Aucune forme juridique d'entreprise purement nominale n'est privilégiée lorsqu'elle n'apporte aucun bénéfice véritable en matière de production ou de propriété.",
       ],
       keywords: [
         "impôt",
@@ -1755,6 +1918,7 @@ export const policyText: PolicyText = {
         "Un système de retraite mixte doit combiner une sécurité vieillesse de base, la prévoyance professionnelle, l'épargne personnelle, le patrimoine familial et la responsabilité entre les générations.",
       position: [
         "Les personnes âgées qui ont contribué à la société ne doivent pas connaître le dénuement, mais la préparation de la retraite ne doit pas rendre les citoyens entièrement dépendants d'un seul régime d'État centralisé.",
+        "Une promesse de retraite est une créance sur une économie future : l'épreuve d'un système est donc de savoir s'il peut la tenir. La prévoyance doit par conséquent reposer sur plusieurs fondements à la fois — une garantie publique de base, des fonds professionnels, l'épargne des ménages et le patrimoine familial — plutôt que sur un seul d'entre eux.",
       ],
       policies: [
         "Garantir une pension de base suffisante pour protéger les citoyens âgés de la pauvreté.",
@@ -1764,6 +1928,10 @@ export const policyText: PolicyText = {
         "Éviter des règles de retraite qui pénalisent structurellement le mariage, la parentalité ou l'aide familiale.",
         "Maintenir la soutenabilité budgétaire afin qu'une génération n'impose pas à la suivante des obligations impossibles à honorer.",
         "Permettre une variation nationale de l'équilibre entre prévoyance publique, professionnelle et privée.",
+      ],
+      limits: [
+        "Aucun âge de départ ni taux de cotisation n'est prescrit ; l'un et l'autre demeurent des questions nationales.",
+        "Encourager l'épargne privée n'est pas un pas vers le retrait de la garantie publique de base.",
       ],
       keywords: [
         "retraites",
@@ -1783,6 +1951,7 @@ export const policyText: PolicyText = {
         "Le logement doit servir principalement à habiter et à faire communauté, l'action publique visant une propriété familiale largement répandue plutôt qu'une extraction financière permanente.",
       position: [
         "La propriété privée est protégée, tandis que des restrictions proportionnées peuvent viser les pratiques qui font d'un logement rare un instrument de rareté artificielle, de monopole ou d'accumulation spéculative.",
+        "Les restrictions exposées ci-dessous sont la forme détaillée de ce jugement. Chacune vise une pratique et non la propriété elle-même, et chacune est proportionnée à une pénurie qui peut être démontrée — ce qui est aussi la condition à laquelle elle doit être levée.",
       ],
       policies: [
         "Faire de l'accession largement répandue à la propriété occupée un objectif central de la politique du logement.",
@@ -1795,6 +1964,10 @@ export const policyText: PolicyText = {
         "Protéger les logements familiaux, les fermes familiales et le patrimoine ordinaire reçu en héritage contre la liquidation forcée.",
         "Soutenir les coopératives et les modèles de propriété enracinés localement là où ils élargissent une propriété qui a du sens.",
         "Préférer des protections proportionnées des locataires aux systèmes d'encadrement des loyers qui rendent la construction neuve économiquement impossible.",
+      ],
+      limits: [
+        "Les restrictions suivent une pénurie démontrée et sont levées lorsqu'elle n'existe plus.",
+        "La cible est une pratique qui soustrait des logements, jamais la propriété ni la location en elles-mêmes.",
       ],
       keywords: [
         "logement",
@@ -1814,6 +1987,7 @@ export const policyText: PolicyText = {
         "Les travailleurs peuvent s'organiser librement, tandis que les relations de travail doivent évoluer vers un système corporatiste d'institutions de branche permanentes représentant les salariés, les employeurs et les professions.",
       position: [
         "Restore Europa refuse aussi bien l'impuissance des travailleurs devant le capital concentré que le conflit de classes permanent comme principe d'organisation de la vie économique.",
+        "Les syndicats indépendants font partie de l'ordre voulu et non d'une étape vers sa disparition. Les travailleurs conservent la liberté d'association et la négociation collective licite, quelles que soient les institutions de branche qui existent à leurs côtés, car une chambre qui a absorbé le syndicat auprès duquel elle devait se tenir ne représente personne.",
       ],
       policies: [
         "Protéger le droit de fonder des syndicats indépendants et d'y adhérer.",
@@ -1825,6 +1999,10 @@ export const policyText: PolicyText = {
         "Empêcher les syndicats de devenir des organes obligatoires de l'État.",
         "Empêcher les employeurs de contrôler des organisations de travailleurs prétendument indépendantes.",
         "Permettre une représentation véritablement plurielle plutôt qu'un syndicat unique contrôlé par l'État.",
+      ],
+      limits: [
+        "Les institutions de branche se construisent à côté des syndicats indépendants, jamais à partir d'eux.",
+        "Rien ici ne fait de l'adhésion à un syndicat ou à une chambre une condition pour travailler.",
       ],
       keywords: [
         "syndicats",

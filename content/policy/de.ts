@@ -1551,9 +1551,23 @@ export const policyText: PolicyText = {
     "economic-order": {
       title: "Wirtschaftsordnung",
       shortAnswer:
-        "Restore Europa verwirft beides: den entfesselten Kapitalismus und den zentralistischen Sozialismus. Sein wirtschaftliches Leitbild ist distributistisch im Eigentum und berufsständisch in der Ordnung.",
+        "Eine Ordnung, die auf dem Privateigentum, der produktiven Arbeit und dem breit gestreuten Eigentum an Kapital beruht: distributistisch im Eigentum, berufsständisch in der Gliederung, subsidiär in der Verwaltung.",
       position: [
-        "Restore Europa verwirft beides: den entfesselten Kapitalismus und den zentralistischen Sozialismus. Sein wirtschaftliches Leitbild ist distributistisch im Eigentum und berufsständisch in der Ordnung.",
+        "Restore Europa hält an einer Wirtschaftsordnung fest, die auf dem Privateigentum, der produktiven Arbeit, der Unabhängigkeit der Familie, dem lauteren Wettbewerb, der sozialen Verantwortung und dem breit gestreuten Eigentum an produktivem Kapital beruht. Das Leitbild ist distributistisch im Eigentum, berufsständisch in der Ordnung der Berufe und in der öffentlichen Verwaltung von der Subsidiarität geleitet.",
+        "Wirtschaftliche Macht sollte sich weder in wenigen Konzernen noch in einem zentralisierten Staat übermäßig ballen. Märkte und Unternehmertum bleiben unverzichtbare Werkzeuge der Zusammenarbeit, der Investition und der Erneuerung, und ihr Wirken muss die Würde des Menschen, gerechte Arbeitsbedingungen, den rechtmäßigen Wettbewerb und das Gemeinwohl achten.",
+      ],
+      policies: [
+        "Privateigentum, produktive Arbeit und die Unabhängigkeit der Familie gelten als die Grundlagen des Wirtschaftslebens.",
+        "Märkte und Unternehmertum bleiben Werkzeuge der Zusammenarbeit und der Investition und werden nicht zum Selbstzweck.",
+        "Der Ballung wirtschaftlicher Macht wird entgegengetreten, in wenigen Konzernen wie im Zentralstaat gleichermaßen.",
+        "Die Berufe werden durch Einrichtungen der Vertretung geordnet und nicht unmittelbar durch den Staat.",
+        "Wirtschaftliche Fragen werden auf der niedrigsten Verwaltungsebene entschieden, die für die Entscheidung über sie zuständig ist.",
+      ],
+      principle:
+        "Nicht die Abhängigkeit vom Staat und nicht das produktive Eigentum in wenigen privaten Händen, sondern Familien, Arbeitende und Gemeinwesen mit eigener wirtschaftlicher Unabhängigkeit.",
+      limits: [
+        "Der Distributismus verlangt nicht die Abschaffung großer Unternehmen, der abhängigen Erwerbsarbeit, der Finanzmärkte oder der privaten Investition.",
+        "Er verlangt weder eine zwangsweise Vergenossenschaftung noch die willkürliche Enteignung von Eigentum.",
       ],
       keywords: [
         "Wirtschaft",
@@ -1561,6 +1575,7 @@ export const policyText: PolicyText = {
         "berufsständische Ordnung",
         "Kapitalismus",
         "Sozialismus",
+        "Subsidiarität",
       ],
     },
 
@@ -1569,67 +1584,203 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Eigentum ist eine Quelle von Unabhängigkeit und Verantwortung. Die Antwort auf die Konzentration ist breiter gestreutes Eigentum und nicht die Abschaffung des Eigentums.",
       position: [
-        "Das Privateigentum ist eine Quelle von Unabhängigkeit und Verantwortung. Die Antwort auf übermäßige Konzentration ist breiter gestreutes Eigentum und nicht die Abschaffung des Eigentums.",
+        "Das Privateigentum ist eine Quelle von Unabhängigkeit und Verantwortung, und die Antwort auf übermäßige Konzentration ist breiter gestreutes Eigentum und nicht die Abschaffung des Eigentums. Die öffentliche Politik sollte die praktischen Möglichkeiten der Haushalte erweitern, eigenes produktives Eigentum zu erwerben.",
+        "Solches Eigentum wird vor allem durch Unternehmensgründung, Sparen, Investition, freiwillige Übertragung, Erbschaft und rechtmäßige Finanzierung erworben. Öffentliche Hilfe sollte die wirklichen Hürden seines Erwerbs senken, ohne private Gewinne zu gewährleisten oder das Anlagerisiko eines Eigentümers auf den Steuerzahler zu verlagern.",
       ],
       policies: [
-        "Breit gestreutes Wohneigentum.",
-        "Familienunternehmen.",
-        "Selbstständiges Handwerk und freie Gewerbe.",
-        "Kleine und mittlere Unternehmen.",
-        "Genossenschaften und Belegschaftseigentum.",
-        "Bäuerliche Familienbetriebe.",
-        "Örtliches und regionales Bankwesen.",
+        "Selbstständige Unternehmen und freiberufliche Praxen.",
+        "Familienunternehmen und bäuerliche Familienbetriebe.",
+        "Belegschaftsanteile und genossenschaftliche Mitgliedschaft.",
+        "Produktive Ausrüstung und Werkstätten.",
+        "Breit gestreute Ersparnisse und Anlagen.",
+        "Wohneigentum und andere rechtmäßige produktive Vermögenswerte.",
       ],
       principle: "Viele Eigentümer statt weniger.",
-      keywords: ["Eigentum", "Besitz", "Distributismus", "Genossenschaften", "Kleineigentümer"],
+      limits: [
+        "Die Hilfe senkt die Hürden zum Eigentum; sie gewährleistet nicht, dass eine Anlage einen Gewinn abwirft.",
+        "Risiko, das dem Eigentümer gehört, wird nicht auf die Öffentlichkeit verlagert.",
+      ],
+      keywords: [
+        "Eigentum",
+        "Besitz",
+        "Distributismus",
+        "Genossenschaften",
+        "Ersparnisse",
+        "Erbschaft",
+      ],
+    },
+
+    "family-business-and-small-enterprise": {
+      title: "Familienunternehmen und Kleinbetriebe",
+      shortAnswer:
+        "Kleinere und familiengeführte Unternehmen sollten einen gerechten Zugang zu Finanzierung, öffentlichen Aufträgen und Gewerberäumen haben, und ein tragfähiger Betrieb sollte an die nächste Generation übergehen können.",
+      position: [
+        "Familiengeführte und kleinere Unternehmen sollten einen gerechten Zugang zu Finanzierung, öffentlicher Auftragsvergabe, Gewerberäumen und Verwaltungsleistungen erhalten. Die Unternehmensgründung und die gewöhnlichen Pflichten der Rechtsbefolgung sollten überall dort vereinfacht werden, wo das möglich ist, ohne den Schutz der Arbeitnehmer, die Sicherheit der Verbraucher oder den Steuervollzug zu schwächen.",
+        "Das Nachfolgerecht sollte einem tragfähigen Familienunternehmen erlauben, weiterzuarbeiten, statt zur Begleichung einer Steuerschuld zerlegt zu werden. Scheitert ein Unternehmen doch, so sollte das Recht einen berechenbaren Weg durch Insolvenz und Restrukturierung bieten, einschließlich einer angemessenen Möglichkeit, neu zu beginnen.",
+      ],
+      policies: [
+        "Familiengeführten und kleineren Unternehmen wird ein gerechter Zugang zu Finanzierung, öffentlicher Auftragsvergabe und Gewerberäumen eröffnet.",
+        "Die Unternehmensgründung und die laufenden Pflichten der Rechtsbefolgung werden vereinfacht, ohne den Schutz der Arbeitnehmer oder der Verbraucher zu schwächen.",
+        "Bei der Unternehmensnachfolge sind Erleichterungen zulässig, wo der Betrieb in wirklicher produktiver Tätigkeit fortgeführt wird.",
+        "Diese Erleichterung wird gegen künstliche Aufspaltungen gesichert, die nur eingerichtet werden, um sie zu erlangen.",
+        "Ein berechenbares Insolvenz- und Restrukturierungsrecht wird bereitgestellt, mit einer angemessenen Möglichkeit eines zweiten Anfangs.",
+      ],
+      limits: [
+        "Die Vereinfachung endet dort, wo sie den Schutz der Arbeitnehmer, die Sicherheit der Verbraucher oder den Steuervollzug schwächen würde.",
+        "Die Erleichterung folgt der wirklichen produktiven Tätigkeit und niemals einer Rechtsform, die gewählt wurde, um sie zu erlangen.",
+      ],
+      keywords: [
+        "Familienunternehmen",
+        "Kleinunternehmen",
+        "Mittelstand",
+        "Unternehmensnachfolge",
+        "Insolvenz",
+        "öffentliche Auftragsvergabe",
+      ],
+    },
+
+    "worker-ownership-and-cooperatives": {
+      title: "Belegschaftseigentum und Genossenschaften",
+      shortAnswer:
+        "Genossenschaften, Belegschaftseigentum und Gewinnbeteiligung sind rechtmäßige Wege, produktives Eigentum zu streuen, und die Teilnahme daran muss freiwillig bleiben.",
+      position: [
+        "Restore Europa erkennt Arbeitergenossenschaften, Treuhandstiftungen des Belegschaftseigentums, die unmittelbare Beteiligung der Belegschaft am Kapital und Vereinbarungen über die Gewinnbeteiligung als rechtmäßige Mittel an, produktives Eigentum zu verteilen. Übernahmen durch die Belegschaft und Übertragungen im Wege der Nachfolge dürfen einen angemessen geregelten Zugang zur Finanzierung erhalten, wo eine unabhängige Prüfung feststellt, dass der Betrieb wirtschaftlich tragfähig ist.",
+        "Die Teilnahme bleibt freiwillig. Kein Arbeitnehmer sollte gezwungen werden, Anteile an seinem Arbeitgeber zu erwerben oder seine Ersparnisse in dasselbe Unternehmen zu legen, das ihm schon sein Einkommen gibt, denn das ballt das Risiko, das ein Haushalt trägt, statt es zu streuen.",
+      ],
+      policies: [
+        "Genossenschaften, Treuhandstiftungen des Eigentums, die Kapitalbeteiligung der Belegschaft und die Gewinnbeteiligung werden rechtlich anerkannt.",
+        "Die Teilnahme am Belegschaftseigentum bleibt in jeder Form, die es annimmt, freiwillig.",
+        "Die geregelte Finanzierung wird Übernahmen durch die Belegschaft und Übertragungen im Wege der Nachfolge eröffnet, die als tragfähig beurteilt werden.",
+        "Von Genossenschaften werden Rechtspersönlichkeit, eine durchsichtige Rechnungslegung und eine demokratische innere Verfassung verlangt.",
+        "Genossenschaften erhalten Zugang zum allgemeinen Gesellschafts- und Insolvenzrecht.",
+      ],
+      limits: [
+        "Der genossenschaftliche oder gemeinwohlorientierte Status befreit kein Unternehmen vom Wettbewerbs-, Verbraucher- oder Finanzaufsichtsrecht.",
+        "Von keinem Arbeitnehmer darf verlangt werden, sein Einkommen und seine Ersparnisse in demselben Unternehmen aufs Spiel zu setzen.",
+      ],
+      keywords: [
+        "Genossenschaften",
+        "Mitarbeiterbeteiligung",
+        "Belegschaftseigentum",
+        "Gewinnbeteiligung",
+        "Betriebsübernahme",
+      ],
     },
 
     "corporations-and-monopolies": {
-      title: "Unternehmen und Monopole",
+      title: "Konzerne, Industrie und Wettbewerb",
       shortAnswer:
-        "Unternehmen sind legitime Werkzeuge, bleiben aber dem Gemeinwohl untergeordnet, und geballter Unternehmensmacht dürfen Schranken gesetzt werden.",
+        "Große Unternehmen sind legitim, wo ihre Größe notwendig oder nützlich ist. Die Politik setzt der missbräuchlichen Marktbeherrschung Schranken, nicht der Größe als solcher.",
       position: [
-        "Unternehmen sind legitime Werkzeuge, müssen aber dem Gemeinwohl untergeordnet bleiben. Übermäßig geballter Unternehmensmacht dürfen Schranken gesetzt werden.",
+        "Große Unternehmen bleiben legitim, wo ihre Größe wirtschaftlich notwendig oder nützlich ist, und sie bleiben dem Gemeinwohl untergeordnet. Der Distributismus verlangt nicht, jede große Fabrik, jede Forschungseinrichtung, jede Eisenbahn oder jedes Industrieunternehmen künstlich in Kleinbetriebe zu zerlegen.",
+        "Die öffentliche Politik richtet sich gegen die missbräuchliche Marktbeherrschung, gegen verdrängendes Verhalten und gegen schädliche Konzentration, und zwar durch ein Wettbewerbsrecht, das unabhängig von der jeweiligen Regierung angewandt wird. Die Industriepolitik darf strategisch wichtige Produktion, Forschung, Energiesicherheit, kritische Infrastruktur und widerstandsfähige Lieferketten unterstützen.",
       ],
       policies: [
-        "Eine starke Wettbewerbs- und Monopolaufsicht.",
-        "Schranken dort, wo Unternehmen politische Institutionen oder lebenswichtige Märkte beherrschen.",
-        "Schutz tragfähiger Gemeinwesen, des Familienlebens und der politischen Unabhängigkeit vor zerstörerischer Konzentration.",
+        "Das Wettbewerbsrecht wird unabhängig angewandt, gegen missbräuchliche Marktbeherrschung und verdrängendes Verhalten.",
+        "Der Konzentration werden Schranken gesetzt, wo Unternehmen dazu übergehen, politische Institutionen oder lebenswichtige Märkte zu beherrschen.",
+        "Strategisch wichtige Produktion, Forschung, Energiesicherheit und kritische Infrastruktur werden unterstützt.",
+        "Industrielle Förderung wird durchsichtig gemacht und einer unabhängigen Bewertung unterworfen.",
+        "Tragfähige Gemeinwesen, das Familienleben und die politische Unabhängigkeit werden vor zerstörerischer Konzentration geschützt.",
       ],
-      keywords: ["Konzerne", "Monopol", "Kartellrecht", "Wettbewerb", "Konzentration"],
+      limits: [
+        "Die Größe allein ist kein Verstoß; maßgeblich ist das Verhalten und seine Wirkung auf einen Markt.",
+        "Industrielle Förderung ist nicht dauerhaft; sie wird zurückgenommen, statt ein nicht tragfähiges Unternehmen weiter zu stützen.",
+      ],
+      keywords: [
+        "Konzerne",
+        "Monopol",
+        "Kartellrecht",
+        "Wettbewerb",
+        "Industriepolitik",
+        "Konzentration",
+      ],
+    },
+
+    "trade-and-economic-sovereignty": {
+      title: "Handel und wirtschaftliche Souveränität",
+      shortAnswer:
+        "Ein Handel, der mit der Widerstandsfähigkeit der Nation und dem lauteren Wettbewerb vereinbar ist — weder die Abhängigkeit von einem einzigen Lieferanten noch die Anmaßung, ein Land könne alles selbst herstellen.",
+      position: [
+        "Restore Europa tritt für einen internationalen Handel ein, der mit der wirtschaftlichen Widerstandsfähigkeit der Nation, dem lauteren Wettbewerb und der Erhaltung strategisch wichtiger Produktionsfähigkeiten vereinbar ist. Ein Land sollte keine vollständige wirtschaftliche Autarkie anstreben, wo Spezialisierung und Handel erheblichen Nutzen bringen.",
+        "Kritische Abhängigkeiten sollten bewusst geprüft und nicht erst in einer Krise entdeckt werden, durch widerstandsfähige Lieferketten, strategische Vorräte, eine breiter aufgestellte Beschaffung und eine angemessene inländische Produktionskapazität. Maßnahmen zu Handel und Investition müssen an den europäischen und internationalen Verpflichtungen überprüft werden, die für sie gelten.",
+      ],
+      policies: [
+        "Kritische Abhängigkeiten in den Lieferketten werden geprüft, bevor sie zu strategischen Verwundbarkeiten werden.",
+        "Für wesentliche Güter werden strategische Vorräte gehalten und die Beschaffung breiter aufgestellt.",
+        "Die inländische Produktionskapazität wird erhalten, wo eine Fähigkeit strategisch wichtig ist.",
+        "Maßnahmen zu Handel und Investition werden an den geltenden europäischen und internationalen Verpflichtungen überprüft.",
+      ],
+      limits: [
+        "Die Autarkie ist nicht das Ziel; Spezialisierung und Handel werden anerkannt, wo der Nutzen erheblich ist.",
+        "Die Widerstandsfähigkeit ist kein allgemeiner Freibrief, eine bloß nicht wettbewerbsfähige Industrie abzuschirmen.",
+      ],
+      keywords: [
+        "Handel",
+        "Zölle",
+        "Lieferketten",
+        "Souveränität",
+        "Widerstandsfähigkeit",
+        "Autarkie",
+      ],
     },
 
     "guilds-chambers-and-corporatist-representation": {
       title: "Zünfte, Kammern und berufsständische Vertretung",
       shortAnswer:
-        "Arbeitnehmer, Unternehmer, Handwerker, Bauern und freie Berufe sollten an Einrichtungen ihrer Branche mitwirken, die fachliche Standards, die Lehre und die Arbeitsbedingungen festlegen.",
+        "Berufsständische Einrichtungen sollten die berufliche Bildung, die Qualifikationen und den Dialog der Branchen tragen, ohne unabhängige Gewerkschaften zu ersetzen oder einen Beruf gegen Neuzugänge zu verschließen.",
       position: [
-        "Arbeitnehmer, Unternehmer, Handwerker, Bauern und freie Berufe sollten an Einrichtungen ihrer Branche mitwirken, die fachliche Standards, die Lehre, die Arbeitsbedingungen und Verfahren der Schlichtung festlegen können.",
+        "Zeitgemäße berufsständische Einrichtungen sollten die berufliche Bildung, die Qualifikationen, die Arbeitsstandards, den Dialog der Branchen und die friedliche Beilegung von Streitigkeiten tragen. Branchenräte dürfen die Beratung und Tarifverhandlungen erleichtern, vorbehaltlich einer vertretungsgerechten inneren Verfassung, der rechtlichen Aufsicht und wettbewerbsrechtlicher Sicherungen.",
+        "Unabhängige Gewerkschaften behalten das Recht, Arbeitnehmer zu vertreten und Tarifverträge auszuhandeln. Berufskammern treten neben sie und nicht an ihre Stelle, und die berufsständische Ordnung als Ganze bleibt der Subsidiarität untergeordnet.",
       ],
       policies: [
-        "Berufskammern und berufsständische Körperschaften sollten hinreichend unabhängig von der zentralen Staatsverwaltung bleiben.",
-        "Berufsorganisationen dürfen im öffentlichen Leben geordnet vertreten sein.",
-        "Die berufsständische Ordnung bleibt der Subsidiarität untergeordnet.",
+        "Den Berufskammern wird die Verantwortung für die berufliche Bildung, die Qualifikationen und die Arbeitsstandards übertragen.",
+        "Diese Kammern bleiben hinreichend unabhängig von der zentralen Staatsverwaltung.",
+        "Branchenräte dürfen die Beratung und die Tariffindung unter einer vertretungsgerechten inneren Verfassung erleichtern.",
+        "Das Recht unabhängiger Gewerkschaften, Arbeitnehmer zu vertreten und Tarifverträge auszuhandeln, bleibt gewahrt.",
+        "Die Einrichtungen der Branchen unterliegen der rechtlichen Aufsicht und wettbewerbsrechtlichen Sicherungen.",
       ],
-      keywords: ["Zünfte", "Kammern", "berufsständische Ordnung", "Lehre", "Handwerk"],
+      limits: [
+        "Keine Kammer ersetzt eine unabhängige Gewerkschaft oder verfügt über eine unkontrollierte Gewalt über den Zugang zu einem Beruf.",
+        "Keine Zunft und keine Kammer darf als rechtswidriges Kartell wirken oder willkürliche Hürden gegen neue Unternehmer aufrichten.",
+      ],
+      keywords: [
+        "Zünfte",
+        "Kammern",
+        "berufsständische Ordnung",
+        "Lehre",
+        "Handwerk",
+        "Tarifverhandlungen",
+      ],
     },
 
     "finance-lending-and-usury": {
-      title: "Finanzwesen, Kredit und Wucher",
+      title: "Finanzwesen, Kredit und Zugang zum Kapital",
       shortAnswer:
-        "Das Finanzwesen soll der produktiven Tätigkeit dienen. Rechtmäßige Kreditvergabe und ein angemessener Ertrag werden anerkannt, ausbeuterische Zinsen und Schuldenfallen nicht.",
+        "Ein vielgestaltiges Finanzwesen im Dienst der produktiven Tätigkeit. Rechtmäßige Kreditvergabe und ein angemessener Ertrag werden anerkannt, ausbeuterische Zinsen und Schuldenfallen nicht.",
       position: [
-        "Das Finanzwesen soll der produktiven Tätigkeit dienen. Restore Europa erkennt die rechtmäßige Kreditvergabe und einen angemessenen Ertrag auf das Kapital an und wendet sich zugleich gegen ausbeuterische Zinsen, ausbeuterische Kreditvergabe und Schuldenfallen.",
+        "Das Finanzwesen soll der produktiven Tätigkeit dienen. Restore Europa erkennt die rechtmäßige Kreditvergabe und einen angemessenen Ertrag auf das Kapital an, wendet sich zugleich gegen ausbeuterische Zinsen, ausbeuterische Kreditvergabe und Schuldenfallen und tritt für ein vielgestaltiges System aus Genossenschaftsbanken, Regionalbanken, Kreditgenossenschaften, Geschäftsbanken und verantwortlich geführten öffentlichen Förderinstituten ein.",
+        "Ein distributistisches Förderinstitut darf tragfähige Übernahmen durch die Belegschaft, genossenschaftliche Unternehmen, die Nachfolge in Familienunternehmen, das selbstständige Unternehmertum und produktive Investitionen in unterversorgten Regionen unterstützen. Öffentliche Kredite und Bürgschaften verlangen eine solide finanzielle Prüfung, eine durchsichtige Berichterstattung, eine unabhängige Aufsicht und eine klare Angabe der Verluste, die daraus entstehen können.",
       ],
       policies: [
-        "Strenge Beschränkungen oder Obergrenzen für ausbeuterische Kleinkredite nach Art der Zahltagdarlehen.",
-        "Die vollständigen Kosten eines Kredits sind offen auszuweisen.",
-        "Beschränkungen missbräuchlicher Verzugsgebühren und sich aufsummierender Vertragsstrafen.",
-        "Gerichte dürfen offensichtlich sittenwidrige Kreditbedingungen für unwirksam erklären.",
-        "Die Politik sollte der produktiven Kreditvergabe für Wohnraum, Familienbetriebe und langfristige Investitionen den Vorzug geben.",
-        "Örtliches und regionales Bankwesen wird gefördert.",
+        "Ein vielgestaltiges System aus Genossenschafts-, Regional-, Geschäfts- und Förderbanken wird erhalten.",
+        "Die Förderfinanzierung wird auf Übernahmen durch die Belegschaft, Genossenschaften, die Nachfolge in Familienunternehmen und unterversorgte Regionen gelenkt.",
+        "Für die öffentliche Kreditvergabe werden eine solide Prüfung, eine durchsichtige Berichterstattung und eine unabhängige Aufsicht verlangt.",
+        "Ausbeuterische Kleinkredite nach Art der Zahltagdarlehen werden mit Obergrenzen versehen oder streng beschränkt, und die vollständigen Kosten eines Kredits sind offen auszuweisen.",
+        "Missbräuchliche Verzugsgebühren und sich aufsummierende Vertragsstrafen werden beschränkt, und die Gerichte dürfen sittenwidrige Kreditbedingungen für unwirksam erklären.",
+        "Der produktiven Kreditvergabe für Wohnraum, Familienunternehmen und langfristige Investitionen wird der Vorzug gegeben.",
       ],
-      keywords: ["Finanzwesen", "Wucher", "Zinsen", "Kredit", "Schulden", "Banken"],
+      limits: [
+        "Politische Amtsträger entscheiden nicht über einzelne Kredite, und kein Kredit wird zu parteipolitischen Zwecken gewährt.",
+        "Die Ersparnisse, Renten und Einlagen der Haushalte sind keine Zwangsquelle spekulativer Finanzierung.",
+      ],
+      keywords: [
+        "Finanzwesen",
+        "Wucher",
+        "Zinsen",
+        "Kredit",
+        "Banken",
+        "Kreditgenossenschaften",
+      ],
     },
 
     "housing-and-financialization": {
@@ -1637,13 +1788,29 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Wohnraum soll vor allem dem Wohnen und dem Zusammenleben dienen und nicht als endlos an Wert gewinnendes Anlagegut wirken.",
       position: [
-        "Wohnraum soll vor allem dem Wohnen und dem Zusammenleben dienen und nicht in erster Linie als endlos an Wert gewinnendes Anlagegut wirken.",
+        "Wohnraum soll vor allem dem Wohnen und dem Zusammenleben dienen und nicht in erster Linie als endlos an Wert gewinnendes Anlagegut wirken. Restore Europa tritt für breit gestreutes Wohneigentum, tragfähige bäuerliche Familienbetriebe, Wohnungsgenossenschaften und die verantwortliche Bewahrung des produktiven Bodens ein.",
+        "Die Politik sollte am Angebot und an der Finanzierung zugleich ansetzen: mehr Baukapazität, eine angemessene Reform des Planungsrechts, ein gerechter Zugang zur Hypothek und Maßnahmen gegen die Spekulation, wo der Schaden, den sie anrichtet, nachgewiesen werden kann. Programme zur Hofnachfolge und zum Zugang zum Boden sollten eine tragfähige landwirtschaftliche Produktion erhalten und dabei die Eigentumsrechte und den rechtmäßigen Wettbewerb achten.",
       ],
       policies: [
-        "Breit gestreutes Wohneigentum ist ein zentrales Ziel.",
-        "Spekulativem und geballtem Eigentum dürfen Schranken gesetzt werden, wo es gewöhnliches Familieneigentum verhindert.",
+        "Breit gestreutes selbstgenutztes Wohneigentum wird zu einem zentralen Ziel der Wohnungspolitik.",
+        "Die Baukapazität wird erhöht und das Planungsrecht dort reformiert, wo es angemessenen Familienwohnraum behindert.",
+        "Ein gerechter Zugang zur Hypothek und eine berechenbare langfristige Finanzierung werden gesichert.",
+        "Spekulativem und geballtem Eigentum werden Schranken gesetzt, wo es gewöhnliches Familieneigentum verdrängt.",
+        "Wohnungsgenossenschaften und örtlich verwurzelte Eigentumsformen werden unterstützt.",
+        "Eine tragfähige landwirtschaftliche Produktion wird durch Programme zur Hofnachfolge und zum Zugang zum Boden erhalten.",
       ],
-      keywords: ["Wohnen", "Wohneigentum", "Miete", "Spekulation", "Vermieter"],
+      limits: [
+        "Die Maßnahmen richten sich gegen eine nachweislich schädliche Spekulation und nicht gegen gewöhnliches Eigentum oder Sparen.",
+        "Die Boden- und Agrarpolitik achtet die Eigentumsrechte und den rechtmäßigen Wettbewerb.",
+      ],
+      keywords: [
+        "Wohnen",
+        "Wohneigentum",
+        "Miete",
+        "Spekulation",
+        "Boden",
+        "Landwirtschaft",
+      ],
     },
 
     work: {
@@ -1651,14 +1818,28 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Arbeit hat ihre Würde, aber sie ist nicht der Zweck des menschlichen Daseins. Wirtschaftlicher Fortschritt sollte Sicherheit, Muße und die Verfügung über das eigene Leben vermehren.",
       position: [
-        "Arbeit hat ihre Würde, aber sie ist nicht der Zweck des menschlichen Daseins. Wirtschaftlicher Fortschritt sollte Sicherheit, Muße, Zeit für die Familie, sinnvolle Arbeit und die Verfügung über das eigene Leben vermehren.",
+        "Arbeit hat ihre Würde, aber sie ist nicht der Zweck des menschlichen Daseins. Wirtschaftlicher Fortschritt sollte Sicherheit, Muße, Zeit für die Familie, sinnvolle Arbeit und die Verfügung über das eigene Leben vermehren, und die selbstständige Tätigkeit wie die gewöhnliche abhängige Erwerbsarbeit bleiben gleichermaßen legitime Wege.",
+        "Die technische Entwicklung sollte das menschliche Wohl und die Produktionsfähigkeit verbessern, statt Arbeitende und Haushalte in die Abhängigkeit von einer engen Ballung von Kapitaleigentümern zu drücken. Was den Nutzen der Automatisierung breiter streut, ist die Beteiligung der Belegschaft an den Produktivitätsgewinnen, die berufliche Weiterbildung, die Unternehmensgründung und der Zugang zu produktiver Technik.",
       ],
       policies: [
-        "Neues gesellschaftliches Ansehen für Handwerk, Landwirtschaft, Ingenieurwesen, Pflege, Unterricht und die Facharbeiterberufe.",
-        "Produktivitätsgewinne sollten nicht bloß mehr Arbeit aus den Menschen herausholen.",
-        "Die Automatisierung sollte die sinnvolle Mitwirkung des Menschen nicht allein um der zahlenmäßigen Effizienz willen beseitigen.",
+        "Handwerk, Landwirtschaft, Ingenieurwesen, Pflege, Unterricht und die Facharbeiterberufe erhalten ihr gesellschaftliches Ansehen zurück.",
+        "Ein Teil der Produktivitätsgewinne wird der Sicherheit und der Muße zugeführt und nicht allein der Abschöpfung.",
+        "Selbstständigkeit und abhängige Erwerbsarbeit bleiben gleichermaßen legitime Formen der Arbeit.",
+        "Die Belegschaft erhält einen Anteil an den Produktivitätsgewinnen, die berufliche Weiterbildung und den Zugang zu produktiver Technik.",
+        "Arbeitnehmer werden vor ausbeuterischen Beschäftigungspraktiken geschützt.",
       ],
-      keywords: ["Arbeit", "Erwerbsarbeit", "Beschäftigung", "Handwerk", "Muße"],
+      limits: [
+        "Die Automatisierung soll wirklich entwürdigende Arbeit abnehmen; die Beseitigung der menschlichen Mitwirkung ist selbst kein Ziel.",
+        "Erneuerung ist nicht schon deshalb zu verbieten, weil sie die Produktivität steigert.",
+      ],
+      keywords: [
+        "Arbeit",
+        "Erwerbsarbeit",
+        "Beschäftigung",
+        "Handwerk",
+        "Muße",
+        "Automatisierung",
+      ],
     },
 
     "minimum-wage": {
@@ -1667,6 +1848,7 @@ export const policyText: PolicyText = {
         "Jedem Arbeitenden steht ein gerechter Lohn zu, der für ein würdiges Leben und den angemessenen Unterhalt einer Familie reicht.",
       position: [
         "Die katholische Soziallehre setzt einen inhaltlichen Maßstab des gerechten Lohnes und nicht ein einziges allgemeines gesetzliches Verfahren. Restore Europa tritt deshalb für eine Lohnfindung nach Branchen und Regionen durch Einrichtungen der Vertretung ein, abgesichert durch gesetzlichen Schutz, wo er nötig ist.",
+        "Die Arbeit sollte eine Entlohnung tragen, die der beruflichen Verantwortung, den Arbeitsbedingungen, der Produktivität und den angemessenen Bedürfnissen des Haushalts entspricht. Die Lohnpolitik muss zugleich die Beschäftigungsmöglichkeiten, die Tragfähigkeit kleiner Unternehmen und die Wirkung auf die Verbraucherpreise abwägen; deshalb wird die Höhe Branche für Branche festgelegt und nicht für einen Kontinent verkündet.",
       ],
       policies: [
         "Der Grundsatz eines gesetzlich geschützten gerechten Lohnes wird festgeschrieben.",
@@ -1676,6 +1858,10 @@ export const policyText: PolicyText = {
         "Die Bedürfnisse der Familie sind zu berücksichtigen, statt allein das Auskommen des Einzelnen zum Maßstab zu nehmen.",
         "Familienzulagen oder Kindergeld werden eingesetzt, wo es angemessen ist, damit die Erziehung von Kindern keinen unzumutbaren wirtschaftlichen Nachteil bedeutet.",
         "Die Tragfähigkeit der Unternehmen, die Produktivität und die Beschäftigungsmöglichkeiten sind zu berücksichtigen.",
+      ],
+      limits: [
+        "Für Europa wird kein einheitlicher Satz vorgeschrieben; die Höhe wird nach Branchen und Regionen festgelegt.",
+        "Branchenstandards werden an die regionalen Verhältnisse angepasst und nicht einheitlich auferlegt.",
       ],
       keywords: [
         "Mindestlohn",
@@ -1696,6 +1882,7 @@ export const policyText: PolicyText = {
         "Steuern sind für das Gemeinwohl legitim, sollten aber gerecht sein, auf Familien Rücksicht nehmen, nicht enteignend wirken und mit breit gestreutem Eigentum, produktiver Arbeit und der Subsidiarität vereinbar bleiben.",
       position: [
         "Das Steuersystem sollte die rechtmäßigen öffentlichen Aufgaben finanzieren, ohne zu einem Mittel zu werden, das Privateigentum zu beseitigen, die Familiengründung zu erschweren oder gesellschaftliche Aufgaben unnötig zu zentralisieren.",
+        "Was eingenommen und was ausgegeben wird, ist eine Frage und nicht zwei. Die Staatsausgaben und die Staatsverschuldung gehören unter eine durchsichtige mehrjährige Haushaltsplanung, eine unabhängige Rechnungsprüfung und eine tragfähige Verwaltung der Staatsschuld, denn ein Steuersystem, das für sich allein beurteilt wird, kann nicht zeigen, ob ein Land im Rahmen seiner Mittel lebt.",
       ],
       policies: [
         "Steuern werden nach klarem Gesetz, mit Augenmaß und gerecht erhoben.",
@@ -1708,9 +1895,11 @@ export const policyText: PolicyText = {
         "Gewöhnliche Familienwohnhäuser, Höfe und fortgeführte Familienbetriebe werden vor Erbschaftsteuerregeln geschützt, die zu unnötiger Veräußerung zwingen.",
         "Gegenüber laufenden allgemeinen Vermögensteuern, die nicht liquides Eigentum unabhängig vom Einkommen belasten können, bleibt Zurückhaltung geboten.",
         "Für Güter des täglichen Bedarfs wird eine ermäßigte Verbrauchsbesteuerung angewandt, wo das praktikabel ist.",
+        "Jede steuerliche Vergünstigung wird auf ihre fiskalischen Kosten, ihre Wirksamkeit und die Umgehung geprüft, zu der sie einlädt.",
       ],
       limits: [
         "Genaue Sätze werden nicht vorgeschrieben und bleiben eine Frage der nationalen Umsetzung.",
+        "Keine bloß der Bezeichnung nach gewählte Rechtsform wird begünstigt, wo sie keinen wirklichen Nutzen für die Produktion oder das Eigentum trägt.",
       ],
       keywords: [
         "Steuern",
@@ -1731,6 +1920,7 @@ export const policyText: PolicyText = {
         "Ein gemischtes Rentensystem sollte die grundlegende Alterssicherung mit betrieblicher Vorsorge, persönlichem Sparen, Familieneigentum und der Verantwortung zwischen den Generationen verbinden.",
       position: [
         "Alte Menschen, die zur Gesellschaft beigetragen haben, sollten nicht in Not geraten, doch die Alterssicherung sollte die Bürger nicht vollständig von einem einzigen zentralen staatlichen System abhängig machen.",
+        "Ein Rentenversprechen ist ein Anspruch an eine künftige Wirtschaft; der Maßstab eines Systems ist deshalb, ob es gehalten werden kann. Die Vorsorge sollte darum auf mehreren Grundlagen zugleich ruhen — einer staatlichen Grundgarantie, betrieblichen Kassen, dem Sparen der Haushalte und dem Familieneigentum — und nicht auf einer einzigen von ihnen.",
       ],
       policies: [
         "Eine Grundrente wird gewährleistet, die alte Bürger vor Armut schützt.",
@@ -1740,6 +1930,10 @@ export const policyText: PolicyText = {
         "Rentenregeln, die Ehe, Elternschaft oder die Pflege in der Familie strukturell benachteiligen, werden vermieden.",
         "Die Finanzierbarkeit bleibt gewahrt, damit eine Generation der nächsten keine unbezahlbaren Lasten auferlegt.",
         "Das Verhältnis von gesetzlicher, betrieblicher und privater Vorsorge darf von Land zu Land verschieden sein.",
+      ],
+      limits: [
+        "Kein Rentenalter und kein Beitragssatz werden vorgeschrieben; beides bleibt eine nationale Frage.",
+        "Die Förderung des privaten Sparens ist kein Schritt zur Rücknahme der staatlichen Grundgarantie.",
       ],
       keywords: [
         "Renten",
@@ -1759,6 +1953,7 @@ export const policyText: PolicyText = {
         "Wohnraum soll vor allem dem Wohnen und dem Zusammenleben dienen; die Politik zielt auf breit gestreutes Familieneigentum statt auf dauerhafte finanzielle Abschöpfung.",
       position: [
         "Das Privateigentum ist geschützt; zugleich dürfen verhältnismäßige Beschränkungen gegen Praktiken gerichtet werden, die knappen Wohnraum zu einem Mittel künstlicher Verknappung, der Monopolbildung oder der spekulativen Anhäufung machen.",
+        "Die nachstehenden Beschränkungen sind die ausgeführte Gestalt dieses Urteils. Jede richtet sich gegen eine Praxis und nicht gegen das Eigentum selbst, und jede ist einer Knappheit angemessen, die sich nachweisen lässt — was auch die Bedingung ist, unter der sie wieder aufzuheben ist.",
       ],
       policies: [
         "Breit gestreutes selbstgenutztes Wohneigentum wird zu einem zentralen Ziel der Wohnungspolitik.",
@@ -1771,6 +1966,10 @@ export const policyText: PolicyText = {
         "Familienwohnhäuser, Familienhöfe und gewöhnliches ererbtes Eigentum werden vor erzwungener Veräußerung geschützt.",
         "Genossenschaften und örtlich verwurzelte Eigentumsformen werden unterstützt, wo sie wirkliches Eigentum breiter streuen.",
         "Verhältnismäßigen Schutzrechten für Mieter wird der Vorzug gegeben vor Mietpreisbindungen, die neuen Wohnraum wirtschaftlich unmöglich machen.",
+      ],
+      limits: [
+        "Die Beschränkungen folgen einer nachgewiesenen Knappheit und werden aufgehoben, wenn sie nicht mehr besteht.",
+        "Ziel ist eine Praxis, die Wohnraum zurückhält, und niemals das Eigentum oder die Vermietung als solche.",
       ],
       keywords: [
         "Wohnen",
@@ -1790,6 +1989,7 @@ export const policyText: PolicyText = {
         "Arbeitnehmer dürfen sich unabhängig organisieren; zugleich sollten sich die Arbeitsbeziehungen zu einer berufsständischen Ordnung dauerhafter Einrichtungen der Branchen entwickeln, die Arbeitnehmer, Arbeitgeber und freie Berufe vertreten.",
       position: [
         "Restore Europa verwirft beides: die Ohnmacht der Arbeitnehmer gegenüber geballtem Kapital und den dauernden Klassenkampf als Ordnungsprinzip des Wirtschaftslebens.",
+        "Unabhängige Gewerkschaften gehören zu dieser Ordnung und sind nicht eine Zwischenstufe auf dem Weg aus ihr heraus. Den Arbeitnehmern bleiben die Koalitionsfreiheit und rechtmäßige Tarifverhandlungen erhalten, welche Einrichtungen der Branchen auch neben ihnen bestehen, denn eine Kammer, die die Gewerkschaft aufgesogen hat, neben der sie stehen sollte, vertritt niemanden.",
       ],
       policies: [
         "Das Recht, unabhängige Gewerkschaften zu gründen und ihnen beizutreten, wird geschützt.",
@@ -1801,6 +2001,10 @@ export const policyText: PolicyText = {
         "Es wird verhindert, dass Gewerkschaften zu Zwangsorganen des Staates werden.",
         "Es wird verhindert, dass Arbeitgeber angeblich unabhängige Arbeitnehmerorganisationen beherrschen.",
         "Eine wirkliche Vielfalt der Vertretung ist zulässig statt einer einzigen staatlich gelenkten Gewerkschaft.",
+      ],
+      limits: [
+        "Die Einrichtungen der Branchen werden neben den unabhängigen Gewerkschaften errichtet und niemals aus ihnen.",
+        "Nichts hiervon macht die Mitgliedschaft in einer Gewerkschaft oder einer Kammer zur Bedingung der Arbeit.",
       ],
       keywords: [
         "Gewerkschaften",

@@ -24,7 +24,7 @@ interface PolicyCardProps {
  * Two things, in other words, and the card is now only those two. It used to
  * carry a third band: a second rule, the count of commitments behind the
  * entry, and an arrow that slid on hover. Each was defensible alone and the
- * three together were not, because this card is drawn ninety-eight times. At
+ * three together were not, because this card is drawn a hundred times over. At
  * that multiple the furniture stops reading as structure and starts reading
  * as texture — two rules and two lines of grey metadata framing two lines of
  * actual position, repeated down the page until the catalogue looks like a
@@ -32,8 +32,8 @@ interface PolicyCardProps {
  *
  * The count is the thing most worth regretting: a position with eleven
  * commitments behind it really is a different proposition from one with
- * three. It survives on the entry page, where it is read once rather than
- * ninety-eight times and where the list it counts is directly beneath it.
+ * three. It survives on the entry page, where it is read once rather than a
+ * hundred times and where the list it counts is directly beneath it.
  *
  * The section line keeps its title and loses its numeral. The numeral orders
  * ten sections; on a card it was a figure with nothing to be ordered against.

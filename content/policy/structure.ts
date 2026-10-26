@@ -498,7 +498,7 @@ export const policyStructure = [
       "finance-lending-and-usury",
       "work",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "private-property-and-broad-ownership",
@@ -506,11 +506,35 @@ export const policyStructure = [
     manifestoBasis: ["economic-order"],
     related: [
       "economic-order",
+      "family-business-and-small-enterprise",
+      "worker-ownership-and-cooperatives",
       "housing-and-financialization",
-      "corporations-and-monopolies",
+    ],
+    lastUpdated: "2026-10-26",
+  },
+  {
+    slug: "family-business-and-small-enterprise",
+    category: "economy",
+    manifestoBasis: ["economic-order", "family", "work"],
+    related: [
+      "private-property-and-broad-ownership",
+      "worker-ownership-and-cooperatives",
+      "finance-lending-and-usury",
+      "taxation",
+    ],
+    lastUpdated: "2026-10-26",
+  },
+  {
+    slug: "worker-ownership-and-cooperatives",
+    category: "economy",
+    manifestoBasis: ["economic-order", "corporatism", "work"],
+    related: [
+      "private-property-and-broad-ownership",
+      "family-business-and-small-enterprise",
+      "guilds-chambers-and-corporatist-representation",
       "finance-lending-and-usury",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "corporations-and-monopolies",
@@ -519,9 +543,22 @@ export const policyStructure = [
     related: [
       "private-property-and-broad-ownership",
       "economic-order",
+      "trade-and-economic-sovereignty",
       "finance-lending-and-usury",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
+  },
+  {
+    slug: "trade-and-economic-sovereignty",
+    category: "economy",
+    manifestoBasis: ["economic-order", "foreign-policy"],
+    related: [
+      "corporations-and-monopolies",
+      "economic-order",
+      "work",
+      "private-property-and-broad-ownership",
+    ],
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "guilds-chambers-and-corporatist-representation",
@@ -531,9 +568,9 @@ export const policyStructure = [
       "economic-order",
       "work",
       "minimum-wage",
-      "authority-democracy-and-subsidiarity",
+      "worker-ownership-and-cooperatives",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "finance-lending-and-usury",
@@ -542,10 +579,10 @@ export const policyStructure = [
     related: [
       "housing-and-financialization",
       "private-property-and-broad-ownership",
-      "gambling",
-      "economic-order",
+      "family-business-and-small-enterprise",
+      "worker-ownership-and-cooperatives",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "housing-and-financialization",
@@ -557,7 +594,7 @@ export const policyStructure = [
       "family",
       "architecture-and-historic-preservation",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "work",
@@ -569,7 +606,7 @@ export const policyStructure = [
       "guilds-chambers-and-corporatist-representation",
       "minimum-wage",
     ],
-    lastUpdated: "2026-09-15",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "minimum-wage",
@@ -581,7 +618,7 @@ export const policyStructure = [
       "trade-unions-and-vocational-representation",
       "taxation",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "taxation",
@@ -600,7 +637,7 @@ export const policyStructure = [
       "pensions",
       "housing-restrictions",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "pensions",
@@ -618,7 +655,7 @@ export const policyStructure = [
       "guilds-chambers-and-corporatist-representation",
       "taxation",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "housing-restrictions",
@@ -630,7 +667,7 @@ export const policyStructure = [
       "architecture-and-historic-preservation",
       "taxation",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "trade-unions-and-vocational-representation",
@@ -640,9 +677,9 @@ export const policyStructure = [
       "guilds-chambers-and-corporatist-representation",
       "minimum-wage",
       "work",
-      "corporations-and-monopolies",
+      "worker-ownership-and-cooperatives",
     ],
-    lastUpdated: "2026-09-21",
+    lastUpdated: "2026-10-26",
   },
   {
     slug: "technology-general-doctrine",

@@ -1597,11 +1597,32 @@ export const policyText: PolicyText = {
     "economic-order": {
       title: "Ład gospodarczy",
       shortAnswer:
-        "Restore Europa odrzuca zarówno kapitalizm bez ograniczeń, jak i socjalizm scentralizowany. Jej ideał gospodarczy jest dystrybucjonistyczny co do własności i korporacjonistyczny co do organizacji.",
+        "Ład oparty na własności prywatnej, pracy wytwórczej i szeroko rozproszonej własności kapitału: dystrybucjonistyczny co do własności, korporacjonistyczny co do organizacji, pomocniczy co do administracji.",
       position: [
-        "Restore Europa odrzuca zarówno kapitalizm bez ograniczeń, jak i socjalizm scentralizowany. Jej ideał gospodarczy jest dystrybucjonistyczny co do własności i korporacjonistyczny co do organizacji.",
+        "Restore Europa opowiada się za ładem gospodarczym opartym na własności prywatnej, pracy wytwórczej, niezależności rodziny, uczciwej konkurencji, odpowiedzialności społecznej i szeroko rozproszonej własności kapitału wytwórczego. Model ten jest dystrybucjonistyczny co do własności, korporacjonistyczny co do organizacji zawodowej i kieruje się pomocniczością w administracji publicznej.",
+        "Władza gospodarcza nie powinna skupiać się nadmiernie ani w rękach nielicznych korporacji, ani w scentralizowanym państwie. Rynki i przedsiębiorczość pozostają niezbędnymi narzędziami współpracy, inwestycji i innowacji, a ich działanie musi szanować godność człowieka, sprawiedliwe warunki zatrudnienia, legalną konkurencję i dobro wspólne.",
       ],
-      keywords: ["gospodarka", "dystrybucjonizm", "korporacjonizm", "kapitalizm", "socjalizm"],
+      policies: [
+        "Traktowanie własności prywatnej, pracy wytwórczej i niezależności rodziny jako podstaw życia gospodarczego.",
+        "Utrzymanie rynków i przedsiębiorczości jako narzędzi współpracy i inwestycji, a nie celów samych w sobie.",
+        "Przeciwdziałanie skupianiu władzy gospodarczej zarówno w kilku korporacjach, jak i w państwie centralnym.",
+        "Organizowanie zawodów przez instytucje przedstawicielskie, a nie bezpośrednio przez państwo.",
+        "Rozstrzyganie spraw gospodarczych na najniższym szczeblu administracji zdolnym o nich decydować.",
+      ],
+      principle:
+        "Ani zależność od państwa, ani własność wytwórcza w kilku prywatnych rękach, lecz rodziny, pracownicy i wspólnoty mające własną niezależność gospodarczą.",
+      limits: [
+        "Dystrybucjonizm nie wymaga zniesienia wielkich przedsiębiorstw, pracy najemnej, rynków finansowych ani prywatnych inwestycji.",
+        "Nie wymaga też ani przymusowej spółdzielczości, ani arbitralnej konfiskaty własności.",
+      ],
+      keywords: [
+        "gospodarka",
+        "dystrybucjonizm",
+        "korporacjonizm",
+        "kapitalizm",
+        "socjalizm",
+        "pomocniczość",
+      ],
     },
 
     "private-property-and-broad-ownership": {
@@ -1609,67 +1630,196 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Własność jest źródłem niezależności i odpowiedzialności. Odpowiedzią na koncentrację jest szersze rozproszenie własności, a nie jej zniesienie.",
       position: [
-        "Własność prywatna jest źródłem niezależności i odpowiedzialności. Odpowiedzią na nadmierną koncentrację jest szersze rozproszenie własności, a nie jej zniesienie.",
+        "Własność prywatna jest źródłem niezależności i odpowiedzialności, a odpowiedzią na nadmierną koncentrację jest szersze rozproszenie własności, a nie jej zniesienie. Polityka publiczna powinna poszerzać rzeczywiste możliwości nabywania przez gospodarstwa domowe własnego majątku wytwórczego.",
+        "Majątek taki nabywa się przede wszystkim przez zakładanie przedsiębiorstw, oszczędzanie, inwestowanie, dobrowolne przekazanie, dziedziczenie i legalne finansowanie. Pomoc publiczna powinna obniżać rzeczywiste bariery w jego nabywaniu, nie gwarantując przy tym prywatnych zysków ani nie przenosząc ryzyka inwestycyjnego właściciela na podatnika.",
       ],
       policies: [
-        "Szeroka własność mieszkaniowa.",
-        "Przedsiębiorstwa rodzinne.",
-        "Niezależni rzemieślnicy i zawody rzemieślnicze.",
-        "Małe i średnie przedsiębiorstwa.",
-        "Spółdzielnie i własność pracownicza.",
-        "Rolnictwo rodzinne.",
-        "Bankowość lokalna i regionalna.",
+        "Niezależne firmy i praktyki zawodowe.",
+        "Przedsiębiorstwa rodzinne i gospodarstwa rolne.",
+        "Akcje pracownicze i członkostwo w spółdzielniach.",
+        "Narzędzia wytwórcze i warsztaty.",
+        "Zróżnicowane oszczędności i inwestycje.",
+        "Własność mieszkaniowa i inne uprawnione aktywa wytwórcze.",
       ],
       principle: "Wielu właścicieli, a nie kilku.",
-      keywords: ["własność", "posiadanie", "dystrybucjonizm", "spółdzielnie", "drobni właściciele"],
+      limits: [
+        "Pomoc obniża bariery w dostępie do własności; nie gwarantuje, że inwestycja przyniesie zysk.",
+        "Ryzyko, które obciąża właściciela, nie jest przenoszone na ogół obywateli.",
+      ],
+      keywords: [
+        "własność",
+        "posiadanie",
+        "dystrybucjonizm",
+        "spółdzielnie",
+        "oszczędności",
+        "dziedziczenie",
+      ],
+    },
+
+    "family-business-and-small-enterprise": {
+      title: "Firma rodzinna i mała przedsiębiorczość",
+      shortAnswer:
+        "Mniejsze firmy i firmy rodzinne powinny mieć uczciwy dostęp do finansowania, zamówień publicznych i lokali, a żywotne przedsiębiorstwo powinno móc przejść na następne pokolenie.",
+      position: [
+        "Przedsiębiorstwa rodzinne i mniejsze powinny otrzymać uczciwy dostęp do finansowania, zamówień publicznych, lokali użytkowych i usług administracyjnych. Zakładanie firmy i zwyczajne obowiązki sprawozdawcze należy upraszczać wszędzie tam, gdzie da się to zrobić bez osłabienia ochrony pracowników, bezpieczeństwa konsumentów ani egzekucji podatkowej.",
+        "Polityka sukcesji powinna pozwalać żywotnemu przedsiębiorstwu rodzinnemu działać dalej, zamiast zmuszać do jego podziału na pokrycie zobowiązania podatkowego. Gdy firma rzeczywiście upada, prawo powinno oferować przewidywalną drogę przez niewypłacalność i restrukturyzację, w tym rozsądną możliwość rozpoczęcia od nowa.",
+      ],
+      policies: [
+        "Zapewnienie firmom rodzinnym i mniejszym uczciwego dostępu do finansowania, zamówień publicznych i lokali użytkowych.",
+        "Uproszczenie zakładania firmy i rutynowych obowiązków sprawozdawczych bez osłabiania ochrony pracowników ani konsumentów.",
+        "Dopuszczenie ulgi przy sukcesji firmy tam, gdzie przedsiębiorstwo kontynuuje rzeczywistą działalność wytwórczą.",
+        "Zabezpieczenie tej ulgi przed sztucznym rozdrabnianiem urządzonym po to, by się do niej zakwalifikować.",
+        "Zapewnienie przewidywalnego prawa upadłościowego i restrukturyzacyjnego, z rozsądną możliwością drugiego startu.",
+      ],
+      limits: [
+        "Upraszczanie kończy się tam, gdzie osłabiłoby ochronę pracowników, bezpieczeństwo konsumentów albo egzekucję podatkową.",
+        "Ulga idzie za rzeczywistą działalnością wytwórczą, nigdy za formą prawną przyjętą po to, by ją otrzymać.",
+      ],
+      keywords: [
+        "firma rodzinna",
+        "mała firma",
+        "przedsiębiorczość",
+        "sukcesja",
+        "upadłość",
+        "zamówienia publiczne",
+      ],
+    },
+
+    "worker-ownership-and-cooperatives": {
+      title: "Własność pracownicza i spółdzielnie",
+      shortAnswer:
+        "Spółdzielnie, własność pracownicza i udział w zyskach są uprawnionymi sposobami rozpraszania własności wytwórczej, a udział w nich musi pozostać dobrowolny.",
+      position: [
+        "Restore Europa uznaje spółdzielnie pracownicze, fundusze własności pracowniczej, bezpośredni akcjonariat pracowniczy i porozumienia o udziale w zyskach za uprawnione sposoby rozpraszania własności wytwórczej. Wykupy pracownicze i przejęcia sukcesyjne mogą otrzymać odpowiednio uregulowany dostęp do finansowania tam, gdzie niezależna ocena stwierdzi, że przedsiębiorstwo jest żywotne gospodarczo.",
+        "Udział pozostaje dobrowolny. Żaden pracownik nie powinien być zmuszany do kupowania udziałów u swojego pracodawcy ani do lokowania oszczędności w tym samym przedsiębiorstwie, które już daje mu dochód, ponieważ skupia to ryzyko ponoszone przez gospodarstwo domowe, zamiast je rozpraszać.",
+      ],
+      policies: [
+        "Uznanie w prawie spółdzielni, funduszy własności pracowniczej, akcjonariatu pracowniczego i udziału w zyskach.",
+        "Utrzymanie dobrowolności udziału we własności pracowniczej we wszystkich jej formach.",
+        "Otwarcie uregulowanego finansowania dla wykupów pracowniczych i przejęć sukcesyjnych ocenionych jako żywotne.",
+        "Wymaganie od spółdzielni osobowości prawnej, przejrzystej rachunkowości i demokratycznego zarządzania wewnętrznego.",
+        "Zapewnienie spółdzielniom dostępu do zwyczajnego prawa gospodarczego i upadłościowego.",
+      ],
+      limits: [
+        "Status spółdzielczy lub społeczny nie zwalnia żadnej firmy z regulacji konkurencyjnych, konsumenckich ani finansowych.",
+        "Od żadnego pracownika nie można wymagać, by ryzykował swój dochód i swoje oszczędności w tym samym przedsiębiorstwie.",
+      ],
+      keywords: [
+        "spółdzielnie",
+        "akcjonariat pracowniczy",
+        "własność pracownicza",
+        "udział w zyskach",
+        "wykup pracowniczy",
+      ],
     },
 
     "corporations-and-monopolies": {
-      title: "Korporacje i monopole",
+      title: "Korporacje, przemysł i konkurencja",
       shortAnswer:
-        "Korporacje są uprawnionymi narzędziami, ale pozostają podporządkowane dobru wspólnemu, a skupioną władzę korporacyjną można ograniczyć.",
+        "Wielkie przedsiębiorstwa są uprawnione tam, gdzie ich skala jest konieczna lub pożyteczna. Polityka ogranicza nadużywanie pozycji dominującej, a nie wielkość jako taką.",
       position: [
-        "Korporacje są uprawnionymi narzędziami, ale muszą pozostać podporządkowane dobru wspólnemu. Nadmiernie skupioną władzę korporacyjną można ograniczyć.",
+        "Wielkie przedsiębiorstwa pozostają uprawnione tam, gdzie ich skala jest gospodarczo konieczna lub korzystna, i pozostają podporządkowane dobru wspólnemu. Dystrybucjonizm nie wymaga sztucznego dzielenia każdej dużej fabryki, instytucji badawczej, kolei czy przedsiębiorstwa przemysłowego na małe firmy.",
+        "Polityka publiczna zajmuje się nadużywaniem pozycji dominującej, praktykami wykluczającymi konkurentów i szkodliwą koncentracją — za pomocą prawa konkurencji stosowanego niezależnie od aktualnego rządu. Polityka przemysłowa może wspierać strategicznie ważną produkcję, badania, bezpieczeństwo energetyczne, infrastrukturę krytyczną i odporne łańcuchy dostaw.",
       ],
       policies: [
-        "Mocna polityka konkurencji i przeciwdziałania monopolom.",
-        "Ograniczenia tam, gdzie firmy podporządkowują sobie instytucje polityczne albo rynki podstawowe.",
+        "Niezależne stosowanie prawa konkurencji przeciwko nadużywaniu pozycji dominującej i praktykom wykluczającym konkurentów.",
+        "Ograniczanie koncentracji tam, gdzie firmy zaczynają podporządkowywać sobie instytucje polityczne albo rynki podstawowe.",
+        "Wspieranie strategicznie ważnej produkcji, badań, bezpieczeństwa energetycznego i infrastruktury krytycznej.",
+        "Przejrzystość pomocy przemysłowej i poddanie jej niezależnej ocenie.",
         "Ochrona żywotnych wspólnot, życia rodzinnego i niezależności politycznej przed niszczącą koncentracją.",
       ],
-      keywords: ["korporacje", "monopol", "prawo antymonopolowe", "konkurencja", "koncentracja"],
+      limits: [
+        "Sama wielkość nie jest przewinieniem; sprawdzianem jest postępowanie i jego skutek dla rynku.",
+        "Pomoc przemysłowa nie jest trwała i zostaje wycofana, zamiast dotować przedsiębiorstwo niezdolne do życia.",
+      ],
+      keywords: [
+        "korporacje",
+        "monopol",
+        "prawo antymonopolowe",
+        "konkurencja",
+        "polityka przemysłowa",
+        "koncentracja",
+      ],
+    },
+
+    "trade-and-economic-sovereignty": {
+      title: "Handel i suwerenność gospodarcza",
+      shortAnswer:
+        "Handel dający się pogodzić z odpornością narodową i uczciwą konkurencją — ani zależność od jednego dostawcy, ani udawanie, że kraj potrafi wytworzyć wszystko sam.",
+      position: [
+        "Restore Europa popiera handel międzynarodowy dający się pogodzić z odpornością gospodarczą narodu, uczciwą konkurencją i zachowaniem strategicznie ważnych zdolności wytwórczych. Kraj nie powinien dążyć do całkowitej autarkii gospodarczej tam, gdzie specjalizacja i wymiana przynoszą znaczne korzyści.",
+        "Krytyczne zależności należy rozpoznawać z rozmysłem, a nie odkrywać dopiero w czasie kryzysu — poprzez odporność łańcuchów dostaw, rezerwy strategiczne, zróżnicowanie źródeł zaopatrzenia i odpowiednie krajowe zdolności produkcyjne. Środki dotyczące handlu i inwestycji muszą być badane pod kątem zgodności z wiążącymi je zobowiązaniami europejskimi i międzynarodowymi.",
+      ],
+      policies: [
+        "Rozpoznawanie krytycznych zależności w łańcuchach dostaw, zanim staną się strategicznymi słabościami.",
+        "Utrzymywanie rezerw strategicznych i zróżnicowanie źródeł zaopatrzenia w dobra podstawowe.",
+        "Zachowanie krajowych zdolności produkcyjnych tam, gdzie dana zdolność jest strategicznie ważna.",
+        "Badanie środków handlowych i inwestycyjnych pod kątem zgodności z mającymi zastosowanie zobowiązaniami europejskimi i międzynarodowymi.",
+      ],
+      limits: [
+        "Autarkia nie jest celem; specjalizacja i wymiana są przyjmowane tam, gdzie korzyść jest znaczna.",
+        "Odporność nie jest ogólnym przyzwoleniem na osłanianie przemysłu, który jest po prostu niekonkurencyjny.",
+      ],
+      keywords: ["handel", "cła", "łańcuchy dostaw", "suwerenność", "odporność", "autarkia"],
     },
 
     "guilds-chambers-and-corporatist-representation": {
       title: "Cechy, izby i przedstawicielstwo korporacyjne",
       shortAnswer:
-        "Pracownicy, pracodawcy, rzemieślnicy, rolnicy i zawody powinni uczestniczyć w instytucjach branżowych ustalających standardy, naukę zawodu i warunki pracy.",
+        "Instytucje zawodowe powinny prowadzić naukę zawodu, kwalifikacje i dialog branżowy, nie zastępując niezależnych związków zawodowych ani nie zamykając zawodu przed nowymi.",
       position: [
-        "Pracownicy, pracodawcy, rzemieślnicy, rolnicy i zawody powinni uczestniczyć w instytucjach branżowych zdolnych ustalać standardy, naukę zawodu, warunki pracy i mechanizmy mediacji.",
+        "Nowoczesne instytucje zawodowe powinny wspierać naukę zawodu, kwalifikacje, standardy zatrudnienia, dialog branżowy i pokojowe rozstrzyganie sporów. Rady branżowe mogą ułatwiać konsultacje i negocjacje zbiorowe, pod warunkiem przedstawicielskiego zarządzania, nadzoru prawnego i zabezpieczeń konkurencji.",
+        "Niezależne związki zawodowe zachowują prawo do reprezentowania pracowników i negocjowania układów zbiorowych. Izby zawodowe stoją obok nich, a nie na ich miejscu, a korporacjonizm jako całość pozostaje podporządkowany pomocniczości.",
       ],
       policies: [
-        "Izby zawodowe i korporacje branżowe powinny pozostać dostatecznie niezależne od scentralizowanej władzy.",
-        "Organizacje zawodowe mogą mieć zorganizowane przedstawicielstwo w życiu publicznym.",
-        "Korporacjonizm pozostaje podporządkowany pomocniczości.",
+        "Powierzenie izbom zawodowym odpowiedzialności za naukę zawodu, kwalifikacje i standardy zatrudnienia.",
+        "Utrzymanie tych izb dostatecznie niezależnymi od scentralizowanej władzy.",
+        "Dopuszczenie, by rady branżowe ułatwiały konsultacje i negocjacje pod przedstawicielskim zarządzaniem.",
+        "Zachowanie prawa niezależnych związków zawodowych do reprezentowania pracowników i negocjowania układów.",
+        "Poddanie instytucji branżowych nadzorowi prawnemu i zabezpieczeniom konkurencji.",
       ],
-      keywords: ["cechy", "izby zawodowe", "korporacjonizm", "nauka zawodu", "rzemiosło"],
+      limits: [
+        "Żadna izba nie zastępuje niezależnego związku zawodowego ani nie ma niekontrolowanej władzy nad dostępem do zawodu.",
+        "Żaden cech ani żadna izba nie może działać jako nielegalny kartel ani stawiać arbitralnych barier przed nowymi przedsiębiorcami.",
+      ],
+      keywords: [
+        "cechy",
+        "izby zawodowe",
+        "korporacjonizm",
+        "nauka zawodu",
+        "rzemiosło",
+        "negocjacje zbiorowe",
+      ],
     },
 
     "finance-lending-and-usury": {
-      title: "Finanse, kredyt i lichwa",
+      title: "Finanse, kredyt i dostęp do kapitału",
       shortAnswer:
-        "Finanse powinny służyć działalności wytwórczej. Uprawnione pożyczanie i rozsądny zwrot są przyjmowane; wyzyskujące oprocentowanie i pętle zadłużenia — nie.",
+        "Zróżnicowany system finansowy służący działalności wytwórczej. Uprawnione pożyczanie i rozsądny zwrot są przyjmowane; wyzyskujące oprocentowanie i pętle zadłużenia — nie.",
       position: [
-        "Finanse powinny służyć działalności wytwórczej. Restore Europa przyjmuje uprawnione pożyczanie i rozsądny zwrot z kapitału, sprzeciwiając się wyzyskującemu oprocentowaniu, drapieżnemu kredytowi i pętlom zadłużenia.",
+        "Finanse powinny służyć działalności wytwórczej. Restore Europa przyjmuje uprawnione pożyczanie i rozsądny zwrot z kapitału, sprzeciwiając się wyzyskującemu oprocentowaniu, drapieżnemu kredytowi i pętlom zadłużenia, oraz popiera zróżnicowany system banków spółdzielczych, banków regionalnych, kas oszczędnościowo-kredytowych, banków komercyjnych i odpowiedzialnie zarządzanych publicznych instytucji rozwoju.",
+        "Dystrybucjonistyczna instytucja finansowania rozwoju może wspierać żywotne wykupy pracownicze, przedsiębiorstwa spółdzielcze, sukcesję firm rodzinnych, niezależną przedsiębiorczość i inwestycje wytwórcze w regionach niedostatecznie obsługiwanych. Publiczne pożyczki i gwarancje wymagają rzetelnej oceny finansowej, przejrzystej sprawozdawczości, niezależnego nadzoru i jasnego wskazania strat, jakie mogą z nich wyniknąć.",
       ],
       policies: [
-        "Ścisłe ograniczenia lub limity dla drapieżnych pożyczek typu chwilówka.",
-        "Przejrzyste podawanie pełnego kosztu kredytu.",
-        "Ograniczenia nadużywanych opłat za opóźnienie i kar narastających.",
-        "Sądy mogą unieważniać wyraźnie rażąco nieuczciwe warunki pożyczki.",
-        "Polityka powinna sprzyjać kredytowi wytwórczemu na mieszkania, firmy rodzinne i inwestycje długoterminowe.",
-        "Wspieranie bankowości lokalnej i regionalnej.",
+        "Utrzymanie zróżnicowanego systemu banków spółdzielczych, regionalnych, komercyjnych i rozwojowych.",
+        "Kierowanie finansowania rozwojowego do wykupów pracowniczych, spółdzielni, sukcesji firm rodzinnych i regionów niedostatecznie obsługiwanych.",
+        "Wymóg rzetelnej oceny, przejrzystej sprawozdawczości i niezależnego nadzoru nad publicznym kredytowaniem.",
+        "Limity lub ścisłe ograniczenia dla drapieżnych pożyczek typu chwilówka oraz wymóg przejrzystego podawania pełnego kosztu kredytu.",
+        "Ograniczenie nadużywanych opłat za opóźnienie i kar narastających oraz umożliwienie sądom unieważniania rażąco nieuczciwych warunków.",
+        "Sprzyjanie kredytowi wytwórczemu na mieszkania, firmy rodzinne i inwestycje długoterminowe.",
       ],
-      keywords: ["finanse", "lichwa", "oprocentowanie", "pożyczki", "dług", "banki"],
+      limits: [
+        "Politycy nie decydują o poszczególnych pożyczkach i żadna pożyczka nie jest udzielana w celach partyjnych.",
+        "Oszczędności gospodarstw domowych, emerytury i depozyty nie są obowiązkowym źródłem finansowania spekulacyjnego.",
+      ],
+      keywords: [
+        "finanse",
+        "lichwa",
+        "oprocentowanie",
+        "pożyczki",
+        "banki",
+        "kasy oszczędnościowo-kredytowe",
+      ],
     },
 
     "housing-and-financialization": {
@@ -1677,13 +1827,22 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Mieszkania powinny służyć przede wszystkim zamieszkiwaniu i wspólnocie, a nie działać jako bez końca drożejące aktywo finansowe.",
       position: [
-        "Mieszkania powinny służyć przede wszystkim zamieszkiwaniu i wspólnocie, a nie działać głównie jako bez końca drożejące aktywo finansowe.",
+        "Mieszkania powinny służyć przede wszystkim zamieszkiwaniu i wspólnocie, a nie działać głównie jako bez końca drożejące aktywo finansowe. Restore Europa popiera szeroką własność mieszkaniową, żywotne gospodarstwa rodzinne, spółdzielnie mieszkaniowe i odpowiedzialne gospodarowanie ziemią wytwórczą.",
+        "Polityka powinna działać jednocześnie po stronie podaży i po stronie finansowania: większe zdolności budowlane, odpowiednia reforma planowania przestrzennego, uczciwy dostęp do kredytu hipotecznego oraz środki przeciw spekulacji tam, gdzie da się wykazać wyrządzaną przez nią szkodę. Programy sukcesji gospodarstw i dostępu do ziemi powinny zachowywać żywotną produkcję rolną, szanując przy tym prawa własności i legalną konkurencję.",
       ],
       policies: [
-        "Szeroka własność mieszkaniowa jest celem podstawowym.",
-        "Własność spekulacyjną i skupioną można ograniczyć tam, gdzie uniemożliwia zwyczajną własność rodzinną.",
+        "Uczynienie szerokiego zamieszkiwania we własnym mieszkaniu podstawowym celem polityki mieszkaniowej.",
+        "Zwiększanie zdolności budowlanych i reforma planowania przestrzennego tam, gdzie utrudnia ono budowę odpowiednich mieszkań rodzinnych.",
+        "Zapewnienie uczciwego dostępu do kredytu hipotecznego i przewidywalnego finansowania długoterminowego.",
+        "Ograniczanie własności spekulacyjnej i skupionej tam, gdzie wypiera ona zwyczajną własność rodzinną.",
+        "Wspieranie spółdzielni mieszkaniowych i zakorzenionych lokalnie form własności.",
+        "Zachowanie żywotnej produkcji rolnej przez programy sukcesji gospodarstw i dostępu do ziemi.",
       ],
-      keywords: ["mieszkania", "własne mieszkanie", "najem", "spekulacja", "wynajmujący"],
+      limits: [
+        "Środki wymierzone są w spekulację, której szkodliwość da się wykazać, a nie w zwyczajną własność czy oszczędzanie.",
+        "Polityka wobec ziemi i gospodarstw rolnych szanuje prawa własności i legalną konkurencję.",
+      ],
+      keywords: ["mieszkania", "własne mieszkanie", "najem", "spekulacja", "ziemia", "rolnictwo"],
     },
 
     work: {
@@ -1691,14 +1850,28 @@ export const policyText: PolicyText = {
       shortAnswer:
         "Praca ma swoją godność, ale nie jest celem ludzkiego istnienia. Postęp gospodarczy powinien zwiększać bezpieczeństwo, czas wolny i władzę człowieka nad własnym życiem.",
       position: [
-        "Praca ma swoją godność, ale nie jest celem ludzkiego istnienia. Postęp gospodarczy powinien zwiększać bezpieczeństwo, czas wolny, czas dla rodziny, sensowną pracę i władzę człowieka nad własnym życiem.",
+        "Praca ma swoją godność, ale nie jest celem ludzkiego istnienia. Postęp gospodarczy powinien zwiększać bezpieczeństwo, czas wolny, czas dla rodziny, sensowną pracę i władzę człowieka nad własnym życiem, a samodzielna działalność gospodarcza i zwyczajna praca najemna pozostają równie uprawnionymi wyborami.",
+        "Rozwój techniki powinien poprawiać dobrobyt człowieka i zdolności wytwórcze, a nie sprowadzać pracowników i gospodarstwa domowe do zależności od wąskiej grupy właścicieli kapitału. Korzyść z automatyzacji poszerzają udział pracowników we wzroście produktywności, szkolenia podnoszące umiejętności, zakładanie przedsiębiorstw i dostęp do techniki wytwórczej.",
       ],
       policies: [
-        "Przywrócona pozycja społeczna rzemiosła, rolnictwa, inżynierii, pracy opiekuńczej, nauczania i zawodów fachowych.",
-        "Wzrost produktywności nie powinien tylko zwiększać ilości wyciskanej z ludzi pracy.",
-        "Automatyzacja nie powinna usuwać sensownego udziału człowieka wyłącznie w imię wydajności liczbowej.",
+        "Przywrócenie pozycji społecznej rzemiosłu, rolnictwu, inżynierii, pracy opiekuńczej, nauczaniu i zawodom fachowym.",
+        "Skierowanie części wzrostu produktywności na bezpieczeństwo i czas wolny, a nie wyłącznie na wyciskanie zysku.",
+        "Utrzymanie samodzielnej działalności gospodarczej i pracy najemnej jako równie uprawnionych sposobów pracy.",
+        "Zapewnienie pracownikom udziału we wzroście produktywności, szkoleń podnoszących umiejętności i dostępu do techniki wytwórczej.",
+        "Ochrona pracowników przed wyzyskującymi praktykami zatrudnienia.",
       ],
-      keywords: ["praca", "zatrudnienie", "rynek pracy", "rzemiosło", "czas wolny"],
+      limits: [
+        "Automatyzacja powinna odciążać od pracy rzeczywiście poniżającej; usuwanie udziału człowieka nie jest celem samym w sobie.",
+        "Innowacji nie należy zakazywać tylko dlatego, że podnosi produktywność.",
+      ],
+      keywords: [
+        "praca",
+        "rynek pracy",
+        "zatrudnienie",
+        "rzemiosło",
+        "czas wolny",
+        "automatyzacja",
+      ],
     },
 
     "minimum-wage": {
@@ -1707,6 +1880,7 @@ export const policyText: PolicyText = {
         "Każdemu pracownikowi należy się płaca sprawiedliwa, wystarczająca na godne życie i na rozsądne utrzymanie rodziny.",
       position: [
         "Katolicka nauka społeczna ustanawia materialny standard płacy sprawiedliwej, a nie jeden powszechny mechanizm ustawowy. Restore Europa opowiada się zatem za ustalaniem wynagrodzeń na szczeblu branżowym i regionalnym przez instytucje przedstawicielskie, wsparte ochroną ustawową tam, gdzie to konieczne.",
+        "Praca powinna dawać wynagrodzenie odpowiadające odpowiedzialności zawodowej, warunkom pracy, produktywności i rozsądnym potrzebom gospodarstwa domowego. Polityka płacowa musi jednocześnie ważyć możliwości zatrudnienia, żywotność małych przedsiębiorstw i wpływ na ceny konsumpcyjne — i dlatego poziom ustala się branża po branży, zamiast ogłaszać go dla całego kontynentu.",
       ],
       policies: [
         "Ustanowienie zasady prawnie chronionej płacy sprawiedliwej.",
@@ -1716,6 +1890,10 @@ export const policyText: PolicyText = {
         "Uwzględnianie potrzeb rodziny, a nie traktowanie utrzymania jednej osoby jako jedynego standardu.",
         "Stosowanie dodatków rodzinnych lub świadczeń na dzieci tam, gdzie to właściwe, tak by wychowywanie dzieci nie stawało się nieuzasadnioną karą ekonomiczną.",
         "Uwzględnianie żywotności przedsiębiorstwa, produktywności i możliwości zatrudnienia.",
+      ],
+      limits: [
+        "Nie przepisuje się tu jednej stawki dla Europy; poziom ustala się branżowo i regionalnie.",
+        "Standardy branżowe dostosowuje się do warunków regionalnych, zamiast narzucać je jednolicie.",
       ],
       keywords: [
         "płaca minimalna",
@@ -1736,6 +1914,7 @@ export const policyText: PolicyText = {
         "Opodatkowanie jest uprawnione dla dobra wspólnego, ale powinno być sprawiedliwe, wrażliwe na rodzinę, niekonfiskacyjne i zgodne z szeroko rozproszoną własnością, pracą wytwórczą i pomocniczością.",
       position: [
         "System podatkowy powinien finansować uprawnione funkcje publiczne, nie stając się mechanizmem znoszenia własności prywatnej, odstraszania od zakładania rodziny ani zbędnej centralizacji obowiązków społecznych.",
+        "To, co się pobiera, i to, co się wydaje, są jedną sprawą, a nie dwiema. Wydatki i zadłużanie się państwa należą do przejrzystego budżetowania wieloletniego, niezależnej kontroli i zrównoważonego zarządzania długiem publicznym, ponieważ system podatkowy oceniany sam w sobie nie pokazuje, czy kraj żyje w granicach swoich możliwości.",
       ],
       policies: [
         "Nakładanie podatków na podstawie jasnego prawa, rozsądnie i sprawiedliwie.",
@@ -1748,9 +1927,11 @@ export const policyText: PolicyText = {
         "Ochrona zwyczajnych domów rodzinnych, gospodarstw rolnych i działających firm rodzinnych przed konstrukcjami podatku spadkowego, które wymuszają zbędną likwidację.",
         "Ostrożność wobec powtarzalnych powszechnych podatków majątkowych, które mogą opodatkowywać majątek niepłynny niezależnie od dochodu.",
         "Obniżone opodatkowanie konsumpcji dóbr podstawowych tam, gdzie to wykonalne.",
+        "Ocena każdej zachęty podatkowej pod kątem jej kosztu fiskalnego, skuteczności i unikania opodatkowania, do którego zachęca.",
       ],
       limits: [
         "Dokładne stawki nie są tu przepisane i pozostają sprawą wykonania na szczeblu narodowym.",
+        "Żadna sama tylko forma prawna działalności nie jest uprzywilejowana tam, gdzie nie niesie rzeczywistej korzyści wytwórczej ani własnościowej.",
       ],
       keywords: [
         "podatek",
@@ -1771,6 +1952,7 @@ export const policyText: PolicyText = {
         "Mieszany system emerytalny powinien łączyć podstawowe zabezpieczenie na starość z zabezpieczeniem zawodowym, oszczędnościami własnymi, majątkiem rodzinnym i odpowiedzialnością międzypokoleniową.",
       position: [
         "Ludzie starsi, którzy wnieśli swój wkład w społeczeństwo, nie powinni popadać w nędzę, ale zabezpieczenie emerytalne nie powinno czynić obywateli całkowicie zależnymi od jednego scentralizowanego systemu państwowego.",
+        "Obietnica emerytalna jest roszczeniem wobec przyszłej gospodarki, więc sprawdzianem systemu jest to, czy da się jej dotrzymać. Zabezpieczenie powinno zatem opierać się na kilku podstawach naraz — podstawowej gwarancji publicznej, funduszach zakładowych, oszczędnościach gospodarstw domowych i majątku rodzinnym — a nie na którejkolwiek z nich z osobna.",
       ],
       policies: [
         "Zagwarantowanie emerytury podstawowej wystarczającej, by chronić starszych obywateli od ubóstwa.",
@@ -1780,6 +1962,10 @@ export const policyText: PolicyText = {
         "Unikanie zasad emerytalnych, które strukturalnie karzą za małżeństwo, rodzicielstwo albo opiekę nad rodziną.",
         "Utrzymanie stabilności finansów publicznych, tak by jedno pokolenie nie nakładało na następne zobowiązań niemożliwych do spłacenia.",
         "Dopuszczenie narodowych różnic w proporcji między zabezpieczeniem publicznym, zawodowym i prywatnym.",
+      ],
+      limits: [
+        "Nie przepisuje się tu ani wieku emerytalnego, ani wysokości składki; jedno i drugie pozostaje sprawą narodową.",
+        "Zachęcanie do prywatnego oszczędzania nie jest krokiem ku wycofaniu podstawowej gwarancji publicznej.",
       ],
       keywords: [
         "emerytury",
@@ -1799,6 +1985,7 @@ export const policyText: PolicyText = {
         "Mieszkania powinny służyć przede wszystkim zamieszkiwaniu i wspólnocie, a polityka powinna zmierzać do szerokiej własności rodzinnej, a nie do trwałego wyciskania zysku finansowego.",
       position: [
         "Własność prywatna jest chroniona, a proporcjonalne ograniczenia mogą dotyczyć praktyk, które z ograniczonego zasobu mieszkań czynią narzędzie sztucznego niedoboru, monopolu lub spekulacyjnej akumulacji.",
+        "Przedstawione niżej ograniczenia są szczegółową postacią tego rozstrzygnięcia. Każde z nich wymierzone jest w praktykę, a nie we własność samą w sobie, i każde jest proporcjonalne do niedoboru, który da się wykazać — co jest zarazem warunkiem jego uchylenia.",
       ],
       policies: [
         "Uczynienie szerokiego zamieszkiwania we własnym mieszkaniu podstawowym celem polityki mieszkaniowej.",
@@ -1811,6 +1998,10 @@ export const policyText: PolicyText = {
         "Ochrona domów rodzinnych, gospodarstw rodzinnych i zwyczajnego majątku odziedziczonego przed przymusową likwidacją.",
         "Wspieranie spółdzielni i zakorzenionych lokalnie form własności tam, gdzie poszerzają rzeczywistą własność.",
         "Pierwszeństwo dla proporcjonalnej ochrony najemców przed systemami kontroli czynszów, które czynią nowe budownictwo ekonomicznie niemożliwym.",
+      ],
+      limits: [
+        "Ograniczenia idą za wykazanym niedoborem i zostają uchylone, gdy niedobór ustaje.",
+        "Celem jest praktyka trzymania mieszkań poza rynkiem, nigdy własność ani wynajmowanie jako takie.",
       ],
       keywords: [
         "mieszkania",
@@ -1830,6 +2021,7 @@ export const policyText: PolicyText = {
         "Pracownicy mogą organizować się niezależnie, a stosunki pracy powinny zmierzać ku korporacjonistycznemu systemowi trwałych instytucji branżowych reprezentujących pracowników, pracodawców i zawody.",
       position: [
         "Restore Europa odrzuca zarówno bezsilność pracownika wobec skupionego kapitału, jak i trwały konflikt klasowy jako zasadę porządkującą życie gospodarcze.",
+        "Niezależne związki zawodowe są częścią tego ładu, a nie etapem na drodze wyjścia z niego. Pracownicy zachowują wolność zrzeszania się i legalne negocjacje zbiorowe niezależnie od tego, jakie instytucje branżowe istnieją obok nich, ponieważ izba, która wchłonęła związek mający stać u jej boku, nie reprezentuje nikogo.",
       ],
       policies: [
         "Ochrona prawa do zakładania niezależnych związków zawodowych i wstępowania do nich.",
@@ -1841,6 +2033,10 @@ export const policyText: PolicyText = {
         "Niedopuszczenie, by związki zawodowe stały się obowiązkowymi organami państwa.",
         "Niedopuszczenie, by pracodawcy kontrolowali rzekomo niezależne organizacje pracownicze.",
         "Dopuszczenie rzeczywistej wielości przedstawicielstwa, a nie jednego związku kontrolowanego przez państwo.",
+      ],
+      limits: [
+        "Instytucje branżowe buduje się obok niezależnych związków zawodowych, nigdy z nich.",
+        "Nic z powyższego nie czyni członkostwa w związku zawodowym ani w izbie warunkiem wykonywania pracy.",
       ],
       keywords: [
         "związki zawodowe",
