@@ -92,4 +92,13 @@ jobs:
       #
       # Separate from the job above so that an advisory published overnight is
       # reported as itself rather than as "the build broke".
+      #
+      # The `overrides` block in package.json is what keeps this green when an
+      # upstream package pins a vulnerable version exactly and has not yet
+      # released against the advisory — `@vercel/cli-config` asks for one
+      # particular zod, three levels below `@vercel/blob`, and no amount of
+      # updating reaches it. An override is the only lever there is, and it is
+      # the honest one: it says in the manifest which version this project
+      # insists on, rather than lowering the bar here until upstream catches
+      # up. Each entry should be removable once it is, and worth trying.
       - run: npm audit --omit=dev --audit-level=high
