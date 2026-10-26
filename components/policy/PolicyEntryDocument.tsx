@@ -88,8 +88,18 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
           belongs to the apparatus, so the two columns still start where the
           title above them does.
         */}
+        {/*
+          The sections below are separated by space rather than by a rule
+          each. An entry has up to five of them and the rail has two more, and
+          a full-width hairline above every one turned a short position — a
+          paragraph, three commitments, two limits — into a stack of ruled
+          boxes larger than anything inside them. Space separates just as
+          well at this length and does not keep announcing that it is doing
+          so. The rules that remain are the ones that divide the page into
+          its genuine parts: the header, the related entries, the sequence.
+        */}
         <div className="grid gap-14 lg:grid-cols-[minmax(0,var(--container-reading))_minmax(16rem,1fr)] lg:gap-16 xl:gap-20">
-          <div className="flex min-w-0 flex-col gap-14">
+          <div className="flex min-w-0 flex-col gap-16">
             <section aria-labelledby="position-heading">
               <h2 id="position-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 {text.positionHeading}
@@ -104,10 +114,7 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
             </section>
 
             {entry.policies ? (
-              <section
-                aria-labelledby="policies-heading"
-                className="border-t border-hairline pt-10"
-              >
+              <section aria-labelledby="policies-heading">
                 {/* Counted, not asserted: how many commitments follow. */}
                 <div className="mb-4 flex items-baseline justify-between gap-6">
                   <h2 id="policies-heading" className="font-serif text-[0.9375rem] text-muted">
@@ -117,25 +124,33 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
                     {plural(locale, commitments, text.commitments)}
                   </p>
                 </div>
-                {/* The rule that opens the next section closes the last row. */}
-                <ul className="flex flex-col border-t border-hairline">
-                  {entry.policies.map((item) => (
+                {/*
+                  A ruled row per commitment made an eleven-item list into
+                  eleven boxes. They are numbered instead: the figure does
+                  the separating a rule was doing, and unlike the rule it
+                  says which of the eleven is being read.
+                */}
+                <ol className="flex flex-col gap-3.5">
+                  {entry.policies.map((item, index) => (
                     <li
                       key={item}
-                      className="border-b border-hairline py-4 text-reading leading-relaxed text-body/92 last:border-b-0"
+                      className="flex gap-4 text-reading leading-relaxed text-body/92"
                     >
-                      {renderInline(item, locale)}
+                      <span
+                        aria-hidden="true"
+                        className="numerals-tabular shrink-0 pt-1 text-micro text-faint"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{renderInline(item, locale)}</span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </section>
             ) : null}
 
             {entry.principle ? (
-              <section
-                aria-labelledby="principle-heading"
-                className="border-t border-hairline pt-10"
-              >
+              <section aria-labelledby="principle-heading">
                 <h2 id="principle-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   {text.principleHeading}
                 </h2>
@@ -146,7 +161,7 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
             ) : null}
 
             {entry.limits ? (
-              <section aria-labelledby="limits-heading" className="border-t border-hairline pt-10">
+              <section aria-labelledby="limits-heading">
                 <h2 id="limits-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   {text.limitsHeading}
                 </h2>
@@ -172,16 +187,16 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
               difference between a reference and a reason.
             */}
             {basis.length > 0 ? (
-              <section aria-labelledby="basis-heading" className="border-t border-hairline pt-10">
+              <section aria-labelledby="basis-heading">
                 <h2 id="basis-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                   {text.basisHeading}
                 </h2>
-                <ul className="flex flex-col border-t border-hairline">
+                <ul className="flex flex-col gap-6">
                   {basis.map((section) => (
-                    <li key={section.id} className="border-b border-hairline last:border-b-0">
+                    <li key={section.id}>
                       <Link
                         href={localePath(locale, `/manifesto#${section.id}`)}
-                        className="group flex flex-col gap-2 py-5 sm:flex-row sm:gap-6"
+                        className="group flex flex-col gap-2 sm:flex-row sm:gap-6"
                       >
                         <span className="numerals-tabular eyebrow shrink-0 text-faint sm:w-10 sm:pt-1.5">
                           {section.numeral}
@@ -238,12 +253,17 @@ export async function PolicyEntryDocument({ edition, entry }: PolicyEntryDocumen
               <h2 id="keywords-heading" className="mb-4 font-serif text-[0.9375rem] text-muted">
                 {text.keywordsHeading}
               </h2>
-              <ul className="flex flex-wrap gap-2">
+              {/*
+                Words, not boxes. Five bordered chips in a narrow rail are
+                five more rectangles on a page that already had too many, and
+                the border was carrying no meaning the underline does not.
+              */}
+              <ul className="flex flex-col gap-2">
                 {entry.keywords.map((keyword) => (
                   <li key={keyword}>
                     <Link
                       href={policyHref(locale, { q: keyword })}
-                      className="inline-flex items-center border border-hairline px-3 py-1.5 text-[0.8125rem] text-muted transition-colors hover:border-ink hover:text-ink"
+                      className="text-[0.875rem] text-muted underline decoration-hairline underline-offset-[0.3em] transition-colors hover:text-ink hover:decoration-rule"
                     >
                       {keyword}
                     </Link>

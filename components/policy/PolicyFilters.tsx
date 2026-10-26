@@ -13,13 +13,12 @@ interface PolicyFiltersProps {
 }
 
 /*
- * The rule belongs to the list item and not to the link inside it: the item
- * is the grid cell and stretches to the height of its row, so a title that
- * wraps to two lines — most of them, in German — does not drop its rule below
- * the rules of the one-line titles beside it.
+ * No rule per cell. Eleven of them across three columns drew a grid inside a
+ * panel that is itself ruled top and bottom, and the only thing they
+ * separated was eleven single lines of text that the column gaps already
+ * separate. The numeral at the head of each row does the rest.
  */
-const cell = "border-b border-hairline";
-const row = "flex h-full items-baseline gap-3 py-2.5 transition-colors";
+const row = "flex h-full items-baseline gap-3 py-2 transition-colors";
 const rowOn = "text-ink";
 const rowOff = "text-muted hover:text-ink";
 
@@ -101,7 +100,7 @@ export function PolicyFilters({ edition, categories, q, category }: PolicyFilter
           </summary>
 
           <ul className="grid gap-x-12 pb-4 text-[0.875rem] sm:grid-cols-2 lg:grid-cols-3">
-            <li className={cell}>
+            <li>
               <Link
                 href={policyHref(locale, { q })}
                 aria-current={category ? undefined : "true"}
@@ -114,7 +113,7 @@ export function PolicyFilters({ edition, categories, q, category }: PolicyFilter
               </Link>
             </li>
             {categories.map((item) => (
-              <li key={item.id} className={cell}>
+              <li key={item.id}>
                 <Link
                   href={policyHref(locale, { q, category: item.id })}
                   aria-current={category === item.id ? "true" : undefined}
