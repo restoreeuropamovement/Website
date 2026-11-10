@@ -2,6 +2,7 @@ import { Panel } from "@/components/admin/Analytics";
 import { ShadeRamp } from "@/components/admin/ShadeRamp";
 import { DAILY_VISITOR_CEILING, scaleCeiling, shadeOf } from "@/lib/admin/choropleth";
 import type { ArchivedDay, Engagement, Live } from "@/lib/admin/pulse";
+import { pulseEnabled } from "@/lib/pulse";
 import { cn } from "@/lib/utils";
 
 /**
@@ -33,6 +34,21 @@ function NoDatabase({ what }: { readonly what: string }) {
   );
 }
 
+/**
+ * Said in place of a zero. With the beacon off nothing is counted, and "nobody
+ * is reading" would be a measurement this page did not take.
+ */
+function BeaconOff({ what }: { readonly what: string }) {
+  return (
+    <p className="border-l-2 border-gold/65 py-1 pl-5 text-[0.875rem] leading-relaxed text-muted">
+      {what} is not being recorded: the reading beacon is switched off because every visit kept
+      the database awake, and it is billed by the hour. Set{" "}
+      <code className="text-ink">PULSE_ENABLED</code> to turn it on, after editing the privacy
+      note.
+    </p>
+  );
+}
+
 /* ------------------------------------------------------------------- live */
 
 /**
@@ -52,6 +68,14 @@ export function LiveNow({ live }: { readonly live: Live | undefined }) {
     return (
       <Panel title="Reading now" caption="Presence in the last ninety seconds.">
         <NoDatabase what="Presence" />
+      </Panel>
+    );
+  }
+
+  if (!pulseEnabled()) {
+    return (
+      <Panel title="Reading now" caption="Presence in the last ninety seconds.">
+        <BeaconOff what="Presence" />
       </Panel>
     );
   }
@@ -124,6 +148,11 @@ export function ReadingTime({
       caption={`Foreground seconds per reading, last ${days} days. A hidden tab counts for nothing, and a reading ends at the last sign of life.`}
       span
     >
+      {pulseEnabled() ? null : (
+        <div className="mb-7">
+          <BeaconOff what="New reading time" />
+        </div>
+      )}
       {engagement.rows.length === 0 ? (
         <p className="text-[0.875rem] text-muted">
           No readings yet. Figures begin from the day this was deployed, not before.

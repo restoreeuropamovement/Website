@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Leerlo no instala ninguna cookie ni escribe nada en el almacenamiento local o de sesión de su navegador. No se construye, ni se compra, ni se vende ningún perfil de su visita. Los únicos scripts son las dos medidas que se describen más abajo — un contador de tráfico y una medida del tiempo que se dedica a leer las páginas — y ninguna de las dos puede identificarle.",
+            text: "Leerlo no instala ninguna cookie ni escribe nada en el almacenamiento local o de sesión de su navegador. No se construye, ni se compra, ni se vende ningún perfil de su visita. El único script es el contador de tráfico que se describe más abajo, y no puede identificarle.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Otras dos cosas se miden aquí y no en el servicio de recuento, y ambas se describen por entero porque en los dos casos su navegador nos envía algo mientras usted lee.",
-          },
-          {
-            type: "paragraph",
-            text: "La primera es cuántas personas tienen el sitio abierto en este momento. Al cargarse, una página genera un número al azar y lo guarda en la memoria de la página — no en una cookie, no en el almacenamiento local o de sesión, en ningún lugar que perdure. Se descarta cuando usted cierra la pestaña o recarga, de modo que no puede reconocerle a su vuelta, y nuestra copia se borra noventa segundos después de la última señal de su navegador. Lo único que permite saber es cuántas pestañas hay abiertas y en qué páginas; nunca de quién.",
-          },
-          {
-            type: "paragraph",
-            text: "La segunda es cuánto tiempo retiene una página a un lector. Los segundos que una página pasa delante de usted se suman directamente al total de ese día para esa página, en la misma operación que los recibe. Su cifra personal no se anota nunca: no existe en ninguna parte constancia de cuánto tiempo pasó usted en nada, y ninguna podría reconstruirse. Una pestaña dejada detrás de otra ventana no cuenta nada, y toda lectura suelta que pase de media hora se cuenta como media hora.",
-          },
-          {
-            type: "paragraph",
-            text: "Ninguna de las dos medidas registra su dirección, una forma disfrazada de su dirección, el identificador de su navegador ni valor alguno que sobreviva a la página en la que se encuentra. Lo que producen son totales por página y por día: por eso se conservan indefinidamente y por eso no hay en ellos nada que borrar a petición.",
+            text: "Hasta noviembre de 2026 se medían aquí otras dos cosas, en la base de datos propia de este proyecto: cuántas personas tenían el sitio abierto en un momento dado y cuánto tiempo retenían las páginas a un lector. Ambas medidas están ya desactivadas; mientras usted lee, su navegador no nos envía nada más allá de la visita que registra el servicio de recuento descrito arriba. Los totales diarios que produjeron se conservan — una página, un día, un número de segundos — y no contienen nada sobre ninguna visita concreta: por eso no hay en ellos nada que borrar a petición.",
           },
           {
             type: "paragraph",

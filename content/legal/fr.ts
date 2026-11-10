@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Le lire ne dépose aucun cookie et n'écrit rien dans le stockage local ou de session de votre navigateur. Aucun profil de votre visite n'est constitué, acheté ni vendu. Les seuls scripts sont les deux mesures décrites ci-dessous — un compteur de fréquentation et une mesure du temps de lecture des pages — et ni l'une ni l'autre ne peut vous identifier.",
+            text: "Le lire ne dépose aucun cookie et n'écrit rien dans le stockage local ou de session de votre navigateur. Aucun profil de votre visite n'est constitué, acheté ni vendu. Le seul script est le compteur de fréquentation décrit ci-dessous, et il ne peut pas vous identifier.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Deux autres choses sont mesurées ici plutôt que par le service de comptage, et toutes deux sont décrites en entier parce que, dans les deux cas, votre navigateur nous envoie quelque chose pendant que vous lisez.",
-          },
-          {
-            type: "paragraph",
-            text: "La première est le nombre de personnes qui ont le site ouvert en ce moment. Au chargement, une page tire un nombre au hasard et le garde dans la mémoire de la page — pas dans un cookie, pas dans le stockage local ou de session, nulle part qui survive. Il est jeté dès que vous fermez l'onglet ou rechargez, de sorte qu'il ne peut pas vous reconnaître à votre retour, et notre copie est supprimée quatre-vingt-dix secondes après le dernier signal de votre navigateur. Tout ce qu'il permet de savoir, c'est combien d'onglets sont ouverts et sur quelles pages ; jamais ceux de qui.",
-          },
-          {
-            type: "paragraph",
-            text: "La seconde est le temps pendant lequel une page retient un lecteur. Les secondes qu'une page passe devant vous sont ajoutées directement au total du jour pour cette page, dans l'opération même qui les reçoit. Votre chiffre personnel n'est jamais consigné : il n'existe nulle part de trace du temps que vous avez passé sur quoi que ce soit, et aucune ne pourrait être reconstituée. Un onglet laissé derrière une autre fenêtre ne compte pour rien, et toute lecture unique au-delà d'une demi-heure est comptée pour une demi-heure.",
-          },
-          {
-            type: "paragraph",
-            text: "Ni l'une ni l'autre n'enregistre votre adresse, une forme déguisée de votre adresse, l'identifiant de votre navigateur, ni aucune valeur qui survive à la page où vous êtes. Ce qu'elles produisent, ce sont des totaux par page et par jour ; c'est pourquoi ils sont conservés indéfiniment et pourquoi il n'y a rien là-dedans à effacer sur demande.",
+            text: "Jusqu'en novembre 2026, deux autres choses étaient mesurées ici, dans la base de données propre à ce projet : le nombre de personnes qui avaient le site ouvert à un moment donné, et le temps pendant lequel les pages retenaient un lecteur. Ces deux mesures sont désormais désactivées ; pendant que vous lisez, votre navigateur ne nous envoie rien de plus que la visite qu'enregistre le service de comptage décrit plus haut. Les totaux quotidiens qu'elles ont produits sont conservés — une page, un jour, un nombre de secondes — et ne contiennent rien sur aucune visite individuelle ; c'est pourquoi il n'y a rien là-dedans à effacer sur demande.",
           },
           {
             type: "paragraph",

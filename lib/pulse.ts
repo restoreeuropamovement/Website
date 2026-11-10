@@ -24,10 +24,34 @@ import { routes } from "@/lib/site";
  */
 
 /**
- * Whether the beacon runs at all. **On unless switched off**, and the reason
- * that is safe is not in this file.
+ * Whether the beacon runs at all. **Off unless `PULSE_ENABLED="true"`**, and
+ * it should stay off for as long as the database is billed by the hour.
  *
- * What happened when it was last on by default: every open tab posted a
+ * It has been on by default twice, and each time it paid for itself in the
+ * wrong currency. The first time, recorded below, it kept the database awake
+ * around the clock. The second time it had been taught to stop when nobody
+ * was reading, on the argument that awake time would then follow reading
+ * time — and that argument was wrong in a way worth writing down. Every
+ * reading, however short, is followed by the five quiet minutes the database
+ * needs before it may sleep, and those minutes are billed. Thirty to two
+ * hundred and eighty readings a day, arriving from six languages' worth of
+ * time zones, means thirty to two hundred and eighty separate wakings with a
+ * paid tail on each: hours of compute a day to learn that the average visit
+ * lasts about ten seconds. The reading time was never the cost; the number of
+ * separate visits was, and nothing a client can do about its own timer
+ * changes how many visitors there are.
+ *
+ * Vercel's counter already answers how many and from where, without touching
+ * this database at all. What is lost is "who is here now" and "how long does
+ * a page hold somebody" — worth having, not worth a standing bill and not
+ * worth the intake going down again when the allowance runs out. With the
+ * beacon off the database wakes for a form, an administrator or the nightly
+ * job, which is what it is for.
+ *
+ * Switching it on means editing `/privacy` first: the note now says both
+ * measures stopped, and it must not become untrue the moment a variable is set.
+ *
+ * What happened when it was first on by default: every open tab posted a
  * heartbeat twice a minute for as long as it existed — hidden, idle or
  * abandoned, it made no difference. Each beat is three writes, and the writes
  * were never the cost. A serverless Postgres sleeps after five minutes of
@@ -38,27 +62,18 @@ import { routes } from "@/lib/site";
  * form spent that time returning a server error to anybody who filled it in.
  * Analytics took down the intake.
  *
- * The obvious repair — beat less often — would have saved nothing at all, and
- * that is the thing worth remembering here. A ping every five minutes keeps a
- * database awake exactly as thoroughly as a ping every thirty seconds. What
- * was needed was for the beacon to stop when there is nobody there, which is
- * now what `IDLE_MS` in `components/layout/Pulse.tsx` makes it do. Awake time
- * is therefore bounded by time actually spent reading the site rather than by
- * time spent having it open, and on a site this size those two differ by more
- * than an order of magnitude.
+ * Beating less often would have saved nothing: a ping every five minutes
+ * keeps a database awake exactly as thoroughly as one every thirty seconds.
+ * `IDLE_MS` in `components/layout/Pulse.tsx` fixed that failure and not the
+ * one above it.
  *
- * Hence the default comes back. The original argument for it stands and was
- * never the thing that failed: a measurement that silently stopped because a
- * variable was never set is a figure nobody can explain weeks later.
- *
- * `PULSE_DISABLED="true"` is the way out if the sums ever stop working. The
- * route refuses on the next request; the chrome stops mounting the timer at
- * the next build, because it is read there too and most pages are prerendered
- * — which is the right trade for not shipping a client-side timer to every
- * reader in order to have it do nothing.
+ * The flag is read by the route, which refuses on the next request, and by
+ * the chrome, which stops mounting the timer at the next build because most
+ * pages are prerendered — so a reader is not shipped a timer only for its
+ * beacons to be refused.
  */
 export function pulseEnabled(): boolean {
-  return process.env.PULSE_DISABLED !== "true";
+  return process.env.PULSE_ENABLED === "true";
 }
 
 /** How long a heartbeat counts for. Two missed beats and a reader is gone. */

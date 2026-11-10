@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Reading it sets no cookies and writes nothing to your browser's local or session storage. No profile of your visit is built, purchased or sold. The only scripts are the two measures described below — a traffic counter and a measure of how long pages are read — and neither can identify you.",
+            text: "Reading it sets no cookies and writes nothing to your browser's local or session storage. No profile of your visit is built, purchased or sold. The only script is the traffic counter described below, and it cannot identify you.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Two further things are measured here rather than by the counting service, and both are described in full because both involve your browser sending us something while you read.",
-          },
-          {
-            type: "paragraph",
-            text: "The first is how many people have the site open at this moment. When a page loads it generates a random number and holds it in the page's memory — not in a cookie, not in local or session storage, nowhere that survives. It is discarded when you close the tab or reload, so it cannot recognise you when you return, and our copy is deleted ninety seconds after your browser last sent it. All it can answer is how many tabs are open and on which pages; it cannot answer whose.",
-          },
-          {
-            type: "paragraph",
-            text: "The second is how long a page holds a reader. The seconds a page spends in front of you are added directly into that day's total for that page, in the same operation that receives them. Your individual figure is never written down: there is no record anywhere of how long you spent on anything, and none could be reconstructed. A tab left open behind another window counts for nothing, and any single reading beyond half an hour is counted as half an hour.",
-          },
-          {
-            type: "paragraph",
-            text: "Neither measure records your address, a disguised form of your address, your browser's user agent, or any value that outlives the page you are on. What they produce are totals per page per day, which is why they are kept indefinitely and why there is nothing in them to erase on request.",
+            text: "Until November 2026 two further things were measured here, in this project's own database: how many people had the site open at a given moment, and how long pages held a reader. Both are now switched off, and while you read your browser sends us nothing beyond the visit the counting service above records. The daily totals they produced are kept — a page, a day, a number of seconds — and hold nothing about any individual visit, which is why there is nothing in them to erase on request.",
           },
           {
             type: "paragraph",

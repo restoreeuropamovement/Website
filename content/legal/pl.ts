@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Czytanie nie ustawia ciasteczek i nie zapisuje niczego w pamięci lokalnej ani sesyjnej twojej przeglądarki. Żaden profil twojej wizyty nie jest tworzony, kupowany ani sprzedawany. Jedyne skrypty to dwa opisane niżej pomiary — licznik ruchu i pomiar czasu czytania stron — i żaden z nich nie może cię zidentyfikować.",
+            text: "Czytanie nie ustawia ciasteczek i nie zapisuje niczego w pamięci lokalnej ani sesyjnej twojej przeglądarki. Żaden profil twojej wizyty nie jest tworzony, kupowany ani sprzedawany. Jedynym skryptem jest opisany niżej licznik ruchu, który nie może cię zidentyfikować.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Dwie kolejne rzeczy mierzymy sami, a nie przez usługę liczącą, i obie opisujemy w całości, bo w obu wypadkach twoja przeglądarka coś nam wysyła, kiedy czytasz.",
-          },
-          {
-            type: "paragraph",
-            text: "Pierwsza to liczba osób, które mają teraz stronę otwartą. Przy wczytaniu strona losuje liczbę i trzyma ją w pamięci strony — nie w ciasteczku, nie w pamięci lokalnej ani sesyjnej, nigdzie, gdzie by przetrwała. Znika, gdy zamkniesz kartę albo odświeżysz, więc nie rozpozna cię po powrocie, a naszą kopię usuwamy dziewięćdziesiąt sekund po ostatnim sygnale twojej przeglądarki. Odpowiada tylko na pytanie, ile kart jest otwartych i na których podstronach; nigdy — czyich.",
-          },
-          {
-            type: "paragraph",
-            text: "Druga to czas, przez jaki strona zatrzymuje czytelnika. Sekundy, które strona spędza przed tobą, dodawane są wprost do sumy dnia dla tej podstrony, w tej samej operacji, która je przyjmuje. Twoja pojedyncza wartość nigdy nie zostaje zapisana: nigdzie nie ma zapisu, ile czasu na czymkolwiek spędziłeś, i żadnego nie dałoby się odtworzyć. Karta pozostawiona za innym oknem nie liczy się wcale, a każde pojedyncze czytanie dłuższe niż pół godziny liczone jest jako pół godziny.",
-          },
-          {
-            type: "paragraph",
-            text: "Żaden z tych pomiarów nie zapisuje twojego adresu, jego zamaskowanej postaci, identyfikatora twojej przeglądarki ani żadnej wartości, która przetrwałaby stronę, na której jesteś. Powstają z nich sumy na podstronę i dzień; dlatego przechowujemy je bezterminowo i dlatego nie ma w nich nic, co można by usunąć na żądanie.",
+            text: "Do listopada 2026 roku mierzyliśmy tu sami, we własnej bazie danych projektu, jeszcze dwie rzeczy: ile osób miało w danej chwili otwartą stronę i jak długo strony zatrzymywały czytelnika. Oba pomiary są już wyłączone; kiedy czytasz, twoja przeglądarka nie wysyła nam niczego poza wizytą, którą rejestruje opisana wyżej usługa licząca. Dzienne sumy, które z nich powstały, zachowujemy — podstrona, dzień, liczba sekund — i nie zawierają one niczego o żadnej pojedynczej wizycie; dlatego nie ma w nich nic, co można by usunąć na żądanie.",
           },
           {
             type: "paragraph",

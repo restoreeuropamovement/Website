@@ -55,11 +55,10 @@ export async function SiteChrome({
        * beside the counter and for the same reason: scoped to the public site
        * so the figures describe readers rather than our own editing.
        *
-       * On unless `PULSE_DISABLED` says otherwise, and gated here as well as in
+       * Off unless `PULSE_ENABLED` says otherwise, and gated here as well as in
        * the route so that a reader whose beacons would be refused is not sent a
-       * timer to fire them. See `pulseEnabled` for why a beacon on a database
-       * billed for being awake is affordable only because this one stops when
-       * the tab it is in does.
+       * timer to fire them. See `pulseEnabled` for why every visit woke a
+       * database billed by the hour.
        */}
       {pulseEnabled() ? <Pulse /> : null}
     </div>

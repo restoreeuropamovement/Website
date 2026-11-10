@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Beim Lesen werden keine Cookies gesetzt und nichts in den lokalen Speicher oder den Sitzungsspeicher Ihres Browsers geschrieben. Über Ihren Besuch wird kein Profil erstellt, gekauft oder verkauft. Die einzigen Skripte sind die beiden unten beschriebenen Messungen — ein Besucherzähler und eine Messung, wie lange Seiten gelesen werden — und keine von beiden kann Sie identifizieren.",
+            text: "Beim Lesen werden keine Cookies gesetzt und nichts in den lokalen Speicher oder den Sitzungsspeicher Ihres Browsers geschrieben. Über Ihren Besuch wird kein Profil erstellt, gekauft oder verkauft. Das einzige Skript ist der unten beschriebene Besucherzähler, und er kann Sie nicht identifizieren.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Zwei weitere Dinge werden hier gemessen und nicht vom Zähldienst; beide werden vollständig beschrieben, weil bei beiden Ihr Browser uns während des Lesens etwas sendet.",
-          },
-          {
-            type: "paragraph",
-            text: "Das erste ist, wie viele Menschen die Seite in diesem Augenblick geöffnet haben. Beim Laden erzeugt eine Seite eine Zufallszahl und hält sie im Arbeitsspeicher der Seite — nicht in einem Cookie, nicht im lokalen oder im Sitzungsspeicher, an keinem Ort, der fortbesteht. Sie wird verworfen, sobald Sie den Tab schließen oder neu laden, kann Sie also bei einer Rückkehr nicht wiedererkennen, und unsere Kopie wird neunzig Sekunden nach dem letzten Signal Ihres Browsers gelöscht. Beantworten lässt sich damit nur, wie viele Tabs offen sind und auf welchen Seiten; nicht, wessen.",
-          },
-          {
-            type: "paragraph",
-            text: "Das zweite ist, wie lange eine Seite einen Leser hält. Die Sekunden, die eine Seite vor Ihnen liegt, werden in demselben Vorgang, der sie entgegennimmt, unmittelbar zur Tagessumme dieser Seite addiert. Ihr einzelner Wert wird nie festgehalten: Es gibt nirgends einen Eintrag darüber, wie lange Sie sich womit befasst haben, und keiner ließe sich rekonstruieren. Ein Tab hinter einem anderen Fenster zählt gar nicht, und jede einzelne Lesung jenseits einer halben Stunde wird als halbe Stunde gezählt.",
-          },
-          {
-            type: "paragraph",
-            text: "Keine der beiden Messungen erfasst Ihre IP-Adresse, eine verschleierte Form davon, die Kennung Ihres Browsers oder irgendeinen Wert, der die aufgerufene Seite überdauert. Was entsteht, sind Summen je Seite und Tag; darum werden sie auf Dauer aufbewahrt, und darum ist darin nichts, was auf Verlangen zu löschen wäre.",
+            text: "Bis November 2026 wurden hier zusätzlich zwei Dinge in der eigenen Datenbank dieses Projekts gemessen: wie viele Menschen die Seite in einem bestimmten Augenblick geöffnet hatten und wie lange Seiten einen Leser hielten. Beide Messungen sind inzwischen abgeschaltet; während Sie lesen, sendet Ihr Browser uns nichts über den Besuch hinaus, den der oben beschriebene Zähldienst erfasst. Die Tagessummen, die dabei entstanden sind, bleiben erhalten — eine Seite, ein Tag, eine Zahl von Sekunden — und enthalten nichts über einen einzelnen Besuch; darum ist darin nichts, was auf Verlangen zu löschen wäre.",
           },
           {
             type: "paragraph",

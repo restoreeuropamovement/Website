@@ -18,7 +18,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Leggerlo non imposta cookie e non scrive nulla nella memoria locale o di sessione del tuo browser. Nessun profilo della tua visita viene costruito, acquistato o venduto. Gli unici script sono le due misure descritte più sotto — un contatore di traffico e una misura di quanto a lungo le pagine vengono lette — e nessuna delle due può identificarti.",
+            text: "Leggerlo non imposta cookie e non scrive nulla nella memoria locale o di sessione del tuo browser. Nessun profilo della tua visita viene costruito, acquistato o venduto. L'unico script è il contatore di traffico descritto più sotto, e non può identificarti.",
           },
           {
             type: "paragraph",
@@ -215,19 +215,7 @@ export const legalText: LegalText = {
           },
           {
             type: "paragraph",
-            text: "Altre due cose sono misurate qui e non dal servizio di conteggio, ed entrambe sono descritte per intero perché in entrambi i casi il tuo browser ci invia qualcosa mentre leggi.",
-          },
-          {
-            type: "paragraph",
-            text: "La prima è quante persone hanno il sito aperto in questo momento. Al caricamento una pagina genera un numero casuale e lo tiene nella memoria della pagina — non in un cookie, non nella memoria locale o di sessione, in nessun luogo che sopravviva. Viene scartato quando chiudi la scheda o ricarichi, così non può riconoscerti al tuo ritorno, e la nostra copia è cancellata novanta secondi dopo l'ultimo segnale del tuo browser. Tutto ciò a cui può rispondere è quante schede sono aperte e su quali pagine; mai di chi.",
-          },
-          {
-            type: "paragraph",
-            text: "La seconda è quanto a lungo una pagina trattiene un lettore. I secondi che una pagina passa davanti a te sono aggiunti direttamente al totale di quel giorno per quella pagina, nella stessa operazione che li riceve. La tua cifra personale non viene mai annotata: non esiste da nessuna parte una traccia di quanto tempo hai passato su qualcosa, e nessuna potrebbe essere ricostruita. Una scheda lasciata dietro un'altra finestra non conta nulla, e ogni singola lettura oltre la mezz'ora è contata come mezz'ora.",
-          },
-          {
-            type: "paragraph",
-            text: "Nessuna delle due misure registra il tuo indirizzo, una sua forma mascherata, l'identificativo del tuo browser o un qualsiasi valore che sopravviva alla pagina su cui ti trovi. Ciò che producono sono totali per pagina e per giorno: è per questo che sono conservati a tempo indeterminato ed è per questo che non contengono nulla da cancellare su richiesta.",
+            text: "Fino a novembre 2026 qui si misuravano altre due cose, nel database di questo progetto: quante persone avevano il sito aperto in un dato momento e quanto a lungo le pagine trattenevano un lettore. Entrambe le misure sono ora disattivate; mentre leggi, il tuo browser non ci invia nulla oltre alla visita che registra il servizio di conteggio descritto sopra. I totali giornalieri che hanno prodotto sono conservati — una pagina, un giorno, un numero di secondi — e non contengono nulla su alcuna singola visita: è per questo che non c'è nulla da cancellare su richiesta.",
           },
           {
             type: "paragraph",
