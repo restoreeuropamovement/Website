@@ -105,14 +105,11 @@ async function attempt(order: ClaimedOrder, provider: PrintProvider | null): Pro
    * Configuration can change between an order being paid and being sent; the
    * order's own record of which Stripe mode paid for it cannot.
    */
-  if (provider.placesRealOrders !== order.livemode) {
-    return toReview(
-      order.id,
-      "mode-mismatch",
-      order.livemode
-        ? "A live payment would have gone to a printer that prints nothing."
-        : "A test payment would have gone to a printer that places real orders.",
-    );
+  if (order.livemode && provider.kind === "simulation") {
+    return toReview(order.id, "mode-mismatch", "A live payment would have gone to a provider that sends nothing.");
+  }
+  if (!order.livemode && provider.kind === "external") {
+    return toReview(order.id, "mode-mismatch", "A test payment would have gone to a company that places real orders.");
   }
   if (!provider.configured()) return toRetry(order, "provider-unconfigured", "The printer's credentials are not set.");
 

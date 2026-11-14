@@ -171,6 +171,14 @@ export type AuditAction =
   | "shop.order.reveal"
   | "shop.order.retry"
   | "shop.order.cancel"
+  /*
+   * The packing list. `reveal` is one row per viewing of the addresses, with
+   * how many were shown; `posted` and `unposted` name the order and whether a
+   * tracking number was given — never the number, which leads to an address.
+   */
+  | "shop.dispatch.reveal"
+  | "shop.order.posted"
+  | "shop.order.unposted"
   | "shop.design.create"
   | "shop.design.update"
   | "shop.design.delete"

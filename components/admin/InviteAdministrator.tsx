@@ -60,6 +60,20 @@ export function InviteAdministrator({
           />
         </Field>
 
+        <Field
+          label="Access"
+          hint="Dispatch accounts see the sticker orders waiting to be posted, and the address on each after a passkey touch. Nothing else: not members, not correspondence, not this page."
+        >
+          <select
+            name="role"
+            defaultValue="dispatch"
+            className="w-full border border-rule bg-surface px-3 py-2 text-[0.9375rem] text-ink focus:border-gold focus:outline-none"
+          >
+            <option value="dispatch">Dispatch only — posts sticker orders</option>
+            <option value="admin">Full administrator</option>
+          </select>
+        </Field>
+
         <button
           type="submit"
           disabled={pending}

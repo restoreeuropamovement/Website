@@ -82,17 +82,26 @@ export type StatusOutcome =
   | { readonly ok: true; readonly state: ProviderState; readonly tracking: Tracking | null }
   | { readonly ok: false; readonly code: string };
 
+/**
+ * What sending an order to a provider actually does.
+ *
+ *   simulation  nothing happens anywhere. Test mode only.
+ *   external    a company is paid to print or post it. Live mode only — a
+ *               test card must never buy a real print run.
+ *   in-house    it joins the packing list of the people who post the stock.
+ *               Both modes: a test order appears there marked as a test, and
+ *               nobody spends anything on it unless they post it.
+ *
+ * Live mode refuses a simulation — a real payment must never go to something
+ * that will not send anything.
+ */
+export type ProviderKind = "simulation" | "external" | "in-house";
+
 export interface PrintProvider {
   /** Stored in `shop_order.provider`. Never change one once orders carry it. */
   readonly id: string;
   readonly label: string;
-  /**
-   * Whether `submit` causes something to be printed and posted for money.
-   * Test mode refuses any provider for which this is true, and live mode
-   * refuses any for which it is false — a test card must never buy a real
-   * print run, and a real payment must never go to a simulation.
-   */
-  readonly placesRealOrders: boolean;
+  readonly kind: ProviderKind;
   /** Whether the printer de-duplicates a repeated `submit` for the same `orderId`. */
   readonly idempotentSubmit: boolean;
   /** Whether this deployment has the credentials it needs. */

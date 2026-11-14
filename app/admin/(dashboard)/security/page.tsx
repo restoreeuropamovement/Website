@@ -127,6 +127,9 @@ export default async function SecurityPage() {
                   <p className="text-[0.9375rem] text-ink">
                     {administrator.displayName}
                     <span className="ml-2 text-micro text-faint">{administrator.username}</span>
+                    {administrator.role === "dispatch" ? (
+                      <span className="ml-2 text-micro text-burgundy">dispatch only</span>
+                    ) : null}
                     {isSelf ? <span className="ml-2 text-micro text-gold">you</span> : null}
                   </p>
                   <p className="mt-1 text-micro text-faint">

@@ -1,10 +1,11 @@
 import {
   isShopCountry,
   isShopQuantity,
-  shippingBandFor,
+  shippingZoneFor,
+  shippingZoneIds,
   shopCountryIds,
   shopQuantities,
-  type ShippingBandId,
+  type ShippingZoneId,
   type ShopCountryId,
   type ShopQuantity,
 } from "@/content/shop/structure";
@@ -21,72 +22,68 @@ import { addMinor, assertMinor, type ShopCurrency } from "@/lib/shop/money";
  * server's job, not the other way round.
  *
  * Every figure is a consumer price in whole cents — what the customer pays,
- * delivery included, VAT included if any is owed. Whether any is owed depends
+ * postage included, VAT included if any is owed. Whether any is owed depends
  * on who the seller turns out to be, which is one of the conditions in
  * `lib/shop/launch.ts`, and the figures have to be revisited when it is
  * settled.
  *
  * `status` is what stops a guess being charged. A provisional book can be
- * used with Stripe's test keys and the mock printer, so the whole flow can be
- * exercised end to end; `SHOP_MODE="live"` is refused until the book in use
- * is `approved`, which should mean: every figure checked against a written
- * quote from the printer actually wired up, for that quantity and that
- * destination, with the per-order margin worked out as in
- * docs/sticker-shop-feasibility.md.
+ * used with Stripe's test keys, so the whole flow can be exercised end to
+ * end; `SHOP_MODE="live"` is refused until the book in use is `approved`,
+ * which should mean: the bulk print price, the envelopes and the postage all
+ * checked against what was actually paid, and the margin worked out again.
  */
 export interface PriceBook {
   readonly id: string;
   readonly status: "provisional" | "approved";
   readonly currency: ShopCurrency;
-  /** The stickers themselves, per quantity. */
+  /** The stickers and their envelope, per quantity. */
   readonly items: Readonly<Record<ShopQuantity, number>>;
   /**
-   * Delivery, per destination and parcel size. `null` is a destination that
-   * is not offered at that size — the order form leaves it out rather than
-   * quoting something nobody has agreed to carry.
+   * Postage, per zone and quantity. `null` is a quantity that is not offered
+   * to that zone — the order form leaves it out rather than quoting something
+   * nobody has worked out how to send.
    */
-  readonly shipping: Readonly<Record<ShopCountryId, Readonly<Record<ShippingBandId, number | null>>>>;
+  readonly shipping: Readonly<Record<ShippingZoneId, Readonly<Record<ShopQuantity, number | null>>>>;
 }
 
 /*
- * PROVISIONAL. Not a supplier's quote, and not to be read as one.
+ * PROVISIONAL. Worked out, not paid.
  *
- * These are the prices docs/sticker-shop-feasibility.md arrives at for its
- * recommended model: stickers printed in bulk, held by a letter-fulfilment
- * house in Germany, and posted per order at Deutsche Post's own rates. Every
- * input is listed there with its source and whether it is verified or
- * assumed; the ones that move these figures most are the fulfilment fee, the
- * postage the house passes on, and the bulk print price. The aim is a margin
- * of about one and a half euros on the smallest orders and a few euros on
- * the largest, after Stripe's fee.
+ * The model is the one chosen on 14 November 2026: stickers printed in one
+ * bulk run, held in Austria, and packed and posted by hand by the people with
+ * dispatch accounts, who are not paid for it. docs/sticker-shop-feasibility.md,
+ * section 0, lists every input and its source. In short:
  *
- * `shipping` is postage and nothing else, rounded up to cover the dearest
- * format in each band. One rate serves the five EU destinations because the
- * cost of a goods consignment to them differs by cents. Switzerland is not
- * offered: Swiss price rules expect a shop that targets Swiss consumers to
- * show prices in francs, and this one prices in euros.
+ *   stickers   2.9 ct each (a thousand for about €29, Onlineprinters' list price)
+ *   envelope   10 ct for the two small sizes, 30 ct for a board-backed B4
+ *   postage    Austrian Post, verified: inside Austria Brief S €1.00, Brief M
+ *              €1.55, Päckchen S €3.10; to the rest of the EU, Economy,
+ *              Brief S €1.25, Brief M €2.00, Brief L €6.70. VAT-exempt.
+ *   card fee   Stripe, 1.5 % + 25 ct
+ *   margin     about 5 %, and never under 50 ct an order, so that one
+ *              lost letter or card dispute does not cost more than a month's
+ *              orders earn
+ *
+ * `shipping` is the postage rounded up to the next ten cents, sometimes a
+ * little more where the margin needed it; `items` is the rest.
  */
 export const priceBook: PriceBook = {
-  id: "2026-11-provisional",
+  id: "2026-11-austria-provisional",
   status: "provisional",
   currency: "EUR",
   items: {
-    10: 480,
-    25: 540,
-    50: 610,
-    100: 810,
-    250: 1310,
-    500: 2130,
-    1000: 3630,
+    10: 120,
+    25: 160,
+    50: 260,
+    100: 410,
+    250: 860,
+    500: 1640,
+    1000: 3190,
   },
   shipping: {
-    DE: { letter: 110, "large-letter": 180, parcel: 360 },
-    AT: { letter: 420, "large-letter": 580, parcel: 700 },
-    FR: { letter: 420, "large-letter": 580, parcel: 700 },
-    NL: { letter: 420, "large-letter": 580, parcel: 700 },
-    IT: { letter: 420, "large-letter": 580, parcel: 700 },
-    ES: { letter: 420, "large-letter": 580, parcel: 700 },
-    CH: { letter: null, "large-letter": null, parcel: null },
+    domestic: { 10: 100, 25: 160, 50: 310, 100: 310, 250: 310, 500: 310, 1000: 310 },
+    eu: { 10: 130, 25: 210, 50: 680, 100: 680, 250: 680, 500: 680, 1000: 680 },
   },
 };
 
@@ -95,7 +92,7 @@ export type Quote =
       readonly ok: true;
       readonly quantity: ShopQuantity;
       readonly country: ShopCountryId;
-      readonly band: ShippingBandId;
+      readonly zone: ShippingZoneId;
       readonly currency: ShopCurrency;
       readonly itemsMinor: number;
       readonly shippingMinor: number;
@@ -114,8 +111,8 @@ export function quote(book: PriceBook, quantity: number, country: string): Quote
   if (!isShopQuantity(quantity)) return { ok: false, reason: "quantity" };
   if (!isShopCountry(country)) return { ok: false, reason: "country" };
 
-  const band = shippingBandFor(quantity);
-  const shippingMinor = book.shipping[country][band];
+  const zone = shippingZoneFor(country);
+  const shippingMinor = book.shipping[zone][quantity];
   if (shippingMinor === null) return { ok: false, reason: "not-offered" };
 
   const itemsMinor = assertMinor(book.items[quantity], `items for ${quantity}`);
@@ -124,19 +121,19 @@ export function quote(book: PriceBook, quantity: number, country: string): Quote
     ok: true,
     quantity,
     country,
-    band,
+    zone,
     currency: book.currency,
     itemsMinor,
-    shippingMinor: assertMinor(shippingMinor, `shipping to ${country}`),
+    shippingMinor: assertMinor(shippingMinor, `postage to ${country}`),
     totalMinor: addMinor(itemsMinor, shippingMinor),
     priceBook: book.id,
   };
 }
 
-/** Destinations with a delivery price for at least one quantity, in list order. */
+/** Destinations with postage for at least one quantity, in list order. */
 export function offeredCountries(book: PriceBook): readonly ShopCountryId[] {
   return shopCountryIds.filter((country) =>
-    shopQuantities.some((quantity) => book.shipping[country][shippingBandFor(quantity)] !== null),
+    shopQuantities.some((quantity) => book.shipping[shippingZoneFor(country)][quantity] !== null),
   );
 }
 
@@ -153,12 +150,10 @@ export function priceBookProblems(book: PriceBook): readonly string[] {
 
   for (const quantity of shopQuantities) {
     if (!valid(book.items[quantity])) problems.push(`items[${quantity}] is not a whole number of cents`);
-  }
-  for (const country of shopCountryIds) {
-    for (const band of Object.keys(book.shipping[country]) as ShippingBandId[]) {
-      const value = book.shipping[country][band];
+    for (const zone of shippingZoneIds) {
+      const value = book.shipping[zone][quantity];
       if (value !== null && !valid(value)) {
-        problems.push(`shipping.${country}.${band} is not a whole number of cents`);
+        problems.push(`shipping.${zone}[${quantity}] is not a whole number of cents`);
       }
     }
   }

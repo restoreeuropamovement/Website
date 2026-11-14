@@ -46,10 +46,19 @@ const TOUCH_AFTER_MINUTES = 5;
  */
 const ELEVATION_MINUTES = 10;
 
+/**
+ * What an account may reach. `dispatch` accounts exist for the people who
+ * post sticker orders and see the packing list and nothing else — see
+ * `requireSession`, which refuses them, and `requireDispatchSession`, which
+ * admits both.
+ */
+export type AdminRole = "admin" | "dispatch";
+
 export interface AdminIdentity {
   readonly id: string;
   readonly username: string;
   readonly displayName: string;
+  readonly role: AdminRole;
 }
 
 export interface ActiveSession {
@@ -182,6 +191,7 @@ export async function currentSession(): Promise<ActiveSession | null> {
       user_id: string;
       username: string;
       display_name: string;
+      role: AdminRole;
       needs_touch: boolean;
       elevated_until: Date | null;
       user_agent: string | null;
@@ -194,6 +204,7 @@ export async function currentSession(): Promise<ActiveSession | null> {
            u.id AS user_id,
            u.username,
            u.display_name,
+           u.role,
            s.last_seen_at < now() - ${`${TOUCH_AFTER_MINUTES} minutes`}::interval AS needs_touch
     FROM admin_session s
     JOIN admin_user u ON u.id = s.user_id
@@ -215,7 +226,12 @@ export async function currentSession(): Promise<ActiveSession | null> {
   }
 
   return {
-    user: { id: row.user_id, username: row.username, displayName: row.display_name },
+    user: {
+      id: row.user_id,
+      username: row.username,
+      displayName: row.display_name,
+      role: row.role === "dispatch" ? "dispatch" : "admin",
+    },
     sessionId: row.id,
     expiresAt: row.expires_at,
     elevatedUntil: row.elevated_until,
@@ -226,8 +242,25 @@ export async function currentSession(): Promise<ActiveSession | null> {
  * Use in Server Actions and Route Handlers that mutate. Throws rather than
  * returning null so a forgotten check cannot silently fall through to the
  * privileged path.
+ *
+ * **Administrators only.** A dispatch account is refused here, which is what
+ * keeps every existing admin action closed to it without each one having to
+ * remember: the roll, the journal, the materials, the shop's settings and
+ * the security page all start by calling this. The one place a dispatch
+ * account is let in calls `requireDispatchSession` instead.
  */
 export async function requireSession(): Promise<ActiveSession> {
+  const session = await currentSession();
+  if (!session) throw new Error("Not authenticated");
+  if (session.user.role !== "admin") throw new Error("Not permitted for this account");
+  return session;
+}
+
+/**
+ * The packing list's gate: any signed-in account, dispatch or administrator.
+ * Used by `/admin/dispatch` and its actions and by nothing else.
+ */
+export async function requireDispatchSession(): Promise<ActiveSession> {
   const session = await currentSession();
   if (!session) throw new Error("Not authenticated");
   return session;

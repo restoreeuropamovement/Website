@@ -3,14 +3,15 @@ import type { Locale } from "@/lib/i18n";
 import { shopText as englishText } from "./en";
 
 export {
+  dispatchCountry,
   isShopCountry,
   isShopQuantity,
-  shippingBandFor,
+  shippingZoneFor,
   shopCountryIds,
   shopQuantities,
   stickerFormat,
 } from "./structure";
-export type { ShippingBandId, ShopCountryId, ShopQuantity } from "./structure";
+export type { ShippingZoneId, ShopCountryId, ShopQuantity } from "./structure";
 
 /**
  * `/shop`, by language.

@@ -475,20 +475,28 @@ database row says.
 
 ### Sticker shop
 
-`/shop` sells printed stickers: a customer picks a design, a quantity and a
-country, pays on Stripe's hosted page, and a printer or fulfilment house posts
-the stickers to them. **It is closed.** With `SHOP_MODE` unset the route answers 404, and
-nothing links to it or lists it in the sitemap. Whether it can open at all is
-argued in [`docs/sticker-shop-feasibility.md`](docs/sticker-shop-feasibility.md),
-which is the document to read before changing anything here.
+`/shop` sells printed stickers to anyone in the EU: a customer picks a design,
+a quantity and a country, pays on Stripe's hosted page, and the stickers are
+posted to them from Austria. The chosen model (section 0 of the report) is one
+bulk print run held in Austria, packed and posted by hand by the people with
+**dispatch accounts**, at Austrian Post's letter rates. **It is closed.** With
+`SHOP_MODE` unset the route answers 404, and nothing links to it or lists it in
+the sitemap. Read [`docs/sticker-shop-feasibility.md`](docs/sticker-shop-feasibility.md)
+before changing anything here.
 
-- **Modes.** `SHOP_MODE=test` runs the whole flow against Stripe's test keys
-  and the mock printer in `lib/shop/providers/mock.ts`, which prints nothing.
-  `SHOP_MODE=live` refuses to open until four things are true: the printer
-  places real orders, the price book in `lib/shop/price-book.ts` is
-  `approved`, every condition in `lib/shop/launch.ts` is ticked, and the
-  Stripe key's own prefix says it is live. Test mode refuses a printer that
-  places real orders, so a test card can never buy a print run.
+- **Modes.** `SHOP_MODE=test` runs the whole flow against Stripe's test keys;
+  with `SHOP_PRINT_PROVIDER=self-dispatch` test orders reach the packing list
+  marked as tests, and `mock` sends nothing at all. `SHOP_MODE=live` refuses
+  to open until the provider is a real dispatch, the price book in
+  `lib/shop/price-book.ts` is `approved`, every condition in
+  `lib/shop/launch.ts` is ticked, and the Stripe key's own prefix says it is
+  live.
+- **Dispatch accounts** are invited at `/admin/security` with "Dispatch only".
+  They sign in with a passkey like anyone else and see `/admin/dispatch` and
+  nothing more: what to post, which envelope and stamp, and — after a passkey
+  touch — the name and address, read from Stripe for that page view. "Posted"
+  moves the order on and the customer's order page says so; it can be undone
+  for a day. Every viewing of the addresses is audited.
 - **No customer record.** `shop_order` holds the design, quantity, country,
   amounts, Stripe ids and the state of the order. The name, email and address
   stay with Stripe, which collected them; fulfilment reads them from Stripe
@@ -519,7 +527,7 @@ which is the document to read before changing anything here.
   credentials read lazily with no defaults. Nothing else changes.
 
 To try it locally: run `npm run db:dev` and `npm run db:migrate`, set
-`SHOP_MODE=test`, `SHOP_PRINT_PROVIDER=mock`, a Stripe test key and the
+`SHOP_MODE=test`, `SHOP_PRINT_PROVIDER=self-dispatch`, a Stripe test key and the
 webhook secret printed by `stripe listen --forward-to
 localhost:3000/api/shop/stripe`, upload a design at `/admin/shop`, switch it on,
 and pay with Stripe's test card `4242 4242 4242 4242`.

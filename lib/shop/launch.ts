@@ -24,31 +24,31 @@ export const launchChecklist = {
     done: false,
     title: "A seller exists",
     detail:
-      "Selling goods needs somebody to sell them: a registered association, a company or a named person, with an address where legal papers can be served, named representatives, a tax number and a bank account. The imprint, the withdrawal notice, the product-safety listing and Stripe's identity checks all require it. The imprint names no publisher because the movement is not registered, and that gap may not be filled with anything plausible.",
+      "Selling goods needs somebody to sell them. The plan is an association (Verein) in Austria, where the stock is: it puts the association's name rather than a person's on the site and the stickers, and its board appears only in the association register. It needs an address where legal papers can be served, named representatives, a tax number and a bank account; the imprint, the withdrawal notice, the product-safety listing and Stripe's identity checks all require them. Until then the imprint names no publisher, and that gap may not be filled with anything plausible.",
   },
   stickerImprint: {
     done: false,
     title: "The printed sticker carries its imprint",
     detail:
-      "German state press laws require every printed item distributed to the public to name its printer and its publisher, with name and address (Bavaria: BayPrG Art. 6 and 7); only commercial and household printing is exempt. The artwork leaves that field blank for whoever puts a sticker up. Once the movement sells the sticker itself it is the publisher, so the master files carry the imprint, or a lawyer has confirmed in writing that they need not.",
+      "Austrian media law requires every printed item to name its publisher and its printer, with the towns of publication and printing — not a street address (MedienG § 24(1)). Stickers posted into Germany are also distributed there, and German state press laws ask for names with addresses (Bavaria: BayPrG Art. 7). The artwork leaves the field blank for whoever puts a sticker up; once the association sells the stickers it is the publisher, so the bulk run is printed with the imprint, worded as an adviser confirms covers both.",
   },
   terms: {
     done: false,
     title: "Terms, withdrawal and delivery are published",
     detail:
-      "Terms of sale; pre-contract information including the EU's harmonised warranty notice (Regulation 2025/1960, since 27 September 2026); the fourteen-day withdrawal notice and model form; the 'Vertrag widerrufen' withdrawal function required since 19 June 2026 (§ 356a BGB); delivery costs and times; and a lawyer's view of the payment button's wording on Stripe's page (§ 312j BGB). Pre-designed stickers are not made to the buyer's specification, so the right of withdrawal applies.",
+      "Terms of sale; pre-contract information including the EU's harmonised warranty notice (Regulation 2025/1960, since 27 September 2026); the fourteen-day withdrawal notice and model form; the online withdrawal function required across the EU since 19 June 2026; delivery costs and times (letters from Austria, Economy abroad); and a lawyer's view of the payment button's wording on Stripe's page. Pre-designed stickers are not made to the buyer's specification, so the right of withdrawal applies.",
   },
   privacy: {
     done: false,
     title: "/privacy describes the shop, in all six languages",
     detail:
-      "A purchase from a political movement can reveal a political opinion (GDPR Art. 9; CJEU C-21/23), so the legal basis is settled with an adviser first, and a data-processing agreement is signed with whoever receives addresses. The note says what Stripe collects, that the movement's name appears on card statements, what the printer or fulfilment house receives and keeps, and that this site keeps no customer record of its own. Edited before the shop opens, not after.",
+      "A purchase from a political movement can reveal a political opinion (GDPR Art. 9; CJEU C-21/23), so the legal basis is settled with an adviser first. The note says what Stripe collects, that the movement's name appears on card statements, that the people posting see a name and address for one envelope and keep nothing, and that this site keeps no customer record of its own. Edited before the shop opens, not after.",
   },
   tax: {
     done: false,
     title: "Tax is settled",
     detail:
-      "Registration with the tax office within a month of starting; whether the small-business exemption (§ 19 UStG) applies or VAT is charged; how VAT falls when someone else posts the goods, which needs an adviser; tracking against the EU's €10,000 and Switzerland's CHF 100,000 thresholds. Prices are shown to consumers as total prices, with whatever tax wording applies.",
+      "Registration with the Austrian tax office; whether the small-business exemption applies or VAT is charged, and whether selling at cost changes anything for an association; tracking sales to other EU countries against the €10,000 threshold above which their VAT applies. Prices are shown to consumers as total prices, with whatever tax wording applies.",
   },
   payments: {
     done: false,
@@ -58,9 +58,9 @@ export const launchChecklist = {
   },
   supplier: {
     done: false,
-    title: "A printer or fulfilment house has agreed to this",
+    title: "Stock and dispatch are ready",
     detail:
-      "Written agreement to political stickers from this seller; automated order intake (an API, or a documented file drop) that the adapter for it is written against and tested in a sandbox; neutral shipping to private addresses; and per-order prices for every quantity and destination offered, from which the price book is approved. For pre-printed stock, the first bulk run is printed with the imprint and delivered to the warehouse.",
+      "The bulk run is printed with the imprint and is in Austria; the people posting have dispatch accounts (invited at /admin/security) with a passkey each; envelopes are bought; and one test order of each size has been packed, weighed against the formats on the packing list and posted, at home and to another EU country. The price book is approved from what that actually cost.",
   },
   productSafety: {
     done: false,
@@ -70,9 +70,9 @@ export const launchChecklist = {
   },
   packaging: {
     done: false,
-    title: "Packaging registration is resolved",
+    title: "Packaging obligations are resolved",
     detail:
-      "Since 12 August 2026 the EU Packaging Regulation and the German VerpackDG apply. A dropshipping seller must check that whoever packs is registered in LUCID, and becomes the obligated producer itself if the packaging bears its name. The provider's terms or an adviser settle which applies.",
+      "Whoever posts goods to consumers puts the envelope on that country's market, and EU countries make the sender responsible for it under the EU Packaging Regulation and their own schemes — Austria's packaging ordinance at home, Germany's VerpackDG and its LUCID register for envelopes to Germany, and so on. Some have thresholds small senders fall under. An adviser settles which apply at this volume.",
   },
 } as const satisfies Record<string, LaunchCondition>;
 

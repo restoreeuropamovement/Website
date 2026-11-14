@@ -93,11 +93,15 @@ export async function createInviteAction(
 
   const username = String(form.get("username") ?? "");
   const displayName = String(form.get("displayName") ?? "");
+  /* Anything but an explicit "admin" is a dispatch account: a mistyped or
+     missing value should fall towards less access, not more. */
+  const role = form.get("role") === "admin" ? "admin" : "dispatch";
 
   const result = await createInvite({
     username,
     displayName,
     invitedById: session.user.id,
+    role,
   });
 
   await recordAudit({
@@ -107,8 +111,8 @@ export async function createInviteAction(
     actorLabel: session.user.username,
     // The account invited, never the token that claims it.
     detail: result.ok
-      ? { username: username.trim().toLowerCase(), inviteId: result.inviteId }
-      : { username: username.trim().toLowerCase(), reason: result.reason },
+      ? { username: username.trim().toLowerCase(), role, inviteId: result.inviteId }
+      : { username: username.trim().toLowerCase(), role, reason: result.reason },
     ipHash,
   });
 

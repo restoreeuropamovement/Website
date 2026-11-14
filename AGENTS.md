@@ -126,11 +126,17 @@ before changing it.
 - **Paid means Stripe's record says paid.** Only `confirmPayment`, reading the session back from
  Stripe's API, writes `paid`, and only after the amount, currency, mode and order id all match.
  Never mark an order paid from a webhook body, a redirect or anything a browser sent.
-- **Submitted means the printer said yes.** `submitted` is written with the printer's order id in the
- same statement and the schema refuses one without the other. Do not add a "manual" printer that
- marks orders submitted; an order a person must place by hand is an order in `review`.
-- **Test and live never cross.** Test mode refuses a printer that places real orders, live mode
- refuses one that does not, and fulfilment checks the order's own Stripe mode again before sending.
+- **Submitted means the provider has it.** `submitted` is written with the provider's order id in the
+ same statement and the schema refuses one without the other. For an outside printer that is the
+ printer's own acknowledgement; for `self-dispatch` — stock in Austria, posted by hand — it means the
+ order is on the packing list, and only a person pressing "Posted" makes it `shipped`. Do not add a
+ provider that reports an outside company's order as submitted without that company's answer.
+- **Dispatch accounts see the packing list and nothing else.** `requireSession()` refuses the
+ `dispatch` role, so every admin page and action is closed to it by default; the packing list in
+ `app/admin/(dispatch)` uses `requireDispatchSession()`, and its addresses need a passkey touch. Do
+ not give that route group anything but the packing list.
+- **Test and live never cross.** Test mode refuses a provider that pays a company for real, live
+ mode refuses a simulation, and fulfilment checks the order's own Stripe mode again before sending.
 - **Opening it is a commit.** `SHOP_MODE=live` stays closed until the price book is `approved` and
  every entry in `lib/shop/launch.ts` is ticked. Tick one only when the thing it describes is true,
  and say in the commit what made it so. `/privacy` is rewritten before the shop opens, not after.

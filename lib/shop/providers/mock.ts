@@ -18,8 +18,8 @@ import type { PrintProvider, StatusOutcome, SubmitOutcome } from "@/lib/shop/pro
  *   SHOP_MOCK_FAILURE=rejected      refused; the order goes to review
  *   SHOP_MOCK_FAILURE=ambiguous     maybe created; retried, as this mock de-duplicates
  *
- * `placesRealOrders` is false, which is what lets test mode use it and what
- * makes live mode refuse it.
+ * It is a `simulation`, which is what lets test mode use it and what makes
+ * live mode refuse it.
  */
 
 const MINUTE = 60_000;
@@ -40,7 +40,7 @@ function failure(): SubmitOutcome | null {
 export const mockProvider: PrintProvider = {
   id: "mock",
   label: "Mock printer (prints nothing)",
-  placesRealOrders: false,
+  kind: "simulation",
   idempotentSubmit: true,
 
   configured: () => true,

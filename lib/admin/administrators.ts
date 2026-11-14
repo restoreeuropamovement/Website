@@ -1,4 +1,5 @@
 import { hashToken, randomToken } from "@/lib/admin/crypto";
+import type { AdminRole } from "@/lib/admin/session";
 import { db } from "@/lib/db";
 
 /**
@@ -65,6 +66,7 @@ export interface Administrator {
   readonly id: string;
   readonly username: string;
   readonly displayName: string;
+  readonly role: AdminRole;
   readonly passkeys: number;
   readonly createdAt: Date;
   readonly disabledAt: Date | null;
@@ -104,6 +106,7 @@ export async function listAdministrators(): Promise<readonly Administrator[]> {
       id: string;
       username: string;
       display_name: string;
+      role: AdminRole;
       passkeys: string;
       created_at: Date;
       disabled_at: Date | null;
@@ -113,6 +116,7 @@ export async function listAdministrators(): Promise<readonly Administrator[]> {
     SELECT u.id,
            u.username,
            u.display_name,
+           u.role,
            u.created_at,
            u.disabled_at,
            count(c.id)::text AS passkeys,
@@ -127,6 +131,7 @@ export async function listAdministrators(): Promise<readonly Administrator[]> {
     id: row.id,
     username: row.username,
     displayName: row.display_name,
+    role: row.role,
     passkeys: Number(row.passkeys),
     createdAt: row.created_at,
     disabledAt: row.disabled_at,
@@ -190,10 +195,12 @@ export async function createInvite(input: {
   username: string;
   displayName: string;
   invitedById: string;
+  role: AdminRole;
 }): Promise<CreateInviteResult> {
   const username = normaliseUsername(input.username);
   const problem = usernameProblem(username);
   if (problem) return { ok: false, reason: problem };
+  const role: AdminRole = input.role === "dispatch" ? "dispatch" : "admin";
 
   const displayName = input.displayName.trim().slice(0, 120) || username;
   const token = randomToken();
@@ -225,12 +232,14 @@ export async function createInvite(input: {
       `;
       if (!created) return { ok: false as const, reason: "Could not create the account." };
       userId = created.id;
+      await sql`UPDATE admin_user SET role = ${role} WHERE id = ${userId}`;
     } else {
       // A pending account whose name was corrected between invitations, and an
-      // account previously disabled: re-inviting is the supported way back in.
+      // account previously disabled: re-inviting is the supported way back in,
+      // and the role chosen this time is the one it comes back with.
       await sql`
         UPDATE admin_user
-           SET display_name = ${displayName}, disabled_at = NULL
+           SET display_name = ${displayName}, disabled_at = NULL, role = ${role}
          WHERE id = ${userId}
       `;
       await sql`

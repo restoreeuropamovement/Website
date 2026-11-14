@@ -117,12 +117,14 @@ export function shopReadiness(): ShopReadiness {
       `SHOP_PRINT_PROVIDER does not name a known printer (${JSON.stringify(process.env.SHOP_PRINT_PROVIDER ?? "")}).`,
     );
   } else {
-    if (!provider.configured()) problems.push(`The printer "${provider.id}" is missing its credentials.`);
-    if (mode === "test" && provider.placesRealOrders) {
-      problems.push(`Test mode cannot use "${provider.id}", which places real orders. Use the mock printer.`);
+    if (!provider.configured()) problems.push(`The provider "${provider.id}" is missing its credentials.`);
+    if (mode === "test" && provider.kind === "external") {
+      problems.push(
+        `Test mode cannot use "${provider.id}", which places real orders with a company. Use self-dispatch or the mock.`,
+      );
     }
-    if (mode === "live" && !provider.placesRealOrders) {
-      problems.push(`Live mode cannot use "${provider.id}", which prints nothing. Real payments need a real printer.`);
+    if (mode === "live" && provider.kind === "simulation") {
+      problems.push(`Live mode cannot use "${provider.id}", which sends nothing. Real payments need a real dispatch.`);
     }
   }
 

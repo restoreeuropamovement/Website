@@ -11,6 +11,71 @@ No supplier was contacted, no account was opened and nothing was ordered.
 
 ---
 
+## 0. Decision, 14 November 2026: dispatch from Austria
+
+Sections 1–14 are the research. After reading them the movement chose a model of its own. Its prices replace the German fulfilment figures in section 10; the rest of the report still stands.
+
+### The model
+
+- **Stock:** one bulk print run, delivered to Austria.
+- **Dispatch:** supporters there pack and post each order by hand, unpaid. They work from a packing list at `/admin/dispatch`, using **dispatch accounts** that can see that list and nothing else.
+- **Delivery:** to all 27 EU member states. Switzerland, Norway and the United Kingdom are left out for now: each needs a customs declaration per envelope, and Switzerland expects prices in francs and the UK a VAT registration.
+- **Profit:** about 5 % per order, and never under €0.50, so that one lost letter or card dispute does not cost more than a month's orders earn.
+- **Seller:** an Austrian association (Verein) is recommended, so the association's name, not a person's, appears on the site and the stickers.
+
+### Postage (Verified, Austrian Post)
+
+Austrian Post's prices are VAT-exempt as universal service. Unlike Deutsche Post, Austrian Post **accepts goods in international letters** ("Sendungen mit Wareninhalt", Brief International terms valid from 1 September 2026). That is why posting to the rest of the EU from Austria costs a letter rather than a parcel.
+
+| Stickers | Format (estimated weight) | Inside Austria | Rest of the EU, Economy |
+|---|---|---|---|
+| 10 | Brief S, ≤ 20 g, 5 mm (C6, ≈ 15 g) | €1.00 | €1.25 |
+| 25 | Brief M, ≤ 75 g, 5 mm (C6, ≈ 33 g) | €1.55 | €2.00 |
+| 50–1,000 | 353 × 250 × 30 mm, ≤ 2 kg (B4 board-backed) | Päckchen S €3.10 | Brief L €6.70 |
+
+- **Bulk discount for later:** Brief International Plus, at 20 or more envelopes per drop-off, is much cheaper. Economy costs €0.69 per item plus €8.30 per kg up to 75 g, and €1.80 plus €3.70 per kg for the large format. It could cut EU postage substantially once volume justifies the paperwork.
+- **Weights:** all estimates, as in section 6.2. Ten stickers fit a 20 g Brief S only without a card stiffener, which is why the packing list says so.
+
+### Prices in the provisional price book
+
+The other inputs:
+
+- **Stickers:** 2.9 cents each (about €29 per 1,000, Onlineprinters' list price; Estimate for the Austrian shop).
+- **Envelopes:** €0.10 for the small sizes, €0.30 for the large one (Estimate).
+- **Card fee:** Stripe, 1.5 % + €0.25.
+- **Labour:** none.
+
+| Stickers | **Austria** | Contribution | **Rest of the EU** | Contribution |
+|---|---|---|---|---|
+| 10 | **€2.20** | €0.53 | **€2.50** | €0.57 |
+| 25 | **€3.20** | €0.52 | **€3.70** | €0.56 |
+| 50 | **€5.70** | €0.51 | **€9.40** | €0.56 |
+| 100 | **€7.20** | €0.54 | **€10.90** | €0.59 |
+| 250 | **€11.70** | €0.61 | **€15.40** | €0.66 |
+| 500 | **€19.50** | €1.05 | **€23.20** | €1.09 |
+| 1,000 | **€35.00** | €1.81 | **€38.70** | €1.85 |
+
+For example, 10 stickers to Austria cost €0.29 for the stickers, €0.10 for the envelope and €1.00 postage, which is €1.39. Add Stripe's €0.28, and €2.20 leaves €0.53.
+
+### What else changes
+
+- **The imprint on the sticker.** Under Austrian media law (MedienG § 24(1), Verified), every printed item names its publisher and its printer, with the **towns** of publication and printing, not a street address. Stickers posted into Germany are also distributed there, where state press laws ask for addresses (section 11). An adviser should word an imprint that covers both.
+- **Code that implements this:**
+  - `self-dispatch` in `lib/shop/providers/`.
+  - The packing list at `app/admin/(dispatch)`.
+  - The `dispatch` role on `admin_user`.
+  - Two postage zones in `content/shop/structure.ts` and `lib/shop/price-book.ts`.
+  - `lib/shop/launch.ts`, rewritten for this model.
+
+**Sources:**
+
+- Austrian Post domestic and international tariffs: https://www.post.at/p/c/tarife-brief-und-paket and https://www.post.at/p/c/brief-ausland
+- Brief International terms, goods content: https://assets.post.at/-/media/Dokumente/De/AGB/PPV-Brief-International-01092026.pdf
+- MedienG § 24: https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10000719&Paragraf=24
+- Austrian business service portal on the media-law imprint: https://www.usp.gv.at/themen/brancheninformationen/information-und-kommunikation/impressumspflicht-gemaess-para-24-mediengesetz.html
+
+---
+
 ## 1. Executive summary
 
 **Recommendation: CONDITIONAL GO.** The shop is technically feasible, and the cheapest model reaches prices close to the brief's target. It cannot lawfully take a single paid order today. The conditions are concrete and listed in section 14; until they are met, the shop that is now built stays closed.

@@ -209,6 +209,32 @@ async function main() {
   check("an order whose payment page never opened is removed", (await sql`SELECT 1 FROM shop_order WHERE id = ${orphan.id}`).length === 0);
   check("the reconciled order is sent by the next queue run", (await fulfilment.processQueue()).submitted >= 1 && (await status(g.order.id)).status === "submitted");
 
+  console.log("self-dispatch");
+  const packingOrder = async (quantity: number, country: string) => {
+    const priced = quote(priceBook, quantity, country);
+    if (!priced.ok) throw new Error("bad quote");
+    const order = await orders.createOrder({ designId: design!.id, quote: priced, provider: "self-dispatch", livemode: false });
+    const session = await createCheckoutSession({
+      orderId: order.id, reference: order.reference, itemName: "x", itemsMinor: priced.itemsMinor,
+      shippingMinor: priced.shippingMinor, shippingLabel: "Postage", currency: "eur", country: priced.country,
+      locale: "de", successUrl: "https://x.invalid/s", cancelUrl: "https://x.invalid/c",
+    });
+    await orders.attachCheckoutSession(order.id, session.id);
+    await orders.confirmPayment(await retrieveCheckoutSession(session.id));
+    return order;
+  };
+  const h = await packingOrder(25, "AT");
+  const packed = await fulfilment.submitOrder(h.id);
+  check("a self-dispatch order is accepted onto the packing list", packed.outcome === "submitted" && packed.providerOrderId === `PACK-${h.reference}`);
+  check("it appears on the packing list", (await orders.packingList()).some((o) => o.id === h.id));
+  check("posting it without tracking works", await orders.markPosted(h.id, null));
+  check("it leaves the packing list", !(await orders.packingList()).some((o) => o.id === h.id));
+  check("it can be undone within the day", await orders.unmarkPosted(h.id));
+  check("posting it with a tracking number works", await orders.markPosted(h.id, "RR123456789AT"));
+  check("the tracking number is stored encrypted", (await orders.orderTracking(h.id))?.number === "RR123456789AT");
+  check("an order for another provider cannot be marked posted here", !(await orders.markPosted(e.order.id, null)));
+  check("the nightly sync leaves in-house orders alone", (await fulfilment.syncStatuses()).changed >= 0 && (await status(h.id)).status === "shipped");
+
   console.log("status sync");
   await sql`UPDATE shop_order SET submitted_at = now() - interval '20 minutes' WHERE id = ${a.order.id}`;
   await fulfilment.syncStatuses();

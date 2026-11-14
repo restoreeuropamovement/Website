@@ -26,6 +26,15 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect("/admin/login");
   }
 
+  /*
+   * A dispatch account never renders anything under this layout. Its packing
+   * list lives in a route group of its own, `app/admin/(dispatch)`, with its
+   * own layout, so moving from there to any page here renders this layout
+   * afresh and arrives at this line — there is no client-side navigation
+   * within this tree that a dispatch account is ever inside.
+   */
+  if (session.user.role !== "admin") redirect("/admin/dispatch");
+
   return (
     <>
       <header className="border-b border-hairline bg-canvas-deep">

@@ -13,12 +13,13 @@
  */
 import { createHmac } from "node:crypto";
 
-import { shippingBandFor, shopCountryIds, shopQuantities } from "../content/shop/structure";
+import { dispatchCountry, shippingZoneFor, shopCountryIds, shopQuantities } from "../content/shop/structure";
 import { shopReadiness } from "../lib/shop/config";
 import { outstandingLaunchConditions } from "../lib/shop/launch";
 import { addMinor, formatMoney } from "../lib/shop/money";
 import { offeredCountries, priceBook, priceBookProblems, quote } from "../lib/shop/price-book";
 import { mockProvider } from "../lib/shop/providers/mock";
+import { selfDispatchProvider } from "../lib/shop/providers/self-dispatch";
 import { encodeForm, verifyStripeSignature } from "../lib/shop/stripe";
 
 let failures = 0;
@@ -49,12 +50,17 @@ function prices(): void {
   check("a fractional quantity is refused", quote(priceBook, 10.5, "DE").ok === false);
   check("a quantity sent as a string is refused", quote(priceBook, "10" as unknown as number, "DE").ok === false);
   check("a country off the list is refused", quote(priceBook, 10, "US").ok === false);
+  check("a country outside the EU is refused", quote(priceBook, 10, "CH").ok === false);
   check("a lower-case country is refused", quote(priceBook, 10, "de").ok === false);
-  check("a destination with no postage is not offered", !offeredCountries(priceBook).includes("CH") || priceBook.shipping.CH.letter !== null);
+  check("all twenty-seven member states are offered", offeredCountries(priceBook).length === 27 && shopCountryIds.length === 27);
 
-  check("larger orders never cost less in total", shopQuantities.every((q, i) => i === 0 || priceBook.items[q] >= priceBook.items[shopQuantities[i - 1]!]));
-  check("every quantity has a band", shopQuantities.every((q) => typeof shippingBandFor(q) === "string"));
-  check("every listed country has a postage row", shopCountryIds.every((c) => c in priceBook.shipping));
+  check("larger orders never cost less", shopQuantities.every((q, i) => i === 0 || priceBook.items[q] >= priceBook.items[shopQuantities[i - 1]!]));
+  check("the dispatch country is the domestic zone", shippingZoneFor(dispatchCountry) === "domestic");
+  check("every other country is the EU zone", shopCountryIds.every((c) => c === dispatchCountry || shippingZoneFor(c) === "eu"));
+  check(
+    "posting abroad never costs less than at home",
+    shopQuantities.every((q) => (priceBook.shipping.eu[q] ?? 0) >= (priceBook.shipping.domestic[q] ?? 0)),
+  );
 
   check("adds minor units exactly", addMinor(10, 20, 70) === 100);
   let threw = false;
@@ -121,7 +127,16 @@ async function provider(): Promise<void> {
     "the mock gives the same order the same id, as an idempotent printer would",
     first.kind === "accepted" && second.kind === "accepted" && first.providerOrderId === second.providerOrderId,
   );
-  check("the mock never places a real order", mockProvider.placesRealOrders === false);
+  check("the mock is a simulation", mockProvider.kind === "simulation");
+
+  const packed = await selfDispatchProvider.submit(job);
+  const packedAgain = await selfDispatchProvider.submit(job);
+  check("self-dispatch is in-house", selfDispatchProvider.kind === "in-house");
+  check(
+    "self-dispatch puts the same order on the packing list once",
+    packed.kind === "accepted" && packedAgain.kind === "accepted" && packed.providerOrderId === packedAgain.providerOrderId,
+  );
+  check("self-dispatch reports nothing it does not know", (await selfDispatchProvider.status("PACK-X", new Date())).ok === false);
 
   const minutesAgo = (m: number) => new Date(Date.now() - m * 60_000);
   const at = async (m: number) => {
@@ -162,9 +177,18 @@ function gating(): void {
     set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_test_check", SHOP_PRINT_PROVIDER: "nonexistent" });
     check("an unknown printer keeps the shop closed", !shopReadiness().open);
 
+    set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_test_check", SHOP_PRINT_PROVIDER: "self-dispatch" });
+    check("test mode opens with self-dispatch", shopReadiness().open, shopReadiness().problems.join("; "));
+
+    set({ ...base, SHOP_MODE: "live", STRIPE_SECRET_KEY: "sk_live_check", SHOP_PRINT_PROVIDER: "self-dispatch" });
+    check(
+      "live mode accepts self-dispatch as a real dispatch",
+      !shopReadiness().problems.some((p) => p.includes("self-dispatch")),
+    );
+
     set({ ...base, SHOP_MODE: "live", STRIPE_SECRET_KEY: "sk_live_check" });
     const live = shopReadiness();
-    check("live mode refuses the mock printer", !live.open && live.problems.some((p) => p.includes("prints nothing")));
+    check("live mode refuses the mock printer", !live.open && live.problems.some((p) => p.includes("sends nothing")));
     check(
       "live mode refuses a provisional price book",
       priceBook.status === "approved" || live.problems.some((p) => p.includes("provisional")),

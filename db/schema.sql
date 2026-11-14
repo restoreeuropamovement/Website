@@ -19,6 +19,14 @@ CREATE TABLE IF NOT EXISTS admin_user (
   disabled_at   timestamptz
 );
 
+-- What an account may see. `admin` is everything this surface offers.
+-- `dispatch` is the people who post sticker orders: the packing list, the
+-- addresses on it (after a passkey touch) and the button that says a parcel
+-- has gone — and nothing else. Not the roll, not the correspondence, not
+-- the shop's own settings. Constrained because it decides access.
+ALTER TABLE admin_user ADD COLUMN IF NOT EXISTS role text NOT NULL DEFAULT 'admin'
+  CHECK (role IN ('admin', 'dispatch'));
+
 -- One row per enrolled passkey. A user may hold several, which is the supported
 -- way to avoid being locked out when a device is lost.
 --

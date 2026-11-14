@@ -1,5 +1,5 @@
 import type { ShopCountryId, ShopQuantity } from "@/content/shop/structure";
-import { decryptPiiSafe } from "@/lib/admin/pii";
+import { decryptPiiSafe, encryptPii } from "@/lib/admin/pii";
 import { db } from "@/lib/db";
 import type { Quote } from "@/lib/shop/price-book";
 import type { Tracking } from "@/lib/shop/providers";
@@ -357,6 +357,65 @@ export async function cancelOrder(orderId: string): Promise<boolean> {
     UPDATE shop_order
        SET status = 'cancelled', closed_at = now(), next_attempt_at = NULL, updated_at = now()
      WHERE id = ${orderId} AND status IN ('paid', 'retry', 'review')
+    RETURNING id
+  `;
+  return rows.length > 0;
+}
+
+/**
+ * The packing list: orders the movement posts itself that have not gone yet,
+ * oldest payment first, so whoever packs works through them in order.
+ */
+export async function packingList(limit = 100): Promise<readonly OrderView[]> {
+  const sql = db();
+  const rows = await sql<OrderRow[]>`
+    SELECT ${sql.unsafe(orderColumns)}
+      FROM shop_order o JOIN shop_design d ON d.id = o.design_id
+     WHERE o.provider = 'self-dispatch' AND o.status IN ('submitted', 'in_production')
+     ORDER BY o.paid_at
+     LIMIT ${limit}
+  `;
+  return rows.map(orderFromRow);
+}
+
+/** What was marked posted in the last day, so a mistaken click can be undone. */
+export async function recentlyPosted(): Promise<readonly OrderView[]> {
+  const sql = db();
+  const rows = await sql<OrderRow[]>`
+    SELECT ${sql.unsafe(orderColumns)}
+      FROM shop_order o JOIN shop_design d ON d.id = o.design_id
+     WHERE o.provider = 'self-dispatch' AND o.status = 'shipped'
+       AND o.shipped_at > now() - interval '1 day'
+     ORDER BY o.shipped_at DESC
+  `;
+  return rows.map(orderFromRow);
+}
+
+/**
+ * A person has posted this order. The tracking number is optional — a
+ * letter has none — and is encrypted like any other, because Austrian Post
+ * will tell anyone who holds it where the envelope went.
+ */
+export async function markPosted(orderId: string, trackingNumber: string | null): Promise<boolean> {
+  const tracking = trackingNumber
+    ? await encryptPii(JSON.stringify({ carrier: "Österreichische Post", number: trackingNumber, url: null }))
+    : null;
+  const rows = await db()`
+    UPDATE shop_order
+       SET status = 'shipped', shipped_at = now(), tracking_encrypted = ${tracking}, updated_at = now()
+     WHERE id = ${orderId} AND provider = 'self-dispatch' AND status IN ('submitted', 'in_production')
+    RETURNING id
+  `;
+  return rows.length > 0;
+}
+
+/** Undoes `markPosted` within a day of it — the envelope is still on the desk. */
+export async function unmarkPosted(orderId: string): Promise<boolean> {
+  const rows = await db()`
+    UPDATE shop_order
+       SET status = 'submitted', shipped_at = NULL, tracking_encrypted = NULL, updated_at = now()
+     WHERE id = ${orderId} AND provider = 'self-dispatch' AND status = 'shipped'
+       AND shipped_at > now() - interval '1 day'
     RETURNING id
   `;
   return rows.length > 0;
