@@ -151,6 +151,29 @@ export type AuditAction =
    */
   | "material.create"
   | "material.delete"
+  /*
+   * The sticker shop. Every entry names an order or a design by id, and the
+   * order entries add the quantity, the destination country and the amount —
+   * figures that describe a sale and identify nobody. No entry ever carries a
+   * name, an email address, a street or a tracking number: the shop keeps no
+   * customer record of its own (see `shop_order` in db/schema.sql), and this
+   * log, which is not encrypted, must not become the one it does keep.
+   *
+   * `shop.checkout` is the fifth public write, recorded with no more detail
+   * than the other four. `shop.order.reveal` is here for the reason
+   * `member.reveal` is: the address Stripe holds is fetched only when an
+   * administrator asks for it, and the asking is the event.
+   */
+  | "shop.checkout"
+  | "shop.order.paid"
+  | "shop.order.expired"
+  | "shop.order.submit"
+  | "shop.order.reveal"
+  | "shop.order.retry"
+  | "shop.order.cancel"
+  | "shop.design.create"
+  | "shop.design.update"
+  | "shop.design.delete"
   /* The weekly summary, and its non-delivery. */
   | "security.digest";
 

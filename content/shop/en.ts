@@ -1,0 +1,114 @@
+import type { PluralForms } from "@/lib/format";
+
+/**
+ * The sticker shop, in English.
+ *
+ * English only for now, and that is a decision rather than an omission: the
+ * shop is closed until the conditions in `lib/shop/launch.ts` are met, and
+ * translating terms of sale and delivery promises that do not yet exist would
+ * be translating guesses. `content/shop/index.ts` falls back to this file for
+ * every language until the five translations are written beside it, which
+ * belongs to the launch, not to the build.
+ *
+ * Nothing here names a printer, a delivery time or a tax treatment. Each is
+ * a fact somebody has to establish first (see the launch checklist), and a
+ * plausible sentence about any of them would be a promise to a paying
+ * customer that nobody has made.
+ */
+export const shopText = {
+  meta: {
+    eyebrow: "Shop",
+    title: "Stickers",
+    metaTitle: "Stickers",
+    description: "Restore Europa stickers, posted to your door.",
+    lede: "Choose a design and a quantity, and the stickers are posted to you directly.",
+  },
+
+  test: {
+    title: "Test mode",
+    body: "Payments here go to Stripe's test environment and nothing is printed or posted. Use Stripe's test card numbers, never a real card.",
+  },
+
+  closed: {
+    title: "The shop is closed",
+    body: "Orders cannot be taken at the moment. Nothing on this page will charge you or send you anything.",
+  },
+
+  unavailable: {
+    title: "The shop cannot be reached",
+    body: "The designs could not be loaded just now. Nothing has been charged. Please try again later.",
+  },
+
+  empty: {
+    title: "No designs yet",
+    body: "There is nothing to order at the moment.",
+  },
+
+  sticker: {
+    title: "The sticker",
+    facts: ["8 × 8 cm, square", "Full colour on 80 g/m² paper", "Permanent adhesive, for indoor use"],
+  },
+
+  form: {
+    design: "Design",
+    quantity: "How many",
+    quantityOption: { one: "{count} sticker", other: "{count} stickers" } satisfies PluralForms,
+    country: "Deliver to",
+    countryPlaceholder: "Choose a country",
+    summaryTitle: "Your order",
+    stickers: "Stickers",
+    delivery: "Delivery",
+    total: "Total",
+    notDelivered: "This quantity cannot be posted to that country yet.",
+    submit: "Continue to payment",
+    submitting: "Opening the payment page…",
+    payment:
+      "You pay on Stripe's own page, which asks for your name, email address and the delivery address. This site never sees your card and keeps no record of who you are: the company that posts the stickers receives your address for this one parcel.",
+    privacyLink: "How your details are handled",
+  },
+
+  errors: {
+    design: "Choose a design.",
+    quantity: "Choose how many.",
+    country: "Choose a country to deliver to.",
+    "not-offered": "That quantity cannot be posted to that country yet.",
+  },
+
+  states: {
+    throttled: "Too many orders have been started from this connection. Please wait an hour and try again.",
+    busy: "The shop is taking a breather after a rush of orders. Please try again in a little while.",
+    unavailable: "The payment page could not be opened just now. Nothing has been charged. Please try again later.",
+    closed: "The shop has just closed. Nothing has been charged.",
+  },
+
+  order: {
+    metaTitle: "Your order",
+    kicker: "Order",
+    missingTitle: "Order not found",
+    missingBody:
+      "This address does not match an order. If you have just paid, the payment page may still be passing it to us — reload in a minute.",
+    keep: "Keep this page's address. This site does not keep your email address, so this page is how you see your order's progress.",
+    design: "Design",
+    quantity: "Quantity",
+    destination: "Delivered to",
+    total: "Paid",
+    tracking: "Tracking",
+    test: "Test order — nothing will be printed or posted.",
+    status: {
+      checkout: "Waiting for the payment to be confirmed.",
+      expired: "The payment was not completed, so nothing was charged and nothing will be sent.",
+      paid: "Paid. Your order is about to be passed on for dispatch.",
+      submitting: "Paid. Your order is being passed on for dispatch.",
+      retry: "Paid. Our dispatch partner could not be reached yet; your order will be passed on automatically.",
+      review: "Paid. Your order needs a moment of a person's attention before it is sent. Nothing more is needed from you.",
+      submitted: "Received by our dispatch partner.",
+      in_production: "Being prepared.",
+      shipped: "Posted.",
+      delivered: "Delivered.",
+      cancelled: "Cancelled. Anything you paid has been or will be refunded to your card.",
+    },
+  },
+
+  item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } satisfies PluralForms,
+  shippingLabel: "Postage",
+} as const;

@@ -473,6 +473,57 @@ database row says.
 > no such person can yet be named. That is a decision about what to publish,
 > not about what to build.
 
+### Sticker shop
+
+`/shop` sells printed stickers: a customer picks a design, a quantity and a
+country, pays on Stripe's hosted page, and a printer or fulfilment house posts
+the stickers to them. **It is closed.** With `SHOP_MODE` unset the route answers 404, and
+nothing links to it or lists it in the sitemap. Whether it can open at all is
+argued in [`docs/sticker-shop-feasibility.md`](docs/sticker-shop-feasibility.md),
+which is the document to read before changing anything here.
+
+- **Modes.** `SHOP_MODE=test` runs the whole flow against Stripe's test keys
+  and the mock printer in `lib/shop/providers/mock.ts`, which prints nothing.
+  `SHOP_MODE=live` refuses to open until four things are true: the printer
+  places real orders, the price book in `lib/shop/price-book.ts` is
+  `approved`, every condition in `lib/shop/launch.ts` is ticked, and the
+  Stripe key's own prefix says it is live. Test mode refuses a printer that
+  places real orders, so a test card can never buy a print run.
+- **No customer record.** `shop_order` holds the design, quantity, country,
+  amounts, Stripe ids and the state of the order. The name, email and address
+  stay with Stripe, which collected them; fulfilment reads them from Stripe
+  for the one request that sends an order to the printer and writes them
+  nowhere. An administrator can see them for one order at a time, after a
+  passkey touch, and the look is audited. The tracking number and the
+  printer's error text are encrypted, because both can point at an address.
+- **Prices are the server's.** The form posts a design, a quantity and a
+  country; the amount is recomputed from the price book, Stripe is told the
+  amount, and the webhook checks Stripe charged exactly that before the order
+  can go anywhere. Money is integer cents throughout (`lib/shop/money.ts`).
+- **Paid, then sent, once.** Only Stripe's own record of a session marks an
+  order paid (`lib/shop/payments.ts`), whether that news arrives by the
+  webhook at `/api/shop/stripe` or by the customer landing on the order page
+  first. Sending is a claim on the row, so two workers cannot both send it;
+  an attempt whose outcome is unknown is repeated only for a printer that
+  de-duplicates on our order id, and otherwise waits for a person at
+  `/admin/shop`. The nightly maintenance run retries what is due and asks the
+  printer for news.
+- **Designs** are uploaded at `/admin/shop`: a raster preview for customers
+  and the print-ready master, larger than the 80 × 80 mm sticker by the
+  printer's bleed (`stickerFormat` in `content/shop/structure.ts`). A new
+  design starts switched off. The public page reads the list
+  through Next's data cache, expired by tag whenever an administrator changes
+  it, so browsing the shop does not wake the database.
+- **Adding a printer** is a file beside `mock.ts` implementing
+  `PrintProvider`, one line in `lib/shop/providers/index.ts`, and its
+  credentials read lazily with no defaults. Nothing else changes.
+
+To try it locally: run `npm run db:dev` and `npm run db:migrate`, set
+`SHOP_MODE=test`, `SHOP_PRINT_PROVIDER=mock`, a Stripe test key and the
+webhook secret printed by `stripe listen --forward-to
+localhost:3000/api/shop/stripe`, upload a design at `/admin/shop`, switch it on,
+and pay with Stripe's test card `4242 4242 4242 4242`.
+
 ### Editing essays
 
 `/admin/journal` lists every essay, draft and published. Drafts are invisible to
@@ -614,6 +665,8 @@ cannot print a map whose borders are invented.
 
 ## Things this site deliberately does not do
 
+- **No shop open before it can be lawful.** `/shop` is built and closed; see
+  "Sticker shop" above for what has to be true first.
 - **No backend it does not admit to.** All three public forms transmit and
   store, and each says so where it is used rather than only in the privacy
   note. `/join` writes an application to `member`, and its lede says the form

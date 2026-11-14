@@ -97,15 +97,43 @@ table will one day be read by someone who should not have it.
   a public form; enrolling an opponent to damage them is a real tactic. Public applications land as
   `pending` and an administrator vets them. Nothing is deleted on a timer — an unreviewed row is
   somebody's application, not a stale token.
-- **The public site has exactly four server actions**, all in `app/(site)`: the membership intake
+- **The public site has exactly five server actions**, all in `app/(site)`: the membership intake
  (`join/actions.ts`), the contact form (`contact/actions.ts`), the newsletter signup
- (`newsletter/actions.ts`) and the member opt-out (`notices/stop/actions.ts`). Each validates
- server-side and audits without personal data. The first three also rate limit per connection and
- encrypt before storing; the fourth stores nothing anybody typed and is deliberately not throttled,
- because the way out of a mailing list must not be harder than the way in. Two of them must also
- answer identically whatever is already stored: the intake, or it becomes an oracle for testing
- whether a named person is a member, and the signup, or it becomes one for testing who reads the
- letter. Do not add a fifth without the same reasoning written down.
+ (`newsletter/actions.ts`), the member opt-out (`notices/stop/actions.ts`) and the shop's checkout
+ (`shop/actions.ts`). Each validates server-side and audits without personal data. The first three
+ also rate limit per connection and encrypt before storing; the fourth stores nothing anybody typed
+ and is deliberately not throttled, because the way out of a mailing list must not be harder than
+ the way in. The fifth is rate limited and stores nothing personal because nobody types anything
+ into it: it takes a design, a quantity and a country from closed lists, prices them itself, and
+ sends the browser to Stripe, which is where a name and an address are entered and kept — its own
+ header says the rest. Two of them must also answer identically whatever is already stored: the
+ intake, or it becomes an oracle for testing whether a named person is a member, and the signup, or
+ it becomes one for testing who reads the letter. Do not add a sixth without the same reasoning
+ written down.
+
+## The sticker shop
+
+`/shop` is built and closed. Read `docs/sticker-shop-feasibility.md` and README.md → "Sticker shop"
+before changing it.
+
+- **The shop keeps no customer record.** `shop_order` has no column for a name, an email address or
+ a street, and must never gain one: a list of who bought this movement's stickers is a list of its
+ supporters. Stripe holds those details; fulfilment reads them from Stripe for one request and drops
+ them. Tracking numbers and printer error text are encrypted, because both point at an address.
+- **Prices are the server's, in cents.** The form never posts an amount. `quote()` in
+ `lib/shop/price-book.ts` is the only arithmetic that is charged, and money is a whole number of
+ minor units from the price book to Stripe.
+- **Paid means Stripe's record says paid.** Only `confirmPayment`, reading the session back from
+ Stripe's API, writes `paid`, and only after the amount, currency, mode and order id all match.
+ Never mark an order paid from a webhook body, a redirect or anything a browser sent.
+- **Submitted means the printer said yes.** `submitted` is written with the printer's order id in the
+ same statement and the schema refuses one without the other. Do not add a "manual" printer that
+ marks orders submitted; an order a person must place by hand is an order in `review`.
+- **Test and live never cross.** Test mode refuses a printer that places real orders, live mode
+ refuses one that does not, and fulfilment checks the order's own Stripe mode again before sending.
+- **Opening it is a commit.** `SHOP_MODE=live` stays closed until the price book is `approved` and
+ every entry in `lib/shop/launch.ts` is ticked. Tick one only when the thing it describes is true,
+ and say in the commit what made it so. `/privacy` is rewritten before the shop opens, not after.
 
 ## Commands
 

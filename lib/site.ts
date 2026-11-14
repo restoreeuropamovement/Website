@@ -133,6 +133,9 @@ export const routes = {
   about: "/about",
   wings: "/wings",
   materials: "/materials",
+  /* Unlisted, like `/materials`, and absent from the sitemap: closed until the
+     conditions in `lib/shop/launch.ts` are met. */
+  shop: "/shop",
   join: "/join",
   newsletter: "/newsletter",
   contact: "/contact",

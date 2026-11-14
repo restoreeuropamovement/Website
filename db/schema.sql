@@ -840,3 +840,127 @@ CREATE TABLE IF NOT EXISTS material (
 
 -- The page groups by category and shows the newest first within each.
 CREATE INDEX IF NOT EXISTS material_category_idx ON material (category, created_at DESC);
+
+-- ---------------------------------------------------------------------------
+-- Sticker shop
+-- ---------------------------------------------------------------------------
+--
+-- Two tables, and what they leave out matters more than what they hold. See
+-- docs/sticker-shop-feasibility.md for the design and lib/shop/ for the code.
+
+-- A design that can be ordered.
+--
+-- Two files per design. `preview_*` is the image a customer chooses from;
+-- `print_*` is the print-ready master the printer receives, unchanged, for
+-- every order. Both are objects in the Vercel Blob store, under `shop/`, at
+-- addresses with a random suffix: the artwork is public by nature, so nothing
+-- here pretends it is a secret, but nothing lists the master files either.
+--
+-- `print_sha256` is the digest of the master as it was uploaded. The printer
+-- is sent the file at `print_url`; the digest is how a person checks, months
+-- later, that what was printed is what was approved.
+--
+-- Operator-entered and English only, like a material. A design is never
+-- deleted while an order refers to it — it is withdrawn with `active` — so an
+-- order can always say what was bought.
+CREATE TABLE IF NOT EXISTS shop_design (
+  id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  slug                text NOT NULL UNIQUE,
+  title               text NOT NULL,
+  description         text NOT NULL DEFAULT '',
+  preview_url         text NOT NULL,
+  preview_pathname    text NOT NULL,
+  print_url           text NOT NULL,
+  print_pathname      text NOT NULL,
+  print_content_type  text NOT NULL,
+  print_bytes         bigint NOT NULL,
+  print_sha256        text NOT NULL,
+  active              boolean NOT NULL DEFAULT false,
+  position            integer NOT NULL DEFAULT 0,
+  created_at          timestamptz NOT NULL DEFAULT now(),
+  updated_at          timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS shop_design_listing_idx ON shop_design (active, position, created_at);
+
+-- One order: one design, one quantity, one destination.
+--
+-- **No customer is identified here.** The name, the email address and the
+-- shipping address are held by Stripe, which collected them on its own page
+-- and has to keep them for the payment anyway. They are read from Stripe at
+-- the moment an order is handed to the printer and are never written to this
+-- database. A list of everybody who bought this movement's stickers is a list
+-- of its supporters, which is what `member` encrypts; the stronger version of
+-- that rule is not to keep the list at all, so a copy of this table is a
+-- record of sales and nothing more.
+--
+-- `country` is in the clear for the reason `member.country` is: totals by
+-- country are what the admin view counts, and a country identifies nobody.
+-- The tracking number is encrypted, because a carrier will tell anyone who
+-- holds it the town a parcel went to.
+--
+-- Money is integer minor units — cents — and nothing else. `total_minor` is
+-- constrained to be the sum of its parts so that a rounding mistake anywhere
+-- in the code fails the insert rather than charging somebody for it.
+--
+-- `status` is a workflow, so it is constrained, unlike `material.category`:
+--
+--   checkout       a Stripe Checkout session exists; nothing is paid
+--   expired        the session lapsed or the payment failed; nothing is owed
+--   paid           Stripe confirmed payment; waiting to go to the printer
+--   submitting     claimed by one worker, so no second one can send it
+--   retry          the printer could not be reached; nothing was created
+--   review         needs a person: refused, uncertain, or out of retries
+--   submitted      the printer accepted it, and `provider_order_id` says so
+--   in_production
+--   shipped
+--   delivered
+--   cancelled      closed by an administrator, after any refund in Stripe
+--
+-- `submitted` is only ever written with the printer's own order id in the
+-- same statement. An order is never reported as sent to a printer that did
+-- not acknowledge it.
+--
+-- `last_error_code` is from a closed list and readable; the printer's own
+-- wording goes in `last_error_encrypted`, because a refusal that quotes the
+-- postcode it refused is an address fragment like any other.
+CREATE TABLE IF NOT EXISTS shop_order (
+  id                    uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  reference             text NOT NULL UNIQUE,
+  status                text NOT NULL DEFAULT 'checkout'
+                          CHECK (status IN (
+                            'checkout', 'expired', 'paid', 'submitting', 'retry', 'review',
+                            'submitted', 'in_production', 'shipped', 'delivered', 'cancelled'
+                          )),
+  livemode              boolean NOT NULL,
+  design_id             uuid NOT NULL REFERENCES shop_design (id) ON DELETE RESTRICT,
+  quantity              integer NOT NULL CHECK (quantity > 0),
+  country               text NOT NULL,
+  currency              text NOT NULL,
+  items_minor           integer NOT NULL CHECK (items_minor >= 0),
+  shipping_minor        integer NOT NULL CHECK (shipping_minor >= 0),
+  total_minor           integer NOT NULL CHECK (total_minor = items_minor + shipping_minor),
+  -- Which edition of the price list produced these figures.
+  price_book            text NOT NULL,
+  checkout_session_id   text UNIQUE,
+  payment_intent_id     text,
+  provider              text NOT NULL,
+  provider_order_id     text,
+  attempts              integer NOT NULL DEFAULT 0,
+  next_attempt_at       timestamptz,
+  last_error_code       text,
+  last_error_encrypted  text,
+  tracking_encrypted    text,
+  created_at            timestamptz NOT NULL DEFAULT now(),
+  paid_at               timestamptz,
+  submitted_at          timestamptz,
+  shipped_at            timestamptz,
+  closed_at             timestamptz,
+  updated_at            timestamptz NOT NULL DEFAULT now(),
+  CHECK (status NOT IN ('submitted', 'in_production', 'shipped', 'delivered')
+         OR provider_order_id IS NOT NULL)
+);
+
+-- The queue: what is due to be sent, and what is waiting on the printer.
+CREATE INDEX IF NOT EXISTS shop_order_queue_idx ON shop_order (status, next_attempt_at);
+CREATE INDEX IF NOT EXISTS shop_order_created_idx ON shop_order (created_at DESC);

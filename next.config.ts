@@ -114,7 +114,18 @@ const contentSecurityPolicy = [
   "frame-src 'none'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  /*
+   * Stripe's hosted payment page, and nothing else. The order form at `/shop`
+   * posts to its own Server Action, which answers with a redirect to
+   * `checkout.stripe.com`. With JavaScript that redirect is an ordinary
+   * navigation, but without it the redirect is the end of a form submission,
+   * and browsers apply `form-action` to every hop of that — so a reader with
+   * scripts off would see the order form do nothing at all. Admitting the one
+   * host Stripe serves Checkout from is the narrowest grant that keeps the
+   * form working for them. A custom checkout domain configured in Stripe would
+   * have to be added here too, and it would fail silently if it were not.
+   */
+  "form-action 'self' https://checkout.stripe.com",
   "upgrade-insecure-requests",
 ].join("; ");
 
@@ -206,6 +217,21 @@ const nextConfig: NextConfig = {
         hostname: materialStore.imageHost,
         port: "",
         pathname: `${materialStore.pathPrefix}**`,
+        search: "",
+      },
+      /*
+       * The sticker shop's preview images, which `lib/admin/shop-designs.ts`
+       * writes under their own prefix in the same store. Raster only and
+       * always through `next/image`, so the content security policy does not
+       * need to admit the store for them: the browser fetches `/_next/image`
+       * from this origin. The print masters beside them under `shop/print/`
+       * are deliberately not admitted — nothing here ever displays one.
+       */
+      {
+        protocol: "https",
+        hostname: materialStore.imageHost,
+        port: "",
+        pathname: "/shop/previews/**",
         search: "",
       },
     ],

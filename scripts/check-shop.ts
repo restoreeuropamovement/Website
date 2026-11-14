@@ -1,0 +1,204 @@
+/**
+ * Guards the sticker shop's arithmetic and its two security boundaries.
+ *
+ * What is tested is what would cost somebody money or let somebody in if it
+ * broke quietly: the price book (a typo is a wrong charge), the quote (the
+ * server's arithmetic is the only arithmetic that counts), Stripe's webhook
+ * signature (a forged "paid" is a free print run), the request encoding (a
+ * malformed field is a checkout that charges the wrong amount), and the line
+ * between test and live (a test card must never buy a real print job, and a
+ * real payment must never go to a simulation).
+ *
+ * Runs in `npm run check`. Needs no database, no Stripe account and no network.
+ */
+import { createHmac } from "node:crypto";
+
+import { shippingBandFor, shopCountryIds, shopQuantities } from "../content/shop/structure";
+import { shopReadiness } from "../lib/shop/config";
+import { outstandingLaunchConditions } from "../lib/shop/launch";
+import { addMinor, formatMoney } from "../lib/shop/money";
+import { offeredCountries, priceBook, priceBookProblems, quote } from "../lib/shop/price-book";
+import { mockProvider } from "../lib/shop/providers/mock";
+import { encodeForm, verifyStripeSignature } from "../lib/shop/stripe";
+
+let failures = 0;
+
+function check(label: string, condition: boolean, detail = ""): void {
+  if (condition) return;
+  failures += 1;
+  console.error(`  FAIL  ${label}${detail ? ` — ${detail}` : ""}`);
+}
+
+function prices(): void {
+  const problems = priceBookProblems(priceBook);
+  check("every figure in the price book is whole cents", problems.length === 0, problems.join("; "));
+
+  for (const country of offeredCountries(priceBook)) {
+    for (const quantity of shopQuantities) {
+      const result = quote(priceBook, quantity, country);
+      if (!result.ok) continue;
+      check(
+        `the total for ${quantity} to ${country} is the sum of its parts`,
+        result.totalMinor === result.itemsMinor + result.shippingMinor,
+      );
+      check(`the quote for ${quantity} to ${country} names the price book`, result.priceBook === priceBook.id);
+    }
+  }
+
+  check("a quantity off the list is refused", quote(priceBook, 73, "DE").ok === false);
+  check("a fractional quantity is refused", quote(priceBook, 10.5, "DE").ok === false);
+  check("a quantity sent as a string is refused", quote(priceBook, "10" as unknown as number, "DE").ok === false);
+  check("a country off the list is refused", quote(priceBook, 10, "US").ok === false);
+  check("a lower-case country is refused", quote(priceBook, 10, "de").ok === false);
+  check("a destination with no postage is not offered", !offeredCountries(priceBook).includes("CH") || priceBook.shipping.CH.letter !== null);
+
+  check("larger orders never cost less in total", shopQuantities.every((q, i) => i === 0 || priceBook.items[q] >= priceBook.items[shopQuantities[i - 1]!]));
+  check("every quantity has a band", shopQuantities.every((q) => typeof shippingBandFor(q) === "string"));
+  check("every listed country has a postage row", shopCountryIds.every((c) => c in priceBook.shipping));
+
+  check("adds minor units exactly", addMinor(10, 20, 70) === 100);
+  let threw = false;
+  try {
+    addMinor(1.5);
+  } catch {
+    threw = true;
+  }
+  check("refuses fractions of a cent", threw);
+  check("formats euros in German", formatMoney(1250, "EUR", "de").replace(/\s/g, " ") === "12,50 €");
+  check("formats euros in English", formatMoney(1250, "EUR", "en") === "€12.50");
+}
+
+function encoding(): void {
+  const encoded = encodeForm({
+    mode: "payment",
+    line_items: [{ quantity: 1, price_data: { currency: "eur", unit_amount: 1490, product_data: { name: "50 stickers — Ā & b" } } }],
+    shipping_address_collection: { allowed_countries: ["DE"] },
+    omitted: null,
+  });
+  const expected = [
+    "mode=payment",
+    "line_items%5B0%5D%5Bquantity%5D=1",
+    "line_items%5B0%5D%5Bprice_data%5D%5Bcurrency%5D=eur",
+    "line_items%5B0%5D%5Bprice_data%5D%5Bunit_amount%5D=1490",
+    `line_items%5B0%5D%5Bprice_data%5D%5Bproduct_data%5D%5Bname%5D=${encodeURIComponent("50 stickers — Ā & b")}`,
+    "shipping_address_collection%5Ballowed_countries%5D%5B0%5D=DE",
+  ].join("&");
+  check("encodes nested Stripe parameters", encoded === expected, encoded);
+}
+
+async function signatures(): Promise<void> {
+  const secret = "whsec_test_secret_for_check_shop";
+  const body = JSON.stringify({ id: "evt_1", type: "checkout.session.completed" });
+  const now = 1_800_000_000;
+  const sign = (t: number, payload: string, key = secret) =>
+    createHmac("sha256", key).update(`${t}.${payload}`).digest("hex");
+
+  const header = `t=${now},v1=${sign(now, body)}`;
+  check("accepts Stripe's own signature", await verifyStripeSignature(body, header, secret, 300, now));
+  check(
+    "accepts any matching v1 during a secret roll",
+    await verifyStripeSignature(body, `t=${now},v1=${"0".repeat(64)},v1=${sign(now, body)}`, secret, 300, now),
+  );
+  check("refuses a changed body", !(await verifyStripeSignature(`${body} `, header, secret, 300, now)));
+  check("refuses the wrong secret", !(await verifyStripeSignature(body, `t=${now},v1=${sign(now, body, "whsec_other")}`, secret, 300, now)));
+  check("refuses a replay from ten minutes ago", !(await verifyStripeSignature(body, header, secret, 300, now + 600)));
+  check("refuses a missing header", !(await verifyStripeSignature(body, null, secret, 300, now)));
+  check("refuses a header with no v1", !(await verifyStripeSignature(body, `t=${now},v0=${sign(now, body)}`, secret, 300, now)));
+}
+
+async function provider(): Promise<void> {
+  const job = {
+    orderId: "0b6c2f4e-9d1a-4c7b-8e3f-5a2d1c0b9e8f",
+    reference: "RE-TEST123",
+    quantity: 25 as const,
+    design: { slug: "test", printUrl: "https://example.invalid/x.pdf", printSha256: "0", printContentType: "application/pdf", finishedMm: 80, bleedMm: 2 },
+    shipTo: { name: "Test", line1: "1 Test Street", line2: null, postalCode: "10115", city: "Berlin", state: null, country: "DE" as const },
+  };
+  const first = await mockProvider.submit(job);
+  const second = await mockProvider.submit(job);
+  check("the mock accepts a job", first.kind === "accepted");
+  check(
+    "the mock gives the same order the same id, as an idempotent printer would",
+    first.kind === "accepted" && second.kind === "accepted" && first.providerOrderId === second.providerOrderId,
+  );
+  check("the mock never places a real order", mockProvider.placesRealOrders === false);
+
+  const minutesAgo = (m: number) => new Date(Date.now() - m * 60_000);
+  const at = async (m: number) => {
+    const status = await mockProvider.status("MOCK-0B6C2F4E", minutesAgo(m));
+    return status.ok ? status.state : "error";
+  };
+  check("the mock moves an order forward over time", (await at(1)) === "accepted" && (await at(3)) === "in_production" && (await at(10)) === "shipped" && (await at(60)) === "delivered");
+}
+
+function gating(): void {
+  const saved = { ...process.env };
+  const set = (values: Record<string, string | undefined>) => {
+    for (const [key, value] of Object.entries(values)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  };
+  const base = {
+    DATABASE_URL: "postgres://check/shop",
+    MEMBER_ENCRYPTION_KEY: "k".repeat(43),
+    STRIPE_WEBHOOK_SECRET: "whsec_check",
+    SHOP_PRINT_PROVIDER: "mock",
+  };
+
+  try {
+    set({ SHOP_MODE: undefined });
+    check("closed when SHOP_MODE is unset", shopReadiness().mode === "off" && !shopReadiness().open);
+
+    set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_test_check" });
+    check("test mode opens with a test key and the mock", shopReadiness().open, shopReadiness().problems.join("; "));
+
+    set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_live_check" });
+    check("test mode refuses a live key", !shopReadiness().open);
+
+    set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_test_check", STRIPE_WEBHOOK_SECRET: undefined });
+    check("test mode refuses to open without a webhook secret", !shopReadiness().open);
+
+    set({ ...base, SHOP_MODE: "test", STRIPE_SECRET_KEY: "sk_test_check", SHOP_PRINT_PROVIDER: "nonexistent" });
+    check("an unknown printer keeps the shop closed", !shopReadiness().open);
+
+    set({ ...base, SHOP_MODE: "live", STRIPE_SECRET_KEY: "sk_live_check" });
+    const live = shopReadiness();
+    check("live mode refuses the mock printer", !live.open && live.problems.some((p) => p.includes("prints nothing")));
+    check(
+      "live mode refuses a provisional price book",
+      priceBook.status === "approved" || live.problems.some((p) => p.includes("provisional")),
+    );
+    check(
+      "live mode refuses an unmet launch checklist",
+      outstandingLaunchConditions().length === 0 || live.problems.some((p) => p.includes("launch checklist")),
+    );
+
+    set({ ...base, SHOP_MODE: "live", STRIPE_SECRET_KEY: "sk_test_check" });
+    check("live mode refuses a test key", !shopReadiness().open);
+
+    set({ ...base, SHOP_MODE: "LIVE", STRIPE_SECRET_KEY: "sk_live_check" });
+    check("an unrecognised mode is closed, not live", shopReadiness().mode === "off");
+  } finally {
+    for (const key of Object.keys(process.env)) if (!(key in saved)) delete process.env[key];
+    Object.assign(process.env, saved);
+  }
+}
+
+async function main(): Promise<void> {
+  prices();
+  encoding();
+  await signatures();
+  await provider();
+  gating();
+
+  if (failures > 0) {
+    console.error(`\n${failures} shop check(s) failed.`);
+    process.exit(1);
+  }
+  console.log(
+    `Shop: the price book, Stripe signatures, request encoding, the mock printer and the test/live line all hold.`,
+  );
+}
+
+void main();

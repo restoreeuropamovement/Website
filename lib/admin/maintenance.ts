@@ -3,6 +3,9 @@ import { recordAudit } from "@/lib/admin/audit";
 import { hasDatabase } from "@/lib/admin/env";
 import { purgeExpiredUnconfirmed } from "@/lib/admin/subscribers";
 import { sweepEphemera } from "@/lib/admin/sweep";
+import { shopMode } from "@/lib/shop/config";
+import { processQueue, syncStatuses, type QueueReport } from "@/lib/shop/fulfilment";
+import { reconcileCheckouts } from "@/lib/shop/payments";
 
 /**
  * The one scheduled housekeeping run, and the isolation that makes folding
@@ -67,14 +70,23 @@ export interface PurgeReport {
   readonly message?: string;
 }
 
+export interface ShopReport {
+  readonly state: "ok" | "unconfigured" | "error";
+  readonly reconciled?: { readonly checked: number; readonly paid: number; readonly expired: number };
+  readonly queue?: QueueReport;
+  readonly sync?: { readonly checked: number; readonly changed: number };
+  readonly message?: string;
+}
+
 export interface MaintenanceReport {
   readonly archive: ArchiveOutcome;
   readonly sweep: SweepReport;
   readonly purge: PurgeReport;
+  readonly shop: ShopReport;
 }
 
 export async function runMaintenance(): Promise<MaintenanceReport> {
-  const [archive, sweep, purge] = await Promise.all([
+  const [archive, sweep, purge, shop] = await Promise.all([
     /* Copies Vercel's daily figures into `traffic_day` before the plan's
      * window forgets them. Why the last fortnight is rewritten on every run
      * rather than only yesterday is in `lib/admin/archive.ts`. This is the one
@@ -96,9 +108,24 @@ export async function runMaintenance(): Promise<MaintenanceReport> {
       removed: 0,
       message,
     })),
+    /* Paid orders the printer has not yet taken, and news of the ones it
+       has. The webhook sends each order the moment it is paid; this is the
+       net under that, and the only retry a Hobby plan's single nightly slot
+       allows. It talks to the printer, so it is isolated like the archive. */
+    isolate("The shop's fulfilment run", shopTask, (message) => ({ state: "error" as const, message })),
   ]);
 
-  return { archive, sweep, purge };
+  return { archive, sweep, purge, shop };
+}
+
+async function shopTask(): Promise<ShopReport> {
+  if (shopMode() === "off" || !hasDatabase()) return { state: "unconfigured" };
+  /* In this order: a payment the webhook missed is confirmed first, so the
+     queue run straight after it sends the order the same night. */
+  const reconciled = await reconcileCheckouts();
+  const queue = await processQueue();
+  const sync = await syncStatuses();
+  return { state: "ok", reconciled, queue, sync };
 }
 
 /**
@@ -133,7 +160,7 @@ export async function runMaintenance(): Promise<MaintenanceReport> {
  */
 export function maintenanceStatus(report: MaintenanceReport): number {
   if (report.purge.state === "error" || report.sweep.state === "error") return 500;
-  return report.archive.state === "error" ? 502 : 200;
+  return report.archive.state === "error" || report.shop.state === "error" ? 502 : 200;
 }
 
 /**
