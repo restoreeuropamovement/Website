@@ -58,7 +58,7 @@ export interface PriceBook {
  * `shipping` is exactly what Austrian Post charges for the format the packing
  * list puts that quantity in (`lib/shop/packing.ts`), verified 15 November
  * 2026 and VAT-exempt: inside Austria Brief S €1.00, Brief M €1.55, Päckchen
- * S €3.10; to the rest of the EU, Economy, Brief S €1.25, Brief M €2.00,
+ * S €3.10; to the rest of Europe, Economy, Brief S €1.25, Brief M €2.00,
  * Brief L €6.70. Nothing is earned on postage, so the line labelled postage
  * is postage.
  *
@@ -84,7 +84,7 @@ export const priceBook: PriceBook = {
   },
   shipping: {
     domestic: { 10: 100, 25: 155, 50: 155, 100: 310, 250: 310, 500: 310, 1000: 310 },
-    eu: { 10: 125, 25: 200, 50: 200, 100: 670, 250: 670, 500: 670, 1000: 670 },
+    europe: { 10: 125, 25: 200, 50: 200, 100: 670, 250: 670, 500: 670, 1000: 670 },
   },
 };
 

@@ -16,23 +16,39 @@
 export const dispatchCountry = "AT" as const;
 
 /**
- * Where the shop delivers: the twenty-seven member states of the European
- * Union, as ISO 3166-1 alpha-2 codes in the upper case Stripe expects.
+ * The member states of the European Union, plus Monaco, which is inside the
+ * EU's customs territory through France. An envelope to any of these needs no
+ * customs declaration.
+ */
+export const customsUnionCountryIds = [
+  "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE",
+  "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "MC",
+] as const;
+
+/**
+ * Where the shop delivers: every country with a wing of the movement
+ * (`content/wings/structure.ts`), as ISO 3166-1 alpha-2 codes in the upper
+ * case Stripe expects. England, Scotland, Wales and Northern Ireland are one
+ * postal destination, `GB`.
  *
- * The EU and not "Europe", for reasons that are each a piece of paperwork
- * nobody has taken on. A parcel to Switzerland, Norway or the United Kingdom
- * leaves the customs union: it needs a customs declaration on every
- * envelope, the buyer may meet import charges at the door, Swiss price rules
- * expect prices in francs, and the United Kingdom requires an overseas
- * seller of goods under £135 to register for its VAT. Any of them can be
- * added later by adding it here and a postage row in the price book.
+ * Russia is the one wing left out, and not by choice: Austrian Post accepts
+ * only documents for Russia and refuses goods (post.at, "Länderinformationen",
+ * read 15 November 2026). Add it back when that changes. `scripts/check-shop.ts`
+ * fails if a wing is added without a decision here.
+ *
+ * Outside the EU's customs territory every envelope carries a CN22 customs
+ * declaration (the packing list says so), and the customer may be asked for
+ * import tax or a handling fee on delivery (the order form says so). The
+ * United Kingdom also requires an overseas seller to register for UK VAT
+ * before selling it goods under £135; that is a launch condition in
+ * `lib/shop/launch.ts`, and the way to open without it is to remove `GB` here.
  *
  * Country names are not written anywhere. `Intl.DisplayNames` gives every one
  * of them in every language the site speaks.
  */
 export const shopCountryIds = [
-  "AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE",
-  "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE",
+  ...customsUnionCountryIds,
+  "AL", "AD", "BA", "GB", "IS", "XK", "LI", "MD", "ME", "MK", "NO", "SM", "RS", "CH", "UA",
 ] as const;
 
 export type ShopCountryId = (typeof shopCountryIds)[number];
@@ -41,17 +57,22 @@ export function isShopCountry(value: string): value is ShopCountryId {
   return (shopCountryIds as readonly string[]).includes(value);
 }
 
+/** Whether an envelope to this country leaves the EU's customs territory. */
+export function needsCustomsDeclaration(country: ShopCountryId): boolean {
+  return !(customsUnionCountryIds as readonly string[]).includes(country);
+}
+
 /**
  * Postage zones. Austrian Post charges one rate inside Austria and one rate
- * for every destination in "EU und Rest Europa", so two zones are all the
- * price book needs.
+ * for every destination in its "EU und Rest Europa" column, which holds every
+ * country above, so two zones are all the price book needs.
  */
-export const shippingZoneIds = ["domestic", "eu"] as const;
+export const shippingZoneIds = ["domestic", "europe"] as const;
 
 export type ShippingZoneId = (typeof shippingZoneIds)[number];
 
 export function shippingZoneFor(country: ShopCountryId): ShippingZoneId {
-  return country === dispatchCountry ? "domestic" : "eu";
+  return country === dispatchCountry ? "domestic" : "europe";
 }
 
 /**

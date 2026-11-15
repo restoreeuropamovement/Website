@@ -6,6 +6,7 @@ export {
   dispatchCountry,
   isShopCountry,
   isShopQuantity,
+  needsCustomsDeclaration,
   shippingZoneFor,
   shopCountryIds,
   shopQuantities,

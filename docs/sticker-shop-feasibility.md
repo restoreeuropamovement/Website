@@ -19,7 +19,11 @@ Sections 1–14 are the research. After reading them the movement chose a model 
 
 - **Stock:** one bulk print run, delivered to Austria.
 - **Dispatch:** supporters there pack and post each order by hand, unpaid. They work from a packing list at `/admin/dispatch`, using **dispatch accounts** that can see that list and nothing else.
-- **Delivery:** to all 27 EU member states. Switzerland, Norway and the United Kingdom are left out for now: each needs a customs declaration per envelope, and Switzerland expects prices in francs and the UK a VAT registration.
+- **Delivery:** widened on 15 November 2026 to every country with a wing of the movement, which is the 27 EU member states plus Albania, Andorra, Bosnia and Herzegovina, Iceland, Kosovo, Liechtenstein, Moldova, Monaco, Montenegro, North Macedonia, Norway, San Marino, Serbia, Switzerland, Ukraine and the United Kingdom. All of them are in Austrian Post's "EU und Rest Europa" price column, so postage is the same as to the EU.
+  - **Russia is the exception.** Austrian Post accepts only documents for Russia, no goods (post.at Länderinformationen, Verified 15 November 2026).
+  - **Outside the EU's customs territory** (Monaco is inside it), every envelope carries a CN22 customs declaration, which the packing list asks for. The buyer may pay import tax or a handling fee on delivery, and the order form says so.
+  - **The United Kingdom** requires an overseas seller of goods under £135 to register for UK VAT and charge it from the first sale, with no threshold (gov.uk, Verified). It is a launch condition; the alternative is removing `GB` from the list.
+  - **Switzerland's** Price Indication Ordinance asks for prices in francs for offers aimed at Swiss consumers. Whether that binds a foreign shop priced in euros is for the adviser.
 - **Profit:** changed on 15 November 2026. The first price book aimed at about 5 % per order. The stickers are now priced to sell, at €15 for 100, with small packs costing visibly more per sticker. Postage is charged at exactly what Austrian Post asks and earns nothing. Every order now leaves a real profit, so the seller has a business income to declare; see `tax` in `lib/shop/launch.ts`.
 - **Seller:** an Austrian association (Verein) is recommended, so the association's name, not a person's, appears on the site and the stickers.
 

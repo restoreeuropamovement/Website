@@ -1,4 +1,10 @@
-import type { ShippingZoneId, ShopQuantity } from "@/content/shop/structure";
+import {
+  needsCustomsDeclaration,
+  shippingZoneFor,
+  type ShopCountryId,
+  type ShopQuantity,
+} from "@/content/shop/structure";
+import { formatMoney, type ShopCurrency } from "@/lib/shop/money";
 
 /**
  * How each order is packed and which Austrian Post product it goes as, for
@@ -19,10 +25,24 @@ import type { ShippingZoneId, ShopQuantity } from "@/content/shop/structure";
  * push ten stickers over 20 g and fifty towards 75 g.
  *
  * Abroad means Economy: cheaper than Priority and slower, which a sticker
- * order can afford.
+ * order can afford. Outside the EU's customs territory a goods letter needs a
+ * CN22 declaration on the front; the value declared is what the stickers were
+ * sold for, without postage, which is the figure customs asks for.
  */
-export function packingInstruction(quantity: ShopQuantity, zone: ShippingZoneId): string {
-  const domestic = zone === "domestic";
+export function packingInstruction(
+  quantity: ShopQuantity,
+  country: ShopCountryId,
+  itemsMinor: number,
+  currency: ShopCurrency,
+): string {
+  const domestic = shippingZoneFor(country) === "domestic";
+  const customs = needsCustomsDeclaration(country)
+    ? ` · CN22 customs form: "printed paper stickers", ${formatMoney(itemsMinor, currency, "en")}, sale of goods`
+    : "";
+  return `${envelope(quantity, domestic)}${customs}`;
+}
+
+function envelope(quantity: ShopQuantity, domestic: boolean): string {
   if (quantity === 10) return `C6 envelope, no stiffener — ${domestic ? "Brief S" : "Brief S, Eco"}`;
   if (quantity === 25) return `C6 envelope, no stiffener — ${domestic ? "Brief M" : "Brief M, Eco"}`;
   if (quantity === 50)

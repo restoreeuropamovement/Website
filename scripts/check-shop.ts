@@ -13,7 +13,15 @@
  */
 import { createHmac } from "node:crypto";
 
-import { dispatchCountry, shippingZoneFor, shopCountryIds, shopQuantities } from "../content/shop/structure";
+import {
+  dispatchCountry,
+  isShopCountry,
+  needsCustomsDeclaration,
+  shippingZoneFor,
+  shopCountryIds,
+  shopQuantities,
+} from "../content/shop/structure";
+import { wingStructure } from "../content/wings/structure";
 import { shopReadiness } from "../lib/shop/config";
 import { outstandingLaunchConditions } from "../lib/shop/launch";
 import { addMinor, formatMoney } from "../lib/shop/money";
@@ -21,6 +29,23 @@ import { offeredCountries, priceBook, priceBookProblems, quote } from "../lib/sh
 import { mockProvider } from "../lib/shop/providers/mock";
 import { selfDispatchProvider } from "../lib/shop/providers/self-dispatch";
 import { encodeForm, verifyStripeSignature } from "../lib/shop/stripe";
+
+/**
+ * Every wing's postal destination, or `null` where the shop cannot deliver.
+ * A new wing fails the check until it is given a line here, so the shop never
+ * quietly leaves out a country the movement has just added.
+ */
+const wingDestinations: Readonly<Record<string, string | null>> = {
+  albania: "AL", andorra: "AD", austria: "AT", belgium: "BE", "bosnia-and-herzegovina": "BA",
+  bulgaria: "BG", croatia: "HR", cyprus: "CY", czechia: "CZ", denmark: "DK", england: "GB",
+  estonia: "EE", finland: "FI", france: "FR", germany: "DE", greece: "GR", hungary: "HU",
+  iceland: "IS", ireland: "IE", italy: "IT", kosovo: "XK", latvia: "LV", liechtenstein: "LI",
+  lithuania: "LT", luxembourg: "LU", malta: "MT", moldova: "MD", monaco: "MC", montenegro: "ME",
+  netherlands: "NL", "north-macedonia": "MK", "northern-ireland": "GB", norway: "NO", poland: "PL",
+  portugal: "PT", romania: "RO", russia: null, "san-marino": "SM", scotland: "GB", serbia: "RS",
+  slovakia: "SK", slovenia: "SI", spain: "ES", sweden: "SE", switzerland: "CH", ukraine: "UA",
+  wales: "GB",
+};
 
 let failures = 0;
 
@@ -50,16 +75,25 @@ function prices(): void {
   check("a fractional quantity is refused", quote(priceBook, 10.5, "DE").ok === false);
   check("a quantity sent as a string is refused", quote(priceBook, "10" as unknown as number, "DE").ok === false);
   check("a country off the list is refused", quote(priceBook, 10, "US").ok === false);
-  check("a country outside the EU is refused", quote(priceBook, 10, "CH").ok === false);
+  check("Russia is refused while Austrian Post takes no goods for it", quote(priceBook, 10, "RU").ok === false);
   check("a lower-case country is refused", quote(priceBook, 10, "de").ok === false);
-  check("all twenty-seven member states are offered", offeredCountries(priceBook).length === 27 && shopCountryIds.length === 27);
+  check("every destination has postage", offeredCountries(priceBook).length === shopCountryIds.length);
+  check("no destination is listed twice", new Set(shopCountryIds).size === shopCountryIds.length);
+
+  const missing = wingStructure.map((wing) => wing.slug).filter((slug) => !(slug in wingDestinations));
+  check("every wing has a shop decision", missing.length === 0, missing.join(", "));
+  for (const [slug, code] of Object.entries(wingDestinations)) {
+    if (code !== null) check(`the ${slug} wing can order`, isShopCountry(code), code);
+  }
 
   check("larger orders never cost less", shopQuantities.every((q, i) => i === 0 || priceBook.items[q] >= priceBook.items[shopQuantities[i - 1]!]));
   check("the dispatch country is the domestic zone", shippingZoneFor(dispatchCountry) === "domestic");
-  check("every other country is the EU zone", shopCountryIds.every((c) => c === dispatchCountry || shippingZoneFor(c) === "eu"));
+  check("every other country is the Europe zone", shopCountryIds.every((c) => c === dispatchCountry || shippingZoneFor(c) === "europe"));
+  check("an EU destination needs no customs form", !needsCustomsDeclaration("DE") && !needsCustomsDeclaration("MC"));
+  check("a destination outside the customs union does", needsCustomsDeclaration("CH") && needsCustomsDeclaration("GB"));
   check(
     "posting abroad never costs less than at home",
-    shopQuantities.every((q) => (priceBook.shipping.eu[q] ?? 0) >= (priceBook.shipping.domestic[q] ?? 0)),
+    shopQuantities.every((q) => (priceBook.shipping.europe[q] ?? 0) >= (priceBook.shipping.domestic[q] ?? 0)),
   );
 
   check("adds minor units exactly", addMinor(10, 20, 70) === 100);

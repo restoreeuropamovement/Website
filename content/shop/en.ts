@@ -21,8 +21,8 @@ export const shopText = {
     eyebrow: "Shop",
     title: "Stickers",
     metaTitle: "Stickers",
-    description: "Restore Europa stickers, packed by hand and posted from Austria to anywhere in the EU.",
-    lede: "Pick a design and how many you want. We pack them by hand and post them to you from Austria — anywhere in the European Union.",
+    description: "Restore Europa stickers, packed by hand and posted from Austria across Europe.",
+    lede: "Pick a design and how many you want. We pack them by hand and post them to you from Austria, across Europe.",
   },
 
   hero: {
@@ -81,6 +81,9 @@ export const shopText = {
     each: "about {price} each",
     secure: "Secure payment with Stripe",
     notDelivered: "This quantity cannot be posted to that country yet.",
+    /** Shown when the chosen country is outside the EU's customs territory. */
+    customs:
+      "This goes through customs. Your country may charge import tax or a handling fee when it is delivered; that is between you and your post office, and is not part of the total here.",
     submit: "Continue to payment",
     submitting: "Opening the payment page…",
     payment:

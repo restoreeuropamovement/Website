@@ -1,6 +1,5 @@
 import { markPostedAction, unmarkPostedAction } from "@/app/admin/(dispatch)/dispatch/actions";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
-import { shippingZoneFor } from "@/content/shop/structure";
 import { recordAudit } from "@/lib/admin/audit";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireDispatchSession, type ActiveSession } from "@/lib/admin/session";
@@ -100,7 +99,7 @@ function Summary({ order }: { readonly order: OrderView }) {
         {order.quantity} × {order.designTitle}
       </p>
       <p className="text-[0.875rem] text-muted">
-        {regionName.of(order.country)} · {packingInstruction(order.quantity, shippingZoneFor(order.country))}
+        {regionName.of(order.country)} · {packingInstruction(order.quantity, order.country, order.itemsMinor, order.currency)}
       </p>
     </div>
   );

@@ -9,7 +9,7 @@ import { useActionState, useId, useMemo, useState } from "react";
 import { startCheckout } from "@/app/(site)/shop/actions";
 import { CHECKOUT_INITIAL, type CheckoutState } from "@/app/(site)/shop/state";
 import { Button } from "@/components/ui/Button";
-import { shopQuantities, type ShopCountryId, type ShopText } from "@/content/shop";
+import { needsCustomsDeclaration, shopQuantities, type ShopCountryId, type ShopText } from "@/content/shop";
 import { fill, plural } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/i18n";
 import { formatMoney } from "@/lib/shop/money";
@@ -270,11 +270,17 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
                   </dd>
                 </div>
               </dl>
-            ) : priced && !priced.ok && priced.reason === "not-offered" ? (
+            ) : priced && priced.reason === "not-offered" ? (
               <p className="text-[0.9375rem] text-muted">{form.notDelivered}</p>
             ) : (
               <p className="text-[0.9375rem] text-faint">{form.countryPlaceholder}</p>
             )}
+            {priced?.ok && needsCustomsDeclaration(priced.country) ? (
+              <p className="mt-4 flex gap-2.5 border-t border-hairline pt-4 text-micro leading-relaxed text-muted">
+                <Info className="mt-0.5 size-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden="true" />
+                {form.customs}
+              </p>
+            ) : null}
           </section>
 
           <div className="flex flex-col gap-4">
