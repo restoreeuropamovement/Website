@@ -37,6 +37,7 @@ export default async function ShopPage(props: {
       designs={page.designs}
       countries={shopCountries()}
       selection={await props.searchParams}
+      visitorCountry={page.visitorCountry}
     />
   );
 }

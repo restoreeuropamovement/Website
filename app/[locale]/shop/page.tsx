@@ -34,6 +34,7 @@ export default async function TranslatedShopPage(props: {
       designs={page.designs}
       countries={shopCountries()}
       selection={await props.searchParams}
+      visitorCountry={page.visitorCountry}
     />
   );
 }

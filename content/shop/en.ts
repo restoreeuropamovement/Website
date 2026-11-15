@@ -75,6 +75,8 @@ export const shopText = {
     country: "Deliver to",
     countryPlaceholder: "Choose a country",
     summaryTitle: "Your order",
+    /** In place of the postage before a destination is chosen. */
+    postagePending: "Choose a country above",
     stickers: "Stickers",
     delivery: "Postage",
     total: "Total",

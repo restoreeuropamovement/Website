@@ -9,7 +9,13 @@ import { useActionState, useId, useMemo, useState } from "react";
 import { startCheckout } from "@/app/(site)/shop/actions";
 import { CHECKOUT_INITIAL, type CheckoutState } from "@/app/(site)/shop/state";
 import { Button } from "@/components/ui/Button";
-import { needsCustomsDeclaration, shopQuantities, type ShopCountryId, type ShopText } from "@/content/shop";
+import {
+  needsCustomsDeclaration,
+  shopQuantities,
+  type ShopCountryId,
+  type ShopQuantity,
+  type ShopText,
+} from "@/content/shop";
 import { fill, plural } from "@/lib/format";
 import { localePath, type Locale } from "@/lib/i18n";
 import { formatMoney } from "@/lib/shop/money";
@@ -273,7 +279,13 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
             ) : priced && priced.reason === "not-offered" ? (
               <p className="text-[0.9375rem] text-muted">{form.notDelivered}</p>
             ) : (
-              <p className="text-[0.9375rem] text-faint">{form.countryPlaceholder}</p>
+              <dl className="flex flex-col gap-2.5 text-[0.9375rem]">
+                <Row label={`${form.stickers} · ${quantity}`} value={money(priceBook.items[quantity as ShopQuantity])} />
+                <div className="flex items-baseline justify-between gap-4">
+                  <dt className="text-muted">{form.delivery}</dt>
+                  <dd className="text-faint">{form.postagePending}</dd>
+                </div>
+              </dl>
             )}
             {priced?.ok && needsCustomsDeclaration(priced.country) ? (
               <p className="mt-4 flex gap-2.5 border-t border-hairline pt-4 text-micro leading-relaxed text-muted">

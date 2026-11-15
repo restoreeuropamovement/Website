@@ -29,6 +29,7 @@ export function ShopDocument({
   designs,
   countries,
   selection,
+  visitorCountry,
 }: {
   readonly edition: ShopEdition;
   readonly mode: ShopMode;
@@ -37,6 +38,7 @@ export function ShopDocument({
   readonly designs: readonly DesignChoice[] | null;
   readonly countries: readonly ShopCountryId[];
   readonly selection: Record<string, string | string[] | undefined>;
+  readonly visitorCountry: ShopCountryId | null;
 }) {
   const { locale, text } = edition;
   const sellable = open && designs !== null && designs.length > 0;
@@ -67,7 +69,7 @@ export function ShopDocument({
             text={text}
             designs={designs}
             countries={countries}
-            initial={initialSelection(selection, designs, countries)}
+            initial={initialSelection(selection, designs, countries, visitorCountry)}
           />
         )}
       </Container>
@@ -92,12 +94,15 @@ function cheapest(countries: readonly ShopCountryId[], locale: ShopEdition["loca
 /**
  * The form's starting values, from the query string when they are valid —
  * which is how "back" from the payment page returns a customer to the order
- * they had chosen rather than to an empty form.
+ * they had chosen rather than to an empty form. Without one, the destination
+ * starts at the country the visitor seems to be in, so the total is shown
+ * postage included from the first look.
  */
 function initialSelection(
   query: Record<string, string | string[] | undefined>,
   designs: readonly DesignChoice[],
   countries: readonly ShopCountryId[],
+  visitorCountry: ShopCountryId | null,
 ): { design: string; quantity: number; country: string } {
   const one = (key: string) => {
     const value = query[key];
@@ -108,7 +113,8 @@ function initialSelection(
   const quantityValue = Number(one("quantity"));
   const quantity = isShopQuantity(quantityValue) ? quantityValue : 25;
   const countryValue = one("country").toUpperCase();
-  const country = isShopCountry(countryValue) && countries.includes(countryValue) ? countryValue : "";
+  const country =
+    isShopCountry(countryValue) && countries.includes(countryValue) ? countryValue : (visitorCountry ?? "");
 
   return { design, quantity, country };
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { getShop, type ShopEdition } from "@/content/shop";
+import { getShop, isShopCountry, type ShopCountryId, type ShopEdition } from "@/content/shop";
 import type { Locale } from "@/lib/i18n";
 import { shopReadiness, type ShopMode } from "@/lib/shop/config";
 import { activeDesigns, type ShopDesign } from "@/lib/shop/designs";
@@ -25,6 +26,8 @@ export interface ShopPageData {
   readonly mode: ShopMode;
   readonly open: boolean;
   readonly designs: readonly ShopDesign[] | null;
+  /** The country the visitor seems to be in, when the shop delivers there; the form's starting destination. */
+  readonly visitorCountry: ShopCountryId | null;
 }
 
 export async function loadShopPage(locale: Locale): Promise<ShopPageData> {
@@ -36,10 +39,25 @@ export async function loadShopPage(locale: Locale): Promise<ShopPageData> {
     mode: readiness.mode,
     open: readiness.open,
     designs: readiness.open ? await activeDesigns() : [],
+    visitorCountry: await visitorCountry(),
   };
 }
 
 export const shopCountries = () => offeredCountries(priceBook);
+
+/**
+ * The country Vercel's edge places this request in, so the total, postage
+ * included, is on the page before anybody touches the form.
+ *
+ * A suggestion, not a fact: the select starts there and the customer changes
+ * it, and the price is computed from whatever is finally posted. It is read
+ * from the header for this one render and kept nowhere — no cookie, no log,
+ * no row — and absent locally, where the form simply starts empty.
+ */
+async function visitorCountry(): Promise<ShopCountryId | null> {
+  const country = (await headers()).get("x-vercel-ip-country")?.toUpperCase() ?? "";
+  return isShopCountry(country) && offeredCountries(priceBook).includes(country) ? country : null;
+}
 
 /**
  * One order, for the page the customer is sent back to.
