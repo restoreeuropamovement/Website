@@ -53,37 +53,38 @@ export interface PriceBook {
  * The model is the one chosen on 14 November 2026: stickers printed in one
  * bulk run, held in Austria, and packed and posted by hand by the people with
  * dispatch accounts, who are not paid for it. docs/sticker-shop-feasibility.md,
- * section 0, lists every input and its source. In short:
+ * section 0, lists every input and its source.
  *
- *   stickers   2.9 ct each (a thousand for about €29, Onlineprinters' list price)
- *   envelope   10 ct for the two small sizes, 30 ct for a board-backed B4
- *   postage    Austrian Post, verified: inside Austria Brief S €1.00, Brief M
- *              €1.55, Päckchen S €3.10; to the rest of the EU, Economy,
- *              Brief S €1.25, Brief M €2.00, Brief L €6.70. VAT-exempt.
- *   card fee   Stripe, 1.5 % + 25 ct
- *   margin     about 5 %, and never under 50 ct an order, so that one
- *              lost letter or card dispute does not cost more than a month's
- *              orders earn
+ * `shipping` is exactly what Austrian Post charges for the format the packing
+ * list puts that quantity in (`lib/shop/packing.ts`), verified 15 November
+ * 2026 and VAT-exempt: inside Austria Brief S €1.00, Brief M €1.55, Päckchen
+ * S €3.10; to the rest of the EU, Economy, Brief S €1.25, Brief M €2.00,
+ * Brief L €6.70. Nothing is earned on postage, so the line labelled postage
+ * is postage.
  *
- * `shipping` is the postage rounded up to the next ten cents, sometimes a
- * little more where the margin needed it; `items` is the rest.
+ * `items` is a sale price, set on 15 November 2026 at €15 for a hundred and
+ * stepped so that the small packs cost visibly more per sticker. It is not
+ * cost plus a small margin: against stickers at 2.9 ct each, envelopes at
+ * 10–30 ct and Stripe's 1.5 % + 25 ct, every quantity leaves between about
+ * €4 and €59. Selling at a profit is a business, and the `tax` and `seller`
+ * conditions in `lib/shop/launch.ts` are answered with that in mind.
  */
 export const priceBook: PriceBook = {
-  id: "2026-11-austria-provisional",
+  id: "2026-11-austria-provisional-2",
   status: "provisional",
   currency: "EUR",
   items: {
-    10: 120,
-    25: 160,
-    50: 260,
-    100: 410,
-    250: 860,
-    500: 1640,
-    1000: 3190,
+    10: 490,
+    25: 790,
+    50: 990,
+    100: 1500,
+    250: 2990,
+    500: 4990,
+    1000: 8990,
   },
   shipping: {
-    domestic: { 10: 100, 25: 160, 50: 310, 100: 310, 250: 310, 500: 310, 1000: 310 },
-    eu: { 10: 130, 25: 210, 50: 680, 100: 680, 250: 680, 500: 680, 1000: 680 },
+    domestic: { 10: 100, 25: 155, 50: 155, 100: 310, 250: 310, 500: 310, 1000: 310 },
+    eu: { 10: 125, 25: 200, 50: 200, 100: 670, 250: 670, 500: 670, 1000: 670 },
   },
 };
 

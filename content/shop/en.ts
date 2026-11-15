@@ -70,8 +70,8 @@ export const shopText = {
     design: "Design",
     quantity: "How many",
     quantityOption: { one: "{count} sticker", other: "{count} stickers" } satisfies PluralForms,
-    /** Under the number on each quantity button. */
-    quantityUnit: "stickers",
+    /** Under the number on each quantity button: the sticker price divided out, before postage. */
+    perSticker: "{price} each",
     country: "Deliver to",
     countryPlaceholder: "Choose a country",
     summaryTitle: "Your order",

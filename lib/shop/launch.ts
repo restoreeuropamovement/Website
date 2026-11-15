@@ -48,7 +48,7 @@ export const launchChecklist = {
     done: false,
     title: "Tax is settled",
     detail:
-      "Registration with the Austrian tax office; whether the small-business exemption applies or VAT is charged, and whether selling at cost changes anything for an association; tracking sales to other EU countries against the €10,000 threshold above which their VAT applies. Prices are shown to consumers as total prices, with whatever tax wording applies.",
+      "Registration with the Austrian tax office; whether the small-business exemption applies or VAT is charged; the prices carry a real profit (about €4 to €59 an order, see the price book), so the seller declares it as business income, and if the seller is an association, whether that sale needs a trade licence (Gewerbeberechtigung) or affects its tax position; tracking sales to other EU countries against the €10,000 threshold above which their VAT applies. Prices are shown to consumers as total prices, with whatever tax wording applies.",
   },
   payments: {
     done: false,

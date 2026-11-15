@@ -20,7 +20,7 @@ Sections 1–14 are the research. After reading them the movement chose a model 
 - **Stock:** one bulk print run, delivered to Austria.
 - **Dispatch:** supporters there pack and post each order by hand, unpaid. They work from a packing list at `/admin/dispatch`, using **dispatch accounts** that can see that list and nothing else.
 - **Delivery:** to all 27 EU member states. Switzerland, Norway and the United Kingdom are left out for now: each needs a customs declaration per envelope, and Switzerland expects prices in francs and the UK a VAT registration.
-- **Profit:** about 5 % per order, and never under €0.50, so that one lost letter or card dispute does not cost more than a month's orders earn.
+- **Profit:** changed on 15 November 2026. The first price book aimed at about 5 % per order. The stickers are now priced to sell, at €15 for 100, with small packs costing visibly more per sticker. Postage is charged at exactly what Austrian Post asks and earns nothing. Every order now leaves a real profit, so the seller has a business income to declare; see `tax` in `lib/shop/launch.ts`.
 - **Seller:** an Austrian association (Verein) is recommended, so the association's name, not a person's, appears on the site and the stickers.
 
 ### Postage (Verified, Austrian Post)
@@ -31,7 +31,10 @@ Austrian Post's prices are VAT-exempt as universal service. Unlike Deutsche Post
 |---|---|---|---|
 | 10 | Brief S, ≤ 20 g, 5 mm (C6, ≈ 15 g) | €1.00 | €1.25 |
 | 25 | Brief M, ≤ 75 g, 5 mm (C6, ≈ 33 g) | €1.55 | €2.00 |
-| 50–1,000 | 353 × 250 × 30 mm, ≤ 2 kg (B4 board-backed) | Päckchen S €3.10 | Brief L €6.70 |
+| 50 | Brief M, ≤ 75 g, 5 mm (C5, two stacks of 25, ≈ 57 g, ≈ 4 mm) | €1.55 | €2.00 |
+| 100–1,000 | 353 × 250 × 30 mm, ≤ 2 kg (B4 board-backed) | Päckchen S €3.10 | Brief L €6.70 |
+
+Austrian Post prices letters by weight only up to 75 g. Above that, the large format costs the same up to 2 kg, which is why postage stops rising at 100 stickers. Tariffs re-read on post.at on 15 November 2026.
 
 - **Bulk discount for later:** Brief International Plus, at 20 or more envelopes per drop-off, is much cheaper. Economy costs €0.69 per item plus €8.30 per kg up to 75 g, and €1.80 plus €3.70 per kg for the large format. It could cut EU postage substantially once volume justifies the paperwork.
 - **Weights:** all estimates, as in section 6.2. Ten stickers fit a 20 g Brief S only without a card stiffener, which is why the packing list says so.
@@ -41,21 +44,21 @@ Austrian Post's prices are VAT-exempt as universal service. Unlike Deutsche Post
 The other inputs:
 
 - **Stickers:** 2.9 cents each (about €29 per 1,000, Onlineprinters' list price; Estimate for the Austrian shop).
-- **Envelopes:** €0.10 for the small sizes, €0.30 for the large one (Estimate).
+- **Envelopes:** €0.10 for C6 and C5, €0.30 for the board-backed B4 (Estimate).
 - **Card fee:** Stripe, 1.5 % + €0.25.
 - **Labour:** none.
 
-| Stickers | **Austria** | Contribution | **Rest of the EU** | Contribution |
-|---|---|---|---|---|
-| 10 | **€2.20** | €0.53 | **€2.50** | €0.57 |
-| 25 | **€3.20** | €0.52 | **€3.70** | €0.56 |
-| 50 | **€5.70** | €0.51 | **€9.40** | €0.56 |
-| 100 | **€7.20** | €0.54 | **€10.90** | €0.59 |
-| 250 | **€11.70** | €0.61 | **€15.40** | €0.66 |
-| 500 | **€19.50** | €1.05 | **€23.20** | €1.09 |
-| 1,000 | **€35.00** | €1.81 | **€38.70** | €1.85 |
+| Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of the EU** | Left over |
+|---|---|---|---|---|---|---|
+| 10 | €4.90 | 49 ct | **€5.90** | €4.17 | **€6.15** | €4.16 |
+| 25 | €7.90 | 32 ct | **€9.45** | €6.68 | **€9.90** | €6.68 |
+| 50 | €9.90 | 20 ct | **€11.45** | €7.92 | **€11.90** | €7.92 |
+| 100 | €15.00 | 15 ct | **€18.10** | €11.27 | **€21.70** | €11.22 |
+| 250 | €29.90 | 12 ct | **€33.00** | €21.60 | **€36.60** | €21.55 |
+| 500 | €49.90 | 10 ct | **€53.00** | €34.05 | **€56.60** | €34.00 |
+| 1,000 | €89.90 | 9 ct | **€93.00** | €58.95 | **€96.60** | €58.90 |
 
-For example, 10 stickers to Austria cost €0.29 for the stickers, €0.10 for the envelope and €1.00 postage, which is €1.39. Add Stripe's €0.28, and €2.20 leaves €0.53.
+For example, 100 stickers to Austria cost €2.90 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.53, and €18.10 leaves €11.27. The ratio is deliberate: 10 stickers cost more than three times as much each as 100.
 
 ### What else changes
 

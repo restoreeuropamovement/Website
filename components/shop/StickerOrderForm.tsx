@@ -215,7 +215,7 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
                     ) : null}
                     <span className="relative numerals-tabular text-[1.0625rem] font-medium leading-none">{count}</span>
                     <span className={cn("relative mt-1 text-[0.6875rem] leading-none", selected ? "text-canvas/70" : "text-faint")}>
-                      {form.quantityUnit}
+                      {fill(form.perSticker, { price: money(Math.round(priceBook.items[count] / count)) })}
                     </span>
                   </label>
                 );
