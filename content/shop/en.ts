@@ -10,18 +10,35 @@ import type { PluralForms } from "@/lib/format";
  * every language until the five translations are written beside it, which
  * belongs to the launch, not to the build.
  *
- * Nothing here names a printer, a delivery time or a tax treatment. Each is
- * a fact somebody has to establish first (see the launch checklist), and a
- * plausible sentence about any of them would be a promise to a paying
- * customer that nobody has made.
+ * Where the stickers are posted from is stated, because it was decided:
+ * Austria, by hand (docs/sticker-shop-feasibility.md, section 0). Nothing
+ * here names a delivery time or a tax treatment. Each is a fact somebody has
+ * to establish first (see the launch checklist), and a plausible sentence
+ * about either would be a promise to a paying customer that nobody has made.
  */
 export const shopText = {
   meta: {
     eyebrow: "Shop",
     title: "Stickers",
     metaTitle: "Stickers",
-    description: "Restore Europa stickers, posted to your door.",
-    lede: "Choose a design and a quantity, and the stickers are posted to you directly.",
+    description: "Restore Europa stickers, packed by hand and posted from Austria to anywhere in the EU.",
+    lede: "Pick a design and how many you want. We pack them by hand and post them to you from Austria — anywhere in the European Union.",
+  },
+
+  hero: {
+    from: "From {price}",
+    posted: "Posted from Austria",
+    noAccount: "No account needed",
+    cta: "Choose your stickers",
+  },
+
+  how: {
+    title: "How it works",
+    steps: [
+      { title: "Choose", body: "Pick a design, a quantity and the country it goes to. The total is shown before you pay, postage included." },
+      { title: "Pay securely", body: "You pay on Stripe's payment page. This site never sees your card and keeps no record of who you are." },
+      { title: "Posted to you", body: "Your stickers are packed by hand and posted from Austria. Keep the order page to see when they go out." },
+    ],
   },
 
   test: {
@@ -53,17 +70,21 @@ export const shopText = {
     design: "Design",
     quantity: "How many",
     quantityOption: { one: "{count} sticker", other: "{count} stickers" } satisfies PluralForms,
+    /** Under the number on each quantity button. */
+    quantityUnit: "stickers",
     country: "Deliver to",
     countryPlaceholder: "Choose a country",
     summaryTitle: "Your order",
     stickers: "Stickers",
-    delivery: "Delivery",
+    delivery: "Postage",
     total: "Total",
+    each: "about {price} each",
+    secure: "Secure payment with Stripe",
     notDelivered: "This quantity cannot be posted to that country yet.",
     submit: "Continue to payment",
     submitting: "Opening the payment page…",
     payment:
-      "You pay on Stripe's own page, which asks for your name, email address and the delivery address. This site never sees your card and keeps no record of who you are: the company that posts the stickers receives your address for this one parcel.",
+      "Stripe's page asks for your name, email address and delivery address. This site never sees your card and keeps no record of who you are: the people posting your stickers see your address for this one envelope.",
     privacyLink: "How your details are handled",
   },
 

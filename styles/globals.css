@@ -301,6 +301,27 @@
   animation: rem-settle 1.8s var(--ease-editorial) both;
 }
 
+/*
+ * A slow drift for the stickers fanned out at the top of `/shop`: a few
+ * pixels and a fraction of a degree, so it reads as paper on air rather than
+ * as something asking to be clicked. The rotation the element already has is
+ * passed in as `--float-rotate` and kept, so each sticker drifts around its
+ * own angle. Collapsed by the reduced-motion block below like everything else.
+ */
+@keyframes rem-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--float-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(calc(var(--float-rotate, 0deg) + 0.8deg));
+  }
+}
+
+@utility animate-float {
+  animation: rem-float 7s ease-in-out infinite;
+}
+
 /* ------------------------------------------------------------------
    Reduced motion — no exceptions.
    ------------------------------------------------------------------ */
