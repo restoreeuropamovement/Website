@@ -22,13 +22,14 @@ import {
   shopQuantities,
 } from "../content/shop/structure";
 import { wingStructure } from "../content/wings/structure";
+import { addressDoubts } from "../lib/shop/address-check";
 import { shopReadiness } from "../lib/shop/config";
 import { outstandingLaunchConditions } from "../lib/shop/launch";
 import { addMinor, formatMoney } from "../lib/shop/money";
 import { offeredCountries, priceBook, priceBookProblems, quote } from "../lib/shop/price-book";
 import { mockProvider } from "../lib/shop/providers/mock";
 import { selfDispatchProvider } from "../lib/shop/providers/self-dispatch";
-import { encodeForm, verifyStripeSignature } from "../lib/shop/stripe";
+import { encodeForm, verifyStripeSignature, type StripeAddress } from "../lib/shop/stripe";
 
 /**
  * Every wing's postal destination, or `null` where the shop cannot deliver.
@@ -91,6 +92,17 @@ function prices(): void {
   check("every other country is the Europe zone", shopCountryIds.every((c) => c === dispatchCountry || shippingZoneFor(c) === "europe"));
   check("an EU destination needs no customs form", !needsCustomsDeclaration("DE") && !needsCustomsDeclaration("MC"));
   check("a destination outside the customs union does", needsCustomsDeclaration("CH") && needsCustomsDeclaration("GB"));
+  const at = (fields: Partial<StripeAddress>, country: "DE" | "GB" | "NL" | "IE" = "DE") =>
+    addressDoubts(country, { line1: "Hauptstraße 12", line2: null, postal_code: "10115", city: "Berlin", state: null, country, ...fields });
+  check("a good German address raises nothing", at({}).length === 0, at({}).join("; "));
+  check("a German postcode with a digit missing is flagged", at({ postal_code: "1011" }).length === 1);
+  check("a street with no number is flagged", at({ line1: "Hauptstraße" }).length === 1);
+  check("a town that is only a number is flagged", at({ city: "10115" }).length === 1);
+  check("a Dutch postcode is accepted with or without its space", at({ postal_code: "1012 ab" }, "NL").length === 0 && at({ postal_code: "1012AB" }, "NL").length === 0);
+  check("a British house name is not flagged", at({ line1: "Rose Cottage", postal_code: "SW1A 1AA", city: "London" }, "GB").length === 0);
+  check("an Irish address without an Eircode is not flagged", at({ line1: "Main Street 4", postal_code: null, city: "Galway" }, "IE").length === 0);
+  check("every destination has a postcode rule", shopCountryIds.every((c) => addressDoubts(c, { line1: "x 1 y", line2: null, postal_code: "!", city: "Town", state: null, country: c }).length === 1));
+
   check(
     "posting abroad never costs less than at home",
     shopQuantities.every((q) => (priceBook.shipping.europe[q] ?? 0) >= (priceBook.shipping.domestic[q] ?? 0)),

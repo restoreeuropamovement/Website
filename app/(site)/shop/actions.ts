@@ -103,6 +103,7 @@ async function prepareCheckout(form: FormData): Promise<CheckoutState | string> 
       itemsMinor: priced.itemsMinor,
       shippingMinor: priced.shippingMinor,
       shippingLabel: text.shippingLabel,
+      addressNote: text.addressNote,
       currency: priced.currency.toLowerCase(),
       country: priced.country,
       locale,

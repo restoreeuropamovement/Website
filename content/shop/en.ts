@@ -135,4 +135,7 @@ export const shopText = {
 
   item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } satisfies PluralForms,
   shippingLabel: "Postage",
+  /** Shown by Stripe above its address form. Stripe allows up to 1,200 characters. */
+  addressNote:
+    "Please check your address carefully, especially the house number and postcode. Your stickers go by ordinary letter post without tracking, so a letter to a mistyped address cannot be traced.",
 } as const;

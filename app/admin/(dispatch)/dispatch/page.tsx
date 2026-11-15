@@ -3,9 +3,11 @@ import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
 import { recordAudit } from "@/lib/admin/audit";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireDispatchSession, type ActiveSession } from "@/lib/admin/session";
+import { addressDoubts } from "@/lib/shop/address-check";
 import { packingList, recentlyPosted, type OrderView } from "@/lib/shop/orders";
 import { packingInstruction } from "@/lib/shop/packing";
 import { retrieveCheckoutSession, shippingDetailsOf } from "@/lib/shop/stripe";
+import { cn } from "@/lib/utils";
 
 /**
  * The packing list: what to post, to whom, and in what envelope.
@@ -129,8 +131,12 @@ async function RevealedList({
         const shipping = shippingDetailsOf(await retrieveCheckoutSession(order.checkoutSessionId));
         if (!shipping) return null;
         const a = shipping.address;
-        return [shipping.name, a.line1, a.line2, [a.postal_code, a.city].filter(Boolean).join(" "), a.state]
-          .filter((line): line is string => Boolean(line));
+        return {
+          lines: [shipping.name, a.line1, a.line2, [a.postal_code, a.city].filter(Boolean).join(" "), a.state].filter(
+            (line): line is string => Boolean(line),
+          ),
+          doubts: addressDoubts(order.country, a),
+        };
       } catch {
         return null;
       }
@@ -140,20 +146,41 @@ async function RevealedList({
   return (
     <ul className="flex flex-col border-t border-hairline">
       {orders.map((order, index) => {
-        const lines = addresses[index];
+        const found = addresses[index];
         return (
           <li key={order.id} className="grid gap-5 border-b border-hairline py-5 sm:grid-cols-[1fr_auto]">
             <div className="flex flex-col gap-3">
               <Summary order={order} />
-              {lines ? (
-                <address className="border-l-2 border-gold/60 pl-4 text-[0.9375rem] leading-relaxed not-italic text-ink">
-                  {lines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                  <span className="block uppercase">{regionName.of(order.country)}</span>
-                </address>
+              {found ? (
+                <>
+                  <address
+                    className={cn(
+                      "border-l-2 pl-4 text-[0.9375rem] leading-relaxed not-italic text-ink",
+                      found.doubts.length > 0 ? "border-burgundy" : "border-gold/60",
+                    )}
+                  >
+                    {found.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                    <span className="block uppercase">{regionName.of(order.country)}</span>
+                  </address>
+                  {found.doubts.length > 0 ? (
+                    <div className="border border-burgundy/50 bg-burgundy/5 p-3 text-[0.875rem] leading-relaxed" role="alert">
+                      <p className="text-burgundy">Check this address before posting:</p>
+                      <ul className="mt-1 list-disc pl-5 text-ink">
+                        {found.doubts.map((doubt) => (
+                          <li key={doubt}>{doubt}</li>
+                        ))}
+                      </ul>
+                      <p className="mt-2 text-muted">
+                        If it looks wrong, do not post it. Tell an administrator, who can reach the buyer through
+                        Stripe.
+                      </p>
+                    </div>
+                  ) : null}
+                </>
               ) : (
                 <p className="text-[0.875rem] text-burgundy">
                   The address could not be read from Stripe just now. Reload in a minute; if it persists,

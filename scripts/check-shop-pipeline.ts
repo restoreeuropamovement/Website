@@ -124,7 +124,7 @@ async function main() {
     const order = await orders.createOrder({ designId: design!.id, quote: priced, provider: "mock", livemode: false });
     const session = await createCheckoutSession({
       orderId: order.id, reference: order.reference, itemName: "x", itemsMinor: priced.itemsMinor,
-      shippingMinor: priced.shippingMinor, shippingLabel: "Postage", currency: "eur", country: priced.country,
+      shippingMinor: priced.shippingMinor, shippingLabel: "Postage", addressNote: "Check it.", currency: "eur", country: priced.country,
       locale: "de", successUrl: "https://x.invalid/s", cancelUrl: "https://x.invalid/c",
     });
     await orders.attachCheckoutSession(order.id, session.id);
@@ -216,7 +216,7 @@ async function main() {
     const order = await orders.createOrder({ designId: design!.id, quote: priced, provider: "self-dispatch", livemode: false });
     const session = await createCheckoutSession({
       orderId: order.id, reference: order.reference, itemName: "x", itemsMinor: priced.itemsMinor,
-      shippingMinor: priced.shippingMinor, shippingLabel: "Postage", currency: "eur", country: priced.country,
+      shippingMinor: priced.shippingMinor, shippingLabel: "Postage", addressNote: "Check it.", currency: "eur", country: priced.country,
       locale: "de", successUrl: "https://x.invalid/s", cancelUrl: "https://x.invalid/c",
     });
     await orders.attachCheckoutSession(order.id, session.id);

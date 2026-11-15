@@ -18,6 +18,7 @@ import { hasBlobStorage, hasDatabase } from "@/lib/admin/env";
 import { clientContext } from "@/lib/admin/request";
 import { isElevated, requireSession, type ActiveSession } from "@/lib/admin/session";
 import { listShopDesigns } from "@/lib/admin/shop-designs";
+import { addressDoubts } from "@/lib/shop/address-check";
 import { shopReadiness } from "@/lib/shop/config";
 import { launchChecklist, launchConditionIds } from "@/lib/shop/launch";
 import { formatMoney } from "@/lib/shop/money";
@@ -368,7 +369,7 @@ async function Revealed({ session, order }: { readonly session: ActiveSession; r
   });
 
   const lastError = await orderLastError(order.id);
-  let customer: { name: string; email: string | null; lines: string[] } | null = null;
+  let customer: { name: string; email: string | null; lines: string[]; doubts: readonly string[] } | null = null;
   let stripeProblem: string | null = null;
   if (order.checkoutSessionId) {
     try {
@@ -382,6 +383,7 @@ async function Revealed({ session, order }: { readonly session: ActiveSession; r
           lines: [a.line1, a.line2, [a.postal_code, a.city].filter(Boolean).join(" "), a.state, a.country].filter(
             (line): line is string => Boolean(line),
           ),
+          doubts: addressDoubts(order.country, a),
         };
       }
     } catch (error) {
@@ -403,7 +405,19 @@ async function Revealed({ session, order }: { readonly session: ActiveSession; r
             ))}
             {customer.email ? <span className="mt-2 block text-muted">{customer.email}</span> : null}
           </address>
-        ) : (
+        ) : null}
+        {customer && customer.doubts.length > 0 ? (
+          <div className="mt-3 border border-burgundy/50 bg-burgundy/5 p-3 text-[0.875rem] leading-relaxed" role="alert">
+            <p className="text-burgundy">This address may be mistyped:</p>
+            <ul className="mt-1 list-disc pl-5 text-ink">
+              {customer.doubts.map((doubt) => (
+                <li key={doubt}>{doubt}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-muted">Ask the buyer at the address above before it is posted.</p>
+          </div>
+        ) : null}
+        {customer ? null : (
           <p className="text-[0.875rem] text-muted">{stripeProblem ?? "Stripe holds no shipping address for this order."}</p>
         )}
       </div>

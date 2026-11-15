@@ -133,6 +133,8 @@ export interface CheckoutSessionInput {
   readonly itemsMinor: number;
   readonly shippingMinor: number;
   readonly shippingLabel: string;
+  /** Shown above Stripe's address form, already in the customer's language. */
+  readonly addressNote: string;
   /** Lower case, as Stripe writes currencies. */
   readonly currency: string;
   /** The one country the parcel may go to — the one the price was computed for. */
@@ -195,6 +197,7 @@ export async function createCheckoutSession(
          */
         excluded_payment_method_types: ["klarna"],
         shipping_address_collection: { allowed_countries: [input.country] },
+        custom_text: { shipping_address: { message: input.addressNote } },
         shipping_options: [
           {
             shipping_rate_data: {
