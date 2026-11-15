@@ -63,11 +63,12 @@ export interface PriceBook {
  * is postage.
  *
  * `items` is a sale price, set on 15 November 2026 at €15 for a hundred and
- * stepped so that the small packs cost visibly more per sticker. It is not
- * cost plus a small margin: against stickers at 2.9 ct each, envelopes at
+ * stepped so that the small packs cost visibly more per sticker. The profit
+ * is on purpose: it goes back into the movement. Against stickers at 7.5 ct
+ * each (about €75 per thousand, the movement's own figure), envelopes at
  * 10–30 ct and Stripe's 1.5 % + 25 ct, every quantity leaves between about
- * €4 and €59. Selling at a profit is a business, and the `tax` and `seller`
- * conditions in `lib/shop/launch.ts` are answered with that in mind.
+ * €3.70 and €32.60, and never less than 30 % of the sticker price — which is
+ * what sets the three largest packs.
  */
 export const priceBook: PriceBook = {
   id: "2026-11-austria-provisional-2",
@@ -78,9 +79,9 @@ export const priceBook: PriceBook = {
     25: 790,
     50: 990,
     100: 1500,
-    250: 2990,
-    500: 4990,
-    1000: 8990,
+    250: 3290,
+    500: 5990,
+    1000: 10990,
   },
   shipping: {
     domestic: { 10: 100, 25: 155, 50: 155, 100: 310, 250: 310, 500: 310, 1000: 310 },

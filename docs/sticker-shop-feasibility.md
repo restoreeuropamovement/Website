@@ -24,7 +24,7 @@ Sections 1–14 are the research. After reading them the movement chose a model 
   - **Outside the EU's customs territory** (Monaco is inside it), every envelope carries a CN22 customs declaration, which the packing list asks for. The buyer may pay import tax or a handling fee on delivery, and the order form says so.
   - **The United Kingdom** requires an overseas seller of goods under £135 to register for UK VAT and charge it from the first sale, with no threshold (gov.uk, Verified). It is a launch condition; the alternative is removing `GB` from the list.
   - **Switzerland's** Price Indication Ordinance asks for prices in francs for offers aimed at Swiss consumers. Whether that binds a foreign shop priced in euros is for the adviser.
-- **Profit:** changed on 15 November 2026. The first price book aimed at about 5 % per order. The stickers are now priced to sell, at €15 for 100, with small packs costing visibly more per sticker. Postage is charged at exactly what Austrian Post asks and earns nothing. Every order now leaves a real profit, so the seller has a business income to declare; see `tax` in `lib/shop/launch.ts`.
+- **Profit:** changed on 15 November 2026. The first price book aimed at about 5 % per order. The stickers are now priced to sell, at €15 for 100, with small packs costing visibly more per sticker. Postage is charged at exactly what Austrian Post asks and earns nothing. Every order leaves a real profit, which is reinvested in the movement; the seller declares it as business income, see `tax` in `lib/shop/launch.ts`.
 - **Seller:** an Austrian association (Verein) is recommended, so the association's name, not a person's, appears on the site and the stickers.
 
 ### Postage (Verified, Austrian Post)
@@ -47,22 +47,24 @@ Austrian Post prices letters by weight only up to 75 g. Above that, the large fo
 
 The other inputs:
 
-- **Stickers:** 2.9 cents each (about €29 per 1,000, Onlineprinters' list price; Estimate for the Austrian shop).
+- **Stickers:** 7.5 cents each, about €75 per 1,000 all in (the movement's own figure, 15 November 2026; it replaces the €29 list-price estimate).
 - **Envelopes:** €0.10 for C6 and C5, €0.30 for the board-backed B4 (Estimate).
 - **Card fee:** Stripe, 1.5 % + €0.25.
 - **Labour:** none.
 
-| Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of the EU** | Left over |
-|---|---|---|---|---|---|---|
-| 10 | €4.90 | 49 ct | **€5.90** | €4.17 | **€6.15** | €4.16 |
-| 25 | €7.90 | 32 ct | **€9.45** | €6.68 | **€9.90** | €6.68 |
-| 50 | €9.90 | 20 ct | **€11.45** | €7.92 | **€11.90** | €7.92 |
-| 100 | €15.00 | 15 ct | **€18.10** | €11.27 | **€21.70** | €11.22 |
-| 250 | €29.90 | 12 ct | **€33.00** | €21.60 | **€36.60** | €21.55 |
-| 500 | €49.90 | 10 ct | **€53.00** | €34.05 | **€56.60** | €34.00 |
-| 1,000 | €89.90 | 9 ct | **€93.00** | €58.95 | **€96.60** | €58.90 |
+The profit goes back into the movement. Every pack keeps at least 30 % of its sticker price, which is what sets the prices of 250, 500 and 1,000.
 
-For example, 100 stickers to Austria cost €2.90 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.53, and €18.10 leaves €11.27. The ratio is deliberate: 10 stickers cost more than three times as much each as 100.
+| Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of Europe** | Left over |
+|---|---|---|---|---|---|---|
+| 10 | €4.90 | 49 ct | **€5.90** | €3.71 | **€6.15** | €3.70 |
+| 25 | €7.90 | 32 ct | **€9.45** | €5.52 | **€9.90** | €5.52 |
+| 50 | €9.90 | 20 ct | **€11.45** | €5.62 | **€11.90** | €5.62 |
+| 100 | €15.00 | 15 ct | **€18.10** | €6.67 | **€21.70** | €6.62 |
+| 250 | €32.90 | 13 ct | **€36.00** | €13.06 | **€39.60** | €13.00 |
+| 500 | €59.90 | 12 ct | **€63.00** | €20.90 | **€66.60** | €20.85 |
+| 1,000 | €109.90 | 11 ct | **€113.00** | €32.65 | **€116.60** | €32.60 |
+
+For example, 100 stickers to Austria cost €7.50 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.53, and €18.10 leaves €6.67. The ratio is deliberate: 10 stickers cost more than three times as much each as 100.
 
 ### What else changes
 
