@@ -1,6 +1,5 @@
 import { Lock } from "lucide-react";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
-import { operatorText } from "@/content/emails/en";
 import { hasMail, hasMemberEncryptionKey } from "@/lib/admin/env";
 import { listNotices, noticeAudience } from "@/lib/admin/notices";
 import { isElevated, requireSession } from "@/lib/admin/session";
@@ -35,16 +34,6 @@ export default async function AdminNoticesPage() {
 
   const [audience, notices] = await Promise.all([noticeAudience(), listNotices()]);
   const elevated = isElevated(session);
-
-  /*
-   * The first notice carries an explanation the later ones must not. Members
-   * who joined before this existed were told that applying put them on no
-   * mailing list; the page saying so has been rewritten, but rewriting a page
-   * tells nobody, so the first message says it in its own words. Offered as a
-   * starting point rather than forced, because it is the operator who knows
-   * whether it has already been said some other way.
-   */
-  const preamble = notices.length === 0 ? `${operatorText.memberNotice.firstNoticePreamble}\n\n` : "";
 
   return (
     <div className="flex flex-col gap-10">
@@ -111,7 +100,6 @@ export default async function AdminNoticesPage() {
               <textarea
                 name="body"
                 rows={16}
-                defaultValue={preamble}
                 required
                 className="rounded-xs border border-field bg-surface px-4 py-3 font-mono text-[0.875rem] leading-relaxed text-body focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-burgundy"
               />
