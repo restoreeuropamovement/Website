@@ -1,4 +1,5 @@
 import { createDictionary } from "@/lib/dictionary";
+import { renderHtmlEmail } from "@/lib/email-html";
 import { fill, plural } from "@/lib/format";
 import { DEFAULT_LOCALE, localePath, type Locale } from "@/lib/i18n";
 import { routes, SITE_URL, site } from "@/lib/site";
@@ -32,6 +33,7 @@ import { emails as en, operatorText } from "./en";
 export interface Message {
   readonly subject: string;
   readonly text: string;
+  readonly html?: string;
 }
 
 /**
@@ -470,6 +472,11 @@ export function noticeStopUrl(optOutToken: string): string {
 export function memberNotice(subject: string, body: string, optOutToken: string): Message {
   const text = operatorText.memberNotice;
   const stopUrl = noticeStopUrl(optOutToken);
+  const footer = [
+    text.why,
+    fill(text.reply, { contact: `${SITE_URL}${routes.contact}` }),
+    fill(text.stop, { stop: stopUrl }),
+  ];
 
   return {
     subject,
@@ -478,11 +485,13 @@ export function memberNotice(subject: string, body: string, optOutToken: string)
 ${signature}
 
 --
-${text.why}
-
-${fill(text.reply, { contact: `${SITE_URL}${routes.contact}` })}
-
-${fill(text.stop, { stop: stopUrl })}`,
+${footer.join("\n\n")}`,
+    html: renderHtmlEmail({
+      subject,
+      body: body.trim(),
+      signature: { name: site.formal, url: SITE_URL },
+      footer,
+    }),
   };
 }
 

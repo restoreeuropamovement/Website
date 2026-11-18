@@ -1,10 +1,11 @@
 import { Lock } from "lucide-react";
+import { NoticeComposer } from "@/components/admin/NoticeComposer";
 import { PasskeyElevation } from "@/components/admin/PasskeyElevation";
-import { hasMail, hasMemberEncryptionKey } from "@/lib/admin/env";
+import { hasMail, hasMemberEncryptionKey, mailNotifyAddress } from "@/lib/admin/env";
 import { listNotices, noticeAudience } from "@/lib/admin/notices";
 import { isElevated, requireSession } from "@/lib/admin/session";
 import { formatDate } from "@/lib/utils";
-import { lockNoticesAction, sendNoticeAction } from "./actions";
+import { lockNoticesAction } from "./actions";
 
 /**
  * Writing to the membership.
@@ -81,53 +82,7 @@ export default async function AdminNoticesPage() {
             Write a notice
           </h2>
 
-          <form action={sendNoticeAction} className="flex flex-col gap-5 border border-gold/40 p-6">
-            <label className="flex flex-col gap-2">
-              <span className="text-[0.875rem] text-muted">Subject</span>
-              <input
-                name="subject"
-                maxLength={140}
-                autoComplete="off"
-                required
-                className="rounded-xs border border-field bg-surface px-4 py-2.5 text-[0.9375rem] text-body focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-burgundy"
-              />
-            </label>
-
-            <label className="flex flex-col gap-2">
-              <span className="text-[0.875rem] text-muted">
-                Message. Plain text; write links out in full and they will be clickable.
-              </span>
-              <textarea
-                name="body"
-                rows={16}
-                required
-                className="rounded-xs border border-field bg-surface px-4 py-3 font-mono text-[0.875rem] leading-relaxed text-body focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-burgundy"
-              />
-            </label>
-
-            <p className="text-[0.875rem] leading-relaxed text-muted">
-              Three things are added underneath: why they are receiving it, that replies go to the
-              contact form rather than the sender, and a link that stops further notices without
-              affecting membership. This goes to all{" "}
-              {audience.reachable.toLocaleString("en-GB")} of them at once and cannot be recalled.
-              Type the subject again to confirm.
-            </p>
-
-            <input
-              name="confirm"
-              placeholder="Repeat the subject"
-              autoComplete="off"
-              aria-label="Type the subject again to confirm sending"
-              className="max-w-sm rounded-xs border border-field bg-surface px-4 py-2.5 text-[0.9375rem] text-body focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-burgundy"
-            />
-
-            <button
-              type="submit"
-              className="self-start border border-gold/70 bg-gold/10 px-5 py-2.5 text-[0.875rem] text-ink transition-colors hover:bg-gold/20"
-            >
-              Send to the membership
-            </button>
-          </form>
+          <NoticeComposer reachable={audience.reachable} canTest={Boolean(mailNotifyAddress())} />
         </section>
       ) : null}
 

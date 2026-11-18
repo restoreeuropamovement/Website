@@ -3,7 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { after } from "next/server";
 import { recordAudit } from "@/lib/admin/audit";
-import { hasMail } from "@/lib/admin/env";
+import { memberNotice } from "@/content/emails";
+import { hasMail, mailNotifyAddress } from "@/lib/admin/env";
+import { sendEmail } from "@/lib/email";
 import { claimNotice, noticeAudience, sendMemberNotice } from "@/lib/admin/notices";
 import { clientContext } from "@/lib/admin/request";
 import { dropElevation, requireElevatedSession } from "@/lib/admin/session";
@@ -115,6 +117,46 @@ export async function sendNoticeAction(form: FormData): Promise<void> {
   });
 
   revalidatePath("/admin/notices");
+}
+
+export type NoticeTestState = "sent" | "failed" | "unavailable" | "empty" | null;
+
+/**
+ * Sends the draft to the operator address only, laid out exactly as the
+ * membership would receive it, so it can be looked at in a real mail client
+ * before it goes to everyone.
+ *
+ * No member's address is read, so none is decrypted. Elevated all the same,
+ * like the real send, because it writes in the movement's name. The stop link
+ * in a test carries a token that matches nobody.
+ */
+export async function sendNoticeTestAction(_previous: NoticeTestState, form: FormData): Promise<NoticeTestState> {
+  const session = await requireElevatedSession();
+  const { ipHash } = await clientContext();
+
+  const subject = String(form.get("subject") ?? "").trim();
+  const body = String(form.get("body") ?? "").trim();
+  const to = mailNotifyAddress();
+
+  const audit = (outcome: "success" | "failure", reason?: string) =>
+    recordAudit({
+      action: "member.notice.test",
+      outcome,
+      actorId: session.user.id,
+      actorLabel: session.user.username,
+      detail: { subject, ...(reason ? { reason } : {}) },
+      ipHash,
+    });
+
+  if (!subject || !body || subject.length > SUBJECT_MAX || body.length > BODY_MAX) return "empty";
+  if (!to || !hasMail()) {
+    await audit("failure", "no operator address or mail provider");
+    return "unavailable";
+  }
+
+  const result = await sendEmail({ to, ...memberNotice(`[Test] ${subject}`, body, "test.test") });
+  await audit(result.ok ? "success" : "failure", result.ok ? undefined : result.reason);
+  return result.ok ? "sent" : "failed";
 }
 
 /** Ends the elevated window early, for leaving a shared machine. */

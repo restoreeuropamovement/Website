@@ -52,12 +52,16 @@ export type AuditAction =
    * `member_notice`, because keeping it would build an archive of everything
    * the movement has said to its members beside the roll it was said to.
    *
+   * `member.notice.test` is a draft sent to the operator address only, and
+   * carries the subject and the outcome, never the body.
+   *
    * `member.notices.stop` carries nothing at all. The token in the link
    * contains the member's id, so recording either the token or the outcome
    * against a row would turn the log into a list of who had asked to be left
    * alone — a smaller list than the roll, and a more telling one.
    */
   | "member.notice"
+  | "member.notice.test"
   | "member.notices.stop"
   /*
    * An office was granted, withdrawn, or the board of them read.

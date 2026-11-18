@@ -24,8 +24,9 @@
     "test:i18n": "tsx scripts/check-translations.ts",
     "test:search": "tsx scripts/check-search.ts",
     "test:shop": "tsx scripts/check-shop.ts",
+    "test:email": "tsx scripts/check-email-html.ts",
     "test:shop-pipeline": "tsx scripts/check-shop-pipeline.ts",
-    "check": "npm run lint && npm run typecheck && npm run test:syntax && npm run test:pii && npm run test:i18n && npm run test:search && npm run test:shop && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run test:syntax && npm run test:pii && npm run test:i18n && npm run test:search && npm run test:shop && npm run test:email && npm run build"
   },
   "dependencies": {
     "@simplewebauthn/browser": "^14.0.0",

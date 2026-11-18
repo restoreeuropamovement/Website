@@ -24,6 +24,10 @@ import { mailSender } from "@/lib/admin/env";
  * through a tracking pixel, cannot be used to fingerprint a mail client, and
  * renders identically everywhere. For a movement whose members may have reason
  * not to want their interest recorded, that is worth more than typography.
+ * Notices to the membership earn it: they are long, structured, and read in
+ * Gmail, where hand-wrapped plain text arrives ragged. Their HTML comes from
+ * `lib/email-html.ts` and is self-contained — no images, no fonts, nothing
+ * remote — so it gives away no more than the text does.
  */
 
 /** The provider rejects a request that hangs; so should we, sooner. */
@@ -35,6 +39,8 @@ export interface EmailMessage {
   readonly to: string;
   readonly subject: string;
   readonly text: string;
+  /** An HTML alternative to `text`. Self-contained only: see the note above. */
+  readonly html?: string;
   /**
    * Extra headers. Used for `List-Unsubscribe` and `List-Unsubscribe-Post`,
    * which are what make Gmail and Outlook show their own unsubscribe control —
@@ -73,6 +79,7 @@ export async function sendEmail(message: EmailMessage): Promise<EmailResult> {
         to: [message.to],
         subject: message.subject,
         text: message.text,
+        ...(message.html ? { html: message.html } : {}),
         ...(message.replyTo ? { reply_to: message.replyTo } : {}),
         ...(message.headers ? { headers: message.headers } : {}),
       }),
