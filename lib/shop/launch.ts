@@ -42,13 +42,13 @@ export const launchChecklist = {
     done: false,
     title: "/privacy describes the shop, in all six languages",
     detail:
-      "A purchase from a political movement can reveal a political opinion (GDPR Art. 9; CJEU C-21/23), so the legal basis is settled with an adviser first. The note says what Stripe collects, that the movement's name appears on card statements, that the people posting see a name and address for one envelope and keep nothing, and that this site keeps no customer record of its own. Edited before the shop opens, not after.",
+      "A purchase from a political movement can reveal a political opinion (GDPR Art. 9; CJEU C-21/23), so the legal basis is settled with an adviser first. The note says what Stripe collects, that the movement's name appears on card statements, that the people posting see a name and address for one envelope and keep nothing, that the buyer's email address is read from Stripe once to send the order confirmation and so passes through the mail provider (Resend), and that this site keeps no customer record of its own. Edited before the shop opens, not after.",
   },
   tax: {
     done: false,
     title: "Tax is settled",
     detail:
-      "Registration with the Austrian tax office; whether the small-business exemption applies or VAT is charged; the prices carry a real profit (about €3.70 to €32.60 an order, see the price book), so the seller declares it as business income, and if the seller is an association, whether that sale needs a trade licence (Gewerbeberechtigung) or affects its tax position; tracking sales to other EU countries against the €10,000 threshold above which their VAT applies; and for the United Kingdom, which the shop delivers to, a UK VAT registration, because an overseas seller of goods under £135 must register and charge UK VAT from the first sale (gov.uk, 'VAT and overseas goods sold directly to customers in the UK'). If that is not wanted, remove GB from shopCountryIds instead. Prices are shown to consumers as total prices, with whatever tax wording applies.",
+      "Registration with the Austrian tax office; whether the small-business exemption applies or VAT is charged; the prices carry a real profit (about €3.69 to €32.65 an order, see the price book), so the seller declares it as business income, and if the seller is an association, whether that sale needs a trade licence (Gewerbeberechtigung) or affects its tax position; tracking sales to other EU countries against the €10,000 threshold above which their VAT applies; and for the United Kingdom, which the shop delivers to, a UK VAT registration, because an overseas seller of goods under £135 must register and charge UK VAT from the first sale (gov.uk, 'VAT and overseas goods sold directly to customers in the UK'). If that is not wanted, remove GB from shopCountryIds instead. Prices are shown to consumers as total prices, with whatever tax wording applies.",
   },
   payments: {
     done: false,

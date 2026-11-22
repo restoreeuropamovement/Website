@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowDown, Mail, ShieldCheck, Tag } from "lucide-react";
+import { ArrowDown, HeartHandshake, Mail, ShieldCheck, Tag } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import type { ShopEdition } from "@/content/shop";
@@ -58,6 +58,9 @@ export function ShopHero({
             <Chip icon={<Mail className="size-3.5" strokeWidth={1.75} aria-hidden="true" />}>{text.hero.posted}</Chip>
             <Chip icon={<ShieldCheck className="size-3.5" strokeWidth={1.75} aria-hidden="true" />}>
               {text.hero.noAccount}
+            </Chip>
+            <Chip icon={<HeartHandshake className="size-3.5" strokeWidth={1.75} aria-hidden="true" />}>
+              {text.hero.supports}
             </Chip>
           </ul>
 

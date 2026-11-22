@@ -170,6 +170,8 @@ export type AuditAction =
    */
   | "shop.checkout"
   | "shop.order.paid"
+  /* The order id and whether the email went; never the address it went to. */
+  | "shop.order.confirmation"
   | "shop.order.expired"
   | "shop.order.submit"
   | "shop.order.reveal"

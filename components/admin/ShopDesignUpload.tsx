@@ -34,9 +34,10 @@ export function ShopDesignUpload() {
           <p className="mt-2 max-w-xl text-[0.875rem] leading-relaxed text-muted">
             The master goes to the printer unchanged, so it must be the print-ready file: {masterMm} ×{" "}
             {masterMm} mm including {stickerFormat.bleedMm} mm bleed on each side for a{" "}
-            {stickerFormat.finishedMm} × {stickerFormat.finishedMm} mm sticker, CMYK, with the
-            imprint on it and nothing important near the cut — the printer&rsquo;s data sheet says
-            how near. It starts switched off.
+            {stickerFormat.finishedMm} × {stickerFormat.finishedMm} mm sticker, CMYK, at least
+            300 dpi ({Math.ceil((masterMm / 25.4) * 300).toLocaleString("en-GB")} px across), with the
+            imprint on it. Keep text and anything else that must not be cut at least{" "}
+            {stickerFormat.safetyMm} mm in from the edge of the file. It starts switched off.
           </p>
         </div>
       </div>

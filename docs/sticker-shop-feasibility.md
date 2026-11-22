@@ -33,22 +33,23 @@ Austrian Post's prices are VAT-exempt as universal service. Unlike Deutsche Post
 
 | Stickers | Format (estimated weight) | Inside Austria | Rest of the EU, Economy |
 |---|---|---|---|
-| 10 | Brief S, ≤ 20 g, 5 mm (C6, ≈ 15 g) | €1.00 | €1.25 |
-| 25 | Brief M, ≤ 75 g, 5 mm (C6, ≈ 33 g) | €1.55 | €2.00 |
-| 50 | Brief M, ≤ 75 g, 5 mm (C5, two stacks of 25, ≈ 57 g, ≈ 4 mm) | €1.55 | €2.00 |
-| 100–1,000 | 353 × 250 × 30 mm, ≤ 2 kg (B4 board-backed) | Päckchen S €3.10 | Brief L €6.70 |
+| 10 | Brief M, ≤ 75 g, 5 mm (C6, ≈ 20 g: too close to Brief S's 20 g limit) | €1.55 | €2.00 |
+| 25 | Brief M, ≤ 75 g, 5 mm (C6, ≈ 38 g, ≈ 3.5 mm) | €1.55 | €2.00 |
+| 50–1,000 | 353 × 250 × 30 mm, ≤ 2 kg (B4 board-backed; 1,000 ≈ 1.65 kg) | Päckchen S €3.10 | Brief L €6.70 |
 
-Austrian Post prices letters by weight only up to 75 g. Above that, the large format costs the same up to 2 kg, which is why postage stops rising at 100 stickers. Tariffs re-read on post.at on 15 November 2026.
+Austrian Post prices letters by weight only up to 75 g. Above that, the large format costs the same up to 2 kg, which is why postage stops rising at 50 stickers. Tariffs re-read on post.at on 15 November 2026.
+
+The sticker is WIRmachenDRUCK's 98 × 98 mm square on white 80 g/m² self-adhesive paper (chosen 22 November 2026), estimated at 1.5 g and 0.14 mm each. The weights above follow from that and are estimates until the first envelopes are weighed.
 
 - **Bulk discount for later:** Brief International Plus, at 20 or more envelopes per drop-off, is much cheaper. Economy costs €0.69 per item plus €8.30 per kg up to 75 g, and €1.80 plus €3.70 per kg for the large format. It could cut EU postage substantially once volume justifies the paperwork.
-- **Weights:** all estimates, as in section 6.2. Ten stickers fit a 20 g Brief S only without a card stiffener, which is why the packing list says so.
+- **Weights:** all estimates, as in section 6.2. No card stiffener goes in the letters, because it would only add weight to envelopes already near their limits.
 
 ### Prices in the provisional price book
 
 The other inputs:
 
 - **Stickers:** 7.5 cents each, about €75 per 1,000 all in (the movement's own figure, 15 November 2026; it replaces the €29 list-price estimate).
-- **Envelopes:** €0.10 for C6 and C5, €0.30 for the board-backed B4 (Estimate).
+- **Envelopes:** €0.10 for C6, €0.30 for the board-backed B4 (Estimate).
 - **Card fee:** Stripe, 1.5 % + €0.25.
 - **Labour:** none.
 
@@ -56,9 +57,9 @@ The profit goes back into the movement. Every pack keeps at least 30 % of its st
 
 | Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of Europe** | Left over |
 |---|---|---|---|---|---|---|
-| 10 | €4.90 | 49 ct | **€5.90** | €3.71 | **€6.15** | €3.70 |
+| 10 | €4.90 | 49 ct | **€6.45** | €3.70 | **€6.90** | €3.69 |
 | 25 | €7.90 | 32 ct | **€9.45** | €5.52 | **€9.90** | €5.52 |
-| 50 | €9.90 | 20 ct | **€11.45** | €5.62 | **€11.90** | €5.62 |
+| 50 | €9.90 | 20 ct | **€13.00** | €5.40 | **€16.60** | €5.35 |
 | 100 | €15.00 | 15 ct | **€18.10** | €6.67 | **€21.70** | €6.62 |
 | 250 | €32.90 | 13 ct | **€36.00** | €13.06 | **€39.60** | €13.00 |
 | 500 | €59.90 | 12 ct | **€63.00** | €20.90 | **€66.60** | €20.85 |

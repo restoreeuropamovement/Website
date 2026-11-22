@@ -1,6 +1,7 @@
 import { after } from "next/server";
 
 import { recordAudit } from "@/lib/admin/audit";
+import { sendOrderConfirmation } from "@/lib/shop/confirmation";
 import { submitOrder } from "@/lib/shop/fulfilment";
 import {
   confirmPayment,
@@ -35,6 +36,7 @@ export async function settle(sessionId: string): Promise<PaymentVerdict> {
     /* After the response, so neither Stripe nor the customer waits on the
        printer. The nightly run picks up any order this does not reach. */
     after(() => submitOrder(verdict.orderId).then(() => undefined));
+    after(() => sendOrderConfirmation(session, verdict.orderId));
   }
 
   if (verdict.kind === "mismatch") {
@@ -84,6 +86,7 @@ export async function reconcileCheckouts(limit = 25): Promise<{ checked: number;
         actorLabel: "stripe reconciliation",
         detail: { order: verdict.orderId, total: session.amount_total, livemode: session.livemode },
       });
+      await sendOrderConfirmation(session, verdict.orderId);
     } else if (verdict.kind === "not-paid" && session.status === "expired") {
       if (await expireOrder(order.sessionId)) expired += 1;
     }

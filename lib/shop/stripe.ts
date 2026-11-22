@@ -240,6 +240,8 @@ export interface CheckoutSession {
   readonly client_reference_id: string | null;
   readonly payment_intent: string | null;
   readonly customer_details: { readonly email: string | null; readonly name: string | null } | null;
+  /** The language the payment page was shown in, as we asked for it. */
+  readonly locale?: string | null;
   readonly collected_information?: {
     readonly shipping_details?: { readonly name: string; readonly address: StripeAddress } | null;
   } | null;

@@ -11,18 +11,23 @@ import { formatMoney, type ShopCurrency } from "@/lib/shop/money";
  * the packing list at `/admin/dispatch`. English, like the rest of the admin
  * surface.
  *
- * The reasoning, which is also the basis of the postage in the price book:
- * an 8 × 8 cm sticker on 80 g/m² paper with its backing weighs about a gram
- * and is about 0.14 mm thick. Ten in a C6 envelope come to about 15 g and
- * twenty-five to about 33 g, both under 5 mm thick — Austrian Post's Brief S
- * (up to 20 g) and Brief M (up to 75 g). Fifty would be 7 mm in one stack, but
- * as two stacks of twenty-five side by side in a C5 envelope they are about
- * 3.5 mm and 57 g, still Brief M. From a hundred the weight passes 75 g, and
- * everything up to a thousand, laid in stacks side by side, fits the
- * 353 × 250 × 30 mm, 2 kg format: Päckchen S inside Austria, Brief L abroad.
- * Austrian Post charges that format the same up to 2 kg, so the postage stops
- * rising there. No card stiffener in the letter formats, because one would
- * push ten stickers over 20 g and fifty towards 75 g.
+ * The reasoning, which is also the basis of the postage in the price book.
+ * A 98 × 98 mm sticker on 80 g/m² paper with its backing weighs an estimated
+ * 1.5 g and is about 0.14 mm thick (Estimate: the paper and liner weights
+ * over the sticker's area; weigh the first envelopes to confirm).
+ *
+ *   10   about 15 g in a C6 envelope, about 20 g together: on Brief S's 20 g
+ *        limit, so it goes as Brief M rather than risk postage due being
+ *        charged to the buyer at the door.
+ *   25   about 38 g and 3.5 mm in a C6 envelope: Brief M (up to 75 g, 5 mm).
+ *   50+  75 g of stickers alone passes Brief M, so everything from fifty to a
+ *        thousand goes in the 353 × 250 × 30 mm, 2 kg format: Päckchen S
+ *        inside Austria, Brief L abroad. A thousand is about 1.65 kg packed,
+ *        and fits as six stacks of about 2.3 cm side by side.
+ *
+ * Austrian Post charges that large format the same up to 2 kg, so the postage
+ * stops rising at fifty. No card stiffener in the letters: it would only add
+ * weight to an envelope already near its limit.
  *
  * Abroad means Economy: cheaper than Priority and slower, which a sticker
  * order can afford. Outside the EU's customs territory a goods letter needs a
@@ -43,10 +48,7 @@ export function packingInstruction(
 }
 
 function envelope(quantity: ShopQuantity, domestic: boolean): string {
-  if (quantity === 10) return `C6 envelope, no stiffener — ${domestic ? "Brief S" : "Brief S, Eco"}`;
-  if (quantity === 25) return `C6 envelope, no stiffener — ${domestic ? "Brief M" : "Brief M, Eco"}`;
-  if (quantity === 50)
-    return `C5 envelope, two stacks of 25 side by side, no stiffener — ${domestic ? "Brief M" : "Brief M, Eco"}`;
-  const stacks = quantity >= 500 ? ", stacks laid side by side" : "";
+  if (quantity <= 25) return `C6 envelope, no stiffener, at most 75 g — ${domestic ? "Brief M" : "Brief M, Eco"}`;
+  const stacks = quantity >= 250 ? ", stacks no higher than 2.5 cm laid side by side" : "";
   return `Board-backed B4 envelope${stacks} — ${domestic ? "Päckchen S" : "Brief L, Eco"}`;
 }

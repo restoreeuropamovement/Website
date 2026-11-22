@@ -1,4 +1,5 @@
 import { HowItWorks } from "@/components/shop/HowItWorks";
+import { ShopDetails } from "@/components/shop/ShopDetails";
 import { ShopHero } from "@/components/shop/ShopHero";
 import { StickerOrderForm, type DesignChoice } from "@/components/shop/StickerOrderForm";
 import { Container } from "@/components/ui/Container";
@@ -74,6 +75,7 @@ export function ShopDocument({
         )}
       </Container>
 
+      {sellable ? <ShopDetails edition={edition} /> : null}
       {sellable ? <HowItWorks edition={edition} /> : null}
     </>
   );

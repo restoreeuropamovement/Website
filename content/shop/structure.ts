@@ -93,17 +93,24 @@ export function isShopQuantity(value: number): value is ShopQuantity {
 /**
  * The one sticker the shop sells, as the printer is asked for it.
  *
+ * WIRmachenDRUCK's square indoor sticker: 98 × 98 mm, white 80 g/m²
+ * self-adhesive paper ("Haftpapier"), printed 4/0 in CMYK, slit backing, no
+ * finish. Chosen 22 November 2026.
+ *
  * `finishedMm` is the size after cutting. The master file is larger by the
  * bleed on every side, and the difference is the margin the cutter is allowed
- * to miss by; a file drawn at exactly 80 mm shows a white hairline on any
- * sticker cut slightly off.
+ * to miss by; a file drawn at exactly 98 mm shows a white hairline on any
+ * sticker cut slightly off. `safetyMm` is how far from the file's edge
+ * anything that must not be cut — text, the address, the imprint — has to
+ * stay.
  *
- * The bleed is the printer's to set, not ours. 2 mm is Onlineprinters'
- * (an 84 mm file); WIRmachenDRUCK asks for 3 mm (86 mm). Change it to match
- * whichever printer the masters are made for — the admin upload form reads it.
+ * Both are the printer's to set, not ours: WIRmachenDRUCK asks for 3 mm of
+ * bleed and 6 mm of safety measured from the file's edge (its data-sheet
+ * template, read 22 November 2026). The admin upload form reads them.
  */
 export const stickerFormat = {
-  id: "square-80",
-  finishedMm: 80,
-  bleedMm: 2,
+  id: "square-98",
+  finishedMm: 98,
+  bleedMm: 3,
+  safetyMm: 6,
 } as const;

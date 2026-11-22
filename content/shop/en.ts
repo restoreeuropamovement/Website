@@ -29,6 +29,8 @@ export const shopText = {
     from: "From {price}",
     posted: "Posted from Austria",
     noAccount: "No account needed",
+    /** True by decision, 15 November 2026: what an order earns goes back into the movement. */
+    supports: "Every order funds the movement",
     cta: "Choose your stickers",
   },
 
@@ -61,9 +63,36 @@ export const shopText = {
     body: "There is nothing to order at the moment.",
   },
 
+  /*
+   * WIRmachenDRUCK's product sheet, in words a buyer uses: square indoor
+   * sticker, 9.8 × 9.8 cm, white 80 g/m² self-adhesive paper, 4/0 CMYK, slit
+   * backing, no finish. Nothing here goes beyond that sheet.
+   */
   sticker: {
     title: "The sticker",
-    facts: ["8 × 8 cm, square", "Full colour on 80 g/m² paper", "Permanent adhesive, for indoor use"],
+    /** On the picture of the sticker. */
+    size: "9.8 × 9.8 cm",
+    facts: ["9.8 × 9.8 cm, square", "Full colour on white sticker paper", "Slit backing, easy to peel"],
+    specs: {
+      title: "Specifications",
+      rows: [
+        { label: "Size", value: "9.8 × 9.8 cm, square" },
+        { label: "Material", value: "White self-adhesive paper, 80 g/m²" },
+        { label: "Print", value: "Full colour (CMYK), front only" },
+        { label: "Backing", value: "Slit, so it peels off easily" },
+        { label: "Finish", value: "None: no lamination or varnish" },
+        { label: "Use", value: "Made for indoors" },
+      ],
+    },
+    delivery: {
+      title: "Delivery",
+      rows: [
+        { label: "From", value: "Austria, packed and posted by hand" },
+        { label: "How", value: "Letter post, without tracking" },
+        { label: "Postage", value: "By weight, shown in your total before you pay" },
+        { label: "Where", value: "The EU and most of Europe; outside the EU, your country's customs may charge on delivery" },
+      ],
+    },
   },
 
   form: {
@@ -113,7 +142,7 @@ export const shopText = {
     missingTitle: "Order not found",
     missingBody:
       "This address does not match an order. If you have just paid, the payment page may still be passing it to us — reload in a minute.",
-    keep: "Keep this page's address. This site does not keep your email address, so this page is how you see your order's progress.",
+    keep: "Keep this page's address; we have also emailed it to you. This site does not keep your email address, so this page is how you see your order's progress.",
     design: "Design",
     quantity: "Quantity",
     destination: "Delivered to",
@@ -133,6 +162,36 @@ export const shopText = {
       delivered: "Delivered.",
       cancelled: "Cancelled. Anything you paid has been or will be refunded to your card.",
     },
+  },
+
+  /**
+   * The email a buyer gets once Stripe confirms the payment. Their address is
+   * read from Stripe for that one send and kept nowhere, like the delivery
+   * address. A line in capitals is a heading in the laid-out version, and a
+   * label followed by two or more spaces is a row of the order table.
+   */
+  confirmation: {
+    subject: "Your sticker order {reference}",
+    intro:
+      "Thank you for your order. Your payment has arrived and your stickers are on our packing list.",
+    orderHeading: "YOUR ORDER",
+    rows: {
+      reference: "Order",
+      design: "Design",
+      quantity: "Quantity",
+      destination: "Deliver to",
+      stickers: "Stickers",
+      postage: "Postage",
+      total: "Total paid",
+    },
+    nextHeading: "WHAT HAPPENS NEXT",
+    next: "We pack your stickers by hand and post them from Austria by letter post, without tracking. This page shows when your order has been posted:",
+    customs:
+      "Your order goes through customs. Your country may charge import tax or a handling fee when it is delivered; that is not part of the total above.",
+    test: "This was a test order. Nothing was charged and nothing will be posted.",
+    reply:
+      "This email was sent automatically and replies to it are not read. If something is wrong with your order, write to us at {contact} and quote {reference}.",
+    why: "You are receiving this because you ordered stickers at {shop}. We do not keep your email address and will not write to you again about this order.",
   },
 
   item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } satisfies PluralForms,

@@ -67,11 +67,11 @@ export interface PriceBook {
  * is on purpose: it goes back into the movement. Against stickers at 7.5 ct
  * each (about €75 per thousand, the movement's own figure), envelopes at
  * 10–30 ct and Stripe's 1.5 % + 25 ct, every quantity leaves between about
- * €3.70 and €32.60, and never less than 30 % of the sticker price — which is
+ * €3.69 and €32.65, and never less than 30 % of the sticker price — which is
  * what sets the three largest packs.
  */
 export const priceBook: PriceBook = {
-  id: "2026-11-austria-provisional-2",
+  id: "2026-11-austria-provisional-3",
   status: "provisional",
   currency: "EUR",
   items: {
@@ -84,8 +84,8 @@ export const priceBook: PriceBook = {
     1000: 10990,
   },
   shipping: {
-    domestic: { 10: 100, 25: 155, 50: 155, 100: 310, 250: 310, 500: 310, 1000: 310 },
-    europe: { 10: 125, 25: 200, 50: 200, 100: 670, 250: 670, 500: 670, 1000: 670 },
+    domestic: { 10: 155, 25: 155, 50: 310, 100: 310, 250: 310, 500: 310, 1000: 310 },
+    europe: { 10: 200, 25: 200, 50: 670, 100: 670, 250: 670, 500: 670, 1000: 670 },
   },
 };
 

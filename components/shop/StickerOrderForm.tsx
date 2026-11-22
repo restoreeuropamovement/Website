@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
-import { ArrowRight, Info, Lock, Ruler, Palette, Sticker } from "lucide-react";
+import { ArrowRight, Info, Layers, Lock, Palette, Ruler, Sticker } from "lucide-react";
 import { useActionState, useId, useMemo, useState } from "react";
 
 import { startCheckout } from "@/app/(site)/shop/actions";
@@ -39,7 +39,7 @@ interface StickerOrderFormProps {
 }
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
-const FACT_ICONS = [Ruler, Palette, Sticker] as const;
+const FACT_ICONS = [Ruler, Palette, Layers] as const;
 
 /**
  * The product: a large picture of the chosen design beside everything needed
@@ -117,7 +117,7 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
             </AnimatePresence>
 
             <span className="absolute bottom-4 left-4 rounded-full border border-rule bg-canvas/80 px-3 py-1 text-micro text-muted backdrop-blur-sm">
-              8 × 8 cm
+              {text.sticker.size}
             </span>
           </div>
 
