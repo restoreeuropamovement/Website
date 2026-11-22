@@ -969,6 +969,12 @@ CREATE TABLE IF NOT EXISTS shop_order (
          OR provider_order_id IS NOT NULL)
 );
 
+-- When the buyer withdrew from the purchase through /shop/withdraw. Only the
+-- moment is kept: the name and email address they gave are used to match the
+-- order and write the acknowledgement, then dropped. A withdrawn order leaves
+-- the packing list; an administrator refunds it in Stripe and cancels it here.
+ALTER TABLE shop_order ADD COLUMN IF NOT EXISTS withdrawn_at timestamptz;
+
 -- The queue: what is due to be sent, and what is waiting on the printer.
 CREATE INDEX IF NOT EXISTS shop_order_queue_idx ON shop_order (status, next_attempt_at);
 CREATE INDEX IF NOT EXISTS shop_order_created_idx ON shop_order (created_at DESC);

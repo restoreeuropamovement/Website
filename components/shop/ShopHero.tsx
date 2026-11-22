@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { ArrowDown, HeartHandshake, Mail, ShieldCheck, Tag } from "lucide-react";
+import { ArrowDown, CalendarClock, HeartHandshake, Mail, ShieldCheck, Tag } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import type { ShopEdition } from "@/content/shop";
+import { preorder, type ShopEdition } from "@/content/shop";
 import { fill } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -50,6 +50,12 @@ export function ShopHero({
           <p className="mt-6 max-w-xl text-lede text-muted">{text.meta.lede}</p>
 
           <ul className="mt-8 flex flex-wrap gap-2.5">
+            {preorder ? (
+              <li className="flex items-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-3.5 py-1.5 text-[0.8125rem] text-ink">
+                <CalendarClock className="size-3.5 text-gold" strokeWidth={1.75} aria-hidden="true" />
+                {text.hero.preorder}
+              </li>
+            ) : null}
             {fromPrice ? (
               <Chip icon={<Tag className="size-3.5" strokeWidth={1.75} aria-hidden="true" />}>
                 {fill(text.hero.from, { price: fromPrice })}

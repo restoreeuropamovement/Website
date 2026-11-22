@@ -495,6 +495,11 @@ ${footer.join("\n\n")}`,
   };
 }
 
+export function withdrawalAlert(): Message {
+  const text = operatorText.withdrawalAlert;
+  return { subject: text.subject, text: fill(text.body, { admin: `${SITE_URL}/admin/shop` }) };
+}
+
 export function enquiryAlert(unread: number): Message {
   const text = operatorText.enquiryAlert;
   return {

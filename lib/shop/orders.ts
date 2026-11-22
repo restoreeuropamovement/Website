@@ -205,6 +205,8 @@ export interface OrderView {
   readonly paidAt: Date | null;
   readonly submittedAt: Date | null;
   readonly shippedAt: Date | null;
+  /** When the buyer withdrew through /shop/withdraw, if they did. */
+  readonly withdrawnAt: Date | null;
 }
 
 interface OrderRow {
@@ -229,6 +231,7 @@ interface OrderRow {
   paid_at: Date | null;
   submitted_at: Date | null;
   shipped_at: Date | null;
+  withdrawn_at: Date | null;
 }
 
 function orderFromRow(row: OrderRow): OrderView {
@@ -254,13 +257,14 @@ function orderFromRow(row: OrderRow): OrderView {
     paidAt: row.paid_at,
     submittedAt: row.submitted_at,
     shippedAt: row.shipped_at,
+    withdrawnAt: row.withdrawn_at,
   };
 }
 
 const orderColumns = `o.id, o.reference, o.status, o.livemode, o.design_id, d.title AS design_title,
   o.quantity, o.country, o.currency, o.items_minor, o.shipping_minor, o.total_minor,
   o.checkout_session_id, o.provider, o.provider_order_id, o.attempts, o.last_error_code,
-  o.created_at, o.paid_at, o.submitted_at, o.shipped_at`;
+  o.created_at, o.paid_at, o.submitted_at, o.shipped_at, o.withdrawn_at`;
 
 export async function orderBySession(sessionId: string): Promise<OrderView | null> {
   const sql = db();
@@ -350,21 +354,54 @@ export async function orderLastError(orderId: string): Promise<string | null> {
 /**
  * Closes an order an administrator has dealt with by hand — refunded in
  * Stripe, or abandoned after review. Allowed from the states in which
- * nothing is with the printer, or in which the printer has said it is not.
+ * nothing is with the printer, or in which the printer has said it is not;
+ * for self-dispatch also once it is on the packing list, because the
+ * "printer" is the movement's own desk and nothing has left it, and after it
+ * has been posted, because a buyer who withdraws sends the stickers back.
  */
 export async function cancelOrder(orderId: string): Promise<boolean> {
   const rows = await db()`
     UPDATE shop_order
        SET status = 'cancelled', closed_at = now(), next_attempt_at = NULL, updated_at = now()
-     WHERE id = ${orderId} AND status IN ('paid', 'retry', 'review')
+     WHERE id = ${orderId}
+       AND (status IN ('paid', 'retry', 'review')
+            OR (provider = 'self-dispatch' AND status IN ('submitted', 'in_production', 'shipped', 'delivered')))
     RETURNING id
   `;
   return rows.length > 0;
 }
 
+/** One order by the reference printed in its confirmation email, as a buyer types it. */
+export async function orderByReference(reference: string): Promise<OrderView | null> {
+  const sql = db();
+  const [row] = await sql<OrderRow[]>`
+    SELECT ${sql.unsafe(orderColumns)}
+      FROM shop_order o JOIN shop_design d ON d.id = o.design_id
+     WHERE o.reference = ${reference}
+  `;
+  return row ? orderFromRow(row) : null;
+}
+
+/**
+ * Records that the buyer withdrew. Only paid orders that are not closed can be
+ * withdrawn from, and only once: a second submission finds it done and
+ * changes nothing, so the date on the acknowledgement stays the first one.
+ */
+export async function recordWithdrawal(orderId: string): Promise<Date | null> {
+  const [row] = await db()<{ withdrawn_at: Date }[]>`
+    UPDATE shop_order
+       SET withdrawn_at = now(), updated_at = now()
+     WHERE id = ${orderId} AND withdrawn_at IS NULL
+       AND status NOT IN ('checkout', 'expired', 'cancelled')
+    RETURNING withdrawn_at
+  `;
+  return row?.withdrawn_at ?? null;
+}
+
 /**
  * The packing list: orders the movement posts itself that have not gone yet,
- * oldest payment first, so whoever packs works through them in order.
+ * oldest payment first, so whoever packs works through them in order. An
+ * order the buyer has withdrawn from is not on it: it must not be posted.
  */
 export async function packingList(limit = 100): Promise<readonly OrderView[]> {
   const sql = db();
@@ -372,6 +409,7 @@ export async function packingList(limit = 100): Promise<readonly OrderView[]> {
     SELECT ${sql.unsafe(orderColumns)}
       FROM shop_order o JOIN shop_design d ON d.id = o.design_id
      WHERE o.provider = 'self-dispatch' AND o.status IN ('submitted', 'in_production')
+       AND o.withdrawn_at IS NULL
      ORDER BY o.paid_at
      LIMIT ${limit}
   `;
@@ -404,6 +442,7 @@ export async function markPosted(orderId: string, trackingNumber: string | null)
     UPDATE shop_order
        SET status = 'shipped', shipped_at = now(), tracking_encrypted = ${tracking}, updated_at = now()
      WHERE id = ${orderId} AND provider = 'self-dispatch' AND status IN ('submitted', 'in_production')
+       AND withdrawn_at IS NULL
     RETURNING id
   `;
   return rows.length > 0;

@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import { getShop } from "@/content/shop";
+import { getShop, preorder } from "@/content/shop";
 import { recordAudit } from "@/lib/admin/audit";
 import { consumeRateLimit } from "@/lib/admin/rate-limit";
 import { clientContext } from "@/lib/admin/request";
@@ -104,6 +104,7 @@ async function prepareCheckout(form: FormData): Promise<CheckoutState | string> 
       shippingMinor: priced.shippingMinor,
       shippingLabel: text.shippingLabel,
       addressNote: text.addressNote,
+      submitNote: preorder ? text.form.preorder : undefined,
       currency: priced.currency.toLowerCase(),
       country: priced.country,
       locale,

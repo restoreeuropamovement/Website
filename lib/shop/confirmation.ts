@@ -1,4 +1,4 @@
-import { getShop, needsCustomsDeclaration, type ShopCountryId, type ShopText } from "@/content/shop";
+import { getShop, needsCustomsDeclaration, preorder, type ShopCountryId, type ShopText } from "@/content/shop";
 import { recordAudit } from "@/lib/admin/audit";
 import { sendEmail } from "@/lib/email";
 import { renderHtmlEmail } from "@/lib/email-html";
@@ -35,7 +35,7 @@ export async function sendOrderConfirmation(session: CheckoutSession, orderId: s
     const locale: Locale = isLocale(tag) ? tag : DEFAULT_LOCALE;
     const { text } = await getShop(locale);
 
-    const message = orderConfirmationMessage(text, locale, { ...order, sessionId: session.id });
+    const message = orderConfirmationMessage(text, locale, { ...order, sessionId: session.id, preorder });
     const result = await sendEmail({ to: email, ...message });
 
     await recordAudit({
@@ -60,6 +60,8 @@ export interface ConfirmedOrder {
   readonly totalMinor: number;
   readonly livemode: boolean;
   readonly sessionId: string;
+  /** Whether it was bought as a pre-order, which the email has to say with its delivery promise. */
+  readonly preorder: boolean;
 }
 
 /** The message itself, plain and laid out. Pure, so it can be checked without a database or a provider. */
@@ -86,12 +88,15 @@ export function orderConfirmationMessage(
   const width = Math.max(...rows.map(([label]) => label.length)) + 3;
   const table = rows.map(([label, value]) => `${label.padEnd(width)}${value}`).join("\n");
 
+  const withdrawUrl = `${SITE_URL}${localePath(locale, `${routes.shop}/withdraw`)}?reference=${encodeURIComponent(order.reference)}`;
+
   const body = [
     words.intro,
     `${words.orderHeading}\n\n${table}`,
-    `${words.nextHeading}\n\n${words.next}\n\n${orderUrl}`,
+    `${words.nextHeading}\n\n${order.preorder ? `${words.preorder}\n\n` : ""}${words.next}\n\n${orderUrl}`,
     needsCustomsDeclaration(order.country) ? words.customs : null,
     order.livemode ? null : words.test,
+    fill(words.withdraw, { withdraw: withdrawUrl }),
     fill(words.reply, { contact, reference: order.reference }),
   ]
     .filter((part): part is string => part !== null)

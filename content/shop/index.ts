@@ -7,6 +7,7 @@ export {
   isShopCountry,
   isShopQuantity,
   needsCustomsDeclaration,
+  preorder,
   shippingZoneFor,
   shopCountryIds,
   shopQuantities,

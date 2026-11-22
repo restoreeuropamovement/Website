@@ -172,6 +172,8 @@ export type AuditAction =
   | "shop.order.paid"
   /* The order id and whether the email went; never the address it went to. */
   | "shop.order.confirmation"
+  /* The order id, or "no match"; never the name or address that was typed. */
+  | "shop.order.withdrawal"
   | "shop.order.expired"
   | "shop.order.submit"
   | "shop.order.reveal"

@@ -97,19 +97,23 @@ table will one day be read by someone who should not have it.
   a public form; enrolling an opponent to damage them is a real tactic. Public applications land as
   `pending` and an administrator vets them. Nothing is deleted on a timer — an unreviewed row is
   somebody's application, not a stale token.
-- **The public site has exactly five server actions**, all in `app/(site)`: the membership intake
+- **The public site has exactly six server actions**, all in `app/(site)`: the membership intake
  (`join/actions.ts`), the contact form (`contact/actions.ts`), the newsletter signup
- (`newsletter/actions.ts`), the member opt-out (`notices/stop/actions.ts`) and the shop's checkout
- (`shop/actions.ts`). Each validates server-side and audits without personal data. The first three
- also rate limit per connection and encrypt before storing; the fourth stores nothing anybody typed
- and is deliberately not throttled, because the way out of a mailing list must not be harder than
- the way in. The fifth is rate limited and stores nothing personal because nobody types anything
- into it: it takes a design, a quantity and a country from closed lists, prices them itself, and
- sends the browser to Stripe, which is where a name and an address are entered and kept — its own
- header says the rest. Two of them must also answer identically whatever is already stored: the
- intake, or it becomes an oracle for testing whether a named person is a member, and the signup, or
- it becomes one for testing who reads the letter. Do not add a sixth without the same reasoning
- written down.
+ (`newsletter/actions.ts`), the member opt-out (`notices/stop/actions.ts`), the shop's checkout
+ (`shop/actions.ts`) and withdrawing from a purchase (`shop/withdraw/actions.ts`). Each validates
+ server-side and audits without personal data. The first three also rate limit per connection and
+ encrypt before storing; the fourth stores nothing anybody typed and is deliberately not throttled,
+ because the way out of a mailing list must not be harder than the way in. The fifth is rate limited
+ and stores nothing personal because nobody types anything into it: it takes a design, a quantity
+ and a country from closed lists, prices them itself, and sends the browser to Stripe, which is
+ where a name and an address are entered and kept — its own header says the rest. The sixth exists
+ because EU law has required an online withdrawal function since 19 June 2026: it is rate limited,
+ uses the name and email typed only to match the order against Stripe and write the
+ acknowledgement, and stores nothing but the time of the withdrawal. Three of them must answer
+ identically whatever is already stored: the intake, or it becomes an oracle for testing whether a
+ named person is a member; the signup, or it becomes one for testing who reads the letter; and the
+ withdrawal, or it becomes one for testing which address bought an order. Do not add a seventh
+ without the same reasoning written down.
 
 ## The sticker shop
 

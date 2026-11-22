@@ -25,6 +25,7 @@ import { wingStructure } from "../content/wings/structure";
 import { shopText } from "../content/shop/en";
 import { addressDoubts } from "../lib/shop/address-check";
 import { orderConfirmationMessage } from "../lib/shop/confirmation";
+import { isOrderReference, normaliseReference, withdrawalMessage } from "../lib/shop/withdrawal";
 import { shopReadiness } from "../lib/shop/config";
 import { outstandingLaunchConditions } from "../lib/shop/launch";
 import { addMinor, formatMoney } from "../lib/shop/money";
@@ -108,7 +109,7 @@ function prices(): void {
   const confirmation = (country: "DE" | "CH", livemode: boolean) =>
     orderConfirmationMessage(shopText, "en", {
       reference: "RE-TEST1", designTitle: "Twelve Stars", quantity: 100, country, currency: "EUR",
-      itemsMinor: 1500, shippingMinor: 670, totalMinor: 2170, livemode, sessionId: "cs_test_abc123",
+      itemsMinor: 1500, shippingMinor: 670, totalMinor: 2170, livemode, sessionId: "cs_test_abc123", preorder: true,
     });
   const confirmed = confirmation("DE", true);
   check("the confirmation names the order", confirmed.subject.includes("RE-TEST1"));
@@ -118,6 +119,15 @@ function prices(): void {
   check("an EU order has no customs line", !confirmed.text.includes("customs"));
   check("an order outside the EU mentions customs", confirmation("CH", true).text.includes("customs"));
   check("a test order says so", confirmation("DE", false).text.includes("test order"));
+  check("a pre-order states when it is posted", confirmed.text.includes("within one month"));
+  check("the confirmation links to the withdrawal function", confirmed.html.includes("/shop/withdraw?reference=RE-TEST1"));
+
+  check("a typed reference is normalised", normaliseReference(" re 7kq2m3x ") === "RE-7KQ2M3X");
+  check("a reference outside the alphabet is refused", !isOrderReference("RE-0OI1LAB"));
+  const acknowledged = withdrawalMessage(shopText, "en", { reference: "RE-TEST1", name: "A. Buyer", when: new Date("2026-11-22T13:05:00Z") });
+  check("the withdrawal acknowledgement names the order", acknowledged.subject.includes("RE-TEST1"));
+  check("the acknowledgement states when it was received, in Austrian time", acknowledged.text.includes("14:05"));
+  check("the acknowledgement repeats the name given", acknowledged.text.includes("A. Buyer"));
 
   check(
     "posting abroad never costs less than at home",

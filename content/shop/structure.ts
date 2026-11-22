@@ -76,6 +76,18 @@ export function shippingZoneFor(country: ShopCountryId): ShippingZoneId {
 }
 
 /**
+ * Whether the shop is taking pre-orders: selling before the stock is in
+ * Austria, with a stated promise of when an order is posted (`preorder` in
+ * the language files: within one month). EU law requires that promise before
+ * the buyer pays, so while this is true it is on the shop page, on Stripe's
+ * payment page, in the confirmation email and on the order page.
+ *
+ * Set on 22 November 2026, the day the first run of 2,500 was ordered. Set it
+ * to `false` once the stock has arrived and every pre-order has been posted.
+ */
+export const preorder = true;
+
+/**
  * The quantities a customer can choose.
  *
  * A closed list rather than a number field: postage steps by weight, packing

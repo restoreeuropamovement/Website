@@ -281,6 +281,12 @@ function Readiness({ readiness }: { readonly readiness: ReturnType<typeof shopRe
 function OrderRow({ order }: { readonly order: OrderView }) {
   const actionable = order.status === "review" || order.status === "retry" || order.status === "paid";
   const uncertain = order.lastErrorCode !== null && UNCERTAIN.has(order.lastErrorCode);
+  /* A withdrawn self-dispatch order can be closed from anywhere short of closed: refund it in Stripe first. */
+  const cancellable =
+    actionable ||
+    (order.withdrawnAt !== null &&
+      order.provider === "self-dispatch" &&
+      ["submitted", "in_production", "shipped", "delivered"].includes(order.status));
 
   return (
     <tr className="border-b border-hairline/60 align-top">
@@ -297,6 +303,11 @@ function OrderRow({ order }: { readonly order: OrderView }) {
       <td className="numerals-tabular py-2.5 pr-3 text-right text-ink">{money(order.totalMinor)}</td>
       <td className="py-2.5 pr-3">
         <span className={order.status === "review" ? "text-burgundy" : "text-body"}>{STATUS_LABEL[order.status]}</span>
+        {order.withdrawnAt && order.status !== "cancelled" ? (
+          <span className="block text-micro text-burgundy">
+            Withdrawn {WHEN.format(order.withdrawnAt)}: not to be posted. Refund in Stripe, then cancel.
+          </span>
+        ) : null}
         {order.lastErrorCode ? (
           <span className="block font-mono text-micro text-faint">
             {order.lastErrorCode} · attempt {order.attempts}
@@ -318,7 +329,7 @@ function OrderRow({ order }: { readonly order: OrderView }) {
               <SmallButton>{uncertain ? "Send again (checked)" : "Send now"}</SmallButton>
             </form>
           ) : null}
-          {actionable ? (
+          {cancellable ? (
             <form action={cancelOrderAction}>
               <input type="hidden" name="id" value={order.id} />
               <SmallButton>Cancel</SmallButton>

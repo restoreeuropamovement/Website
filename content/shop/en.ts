@@ -31,6 +31,7 @@ export const shopText = {
     noAccount: "No account needed",
     /** True by decision, 15 November 2026: what an order earns goes back into the movement. */
     supports: "Every order funds the movement",
+    preorder: "Pre-order: posted within one month",
     cta: "Choose your stickers",
   },
 
@@ -92,6 +93,8 @@ export const shopText = {
         { label: "Postage", value: "By weight, shown in your total before you pay" },
         { label: "Where", value: "The EU and most of Europe; outside the EU, your country's customs may charge on delivery" },
       ],
+      /** First row of the delivery card while the shop takes pre-orders. */
+      preorderRow: { label: "When", value: "Pre-order: posted within one month of your order" },
     },
   },
 
@@ -115,6 +118,9 @@ export const shopText = {
     /** Shown when the chosen country is outside the EU's customs territory. */
     customs:
       "This goes through customs. Your country may charge import tax or a handling fee when it is delivered; that is between you and your post office, and is not part of the total here.",
+    /** Above the payment button while the shop takes pre-orders. */
+    preorder:
+      "Pre-order. The stickers are being printed now, and your order is posted within one month of ordering.",
     submit: "Continue to payment",
     submitting: "Opening the payment page…",
     payment:
@@ -149,6 +155,10 @@ export const shopText = {
     total: "Paid",
     tracking: "Tracking",
     test: "Test order — nothing will be printed or posted.",
+    preorder: "This is a pre-order: it is posted within one month of the day you ordered.",
+    withdrawn:
+      "You withdrew from this order on {date}. We refund your payment, including the postage, within 14 days of that day. If the stickers have already reached you, please send them back complete; we may wait until they arrive before refunding.",
+    withdrawLink: "Withdraw from this purchase",
     status: {
       checkout: "Waiting for the payment to be confirmed.",
       expired: "The payment was not completed, so nothing was charged and nothing will be sent.",
@@ -186,12 +196,65 @@ export const shopText = {
     },
     nextHeading: "WHAT HAPPENS NEXT",
     next: "We pack your stickers by hand and post them from Austria by letter post, without tracking. This page shows when your order has been posted:",
+    preorder: "This is a pre-order. The stickers are being printed now, and your order is posted within one month of today.",
+    withdraw: "Changed your mind? You can withdraw from this purchase within 14 days of receiving the stickers, without giving a reason: {withdraw}",
     customs:
       "Your order goes through customs. Your country may charge import tax or a handling fee when it is delivered; that is not part of the total above.",
     test: "This was a test order. Nothing was charged and nothing will be posted.",
     reply:
       "This email was sent automatically and replies to it are not read. If something is wrong with your order, write to us at {contact} and quote {reference}.",
     why: "You are receiving this because you ordered stickers at {shop}. We do not keep your email address and will not write to you again about this order.",
+  },
+
+  /**
+   * Withdrawing from a purchase: the online function EU consumer law requires
+   * of shops since 19 June 2026 (Directive (EU) 2023/2673). It asks for the
+   * buyer's name, the order and an email address, shows them back for a
+   * second, explicit confirmation, and answers by email with the time it was
+   * received. The page's answer is the same whether or not the details match
+   * an order, so it cannot be used to test who bought what.
+   */
+  withdrawal: {
+    metaTitle: "Withdraw from a purchase",
+    kicker: "Shop",
+    title: "Withdraw from your purchase",
+    lede: "You can withdraw from a sticker order within 14 days of receiving it, without giving a reason. Fill in the details below, check them, and confirm. We reply by email with the date and time we received it.",
+    shopLink: "Changed your mind? Withdraw from a purchase",
+    name: "Your name",
+    reference: "Order number",
+    referenceHint: "It starts with RE- and is in your confirmation email.",
+    email: "Email address",
+    emailHint: "The one you used when you paid.",
+    review: "Continue",
+    checkTitle: "Check and confirm",
+    checkBody: "You are withdrawing from this purchase:",
+    confirm: "Confirm withdrawal",
+    change: "Change the details",
+    doneTitle: "Withdrawal received",
+    doneBody:
+      "If these details match an order, your withdrawal is recorded and a confirmation is on its way to that email address, with the date and time we received it. If nothing arrives within an hour, check the order number and email address and try again, or write to us through the contact form.",
+    errors: {
+      name: "Enter your name.",
+      reference: "Enter the order number, which starts with RE-.",
+      email: "Enter the email address you ordered with.",
+    },
+    states: {
+      throttled: "Too many attempts from this connection. Please wait an hour and try again.",
+      unavailable: "This could not be sent just now. Please try again later, or write to us through the contact form.",
+    },
+    /** The acknowledgement the law asks for, sent to the address the order was paid with. */
+    acknowledgement: {
+      subject: "Withdrawal received: order {reference}",
+      intro: "We received your withdrawal from order {reference} on {when}.",
+      name: "Name given: {name}",
+      nextHeading: "WHAT HAPPENS NEXT",
+      notPosted: "If your stickers have not been posted yet, they will not be.",
+      returns:
+        "If they have already reached you, please send them back complete. Write to us through {contact} and we tell you where to send them.",
+      refund:
+        "We refund your payment, including the postage you paid, within 14 days of today, to the card you paid with. We may wait until the stickers are back before refunding.",
+      why: "You are receiving this because a withdrawal was submitted for this order at {shop}. Replies to this email are not read.",
+    },
   },
 
   item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } satisfies PluralForms,

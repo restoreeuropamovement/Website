@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
-import { ArrowRight, Info, Layers, Lock, Palette, Ruler, Sticker } from "lucide-react";
+import { ArrowRight, CalendarClock, Info, Layers, Lock, Palette, Ruler, Sticker } from "lucide-react";
 import { useActionState, useId, useMemo, useState } from "react";
 
 import { startCheckout } from "@/app/(site)/shop/actions";
@@ -11,6 +11,7 @@ import { CHECKOUT_INITIAL, type CheckoutState } from "@/app/(site)/shop/state";
 import { Button } from "@/components/ui/Button";
 import {
   needsCustomsDeclaration,
+  preorder,
   shopQuantities,
   type ShopCountryId,
   type ShopQuantity,
@@ -296,6 +297,12 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
           </section>
 
           <div className="flex flex-col gap-4">
+            {preorder ? (
+              <p className="flex gap-3 rounded-[6px] border border-gold/50 bg-gold/10 p-4 text-[0.875rem] leading-relaxed text-body">
+                <CalendarClock className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden="true" />
+                {form.preorder}
+              </p>
+            ) : null}
             <Button type="submit" size="lg" disabled={pending || !priced?.ok} className="group w-full">
               {pending ? form.submitting : form.submit}
               {pending ? null : (

@@ -85,6 +85,11 @@ export const operatorText: {
     readonly events: Readonly<Record<SecurityEventKind, string>>;
     readonly close: string;
   };
+  /** `{admin}` — the shop admin page. Says that a withdrawal arrived, never whose. */
+  readonly withdrawalAlert: {
+    readonly subject: string;
+    readonly body: string;
+  };
   readonly securityDigest: {
     readonly subject: string;
     readonly intro: string;
@@ -126,6 +131,11 @@ export const operatorText: {
     },
     withheld: `Who it is from is deliberately not in this message. Sign in and use your
 passkey to read it: {admin}`,
+  },
+  withdrawalAlert: {
+    subject: "A buyer withdrew from a sticker order",
+    body: `A buyer has withdrawn from a sticker order. It has been taken off the packing
+list. Refund it in Stripe, then cancel it on the shop page: {admin}`,
   },
   enquiryAlert: {
     subject: "An enquiry is waiting",

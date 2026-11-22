@@ -1,7 +1,11 @@
+import Link from "next/link";
+
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
-import type { ShopEdition } from "@/content/shop";
-import { plural } from "@/lib/format";
+import { preorder, type ShopEdition } from "@/content/shop";
+import { fill, plural } from "@/lib/format";
+import { localePath } from "@/lib/i18n";
+import { routes } from "@/lib/site";
 import { formatMoney } from "@/lib/shop/money";
 import type { OrderView } from "@/lib/shop/orders";
 import type { Tracking } from "@/lib/shop/providers";
@@ -54,6 +58,15 @@ export function OrderStatusDocument({
         {!order.livemode ? (
           <p className="border-l-2 border-burgundy py-1 pl-5 text-[0.9375rem] text-muted">{words.test}</p>
         ) : null}
+        {order.withdrawnAt ? (
+          <p className="border-l-2 border-burgundy py-1 pl-5 text-[0.9375rem] leading-relaxed text-body">
+            {fill(words.withdrawn, {
+              date: new Intl.DateTimeFormat(locale, { dateStyle: "long", timeZone: "Europe/Vienna" }).format(order.withdrawnAt),
+            })}
+          </p>
+        ) : preorder && ["paid", "submitting", "retry", "review", "submitted", "in_production"].includes(order.status) ? (
+          <p className="border-l-2 border-gold/70 py-1 pl-5 text-[0.9375rem] text-body">{words.preorder}</p>
+        ) : null}
 
         <dl className="flex flex-col border-t border-hairline">
           <Row label={words.design} value={order.designTitle} />
@@ -77,6 +90,15 @@ export function OrderStatusDocument({
         </dl>
 
         <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-muted">{words.keep}</p>
+
+        {!order.withdrawnAt && !["checkout", "expired", "cancelled"].includes(order.status) ? (
+          <Link
+            href={`${localePath(locale, `${routes.shop}/withdraw`)}?reference=${encodeURIComponent(order.reference)}`}
+            className="self-start text-[0.9375rem] text-muted underline decoration-rule underline-offset-4 transition-colors hover:text-burgundy hover:decoration-burgundy"
+          >
+            {words.withdrawLink}
+          </Link>
+        ) : null}
       </Container>
     </>
   );

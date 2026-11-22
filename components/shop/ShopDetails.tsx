@@ -1,12 +1,17 @@
+import Link from "next/link";
 import { Package, Ruler } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import type { ShopEdition } from "@/content/shop";
+import { preorder, type ShopEdition } from "@/content/shop";
+import { localePath } from "@/lib/i18n";
+import { routes } from "@/lib/site";
 
 /** The sticker's specifications and how it is delivered, as two cards side by side. */
 export function ShopDetails({ edition }: { readonly edition: ShopEdition }) {
-  const { specs, delivery } = edition.text.sticker;
+  const { locale, text } = edition;
+  const { specs, delivery } = text.sticker;
+  const deliveryRows = preorder ? [delivery.preorderRow, ...delivery.rows] : delivery.rows;
 
   return (
     <section className="border-t border-hairline">
@@ -15,8 +20,16 @@ export function ShopDetails({ edition }: { readonly edition: ShopEdition }) {
           <Card icon={<Ruler className="size-4" strokeWidth={1.6} aria-hidden="true" />} title={specs.title} rows={specs.rows} />
         </Reveal>
         <Reveal delay={0.12}>
-          <Card icon={<Package className="size-4" strokeWidth={1.6} aria-hidden="true" />} title={delivery.title} rows={delivery.rows} />
+          <Card icon={<Package className="size-4" strokeWidth={1.6} aria-hidden="true" />} title={delivery.title} rows={deliveryRows} />
         </Reveal>
+        <p className="text-[0.9375rem] text-muted md:col-span-2">
+          <Link
+            href={localePath(locale, `${routes.shop}/withdraw`)}
+            className="underline decoration-rule underline-offset-4 transition-colors hover:text-burgundy hover:decoration-burgundy"
+          >
+            {text.withdrawal.shopLink}
+          </Link>
+        </p>
       </Container>
     </section>
   );
