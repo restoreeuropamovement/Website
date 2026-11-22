@@ -67,9 +67,9 @@ export interface PriceBook {
  * packs cost visibly more per sticker, and each larger pack a little less
  * than the one before it (12, 11.2, 10, 9.5 ct), so a bigger order is never
  * the worse buy. The profit is on purpose: it goes back into the movement.
- * Against stickers at 7.5 ct each (about €75 per thousand, the movement's
- * own figure), envelopes at 10–30 ct and Stripe's 1.5 % + 25 ct, every
- * quantity leaves between about €3.66 and €17.88.
+ * Against stickers at 3.28 ct each (€82 for a run of 2,500, the movement's
+ * own figure of 22 November 2026), envelopes at 10–30 ct and Stripe's
+ * 1.5 % + 25 ct, every quantity leaves between about €4.11 and €60.08.
  */
 export const priceBook: PriceBook = {
   id: "2026-11-austria-provisional-4",

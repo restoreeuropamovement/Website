@@ -48,7 +48,7 @@ The sticker is WIRmachenDRUCK's 98 × 98 mm square on white 80 g/m² self-adhesi
 
 The other inputs:
 
-- **Stickers:** 7.5 cents each, about €75 per 1,000 all in (the movement's own figure, 15 November 2026; it replaces the €29 list-price estimate).
+- **Stickers:** 3.28 cents each: €82 for a run of 2,500 (the movement's own figure, 22 November 2026; it replaces the earlier €75 per 1,000).
 - **Envelopes:** €0.10 for C6, €0.30 for the board-backed B4 (Estimate).
 - **Card fee:** Stripe, 1.5 % + €0.25.
 - **Labour:** none.
@@ -57,15 +57,15 @@ The profit goes back into the movement. On 22 November 2026, 100 stickers came d
 
 | Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of Europe** | Left over |
 |---|---|---|---|---|---|---|
-| 10 | €4.90 | 49 ct | **€6.45** | €3.70 | **€6.90** | €3.69 |
-| 25 | €7.90 | 32 ct | **€9.45** | €5.52 | **€9.90** | €5.52 |
-| 50 | €9.90 | 20 ct | **€13.00** | €5.40 | **€16.60** | €5.35 |
-| 100 | €12.00 | 12 ct | **€15.10** | €3.72 | **€18.70** | €3.66 |
-| 250 | €27.90 | 11 ct | **€31.00** | €8.13 | **€34.60** | €8.08 |
-| 500 | €49.90 | 10 ct | **€53.00** | €11.05 | **€56.60** | €11.00 |
-| 1,000 | €94.90 | 9.5 ct | **€98.00** | €17.88 | **€101.60** | €17.82 |
+| 10 | €4.90 | 49 ct | **€6.45** | €4.12 | **€6.90** | €4.11 |
+| 25 | €7.90 | 32 ct | **€9.45** | €6.58 | **€9.90** | €6.58 |
+| 50 | €9.90 | 20 ct | **€13.00** | €7.51 | **€16.60** | €7.46 |
+| 100 | €12.00 | 12 ct | **€15.10** | €7.94 | **€18.70** | €7.88 |
+| 250 | €27.90 | 11 ct | **€31.00** | €18.68 | **€34.60** | €18.63 |
+| 500 | €49.90 | 10 ct | **€53.00** | €32.15 | **€56.60** | €32.10 |
+| 1,000 | €94.90 | 9.5 ct | **€98.00** | €60.08 | **€101.60** | €60.02 |
 
-For example, 100 stickers to Austria cost €7.50 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.48, and €15.10 leaves €3.72. The ratio is deliberate: 10 stickers cost four times as much each as 100.
+For example, 100 stickers to Austria cost €3.28 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.48, and €15.10 leaves €7.94. The ratio is deliberate: 10 stickers cost four times as much each as 100.
 
 ### What else changes
 
