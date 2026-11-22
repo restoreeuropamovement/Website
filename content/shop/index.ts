@@ -16,21 +16,35 @@ export {
 export type { ShippingZoneId, ShopCountryId, ShopQuantity } from "./structure";
 
 /**
- * `/shop`, by language.
- *
- * No loaders are registered yet, so every language reads the English file —
- * see the note at the top of `en.ts` for why the translations wait for the
- * launch. Registering one is a line here and a file beside `en.ts`, typed
- * against it like every other domain.
+ * `/shop`, by language: the shop page, the order and withdrawal pages, and
+ * the buyer's emails, in all six of the site's languages.
  */
-export type ShopText = typeof englishText;
+
+/**
+ * The shape of `en.ts` with its words loosened to `string`, so a translation
+ * is checked for every key and every list without being required to say the
+ * English words.
+ */
+type Words<T> = T extends string
+  ? string
+  : T extends readonly (infer Item)[]
+    ? readonly Words<Item>[]
+    : { readonly [Key in keyof T]: Words<T[Key]> };
+
+export type ShopText = Words<typeof englishText>;
 
 export interface ShopEdition {
   readonly locale: Locale;
   readonly text: ShopText;
 }
 
-const getShopText = createDictionary<ShopText>(englishText);
+const getShopText = createDictionary<ShopText>(englishText, {
+  de: () => import("./de").then((m) => m.shopText),
+  fr: () => import("./fr").then((m) => m.shopText),
+  pl: () => import("./pl").then((m) => m.shopText),
+  it: () => import("./it").then((m) => m.shopText),
+  es: () => import("./es").then((m) => m.shopText),
+});
 
 export async function getShop(locale: Locale): Promise<ShopEdition> {
   return { locale, text: await getShopText(locale) };

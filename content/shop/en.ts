@@ -1,20 +1,13 @@
 import type { PluralForms } from "@/lib/format";
 
 /**
- * The sticker shop, in English.
+ * The sticker shop, in English: the source the five translations beside it
+ * are typed against.
  *
- * English only for now, and that is a decision rather than an omission: the
- * shop is closed until the conditions in `lib/shop/launch.ts` are met, and
- * translating terms of sale and delivery promises that do not yet exist would
- * be translating guesses. `content/shop/index.ts` falls back to this file for
- * every language until the five translations are written beside it, which
- * belongs to the launch, not to the build.
- *
- * Where the stickers are posted from is stated, because it was decided:
- * Austria, by hand (docs/sticker-shop-feasibility.md, section 0). Nothing
- * here names a delivery time or a tax treatment. Each is a fact somebody has
- * to establish first (see the launch checklist), and a plausible sentence
- * about either would be a promise to a paying customer that nobody has made.
+ * Every promise to a buyer here is one somebody has made: posted from
+ * Austria, by hand (docs/sticker-shop-feasibility.md, section 0); within one
+ * month while the shop takes pre-orders (decided 22 November 2026). Nothing
+ * here names a tax treatment, which is the seller's to state.
  */
 export const shopText = {
   meta: {
@@ -101,7 +94,7 @@ export const shopText = {
   form: {
     design: "Design",
     quantity: "How many",
-    quantityOption: { one: "{count} sticker", other: "{count} stickers" } satisfies PluralForms,
+    quantityOption: { one: "{count} sticker", other: "{count} stickers" } as PluralForms,
     /** Under the number on each quantity button: the sticker price divided out, before postage. */
     perSticker: "{price} each",
     country: "Deliver to",
@@ -257,7 +250,7 @@ export const shopText = {
     },
   },
 
-  item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } satisfies PluralForms,
+  item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } as PluralForms,
   shippingLabel: "Postage",
   /** Shown by Stripe above its address form. Stripe allows up to 1,200 characters. */
   addressNote:
