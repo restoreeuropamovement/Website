@@ -62,26 +62,27 @@ export interface PriceBook {
  * Brief L €6.70. Nothing is earned on postage, so the line labelled postage
  * is postage.
  *
- * `items` is a sale price, set on 15 November 2026 at €15 for a hundred and
- * stepped so that the small packs cost visibly more per sticker. The profit
- * is on purpose: it goes back into the movement. Against stickers at 7.5 ct
- * each (about €75 per thousand, the movement's own figure), envelopes at
- * 10–30 ct and Stripe's 1.5 % + 25 ct, every quantity leaves between about
- * €3.69 and €32.65, and never less than 30 % of the sticker price — which is
- * what sets the three largest packs.
+ * `items` is a sale price, set on 22 November 2026 at €12 for a hundred,
+ * down from €15 because €21.70 with postage abroad was too much. The small
+ * packs cost visibly more per sticker, and each larger pack a little less
+ * than the one before it (12, 11.2, 10, 9.5 ct), so a bigger order is never
+ * the worse buy. The profit is on purpose: it goes back into the movement.
+ * Against stickers at 7.5 ct each (about €75 per thousand, the movement's
+ * own figure), envelopes at 10–30 ct and Stripe's 1.5 % + 25 ct, every
+ * quantity leaves between about €3.66 and €17.88.
  */
 export const priceBook: PriceBook = {
-  id: "2026-11-austria-provisional-3",
+  id: "2026-11-austria-provisional-4",
   status: "provisional",
   currency: "EUR",
   items: {
     10: 490,
     25: 790,
     50: 990,
-    100: 1500,
-    250: 3290,
-    500: 5990,
-    1000: 10990,
+    100: 1200,
+    250: 2790,
+    500: 4990,
+    1000: 9490,
   },
   shipping: {
     domestic: { 10: 155, 25: 155, 50: 310, 100: 310, 250: 310, 500: 310, 1000: 310 },

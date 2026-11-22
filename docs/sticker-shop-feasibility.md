@@ -53,19 +53,19 @@ The other inputs:
 - **Card fee:** Stripe, 1.5 % + €0.25.
 - **Labour:** none.
 
-The profit goes back into the movement. Every pack keeps at least 30 % of its sticker price, which is what sets the prices of 250, 500 and 1,000.
+The profit goes back into the movement. On 22 November 2026, 100 stickers came down from €15 to €12, because €21.70 with postage abroad was too much, and the larger packs followed so that each still costs a little less per sticker than the one before it.
 
 | Stickers | Stickers price | Per sticker | **Total, Austria** | Left over | **Total, rest of Europe** | Left over |
 |---|---|---|---|---|---|---|
 | 10 | €4.90 | 49 ct | **€6.45** | €3.70 | **€6.90** | €3.69 |
 | 25 | €7.90 | 32 ct | **€9.45** | €5.52 | **€9.90** | €5.52 |
 | 50 | €9.90 | 20 ct | **€13.00** | €5.40 | **€16.60** | €5.35 |
-| 100 | €15.00 | 15 ct | **€18.10** | €6.67 | **€21.70** | €6.62 |
-| 250 | €32.90 | 13 ct | **€36.00** | €13.06 | **€39.60** | €13.00 |
-| 500 | €59.90 | 12 ct | **€63.00** | €20.90 | **€66.60** | €20.85 |
-| 1,000 | €109.90 | 11 ct | **€113.00** | €32.65 | **€116.60** | €32.60 |
+| 100 | €12.00 | 12 ct | **€15.10** | €3.72 | **€18.70** | €3.66 |
+| 250 | €27.90 | 11 ct | **€31.00** | €8.13 | **€34.60** | €8.08 |
+| 500 | €49.90 | 10 ct | **€53.00** | €11.05 | **€56.60** | €11.00 |
+| 1,000 | €94.90 | 9.5 ct | **€98.00** | €17.88 | **€101.60** | €17.82 |
 
-For example, 100 stickers to Austria cost €7.50 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.53, and €18.10 leaves €6.67. The ratio is deliberate: 10 stickers cost more than three times as much each as 100.
+For example, 100 stickers to Austria cost €7.50 for the stickers, €0.30 for the envelope and €3.10 postage. Add Stripe's €0.48, and €15.10 leaves €3.72. The ratio is deliberate: 10 stickers cost four times as much each as 100.
 
 ### What else changes
 
