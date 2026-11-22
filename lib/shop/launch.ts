@@ -57,7 +57,7 @@ export const launchChecklist = {
       "A Stripe account under the seller's true business type, describing the products as what they are; Klarna off (Klarna forbids political organisations, and checkout excludes it in code as well); fixed prices, never pay-what-you-want, which Stripe treats as fundraising; iDEAL | Wero only once a registration number can be shown, and TWINT only with prices in francs.",
   },
   supplier: {
-    done: false,
+    done: true,
     title: "Stock is ordered and dispatch is ready",
     detail:
       "Reworded on 22 November 2026 for pre-orders (`preorder` in content/shop/structure.ts): the shop may sell before the stickers are in Austria, because every page and email says the order is posted within one month. So: the bulk run is ordered with the imprint on it, and the printer's delivery date leaves that month; the people posting have dispatch accounts (invited at /admin/security) with a passkey each; envelopes are bought or ordered. When the stock arrives, and before the first pre-order goes out, one envelope of each size is packed and weighed against the formats on the packing list.",

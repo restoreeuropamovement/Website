@@ -72,8 +72,13 @@ export interface PriceBook {
  * 1.5 % + 25 ct, every quantity leaves between about €4.11 and €60.08.
  */
 export const priceBook: PriceBook = {
-  id: "2026-11-austria-provisional-4",
-  status: "provisional",
+  id: "2026-11-austria-1",
+  /* Approved 22 November 2026 by the operator: €12 for a hundred confirmed, the
+     print cost is the printer's own price for the run of 2,500, and postage is
+     Austrian Post's tariff. The weights behind the envelope formats are still
+     estimates, chosen with margin; the first envelope of each size is weighed
+     when the stock arrives, before any pre-order is posted. */
+  status: "approved",
   currency: "EUR",
   items: {
     10: 490,
