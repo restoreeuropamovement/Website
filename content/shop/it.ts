@@ -75,11 +75,19 @@ export const shopText: ShopText = {
     },
   },
 
+  soldOut: {
+    title: "Esaurito",
+    preorderTitle: "Preordini esauriti",
+    body: "Tutti gli adesivi di questa tiratura sono stati ordinati. Al momento non è possibile ordinare.",
+  },
+
   form: {
     design: "Design",
     quantity: "Quanti",
     quantityOption: { one: "{count} adesivo", other: "{count} adesivi" },
     perSticker: "{price} l'uno",
+    left: "Ne restano {count} di questa tiratura",
+    notEnough: "non disponibile",
     country: "Consegna in",
     countryPlaceholder: "Scegli un paese",
     summaryTitle: "Il tuo ordine",
@@ -113,6 +121,7 @@ export const shopText: ShopText = {
     busy: "Il negozio si sta riprendendo da un'ondata di ordini. Riprova tra poco.",
     unavailable: "Non è stato possibile aprire la pagina di pagamento in questo momento. Non è stato addebitato nulla. Riprova più tardi.",
     closed: "Il negozio ha appena chiuso. Non è stato addebitato nulla.",
+    soldout: "Per questa quantità non restano abbastanza adesivi. Scegline di meno. Non è stato addebitato nulla.",
   },
 
   order: {

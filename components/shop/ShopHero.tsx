@@ -26,9 +26,11 @@ export function ShopHero({
   edition,
   stickers,
   fromPrice,
+  soldOut = false,
 }: {
   readonly edition: ShopEdition;
   readonly stickers: readonly HeroSticker[];
+  readonly soldOut?: boolean;
   /** The cheapest order the price book offers, already formatted; null hides the chip. */
   readonly fromPrice: string | null;
 }) {
@@ -50,7 +52,12 @@ export function ShopHero({
           <p className="mt-6 max-w-xl text-lede text-muted">{text.meta.lede}</p>
 
           <ul className="mt-8 flex flex-wrap gap-2.5">
-            {preorder ? (
+            {soldOut ? (
+              <li className="flex items-center gap-2 rounded-full border border-burgundy/60 bg-burgundy/10 px-3.5 py-1.5 text-[0.8125rem] text-ink">
+                <CalendarClock className="size-3.5 text-burgundy" strokeWidth={1.75} aria-hidden="true" />
+                {preorder ? text.soldOut.preorderTitle : text.soldOut.title}
+              </li>
+            ) : preorder ? (
               <li className="flex items-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-3.5 py-1.5 text-[0.8125rem] text-ink">
                 <CalendarClock className="size-3.5 text-gold" strokeWidth={1.75} aria-hidden="true" />
                 {text.hero.preorder}
@@ -70,17 +77,19 @@ export function ShopHero({
             </Chip>
           </ul>
 
-          <a
-            href="#order"
-            className="group mt-10 inline-flex items-center gap-2.5 text-[0.9375rem] text-ink underline decoration-rule decoration-1 underline-offset-[0.35em] transition-colors hover:text-burgundy hover:decoration-burgundy"
-          >
-            {text.hero.cta}
-            <ArrowDown
-              className="size-4 transition-transform duration-300 motion-safe:group-hover:translate-y-0.5"
-              strokeWidth={1.75}
-              aria-hidden="true"
-            />
-          </a>
+          {soldOut ? null : (
+            <a
+              href="#order"
+              className="group mt-10 inline-flex items-center gap-2.5 text-[0.9375rem] text-ink underline decoration-rule decoration-1 underline-offset-[0.35em] transition-colors hover:text-burgundy hover:decoration-burgundy"
+            >
+              {text.hero.cta}
+              <ArrowDown
+                className="size-4 transition-transform duration-300 motion-safe:group-hover:translate-y-0.5"
+                strokeWidth={1.75}
+                aria-hidden="true"
+              />
+            </a>
+          )}
         </div>
 
         {pile.length > 0 ? (

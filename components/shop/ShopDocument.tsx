@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import {
   isShopCountry,
   isShopQuantity,
+  preorder,
   shopQuantities,
   type ShopCountryId,
   type ShopEdition,
@@ -19,8 +20,8 @@ import { priceBook, quote } from "@/lib/shop/price-book";
  *
  * The order of the states below is the order of what can be wrong: the shop
  * is not open (said, with no form); the designs cannot be read (said, rather
- * than shown as an empty shop); there are none (said); or there is something
- * to buy. Test mode puts a slim bar above the page and changes nothing else,
+ * than shown as an empty shop); there are none (said); every sticker of the
+ * run is spoken for (said); or there is something to buy. Test mode puts a slim bar above the page and changes nothing else,
  * so what is tested is what will be sold.
  */
 export function ShopDocument({
@@ -31,6 +32,7 @@ export function ShopDocument({
   countries,
   selection,
   visitorCountry,
+  remaining,
 }: {
   readonly edition: ShopEdition;
   readonly mode: ShopMode;
@@ -40,9 +42,11 @@ export function ShopDocument({
   readonly countries: readonly ShopCountryId[];
   readonly selection: Record<string, string | string[] | undefined>;
   readonly visitorCountry: ShopCountryId | null;
+  readonly remaining: number | null;
 }) {
   const { locale, text } = edition;
-  const sellable = open && designs !== null && designs.length > 0;
+  const soldOut = remaining !== null && remaining < shopQuantities[0];
+  const sellable = open && designs !== null && designs.length > 0 && !soldOut;
 
   return (
     <>
@@ -55,7 +59,12 @@ export function ShopDocument({
         </div>
       ) : null}
 
-      <ShopHero edition={edition} stickers={sellable ? designs : []} fromPrice={sellable ? cheapest(countries, locale) : null} />
+      <ShopHero
+        edition={edition}
+        stickers={sellable || soldOut ? (designs ?? []) : []}
+        fromPrice={sellable ? cheapest(countries, locale) : null}
+        soldOut={soldOut}
+      />
 
       <Container className="py-14 lg:py-20">
         {!open ? (
@@ -64,13 +73,16 @@ export function ShopDocument({
           <Notice title={text.unavailable.title} body={text.unavailable.body} />
         ) : designs.length === 0 ? (
           <Notice title={text.empty.title} body={text.empty.body} />
+        ) : soldOut ? (
+          <Notice title={preorder ? text.soldOut.preorderTitle : text.soldOut.title} body={text.soldOut.body} />
         ) : (
           <StickerOrderForm
             locale={locale}
             text={text}
             designs={designs}
             countries={countries}
-            initial={initialSelection(selection, designs, countries, visitorCountry)}
+            remaining={remaining}
+            initial={initialSelection(selection, designs, countries, visitorCountry, remaining)}
           />
         )}
       </Container>
@@ -105,6 +117,7 @@ function initialSelection(
   designs: readonly DesignChoice[],
   countries: readonly ShopCountryId[],
   visitorCountry: ShopCountryId | null,
+  remaining: number | null,
 ): { design: string; quantity: number; country: string } {
   const one = (key: string) => {
     const value = query[key];
@@ -113,7 +126,9 @@ function initialSelection(
 
   const design = designs.some((choice) => choice.slug === one("design")) ? one("design") : designs[0]!.slug;
   const quantityValue = Number(one("quantity"));
-  const quantity = isShopQuantity(quantityValue) ? quantityValue : 25;
+  const wanted = isShopQuantity(quantityValue) ? quantityValue : 25;
+  const available = shopQuantities.filter((count) => remaining === null || count <= remaining);
+  const quantity = available.includes(wanted) ? wanted : (available.at(-1) ?? shopQuantities[0]);
   const countryValue = one("country").toUpperCase();
   const country =
     isShopCountry(countryValue) && countries.includes(countryValue) ? countryValue : (visitorCountry ?? "");

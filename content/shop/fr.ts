@@ -75,11 +75,19 @@ export const shopText: ShopText = {
     },
   },
 
+  soldOut: {
+    title: "Épuisé",
+    preorderTitle: "Plus de précommandes possibles",
+    body: "Tous les autocollants de ce tirage ont été commandés. Aucune commande n’est possible pour le moment.",
+  },
+
   form: {
     design: "Motif",
     quantity: "Quantité",
     quantityOption: { one: "{count} autocollant", other: "{count} autocollants" },
     perSticker: "{price} l'unité",
+    left: "Plus que {count} autocollants dans ce tirage",
+    notEnough: "stock insuffisant",
     country: "Livrer en",
     countryPlaceholder: "Choisir un pays",
     summaryTitle: "Votre commande",
@@ -113,6 +121,7 @@ export const shopText: ShopText = {
     busy: "La boutique reprend son souffle après un afflux de commandes. Veuillez réessayer d'ici peu.",
     unavailable: "La page de paiement n'a pas pu être ouverte à l'instant. Rien n'a été débité. Veuillez réessayer plus tard.",
     closed: "La boutique vient de fermer. Rien n'a été débité.",
+    soldout: "Il ne reste pas assez d’autocollants pour cette quantité. Choisissez-en moins. Rien n’a été débité.",
   },
 
   order: {

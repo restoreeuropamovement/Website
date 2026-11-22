@@ -88,6 +88,17 @@ export function shippingZoneFor(country: ShopCountryId): ShippingZoneId {
 export const preorder = true;
 
 /**
+ * How many stickers there are to sell: the print runs ordered so far, all
+ * designs together. Every order that is paid, or whose payment page is still
+ * open, counts against it, and once fewer than the smallest pack are left the
+ * shop says it is sold out. Raise it in the same commit that records a new
+ * run being ordered.
+ *
+ * 2,500: the first run, ordered 22 November 2026.
+ */
+export const stickerStock = 2500;
+
+/**
  * The quantities a customer can choose.
  *
  * A closed list rather than a number field: postage steps by weight, packing

@@ -3,6 +3,7 @@ import { decryptPiiSafe, encryptPii } from "@/lib/admin/pii";
 import { db } from "@/lib/db";
 import type { Quote } from "@/lib/shop/price-book";
 import type { Tracking } from "@/lib/shop/providers";
+import { releaseStockCache } from "@/lib/shop/stock";
 import type { CheckoutSession } from "@/lib/shop/stripe";
 
 /**
@@ -69,7 +70,10 @@ export async function createOrder(order: NewOrder): Promise<{ id: string; refere
       ON CONFLICT (reference) DO NOTHING
       RETURNING id
     `;
-    if (rows[0]) return { id: rows[0].id, reference };
+    if (rows[0]) {
+      releaseStockCache();
+      return { id: rows[0].id, reference };
+    }
   }
   throw new Error("Could not allocate an order reference.");
 }
@@ -85,6 +89,7 @@ export async function discardUnstartedOrder(orderId: string): Promise<void> {
     DELETE FROM shop_order
      WHERE id = ${orderId} AND status = 'checkout' AND checkout_session_id IS NULL
   `;
+  releaseStockCache();
 }
 
 /** Orders still waiting on a payment page old enough that Stripe has settled it one way or the other. */
@@ -180,6 +185,7 @@ export async function expireOrder(sessionId: string): Promise<string | null> {
      WHERE checkout_session_id = ${sessionId} AND status = 'checkout'
     RETURNING id
   `;
+  if (row) releaseStockCache();
   return row?.id ?? null;
 }
 
@@ -368,6 +374,7 @@ export async function cancelOrder(orderId: string): Promise<boolean> {
             OR (provider = 'self-dispatch' AND status IN ('submitted', 'in_production', 'shipped', 'delivered')))
     RETURNING id
   `;
+  if (rows.length > 0) releaseStockCache();
   return rows.length > 0;
 }
 

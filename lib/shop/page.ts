@@ -10,6 +10,7 @@ import { orderBySession, orderTracking, type OrderView } from "@/lib/shop/orders
 import { settle } from "@/lib/shop/payments";
 import { offeredCountries, priceBook } from "@/lib/shop/price-book";
 import type { Tracking } from "@/lib/shop/providers";
+import { remainingStock } from "@/lib/shop/stock";
 import { isCheckoutSessionId } from "@/lib/shop/stripe";
 
 /**
@@ -28,6 +29,8 @@ export interface ShopPageData {
   readonly designs: readonly ShopDesign[] | null;
   /** The country the visitor seems to be in, when the shop delivers there; the form's starting destination. */
   readonly visitorCountry: ShopCountryId | null;
+  /** Stickers left to sell, or `null` when it could not be read — then checkout still counts before it sells. */
+  readonly remaining: number | null;
 }
 
 export async function loadShopPage(locale: Locale): Promise<ShopPageData> {
@@ -40,6 +43,7 @@ export async function loadShopPage(locale: Locale): Promise<ShopPageData> {
     open: readiness.open,
     designs: readiness.open ? await activeDesigns() : [],
     visitorCountry: await visitorCountry(),
+    remaining: readiness.open ? await remainingStock(readiness.mode === "live").catch(() => null) : null,
   };
 }
 

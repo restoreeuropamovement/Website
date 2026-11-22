@@ -37,7 +37,12 @@ interface StickerOrderFormProps {
   readonly designs: readonly DesignChoice[];
   readonly countries: readonly ShopCountryId[];
   readonly initial: { readonly design: string; readonly quantity: number; readonly country: string };
+  /** Stickers left to sell; larger packs are shown but cannot be chosen. `null` when unknown. */
+  readonly remaining: number | null;
 }
+
+/** Below this many left, the form says how many. */
+const LOW_STOCK = 1000;
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 const FACT_ICONS = [Ruler, Palette, Layers] as const;
@@ -57,7 +62,7 @@ const FACT_ICONS = [Ruler, Palette, Layers] as const;
  * library drop transforms for anyone whose system asks it to — the same
  * markup on server and client either way, which a branch here would not be.
  */
-export function StickerOrderForm({ locale, text, designs, countries, initial }: StickerOrderFormProps) {
+export function StickerOrderForm({ locale, text, designs, countries, initial, remaining }: StickerOrderFormProps) {
   const uid = useId();
   const form = text.form;
   const [state, formAction, pending] = useActionState<CheckoutState, FormData>(startCheckout, CHECKOUT_INITIAL);
@@ -188,18 +193,30 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
           ) : null}
 
           <fieldset>
-            <legend className="eyebrow mb-3 text-muted">{form.quantity}</legend>
+            <legend className="mb-3 flex w-full flex-wrap items-baseline justify-between gap-x-4">
+              <span className="eyebrow text-muted">{form.quantity}</span>
+              {remaining !== null && remaining <= LOW_STOCK ? (
+                <span className="text-micro text-gold">
+                  {fill(form.left, { count: remaining.toLocaleString(locale) })}
+                </span>
+              ) : null}
+            </legend>
             <div className="grid grid-cols-4 gap-2">
               {shopQuantities.map((count) => {
                 const id = `${uid}-quantity-${count}`;
                 const selected = count === quantity;
+                const unavailable = remaining !== null && count > remaining;
                 return (
                   <label
                     key={count}
                     htmlFor={id}
                     className={cn(
-                      "relative flex h-14 cursor-pointer flex-col items-center justify-center rounded-[6px] border transition-colors duration-200 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-burgundy",
-                      selected ? "border-transparent text-canvas" : "border-rule text-ink hover:border-field",
+                      "relative flex h-14 flex-col items-center justify-center rounded-[6px] border transition-colors duration-200 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-burgundy",
+                      selected
+                        ? "cursor-pointer border-transparent text-canvas"
+                        : unavailable
+                          ? "cursor-not-allowed border-hairline text-faint line-through decoration-faint/60"
+                          : "cursor-pointer border-rule text-ink hover:border-field",
                     )}
                   >
                     <input
@@ -208,6 +225,7 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
                       name="quantity"
                       value={count}
                       checked={selected}
+                      disabled={unavailable}
                       onChange={() => setQuantity(count)}
                       aria-label={plural(locale, count, form.quantityOption)}
                       className="sr-only"
@@ -222,7 +240,9 @@ export function StickerOrderForm({ locale, text, designs, countries, initial }: 
                     ) : null}
                     <span className="relative numerals-tabular text-[1.0625rem] font-medium leading-none">{count}</span>
                     <span className={cn("relative mt-1 text-[0.6875rem] leading-none", selected ? "text-canvas/70" : "text-faint")}>
-                      {fill(form.perSticker, { price: money(Math.round(priceBook.items[count] / count)) })}
+                      {unavailable
+                        ? form.notEnough
+                        : fill(form.perSticker, { price: money(Math.round(priceBook.items[count] / count)) })}
                     </span>
                   </label>
                 );

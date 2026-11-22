@@ -75,11 +75,19 @@ export const shopText: ShopText = {
     },
   },
 
+  soldOut: {
+    title: "Ausverkauft",
+    preorderTitle: "Keine Vorbestellungen mehr möglich",
+    body: "Alle Sticker dieser Auflage sind bestellt. Derzeit kann nichts bestellt werden.",
+  },
+
   form: {
     design: "Motiv",
     quantity: "Wie viele",
     quantityOption: { one: "{count} Sticker", other: "{count} Sticker" },
     perSticker: "{price} pro Stück",
+    left: "Noch {count} Sticker aus dieser Auflage",
+    notEnough: "nicht genug übrig",
     country: "Lieferung nach",
     countryPlaceholder: "Land auswählen",
     summaryTitle: "Ihre Bestellung",
@@ -113,6 +121,7 @@ export const shopText: ShopText = {
     busy: "Nach einem Ansturm von Bestellungen legt der Shop eine kurze Pause ein. Bitte versuchen Sie es in Kürze erneut.",
     unavailable: "Die Zahlungsseite konnte gerade nicht geöffnet werden. Es wurde nichts abgebucht. Bitte versuchen Sie es später erneut.",
     closed: "Der Shop wurde soeben geschlossen. Es wurde nichts abgebucht.",
+    soldout: "Für diese Menge sind nicht mehr genug Sticker übrig. Bitte wählen Sie weniger. Es wurde nichts berechnet.",
   },
 
   order: {

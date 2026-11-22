@@ -5,7 +5,7 @@
 export type CheckoutErrorCode = "design" | "quantity" | "country" | "not-offered";
 
 export interface CheckoutState {
-  readonly status: "idle" | "invalid" | "closed" | "throttled" | "busy" | "unavailable";
+  readonly status: "idle" | "invalid" | "closed" | "throttled" | "busy" | "unavailable" | "soldout";
   readonly errors: readonly CheckoutErrorCode[];
 }
 

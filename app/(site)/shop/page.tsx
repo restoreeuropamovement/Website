@@ -38,6 +38,7 @@ export default async function ShopPage(props: {
       countries={shopCountries()}
       selection={await props.searchParams}
       visitorCountry={page.visitorCountry}
+      remaining={page.remaining}
     />
   );
 }

@@ -75,6 +75,12 @@ export const shopText: ShopText = {
     },
   },
 
+  soldOut: {
+    title: "Wyprzedane",
+    preorderTitle: "Przedsprzedaż zakończona",
+    body: "Wszystkie naklejki z tego nakładu zostały zamówione. Obecnie nie można nic zamówić.",
+  },
+
   form: {
     design: "Wzór",
     quantity: "Ile sztuk",
@@ -85,6 +91,8 @@ export const shopText: ShopText = {
       other: "{count} naklejki",
     },
     perSticker: "{price} za sztukę",
+    left: "Pozostało naklejek z tego nakładu: {count}",
+    notEnough: "za mało",
     country: "Kraj dostawy",
     countryPlaceholder: "Wybierz kraj",
     summaryTitle: "Twoje zamówienie",
@@ -118,6 +126,7 @@ export const shopText: ShopText = {
     busy: "Sklep łapie oddech po fali zamówień. Spróbuj ponownie za chwilę.",
     unavailable: "Nie udało się teraz otworzyć strony płatności. Nic nie zostało pobrane. Spróbuj ponownie później.",
     closed: "Sklep został właśnie zamknięty. Nic nie zostało pobrane.",
+    soldout: "Na tę ilość zostało za mało naklejek. Wybierz mniejszą. Nic nie zostało pobrane.",
   },
 
   order: {

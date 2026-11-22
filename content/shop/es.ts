@@ -75,11 +75,19 @@ export const shopText: ShopText = {
     },
   },
 
+  soldOut: {
+    title: "Agotado",
+    preorderTitle: "Preventa agotada",
+    body: "Todas las pegatinas de esta tirada ya están pedidas. Por ahora no se puede hacer ningún pedido.",
+  },
+
   form: {
     design: "Diseño",
     quantity: "Cuántas",
     quantityOption: { one: "{count} pegatina", other: "{count} pegatinas" },
     perSticker: "{price} cada una",
+    left: "Quedan {count} pegatinas de esta tirada",
+    notEnough: "no hay suficientes",
     country: "Enviar a",
     countryPlaceholder: "Elija un país",
     summaryTitle: "Su pedido",
@@ -113,6 +121,7 @@ export const shopText: ShopText = {
     busy: "La tienda se está tomando un respiro tras una avalancha de pedidos. Vuelva a intentarlo dentro de un rato.",
     unavailable: "La página de pago no se ha podido abrir en este momento. No se ha cobrado nada. Vuelva a intentarlo más tarde.",
     closed: "La tienda acaba de cerrar. No se ha cobrado nada.",
+    soldout: "No quedan suficientes pegatinas para esa cantidad. Elija menos. No se ha cobrado nada.",
   },
 
   order: {

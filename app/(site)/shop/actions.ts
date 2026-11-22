@@ -12,6 +12,7 @@ import { configuredPrintProvider, shopMode, shopReadiness } from "@/lib/shop/con
 import { designForOrder } from "@/lib/shop/designs";
 import { attachCheckoutSession, createOrder, discardUnstartedOrder } from "@/lib/shop/orders";
 import { priceBook, quote } from "@/lib/shop/price-book";
+import { remainingStockNow } from "@/lib/shop/stock";
 import { createCheckoutSession } from "@/lib/shop/stripe";
 import { routes, SITE_URL } from "@/lib/site";
 import type { CheckoutErrorCode, CheckoutState } from "./state";
@@ -90,7 +91,16 @@ async function prepareCheckout(form: FormData): Promise<CheckoutState | string> 
   if (!global.allowed) return { status: "busy", errors: [] };
 
   const livemode = shopMode() === "live";
+  if (priced.quantity > (await remainingStockNow(livemode))) return { status: "soldout", errors: [] };
   const order = await createOrder({ designId: design.id, quote: priced, provider: provider.id, livemode });
+
+  /* Counted again with this order in it: two checkouts that each saw enough
+     left a moment ago must not both get the last stickers. The one that tips
+     the count over gives its place back. */
+  if ((await remainingStockNow(livemode)) < 0) {
+    await discardUnstartedOrder(order.id);
+    return { status: "soldout", errors: [] };
+  }
 
   const { text } = await getShop(locale);
   const shopUrl = `${SITE_URL}${localePath(locale, routes.shop)}`;

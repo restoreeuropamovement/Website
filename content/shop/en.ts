@@ -91,12 +91,20 @@ export const shopText = {
     },
   },
 
+  soldOut: {
+    title: "Sold out",
+    preorderTitle: "No more pre-orders available",
+    body: "Every sticker of this print run has been ordered. Nothing can be ordered at the moment.",
+  },
+
   form: {
     design: "Design",
     quantity: "How many",
     quantityOption: { one: "{count} sticker", other: "{count} stickers" } as PluralForms,
     /** Under the number on each quantity button: the sticker price divided out, before postage. */
     perSticker: "{price} each",
+    left: "{count} stickers left in this run",
+    notEnough: "not enough left",
     country: "Deliver to",
     countryPlaceholder: "Choose a country",
     summaryTitle: "Your order",
@@ -133,6 +141,7 @@ export const shopText = {
     busy: "The shop is taking a breather after a rush of orders. Please try again in a little while.",
     unavailable: "The payment page could not be opened just now. Nothing has been charged. Please try again later.",
     closed: "The shop has just closed. Nothing has been charged.",
+    soldout: "There are not enough stickers left for that quantity. Choose fewer. Nothing has been charged.",
   },
 
   order: {
