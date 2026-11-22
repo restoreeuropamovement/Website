@@ -42,6 +42,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
          are addressed by a token in a message and say nothing without one;
          listing them would invite a crawler to spend confirmation links. */
       { path: "/newsletter", changeFrequency: "yearly", priority: 0.5 },
+      /* The shop and its terms. Not `/shop/order` or `/shop/withdraw`, which are
+         for people who have bought and say nothing to anyone else. */
+      { path: "/shop", changeFrequency: "weekly", priority: 0.7 },
+      { path: "/shop/terms", changeFrequency: "yearly", priority: 0.3 },
       { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
       { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
       { path: "/imprint", changeFrequency: "yearly", priority: 0.3 },

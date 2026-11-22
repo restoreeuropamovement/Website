@@ -34,6 +34,10 @@ export const chrome: ChromeContent = {
       label: "Sections",
       description: "La section nationale dans chaque nation européenne.",
     },
+    shop: {
+      label: "Boutique",
+      description: "Autocollants emballés à la main et envoyés depuis l’Autriche.",
+    },
   },
 
   cta: {
@@ -57,6 +61,7 @@ export const chrome: ChromeContent = {
       materials: "Matériel",
       join: "Participer",
       newsletter: "Lettre",
+      shop: "Boutique d’autocollants",
     },
     contact: {
       title: "Contact",
@@ -69,6 +74,7 @@ export const chrome: ChromeContent = {
       title: "Mentions légales",
       privacy: "Confidentialité",
       imprint: "Mentions légales",
+      terms: "Conditions de vente",
     },
   },
 

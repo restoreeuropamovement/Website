@@ -35,6 +35,7 @@ export function Footer({
            and restoring this one line is the whole of publishing it. */
         { label: chrome.footer.movement.join, href: routes.join },
         { label: chrome.footer.movement.newsletter, href: routes.newsletter },
+        { label: chrome.footer.movement.shop, href: routes.shop },
       ],
     },
     {
@@ -51,6 +52,7 @@ export function Footer({
       items: [
         { label: chrome.footer.legal.privacy, href: routes.privacy },
         { label: chrome.footer.legal.imprint, href: routes.imprint },
+        { label: chrome.footer.legal.terms, href: routes.terms },
       ],
     },
   ];

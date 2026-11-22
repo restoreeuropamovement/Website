@@ -34,6 +34,10 @@ export const chrome: ChromeContent = {
       label: "Verbände",
       description: "Der Landesverband in jeder europäischen Nation.",
     },
+    shop: {
+      label: "Shop",
+      description: "Sticker, von Hand verpackt und aus Österreich verschickt.",
+    },
   },
 
   cta: {
@@ -57,6 +61,7 @@ export const chrome: ChromeContent = {
       materials: "Materialien",
       join: "Mitmachen",
       newsletter: "Rundbrief",
+      shop: "Sticker-Shop",
     },
     contact: {
       title: "Kontakt",
@@ -69,6 +74,7 @@ export const chrome: ChromeContent = {
       title: "Rechtliches",
       privacy: "Datenschutz",
       imprint: "Impressum",
+      terms: "AGB",
     },
   },
 

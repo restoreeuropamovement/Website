@@ -34,6 +34,10 @@ export const chrome: ChromeContent = {
       label: "Secciones",
       description: "La sección nacional en cada nación europea.",
     },
+    shop: {
+      label: "Tienda",
+      description: "Pegatinas empaquetadas a mano y enviadas desde Austria.",
+    },
   },
 
   cta: {
@@ -57,6 +61,7 @@ export const chrome: ChromeContent = {
       materials: "Materiales",
       join: "Participa",
       newsletter: "Boletín",
+      shop: "Tienda de pegatinas",
     },
     contact: {
       title: "Contacto",
@@ -69,6 +74,7 @@ export const chrome: ChromeContent = {
       title: "Aviso legal",
       privacy: "Privacidad",
       imprint: "Aviso legal",
+      terms: "Condiciones de venta",
     },
   },
 

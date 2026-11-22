@@ -34,6 +34,10 @@ export const chrome: ChromeContent = {
       label: "Sezioni",
       description: "La sezione nazionale in ogni nazione europea.",
     },
+    shop: {
+      label: "Negozio",
+      description: "Adesivi confezionati a mano e spediti dall’Austria.",
+    },
   },
 
   cta: {
@@ -57,6 +61,7 @@ export const chrome: ChromeContent = {
       materials: "Materiali",
       join: "Partecipa",
       newsletter: "Lettera",
+      shop: "Negozio di adesivi",
     },
     contact: {
       title: "Contatti",
@@ -69,6 +74,7 @@ export const chrome: ChromeContent = {
       title: "Note legali",
       privacy: "Privacy",
       imprint: "Dati editoriali",
+      terms: "Condizioni di vendita",
     },
   },
 

@@ -133,8 +133,7 @@ export const routes = {
   about: "/about",
   wings: "/wings",
   materials: "/materials",
-  /* Unlisted, like `/materials`, and absent from the sitemap: closed until the
-     conditions in `lib/shop/launch.ts` are met. */
+  /* Published 22 November 2026: in the masthead, the footer and the sitemap. */
   shop: "/shop",
   terms: "/shop/terms",
   withdraw: "/shop/withdraw",
@@ -158,6 +157,7 @@ export const primaryNavIds = [
   "vision",
   "about",
   "wings",
+  "shop",
 ] as const;
 
 export type PrimaryNavId = (typeof primaryNavIds)[number];

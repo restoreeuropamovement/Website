@@ -34,6 +34,10 @@ export const chrome: ChromeContent = {
       label: "Sekcje",
       description: "Sekcja krajowa w każdym z narodów Europy.",
     },
+    shop: {
+      label: "Sklep",
+      description: "Naklejki pakowane ręcznie i wysyłane z Austrii.",
+    },
   },
 
   cta: {
@@ -57,6 +61,7 @@ export const chrome: ChromeContent = {
       materials: "Materiały",
       join: "Zaangażuj się",
       newsletter: "Biuletyn",
+      shop: "Sklep z naklejkami",
     },
     contact: {
       title: "Kontakt",
@@ -69,6 +74,7 @@ export const chrome: ChromeContent = {
       title: "Informacje prawne",
       privacy: "Prywatność",
       imprint: "Nota prawna",
+      terms: "Regulamin sprzedaży",
     },
   },
 

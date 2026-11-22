@@ -49,6 +49,10 @@ export const chrome = {
       label: "Wings",
       description: "The national wing in each European nation.",
     },
+    shop: {
+      label: "Shop",
+      description: "Stickers, packed by hand and posted from Austria.",
+    },
   },
 
   cta: {
@@ -77,6 +81,7 @@ export const chrome = {
       materials: "Materials",
       join: "Get Involved",
       newsletter: "Newsletter",
+      shop: "Sticker Shop",
     },
     contact: {
       title: "Contact",
@@ -89,6 +94,7 @@ export const chrome = {
       title: "Legal",
       privacy: "Privacy",
       imprint: "Imprint",
+      terms: "Terms of Sale",
     },
   },
 
