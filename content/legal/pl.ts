@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "Są na tej stronie trzy miejsca, przez które możesz przekazać dane osobowe, i we wszystkich trzech trzeba tego naprawdę chcieć: zgłoszenie członkowskie na [Włącz się][join], formularz wiadomości na [Kontakt][contact] i pole zapisu na [stronie biuletynu][newsletter]. Nic innego na stronie niczego nie przesyła, a do żadnego z tych formularzy nie trafia się przypadkiem.",
           },
+          {
+            type: "paragraph",
+            text: "Zakup naklejek w [sklepie][shop] to czwarty, i odmienny, przypadek: swoje dane wpisujesz na stronie operatora płatności, a nie na tej stronie. Ma on niżej własny rozdział.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "Jeśli kupujesz naklejki",
+        body: [
+          {
+            type: "paragraph",
+            text: "[Sklep z naklejkami][shop] prowadzi Restore Europa Movement, jednoosobowa działalność gospodarcza w Austrii, która odpowiada za dane opisane w tym rozdziale. W odróżnieniu od reszty tej strony sklep ma więc wskazanego administratora danych. Możesz się z nim skontaktować pod adresem restoreeuropamovement@gmail.com; jego adres pocztowy jest podawany na prośbę.",
+          },
+          {
+            type: "paragraph",
+            text: "**Co przechowuje ta strona.** Przy każdym zamówieniu przechowuje to, co wybrałeś — wzór, liczbę naklejek, kraj dostawy i kwoty — wraz z numerem zamówienia, datami oraz informacją, czy zamówienie zostało wysłane albo czy od niego odstąpiono. Nie przechowuje imienia ani nazwiska, adresu poczty elektronicznej ani adresu pocztowego. Lista osób, które kupiły naklejki od ruchu politycznego, jest listą jego zwolenników, więc sklep jest zbudowany tak, żeby takiej listy nie mieć.",
+          },
+          {
+            type: "paragraph",
+            text: "**Co przechowuje Stripe.** Płacisz na stronie naszego operatora płatności, Stripe (Stripe Payments Europe, Limited, Dublin, Irlandia). Zbiera on twoje imię i nazwisko, adres poczty elektronicznej, adres dostawy i dane płatnicze i przechowuje je zgodnie z własną polityką prywatności, tak jak wymaga tego od niego prawo dotyczące płatności. Na wyciągu z banku lub karty widnieje nazwa sklepu.",
+          },
+          {
+            type: "paragraph",
+            text: "**Kiedy twoje dane są odczytywane.** Twój adres dostawy jest odczytywany ze Stripe, gdy twoje naklejki są pakowane: osoby, które je wysyłają, widzą twoje imię, nazwisko i adres na potrzeby tej jednej koperty i niczego nie zachowują. Twój adres poczty elektronicznej jest odczytywany ze Stripe raz, żeby wysłać potwierdzenie zamówienia, i dlatego przechodzi przez Resend, dostawcę, który doręcza pocztę tej strony. Administratorzy sklepu mogą sprawdzić dane zamówienia w Stripe, na przykład żeby ci odpowiedzieć albo zwrócić pieniądze, a każde takie sprawdzenie jest zapisywane w dzienniku.",
+          },
+          {
+            type: "paragraph",
+            text: "**Jeśli odstępujesz od zakupu.** [Formularz odstąpienia][withdraw] pyta o twoje imię i nazwisko, numer zamówienia i adres poczty elektronicznej. Służą one do odnalezienia twojego zamówienia i wysłania ci potwierdzenia i nie są przechowywane: zamówienie zapisuje tylko czas twojego odstąpienia.",
+          },
+          {
+            type: "paragraph",
+            text: "**Dlaczego i jak długo.** Te dane służą do zawarcia i realizacji twojego zakupu oraz do wypełnienia obowiązków ewidencyjnych wynikających z prawa podatkowego (art. 6 ust. 1 lit. b i c RODO). Zapisy zamówień są przechowywane przez siedem lat, jak wymaga austriackie prawo podatkowe; nie zawierają niczego, co by cię wskazywało. Prawa opisane niżej dotyczą również sklepu; aby z nich skorzystać, napisz na podany wyżej adres.",
+          },
+        ],
+      },
+
       analytics: {
         title: "Dane o ruchu",
         body: [
@@ -346,6 +380,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Sprostowania i pisma prawne można przesyłać przez [Kontakt][contact], gdy adresy zostaną opublikowane.",
+      },
+      {
+        type: "subheading",
+        text: "Sklep z naklejkami",
+      },
+      {
+        type: "paragraph",
+        text: "Naklejki w [sklepie][shop] sprzedaje Restore Europa Movement, jednoosobowa działalność gospodarcza (Einzelunternehmen) w Austrii. E-mail: restoreeuropamovement@gmail.com. Telefon: +43 650 5006955. Adres pocztowy jest podawany na prośbę przesłaną e-mailem. Do każdego zamówienia ma zastosowanie [regulamin sprzedaży][terms].",
       },
     ],
   },

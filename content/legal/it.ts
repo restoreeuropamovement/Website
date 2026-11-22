@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "Su questo sito ci sono tre soli luoghi attraverso i quali puoi consegnare dati personali, e in tutti e tre devi volerlo davvero: la domanda di iscrizione su [Partecipa][join], il modulo per i messaggi su [Contatti][contact] e la casella di iscrizione sulla [pagina della lettera][newsletter]. Nient'altro nel sito trasmette qualcosa, e nessuno dei tre moduli si raggiunge per caso.",
           },
+          {
+            type: "paragraph",
+            text: "Acquistare adesivi nel [negozio][shop] è un quarto caso, e diverso: inserisci i tuoi dati sulla pagina del fornitore di servizi di pagamento, non su questo sito. Ha una sezione propria più sotto.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "Se acquisti adesivi",
+        body: [
+          {
+            type: "paragraph",
+            text: "Il [negozio di adesivi][shop] è gestito da Restore Europa Movement, impresa individuale in Austria, che è titolare del trattamento dei dati descritti in questa sezione. A differenza del resto di questo sito, il negozio ha quindi un titolare indicato per nome. Puoi contattarlo all'indirizzo restoreeuropamovement@gmail.com; il suo indirizzo postale viene comunicato su richiesta.",
+          },
+          {
+            type: "paragraph",
+            text: "**Che cosa conserva questo sito.** Per ogni ordine conserva ciò che hai scelto — il design, la quantità, il paese di destinazione e gli importi — con il numero d'ordine, le date e l'informazione se l'ordine è stato spedito o se ne è stato esercitato il recesso. Non conserva alcun nome, alcun indirizzo di posta elettronica né alcun indirizzo stradale. Un elenco di chi ha comprato adesivi da un movimento politico è un elenco dei suoi sostenitori, perciò il negozio è costruito per non averne uno.",
+          },
+          {
+            type: "paragraph",
+            text: "**Che cosa conserva Stripe.** Paghi sulla pagina del nostro fornitore di servizi di pagamento, Stripe (Stripe Payments Europe, Limited, Dublin, Irlanda). Raccoglie il tuo nome, il tuo indirizzo di posta elettronica, l'indirizzo di consegna e i dati di pagamento, e li conserva secondo la propria informativa sulla privacy, come la normativa sui pagamenti gli impone. L'estratto conto della tua banca o della tua carta riporta il nome del negozio.",
+          },
+          {
+            type: "paragraph",
+            text: "**Quando vengono letti i tuoi dati.** Il tuo indirizzo di consegna viene letto da Stripe quando i tuoi adesivi vengono imballati: chi li spedisce vede il tuo nome e il tuo indirizzo per quell'unica busta e non conserva nulla. Il tuo indirizzo di posta elettronica viene letto da Stripe una sola volta, per inviarti la conferma d'ordine, e passa quindi attraverso Resend, il fornitore che recapita la posta di questo sito. Gli amministratori del negozio possono consultare i dati di un ordine in Stripe, per esempio per risponderti o per rimborsarti, e ogni consultazione viene registrata.",
+          },
+          {
+            type: "paragraph",
+            text: "**Se recedi.** Il [modulo di recesso][withdraw] chiede il tuo nome, il numero d'ordine e il tuo indirizzo di posta elettronica. Servono a trovare il tuo ordine e a inviarti una conferma, e non vengono conservati: l'ordine registra soltanto il momento in cui hai receduto.",
+          },
+          {
+            type: "paragraph",
+            text: "**Perché, e per quanto tempo.** Questi dati sono usati per concludere ed eseguire il tuo acquisto e per adempiere agli obblighi di conservazione previsti dalla normativa fiscale (art. 6, par. 1, lett. b) e c), del GDPR). I registri degli ordini sono conservati per i sette anni richiesti dalla normativa fiscale austriaca; non contengono nulla che ti identifichi per nome. I diritti esposti più sotto valgono anche per il negozio; per esercitarli scrivi all'indirizzo indicato sopra.",
+          },
+        ],
+      },
+
       analytics: {
         title: "I dati di traffico",
         body: [
@@ -346,6 +380,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Rettifiche e comunicazioni legali potranno essere inviate attraverso [Contatti][contact] una volta pubblicati gli indirizzi.",
+      },
+      {
+        type: "subheading",
+        text: "Il negozio di adesivi",
+      },
+      {
+        type: "paragraph",
+        text: "Gli adesivi del [negozio][shop] sono venduti da Restore Europa Movement, impresa individuale (Einzelunternehmen) in Austria. Email: restoreeuropamovement@gmail.com. Telefono: +43 650 5006955. L'indirizzo postale viene comunicato su richiesta per email. A ogni ordine si applicano le [condizioni di vendita][terms].",
       },
     ],
   },

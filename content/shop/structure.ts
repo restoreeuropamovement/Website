@@ -116,9 +116,9 @@ export function isShopQuantity(value: number): value is ShopQuantity {
 /**
  * The one sticker the shop sells, as the printer is asked for it.
  *
- * WIRmachenDRUCK's square indoor sticker: 98 × 98 mm, white 80 g/m²
+ * FLYERALARM's square indoor sticker: 98 × 98 mm, white 80 g/m²
  * self-adhesive paper ("Haftpapier"), printed 4/0 in CMYK, slit backing, no
- * finish. Chosen 22 November 2026.
+ * finish. Chosen 22 November 2026; FLYERALARM prints the run.
  *
  * `finishedMm` is the size after cutting. The master file is larger by the
  * bleed on every side, and the difference is the margin the cutter is allowed
@@ -127,13 +127,38 @@ export function isShopQuantity(value: number): value is ShopQuantity {
  * anything that must not be cut — text, the address, the imprint — has to
  * stay.
  *
- * Both are the printer's to set, not ours: WIRmachenDRUCK asks for 3 mm of
- * bleed and 6 mm of safety measured from the file's edge (its data-sheet
- * template, read 22 November 2026). The admin upload form reads them.
+ * Both are the printer's to set, not ours: FLYERALARM's sticker templates
+ * ask for 1 mm of bleed on each side (a 100 mm file for a 98 mm sticker) and
+ * keep text 3 mm in from the file's edge (its sticker data sheets, read
+ * 22 November 2026). The admin upload form reads them.
  */
 export const stickerFormat = {
   id: "square-98",
   finishedMm: 98,
-  bleedMm: 3,
-  safetyMm: 6,
+  bleedMm: 1,
+  safetyMm: 3,
+} as const;
+
+/**
+ * Who makes the sticker, for the product-safety details the General Product
+ * Safety Regulation requires on the listing: name, postal and electronic
+ * address. Not words, so not in a language file. FLYERALARM's own imprint,
+ * read 22 November 2026.
+ */
+export const stickerManufacturer = {
+  name: "FLYERALARM GmbH",
+  address: "Alfred-Nobel-Straße 18, 97080 Würzburg, Germany",
+  email: "info@flyeralarm.de",
+} as const;
+
+/**
+ * Who sells the stickers, as the operator gave it on 22 November 2026: the
+ * trading name on the Stripe account, a sole trader in Austria. The postal
+ * address is given on request rather than published, by the operator's
+ * decision; see `terms` in `lib/shop/launch.ts`.
+ */
+export const shopSeller = {
+  name: "Restore Europa Movement",
+  email: "restoreeuropamovement@gmail.com",
+  phone: "+43 650 5006955",
 } as const;

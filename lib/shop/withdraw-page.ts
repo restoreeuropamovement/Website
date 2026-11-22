@@ -6,9 +6,10 @@ import type { Locale } from "@/lib/i18n";
 import { shopMode } from "@/lib/shop/config";
 
 /**
- * What both `/shop/withdraw` routes need. The page exists whenever the shop
- * does — test or live, open or not — because a buyer's right to withdraw
- * outlasts the shop's being open.
+ * What the `/shop/withdraw` and `/shop/terms` routes need. Both exist
+ * whenever the shop does — test or live, open or not — because a buyer's
+ * right to withdraw, and the terms they bought on, outlast the shop's being
+ * open.
  */
 export async function loadWithdrawPage(locale: Locale): Promise<ShopEdition> {
   if (shopMode() === "off") notFound();

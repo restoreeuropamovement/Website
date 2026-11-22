@@ -139,8 +139,8 @@ export const shopText: ShopText = {
     test: "Testbestellung — nichts wird gedruckt oder verschickt.",
     preorder: "Dies ist eine Vorbestellung: Sie wird innerhalb eines Monats ab dem Tag Ihrer Bestellung verschickt.",
     withdrawn:
-      "Sie sind am {date} von dieser Bestellung zurückgetreten. Wir erstatten Ihre Zahlung, einschließlich des Portos, innerhalb von 14 Tagen ab diesem Tag. Wenn die Sticker Sie bereits erreicht haben, senden Sie sie bitte vollständig zurück; wir können mit der Erstattung warten, bis sie bei uns eingetroffen sind.",
-    withdrawLink: "Von diesem Kauf zurücktreten",
+      "Sie haben diese Bestellung am {date} widerrufen. Wir erstatten Ihre Zahlung, einschließlich des Portos, innerhalb von 14 Tagen ab diesem Tag. Wenn die Sticker Sie bereits erreicht haben, senden Sie sie bitte vollständig zurück; wir können mit der Erstattung warten, bis sie bei uns eingetroffen sind.",
+    withdrawLink: "Diesen Kauf widerrufen",
     status: {
       checkout: "Die Bestätigung der Zahlung steht noch aus.",
       expired: "Die Zahlung wurde nicht abgeschlossen, daher wurde nichts abgebucht und es wird nichts verschickt.",
@@ -173,7 +173,7 @@ export const shopText: ShopText = {
     nextHeading: "WIE ES WEITERGEHT",
     next: "Wir verpacken Ihre Sticker von Hand und schicken sie aus Österreich als Brief, ohne Sendungsverfolgung. Diese Seite zeigt, wann Ihre Bestellung verschickt wurde:",
     preorder: "Dies ist eine Vorbestellung. Die Sticker werden gerade gedruckt, und Ihre Bestellung wird innerhalb eines Monats ab heute verschickt.",
-    withdraw: "Haben Sie es sich anders überlegt? Sie können innerhalb von 14 Tagen nach Erhalt der Sticker ohne Angabe von Gründen von diesem Kauf zurücktreten: {withdraw}",
+    withdraw: "Haben Sie es sich anders überlegt? Sie können innerhalb von 14 Tagen nach Erhalt der Sticker ohne Angabe von Gründen widerrufen: {withdraw}",
     customs:
       "Ihre Bestellung geht durch den Zoll. Ihr Land kann bei der Zustellung Einfuhrabgaben oder eine Bearbeitungsgebühr erheben; diese sind im obigen Gesamtbetrag nicht enthalten.",
     test: "Dies war eine Testbestellung. Es wurde nichts abgebucht, und es wird nichts verschickt.",
@@ -183,11 +183,11 @@ export const shopText: ShopText = {
   },
 
   withdrawal: {
-    metaTitle: "Vom Kauf zurücktreten",
+    metaTitle: "Einen Kauf widerrufen",
     kicker: "Shop",
-    title: "Von Ihrem Kauf zurücktreten",
-    lede: "Sie können innerhalb von 14 Tagen nach Erhalt ohne Angabe von Gründen von einer Sticker-Bestellung zurücktreten. Füllen Sie die Angaben unten aus, prüfen Sie sie und bestätigen Sie. Wir antworten per E-Mail mit Datum und Uhrzeit des Eingangs.",
-    shopLink: "Es sich anders überlegt? Vom Kauf zurücktreten",
+    title: "Ihren Kauf widerrufen",
+    lede: "Sie können innerhalb von 14 Tagen nach Erhalt eine Sticker-Bestellung ohne Angabe von Gründen widerrufen. Füllen Sie die Angaben unten aus, prüfen Sie sie und bestätigen Sie. Wir antworten per E-Mail mit Datum und Uhrzeit des Eingangs.",
+    shopLink: "Es sich anders überlegt? Kauf widerrufen",
     name: "Ihr Name",
     reference: "Bestellnummer",
     referenceHint: "Sie beginnt mit RE- und steht in Ihrer Bestätigungs-E-Mail.",
@@ -196,11 +196,11 @@ export const shopText: ShopText = {
     review: "Weiter",
     checkTitle: "Prüfen und bestätigen",
     checkBody: "Sie treten von diesem Kauf zurück:",
-    confirm: "Rücktritt bestätigen",
+    confirm: "Widerruf bestätigen",
     change: "Angaben ändern",
-    doneTitle: "Rücktritt eingegangen",
+    doneTitle: "Widerruf eingegangen",
     doneBody:
-      "Wenn diese Angaben zu einer Bestellung passen, ist Ihr Rücktritt erfasst, und eine Bestätigung mit Datum und Uhrzeit des Eingangs ist an diese E-Mail-Adresse unterwegs. Wenn innerhalb einer Stunde nichts ankommt, prüfen Sie die Bestellnummer und die E-Mail-Adresse und versuchen Sie es erneut, oder schreiben Sie uns über das Kontaktformular.",
+      "Wenn diese Angaben zu einer Bestellung passen, ist Ihr Widerruf erfasst, und eine Bestätigung mit Datum und Uhrzeit des Eingangs ist an diese E-Mail-Adresse unterwegs. Wenn innerhalb einer Stunde nichts ankommt, prüfen Sie die Bestellnummer und die E-Mail-Adresse und versuchen Sie es erneut, oder schreiben Sie uns über das Kontaktformular.",
     errors: {
       name: "Geben Sie Ihren Namen ein.",
       reference: "Geben Sie die Bestellnummer ein, die mit RE- beginnt.",
@@ -211,8 +211,8 @@ export const shopText: ShopText = {
       unavailable: "Das konnte gerade nicht gesendet werden. Bitte versuchen Sie es später erneut, oder schreiben Sie uns über das Kontaktformular.",
     },
     acknowledgement: {
-      subject: "Rücktritt eingegangen: Bestellung {reference}",
-      intro: "Ihr Rücktritt von der Bestellung {reference} ist am {when} bei uns eingegangen.",
+      subject: "Widerruf eingegangen: Bestellung {reference}",
+      intro: "Ihr Widerruf der Bestellung {reference} ist am {when} bei uns eingegangen.",
       name: "Angegebener Name: {name}",
       nextHeading: "WIE ES WEITERGEHT",
       notPosted: "Wenn Ihre Sticker noch nicht verschickt wurden, werden sie nicht mehr verschickt.",
@@ -220,8 +220,99 @@ export const shopText: ShopText = {
         "Wenn sie Sie bereits erreicht haben, senden Sie sie bitte vollständig zurück. Schreiben Sie uns über {contact}, und wir teilen Ihnen mit, wohin Sie sie schicken sollen.",
       refund:
         "Wir erstatten Ihre Zahlung, einschließlich des von Ihnen bezahlten Portos, innerhalb von 14 Tagen ab heute auf die Karte, mit der Sie bezahlt haben. Wir können mit der Erstattung warten, bis die Sticker wieder bei uns sind.",
-      why: "Sie erhalten diese E-Mail, weil unter {shop} ein Rücktritt für diese Bestellung eingereicht wurde. Antworten auf diese E-Mail werden nicht gelesen.",
+      why: "Sie erhalten diese E-Mail, weil unter {shop} ein Widerruf für diese Bestellung eingereicht wurde. Antworten auf diese E-Mail werden nicht gelesen.",
     },
+  },
+
+  safety: {
+    title: "Produktsicherheit",
+    product: "Produkt",
+    productValue: "Sticker, 9,8 × 9,8 cm, weißes selbstklebendes Papier, vollfarbig bedruckt",
+    manufacturer: "Hersteller",
+    seller: "Verkauft von",
+  },
+
+  terms: {
+    metaTitle: "Allgemeine Geschäftsbedingungen",
+    kicker: "Shop",
+    title: "Allgemeine Geschäftsbedingungen",
+    lede: "Die Bedingungen, zu denen in diesem Shop Sticker verkauft werden, mit Ihrem Recht, einen Kauf zu widerrufen, und einem Formular dafür.",
+    updated: "Stand: 22. November 2026.",
+    sections: [
+      {
+        heading: "1. Wer verkauft",
+        paragraphs: [
+          "Die Sticker in diesem Shop werden von {seller} verkauft, einem Einzelunternehmen in Österreich. Sie erreichen uns per E-Mail unter {email} oder telefonisch unter {phone}. Unsere Postanschrift teilen wir auf Anfrage per E-Mail mit.",
+        ],
+      },
+      {
+        heading: "2. Geltungsbereich",
+        paragraphs: [
+          "Diese Bedingungen gelten für jede Bestellung, die eine Verbraucherin oder ein Verbraucher in diesem Shop aufgibt. Die Beschreibung der Sticker auf der Shopseite ist Teil davon.",
+        ],
+      },
+      {
+        heading: "3. Wie der Vertrag zustande kommt",
+        paragraphs: [
+          "Auf der Shopseite wählen Sie ein Motiv, eine Menge und das Lieferland und sehen den Gesamtbetrag einschließlich Porto. Mit „Weiter zur Zahlung“ gelangen Sie auf die Zahlungsseite unseres Zahlungsdienstleisters Stripe, wo Sie Ihren Namen, Ihre E-Mail-Adresse, Ihre Lieferadresse und Ihre Zahlungsdaten eingeben und noch korrigieren können.",
+          "Mit dem Klick auf die Zahlschaltfläche dort geben Sie ein verbindliches Kaufangebot ab. Der Vertrag kommt zustande, wenn die Zahlung bestätigt ist. Wir senden Ihnen dann eine Bestätigungs-E-Mail mit Ihrer Bestellnummer und einem Link zur Seite Ihrer Bestellung.",
+        ],
+      },
+      {
+        heading: "4. Preise und Zahlung",
+        paragraphs: [
+          "Alle Preise sind in Euro angegeben und sind Endpreise. Das Porto wird vor der Zahlung gesondert ausgewiesen und ist im Gesamtbetrag enthalten. Weitere Kosten berechnen wir nicht.",
+          "Außerhalb der Europäischen Union kann der Zoll Ihres Landes bei der Zustellung Einfuhrabgaben oder eine Bearbeitungsgebühr erheben. Diese sind nicht Teil unseres Preises.",
+          "Sie bezahlen auf der Zahlungsseite von Stripe mit einer der dort angebotenen Zahlungsarten. Der Betrag wird bei der Bestellung belastet.",
+        ],
+      },
+      {
+        heading: "5. Lieferung",
+        paragraphs: [
+          "Wir verschicken die Sticker aus Österreich als Brief, ohne Sendungsverfolgung, an die Adresse, die Sie auf der Zahlungsseite angeben, in die auf der Shopseite angebotenen Länder.",
+          "Bestellungen, die aufgegeben werden, solange der Shop sie als Vorbestellungen kennzeichnet, werden innerhalb eines Monats ab dem Tag der Bestellung verschickt. Die Seite Ihrer Bestellung zeigt, wann sie verschickt wurde.",
+          "Können wir eine Bestellung doch nicht liefern, etwa weil weniger Sticker gedruckt werden als erwartet, teilen wir Ihnen das per E-Mail mit und erstatten sofort den vollen Betrag.",
+        ],
+      },
+      {
+        heading: "6. Ihr Widerrufsrecht",
+        paragraphs: [
+          "Sie haben das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem Sie oder ein von Ihnen benannter Dritter, der nicht der Beförderer ist, die Sticker in Besitz genommen haben bzw. hat.",
+          "Um Ihr Widerrufsrecht auszuüben, müssen Sie uns mittels einer eindeutigen Erklärung über Ihren Entschluss, diesen Vertrag zu widerrufen, informieren. Am schnellsten geht das über unsere [Widerrufsfunktion][withdraw]. Sie können auch an {email} schreiben oder das unten stehende Muster-Widerrufsformular verwenden, das jedoch nicht vorgeschrieben ist. Zur Wahrung der Widerrufsfrist reicht es aus, dass Sie Ihre Erklärung vor Ablauf der Widerrufsfrist absenden.",
+          "**Folgen des Widerrufs.** Wenn Sie diesen Vertrag widerrufen, haben wir Ihnen alle Zahlungen, die wir von Ihnen erhalten haben, einschließlich der Standard-Lieferkosten, unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem die Mitteilung über Ihren Widerruf dieses Vertrags bei uns eingegangen ist. Für diese Rückzahlung verwenden wir dasselbe Zahlungsmittel, das Sie bei der ursprünglichen Transaktion eingesetzt haben, es sei denn, mit Ihnen wurde ausdrücklich etwas anderes vereinbart; in keinem Fall werden Ihnen wegen dieser Rückzahlung Entgelte berechnet. Wir können die Rückzahlung verweigern, bis wir die Sticker wieder zurückerhalten haben oder bis Sie den Nachweis erbracht haben, dass Sie die Sticker zurückgesandt haben, je nachdem, welches der frühere Zeitpunkt ist.",
+          "Haben die Sticker Sie bereits erreicht, haben Sie sie unverzüglich und in jedem Fall spätestens binnen vierzehn Tagen ab dem Tag, an dem Sie uns über den Widerruf unterrichten, an uns zurückzusenden. Die Rücksendeadresse teilen wir Ihnen bei Ihrem Widerruf per E-Mail mit. Sie tragen die unmittelbaren Kosten der Rücksendung. Sie müssen für einen etwaigen Wertverlust der Sticker nur aufkommen, wenn dieser Wertverlust auf einen zur Prüfung der Beschaffenheit, Eigenschaften und Funktionsweise nicht notwendigen Umgang mit ihnen zurückzuführen ist, etwa wenn Sticker fehlen, verwendet oder beschädigt sind.",
+        ],
+      },
+      {
+        heading: "7. Wenn etwas nicht stimmt",
+        paragraphs: [
+          "Es gilt die gesetzliche Gewährleistung für Waren. Kommen Sticker beschädigt, fehlerhaft gedruckt oder nicht wie beschrieben an, oder kommen sie gar nicht an, schreiben Sie uns unter {email} mit Ihrer Bestellnummer, und wir bringen es in Ordnung, indem wir Ersatz schicken oder Ihnen den Betrag erstatten.",
+        ],
+      },
+      {
+        heading: "8. Anwendbares Recht",
+        paragraphs: [
+          "Es gilt österreichisches Recht unter Ausschluss seiner Verweisungsnormen. Sind Sie Verbraucherin oder Verbraucher mit Wohnsitz in einem anderen Land, wird Ihnen dadurch nicht der Schutz der zwingenden Bestimmungen des Rechts dieses Landes entzogen.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Muster-Widerrufsformular",
+      intro: "Wenn Sie den Vertrag widerrufen wollen, können Sie dieses Formular ausfüllen und an uns zurücksenden. Sie müssen es nicht verwenden.",
+      lines: [
+        "An {seller}, {email}:",
+        "Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über den Kauf der folgenden Waren:",
+        "Bestellt am (*) / erhalten am (*):",
+        "Bestellnummer:",
+        "Name des/der Verbraucher(s):",
+        "Anschrift des/der Verbraucher(s):",
+        "Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier):",
+        "Datum:",
+      ],
+      note: "(*) Unzutreffendes streichen.",
+    },
+    shopLink: "Allgemeine Geschäftsbedingungen",
+    accept: "Mit „Weiter zur Zahlung“ akzeptieren Sie unsere [Allgemeinen Geschäftsbedingungen][terms], die Ihr Widerrufsrecht enthalten.",
   },
 
   item: { one: "{count} Sticker — {design}", other: "{count} Sticker — {design}" },

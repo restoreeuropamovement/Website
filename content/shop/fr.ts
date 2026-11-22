@@ -224,6 +224,97 @@ export const shopText: ShopText = {
     },
   },
 
+  safety: {
+    title: "Sécurité du produit",
+    product: "Produit",
+    productValue: "Autocollant, 9,8 × 9,8 cm, papier autocollant blanc, imprimé en quadrichromie",
+    manufacturer: "Fabricant",
+    seller: "Vendu par",
+  },
+
+  terms: {
+    metaTitle: "Conditions générales de vente",
+    kicker: "Boutique",
+    title: "Conditions générales de vente",
+    lede: "Les conditions auxquelles les autocollants sont vendus dans cette boutique, avec votre droit de vous rétracter d'un achat et un formulaire pour le faire.",
+    updated: "En vigueur au 22 novembre 2026.",
+    sections: [
+      {
+        heading: "1. Le vendeur",
+        paragraphs: [
+          "Les autocollants de cette boutique sont vendus par {seller}, entreprise individuelle établie en Autriche. Vous pouvez nous joindre par courriel à {email} ou par téléphone au {phone}. Notre adresse postale est communiquée sur demande par courriel.",
+        ],
+      },
+      {
+        heading: "2. Champ d'application",
+        paragraphs: [
+          "Les présentes conditions s'appliquent à toute commande passée dans cette boutique par un consommateur. La description des autocollants figurant sur la page de la boutique en fait partie.",
+        ],
+      },
+      {
+        heading: "3. Conclusion du contrat",
+        paragraphs: [
+          "Sur la page de la boutique, vous choisissez un motif, une quantité et le pays de livraison, et voyez le total, frais de port compris. Passer au paiement vous mène à la page de paiement de notre prestataire de paiement, Stripe, où vous saisissez votre nom, votre adresse électronique, votre adresse de livraison et vos données de paiement, et pouvez encore les corriger.",
+          "En appuyant sur le bouton de paiement de cette page, vous faites une offre d'achat ferme. Le contrat est conclu lorsque le paiement est confirmé. Nous vous envoyons alors un courriel de confirmation indiquant votre numéro de commande et un lien vers la page de votre commande.",
+        ],
+      },
+      {
+        heading: "4. Prix et paiement",
+        paragraphs: [
+          "Tous les prix sont indiqués en euros et correspondent à ce que vous payez. Les frais de port sont affichés séparément avant le paiement et inclus dans le total. Nous n'ajoutons aucun autre frais.",
+          "Hors de l'Union européenne, les douanes de votre pays peuvent percevoir une taxe à l'importation ou des frais de traitement à la livraison. Ceux-ci ne font pas partie de notre prix.",
+          "Vous payez sur la page de paiement de Stripe au moyen de l'un des modes de paiement qui y sont proposés. Le montant est débité au moment de la commande.",
+        ],
+      },
+      {
+        heading: "5. Livraison",
+        paragraphs: [
+          "Nous expédions les autocollants depuis l'Autriche par lettre simple, sans suivi, à l'adresse que vous indiquez sur la page de paiement, dans les pays proposés sur la page de la boutique.",
+          "Les commandes passées pendant que la boutique les signale comme précommandes sont expédiées dans un délai d'un mois à compter du jour de la commande. La page de votre commande indique quand elle a été expédiée.",
+          "Si nous ne pouvons finalement pas livrer une commande, par exemple parce que moins d'autocollants ont été imprimés que prévu, nous vous en informons par courriel et vous remboursons immédiatement l'intégralité du montant.",
+        ],
+      },
+      {
+        heading: "6. Votre droit de rétractation",
+        paragraphs: [
+          "Vous avez le droit de vous rétracter du présent contrat sans donner de motif dans un délai de quatorze jours. Le délai de rétractation expire quatorze jours après le jour où vous-même, ou un tiers autre que le transporteur et désigné par vous, prenez physiquement possession des autocollants.",
+          "Pour exercer le droit de rétractation, vous devez nous notifier votre décision de rétractation au moyen d'une déclaration dénuée d'ambiguïté. Le moyen le plus rapide est notre [fonction de rétractation][withdraw]. Vous pouvez également écrire à {email} ou utiliser le modèle de formulaire de rétractation ci-dessous, mais ce n'est pas obligatoire. Pour que le délai de rétractation soit respecté, il suffit que vous transmettiez votre communication relative à l'exercice du droit de rétractation avant l'expiration du délai.",
+          "**Effets de la rétractation.** En cas de rétractation de votre part, nous vous rembourserons tous les paiements reçus de vous, y compris les frais de livraison standard, sans retard excessif et, en tout état de cause, au plus tard quatorze jours à compter du jour où nous sommes informés de votre décision de rétractation. Nous procéderons au remboursement en utilisant le même moyen de paiement que celui que vous aurez utilisé, sauf si vous convenez expressément d'un moyen différent ; en tout état de cause, ce remboursement n'occasionnera pas de frais pour vous. Nous pouvons différer le remboursement jusqu'à ce que nous ayons reçu les autocollants ou jusqu'à ce que vous ayez fourni une preuve de leur expédition, la date retenue étant celle du premier de ces faits.",
+          "Si les autocollants vous sont déjà parvenus, vous devrez nous les renvoyer sans retard excessif et, en tout état de cause, au plus tard quatorze jours après que vous nous aurez communiqué votre décision de rétractation. Nous vous indiquons l'adresse de retour par courriel lors de votre rétractation. Vous devrez prendre en charge les frais directs de renvoi. Votre responsabilité n'est engagée qu'à l'égard de la dépréciation des autocollants résultant de manipulations autres que celles nécessaires pour établir leur nature, leurs caractéristiques et leur bon fonctionnement, par exemple si des autocollants manquent, ont été utilisés ou sont endommagés.",
+        ],
+      },
+      {
+        heading: "7. En cas de problème",
+        paragraphs: [
+          "La garantie légale de conformité des biens s'applique. Si des autocollants arrivent endommagés, mal imprimés ou non conformes à leur description, ou n'arrivent pas, écrivez-nous à {email} en indiquant votre numéro de commande, et nous y remédions en envoyant des autocollants de remplacement ou en vous remboursant.",
+        ],
+      },
+      {
+        heading: "8. Droit applicable",
+        paragraphs: [
+          "Le droit autrichien s'applique, à l'exclusion de ses règles de conflit de lois. Si vous êtes un consommateur résidant dans un autre pays, cela ne vous prive pas de la protection que vous assurent les dispositions impératives du droit de ce pays.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Modèle de formulaire de rétractation",
+      intro: "Si vous souhaitez vous rétracter du contrat, vous pouvez compléter le présent formulaire et nous le renvoyer. Son utilisation n'est pas obligatoire.",
+      lines: [
+        "À l'attention de {seller}, {email} :",
+        "Je/Nous (*) vous notifie/notifions (*) par la présente ma/notre (*) rétractation du contrat portant sur la vente du bien (*) ci-dessous :",
+        "Commandé le (*) / reçu le (*) :",
+        "Numéro de commande :",
+        "Nom du (des) consommateur(s) :",
+        "Adresse du (des) consommateur(s) :",
+        "Signature du (des) consommateur(s) (uniquement en cas de notification du présent formulaire sur papier) :",
+        "Date :",
+      ],
+      note: "(*) Rayez la mention inutile.",
+    },
+    shopLink: "Conditions générales de vente",
+    accept: "En passant au paiement, vous acceptez nos [conditions générales de vente][terms], qui comprennent votre droit de rétractation.",
+  },
+
   item: { one: "{count} autocollant — {design}", other: "{count} autocollants — {design}" },
   shippingLabel: "Frais de port",
   addressNote:

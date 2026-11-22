@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "Hay tres lugares en este sitio a través de los cuales puede usted entregar datos personales, y en los tres tiene que quererlo de veras: la solicitud de afiliación en [Participar][join], el formulario de mensaje en [Contacto][contact] y la casilla de suscripción de la [página del boletín][newsletter]. Nada más en el sitio transmite nada, y a ninguno de los tres formularios se llega por accidente.",
           },
+          {
+            type: "paragraph",
+            text: "Comprar pegatinas en la [tienda][shop] es un cuarto caso, y distinto: usted introduce sus datos en la página del proveedor de pagos, no en este sitio. Tiene su propia sección más abajo.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "Si compra pegatinas",
+        body: [
+          {
+            type: "paragraph",
+            text: "La [tienda de pegatinas][shop] la gestiona Restore Europa Movement, un empresario individual en Austria, que es el responsable de los datos descritos en esta sección. A diferencia del resto de este sitio, la tienda tiene por tanto un responsable con nombre. Puede contactar con él en restoreeuropamovement@gmail.com; su dirección postal se facilita previa solicitud.",
+          },
+          {
+            type: "paragraph",
+            text: "**Qué conserva este sitio.** De cada pedido conserva lo que usted eligió — el diseño, la cantidad, el país de destino y los importes — junto con el número de pedido, las fechas y si el pedido se ha enviado o se ha desistido de él. No conserva ningún nombre, ninguna dirección de correo electrónico ni ninguna dirección postal. Una lista de quienes compraron pegatinas a un movimiento político es una lista de sus simpatizantes, así que la tienda está hecha para no tener ninguna.",
+          },
+          {
+            type: "paragraph",
+            text: "**Qué conserva Stripe.** Usted paga en la página de nuestro proveedor de pagos, Stripe (Stripe Payments Europe, Limited, Dublin, Irlanda). Este recoge su nombre, su dirección de correo electrónico, su dirección de entrega y sus datos de pago, y los conserva conforme a su propia política de privacidad, como le exige la normativa de pagos. En el extracto de su banco o de su tarjeta figura el nombre de la tienda.",
+          },
+          {
+            type: "paragraph",
+            text: "**Cuándo se leen sus datos.** Su dirección de entrega se lee de Stripe cuando se empaquetan sus pegatinas: quienes las envían ven su nombre y su dirección para ese único sobre y no conservan nada. Su dirección de correo electrónico se lee de Stripe una sola vez, para enviarle la confirmación del pedido, y pasa por tanto por Resend, el proveedor que entrega el correo de este sitio. Los administradores de la tienda pueden consultar los datos de un pedido en Stripe, por ejemplo para responderle o para hacerle un reembolso, y cada consulta queda registrada.",
+          },
+          {
+            type: "paragraph",
+            text: "**Si desiste.** El [formulario de desistimiento][withdraw] le pide su nombre, su número de pedido y su dirección de correo electrónico. Se usan para encontrar su pedido y enviarle una confirmación, y no se guardan: el pedido registra únicamente el momento en que usted desistió.",
+          },
+          {
+            type: "paragraph",
+            text: "**Por qué, y durante cuánto tiempo.** Estos datos se usan para formalizar y entregar su compra y para cumplir las obligaciones de conservación de documentos que impone la normativa tributaria (artículo 6, apartado 1, letras b) y c), del RGPD). Los registros de pedidos se conservan durante los siete años que exige la normativa tributaria austriaca; no contienen nada que le identifique por su nombre. Los derechos que se exponen más abajo se aplican también a la tienda; escriba a la dirección indicada arriba para ejercerlos.",
+          },
+        ],
+      },
+
       analytics: {
         title: "Cifras de tráfico",
         body: [
@@ -346,6 +380,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Las correcciones y los requerimientos legales podrán enviarse a través de [Contacto][contact] una vez que se publiquen las direcciones.",
+      },
+      {
+        type: "subheading",
+        text: "La tienda de pegatinas",
+      },
+      {
+        type: "paragraph",
+        text: "Las pegatinas de la [tienda][shop] las vende Restore Europa Movement, un empresario individual (Einzelunternehmen) en Austria. Correo electrónico: restoreeuropamovement@gmail.com. Teléfono: +43 650 5006955. La dirección postal se facilita previa solicitud por correo electrónico. Las [condiciones de venta][terms] se aplican a todos los pedidos.",
       },
     ],
   },

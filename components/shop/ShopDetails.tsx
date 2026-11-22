@@ -1,13 +1,16 @@
 import Link from "next/link";
-import { Package, Ruler } from "lucide-react";
+import { Package, Ruler, ShieldCheck } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { preorder, type ShopEdition } from "@/content/shop";
+import { preorder, shopSeller, stickerManufacturer, type ShopEdition } from "@/content/shop";
 import { localePath } from "@/lib/i18n";
 import { routes } from "@/lib/site";
 
-/** The sticker's specifications and how it is delivered, as two cards side by side. */
+const LINK =
+  "underline decoration-rule underline-offset-4 transition-colors hover:text-burgundy hover:decoration-burgundy";
+
+/** The sticker's specifications, how it is delivered, and its product-safety details. */
 export function ShopDetails({ edition }: { readonly edition: ShopEdition }) {
   const { locale, text } = edition;
   const { specs, delivery } = text.sticker;
@@ -22,11 +25,25 @@ export function ShopDetails({ edition }: { readonly edition: ShopEdition }) {
         <Reveal delay={0.12}>
           <Card icon={<Package className="size-4" strokeWidth={1.6} aria-hidden="true" />} title={delivery.title} rows={deliveryRows} />
         </Reveal>
-        <p className="text-[0.9375rem] text-muted md:col-span-2">
-          <Link
-            href={localePath(locale, `${routes.shop}/withdraw`)}
-            className="underline decoration-rule underline-offset-4 transition-colors hover:text-burgundy hover:decoration-burgundy"
-          >
+        <Reveal delay={0.2} className="md:col-span-2">
+          <Card
+            icon={<ShieldCheck className="size-4" strokeWidth={1.6} aria-hidden="true" />}
+            title={text.safety.title}
+            rows={[
+              { label: text.safety.product, value: text.safety.productValue },
+              {
+                label: text.safety.manufacturer,
+                value: `${stickerManufacturer.name}, ${stickerManufacturer.address} · ${stickerManufacturer.email}`,
+              },
+              { label: text.safety.seller, value: `${shopSeller.name} · ${shopSeller.email}` },
+            ]}
+          />
+        </Reveal>
+        <p className="flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem] text-muted md:col-span-2">
+          <Link href={localePath(locale, routes.terms)} className={LINK}>
+            {text.terms.shopLink}
+          </Link>
+          <Link href={localePath(locale, routes.withdraw)} className={LINK}>
             {text.withdrawal.shopLink}
           </Link>
         </p>

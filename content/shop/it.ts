@@ -224,6 +224,97 @@ export const shopText: ShopText = {
     },
   },
 
+  safety: {
+    title: "Sicurezza del prodotto",
+    product: "Prodotto",
+    productValue: "Adesivo, 9,8 × 9,8 cm, carta autoadesiva bianca, stampato a colori",
+    manufacturer: "Fabbricante",
+    seller: "Venduto da",
+  },
+
+  terms: {
+    metaTitle: "Condizioni di vendita",
+    kicker: "Negozio",
+    title: "Condizioni di vendita",
+    lede: "Le condizioni alle quali gli adesivi sono venduti in questo negozio, con il tuo diritto di recedere da un acquisto e un modulo per farlo.",
+    updated: "Aggiornate al 22 novembre 2026.",
+    sections: [
+      {
+        heading: "1. Chi vende",
+        paragraphs: [
+          "Gli adesivi di questo negozio sono venduti da {seller}, impresa individuale in Austria. Puoi contattarci per email all'indirizzo {email} o per telefono al numero {phone}. Il nostro indirizzo postale viene comunicato su richiesta per email.",
+        ],
+      },
+      {
+        heading: "2. A cosa si applicano queste condizioni",
+        paragraphs: [
+          "Queste condizioni si applicano a ogni ordine effettuato in questo negozio da un consumatore. La descrizione degli adesivi nella pagina del negozio ne fa parte.",
+        ],
+      },
+      {
+        heading: "3. Come si conclude il contratto",
+        paragraphs: [
+          "Nella pagina del negozio scegli un design, una quantità e il paese di consegna, e vedi il totale, spese di spedizione incluse. Procedendo al pagamento arrivi alla pagina di pagamento del nostro fornitore di servizi di pagamento, Stripe, dove inserisci il tuo nome, il tuo indirizzo email, l'indirizzo di consegna e i dati di pagamento, e puoi ancora correggerli.",
+          "Premendo lì il pulsante di pagamento fai un'offerta di acquisto vincolante. Il contratto è concluso quando il pagamento è confermato. Ti inviamo quindi un'email di conferma con il numero d'ordine e un link alla pagina del tuo ordine.",
+        ],
+      },
+      {
+        heading: "4. Prezzi e pagamento",
+        paragraphs: [
+          "Tutti i prezzi sono in euro e corrispondono a quanto paghi. Le spese di spedizione sono indicate separatamente prima del pagamento e sono incluse nel totale. Non aggiungiamo altri costi.",
+          "Fuori dall'Unione europea, la dogana del tuo paese può applicare alla consegna un'imposta di importazione o una commissione di gestione. Questi importi non fanno parte del nostro prezzo.",
+          "Paghi sulla pagina di pagamento di Stripe con uno dei metodi offerti lì. L'importo viene addebitato al momento dell'ordine.",
+        ],
+      },
+      {
+        heading: "5. Consegna",
+        paragraphs: [
+          "Spediamo gli adesivi dall'Austria per posta ordinaria, senza tracciamento, all'indirizzo che indichi nella pagina di pagamento, nei paesi offerti nella pagina del negozio.",
+          "Gli ordini effettuati mentre il negozio li indica come preordini vengono spediti entro un mese dal giorno dell'ordine. La pagina del tuo ordine mostra quando è stato spedito.",
+          "Se alla fine non possiamo consegnare un ordine, per esempio perché vengono stampati meno adesivi del previsto, te lo comunichiamo per email e ti rimborsiamo subito l'intero importo.",
+        ],
+      },
+      {
+        heading: "6. Il tuo diritto di recesso",
+        paragraphs: [
+          "Hai il diritto di recedere dal contratto, senza indicarne le ragioni, entro 14 giorni. Il periodo di recesso scade dopo 14 giorni dal giorno in cui tu o un terzo, diverso dal vettore e da te designato, ricevete gli adesivi.",
+          "Per esercitare il diritto di recesso, sei tenuto a informarci della tua decisione tramite una dichiarazione esplicita. Il modo più rapido è la nostra [funzione di recesso][withdraw]. Puoi anche scrivere a {email} o utilizzare il modulo tipo di recesso riportato qui sotto, ma non è obbligatorio. Per rispettare il termine di recesso, è sufficiente che tu invii la tua dichiarazione prima della scadenza del periodo di recesso.",
+          "**Effetti del recesso.** Se recedi dal presente contratto, ti saranno rimborsati tutti i pagamenti che hai effettuato a nostro favore, compresi i costi di consegna standard, senza indebito ritardo e in ogni caso non oltre 14 giorni dal giorno in cui riceviamo il tuo recesso. Detti rimborsi saranno effettuati utilizzando lo stesso mezzo di pagamento da te usato, salvo che tu abbia espressamente convenuto altrimenti; in ogni caso, non dovrai sostenere alcun costo quale conseguenza di tale rimborso. Il rimborso può essere sospeso fino al ricevimento degli adesivi oppure fino all'avvenuta dimostrazione da parte tua di averli rispediti, se precedente.",
+          "Se gli adesivi ti sono già arrivati, sei pregato di rispedirceli senza indebiti ritardi e in ogni caso entro 14 giorni dal recesso. Ti comunichiamo l'indirizzo per la restituzione per email quando recedi. I costi diretti della restituzione sono a tuo carico. Sei responsabile della diminuzione del valore degli adesivi solo se risulta da una manipolazione diversa da quella necessaria per stabilirne la natura e il funzionamento, per esempio se mancano adesivi o se sono stati usati o danneggiati.",
+        ],
+      },
+      {
+        heading: "7. Se qualcosa non va",
+        paragraphs: [
+          "Si applica la garanzia legale sui beni. Se gli adesivi arrivano danneggiati, stampati male o non conformi alla descrizione, oppure non arrivano, scrivici a {email} indicando il numero d'ordine, e rimediamo inviandoti adesivi sostitutivi o rimborsandoti.",
+        ],
+      },
+      {
+        heading: "8. Legge applicabile",
+        paragraphs: [
+          "Si applica il diritto austriaco, escluse le sue norme sul conflitto di leggi. Se sei un consumatore residente in un altro paese, ciò non ti priva della tutela delle norme imperative di quel paese.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Modulo di recesso tipo",
+      intro: "Se desideri recedere dal contratto, puoi compilare questo modulo e inviarcelo. Non sei obbligato a usarlo.",
+      lines: [
+        "Destinatario: {seller}, {email}:",
+        "Con la presente io/noi (*) notifichiamo il recesso dal mio/nostro (*) contratto di vendita dei seguenti beni:",
+        "Ordinato il (*) / ricevuto il (*):",
+        "Numero d'ordine:",
+        "Nome del/dei consumatore(i):",
+        "Indirizzo del/dei consumatore(i):",
+        "Firma del/dei consumatore(i) (solo se il presente modulo è notificato in versione cartacea):",
+        "Data:",
+      ],
+      note: "(*) Cancellare la dicitura inutile.",
+    },
+    shopLink: "Condizioni di vendita",
+    accept: "Procedendo al pagamento accetti le nostre [condizioni di vendita][terms], che comprendono il tuo diritto di recesso.",
+  },
+
   item: { one: "{count} adesivo — {design}", other: "{count} adesivi — {design}" },
   shippingLabel: "Spese di spedizione",
   addressNote:

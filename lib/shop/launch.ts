@@ -33,13 +33,19 @@ export const launchChecklist = {
       "Austrian media law requires every printed item to name its publisher and its printer, with the towns of publication and printing — not a street address (MedienG § 24(1)). Stickers posted into Germany are also distributed there, and German state press laws ask for names with addresses (Bavaria: BayPrG Art. 7). The artwork leaves the field blank for whoever puts a sticker up; once the association sells the stickers it is the publisher, so the bulk run is printed with the imprint, worded as an adviser confirms covers both.",
   },
   terms: {
-    done: false,
+    done: true,
     title: "Terms, withdrawal and delivery are published",
+    /* Done 22 November 2026: /shop/terms with the withdrawal notice and model form,
+       the online withdrawal function at /shop/withdraw, in six languages. By the
+       operator's decision the seller's postal address is not published and is given
+       on request by email, including the return address after a withdrawal; that
+       departs from what Austrian law (ECG § 5, FAGG § 4) expects of a shop, and is
+       recorded here as a choice rather than an oversight. */
     detail:
       "Terms of sale; pre-contract information including the EU's harmonised warranty notice (Regulation 2025/1960, since 27 September 2026); the fourteen-day withdrawal notice and model form; the online withdrawal function required across the EU since 19 June 2026; delivery costs and times (letters from Austria, Economy abroad); and a lawyer's view of the payment button's wording on Stripe's page. Pre-designed stickers are not made to the buyer's specification, so the right of withdrawal applies.",
   },
   privacy: {
-    done: false,
+    done: true,
     title: "/privacy describes the shop, in all six languages",
     detail:
       "A purchase from a political movement can reveal a political opinion (GDPR Art. 9; CJEU C-21/23), so the legal basis is settled with an adviser first. The note says what Stripe collects, that the movement's name appears on card statements, that the people posting see a name and address for one envelope and keep nothing, that the buyer's email address is read from Stripe once to send the order confirmation and so passes through the mail provider (Resend), and that this site keeps no customer record of its own. Edited before the shop opens, not after.",
@@ -63,7 +69,7 @@ export const launchChecklist = {
       "Reworded on 22 November 2026 for pre-orders (`preorder` in content/shop/structure.ts): the shop may sell before the stickers are in Austria, because every page and email says the order is posted within one month. So: the bulk run is ordered with the imprint on it, and the printer's delivery date leaves that month; the people posting have dispatch accounts (invited at /admin/security) with a passkey each; envelopes are bought or ordered. When the stock arrives, and before the first pre-order goes out, one envelope of each size is packed and weighed against the formats on the packing list.",
   },
   productSafety: {
-    done: false,
+    done: true,
     title: "Product-safety details are on the listing",
     detail:
       "Under the General Product Safety Regulation whoever has a product made and sells it under their own name is its manufacturer: the shop names the manufacturer with a postal and an electronic address, identifies the product and states any warnings, and the movement keeps the technical documentation for ten years.",

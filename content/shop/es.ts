@@ -224,6 +224,97 @@ export const shopText: ShopText = {
     },
   },
 
+  safety: {
+    title: "Seguridad del producto",
+    product: "Producto",
+    productValue: "Pegatina, 9,8 × 9,8 cm, papel blanco autoadhesivo, impresa a todo color",
+    manufacturer: "Fabricante",
+    seller: "Vendido por",
+  },
+
+  terms: {
+    metaTitle: "Condiciones de venta",
+    kicker: "Tienda",
+    title: "Condiciones de venta",
+    lede: "Las condiciones con arreglo a las cuales se venden las pegatinas en esta tienda, con su derecho a desistir de una compra y un formulario para hacerlo.",
+    updated: "Vigentes a 22 de noviembre de 2026.",
+    sections: [
+      {
+        heading: "1. Quién vende",
+        paragraphs: [
+          "Las pegatinas de esta tienda las vende {seller}, un empresario individual en Austria. Puede contactar con nosotros por correo electrónico en {email} o por teléfono en el {phone}. Nuestra dirección postal se facilita previa solicitud por correo electrónico.",
+        ],
+      },
+      {
+        heading: "2. Qué abarcan estas condiciones",
+        paragraphs: [
+          "Estas condiciones se aplican a todos los pedidos que un consumidor haga en esta tienda. La descripción de las pegatinas en la página de la tienda forma parte de ellas.",
+        ],
+      },
+      {
+        heading: "3. Cómo se celebra el contrato",
+        paragraphs: [
+          "En la página de la tienda usted elige un diseño, una cantidad y el país de entrega, y ve el total, gastos de envío incluidos. Al continuar al pago pasa a la página de pago de nuestro proveedor de pagos, Stripe, donde introduce su nombre, su dirección de correo electrónico, su dirección de entrega y sus datos de pago, y todavía puede corregirlos.",
+          "Pulsar allí el botón de pago constituye una oferta de compra vinculante. El contrato se celebra cuando se confirma el pago. A continuación le enviamos un correo electrónico de confirmación con su número de pedido y un enlace a la página de su pedido.",
+        ],
+      },
+      {
+        heading: "4. Precios y pago",
+        paragraphs: [
+          "Todos los precios se expresan en euros y son lo que usted paga. Los gastos de envío se muestran por separado antes de pagar y están incluidos en el total. No añadimos ningún otro cargo.",
+          "Fuera de la Unión Europea, las aduanas de su país pueden cobrar a la entrega impuestos de importación o una tasa de gestión. Esos importes no forman parte de nuestro precio.",
+          "Usted paga en la página de pago de Stripe con uno de los medios que allí se ofrecen. El importe se cobra en el momento del pedido.",
+        ],
+      },
+      {
+        heading: "5. Entrega",
+        paragraphs: [
+          "Enviamos las pegatinas desde Austria por correo ordinario, sin seguimiento, a la dirección que usted indique en la página de pago, a los países que se ofrecen en la página de la tienda.",
+          "Los pedidos hechos mientras la tienda los marca como reservas se envían en el plazo de un mes desde el día del pedido. La página de su pedido indica cuándo se ha enviado.",
+          "Si finalmente no podemos entregar un pedido, por ejemplo porque se imprimen menos pegatinas de las previstas, se lo comunicamos por correo electrónico y le reembolsamos de inmediato el importe íntegro.",
+        ],
+      },
+      {
+        heading: "6. Su derecho de desistimiento",
+        paragraphs: [
+          "Tiene usted derecho a desistir del presente contrato en un plazo de 14 días naturales sin necesidad de justificación. El plazo de desistimiento expirará a los 14 días naturales del día que usted o un tercero por usted indicado, distinto del transportista, adquiera la posesión material de las pegatinas.",
+          "Para ejercer el derecho de desistimiento, deberá usted notificarnos su decisión de desistir del contrato a través de una declaración inequívoca. La vía más rápida es nuestra [función de desistimiento][withdraw]. También puede escribir a {email} o utilizar el modelo de formulario de desistimiento que figura a continuación, aunque su uso no es obligatorio. Para cumplir el plazo de desistimiento, basta con que la comunicación relativa al ejercicio por su parte de este derecho sea enviada antes de que venza el plazo correspondiente.",
+          "**Consecuencias del desistimiento.** En caso de desistimiento por su parte, le devolveremos todos los pagos recibidos de usted, incluidos los gastos de entrega ordinaria, sin ninguna demora indebida y, en todo caso, a más tardar 14 días naturales a partir de la fecha en la que se nos informe de su decisión de desistir del presente contrato. Procederemos a efectuar dicho reembolso utilizando el mismo medio de pago empleado por usted, a no ser que hayamos dispuesto expresamente lo contrario; en todo caso, no incurrirá en ningún gasto como consecuencia del reembolso. Podremos retener el reembolso hasta haber recibido las pegatinas, o hasta que usted haya presentado una prueba de su devolución, según qué condición se cumpla primero.",
+          "Si las pegatinas ya le han llegado, deberá devolvérnoslas sin ninguna demora indebida y, en cualquier caso, a más tardar en el plazo de 14 días naturales a partir de la fecha en que nos comunique su decisión de desistimiento. Le indicamos la dirección de devolución por correo electrónico cuando desista. Deberá usted asumir el coste directo de devolución. Solo será usted responsable de la disminución de valor de las pegatinas resultante de una manipulación distinta a la necesaria para establecer su naturaleza y su funcionamiento, por ejemplo si faltan pegatinas o están usadas o dañadas.",
+        ],
+      },
+      {
+        heading: "7. Si algo no está bien",
+        paragraphs: [
+          "Se aplica la garantía legal de los bienes. Si las pegatinas llegan dañadas, mal impresas o no conformes con la descripción, o no llegan, escríbanos a {email} indicando su número de pedido y lo solucionaremos enviándole otras en sustitución o reembolsándole el importe.",
+        ],
+      },
+      {
+        heading: "8. Legislación aplicable",
+        paragraphs: [
+          "Se aplica el Derecho austriaco, con exclusión de sus normas de conflicto de leyes. Si usted es un consumidor que reside en otro país, ello no le priva de la protección que le otorgan las disposiciones imperativas del Derecho de ese país.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Modelo de formulario de desistimiento",
+      intro: "Si desea desistir del contrato, puede cumplimentar este formulario y enviárnoslo. Su uso no es obligatorio.",
+      lines: [
+        "A la atención de {seller}, {email}:",
+        "Por la presente le comunico/comunicamos (*) que desisto de mi/desistimos de nuestro (*) contrato de venta del siguiente bien (*):",
+        "Pedido el (*) / recibido el (*):",
+        "Número de pedido:",
+        "Nombre del consumidor o de los consumidores:",
+        "Domicilio del consumidor o de los consumidores:",
+        "Firma del consumidor o de los consumidores (solo si el presente formulario se presenta en papel):",
+        "Fecha:",
+      ],
+      note: "(*) Táchese lo que no proceda.",
+    },
+    shopLink: "Condiciones de venta",
+    accept: "Al continuar al pago acepta nuestras [condiciones de venta][terms], que incluyen su derecho de desistimiento.",
+  },
+
   item: { one: "{count} pegatina — {design}", other: "{count} pegatinas — {design}" },
   shippingLabel: "Gastos de envío",
   addressNote:

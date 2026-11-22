@@ -39,7 +39,7 @@ Austrian Post's prices are VAT-exempt as universal service. Unlike Deutsche Post
 
 Austrian Post prices letters by weight only up to 75 g. Above that, the large format costs the same up to 2 kg, which is why postage stops rising at 50 stickers. Tariffs re-read on post.at on 15 November 2026.
 
-The sticker is WIRmachenDRUCK's 98 × 98 mm square on white 80 g/m² self-adhesive paper (chosen 22 November 2026), estimated at 1.5 g and 0.14 mm each. The weights above follow from that and are estimates until the first envelopes are weighed.
+The sticker is FLYERALARM's 98 × 98 mm square on white 80 g/m² self-adhesive paper (chosen 22 November 2026; FLYERALARM prints the run and is named as manufacturer), estimated at 1.5 g and 0.14 mm each. The weights above follow from that and are estimates until the first envelopes are weighed.
 
 - **Bulk discount for later:** Brief International Plus, at 20 or more envelopes per drop-off, is much cheaper. Economy costs €0.69 per item plus €8.30 per kg up to 75 g, and €1.80 plus €3.70 per kg for the large format. It could cut EU postage substantially once volume justifies the paperwork.
 - **Weights:** all estimates, as in section 6.2. No card stiffener goes in the letters, because it would only add weight to envelopes already near their limits.

@@ -229,6 +229,97 @@ export const shopText: ShopText = {
     },
   },
 
+  safety: {
+    title: "Bezpieczeństwo produktu",
+    product: "Produkt",
+    productValue: "Naklejka, 9,8 × 9,8 cm, biały papier samoprzylepny, nadruk w pełnym kolorze",
+    manufacturer: "Producent",
+    seller: "Sprzedawca",
+  },
+
+  terms: {
+    metaTitle: "Regulamin sprzedaży",
+    kicker: "Sklep",
+    title: "Regulamin sprzedaży",
+    lede: "Warunki, na jakich w tym sklepie sprzedawane są naklejki, wraz z Państwa prawem odstąpienia od zakupu i formularzem, który to umożliwia.",
+    updated: "Stan na 22 listopada 2026 r.",
+    sections: [
+      {
+        heading: "1. Kto sprzedaje",
+        paragraphs: [
+          "Sprzedawcą naklejek w tym sklepie jest {seller}, jednoosobowa działalność gospodarcza w Austrii. Mogą się Państwo z nami skontaktować e-mailem pod adresem {email} lub telefonicznie pod numerem {phone}. Nasz adres pocztowy podajemy na prośbę przesłaną e-mailem.",
+        ],
+      },
+      {
+        heading: "2. Czego dotyczy niniejszy regulamin",
+        paragraphs: [
+          "Niniejszy regulamin ma zastosowanie do każdego zamówienia złożonego w tym sklepie przez konsumenta. Opis naklejek na stronie sklepu stanowi jego część.",
+        ],
+      },
+      {
+        heading: "3. Zawarcie umowy",
+        paragraphs: [
+          "Na stronie sklepu wybierają Państwo wzór, liczbę naklejek i kraj dostawy oraz widzą kwotę łączną wraz z kosztem wysyłki. Przejście do płatności prowadzi na stronę płatności naszego operatora płatności, Stripe, gdzie podają Państwo imię i nazwisko, adres e-mail, adres dostawy i dane płatnicze i mogą je jeszcze poprawić.",
+          "Naciśnięcie tam przycisku płatności stanowi wiążącą ofertę zakupu. Umowa zostaje zawarta z chwilą potwierdzenia płatności. Następnie wysyłamy Państwu e-mail z potwierdzeniem, zawierający numer zamówienia i link do strony zamówienia.",
+        ],
+      },
+      {
+        heading: "4. Ceny i płatność",
+        paragraphs: [
+          "Wszystkie ceny są podane w euro i są kwotami, które Państwo płacą. Koszt wysyłki jest wskazany osobno przed zapłatą i wliczony w kwotę łączną. Nie doliczamy żadnych innych opłat.",
+          "Poza Unią Europejską służby celne Państwa kraju mogą przy doręczeniu pobrać podatek importowy lub opłatę manipulacyjną. Nie wchodzą one w naszą cenę.",
+          "Płacą Państwo na stronie płatności Stripe jedną z oferowanych tam metod. Kwota jest pobierana w chwili złożenia zamówienia.",
+        ],
+      },
+      {
+        heading: "5. Dostawa",
+        paragraphs: [
+          "Wysyłamy naklejki z Austrii zwykłym listem, bez śledzenia przesyłki, na adres podany przez Państwa na stronie płatności, do krajów wskazanych na stronie sklepu.",
+          "Zamówienia złożone w czasie, gdy sklep oznacza je jako przedsprzedaż, wysyłamy w ciągu miesiąca od dnia złożenia zamówienia. Strona zamówienia pokazuje, kiedy zostało ono wysłane.",
+          "Jeśli mimo wszystko nie możemy zrealizować zamówienia, na przykład dlatego, że wydrukowano mniej naklejek, niż przewidywano, informujemy Państwa o tym e-mailem i niezwłocznie zwracamy całą kwotę.",
+        ],
+      },
+      {
+        heading: "6. Prawo odstąpienia od umowy",
+        paragraphs: [
+          "Mają Państwo prawo odstąpić od niniejszej umowy w terminie 14 dni bez podania jakiejkolwiek przyczyny. Termin do odstąpienia od umowy wygasa po upływie 14 dni od dnia, w którym weszli Państwo w posiadanie naklejek lub w którym osoba trzecia inna niż przewoźnik i wskazana przez Państwa weszła w posiadanie naklejek.",
+          "Aby skorzystać z prawa odstąpienia od umowy, muszą Państwo poinformować nas o swojej decyzji o odstąpieniu od niniejszej umowy w drodze jednoznacznego oświadczenia. Najszybciej można to zrobić za pomocą naszej [funkcji odstąpienia od umowy][withdraw]. Mogą Państwo również napisać na adres {email} lub skorzystać z poniższego wzoru formularza odstąpienia od umowy, jednak nie jest to obowiązkowe. Aby zachować termin do odstąpienia od umowy, wystarczy wysłać oświadczenie przed jego upływem.",
+          "**Skutki odstąpienia od umowy.** W przypadku odstąpienia od niniejszej umowy zwracamy Państwu wszystkie otrzymane od Państwa płatności, w tym koszt standardowej wysyłki, niezwłocznie, a w każdym przypadku nie później niż 14 dni od dnia, w którym zostaliśmy poinformowani o Państwa decyzji o wykonaniu prawa odstąpienia od niniejszej umowy. Zwrotu płatności dokonamy przy użyciu takich samych sposobów płatności, jakie zostały przez Państwa użyte w pierwotnej transakcji, chyba że wyraźnie zgodzili się Państwo na inne rozwiązanie; w każdym przypadku nie poniosą Państwo żadnych opłat w związku z tym zwrotem. Możemy wstrzymać się ze zwrotem płatności do czasu otrzymania naklejek z powrotem lub do czasu dostarczenia nam dowodu ich odesłania, w zależności od tego, które zdarzenie nastąpi wcześniej.",
+          "Jeśli naklejki już do Państwa dotarły, prosimy odesłać je nam niezwłocznie, a w każdym razie nie później niż 14 dni od dnia, w którym poinformowali nas Państwo o odstąpieniu od niniejszej umowy. Adres do zwrotu podajemy e-mailem w chwili odstąpienia. Będą Państwo musieli ponieść bezpośrednie koszty zwrotu naklejek. Odpowiadają Państwo za zmniejszenie wartości naklejek wyłącznie wtedy, gdy wynika ono z korzystania z nich w sposób inny niż było to konieczne do stwierdzenia ich charakteru, cech i funkcjonowania, na przykład jeśli brakuje naklejek albo są one zużyte lub uszkodzone.",
+        ],
+      },
+      {
+        heading: "7. Gdy coś jest nie tak",
+        paragraphs: [
+          "Obowiązuje ustawowa rękojmia za towary. Jeśli naklejki dotrą uszkodzone, źle wydrukowane lub niezgodne z opisem albo w ogóle nie dotrą, prosimy napisać do nas na adres {email}, podając numer zamówienia, a my naprawimy sytuację, wysyłając nowe naklejki lub zwracając pieniądze.",
+        ],
+      },
+      {
+        heading: "8. Prawo właściwe",
+        paragraphs: [
+          "Zastosowanie ma prawo austriackie z wyłączeniem norm kolizyjnych. Jeśli są Państwo konsumentem mieszkającym w innym kraju, nie pozbawia to Państwa ochrony przysługującej na podstawie bezwzględnie obowiązujących przepisów prawa tego kraju.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Wzór formularza odstąpienia od umowy",
+      intro: "Jeśli chcą Państwo odstąpić od umowy, mogą Państwo wypełnić ten formularz i odesłać go do nas. Nie jest to obowiązkowe.",
+      lines: [
+        "Adresat: {seller}, {email}:",
+        "Ja/My (*) niniejszym informuję/informujemy (*) o moim/naszym (*) odstąpieniu od umowy sprzedaży następujących rzeczy:",
+        "Data zamówienia (*) / data odbioru (*):",
+        "Numer zamówienia:",
+        "Imię i nazwisko konsumenta(-ów):",
+        "Adres konsumenta(-ów):",
+        "Podpis konsumenta(-ów) (tylko jeżeli formularz jest przesyłany w wersji papierowej):",
+        "Data:",
+      ],
+      note: "(*) Niepotrzebne skreślić.",
+    },
+    shopLink: "Regulamin sprzedaży",
+    accept: "Przechodząc do płatności, akceptujesz nasz [regulamin sprzedaży][terms], który obejmuje twoje prawo odstąpienia od umowy.",
+  },
+
   item: {
     one: "{count} naklejka — {design}",
     few: "{count} naklejki — {design}",

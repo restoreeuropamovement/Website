@@ -189,7 +189,7 @@ async function provider(): Promise<void> {
     orderId: "0b6c2f4e-9d1a-4c7b-8e3f-5a2d1c0b9e8f",
     reference: "RE-TEST123",
     quantity: 25 as const,
-    design: { slug: "test", printUrl: "https://example.invalid/x.pdf", printSha256: "0", printContentType: "application/pdf", finishedMm: 98, bleedMm: 3 },
+    design: { slug: "test", printUrl: "https://example.invalid/x.pdf", printSha256: "0", printContentType: "application/pdf", finishedMm: 98, bleedMm: 1 },
     shipTo: { name: "Test", line1: "1 Test Street", line2: null, postalCode: "10115", city: "Berlin", state: null, country: "DE" as const },
   };
   const first = await mockProvider.submit(job);

@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "Il existe trois endroits sur ce site par lesquels vous pouvez transmettre des données à caractère personnel, et dans les trois cas il faut le vouloir : la demande d'adhésion sur [S'engager][join], le formulaire de message sur [Contact][contact] et le champ d'inscription de la [page de la lettre][newsletter]. Rien d'autre sur ce site ne transmet quoi que ce soit, et aucun des trois formulaires n'est accessible par accident.",
           },
+          {
+            type: "paragraph",
+            text: "Acheter des autocollants dans la [boutique][shop] est un quatrième cas, et un cas différent : vous saisissez vos coordonnées sur la page du prestataire de paiement, et non sur ce site. Une section lui est consacrée plus bas.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "Si vous achetez des autocollants",
+        body: [
+          {
+            type: "paragraph",
+            text: "La [boutique d'autocollants][shop] est exploitée par Restore Europa Movement, entreprise individuelle établie en Autriche, qui est responsable des données décrites dans cette section. Contrairement au reste de ce site, la boutique a donc un responsable du traitement nommément désigné. Vous pouvez le joindre à restoreeuropamovement@gmail.com ; son adresse postale est communiquée sur demande.",
+          },
+          {
+            type: "paragraph",
+            text: "**Ce que ce site conserve.** Pour chaque commande, il conserve ce que vous avez choisi — le motif, la quantité, le pays de destination et les montants —, avec le numéro de commande, les dates, et le fait que la commande a été expédiée ou a fait l'objet d'une rétractation. Il ne conserve ni nom, ni adresse électronique, ni adresse postale. La liste des personnes ayant acheté des autocollants à un mouvement politique est la liste de ses sympathisants : la boutique est donc conçue pour ne pas en avoir.",
+          },
+          {
+            type: "paragraph",
+            text: "**Ce que Stripe conserve.** Vous payez sur la page de notre prestataire de paiement, Stripe (Stripe Payments Europe, Limited, Dublin, Irlande). Celui-ci recueille votre nom, votre adresse électronique, votre adresse de livraison et vos données de paiement, et les conserve selon sa propre politique de confidentialité, comme le droit des paiements l'y oblige. Votre relevé bancaire ou de carte indique le nom de la boutique.",
+          },
+          {
+            type: "paragraph",
+            text: "**Quand vos données sont lues.** Votre adresse de livraison est lue chez Stripe au moment où vos autocollants sont emballés : les personnes qui les expédient voient votre nom et votre adresse pour cette seule enveloppe et n'en conservent rien. Votre adresse électronique est lue chez Stripe une seule fois, pour vous envoyer la confirmation de commande, et transite donc par Resend, le prestataire qui achemine les courriels de ce site. Les administrateurs de la boutique peuvent consulter chez Stripe les détails d'une commande, par exemple pour vous répondre ou vous rembourser, et chaque consultation est consignée.",
+          },
+          {
+            type: "paragraph",
+            text: "**Si vous vous rétractez.** Le [formulaire de rétractation][withdraw] demande votre nom, votre numéro de commande et votre adresse électronique. Ils servent à retrouver votre commande et à vous envoyer une confirmation, et ne sont pas conservés : la commande n'enregistre que l'heure de votre rétractation.",
+          },
+          {
+            type: "paragraph",
+            text: "**Pourquoi, et pour combien de temps.** Ces données servent à conclure et à exécuter votre achat ainsi qu'à respecter les obligations de conservation du droit fiscal (article 6, paragraphe 1, points b) et c), du RGPD). Les enregistrements de commande sont conservés pendant les sept ans qu'exige le droit fiscal autrichien ; ils ne contiennent rien qui vous nomme. Les droits exposés plus bas s'appliquent également à la boutique ; écrivez à l'adresse ci-dessus pour les exercer.",
+          },
+        ],
+      },
+
       analytics: {
         title: "Chiffres de fréquentation",
         body: [
@@ -346,6 +380,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Les corrections et les notifications légales pourront être envoyées par [Contact][contact] dès que les adresses seront publiées.",
+      },
+      {
+        type: "subheading",
+        text: "La boutique d'autocollants",
+      },
+      {
+        type: "paragraph",
+        text: "Les autocollants de la [boutique][shop] sont vendus par Restore Europa Movement, entreprise individuelle (Einzelunternehmen) établie en Autriche. Courriel : restoreeuropamovement@gmail.com. Téléphone : +43 650 5006955. L'adresse postale est communiquée sur demande par courriel. Les [conditions générales de vente][terms] s'appliquent à toute commande.",
       },
     ],
   },

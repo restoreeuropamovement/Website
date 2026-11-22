@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "There are three places on this site through which you can hand over personal data, and in all three you have to mean it: the membership application on [Get Involved][join], the message form on [Contact][contact], and the subscription box on the [newsletter page][newsletter]. Nothing else on the site transmits anything, and none of the three is reachable by accident.",
           },
+          {
+            type: "paragraph",
+            text: "Buying stickers in the [shop][shop] is a fourth, and a different case: you enter your details on the payment provider's page, not on this site. It has its own section below.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "If you buy stickers",
+        body: [
+          {
+            type: "paragraph",
+            text: "The [sticker shop][shop] is run by Restore Europa Movement, a sole trader in Austria, which is responsible for the data described in this section. Unlike the rest of this site, the shop therefore has a named controller. You can reach it at restoreeuropamovement@gmail.com; its postal address is given on request.",
+          },
+          {
+            type: "paragraph",
+            text: "**What this site keeps.** For each order it keeps what you chose — the design, the quantity, the destination country and the amounts — with the order number, the dates, and whether the order has been posted or withdrawn. It keeps no name, no email address and no street address. A list of who bought stickers from a political movement is a list of its supporters, so the shop is built not to have one.",
+          },
+          {
+            type: "paragraph",
+            text: "**What Stripe keeps.** You pay on the page of our payment provider, Stripe (Stripe Payments Europe, Limited, Dublin, Ireland). It collects your name, email address, delivery address and payment details, and keeps them under its own privacy policy, as payment law requires it to. Your bank or card statement shows the shop's name.",
+          },
+          {
+            type: "paragraph",
+            text: "**When your details are read.** Your delivery address is read from Stripe when your stickers are packed: the people posting them see your name and address for that one envelope and keep nothing. Your email address is read from Stripe once, to send your order confirmation, and so passes through Resend, the provider that delivers this site's email. The shop's administrators can look up an order's details in Stripe, for example to answer you or to refund you, and each look is logged.",
+          },
+          {
+            type: "paragraph",
+            text: "**If you withdraw.** The [withdrawal form][withdraw] asks for your name, your order number and your email address. They are used to find your order and to send you a confirmation, and are not stored: the order records only the time you withdrew.",
+          },
+          {
+            type: "paragraph",
+            text: "**Why, and for how long.** These details are used to make and deliver your purchase and to meet the record-keeping duties of tax law (GDPR Article 6(1)(b) and (c)). Order records are kept for the seven years Austrian tax law requires; they contain nothing that names you. The rights set out below apply to the shop as well; write to the address above to use them.",
+          },
+        ],
+      },
+
       analytics: {
         title: "Traffic figures",
         body: [
@@ -359,6 +393,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Corrections and legal notices may be sent through [Contact][contact] once addresses are published.",
+      },
+      {
+        type: "subheading",
+        text: "The sticker shop",
+      },
+      {
+        type: "paragraph",
+        text: "Stickers in the [shop][shop] are sold by Restore Europa Movement, a sole trader (Einzelunternehmen) in Austria. Email: restoreeuropamovement@gmail.com. Phone: +43 650 5006955. The postal address is given on request by email. The [terms of sale][terms] apply to every order.",
       },
     ],
   },

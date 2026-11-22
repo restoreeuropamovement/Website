@@ -11,7 +11,9 @@ export {
   shippingZoneFor,
   shopCountryIds,
   shopQuantities,
+  shopSeller,
   stickerFormat,
+  stickerManufacturer,
   stickerStock,
 } from "./structure";
 export type { ShippingZoneId, ShopCountryId, ShopQuantity } from "./structure";

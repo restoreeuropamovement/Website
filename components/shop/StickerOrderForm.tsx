@@ -18,6 +18,7 @@ import {
   type ShopText,
 } from "@/content/shop";
 import { fill, plural } from "@/lib/format";
+import { renderInline } from "@/lib/inline";
 import { localePath, type Locale } from "@/lib/i18n";
 import { formatMoney } from "@/lib/shop/money";
 import { priceBook, quote } from "@/lib/shop/price-book";
@@ -336,6 +337,9 @@ export function StickerOrderForm({ locale, text, designs, countries, initial, re
             <p className="flex items-center justify-center gap-2 text-micro text-muted">
               <Lock className="size-3.5" strokeWidth={1.75} aria-hidden="true" />
               {form.secure}
+            </p>
+            <p className="text-center text-micro text-muted [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-burgundy">
+              {renderInline(text.terms.accept, locale)}
             </p>
             <p className="text-micro leading-relaxed text-faint">
               {form.payment}{" "}

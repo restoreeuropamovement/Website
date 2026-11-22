@@ -217,7 +217,11 @@ reads from Postgres when `DATABASE_URL` is set, with `content/journal/articles.t
 
 - No fabricated facts, statistics, quotations, names, addresses or email addresses. The imprint has
   no named publisher because the movement is not yet registered, and no correspondence addresses are
-  printed because none is monitored yet. Neither gap may be filled with something plausible.
+  printed for it because none is monitored yet. Neither gap may be filled with something plausible.
+  The sticker shop is the exception, with details the operator supplied on 22 November 2026: it is
+  sold by Restore Europa Movement, a sole trader, at restoreeuropamovement@gmail.com and
+  +43 650 5006955 (`shopSeller` in `content/shop/structure.ts`). Its postal address is given on
+  request by the operator's decision — do not supply one.
 - **Both public forms genuinely work.** `/join` writes to `member`, `/contact` writes to `enquiry`,
   and each says what it does. If either is ever disconnected, the page must say so before the change
   ships — a form that silently discards what is typed into it is worse than no form.

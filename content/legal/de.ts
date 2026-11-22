@@ -24,6 +24,10 @@ export const legalText: LegalText = {
             type: "paragraph",
             text: "Es gibt drei Stellen auf dieser Seite, über die Sie personenbezogene Daten übergeben können, und an allen dreien müssen Sie es ernst meinen: die Bewerbung um die Mitgliedschaft unter [Mitmachen][join], das Nachrichtenformular unter [Kontakt][contact] und das Eintragefeld auf der [Rundbrief-Seite][newsletter]. Nichts sonst auf der Seite übermittelt etwas, und keines der drei Formulare ist versehentlich zu erreichen.",
           },
+          {
+            type: "paragraph",
+            text: "Der Kauf von Stickern im [Shop][shop] ist ein vierter, und ein anderer Fall: Ihre Angaben machen Sie auf der Seite des Zahlungsdienstleisters, nicht auf dieser Website. Er hat weiter unten einen eigenen Abschnitt.",
+          },
         ],
       },
 
@@ -198,6 +202,36 @@ export const legalText: LegalText = {
         ],
       },
 
+      shop: {
+        title: "Wenn Sie Sticker kaufen",
+        body: [
+          {
+            type: "paragraph",
+            text: "Der [Sticker-Shop][shop] wird von Restore Europa Movement betrieben, einem Einzelunternehmen in Österreich, das für die in diesem Abschnitt beschriebenen Daten verantwortlich ist. Anders als der Rest dieser Website hat der Shop daher einen namentlich genannten Verantwortlichen. Sie erreichen ihn unter restoreeuropamovement@gmail.com; die Postanschrift wird auf Anfrage mitgeteilt.",
+          },
+          {
+            type: "paragraph",
+            text: "**Was diese Website speichert.** Zu jeder Bestellung speichert sie, was Sie gewählt haben — das Motiv, die Menge, das Zielland und die Beträge —, dazu die Bestellnummer, die Zeitpunkte und ob die Bestellung verschickt oder widerrufen wurde. Sie speichert keinen Namen, keine E-Mail-Adresse und keine Anschrift. Eine Liste derer, die bei einer politischen Bewegung Sticker gekauft haben, ist eine Liste ihrer Unterstützer, und deshalb ist der Shop so gebaut, dass er keine hat.",
+          },
+          {
+            type: "paragraph",
+            text: "**Was Stripe speichert.** Sie bezahlen auf der Seite unseres Zahlungsdienstleisters Stripe (Stripe Payments Europe, Limited, Dublin, Irland). Stripe erhebt Ihren Namen, Ihre E-Mail-Adresse, Ihre Lieferadresse und Ihre Zahlungsdaten und speichert sie nach seiner eigenen Datenschutzerklärung, wie es das Zahlungsrecht verlangt. Auf Ihrem Konto- oder Kartenauszug erscheint der Name des Shops.",
+          },
+          {
+            type: "paragraph",
+            text: "**Wann Ihre Angaben gelesen werden.** Ihre Lieferadresse wird von Stripe abgerufen, wenn Ihre Sticker verpackt werden: wer sie verschickt, sieht Ihren Namen und Ihre Anschrift für diesen einen Umschlag und behält nichts davon. Ihre E-Mail-Adresse wird einmal von Stripe abgerufen, um Ihnen die Bestellbestätigung zu senden, und läuft dabei über Resend, den Anbieter, der die E-Mails dieser Website zustellt. Die Verwaltung des Shops kann die Angaben zu einer Bestellung bei Stripe einsehen, etwa um Ihnen zu antworten oder Ihnen etwas zu erstatten, und jeder solche Blick wird protokolliert.",
+          },
+          {
+            type: "paragraph",
+            text: "**Wenn Sie widerrufen.** Das [Widerrufsformular][withdraw] fragt nach Ihrem Namen, Ihrer Bestellnummer und Ihrer E-Mail-Adresse. Sie dienen dazu, Ihre Bestellung zu finden und Ihnen eine Bestätigung zu senden, und werden nicht gespeichert: die Bestellung hält nur den Zeitpunkt Ihres Widerrufs fest.",
+          },
+          {
+            type: "paragraph",
+            text: "**Wozu und wie lange.** Diese Angaben dienen dazu, Ihren Kauf abzuschließen und auszuliefern und die Aufbewahrungspflichten des Steuerrechts zu erfüllen (Art. 6 Abs. 1 lit. b und c DSGVO). Bestelldaten werden die sieben Jahre aufbewahrt, die das österreichische Steuerrecht verlangt; sie enthalten nichts, was Sie namentlich bezeichnet. Die unten dargestellten Rechte gelten auch für den Shop; um sie auszuüben, schreiben Sie an die oben genannte Adresse.",
+          },
+        ],
+      },
+
       analytics: {
         title: "Zugriffszahlen",
         body: [
@@ -346,6 +380,14 @@ export const legalText: LegalText = {
       {
         type: "paragraph",
         text: "Berichtigungen und rechtliche Mitteilungen können über [Kontakt][contact] gesandt werden, sobald Adressen veröffentlicht sind.",
+      },
+      {
+        type: "subheading",
+        text: "Der Sticker-Shop",
+      },
+      {
+        type: "paragraph",
+        text: "Sticker im [Shop][shop] werden von Restore Europa Movement verkauft, einem Einzelunternehmen in Österreich. E-Mail: restoreeuropamovement@gmail.com. Telefon: +43 650 5006955. Die Postanschrift wird auf Anfrage per E-Mail mitgeteilt. Für jede Bestellung gelten die [Allgemeinen Geschäftsbedingungen][terms].",
       },
     ],
   },

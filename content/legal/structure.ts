@@ -20,6 +20,9 @@ export const privacySectionIds = [
      measurement sections, because it is the last thing on this page that is
      about somebody handing an identifier over on purpose. */
   "newsletter",
+  /* The sticker shop. After the newsletter, as the last thing somebody hands
+     over on purpose, and the one part of the site with a named controller. */
+  "shop",
   "analytics",
   "fonts-and-assets",
   "server-logs",

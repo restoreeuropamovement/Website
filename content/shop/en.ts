@@ -259,6 +259,109 @@ export const shopText = {
     },
   },
 
+  /**
+   * The product-safety details the General Product Safety Regulation asks of a
+   * listing. Labels only: the names and addresses come from `structure.ts`.
+   */
+  safety: {
+    title: "Product safety",
+    product: "Product",
+    productValue: "Sticker, 9.8 × 9.8 cm, white self-adhesive paper, printed in full colour",
+    manufacturer: "Manufacturer",
+    seller: "Sold by",
+  },
+
+  /**
+   * The terms of sale, with the withdrawal notice and the model form the law
+   * prescribes. `{seller}`, `{email}` and `{phone}` are filled in from
+   * `shopSeller` in `structure.ts`. The postal address is given on request,
+   * by the operator's decision of 22 November 2026, and is not written here.
+   */
+  terms: {
+    metaTitle: "Terms of sale",
+    kicker: "Shop",
+    title: "Terms of sale",
+    lede: "The terms on which stickers are sold in this shop, with your right to withdraw from a purchase and a form for doing so.",
+    updated: "As of 22 November 2026.",
+    sections: [
+      {
+        heading: "1. Who sells",
+        paragraphs: [
+          "The stickers in this shop are sold by {seller}, a sole trader in Austria. You can reach us by email at {email} or by phone at {phone}. Our postal address is given on request by email.",
+        ],
+      },
+      {
+        heading: "2. What these terms cover",
+        paragraphs: [
+          "These terms apply to every order placed in this shop by a consumer. The description of the stickers on the shop page is part of them.",
+        ],
+      },
+      {
+        heading: "3. How the contract is made",
+        paragraphs: [
+          "On the shop page you choose a design, a quantity and the country of delivery, and see the total, postage included. Continuing to payment takes you to the payment page of our payment provider, Stripe, where you enter your name, email address, delivery address and payment details and can still correct them.",
+          "Pressing the pay button there is a binding offer to buy. The contract is made when the payment is confirmed. We then send you a confirmation email with your order number and a link to your order's page.",
+        ],
+      },
+      {
+        heading: "4. Prices and payment",
+        paragraphs: [
+          "All prices are in euros and are what you pay. Postage is shown separately before you pay and is included in the total. We add no further charges.",
+          "Outside the European Union, your country's customs may charge import tax or a handling fee on delivery. Those are not part of our price.",
+          "You pay on Stripe's payment page with one of the methods offered there. The amount is charged when you order.",
+        ],
+      },
+      {
+        heading: "5. Delivery",
+        paragraphs: [
+          "We post the stickers from Austria by letter post, without tracking, to the address you give on the payment page, in the countries offered on the shop page.",
+          "Orders placed while the shop marks them as pre-orders are posted within one month of the day you order. Your order's page shows when it has been posted.",
+          "If we cannot deliver an order after all, for example because fewer stickers are printed than expected, we tell you by email and refund the full amount straight away.",
+        ],
+      },
+      {
+        heading: "6. Your right to withdraw",
+        paragraphs: [
+          "You have the right to withdraw from this contract within fourteen days without giving any reason. The withdrawal period ends fourteen days after the day on which you, or someone you name who is not the carrier, receive the stickers.",
+          "To withdraw, tell us of your decision by a clear statement. The quickest way is our [withdrawal function][withdraw]. You can also write to {email}, or use the model form below, though you do not have to. It is enough to send your statement before the period ends.",
+          "**Effects of withdrawal.** If you withdraw, we refund all payments we received from you, including the standard postage, without undue delay and at the latest within fourteen days of the day we receive your withdrawal. We use the payment method you used, unless we expressly agree otherwise, and you are not charged for the refund. We may withhold the refund until we have the stickers back or you have shown that you sent them, whichever is earlier.",
+          "If the stickers have already reached you, send them back to us without undue delay and at the latest within fourteen days of withdrawing. We give you the return address by email when you withdraw. You bear the direct cost of returning them. You are liable for a loss in value of the stickers only if it results from handling them beyond what is needed to establish what they are and how they work, for example if stickers are missing, used or damaged.",
+        ],
+      },
+      {
+        heading: "7. If something is wrong",
+        paragraphs: [
+          "The statutory warranty for goods applies. If stickers arrive damaged, misprinted or not as described, or do not arrive, write to us at {email} with your order number, and we put it right by sending replacements or refunding you.",
+        ],
+      },
+      {
+        heading: "8. Applicable law",
+        paragraphs: [
+          "Austrian law applies, without its rules on conflicts of law. If you are a consumer living in another country, this does not take away the protection of the mandatory law of that country.",
+        ],
+      },
+    ],
+    form: {
+      heading: "Model withdrawal form",
+      intro: "If you want to withdraw from the contract, you can fill in this form and send it to us. You do not have to use it.",
+      lines: [
+        "To {seller}, {email}:",
+        "I/We (*) hereby give notice that I/we (*) withdraw from my/our (*) contract for the purchase of the following goods:",
+        "Ordered on (*) / received on (*):",
+        "Order number:",
+        "Name of consumer(s):",
+        "Address of consumer(s):",
+        "Signature of consumer(s) (only if this form is sent on paper):",
+        "Date:",
+      ],
+      note: "(*) Delete as appropriate.",
+    },
+    /** Under the shop's details, and in the footer of the terms' own links. */
+    shopLink: "Terms of sale",
+    /** Above the payment button. */
+    accept: "By continuing to payment you accept our [terms of sale][terms], which include your right to withdraw.",
+  },
+
   item: { one: "{count} sticker — {design}", other: "{count} stickers — {design}" } as PluralForms,
   shippingLabel: "Postage",
   /** Shown by Stripe above its address form. Stripe allows up to 1,200 characters. */
